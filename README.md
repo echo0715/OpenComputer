@@ -8,7 +8,7 @@
 </h1>
 
 <p align="center">
-  <a href="https://echo0715.github.io/OpenComputer"><strong>🌐 Website</strong></a>
+  <a href="https://echo0715.github.io/OpenComputer" target="_blank" rel="noopener"><strong>🌐 Website</strong></a>
   &nbsp;·&nbsp;
   <a href="#synthesis-quick-start">Synthesis Quick Start</a>
   &nbsp;·&nbsp;
