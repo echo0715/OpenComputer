@@ -1,0 +1,62 @@
+{
+  "id": "gedit_save_as_new_encoding",
+  "app": "gedit",
+  "task": "/home/user/Documents/notes_utf8.txt currently has 5 lines of meeting notes, 3 of which contain the word `TODO`:\n\n```\nMeeting notes from Monday\nTODO: Review the quarterly budget report\nAction items from last week are complete\nTODO: Schedule follow-up with the design team\nTODO: Update project timeline with new milestones\n```\n\nFirst, save a copy of the file as /home/user/Documents/notes_copy.txt that preserves the original content (it must still contain `TODO`).\n\nThen, in /home/user/Documents/notes_utf8.txt, replace every occurrence of `TODO` with `DONE` (3 occurrences) so the original file no longer contains `TODO`.\n\nBoth files must end up with exactly 5 lines.",
+  "env": {
+    "files": [
+      {
+        "filename": "notes_utf8.txt",
+        "sandbox_path": "/home/user/Documents/notes_utf8.txt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/notes_copy.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "notes_copy.txt was created via Save As"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/notes_copy.txt TODO",
+      "key": "contains",
+      "expected": true,
+      "description": "Copy preserves original TODO content"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/notes_utf8.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "Original file still exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/notes_utf8.txt DONE",
+      "key": "contains",
+      "expected": true,
+      "description": "Original file now contains DONE"
+    },
+    {
+      "command": "file-content /home/user/Documents/notes_utf8.txt",
+      "eval": "'TODO' not in result.get('content', '')",
+      "description": "Original file no longer contains TODO"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/notes_utf8.txt 5",
+      "key": "matches",
+      "expected": true,
+      "description": "Original file still has 5 lines"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/notes_copy.txt 5",
+      "key": "matches",
+      "expected": true,
+      "description": "Copy file has 5 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

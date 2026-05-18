@@ -1,0 +1,48 @@
+{
+  "id": "cloudcompare_gap_icp_fine_registration",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/reference.ply and /home/user/Documents/misaligned.ply are ASCII PLYs with 1200 points each. misaligned.ply is the same object as reference.ply but rotated ~10 degrees around Z and translated roughly by (2, 1, 0.5).\n\nRun ICP fine registration with default options using misaligned.ply as the to-be-aligned (compared) entity and reference.ply as the reference, then export the aligned (compared) cloud as an ASCII PLY at /home/user/Documents/aligned.ply. Do not export the reference cloud. The aligned cloud must have 1200 points, and its bounding box must fall within [-2.5, -2.5, -2.5]..[5.5, 2.5, 2.5] (approximately the reference cloud's bounds).",
+  "env": {
+    "files": [
+      {
+        "filename": "misaligned.ply",
+        "sandbox_path": "/home/user/Documents/misaligned.ply"
+      },
+      {
+        "filename": "reference.ply",
+        "sandbox_path": "/home/user/Documents/reference.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/aligned.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Aligned PLY exists"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/aligned.ply 1200",
+      "key": "match",
+      "expected": true,
+      "description": "Aligned cloud has the same 1200 points"
+    },
+    {
+      "command": "check-bbox-within /home/user/Documents/aligned.ply -2.5 -2.5 -2.5 5.5 2.5 2.5",
+      "key": "match",
+      "expected": true,
+      "description": "Aligned cloud bbox falls within reference cloud bbox"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/aligned.ply ascii",
+      "key": "match",
+      "expected": true,
+      "description": "Exported as ASCII PLY"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

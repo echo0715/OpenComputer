@@ -1,0 +1,74 @@
+{
+  "id": "blender_boolean_cutout",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/boolean_scene.blend (which starts empty), build a boolean cutout. Add a Cube named 'Block' and a smaller Cube named 'Hole' (e.g., scaled to 0.5). Add a Boolean modifier on 'Block' with Operation = Difference and Object = 'Hole'. Hide 'Hole' from the viewport.\n\nSet the render engine to Cycles, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "boolean_scene.blend",
+        "sandbox_path": "/home/user/Documents/boolean_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/boolean_scene.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/boolean_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/boolean_scene.blend Block",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Block' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/boolean_scene.blend Block MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Block' is MESH"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/boolean_scene.blend Hole",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Hole' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/boolean_scene.blend Hole MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Hole' is MESH"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/boolean_scene.blend Block BOOLEAN",
+      "key": "exists",
+      "expected": true,
+      "description": "'Block' has a BOOLEAN modifier"
+    },
+    {
+      "command": "modifiers /home/user/Documents/boolean_scene.blend Block",
+      "eval": "any(m.get('type') == 'BOOLEAN' and m.get('operation') == 'DIFFERENCE' and m.get('object') == 'Hole' for m in result.get('modifiers', []))",
+      "description": "BOOLEAN modifier uses DIFFERENCE operation and references 'Hole'"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/boolean_scene.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is Cycles"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

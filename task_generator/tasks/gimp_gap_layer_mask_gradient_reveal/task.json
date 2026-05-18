@@ -1,0 +1,53 @@
+{
+  "id": "gimp_gap_layer_mask_gradient_reveal",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/blue_bg.png in GIMP as the background layer and add /home/user/Documents/red_fg.png as a layer on top.\n\nApply a layer mask to the red layer painted with a left-to-right black-to-white linear gradient (black at the left edge fully hides the red, white at the right edge fully reveals it) so the red layer fades into the blue background across the canvas. Flatten and export the result as PNG to /home/user/Documents/mask_gradient.png. The output must be 400x300, with the left edge showing pure blue, the right edge showing pure red, and the midpoint showing a blend of red and blue.",
+  "env": {
+    "files": [
+      {
+        "filename": "blue_bg.png",
+        "sandbox_path": "/home/user/Documents/blue_bg.png"
+      },
+      {
+        "filename": "red_fg.png",
+        "sandbox_path": "/home/user/Documents/red_fg.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/mask_gradient.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Output PNG exists"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/mask_gradient.png 400 300",
+      "key": "match",
+      "expected": true,
+      "description": "Output is 400x300"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/mask_gradient.png 5 150 0 0 255 20",
+      "key": "match",
+      "expected": true,
+      "description": "Left edge reveals blue (mask fully hides red)"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/mask_gradient.png 395 150 255 0 0 20",
+      "key": "match",
+      "expected": true,
+      "description": "Right edge shows red (mask fully reveals red)"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/mask_gradient.png 200 150",
+      "eval": "50 < result.get('r', 0) < 230 and 0 <= result.get('g', 255) < 50 and 30 < result.get('b', 0) < 230",
+      "description": "Midpoint is a blend of red and blue (not pure red or pure blue)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

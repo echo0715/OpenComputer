@@ -1,0 +1,97 @@
+{
+  "id": "writer_report_restructure",
+  "app": "libreoffice_writer",
+  "task": "The file /home/user/Documents/quarterly_report.odt is open in LibreOffice Writer — a quarterly report with all paragraphs in Default Paragraph Style (no headings, no formatting).\n\nRestructure and format the document as follows, then save the file:\n- Set the first paragraph 'Q4 2025 Quarterly Report' to Heading 1 style.\n- Set 'Revenue Overview', 'Expense Analysis', 'Key Achievements', and 'Next Steps' to Heading 2 style.\n- Make the paragraph 'Total Revenue: $2,450,000' bold.\n- Make the paragraph 'Total Expenses: $1,890,000' bold.\n- Append a table named 'Table1' (4 rows × 3 columns) at the end of the document, filled exactly as:\n  - Row 0 (header): 'Category', 'Amount', 'Change'\n  - Row 1: 'Product Sales', '$1,200,000', '+8%'\n  - Row 2: 'Services', '$850,000', '+12%'\n  - Row 3: 'Licensing', '$400,000', '-3%'",
+  "env": {
+    "files": [
+      {
+        "filename": "quarterly_report.odt",
+        "sandbox_path": "/home/user/Documents/quarterly_report.odt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-heading-exists \"Q4 2025 Quarterly Report\" 1",
+      "key": "exists",
+      "expected": true,
+      "description": "'Q4 2025 Quarterly Report' is Heading 1"
+    },
+    {
+      "command": "check-heading-exists \"Revenue Overview\" 2",
+      "key": "exists",
+      "expected": true,
+      "description": "'Revenue Overview' is Heading 2"
+    },
+    {
+      "command": "check-heading-exists \"Expense Analysis\" 2",
+      "key": "exists",
+      "expected": true,
+      "description": "'Expense Analysis' is Heading 2"
+    },
+    {
+      "command": "check-heading-exists \"Key Achievements\" 2",
+      "key": "exists",
+      "expected": true,
+      "description": "'Key Achievements' is Heading 2"
+    },
+    {
+      "command": "check-heading-exists \"Next Steps\" 2",
+      "key": "exists",
+      "expected": true,
+      "description": "'Next Steps' is Heading 2"
+    },
+    {
+      "command": "text",
+      "eval": "'Total Revenue: $2,450,000' in result['text']",
+      "description": "Document contains 'Total Revenue: $2,450,000'"
+    },
+    {
+      "command": "text",
+      "eval": "'Total Expenses: $1,890,000' in result['text']",
+      "description": "Document contains 'Total Expenses: $1,890,000'"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    },
+    {
+      "command": "parse-tables /home/user/Documents/quarterly_report.odt",
+      "eval": "any(t['name'] == 'Table1' for t in result.get('tables', []))",
+      "description": "Table 'Table1' exists in saved file"
+    },
+    {
+      "command": "parse-tables /home/user/Documents/quarterly_report.odt",
+      "eval": "any(t['name'] == 'Table1' and t.get('rows') == 4 and t.get('cols') == 3 for t in result.get('tables', []))",
+      "description": "Table1 has 4 rows and 3 columns"
+    },
+    {
+      "command": "parse-tables /home/user/Documents/quarterly_report.odt",
+      "eval": "any(t['name'] == 'Table1' and len(t.get('data', [])) > 0 and len(t['data'][0]) > 0 and t['data'][0][0] == 'Category' for t in result.get('tables', []))",
+      "description": "Table1 (0,0) is 'Category'"
+    },
+    {
+      "command": "parse-tables /home/user/Documents/quarterly_report.odt",
+      "eval": "any(t['name'] == 'Table1' and len(t.get('data', [])) > 1 and len(t['data'][1]) > 1 and t['data'][1][1] == '$1,200,000' for t in result.get('tables', []))",
+      "description": "Table1 (1,1) is '$1,200,000'"
+    },
+    {
+      "command": "parse-tables /home/user/Documents/quarterly_report.odt",
+      "eval": "any(t['name'] == 'Table1' and len(t.get('data', [])) > 3 and len(t['data'][3]) > 2 and t['data'][3][2] == '-3%' for t in result.get('tables', []))",
+      "description": "Table1 (3,2) is '-3%'"
+    },
+    {
+      "command": "parse-tables /home/user/Documents/quarterly_report.odt",
+      "eval": "any(t['name'] == 'Table1' and len(t.get('data', [])) > 2 and len(t['data'][2]) > 0 and t['data'][2][0] == 'Services' for t in result.get('tables', []))",
+      "description": "Table1 (2,0) is 'Services'"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

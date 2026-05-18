@@ -1,0 +1,163 @@
+{
+  "id": "kdenlive_4k60_multilayer_fx_render",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/epic_4k.kdenlive (3840x2160, 60fps \u2014 4K UHD).\n\nImport six video clips from /home/user/Videos/: bg_wide.mp4, hero_a.mp4, hero_b.mp4, insert_1.mp4, insert_2.mp4, and credits.mp4. Set up the project with at least 8 tracks in total (video and audio combined). Arrange bg_wide.mp4 on Video Track 1 as a background layer spanning the full duration. Place hero_a.mp4 and hero_b.mp4 sequentially on Video Track 2 with a slight overlap, and add a Dissolve (`luma`) transition bridging that overlap. Place insert_1.mp4 on Video Track 3 so it overlaps in time with hero_a.mp4 on Track 2, and add a Composite and Transform (`qtblend`) transition between Track 2 and Track 3. Place insert_2.mp4 and credits.mp4 on Video Track 4. Apply the Edge Detection effect (`frei0r.sobel`) to the insert_1.mp4 clip, the Cartoon effect (`frei0r.cartoon`) to the hero_a.mp4 clip, the Glow effect (`frei0r.glow`) to the hero_b.mp4 clip, the Invert effect (`frei0r.invert0r`) to the insert_2.mp4 clip, and a Volume effect (`volume`) to any audio track. Save the project so the changes are persisted to /home/user/Documents/epic_4k.kdenlive, then render the project to /home/user/Documents/epic_4k_out.mp4 using the MP4 / H.264 preset. The project must remain at 3840x2160, 60fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "epic_4k.kdenlive",
+        "sandbox_path": "/home/user/Documents/epic_4k.kdenlive"
+      },
+      {
+        "filename": "bg_wide.mp4",
+        "sandbox_path": "/home/user/Videos/bg_wide.mp4"
+      },
+      {
+        "filename": "hero_a.mp4",
+        "sandbox_path": "/home/user/Videos/hero_a.mp4"
+      },
+      {
+        "filename": "hero_b.mp4",
+        "sandbox_path": "/home/user/Videos/hero_b.mp4"
+      },
+      {
+        "filename": "insert_1.mp4",
+        "sandbox_path": "/home/user/Videos/insert_1.mp4"
+      },
+      {
+        "filename": "insert_2.mp4",
+        "sandbox_path": "/home/user/Videos/insert_2.mp4"
+      },
+      {
+        "filename": "credits.mp4",
+        "sandbox_path": "/home/user/Videos/credits.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/epic_4k.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/epic_4k.kdenlive 3840 2160",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 3840x2160"
+    },
+    {
+      "command": "check-fps /home/user/Documents/epic_4k.kdenlive 60",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate is 60fps"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/epic_4k.kdenlive 6",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 6 clips in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/epic_4k.kdenlive bg_wide.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "bg_wide.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/epic_4k.kdenlive hero_a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "hero_a.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/epic_4k.kdenlive hero_b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "hero_b.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/epic_4k.kdenlive insert_1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "insert_1.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/epic_4k.kdenlive insert_2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "insert_2.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/epic_4k.kdenlive credits.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "credits.mp4 imported"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/epic_4k.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "Dissolve (luma) transition exists"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/epic_4k.kdenlive qtblend",
+      "key": "exists",
+      "expected": true,
+      "description": "Composite (qtblend) transition exists"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/epic_4k.kdenlive frei0r.sobel",
+      "key": "exists",
+      "expected": true,
+      "description": "Edge Detection (sobel) effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/epic_4k.kdenlive frei0r.cartoon",
+      "key": "exists",
+      "expected": true,
+      "description": "Cartoon effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/epic_4k.kdenlive frei0r.glow",
+      "key": "exists",
+      "expected": true,
+      "description": "Glow effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/epic_4k.kdenlive frei0r.invert0r",
+      "key": "exists",
+      "expected": true,
+      "description": "Invert effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/epic_4k.kdenlive volume",
+      "key": "exists",
+      "expected": true,
+      "description": "Volume effect applied to audio"
+    },
+    {
+      "command": "tracks /home/user/Documents/epic_4k.kdenlive",
+      "eval": "len(result) >= 8",
+      "description": "At least 8 tracks in project"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/epic_4k_out.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Rendered output file exists"
+    },
+    {
+      "command": "check-render-output /home/user/Documents/epic_4k_out.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Rendered output is valid media"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

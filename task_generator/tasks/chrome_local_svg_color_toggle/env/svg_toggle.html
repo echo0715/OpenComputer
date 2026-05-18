@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SVG Color Toggle</title>
+<style>
+  body { font-family: system-ui, sans-serif; text-align: center; padding: 20px; }
+  svg { background: #f4f4f4; border: 1px solid #ccc; }
+  #status { margin-top: 12px; font-size: 16px; }
+</style>
+</head>
+<body>
+<h1>SVG Color Toggle</h1>
+<p>Click each circle to cycle its fill: gray &rarr; red &rarr; green &rarr; blue &rarr; yellow.</p>
+<svg width="640" height="140" id="panel">
+  <circle id="circle-1" cx="60"  cy="70" r="40" fill="gray" stroke="#333" stroke-width="2"/>
+  <circle id="circle-2" cx="160" cy="70" r="40" fill="gray" stroke="#333" stroke-width="2"/>
+  <circle id="circle-3" cx="260" cy="70" r="40" fill="gray" stroke="#333" stroke-width="2"/>
+  <circle id="circle-4" cx="360" cy="70" r="40" fill="gray" stroke="#333" stroke-width="2"/>
+  <circle id="circle-5" cx="460" cy="70" r="40" fill="gray" stroke="#333" stroke-width="2"/>
+  <circle id="circle-6" cx="560" cy="70" r="40" fill="gray" stroke="#333" stroke-width="2"/>
+</svg>
+<div id="status">Clicks: 0</div>
+<script>
+  const cycle = ["gray", "red", "green", "blue", "yellow"];
+  let clicks = 0;
+  for (let i = 1; i <= 6; i++) {
+    const c = document.getElementById("circle-" + i);
+    c.addEventListener("click", () => {
+      const cur = c.getAttribute("fill");
+      const idx = cycle.indexOf(cur);
+      const next = cycle[(idx + 1) % cycle.length];
+      c.setAttribute("fill", next);
+      clicks++;
+      document.getElementById("status").textContent = "Clicks: " + clicks;
+    });
+  }
+</script>
+</body>
+</html>

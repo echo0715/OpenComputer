@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_data_viz_toggle",
+  "files": [
+    {
+      "filename": "dashboard.html",
+      "sandbox_path": "/home/user/Documents/dashboard.html",
+      "type": "html"
+    }
+  ]
+}

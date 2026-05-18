@@ -1,0 +1,50 @@
+{
+  "id": "zotero_gap_multi_pdf_attach",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite, and three PDF files are provided under /home/user/Documents/: attention.pdf, bert.pdf, deep_learning.pdf.\n\nAttach each PDF as a stored child attachment to the matching existing item:\n- /home/user/Documents/attention.pdf → 'Attention Is All You Need'\n- /home/user/Documents/bert.pdf → 'BERT: Pre-training of Deep Bidirectional Transformers'\n- /home/user/Documents/deep_learning.pdf → 'Deep Learning'\n\nAfter completion, each of the three items must have at least one child PDF attachment. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      },
+      {
+        "filename": "attention.pdf",
+        "sandbox_path": "/home/user/Documents/attention.pdf"
+      },
+      {
+        "filename": "bert.pdf",
+        "sandbox_path": "/home/user/Documents/bert.pdf"
+      },
+      {
+        "filename": "deep_learning.pdf",
+        "sandbox_path": "/home/user/Documents/deep_learning.pdf"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-item-attachment 'Attention Is All You Need'",
+      "key": "has_attachment",
+      "expected": true,
+      "description": "Attention has an attachment"
+    },
+    {
+      "command": "check-item-attachment 'BERT'",
+      "key": "has_attachment",
+      "expected": true,
+      "description": "BERT has an attachment"
+    },
+    {
+      "command": "check-item-attachment 'Deep Learning'",
+      "key": "has_attachment",
+      "expected": true,
+      "description": "Deep Learning has an attachment"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

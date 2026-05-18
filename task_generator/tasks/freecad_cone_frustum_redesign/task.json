@@ -1,0 +1,69 @@
+{
+  "id": "freecad_cone_frustum_redesign",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/cone.FCStd, which already contains a default Part::Cone named 'Cone' (Radius1=2 mm, Radius2=0 mm, Height=10 mm, Angle=360 deg).\n\nUpdate the Cone's parameters to exactly Radius1=25, Radius2=10, Height=60, Angle=270, and set its Label to exactly 'Frustum'. Do not rename the internal name 'Cone'. Save the file so the changes are written back to /home/user/Documents/cone.FCStd.",
+  "env": {
+    "files": [
+      {
+        "filename": "cone.FCStd",
+        "sandbox_path": "/home/user/Documents/cone.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/cone.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/cone.FCStd Cone",
+      "key": "exists",
+      "expected": true,
+      "description": "Cone object still exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/cone.FCStd Cone Part::Cone",
+      "key": "match",
+      "expected": true,
+      "description": "Cone is Part::Cone"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/cone.FCStd Cone Radius1 25",
+      "key": "match",
+      "expected": true,
+      "description": "Cone Radius1 == 25"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/cone.FCStd Cone Radius2 10",
+      "key": "match",
+      "expected": true,
+      "description": "Cone Radius2 == 10"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/cone.FCStd Cone Height 60",
+      "key": "match",
+      "expected": true,
+      "description": "Cone Height == 60"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/cone.FCStd Cone Angle 270",
+      "key": "match",
+      "expected": true,
+      "description": "Cone Angle == 270"
+    },
+    {
+      "command": "check-label /home/user/Documents/cone.FCStd Cone Frustum",
+      "key": "match",
+      "expected": true,
+      "description": "Cone Label == 'Frustum'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

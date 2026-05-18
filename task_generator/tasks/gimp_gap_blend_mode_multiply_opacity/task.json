@@ -1,0 +1,52 @@
+{
+  "id": "gimp_gap_blend_mode_multiply_opacity",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/photo_base.png in GIMP and add /home/user/Documents/texture_overlay.png as a new layer above it.\n\nConfigure the top (texture) layer with blend mode = Multiply and opacity = 60%. Flatten the image and export the composite as PNG to /home/user/Documents/multiply_result.png. The output must be 512x512 pixels and reflect the Multiply blend (the center pixel must show the multiply effect rather than the raw base or raw overlay).",
+  "env": {
+    "files": [
+      {
+        "filename": "photo_base.png",
+        "sandbox_path": "/home/user/Documents/photo_base.png"
+      },
+      {
+        "filename": "texture_overlay.png",
+        "sandbox_path": "/home/user/Documents/texture_overlay.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multiply_result.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Output PNG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/multiply_result.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Output is PNG"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/multiply_result.png 512 512",
+      "key": "match",
+      "expected": true,
+      "description": "Output is 512x512"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/multiply_result.png 256 256",
+      "eval": "result.get('r', 999) < 250 and result.get('g', 999) < 250",
+      "description": "Center pixel shows blend effect (not pure yellow/white from base) — R and G channels darkened by multiply"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/multiply_result.png 256 256",
+      "eval": "result.get('b', 0) < 220",
+      "description": "Center pixel blue channel still affected by multiply (not 255, not raw overlay either)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

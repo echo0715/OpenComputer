@@ -1,0 +1,105 @@
+{
+  "id": "obs_multi_collection_profiles",
+  "app": "obs",
+  "task": "Build an OBS Studio scene collection for a virtual event. The final collection must contain exactly 4 scenes (no default 'Scene' left over) with these exact names: 'Welcome', 'Speaker', 'Panel', 'Closing'.\n\nSources required per scene, with these exact names and types:\n- 'Welcome': Image named 'Event Banner' (file /home/user/Pictures/banner.png); Text (FreeType 2) named 'Event Title' (any text)\n- 'Speaker': Display Capture named 'Slides'; Video Capture Device named 'Speaker Cam'\n- 'Panel': Video Capture Device named 'Panelist 1'; Video Capture Device named 'Panelist 2'; Video Capture Device named 'Panelist 3'\n- 'Closing': Color Source named 'Closing BG'; Text (FreeType 2) named 'Goodbye' (any text)\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "banner.png",
+        "sandbox_path": "/home/user/Pictures/banner.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Welcome",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Welcome' exists"
+    },
+    {
+      "command": "check-scene-exists Speaker",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Speaker' exists"
+    },
+    {
+      "command": "check-scene-exists Panel",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Panel' exists"
+    },
+    {
+      "command": "check-scene-exists Closing",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Closing' exists"
+    },
+    {
+      "command": "check-scene-count 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 scenes in the collection"
+    },
+    {
+      "command": "check-source-in-scene 'Event Banner' Welcome",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Event Banner' exists in 'Welcome' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Event Title' Welcome",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Event Title' exists in 'Welcome' scene"
+    },
+    {
+      "command": "check-source-in-scene Slides Speaker",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Slides' exists in 'Speaker' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Speaker Cam' Speaker",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Speaker Cam' exists in 'Speaker' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Panelist 1' Panel",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Panelist 1' exists in 'Panel' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Panelist 2' Panel",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Panelist 2' exists in 'Panel' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Panelist 3' Panel",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Panelist 3' exists in 'Panel' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Closing BG' Closing",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Closing BG' exists in 'Closing' scene"
+    },
+    {
+      "command": "check-source-in-scene Goodbye Closing",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Goodbye' exists in 'Closing' scene"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

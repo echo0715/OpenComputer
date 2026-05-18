@@ -1,0 +1,6 @@
+{
+  "task_id": "cloudcompare_gap_fit_plane",
+  "files": [
+    {"filename": "planar_cloud.ply", "sandbox_path": "/home/user/Documents/planar_cloud.ply", "type": "ply"}
+  ]
+}

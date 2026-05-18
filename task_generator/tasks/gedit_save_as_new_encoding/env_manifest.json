@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_save_as_new_encoding",
+  "files": [
+    {"filename": "notes_utf8.txt", "sandbox_path": "/home/user/Documents/notes_utf8.txt", "type": "txt"}
+  ]
+}

@@ -1,0 +1,15 @@
+1
+00:00:00,500 --> 00:00:03,000
+Hello from VLC subtitle test.
+
+2
+00:00:03,500 --> 00:00:06,000
+This is the second caption line.
+
+3
+00:00:06,500 --> 00:00:09,000
+Third caption with accented chars: café, naïve.
+
+4
+00:00:09,500 --> 00:00:11,500
+Fourth and final caption.

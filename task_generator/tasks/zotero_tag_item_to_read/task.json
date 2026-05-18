@@ -1,0 +1,39 @@
+{
+  "id": "zotero_tag_item_to_read",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. The tag 'to-read' does not yet exist in the library.\n\nCreate a new tag named exactly 'to-read' (lowercase, with a hyphen) and assign it to the item titled 'Attention Is All You Need'. After saving, the tag 'to-read' must exist in the library and must be assigned to that item. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists on disk"
+    },
+    {
+      "command": "check-tag-exists to-read",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'to-read' exists"
+    },
+    {
+      "command": "check-item-tag 'Attention Is All You Need' to-read",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Attention Is All You Need item has tag 'to-read'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_gap_audio_filter_headphones",
+  "files": [
+    {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4", "type": "mp4"}
+  ]
+}

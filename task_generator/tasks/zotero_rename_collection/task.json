@@ -1,0 +1,39 @@
+{
+  "id": "zotero_rename_collection",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. There is a top-level collection named 'Reinforcement Learning' that contains the item 'A Survey of RL Methods'.\n\nRename the 'Reinforcement Learning' collection to exactly 'RL Papers'. After renaming, the collection 'Reinforcement Learning' must no longer exist, the collection 'RL Papers' must exist, and the 'A Survey of RL Methods' item must still belong to 'RL Papers'. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-collection-exists 'RL Papers'",
+      "key": "exists",
+      "expected": true,
+      "description": "Renamed collection exists"
+    },
+    {
+      "command": "check-collection-exists 'Reinforcement Learning'",
+      "key": "exists",
+      "expected": false,
+      "description": "Old collection name removed"
+    },
+    {
+      "command": "check-collection-contains 'RL Papers' 'Survey of RL Methods'",
+      "key": "contains",
+      "expected": true,
+      "description": "Survey item is in renamed collection"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

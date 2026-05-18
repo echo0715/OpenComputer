@@ -1,0 +1,80 @@
+{
+  "id": "thunderbird_two_mailing_lists",
+  "app": "thunderbird",
+  "task": "In Thunderbird's Personal Address Book, add the following six contacts (all with company `Summit Labs`):\n\n1. Bianca Ferraro — bianca@summitlabs.example\n2. Noah Sandoval — noah@summitlabs.example\n3. Pavel Dvorak — pavel@summitlabs.example\n4. Camille Archambault — camille@summitlabs.example\n5. Theo Nakamura — theo@summitlabs.example\n6. Jemma Winchester — jemma@summitlabs.example\n\nCreate two mailing lists in the Personal Address Book with these exact names and members:\n- `Engineering Circle` — members: Bianca Ferraro, Noah Sandoval, Pavel Dvorak\n- `Product Circle` — members: Camille Archambault, Theo Nakamura, Jemma Winchester",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists 'Bianca Ferraro'",
+      "key": "found",
+      "expected": true,
+      "description": "Bianca Ferraro exists"
+    },
+    {
+      "command": "check-contact-exists 'Noah Sandoval'",
+      "key": "found",
+      "expected": true,
+      "description": "Noah Sandoval exists"
+    },
+    {
+      "command": "check-contact-exists 'Pavel Dvorak'",
+      "key": "found",
+      "expected": true,
+      "description": "Pavel Dvorak exists"
+    },
+    {
+      "command": "check-contact-exists 'Camille Archambault'",
+      "key": "found",
+      "expected": true,
+      "description": "Camille Archambault exists"
+    },
+    {
+      "command": "check-contact-exists 'Theo Nakamura'",
+      "key": "found",
+      "expected": true,
+      "description": "Theo Nakamura exists"
+    },
+    {
+      "command": "check-contact-exists 'Jemma Winchester'",
+      "key": "found",
+      "expected": true,
+      "description": "Jemma Winchester exists"
+    },
+    {
+      "command": "check-contact-field 'Bianca Ferraro' company 'Summit Labs'",
+      "key": "match",
+      "expected": true,
+      "description": "Bianca company correct"
+    },
+    {
+      "command": "check-mailing-list 'Engineering Circle'",
+      "key": "found",
+      "expected": true,
+      "description": "Engineering Circle mailing list exists"
+    },
+    {
+      "command": "check-mailing-list 'Product Circle'",
+      "key": "found",
+      "expected": true,
+      "description": "Product Circle mailing list exists"
+    },
+    {
+      "command": "contact-count",
+      "eval": "result.get('count', 0) >= 6",
+      "description": "At least 6 contacts total"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "id": "pcmanfm_create_project_structure",
+  "app": "pcmanfm",
+  "task": "Create a project directory structure at /home/user/Projects/webapp containing four subdirectories: 'src', 'tests', 'docs', 'assets'. Populate them with these files and exact contents:\n1. src/main.py — '#!/usr/bin/env python3\\nprint(\"Hello webapp\")', with permissions 755 (executable)\n2. src/config.py — 'DATABASE_URL = \"sqlite:///app.db\"'\n3. tests/test_main.py — 'def test_hello():\\n    assert True'\n4. docs/README.txt — 'Webapp project documentation'\n5. assets/style.css — 'body { margin: 0; }'",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/Projects/webapp",
+      "key": "exists",
+      "expected": true,
+      "description": "webapp project directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Projects/webapp/src",
+      "key": "exists",
+      "expected": true,
+      "description": "src subdirectory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Projects/webapp/tests",
+      "key": "exists",
+      "expected": true,
+      "description": "tests subdirectory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Projects/webapp/docs",
+      "key": "exists",
+      "expected": true,
+      "description": "docs subdirectory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Projects/webapp/assets",
+      "key": "exists",
+      "expected": true,
+      "description": "assets subdirectory exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Projects/webapp/src/main.py",
+      "key": "exists",
+      "expected": true,
+      "description": "main.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Projects/webapp/src/main.py Hello webapp",
+      "key": "contains",
+      "expected": true,
+      "description": "main.py contains expected content"
+    },
+    {
+      "command": "check-permissions /home/user/Projects/webapp/src/main.py 755",
+      "key": "match",
+      "expected": true,
+      "description": "main.py has executable permissions 755"
+    },
+    {
+      "command": "check-file-exists /home/user/Projects/webapp/src/config.py",
+      "key": "exists",
+      "expected": true,
+      "description": "config.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Projects/webapp/src/config.py DATABASE_URL",
+      "key": "contains",
+      "expected": true,
+      "description": "config.py contains DATABASE_URL"
+    },
+    {
+      "command": "check-file-exists /home/user/Projects/webapp/tests/test_main.py",
+      "key": "exists",
+      "expected": true,
+      "description": "test_main.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Projects/webapp/tests/test_main.py test_hello",
+      "key": "contains",
+      "expected": true,
+      "description": "test_main.py contains test function"
+    },
+    {
+      "command": "check-file-exists /home/user/Projects/webapp/docs/README.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "README.txt exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Projects/webapp/docs/README.txt Webapp project documentation",
+      "key": "contains",
+      "expected": true,
+      "description": "README.txt contains expected content"
+    },
+    {
+      "command": "check-file-exists /home/user/Projects/webapp/assets/style.css",
+      "key": "exists",
+      "expected": true,
+      "description": "style.css exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Projects/webapp/assets/style.css margin",
+      "key": "contains",
+      "expected": true,
+      "description": "style.css contains expected content"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

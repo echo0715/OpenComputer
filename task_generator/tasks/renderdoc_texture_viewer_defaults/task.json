@@ -1,0 +1,51 @@
+{
+  "id": "renderdoc_texture_viewer_defaults",
+  "app": "renderdoc",
+  "task": "Edit /home/user/.local/share/qrenderdoc/UI.config (a JSON document) and change these three Texture Viewer keys in a single save:\n\n1. Set `\"TextureViewer_ResetRange\"` to `true`.\n2. Set `\"TextureViewer_PerTexYFlip\"` to `true`.\n3. Set `\"TextureViewer_PerTexSettings\"` to `false`.\n\nLeave every other key unchanged. The top-level `\"rdocConfigData\": 1` marker must still be present after saving.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting TextureViewer_ResetRange true",
+      "key": "match",
+      "expected": true,
+      "description": "TextureViewer_ResetRange is true"
+    },
+    {
+      "command": "check-setting TextureViewer_PerTexYFlip true",
+      "key": "match",
+      "expected": true,
+      "description": "TextureViewer_PerTexYFlip is true"
+    },
+    {
+      "command": "check-setting TextureViewer_PerTexSettings false",
+      "key": "match",
+      "expected": true,
+      "description": "TextureViewer_PerTexSettings is false"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

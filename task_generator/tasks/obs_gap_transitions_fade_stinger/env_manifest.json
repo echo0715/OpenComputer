@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_gap_transitions_fade_stinger",
+  "files": [
+    {
+      "filename": "stinger.mp4",
+      "sandbox_path": "/home/user/Videos/stinger.mp4",
+      "type": "mp4"
+    }
+  ]
+}

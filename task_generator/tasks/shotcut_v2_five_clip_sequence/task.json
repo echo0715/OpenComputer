@@ -1,0 +1,94 @@
+{
+  "id": "shotcut_v2_five_clip_sequence",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/montage.mlt (1920x1080 30 fps, empty timeline). Five source videos exist: /home/user/Videos/clip1.mp4, /home/user/Videos/clip2.mp4, /home/user/Videos/clip3.mp4, /home/user/Videos/clip4.mp4, and /home/user/Videos/clip5.mp4.\n\nPlace all five clips on the V1 timeline track in this exact left-to-right order: clip1.mp4, clip2.mp4, clip3.mp4, clip4.mp4, clip5.mp4. Save the project so /home/user/Documents/montage.mlt keeps its 1920x1080 30 fps profile and references all five clips.",
+  "env": {
+    "files": [
+      {
+        "filename": "montage.mlt",
+        "sandbox_path": "/home/user/Documents/montage.mlt"
+      },
+      {
+        "filename": "clip1.mp4",
+        "sandbox_path": "/home/user/Videos/clip1.mp4"
+      },
+      {
+        "filename": "clip2.mp4",
+        "sandbox_path": "/home/user/Videos/clip2.mp4"
+      },
+      {
+        "filename": "clip3.mp4",
+        "sandbox_path": "/home/user/Videos/clip3.mp4"
+      },
+      {
+        "filename": "clip4.mp4",
+        "sandbox_path": "/home/user/Videos/clip4.mp4"
+      },
+      {
+        "filename": "clip5.mp4",
+        "sandbox_path": "/home/user/Videos/clip5.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/montage.mlt",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/montage.mlt 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/montage.mlt 30",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/montage.mlt clip1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "clip1.mp4 is referenced"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/montage.mlt clip2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "clip2.mp4 is referenced"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/montage.mlt clip3.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "clip3.mp4 is referenced"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/montage.mlt clip4.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "clip4.mp4 is referenced"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/montage.mlt clip5.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "clip5.mp4 is referenced"
+    },
+    {
+      "command": "project-info /home/user/Documents/montage.mlt",
+      "eval": "result['producer_count'] >= 5",
+      "description": "Project contains at least 5 clip producers"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "chrome_local_form_and_submit",
+  "files": [
+    {"filename": "survey_form.html", "sandbox_path": "/home/user/Documents/survey_form.html", "type": "html"}
+  ]
+}

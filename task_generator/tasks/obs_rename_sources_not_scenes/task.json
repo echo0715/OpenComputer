@@ -1,0 +1,93 @@
+{
+  "id": "obs_rename_sources_not_scenes",
+  "app": "obs",
+  "task": "OBS Studio is open with a scene collection that already contains one scene named 'Show' holding 4 generically-named sources: 'Video Capture Device', 'Audio Input Capture', 'Display Capture', 'Text FreeType 2'.\n\nRename each source exactly:\n- 'Video Capture Device' → 'Host Camera'\n- 'Audio Input Capture' → 'Host Microphone'\n- 'Display Capture' → 'Main Screen'\n- 'Text FreeType 2' → 'Show Title'\n\nDo NOT add, remove, or create any source, and do NOT rename or modify the scene — the collection must still have exactly 1 scene named 'Show' containing exactly 4 sources (with the new names), all visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "scene_collection.json",
+        "sandbox_path": "/home/user/.config/obs-studio/basic/scenes/Untitled.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Show",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Show' still exists"
+    },
+    {
+      "command": "check-scene-count 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 1 scene"
+    },
+    {
+      "command": "check-source-in-scene 'Host Camera' Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Host Camera' (renamed) in 'Show'"
+    },
+    {
+      "command": "check-source-in-scene 'Host Microphone' Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Host Microphone' (renamed) in 'Show'"
+    },
+    {
+      "command": "check-source-in-scene 'Main Screen' Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Main Screen' (renamed) in 'Show'"
+    },
+    {
+      "command": "check-source-in-scene 'Show Title' Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Show Title' (renamed) in 'Show'"
+    },
+    {
+      "command": "check-source-in-scene 'Video Capture Device' Show",
+      "key": "exists",
+      "expected": false,
+      "description": "Old generic name 'Video Capture Device' gone"
+    },
+    {
+      "command": "check-source-in-scene 'Audio Input Capture' Show",
+      "key": "exists",
+      "expected": false,
+      "description": "Old generic name 'Audio Input Capture' gone"
+    },
+    {
+      "command": "check-source-in-scene 'Display Capture' Show",
+      "key": "exists",
+      "expected": false,
+      "description": "Old generic name 'Display Capture' gone"
+    },
+    {
+      "command": "check-source-in-scene 'Text FreeType 2' Show",
+      "key": "exists",
+      "expected": false,
+      "description": "Old generic name 'Text FreeType 2' gone"
+    },
+    {
+      "command": "check-source-visible 'Host Camera'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Host Camera' visible"
+    },
+    {
+      "command": "check-source-visible 'Show Title'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Show Title' visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

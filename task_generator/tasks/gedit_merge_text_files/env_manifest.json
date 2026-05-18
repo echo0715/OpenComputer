@@ -1,0 +1,8 @@
+{
+  "task_id": "gedit_merge_text_files",
+  "files": [
+    {"filename": "header.txt", "sandbox_path": "/home/user/Documents/header.txt", "type": "txt"},
+    {"filename": "body.txt", "sandbox_path": "/home/user/Documents/body.txt", "type": "txt"},
+    {"filename": "footer.txt", "sandbox_path": "/home/user/Documents/footer.txt", "type": "txt"}
+  ]
+}

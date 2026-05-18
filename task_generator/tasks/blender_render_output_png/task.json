@@ -1,0 +1,65 @@
+{
+  "id": "blender_render_output_png",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/output_setup.blend, keep the default Cube and configure these render output settings:\n- Render engine: Eevee\n- Resolution: 1920x1080 at 50% resolution percentage\n- Output file format: PNG\n- Output filepath: `/tmp/renders/frame_`\n- Film Transparent: enabled\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "output_setup.blend",
+        "sandbox_path": "/home/user/Documents/output_setup.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/output_setup.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/output_setup.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/output_setup.blend BLENDER_EEVEE",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is Eevee"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/output_setup.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 1920x1080"
+    },
+    {
+      "command": "scene-info /home/user/Documents/output_setup.blend",
+      "eval": "result.get('resolution_percentage') == 50",
+      "description": "Resolution percentage is 50"
+    },
+    {
+      "command": "scene-info /home/user/Documents/output_setup.blend",
+      "eval": "result.get('file_format') == 'PNG'",
+      "description": "Output file format is PNG"
+    },
+    {
+      "command": "scene-info /home/user/Documents/output_setup.blend",
+      "eval": "'renders/frame_' in str(result.get('output_path', ''))",
+      "description": "Output filepath contains 'renders/frame_'"
+    },
+    {
+      "command": "scene-info /home/user/Documents/output_setup.blend",
+      "eval": "result.get('film_transparent') == True",
+      "description": "Film Transparent is enabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

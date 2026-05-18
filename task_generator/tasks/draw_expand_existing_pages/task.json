@@ -1,0 +1,90 @@
+{
+  "id": "draw_expand_existing_pages",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/two_page_draft.odg is open in LibreOffice Draw. It has 2 pages: page 1 has a rectangle labeled 'Overview', page 2 has a rectangle labeled 'Details'.\n\nMake the following additions, preserving the original 'Overview' and 'Details' shapes:\n- Page 1: add a new rectangle with the text 'Last Updated: March 2026'. Page 1 must end up with at least 2 shapes.\n- Page 2: add an ellipse with the text 'Approved' and a rectangle with the text 'Reviewer: Smith'. Page 2 must end up with at least 3 shapes.\n- Add a new page 3 containing two rectangles with the texts 'Appendix A' and 'Appendix B'. Page 3 must end up with at least 2 shapes.\n\nThe document must end up with exactly 3 pages. Save the file in-place.",
+  "env": {
+    "files": [
+      {
+        "filename": "two_page_draft.odg",
+        "sandbox_path": "/home/user/Documents/two_page_draft.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 3 pages"
+    },
+    {
+      "command": "check-page-contains 0 Overview",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Overview' (original)"
+    },
+    {
+      "command": "check-page-contains 0 \"Last Updated: March 2026\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Last Updated: March 2026'"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 2",
+      "description": "Page 1 has at least 2 shapes"
+    },
+    {
+      "command": "check-page-contains 1 Details",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 still contains 'Details' (original)"
+    },
+    {
+      "command": "check-page-contains 1 Approved",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Approved'"
+    },
+    {
+      "command": "check-page-contains 1 \"Reviewer: Smith\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Reviewer: Smith'"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][1]['shape_count'] >= 3",
+      "description": "Page 2 has at least 3 shapes"
+    },
+    {
+      "command": "check-page-contains 2 \"Appendix A\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains text 'Appendix A'"
+    },
+    {
+      "command": "check-page-contains 2 \"Appendix B\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains text 'Appendix B'"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][2]['shape_count'] >= 2",
+      "description": "Page 3 has at least 2 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

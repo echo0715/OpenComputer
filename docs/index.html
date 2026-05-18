@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenComputer: Synthetic Verifiable Environments for Computer-Use Agents</title>
+  <link rel="icon" type="image/svg+xml" href="opencomputer.svg" />
+  <link rel="alternate icon" href="opencomputer.svg" />
+  <link rel="apple-touch-icon" href="opencomputer.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --paper: #ffffff;
+      --ink: #1a1a1a;
+      --ink-soft: #3a3a3a;
+      --muted: #6b6b6b;
+      --muted-2: #8a8a8a;
+      --rule: #e5e2db;
+      --rule-soft: #efece6;
+      --accent: #b04a2f;       /* warm research-paper red */
+      --accent-soft: #f3e1d8;
+      --link: #2a5db0;
+      --code-bg: #f4f1ea;
+      --highlight: #fff6dc;
+      --max-w: 880px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 16.5px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--link); text-decoration: none; transition: color .15s; }
+    a:hover { text-decoration: underline; }
+
+    code, pre, .mono {
+      font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    }
+
+    code {
+      background: var(--code-bg);
+      padding: 0.1em 0.38em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      color: var(--ink-soft);
+    }
+
+    .wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ────────── HEADER / TITLE BLOCK ────────── */
+    header.title {
+      padding: 5rem 1.5rem 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(176,74,47,0.05) 0%, transparent 70%),
+        var(--bg);
+    }
+    header.title:has(+ #demo-section) { border-bottom: none; padding-bottom: 1.5rem; }
+    #demo-section { padding-top: 0.5rem; }
+    .venue-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.28rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.6rem;
+    }
+    h1.paper-title {
+      font-family: "Source Serif 4", "Times New Roman", serif;
+      font-size: clamp(2rem, 5.4vw, 3.1rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+      max-width: 1020px;
+      margin: 0 auto 0.5rem;
+      color: var(--ink);
+    }
+    .paper-subtitle {
+      font-family: "Source Serif 4", serif;
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .authors {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.4rem;
+      font-size: 1.02rem;
+      color: var(--ink-soft);
+      margin-bottom: 0.7rem;
+    }
+    .authors .author { white-space: nowrap; }
+    .authors sup { color: var(--accent); font-weight: 600; }
+    .affil {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 2.2rem;
+    }
+    .affil sup { color: var(--accent); }
+
+    /* action buttons */
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 2.5rem;
+    }
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--ink);
+      color: #fff;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: transform .12s, background .15s;
+      border: 1px solid var(--ink);
+    }
+    .action-btn:hover {
+      text-decoration: none;
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .action-btn.ghost {
+      background: transparent;
+      color: var(--ink);
+    }
+    .action-btn.ghost:hover { background: var(--ink); color: #fff; }
+    .action-btn .ico {
+      width: 16px; height: 16px;
+      display: inline-block;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* dual-purpose path chooser */
+    .dual-paths {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+    }
+    .path-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 1.3rem 1.4rem;
+      text-align: left;
+      transition: border-color .15s, transform .12s, box-shadow .15s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      position: relative;
+    }
+    .path-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(176,74,47,0.07);
+      text-decoration: none;
+    }
+    .path-card .path-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+    .path-card .path-title {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-top: 0.2rem;
+    }
+    .path-card .path-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .path-card .path-cta {
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      .dual-paths { grid-template-columns: 1fr; }
+    }
+
+    /* tabs (Framework / Benchmark) */
+    .tabs-wrap {
+      max-width: 720px;
+      margin: 1.6rem auto 0;
+    }
+    .tabs-bar {
+      display: flex;
+      gap: 0.4rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      padding: 0.4rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .tabs-bar.sticky {
+      position: sticky;
+      top: 1rem;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.92);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 0.85rem 1.3rem;
+      border-radius: 999px;
+      background: transparent;
+      border: none;
+      font-family: "Inter", sans-serif;
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      transition: background .2s, color .2s, transform .1s;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active {
+      background: var(--ink);
+      color: #fff;
+    }
+    .tab-btn.active .tab-ico { color: #fff; }
+    .tab-btn .tab-ico {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .tab-btn .tab-meta {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      opacity: 0.65;
+      margin-right: 0.35rem;
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    .tab-intro {
+      text-align: center;
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 0.9rem;
+      font-style: italic;
+    }
+    @media (max-width: 640px) {
+      .tab-btn { padding: 0.7rem 0.6rem; font-size: 0.85rem; gap: 0.3rem; }
+      .tab-btn .tab-meta { display: none; }
+    }
+
+    /* part divider */
+    .part-divider {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 4rem 1.5rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid var(--rule);
+    }
+    .part-divider .part-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .part-divider h2.part-h {
+      font-family: "Source Serif 4", serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.012em;
+      margin-bottom: 0.6rem;
+    }
+    .part-divider .part-sub {
+      font-family: "Source Serif 4", serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .part-divider + section { border-top: none; padding-top: 2rem; }
+
+    /* "growing" banner — open invitation to synthesize new apps */
+    .growing-banner {
+      position: relative;
+      max-width: 760px;
+      margin: 2rem auto 0;
+      padding: 1.6rem 1.8rem 1.4rem;
+      background:
+        linear-gradient(135deg, rgba(176,74,47,0.06) 0%, rgba(42,122,74,0.05) 100%),
+        var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      text-align: left;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+    }
+    .growing-banner .live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2a7a4a;
+      margin-bottom: 0.7rem;
+    }
+    .growing-banner .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2a7a4a;
+      box-shadow: 0 0 0 0 rgba(42,122,74,0.5);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(42,122,74,0.55); }
+      70%  { box-shadow: 0 0 0 9px rgba(42,122,74,0); }
+      100% { box-shadow: 0 0 0 0 rgba(42,122,74,0); }
+    }
+    .growing-banner h3 {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .growing-banner h3 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+    .growing-banner p {
+      font-size: 0.96rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+      max-width: 640px;
+    }
+    .growing-banner .cmd-rows {
+      background: rgba(13, 17, 23, 0.92);
+      border-radius: 8px;
+      padding: 0.85rem 1.05rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.83rem;
+      line-height: 1.75;
+      color: #e6edf3;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+    }
+    .growing-banner .cmd-rows .prompt { color: #6b9cff; user-select: none; margin-right: 0.5rem; }
+    .growing-banner .cmd-rows .comment { color: #8b949e; }
+    .growing-banner .cmd-rows .arg { color: #7ee0a3; }
+    .growing-banner .cmd-rows .row { white-space: pre; }
+    .growing-banner .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .growing-banner .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--accent);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .growing-banner .cta-link:hover { text-decoration: underline; }
+    .growing-banner .cta-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    @media (max-width: 640px) {
+      .growing-banner { padding: 1.2rem 1.1rem 1.1rem; }
+      .growing-banner h3 { font-size: 1.12rem; }
+      .growing-banner .cmd-rows { font-size: 0.74rem; }
+    }
+
+    /* hero stats */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      max-width: 720px;
+      margin: 0 auto;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .hero-stats .stat {
+      flex: 1 1 120px;
+      padding: 1rem 1.2rem;
+      text-align: center;
+      border-right: 1px solid var(--rule);
+    }
+    .hero-stats .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--ink);
+      display: block;
+      line-height: 1.1;
+    }
+    .stat-lbl {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+    .stat-num-row {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      justify-content: center;
+    }
+    .stat-trend {
+      font-size: 0.85rem;
+      color: #2a7a4a;
+      font-weight: 700;
+      line-height: 1;
+      animation: trend-rise 2.4s ease-in-out infinite;
+    }
+    @keyframes trend-rise {
+      0%, 100% { transform: translateY(0); opacity: 0.85; }
+      50%      { transform: translateY(-3px); opacity: 1; }
+    }
+    .stat-growing {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #2a7a4a;
+    }
+    .stat-growing .grow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #2a7a4a;
+      box-shadow: 0 0 0 0 rgba(42,122,74,0.5);
+      animation: pulse 1.8s infinite;
+    }
+
+    /* ────────── SECTIONS ────────── */
+    section { padding: 3.5rem 0; border-bottom: 1px solid var(--rule); }
+    section:last-of-type { border-bottom: none; }
+
+    h2.section-h {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      margin-bottom: 1.2rem;
+      color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+    h2.section-h .num {
+      font-family: "Source Serif 4", serif;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    h3.sub-h {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.18rem;
+      font-weight: 600;
+      margin: 1.4rem 0 0.5rem;
+      color: var(--ink);
+    }
+
+    p { margin-bottom: 1rem; color: var(--ink-soft); }
+    p.lead {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.13rem;
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    /* abstract */
+    .abstract {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 1.8rem;
+      border-radius: 4px;
+    }
+    .abstract::first-letter {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+
+    /* teaser figure */
+    figure.teaser {
+      margin: 2rem 0 0;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 1.8rem 1.5rem 1.2rem;
+    }
+    figcaption {
+      font-family: "Source Serif 4", serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-top: 1.1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    figcaption strong { color: var(--ink); font-weight: 600; }
+
+    /* pipeline diagram (svg-like with html) */
+    .pipe-diagram {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      align-items: stretch;
+    }
+    .pipe-node {
+      text-align: center;
+      padding: 0.9rem 0.6rem;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: var(--bg);
+      position: relative;
+    }
+    .pipe-node + .pipe-node::before {
+      content: "";
+      position: absolute;
+      left: -14px;
+      top: 50%;
+      width: 14px;
+      height: 2px;
+      background: var(--muted-2);
+    }
+    .pipe-node + .pipe-node::after {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 6px solid var(--muted-2);
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+    }
+    .pipe-stage {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .pipe-name {
+      font-family: "Source Serif 4", serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .pipe-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+
+    @media (max-width: 720px) {
+      .pipe-diagram { grid-template-columns: 1fr; gap: 0.6rem; }
+      .pipe-node + .pipe-node::before,
+      .pipe-node + .pipe-node::after { display: none; }
+    }
+
+    /* embedded live demo — wider container override */
+    .wrap.wrap-wide { max-width: 1220px; }
+
+    .demo-frame {
+      position: relative;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+      margin-top: 1.6rem;
+    }
+    .demo-frame iframe {
+      display: block;
+      width: 100%;
+      height: 780px;
+      border: 0;
+      background: #fbfaf7;
+    }
+    .demo-frame-cap {
+      margin-top: 0.7rem;
+      font-size: 0.84rem;
+      color: var(--muted);
+      text-align: center;
+      font-style: italic;
+    }
+    @media (max-width: 720px) {
+      .demo-frame iframe { height: 1300px; }
+    }
+
+    /* method steps */
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.2rem;
+      padding: 1.3rem 1.4rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+    }
+    .step-num {
+      font-family: "Source Serif 4", serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .step-num small {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+      font-family: "Inter", sans-serif;
+      margin-top: 0.3rem;
+    }
+    .step-body h4 {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+    .step-body p { font-size: 0.95rem; margin-bottom: 0.6rem; color: var(--ink-soft); }
+    .step-cmd {
+      display: inline-block;
+      background: var(--code-bg);
+      border: 1px solid var(--rule);
+      border-radius: 5px;
+      padding: 0.35rem 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+    }
+
+    /* contributions list (academic style) */
+    .contrib {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+    .contrib-item {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1.1rem 1.2rem;
+    }
+    .contrib-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .contrib-item h4 {
+      font-family: "Source Serif 4", serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+    .contrib-item p { font-size: 0.9rem; line-height: 1.6; color: var(--muted); margin: 0; }
+
+    /* apps */
+    .apps {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .app {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 0.55rem 0.7rem;
+      text-align: center;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      transition: border-color .12s, color .12s;
+    }
+    .app:hover { border-color: var(--accent); color: var(--accent); }
+    .app.app-more {
+      border-style: dashed;
+      color: var(--accent);
+      background: transparent;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .app.app-more:hover { background: var(--accent-soft); }
+
+    /* platform expansion roadmap */
+    .platforms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+    .platform-card {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 1.6rem 1rem 1rem;
+      transition: border-color .15s, transform .15s, box-shadow .15s;
+      overflow: hidden;
+    }
+    .platform-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+    .platform-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--rule);
+    }
+    .platform-card.available::before { background: #2a7a4a; }
+    .platform-card.in-progress::before {
+      background: repeating-linear-gradient(90deg, var(--accent) 0 8px, transparent 8px 14px);
+    }
+    .platform-card.planned::before { background: var(--rule); }
+    .platform-card.growing::before { background: var(--link); }
+    .platform-status {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid;
+      line-height: 1.4;
+    }
+    .platform-card.available .platform-status {
+      color: #2a7a4a;
+      border-color: #2a7a4a;
+      background: rgba(42, 122, 74, 0.07);
+    }
+    .platform-card.in-progress .platform-status {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .platform-card.planned .platform-status {
+      color: var(--muted);
+      border-color: var(--rule);
+      background: var(--bg);
+    }
+    .platform-card.growing .platform-status {
+      color: var(--link);
+      border-color: var(--link);
+      background: rgba(42, 93, 176, 0.06);
+    }
+    .platform-icon {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 0.7rem;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .platform-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .platform-name {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.06rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+    .platform-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .roadmap-note {
+      margin-top: 1.4rem;
+      padding: 0.85rem 1.1rem;
+      background: var(--paper);
+      border: 1px dashed var(--accent);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .roadmap-note .pulse {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* table */
+    table.models {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 0.92rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table.models th, table.models td {
+      padding: 0.7rem 0.95rem;
+      text-align: left;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: top;
+    }
+    table.models tr:last-child td { border-bottom: none; }
+    table.models th {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--bg);
+    }
+    table.models .family {
+      font-family: "Source Serif 4", serif;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.98rem;
+      white-space: nowrap;
+    }
+    table.models .org { font-size: 0.85rem; color: var(--muted); }
+    .alias {
+      display: inline-block;
+      background: var(--code-bg);
+      border-radius: 4px;
+      padding: 0.12rem 0.45rem;
+      margin: 0.12rem 0.2rem 0.12rem 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+
+    /* leaderboard */
+    table.leaderboard {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 0.92rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table.leaderboard th, table.leaderboard td {
+      padding: 0.72rem 0.85rem;
+      text-align: right;
+      border-bottom: 1px solid var(--rule);
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    table.leaderboard th:first-child,
+    table.leaderboard td:first-child,
+    table.leaderboard th:nth-child(2),
+    table.leaderboard td:nth-child(2) { text-align: left; }
+    table.leaderboard tr:last-child td { border-bottom: none; }
+    table.leaderboard th {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--bg);
+    }
+    table.leaderboard .rank {
+      font-family: "Source Serif 4", serif;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center !important;
+      width: 36px;
+    }
+    table.leaderboard .model {
+      font-family: "Source Serif 4", serif;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.98rem;
+    }
+    table.leaderboard .num-cell {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      font-variant-numeric: tabular-nums;
+    }
+    table.leaderboard .primary {
+      font-weight: 700;
+      color: var(--ink);
+    }
+    table.leaderboard .bar {
+      position: relative;
+      min-width: 130px;
+    }
+    table.leaderboard .bar-track {
+      position: absolute;
+      left: 0.5rem;
+      right: 0.85rem;
+      bottom: 6px;
+      height: 4px;
+      background: var(--rule-soft);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    table.leaderboard .bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0; bottom: 0;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    table.leaderboard tr.gold td { background: rgba(255, 215, 0, 0.06); }
+    table.leaderboard tr.gold .rank { color: #b8860b; }
+    table.leaderboard tr.silver .rank { color: #6b6b6b; }
+    table.leaderboard tr.bronze .rank { color: #a0522d; }
+    table.leaderboard .medal {
+      display: inline-block;
+      margin-right: 0.3rem;
+    }
+    table.leaderboard .badge-best {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      padding: 0.05rem 0.4rem;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+    .lb-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+    .lb-note strong { color: var(--ink); }
+
+    .lb-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    .lb-card {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+    .lb-card .lb-rank {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .lb-card .lb-model {
+      font-family: "Source Serif 4", serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .lb-card .lb-stat {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .lb-card .lb-stat-lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 720px) {
+      table.leaderboard { font-size: 0.82rem; }
+      table.leaderboard th, table.leaderboard td { padding: 0.5rem 0.45rem; }
+      table.leaderboard .bar { min-width: 70px; }
+    }
+
+    /* code blocks */
+    pre {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1.1rem 1.3rem;
+      overflow-x: auto;
+      font-size: 0.83rem;
+      line-height: 1.7;
+      color: var(--ink);
+      margin: 0.8rem 0;
+    }
+    pre .c { color: var(--muted); font-style: italic; }
+    pre .k { color: var(--accent); }
+    pre .s { color: #2a7a4a; }
+    pre .f { color: #8a5a16; }
+
+    .qs-step { margin-bottom: 1.6rem; }
+    .qs-step h4 {
+      font-family: "Source Serif 4", serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+    .qs-step h4 .qs-tag {
+      font-family: "Inter", sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-right: 0.6rem;
+    }
+
+    /* bibtex */
+    .bibtex {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1.2rem 1.3rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      margin-top: 1.2rem;
+      white-space: pre;
+      overflow-x: auto;
+      position: relative;
+    }
+    .bibtex .copy-btn {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 0.32rem 0.7rem;
+      font-size: 0.72rem;
+      font-family: "Inter", sans-serif;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .bibtex .copy-btn:hover { background: var(--accent); }
+
+    /* TOC sticky on the right */
+    nav.toc {
+      position: fixed;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      font-size: 0.78rem;
+      color: var(--muted);
+      max-width: 130px;
+      line-height: 1.5;
+      display: none;
+    }
+    @media (min-width: 1440px) {
+      nav.toc { display: block; }
+    }
+    nav.toc a {
+      display: block;
+      color: var(--muted);
+      padding: 0.18rem 0;
+      border-left: 2px solid var(--rule);
+      padding-left: 0.6rem;
+      transition: color .15s, border-color .15s;
+    }
+    nav.toc a:hover, nav.toc a.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+    nav.toc .toc-h {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+      padding-left: 0.6rem;
+    }
+
+    footer {
+      padding: 2.5rem 1.5rem 3.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      border-top: 1px solid var(--rule);
+    }
+    footer p { color: var(--muted); }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+
+    /* fade in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 720px) {
+      header.title { padding: 3rem 1rem 2rem; }
+      .step { grid-template-columns: 1fr; gap: 0.4rem; }
+      .step-num { font-size: 1.4rem; display: flex; align-items: baseline; gap: 0.6rem; }
+      .step-num small { margin-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOC -->
+<nav class="toc">
+  <div class="toc-h">Contents</div>
+  <a href="#abstract">Abstract</a>
+  <a href="#contributions">Two Roles</a>
+  <div class="toc-h" style="margin-top:0.7rem;">Framework</div>
+  <a href="#method">Pipeline</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#apps">Applications</a>
+  <div class="toc-h" style="margin-top:0.7rem;">Benchmark</div>
+  <a href="#models">Models</a>
+  <a href="#leaderboard">Leaderboard</a>
+  <a href="#bibtex" style="margin-top:0.7rem;">BibTeX</a>
+</nav>
+
+<!-- HEADER / TITLE -->
+<header class="title">
+  <div class="venue-badge">Research Preview &bull; 2026</div>
+  <h1 class="paper-title">OpenComputer: Synthetic Environments for Computer-Use&nbsp;Agents</h1>
+  <p class="paper-subtitle">A framework for automatically synthesizing computer-use tasks, environments, and verifiers at scale.</p>
+
+  <div class="authors">
+    <span class="author">Jinbiao Wei<sup>Y</sup></span>
+    <span class="author">Qianran Ma<sup>P</sup></span>
+    <span class="author">Yilun Zhao<sup>Y</sup></span>
+    <span class="author">Xiao Zhou<sup>Y</sup></span>
+    <span class="author">Kangqi Ni<sup>C</sup></span>
+    <span class="author">Guo Gan<sup>Y</sup></span>
+    <span class="author">Arman Cohan<sup>Y</sup></span>
+  </div>
+  <div class="affil">
+    <sup>Y</sup>Yale NLP Lab &nbsp;&middot;&nbsp;
+    <sup>P</sup>University of Pennsylvania &nbsp;&middot;&nbsp;
+    <sup>C</sup>University of North Carolina at Chapel Hill
+  </div>
+
+  <div class="actions">
+    <a class="action-btn ghost" href="#abstract">
+      <svg class="ico" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 13h6M9 17h6M9 9h2"/></svg>
+      Paper
+    </a>
+    <a class="action-btn ghost" href="https://github.com/echo0715/OpenComputer" target="_blank" rel="noopener">
+      <svg class="ico" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.4 3.4 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.4 13.4 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.4 3.4 0 0 0 9 18.13V22"/></svg>
+      Code
+    </a>
+    <a class="action-btn ghost" href="#demo-section">
+      <svg class="ico" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Demo
+    </a>
+    <a class="action-btn ghost" href="#leaderboard">
+      <svg class="ico" viewBox="0 0 24 24"><path d="M4 21V10M12 21V4M20 21v-7"/></svg>
+      Leaderboard
+    </a>
+    <a class="action-btn ghost" href="#apps">
+      <svg class="ico" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+      Tasks &amp; Data
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num-row">
+        <span class="stat-num">1,000</span>
+        <span class="stat-trend" aria-hidden="true">↗</span>
+      </span>
+      <div class="stat-lbl">Tasks</div>
+      <div class="stat-growing"><span class="grow-dot" aria-hidden="true"></span>Growing</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num-row">
+        <span class="stat-num">33</span>
+        <span class="stat-trend" aria-hidden="true">↗</span>
+      </span>
+      <div class="stat-lbl">Apps</div>
+      <div class="stat-growing"><span class="grow-dot" aria-hidden="true"></span>Growing</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">8</span>
+      <div class="stat-lbl">Models Evaluated</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">17.7</span>
+      <div class="stat-lbl">Endpoints / App</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">6.9</span>
+      <div class="stat-lbl">Checks / Task</div>
+    </div>
+  </div>
+
+  <!-- <div class="growing-banner fade-in">
+    <div class="live-tag">
+      <span class="live-dot" aria-hidden="true"></span>
+      Live &amp; growing
+    </div>
+    <h3>Bring your <em>own</em> app &mdash; the synthesis pipeline is open</h3>
+    <p>
+      Any desktop application can be added to OpenComputer with a small set of
+      commands. The catalog of apps, platforms, and tasks <strong>keeps growing</strong>
+      &mdash; new environments and verifier-grounded tasks ship with every release.
+    </p>
+    <div class="cta-row">
+      <button class="cta-link" type="button" data-jump="framework">See the synthesis framework &rarr;</button>
+      <span class="cta-meta">More apps, platforms, and tasks added every release.</span>
+    </div>
+  </div> -->
+
+</header>
+
+<!-- LIVE DEMO -->
+<section id="demo-section">
+  <div class="wrap wrap-wide">
+    <div class="demo-frame fade-in">
+      <iframe src="demo.html" title="OpenComputer pipeline demo" loading="lazy"></iframe>
+    </div>
+    <p class="demo-frame-cap">
+      Pipeline replay for <code>blender</code> &mdash; the same flow runs for any app.
+    </p>
+  </div>
+</section>
+
+<!-- ABSTRACT -->
+<section id="abstract">
+  <div class="wrap">
+    <h2 class="section-h"><span class="num">1.</span>Abstract</h2>
+    <p class="abstract fade-in">
+      We present <strong>OpenComputer</strong>, a verifier-grounded framework for constructing
+      verifiable software worlds for computer-use agents. OpenComputer integrates four
+      components: (1) app-specific state verifiers that expose structured inspection endpoints
+      over real applications, (2) a self-evolving verification layer that improves verifier
+      reliability using execution-grounded feedback, (3) a task-generation pipeline that
+      synthesizes realistic and machine-checkable desktop tasks, and (4) an evaluation harness
+      that records full trajectories and computes auditable partial-credit rewards.
+      In its current form, OpenComputer covers <strong>33 desktop applications</strong> and
+      <strong>1,000 finalized tasks</strong> spanning browsers, office tools, creative
+      software, development environments, file managers, and communication applications.
+      The pipeline is designed to be extensible: new applications and platforms (Windows,
+      macOS, Android) can be added by following the same verifier-grounded workflow. We are
+      actively expanding coverage, and the framework is open for the community to build on
+      &mdash; anyone can use it to onboard their own apps and grow the environment and tasks.
+    </p>
+
+    <figure class="teaser fade-in">
+      <div class="pipe-diagram">
+        <div class="pipe-node">
+          <div class="pipe-stage">Stage 1</div>
+          <div class="pipe-name">Verifier</div>
+          <div class="pipe-desc">Endpoints over IPC, files, profile DBs</div>
+        </div>
+        <div class="pipe-node">
+          <div class="pipe-stage">Stage 2</div>
+          <div class="pipe-name">Smoke Tests</div>
+          <div class="pipe-desc">Live-sandbox endpoint checks</div>
+        </div>
+        <div class="pipe-node">
+          <div class="pipe-stage">Stage 3</div>
+          <div class="pipe-name">Task Synthesis</div>
+          <div class="pipe-desc">Propose &rarr; evaluate &rarr; match &rarr; seed env</div>
+        </div>
+        <div class="pipe-node">
+          <div class="pipe-stage">Stage 4</div>
+          <div class="pipe-name">Repair Loop</div>
+          <div class="pipe-desc">Verifier &harr; LLM judge reconciliation</div>
+        </div>
+      </div>
+      <figcaption>
+        <strong>Figure 1.</strong> The OpenComputer pipeline. Each stage gates the next: verifier
+        quality determines task quality, and task quality determines whether evaluation is meaningful.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- TWO ROLES + TAB SWITCH -->
+<section id="contributions">
+  <div class="wrap">
+    <h2 class="section-h"><span class="num">2.</span>Framework and Benchmark</h2>
+    <p class="lead">
+      OpenComputer is an <strong>open-ended synthesis framework</strong> that generates verifiable
+      tasks for any desktop app. It also ships a <strong>benchmark suite</strong> of 1,000 tasks
+      across 33 applications produced by that framework. Use the toggle below to read whichever
+      side is relevant to your work.
+    </p>
+
+    <div class="tabs-wrap fade-in">
+      <div class="tabs-bar" role="tablist" aria-label="OpenComputer modes">
+        <button class="tab-btn active" data-target="framework" role="tab" aria-selected="true">
+          <svg class="tab-ico" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span class="tab-meta">Framework</span> Synthesize tasks
+        </button>
+        <button class="tab-btn" data-target="benchmark" role="tab" aria-selected="false">
+          <svg class="tab-ico" viewBox="0 0 24 24"><path d="M4 21V10M12 21V4M20 21v-7"/></svg>
+          <span class="tab-meta">Benchmark</span> Evaluate agents
+        </button>
+      </div>
+      <div class="tab-intro" id="tab-intro">
+        Reading the <strong>Synthesis Framework</strong> &mdash; the verifier-grounded pipeline that builds new tasks.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── BENCHMARK TAB PANE ───────── -->
+<div class="tab-pane" data-tab="benchmark" id="part-benchmark">
+
+<!-- MODELS -->
+<section id="models">
+  <div class="wrap">
+    <h2 class="section-h">Supported Models</h2>
+    <p class="lead">
+      Pass any alias to <code>--model</code>. Unknown model IDs are routed by family heuristics —
+      a name containing <code>claude</code>, <code>kimi</code>, <code>qwen</code>, <code>gemini</code>,
+      <code>gpt-</code>, etc., automatically picks up the correct agent class.
+    </p>
+    <div style="overflow-x:auto;" class="fade-in">
+      <table class="models">
+        <thead>
+          <tr>
+            <th>Family</th>
+            <th>Provider</th>
+            <th>Aliases</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="family">Claude</td>
+            <td class="org">Anthropic</td>
+            <td>
+              <span class="alias">claude-sonnet-4-6</span>
+              <span class="alias">claude-opus-4</span>
+              <span class="alias">claude-3-7-sonnet</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="family">GPT&nbsp;/&nbsp;ChatGPT</td>
+            <td class="org">OpenAI</td>
+            <td>
+              <span class="alias">gpt-5</span>
+              <span class="alias">gpt-5.4</span>
+              <span class="alias">computer-use-preview</span>
+              <span class="alias">azure-gpt-5.4</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="family">Gemini</td>
+            <td class="org">Google</td>
+            <td>
+              <span class="alias">gemini-3-flash</span>
+              <span class="alias">gemini-3-flash-preview</span>
+              <span class="alias">gemini-2.5-computer-use</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="family">Kimi</td>
+            <td class="org">Moonshot</td>
+            <td>
+              <span class="alias">kimi-k2.5</span>
+              <span class="alias">kimi-k2.6</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="family">Qwen</td>
+            <td class="org">Alibaba</td>
+            <td>
+              <span class="alias">qwen3-vl</span>
+              <span class="alias">qwen2.5-vl-72b</span>
+              <span class="alias">qwen3.5-35b-a3b</span>
+              <span class="alias">qwen3.5-27b</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="family">Specialised CUA</td>
+            <td class="org">GUI-Owl, EvoCUA, Mano, OpenCUA, Dart</td>
+            <td>
+              <span class="alias">owl1.5</span>
+              <span class="alias">evocua-s1</span>
+              <span class="alias">evocua-s2</span>
+              <span class="alias">mano</span>
+              <span class="alias">opencua</span>
+              <span class="alias">dart</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERBOARD -->
+<section id="leaderboard">
+  <div class="wrap">
+    <h2 class="section-h">Leaderboard</h2>
+    <p class="lead">
+      Performance and efficiency comparison across computer-use agents on the OpenComputer
+      benchmark. <em>Success Rate</em> is the fraction of tasks for which all required
+      criteria are satisfied; <em>Avg. Reward</em> is the mean fraction of passed verifier
+      checks (giving partial credit). OSWorld-Verified is reported as an external reference
+      where available.
+    </p>
+
+    <div class="lb-summary fade-in">
+      <div class="lb-card">
+        <div class="lb-rank">&#x1F947; 1st &middot; Frontier</div>
+        <div class="lb-model">GPT-5.4</div>
+        <div class="lb-stat">68.3<span style="font-size:0.7em;color:var(--muted);">%</span></div>
+        <div class="lb-stat-lbl">Success Rate</div>
+      </div>
+      <div class="lb-card">
+        <div class="lb-rank">&#x1F948; 2nd &middot; Frontier</div>
+        <div class="lb-model">Claude-Sonnet-4.6</div>
+        <div class="lb-stat">64.4<span style="font-size:0.7em;color:var(--muted);">%</span></div>
+        <div class="lb-stat-lbl">Success Rate</div>
+      </div>
+      <div class="lb-card">
+        <div class="lb-rank">&#x1F949; 3rd &middot; Frontier</div>
+        <div class="lb-model">Kimi-K2.6</div>
+        <div class="lb-stat">58.8<span style="font-size:0.7em;color:var(--muted);">%</span></div>
+        <div class="lb-stat-lbl">Success Rate</div>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;" class="fade-in">
+      <table class="leaderboard">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Model</th>
+            <th>OSWorld</th>
+            <th>Success Rate <span style="color:var(--accent);">&darr;</span></th>
+            <th>Avg. Reward</th>
+            <th>Avg. Steps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="gold">
+            <td class="rank">1</td>
+            <td class="model">GPT-5.4 <span class="badge-best">Best</span></td>
+            <td class="num-cell">75.0%</td>
+            <td class="num-cell primary bar">
+              68.3%
+              <span class="bar-track"><span class="bar-fill" style="width:100%"></span></span>
+            </td>
+            <td class="num-cell">88.4%</td>
+            <td class="num-cell">19.0</td>
+          </tr>
+          <tr class="silver">
+            <td class="rank">2</td>
+            <td class="model">Claude-Sonnet-4.6</td>
+            <td class="num-cell">72.5%</td>
+            <td class="num-cell primary bar">
+              64.4%
+              <span class="bar-track"><span class="bar-fill" style="width:94.3%"></span></span>
+            </td>
+            <td class="num-cell">76.6%</td>
+            <td class="num-cell">31.5</td>
+          </tr>
+          <tr class="bronze">
+            <td class="rank">3</td>
+            <td class="model">Kimi-K2.6</td>
+            <td class="num-cell">73.1%</td>
+            <td class="num-cell primary bar">
+              58.8%
+              <span class="bar-track"><span class="bar-fill" style="width:86.1%"></span></span>
+            </td>
+            <td class="num-cell">70.7%</td>
+            <td class="num-cell">35.7</td>
+          </tr>
+          <tr>
+            <td class="rank">4</td>
+            <td class="model">Qwen-3.5-27B</td>
+            <td class="num-cell">56.2%</td>
+            <td class="num-cell primary bar">
+              32.3%
+              <span class="bar-track"><span class="bar-fill" style="width:47.3%"></span></span>
+            </td>
+            <td class="num-cell">59.4%</td>
+            <td class="num-cell">33.1</td>
+          </tr>
+          <tr>
+            <td class="rank">5</td>
+            <td class="model">Gemini-3-Flash</td>
+            <td class="num-cell" style="color:var(--muted-2);">&mdash;</td>
+            <td class="num-cell primary bar">
+              16.4%
+              <span class="bar-track"><span class="bar-fill" style="width:24.0%"></span></span>
+            </td>
+            <td class="num-cell">37.0%</td>
+            <td class="num-cell">25.4</td>
+          </tr>
+          <tr>
+            <td class="rank">6</td>
+            <td class="model">EvoCUA-8B</td>
+            <td class="num-cell">46.1%</td>
+            <td class="num-cell primary bar">
+              10.9%
+              <span class="bar-track"><span class="bar-fill" style="width:16.0%"></span></span>
+            </td>
+            <td class="num-cell">38.1%</td>
+            <td class="num-cell">67.0</td>
+          </tr>
+          <tr>
+            <td class="rank">7</td>
+            <td class="model">Qwen-3.5-9B</td>
+            <td class="num-cell">41.8%</td>
+            <td class="num-cell primary bar">
+              7.8%
+              <span class="bar-track"><span class="bar-fill" style="width:11.4%"></span></span>
+            </td>
+            <td class="num-cell">31.7%</td>
+            <td class="num-cell">39.3</td>
+          </tr>
+          <tr>
+            <td class="rank">8</td>
+            <td class="model">GUI-OWL-1.5-8B</td>
+            <td class="num-cell">52.3%</td>
+            <td class="num-cell primary bar">
+              5.7%
+              <span class="bar-track"><span class="bar-fill" style="width:8.3%"></span></span>
+            </td>
+            <td class="num-cell">27.8%</td>
+            <td class="num-cell">73.6</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="lb-note">
+      <strong>Observations.</strong> OpenComputer is challenging even for the strongest current
+      agents &mdash; GPT-5.4 still fails to completely solve nearly one-third of the benchmark
+      tasks. Open-source models drop sharply from their reported OSWorld-Verified scores
+      (e.g. GUI-OWL-1.5-8B: 52.3% &rarr; 5.7%; EvoCUA-8B: 46.1% &rarr; 10.9%), suggesting
+      limited cross-benchmark generalization to the broader, more heterogeneous software
+      surfaces covered here. GPT-5.4 is also the most efficient: it completes tasks in only
+      19 steps on average by combining low-level operations into single computer-control
+      steps.
+    </p>
+  </div>
+</section>
+
+</div>
+<!-- ───────── /BENCHMARK PANE ───────── -->
+
+
+<!-- ───────── FRAMEWORK TAB PANE ───────── -->
+<div class="tab-pane active" data-tab="framework" id="part-framework">
+
+<!-- METHOD -->
+<section id="method">
+  <div class="wrap">
+    <h2 class="section-h">Pipeline</h2>
+    <p class="lead">
+      The execution order is strict: verifier &rarr; smoke tests &rarr; task generation &rarr; (optional)
+      repair. Each stage gates the next, because verifier quality dictates task quality and task quality
+      dictates evaluation signal. Use this part of the framework when you want to add a new app or
+      extend the existing benchmark with new tasks.
+    </p>
+
+    <div id="pipeline" class="steps fade-in">
+      <div class="step">
+        <div class="step-num">1<small>Stage</small></div>
+        <div class="step-body">
+          <h4>Verifier Generation</h4>
+          <p>Build a programmatic verifier for the target app under <code>verifiers/&lt;app&gt;/</code>.
+          Design comprehensive <code>check-*</code> endpoints across every inspectable surface &mdash; file
+          state, IPC state, profile databases. Write <code>Test.md</code> before test code, then run
+          until all unit tests pass.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2<small>Stage</small></div>
+        <div class="step-body">
+          <h4>Smoke Tests</h4>
+          <p>After unit tests pass, run the smoke pipeline so each verifier endpoint is exercised by
+          a real agent trajectory in a fresh sandbox. One small task per endpoint group; the run
+          produces <code>REPORT.md</code>. Real task generation does not begin until smoke is green.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3<small>Stage</small></div>
+        <div class="step-body">
+          <h4>Task Generation</h4>
+          <p>Generate proposals <em>without</em> consulting the verifier (the single most important
+          synthesis rule &mdash; it prevents the task set from collapsing onto whatever the verifier already
+          supports). Evaluate on complexity and data-generatability, then match to verifiers by
+          adapting the task, extending the verifier, or discarding. Synthesize <code>env/</code>
+          seed files and target at least three finalized tasks per app.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4<small>Stage</small></div>
+        <div class="step-body">
+          <h4>Repair Loop <em style="font-weight:400;color:var(--muted);font-size:0.85em;">(optional)</em></h4>
+          <p>For each round the agent runs, the programmatic verifier and an LLM-as-judge both grade
+          the trajectory. When they disagree, the script edits the verifier or task spec; when they
+          agree, the run is finalized. Each invocation is single-task; loop in shell to repair multiple.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM ROADMAP (framework) -->
+<section id="roadmap">
+  <div class="wrap">
+    <h2 class="section-h">Platform Roadmap</h2>
+    <p class="lead">
+      OpenComputer started on Linux desktop, but the synthesis pipeline &mdash; verifiers,
+      task generation, sandbox provisioning &mdash; is platform-agnostic by design. We are
+      actively extending the framework to <strong>Windows</strong>, <strong>macOS</strong>,
+      and <strong>Android</strong> so that a single benchmark can grade computer-use agents
+      across every major form factor.
+    </p>
+
+    <div class="platforms fade-in">
+      <div class="platform-card available">
+        <span class="platform-status">Available</span>
+        <div class="platform-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="platform-name">Linux</div>
+        <div class="platform-desc">Ubuntu / XFCE &middot; 33 apps, 1,000 tasks</div>
+      </div>
+
+      <div class="platform-card in-progress">
+        <span class="platform-status">In Progress</span>
+        <div class="platform-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 5l8-1.2v8.4H3zM3 12.8h8v8.4L3 20zM12 3.65L21 2.4v9.8h-9zM12 12.8h9V21.6l-9-1.25z"/></svg>
+        </div>
+        <div class="platform-name">Windows</div>
+        <div class="platform-desc">Win32 + UWP &middot; UI Automation verifiers</div>
+      </div>
+
+      <div class="platform-card in-progress">
+        <span class="platform-status">In Progress</span>
+        <div class="platform-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M16.5 3.5c-0.4 1.6-1.6 2.9-3 3.1"/><path d="M19 16.7c-0.7 1.5-1.5 3-2.9 3-1.1 0-1.6-0.7-2.9-0.7-1.3 0-1.9 0.7-2.9 0.7-1.4 0-2.4-1.4-3.2-2.9-1.6-2.7-2.5-7.6 1.0-9.4 1.6-0.8 3.0 0.0 4.1 0.0 1.1 0 2.7-0.9 4.4-0.0 0.6 0.3 2.0 1.2 2.5 2.7-2.5 1.5-2.1 5.1-0.1 6.6z"/></svg>
+        </div>
+        <div class="platform-name">macOS</div>
+        <div class="platform-desc">AppKit &middot; AX API + AppleScript bridges</div>
+      </div>
+
+      <div class="platform-card in-progress">
+        <span class="platform-status">In Progress</span>
+        <div class="platform-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M6 9.5h12v8.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 18z"/><path d="M9 6L7.5 3.5M15 6l1.5-2.5"/><circle cx="9.5" cy="13" r="0.6" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13" r="0.6" fill="currentColor" stroke="none"/><path d="M3.5 11v5M20.5 11v5"/></svg>
+        </div>
+        <div class="platform-name">Android</div>
+        <div class="platform-desc">Mobile &middot; adb / UI Automator harness</div>
+      </div>
+
+      <div class="platform-card growing">
+        <span class="platform-status">Growing</span>
+        <div class="platform-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <div class="platform-name">More Apps</div>
+        <div class="platform-desc">New apps synthesized every release</div>
+      </div>
+    </div>
+
+    <div class="roadmap-note">
+      <span class="pulse" aria-hidden="true"></span>
+      <span><strong>Active development:</strong> the verifier &rarr; smoke &rarr; task pipeline
+      is being ported to each platform &mdash; Windows and Android sandboxes are already
+      provisioning agents end-to-end in our internal CI.</span>
+    </div>
+  </div>
+</section>
+
+<!-- APPS (framework) -->
+<section id="apps">
+  <div class="wrap">
+    <h2 class="section-h">Applications</h2>
+    <p class="lead">
+      The synthesis pipeline has been instantiated for all 33 applications below &mdash;
+      each ships with a verifier module, a documented set of inspection endpoints, and
+      finalized tasks. The catalog is <strong>actively growing</strong>; new apps are
+      added by following the same four-stage pipeline.
+    </p>
+    <div class="apps fade-in">
+      <div class="app">Audacity</div>
+      <div class="app">Blender</div>
+      <div class="app">Brave</div>
+      <div class="app">Chrome</div>
+      <div class="app">CloudCompare</div>
+      <div class="app">darktable</div>
+      <div class="app">draw.io</div>
+      <div class="app">Eclipse</div>
+      <div class="app">Firefox</div>
+      <div class="app">FreeCAD</div>
+      <div class="app">Galculator</div>
+      <div class="app">gedit</div>
+      <div class="app">GIMP</div>
+      <div class="app">Godot 4</div>
+      <div class="app">Inkscape</div>
+      <div class="app">Kdenlive</div>
+      <div class="app">Krita</div>
+      <div class="app">LO Calc</div>
+      <div class="app">LO Draw</div>
+      <div class="app">LO Impress</div>
+      <div class="app">LO Writer</div>
+      <div class="app">MuseScore 3</div>
+      <div class="app">OBS Studio</div>
+      <div class="app">Obsidian</div>
+      <div class="app">PCManFM</div>
+      <div class="app">RenderDoc</div>
+      <div class="app">Shotcut</div>
+      <div class="app">Thunderbird</div>
+      <div class="app">VLC</div>
+      <div class="app">VS Code</div>
+      <div class="app">Zoom</div>
+      <div class="app">Zotero</div>
+      <div class="app app-more" title="More apps coming soon">+ more soon</div>
+    </div>
+  </div>
+</section>
+
+</div>
+<!-- ───────── /FRAMEWORK PANE ───────── -->
+
+
+<!-- BIBTEX -->
+<section id="bibtex">
+  <div class="wrap">
+    <h2 class="section-h"><span class="num">3.</span>Citation</h2>
+    <p>If you use OpenComputer in your research, please cite:</p>
+    <div class="bibtex fade-in" id="bibtex-block">
+<button class="copy-btn" onclick="copyBibtex()">Copy</button>@misc{opencomputer2026,
+  title         = {OpenComputer: Synthetic Environments for Computer-Use Agents},
+  author        = {OpenComputer Team},
+  year          = {2026},
+  howpublished  = {\url{https://github.com/echo0715}},
+  note          = {Research preview}
+}</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>OpenComputer</strong> &nbsp;&middot;&nbsp; Synthetic Environments for Computer-Use Agents</p>
+  <p style="margin-top:0.5rem;">
+    <a href="https://github.com/echo0715" target="_blank" rel="noopener">GitHub</a>
+    &nbsp;&middot;&nbsp;
+    <a href="#abstract">Top</a>
+  </p>
+</footer>
+
+<script>
+  // fade-in
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll(".fade-in").forEach(el => io.observe(el));
+
+  // tab switching (Framework / Benchmark)
+  const tabBtns = document.querySelectorAll(".tab-btn");
+  const tabPanes = document.querySelectorAll(".tab-pane");
+  const tabIntroEl = document.getElementById("tab-intro");
+  const TAB_INTROS = {
+    framework: 'Reading the <strong>Synthesis Framework</strong> &mdash; the verifier-grounded pipeline that builds new tasks.',
+    benchmark: 'Reading the <strong>Benchmark Suite</strong> &mdash; 1,000 verifiable tasks, leaderboard, and how to run an evaluation.'
+  };
+  function activateTab(target) {
+    tabBtns.forEach(b => {
+      const isActive = b.dataset.target === target;
+      b.classList.toggle("active", isActive);
+      b.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+    tabPanes.forEach(p => p.classList.toggle("active", p.dataset.tab === target));
+    if (tabIntroEl && TAB_INTROS[target]) tabIntroEl.innerHTML = TAB_INTROS[target];
+  }
+  tabBtns.forEach(btn => btn.addEventListener("click", () => {
+    activateTab(btn.dataset.target);
+    const bar = document.querySelector(".tabs-bar");
+    if (bar) {
+      const rect = bar.getBoundingClientRect();
+      if (rect.top < 0) {
+        window.scrollTo({ top: window.scrollY + rect.top - 80, behavior: "smooth" });
+      }
+    }
+  }));
+
+  // any [data-jump="<tab>"] button switches to that tab and scrolls to it
+  document.querySelectorAll("[data-jump]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.jump;
+      activateTab(target);
+      const pane = document.querySelector('.tab-pane[data-tab="' + target + '"]');
+      const anchor = document.querySelector(".tabs-bar") || pane;
+      if (anchor) anchor.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // toc + intra-tab links: auto-switch tab if needed
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", () => {
+      const tgt = document.querySelector(a.getAttribute("href"));
+      if (!tgt) return;
+      const pane = tgt.closest(".tab-pane");
+      if (pane && !pane.classList.contains("active")) {
+        activateTab(pane.dataset.tab);
+      }
+    });
+  });
+
+  // toc active link (skip hidden sections)
+  const tocLinks = Array.from(document.querySelectorAll("nav.toc a"));
+  const sections = tocLinks.map(a => document.querySelector(a.getAttribute("href")));
+  function updateActive() {
+    const y = window.scrollY + 140;
+    let active = 0;
+    sections.forEach((s, i) => {
+      if (s && s.offsetParent !== null && s.offsetTop <= y) active = i;
+    });
+    tocLinks.forEach((a, i) => a.classList.toggle("active", i === active));
+  }
+  window.addEventListener("scroll", updateActive, { passive: true });
+  updateActive();
+
+  // bibtex copy
+  function copyBibtex() {
+    const block = document.getElementById("bibtex-block");
+    const txt = block.innerText.replace(/^Copy\s*/, "");
+    navigator.clipboard.writeText(txt).then(() => {
+      const btn = block.querySelector(".copy-btn");
+      const prev = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => (btn.textContent = prev), 1500);
+    });
+  }
+</script>
+</body>
+</html>

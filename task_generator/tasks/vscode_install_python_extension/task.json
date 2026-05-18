@@ -1,0 +1,34 @@
+{
+  "id": "vscode_install_python_extension",
+  "app": "vscode",
+  "task": "Install the Python extension by Microsoft (extension id `ms-python.python`) and configure the following user settings (persisted to `~/.config/Code/User/settings.json`):\n\n- `python.analysis.typeCheckingMode`: `basic`\n- `python.formatting.provider`: `black`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-extension-installed ms-python.python",
+      "key": "installed",
+      "expected": true,
+      "description": "Python extension is installed"
+    },
+    {
+      "command": "check-setting python.analysis.typeCheckingMode basic",
+      "key": "match",
+      "expected": true,
+      "description": "typeCheckingMode is basic"
+    },
+    {
+      "command": "check-setting python.formatting.provider black",
+      "key": "match",
+      "expected": true,
+      "description": "formatting.provider is black"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

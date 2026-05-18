@@ -1,0 +1,93 @@
+{
+  "id": "renderdoc_capture_version_prefix_rename",
+  "app": "renderdoc",
+  "task": "Three valid RenderDoc captures exist in /home/user/unlabeled/. All three use the same serialise_version (258 decimal, also known as 0x102 -- the version that shipped with RenderDoc 1.36). Rename each file so that its new basename is prefixed with \"v258_\" (underscore included), and move it into /home/user/labeled/.\n\nStarting files:\n  /home/user/unlabeled/shadow.rdc\n  /home/user/unlabeled/lighting.rdc\n  /home/user/unlabeled/post.rdc\n\nExpected result in /home/user/labeled/:\n  v258_shadow.rdc\n  v258_lighting.rdc\n  v258_post.rdc\n\nThe /home/user/unlabeled directory must be empty of .rdc files when you are done. Also set \"DefaultCaptureSaveDirectory\" in /home/user/.local/share/qrenderdoc/UI.config to the string \"/home/user/labeled\". The \"rdocConfigData\": 1 marker must remain.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      },
+      {
+        "filename": "shadow.rdc",
+        "sandbox_path": "/home/user/unlabeled/shadow.rdc"
+      },
+      {
+        "filename": "lighting.rdc",
+        "sandbox_path": "/home/user/unlabeled/lighting.rdc"
+      },
+      {
+        "filename": "post.rdc",
+        "sandbox_path": "/home/user/unlabeled/post.rdc"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-capture-count /home/user/labeled 3",
+      "key": "match",
+      "expected": true,
+      "description": "labeled has 3 captures"
+    },
+    {
+      "command": "check-capture-count /home/user/unlabeled 0",
+      "key": "match",
+      "expected": true,
+      "description": "unlabeled empty"
+    },
+    {
+      "command": "check-rdc-version /home/user/labeled/v258_shadow.rdc 258",
+      "key": "match",
+      "expected": true,
+      "description": "v258_shadow.rdc version 258"
+    },
+    {
+      "command": "check-rdc-version /home/user/labeled/v258_lighting.rdc 0x102",
+      "key": "match",
+      "expected": true,
+      "description": "v258_lighting.rdc version 0x102"
+    },
+    {
+      "command": "check-rdc-version /home/user/labeled/v258_post.rdc 258",
+      "key": "match",
+      "expected": true,
+      "description": "v258_post.rdc version 258"
+    },
+    {
+      "command": "check-rdc-valid /home/user/labeled/v258_shadow.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "v258_shadow.rdc valid"
+    },
+    {
+      "command": "check-rdc-valid /home/user/labeled/v258_lighting.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "v258_lighting.rdc valid"
+    },
+    {
+      "command": "check-rdc-valid /home/user/labeled/v258_post.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "v258_post.rdc valid"
+    },
+    {
+      "command": "check-setting DefaultCaptureSaveDirectory \"/home/user/labeled\"",
+      "key": "match",
+      "expected": true,
+      "description": "DefaultCaptureSaveDirectory set"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

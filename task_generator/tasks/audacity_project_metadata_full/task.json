@@ -1,0 +1,67 @@
+{
+  "id": "audacity_project_metadata_full",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/ambient.aup already loaded — a project containing a single wavetrack named 'Ambient Pad' and no metadata tags.\n\nSet the project metadata tags to exactly:\n- Title: Ocean Drift\n- Artist: Mika Lee\n- Album: Coastal\n- Year: 2024\n- Genre: Ambient\n- Comments: A short demo recording for testing\n\nSave the project so the tags are persisted inside the .aup XML at /home/user/Music/ambient.aup. Do not rename the file and do not change any track or project settings.",
+  "env": {
+    "files": [
+      {
+        "filename": "ambient.aup",
+        "sandbox_path": "/home/user/Music/ambient.aup"
+      },
+      {
+        "filename": "ambient_data/e00/d00/e000001.au",
+        "sandbox_path": "/home/user/Music/ambient_data/e00/d00/e000001.au"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-valid-aup /home/user/Music/ambient.aup",
+      "key": "valid",
+      "expected": true,
+      "description": "Project file is still a valid .aup"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/ambient.aup TITLE 'Ocean Drift'",
+      "key": "match",
+      "expected": true,
+      "description": "TITLE tag is 'Ocean Drift'"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/ambient.aup ARTIST 'Mika Lee'",
+      "key": "match",
+      "expected": true,
+      "description": "ARTIST tag is 'Mika Lee'"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/ambient.aup ALBUM Coastal",
+      "key": "match",
+      "expected": true,
+      "description": "ALBUM tag is 'Coastal'"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/ambient.aup YEAR 2024",
+      "key": "match",
+      "expected": true,
+      "description": "YEAR tag is '2024'"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/ambient.aup GENRE Ambient",
+      "key": "match",
+      "expected": true,
+      "description": "GENRE tag is 'Ambient'"
+    },
+    {
+      "command": "check-tag-contains /home/user/Music/ambient.aup COMMENTS demo",
+      "key": "match",
+      "expected": true,
+      "description": "COMMENTS tag contains 'demo'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

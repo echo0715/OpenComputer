@@ -1,0 +1,46 @@
+{
+  "id": "vscode_workspace_build_tasks",
+  "app": "vscode",
+  "task": "Create a project at `/home/user/projects/webapp` with the following files:\n\n- `.vscode/tasks.json` — three shell tasks:\n  - `Build` — runs `npm run build`\n  - `Test` — runs `npm test`\n  - `Lint` — runs `npx eslint src`\n- `package.json`:\n  ```json\n  {\n    \"name\": \"webapp\",\n    \"version\": \"1.0.0\"\n  }\n  ```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tasks-defined /home/user/projects/webapp",
+      "key": "defined",
+      "expected": true,
+      "description": "tasks.json has tasks defined"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/webapp Build",
+      "key": "exists",
+      "expected": true,
+      "description": "Build task exists"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/webapp Test",
+      "key": "exists",
+      "expected": true,
+      "description": "Test task exists"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/webapp Lint",
+      "key": "exists",
+      "expected": true,
+      "description": "Lint task exists"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/webapp/package.json",
+      "key": "exists",
+      "expected": true,
+      "description": "package.json exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

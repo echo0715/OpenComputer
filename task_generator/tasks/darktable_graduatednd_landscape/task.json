@@ -1,0 +1,63 @@
+{
+  "id": "darktable_graduatednd_landscape",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/horizon.png into the darktable library.\n\nEnable the 'graduated density' module (internally 'graduatednd') so the bright sky is darkened, and enable the 'sharpen' module. Apply both tags 'landscape' and 'enhanced' to the image, set its star rating to 5 stars, and export it as a JPEG to /home/user/Pictures/horizon_enhanced.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "horizon.png",
+        "sandbox_path": "/home/user/Pictures/horizon.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported horizon.png",
+      "key": "imported",
+      "expected": true,
+      "description": "horizon.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation horizon.png graduatednd",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'graduatednd' operation"
+    },
+    {
+      "command": "check-db-has-operation horizon.png sharpen",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'sharpen' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename horizon.png landscape",
+      "key": "tagged",
+      "expected": true,
+      "description": "horizon.png is tagged with 'landscape'"
+    },
+    {
+      "command": "check-image-tagged-by-filename horizon.png enhanced",
+      "key": "tagged",
+      "expected": true,
+      "description": "horizon.png is tagged with 'enhanced'"
+    },
+    {
+      "command": "check-image-rating-by-filename horizon.png 5",
+      "key": "matches",
+      "expected": true,
+      "description": "horizon.png rating is 5 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/horizon_enhanced.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG exists at /home/user/Pictures/horizon_enhanced.jpg"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

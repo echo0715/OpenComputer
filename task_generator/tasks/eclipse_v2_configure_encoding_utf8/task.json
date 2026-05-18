@@ -1,0 +1,75 @@
+{
+  "id": "eclipse_v2_configure_encoding_utf8",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the Java project 'Unicode' sits at /home/user/workspace/Unicode (import it if necessary) with current compiler compliance 17.\n\nApply two project-specific configuration changes to 'Unicode':\n\n1. Set the project-specific text file encoding to UTF-8 — /home/user/workspace/Unicode/.settings/org.eclipse.core.resources.prefs must contain the literal key `encoding/Unicode` with value `UTF-8`.\n2. Raise the Java compiler compliance, source, and target all from 17 to 21 (project-specific Java compiler settings enabled).\n\nDo NOT modify the existing src/uni/TextProcessor.java file.",
+  "env": {
+    "files": [
+      {
+        "filename": "Unicode/.project",
+        "sandbox_path": "/home/user/workspace/Unicode/.project"
+      },
+      {
+        "filename": "Unicode/.classpath",
+        "sandbox_path": "/home/user/workspace/Unicode/.classpath"
+      },
+      {
+        "filename": "Unicode/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/Unicode/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "Unicode/src/uni/TextProcessor.java",
+        "sandbox_path": "/home/user/workspace/Unicode/src/uni/TextProcessor.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace Unicode",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'Unicode' exists"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/Unicode org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-setting /home/user/workspace/Unicode org.eclipse.core.resources.prefs encoding/Unicode UTF-8",
+      "key": "matches",
+      "expected": true,
+      "description": "Project text file encoding set to UTF-8"
+    },
+    {
+      "command": "check-setting /home/user/workspace/Unicode org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 21",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler compliance = 21"
+    },
+    {
+      "command": "check-setting /home/user/workspace/Unicode org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.source 21",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler source = 21"
+    },
+    {
+      "command": "check-setting /home/user/workspace/Unicode org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.codegen.targetPlatform 21",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler target = 21"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Unicode src/uni/TextProcessor.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Existing TextProcessor.java still present"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

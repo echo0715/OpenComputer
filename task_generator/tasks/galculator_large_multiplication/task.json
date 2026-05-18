@@ -1,0 +1,28 @@
+{
+  "id": "galculator_large_multiplication",
+  "app": "galculator",
+  "task": "In galculator, compute `9876 * 5432`. The final display must show exactly `53646432`.\n\nLeave galculator open with the result showing on the display.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-running",
+      "key": "running",
+      "expected": true,
+      "description": "galculator is running"
+    },
+    {
+      "command": "check-display-value 53646432",
+      "key": "match",
+      "expected": true,
+      "description": "Display shows 53646432"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

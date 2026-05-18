@@ -1,0 +1,49 @@
+{
+  "id": "shotcut_720p_project_single_clip",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/travel.mlt — a 1280x720, 25 fps project. A single video file exists at /home/user/Videos/beach.mp4.\n\nPlace /home/user/Videos/beach.mp4 onto the V1 timeline track as the only clip on the timeline, and save the project. The saved /home/user/Documents/travel.mlt must keep its 1280x720 25 fps profile and reference beach.mp4.",
+  "env": {
+    "files": [
+      {
+        "filename": "travel.mlt",
+        "sandbox_path": "/home/user/Documents/travel.mlt"
+      },
+      {
+        "filename": "beach.mp4",
+        "sandbox_path": "/home/user/Videos/beach.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/travel.mlt",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/travel.mlt 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1280x720"
+    },
+    {
+      "command": "check-fps /home/user/Documents/travel.mlt 25",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 25 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/travel.mlt beach.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip beach.mp4 is referenced in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

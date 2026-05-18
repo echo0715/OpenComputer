@@ -1,0 +1,10 @@
+{
+  "task_id": "cloudcompare_translate_origin_bbox",
+  "files": [
+    {
+      "filename": "offset.ply",
+      "sandbox_path": "/home/user/Documents/offset.ply",
+      "type": "ply"
+    }
+  ]
+}

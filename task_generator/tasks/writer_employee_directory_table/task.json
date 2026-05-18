@@ -1,0 +1,93 @@
+{
+  "id": "writer_employee_directory_table",
+  "app": "libreoffice_writer",
+  "task": "Create a new LibreOffice Writer document containing an employee directory and save it as /home/user/Documents/employee_directory.odt in ODF Text format.\n\nThe document must contain, in order:\n- First paragraph 'Employee Directory' in Heading 1 style.\n- Second paragraph 'Last updated: March 2026' in Default Paragraph Style.\n- A table named 'Table1' with 6 rows and 4 columns, filled exactly as:\n  - Row 0 (header): 'Name', 'Department', 'Extension', 'Email'\n  - Row 1: 'Alice Johnson', 'Engineering', '1001', 'alice@company.com'\n  - Row 2: 'Bob Smith', 'Marketing', '1002', 'bob@company.com'\n  - Row 3: 'Carol Davis', 'Finance', '1003', 'carol@company.com'\n  - Row 4: 'David Lee', 'Engineering', '1004', 'david@company.com'\n  - Row 5: 'Eva Martinez', 'HR', '1005', 'eva@company.com'",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-heading-exists \"Employee Directory\" 1",
+      "key": "exists",
+      "expected": true,
+      "description": "'Employee Directory' exists as Heading 1"
+    },
+    {
+      "command": "check-text-contains \"Last updated: March 2026\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Document contains 'Last updated: March 2026'"
+    },
+    {
+      "command": "check-table-exists Table1",
+      "key": "exists",
+      "expected": true,
+      "description": "Table 'Table1' exists"
+    },
+    {
+      "command": "tables",
+      "eval": "result['tables'][0]['rows'] == 6 and result['tables'][0]['cols'] == 4",
+      "description": "Table has 6 rows and 4 columns"
+    },
+    {
+      "command": "check-table-cell Table1 0 0 Name",
+      "key": "match",
+      "expected": true,
+      "description": "Table header (0,0) is 'Name'"
+    },
+    {
+      "command": "check-table-cell Table1 0 1 Department",
+      "key": "match",
+      "expected": true,
+      "description": "Table header (0,1) is 'Department'"
+    },
+    {
+      "command": "check-table-cell Table1 0 2 Extension",
+      "key": "match",
+      "expected": true,
+      "description": "Table header (0,2) is 'Extension'"
+    },
+    {
+      "command": "check-table-cell Table1 0 3 Email",
+      "key": "match",
+      "expected": true,
+      "description": "Table header (0,3) is 'Email'"
+    },
+    {
+      "command": "check-table-cell Table1 1 0 \"Alice Johnson\"",
+      "key": "match",
+      "expected": true,
+      "description": "Row 1 col 0 is 'Alice Johnson'"
+    },
+    {
+      "command": "check-table-cell Table1 3 1 Finance",
+      "key": "match",
+      "expected": true,
+      "description": "Row 3 col 1 is 'Finance'"
+    },
+    {
+      "command": "check-table-cell Table1 5 3 eva@company.com",
+      "key": "match",
+      "expected": true,
+      "description": "Row 5 col 3 is 'eva@company.com'"
+    },
+    {
+      "command": "check-table-cell Table1 2 2 1002",
+      "key": "match",
+      "expected": true,
+      "description": "Row 2 col 2 is '1002'"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/employee_directory.odt",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved at /home/user/Documents/employee_directory.odt"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

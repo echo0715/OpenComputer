@@ -1,0 +1,44 @@
+{
+  "id": "krita_add_vector_layer_rectangle",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/frame.kra loaded — a single paint layer named 'Canvas'.\n\nAdd a new vector (shape) layer named exactly 'Frame' positioned above the 'Canvas' layer, and place a rectangle shape on it (a stroked rectangle covering most of the canvas is fine).\n\nSave the file in place at /home/user/Documents/frame.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "frame.kra",
+        "sandbox_path": "/home/user/Documents/frame.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/frame.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "frame.kra still exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/frame.kra Canvas",
+      "key": "exists",
+      "expected": true,
+      "description": "Canvas paint layer preserved"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/frame.kra Frame",
+      "key": "exists",
+      "expected": true,
+      "description": "Frame vector layer added"
+    },
+    {
+      "command": "check-layer-node-type /home/user/Documents/frame.kra Frame shapelayer",
+      "key": "match",
+      "expected": true,
+      "description": "Frame is a vector (shape) layer"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "krita_selection_mask_on_layer",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/mask_demo.kra loaded — a single paint layer named 'Foreground'.\n\nAdd a local selection mask named exactly 'LocalSel' as a child of the 'Foreground' layer, derived from any rectangular canvas selection.\n\nSave the file in place at /home/user/Documents/mask_demo.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "mask_demo.kra",
+        "sandbox_path": "/home/user/Documents/mask_demo.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/mask_demo.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "mask_demo.kra still exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/mask_demo.kra Foreground",
+      "key": "exists",
+      "expected": true,
+      "description": "Foreground layer preserved"
+    },
+    {
+      "command": "check-mask-of /home/user/Documents/mask_demo.kra Foreground LocalSel",
+      "key": "exists",
+      "expected": true,
+      "description": "LocalSel mask is a child of Foreground"
+    },
+    {
+      "command": "check-layer-node-type /home/user/Documents/mask_demo.kra LocalSel selectionmask",
+      "key": "match",
+      "expected": true,
+      "description": "LocalSel node type is selectionmask"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

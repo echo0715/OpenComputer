@@ -1,0 +1,51 @@
+{
+  "id": "darktable_exposure_tag_export",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/dark_scene.png into the darktable library.\n\nEnable the 'exposure' module and increase the exposure to brighten the image. Apply the tag 'brightened' to the image and export it as a JPEG to /home/user/Pictures/dark_scene_bright.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "dark_scene.png",
+        "sandbox_path": "/home/user/Pictures/dark_scene.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported dark_scene.png",
+      "key": "imported",
+      "expected": true,
+      "description": "dark_scene.png is imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation dark_scene.png exposure",
+      "key": "has_operation",
+      "expected": true,
+      "description": "darktable library.db history contains 'exposure' operation for this image"
+    },
+    {
+      "command": "check-tag-exists brightened",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'brightened' exists in the library"
+    },
+    {
+      "command": "check-image-tagged-by-filename dark_scene.png brightened",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'brightened'"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/dark_scene_bright.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG file exists and is a valid image"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

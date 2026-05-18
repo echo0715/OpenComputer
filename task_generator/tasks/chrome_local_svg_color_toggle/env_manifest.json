@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_svg_color_toggle",
+  "files": [
+    {
+      "filename": "svg_toggle.html",
+      "sandbox_path": "/home/user/Documents/svg_toggle.html",
+      "type": "html"
+    }
+  ]
+}

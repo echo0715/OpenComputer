@@ -1,0 +1,20 @@
+{
+  "task_id": "kdenlive_render_720p_wipe",
+  "files": [
+    {
+      "filename": "wipe_project.kdenlive",
+      "sandbox_path": "/home/user/Documents/wipe_project.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "clip_one.mp4",
+      "sandbox_path": "/home/user/Videos/clip_one.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "clip_two.mp4",
+      "sandbox_path": "/home/user/Videos/clip_two.mp4",
+      "type": "mp4"
+    }
+  ]
+}

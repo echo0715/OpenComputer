@@ -1,0 +1,6 @@
+{
+  "task_id": "inkscape_modify_attributes",
+  "files": [
+    {"filename": "blueprint.svg", "sandbox_path": "/home/user/Documents/blueprint.svg", "type": "svg"}
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "kdenlive_cinema_24fps_dissolve",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/cinema.kdenlive (2560x1080, 24fps — an ultra-wide cinematic profile).\n\nImport these four clips from /home/user/Videos/ into the project — intro.mp4, scene_a.mp4, scene_b.mp4, outro.mp4 — and arrange them sequentially on a video track in the order intro → scene_a → scene_b → outro. Slightly overlap intro.mp4 with scene_a.mp4 and add a Dissolve (`luma`) transition bridging that overlap. Save the project so the changes are persisted to /home/user/Documents/cinema.kdenlive. The project must contain exactly 4 clips and remain at 2560x1080, 24fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "cinema.kdenlive",
+        "sandbox_path": "/home/user/Documents/cinema.kdenlive"
+      },
+      {
+        "filename": "intro.mp4",
+        "sandbox_path": "/home/user/Videos/intro.mp4"
+      },
+      {
+        "filename": "scene_a.mp4",
+        "sandbox_path": "/home/user/Videos/scene_a.mp4"
+      },
+      {
+        "filename": "scene_b.mp4",
+        "sandbox_path": "/home/user/Videos/scene_b.mp4"
+      },
+      {
+        "filename": "outro.mp4",
+        "sandbox_path": "/home/user/Videos/outro.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/cinema.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/cinema.kdenlive 2560 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 2560x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/cinema.kdenlive 24",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate is 24 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/cinema.kdenlive intro.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "intro.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/cinema.kdenlive scene_a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "scene_a.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/cinema.kdenlive scene_b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "scene_b.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/cinema.kdenlive outro.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "outro.mp4 in project"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/cinema.kdenlive 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 clips in project"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/cinema.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "Dissolve (luma) transition exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

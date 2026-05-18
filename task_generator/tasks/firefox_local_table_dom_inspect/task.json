@@ -1,0 +1,59 @@
+{
+  "id": "firefox_local_table_dom_inspect",
+  "app": "firefox",
+  "task": "Load the local sales report at file:///home/user/Documents/sales_report.html (heading 'Quarterly Sales', a data table with five regional rows, and a grand total of '48250') and end with the active tab's URL exactly file:///home/user/Documents/sales_report.html#totals so the browser location includes the #totals anchor.",
+  "env": {
+    "files": [
+      {
+        "filename": "sales_report.html",
+        "sandbox_path": "/home/user/Documents/sales_report.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open sales_report.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for sales_report.html is open"
+    },
+    {
+      "command": "check-page-contains \"Quarterly Sales\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page contains heading 'Quarterly Sales'"
+    },
+    {
+      "command": "eval \"document.querySelectorAll('#sales tbody tr').length\"",
+      "eval": "int(result.get('value', 0)) >= 5",
+      "description": "Sales table has at least 5 data rows"
+    },
+    {
+      "command": "eval \"document.getElementById('total').textContent.trim()\"",
+      "eval": "result.get('value') == '48250'",
+      "description": "Grand total element shows 48250"
+    },
+    {
+      "command": "eval \"document.querySelectorAll('#sales tbody tr')[1].children[0].textContent.trim()\"",
+      "eval": "result.get('value') == 'North America'",
+      "description": "Second data row region is 'North America'"
+    },
+    {
+      "command": "check-element-exists \"#totals\"",
+      "key": "exists",
+      "expected": true,
+      "description": "#totals anchor element exists on the page"
+    },
+    {
+      "command": "url",
+      "eval": "'#totals' in (result.get('value') or '')",
+      "description": "Current URL contains the #totals fragment"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

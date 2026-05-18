@@ -1,0 +1,30 @@
+{
+  "task_id": "godot4_gap_preload_and_instantiate",
+  "files": [
+    {
+      "filename": "project.godot",
+      "sandbox_path": "/home/user/godot_projects/preload_game/project.godot",
+      "type": "godot"
+    },
+    {
+      "filename": "main.tscn",
+      "sandbox_path": "/home/user/godot_projects/preload_game/main.tscn",
+      "type": "tscn"
+    },
+    {
+      "filename": "scenes/bullet.tscn",
+      "sandbox_path": "/home/user/godot_projects/preload_game/scenes/bullet.tscn",
+      "type": "tscn"
+    },
+    {
+      "filename": "scripts/spawner.gd",
+      "sandbox_path": "/home/user/godot_projects/preload_game/scripts/spawner.gd",
+      "type": "gd"
+    },
+    {
+      "filename": "icon.svg",
+      "sandbox_path": "/home/user/godot_projects/preload_game/icon.svg",
+      "type": "svg"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "krita_add_adjustment_layer",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/portrait.kra loaded — a single paint layer named 'Background'.\n\nAdd a new filter/adjustment layer (e.g., Color Balance or Curves) named exactly 'WarmTone' positioned above the 'Background' layer, with opacity set to 70% (≈178 on the 0–255 scale). Keep the 'Background' layer untouched.\n\nSave the file in place so the changes are written back to /home/user/Documents/portrait.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "portrait.kra",
+        "sandbox_path": "/home/user/Documents/portrait.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/portrait.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "portrait.kra still exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/portrait.kra Background",
+      "key": "exists",
+      "expected": true,
+      "description": "Original Background layer preserved"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/portrait.kra WarmTone",
+      "key": "exists",
+      "expected": true,
+      "description": "WarmTone layer added"
+    },
+    {
+      "command": "layer-info /home/user/Documents/portrait.kra WarmTone",
+      "eval": "result.get('node_type') in ('adjustmentlayer','filterlayer')",
+      "expected": true,
+      "description": "WarmTone is an adjustment/filter layer"
+    },
+    {
+      "command": "layer-info /home/user/Documents/portrait.kra WarmTone",
+      "eval": "160 <= int(result.get('opacity',0)) <= 200",
+      "expected": true,
+      "description": "WarmTone opacity ≈ 70% (178±)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

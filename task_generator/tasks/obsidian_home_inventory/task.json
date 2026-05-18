@@ -1,0 +1,99 @@
+{
+  "id": "obsidian_home_inventory",
+  "app": "obsidian",
+  "task": "Build a home inventory system in the Obsidian vault at /home/user/Documents/HomeInventory.\n\n1. Create folders: 'Rooms', 'Items', 'Warranties'.\n2. Create 'Rooms/Living Room.md' with frontmatter `type: room`, `floor: 1`, body with heading 'Living Room', a description, a link to [[TV Samsung 55]], and tags #room #livingroom.\n3. Create 'Rooms/Kitchen.md' with frontmatter `type: room`, `floor: 1`, body with heading 'Kitchen', a description, a link to [[Refrigerator LG]], and tags #room #kitchen.\n4. Create 'Items/TV Samsung 55.md' with frontmatter `type: item`, `brand: Samsung`, `value: 800`, body with heading 'TV Samsung 55', a description, links to [[Living Room]] and [[TV Warranty]], and tags #item #electronics.\n5. Create 'Items/Refrigerator LG.md' with frontmatter `type: item`, `brand: LG`, `value: 1200`, body with heading 'Refrigerator LG', a description, links to [[Kitchen]] and [[Fridge Warranty]], and tags #item #appliance.\n6. Create 'Warranties/TV Warranty.md' with frontmatter `type: warranty`, `expires: 2027-03-15`, body with heading 'TV Warranty', warranty details, a link to [[TV Samsung 55]], and tags #warranty #electronics.\n7. Create 'Warranties/Fridge Warranty.md' with frontmatter `type: warranty`, `expires: 2028-06-01`, body with heading 'Fridge Warranty', warranty details, a link to [[Refrigerator LG]], and tags #warranty #appliance.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/HomeInventory Rooms",
+      "key": "exists",
+      "expected": true,
+      "description": "Rooms folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/HomeInventory Items",
+      "key": "exists",
+      "expected": true,
+      "description": "Items folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/HomeInventory Warranties",
+      "key": "exists",
+      "expected": true,
+      "description": "Warranties folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/HomeInventory 'Living Room' type room",
+      "key": "match",
+      "expected": true,
+      "description": "Living Room has type=room"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/HomeInventory 'Living Room' 'TV Samsung 55'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Living Room links to TV Samsung 55"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/HomeInventory Kitchen 'Refrigerator LG'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Kitchen links to Refrigerator LG"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/HomeInventory 'TV Samsung 55' value 800",
+      "key": "match",
+      "expected": true,
+      "description": "TV Samsung 55 has value=800"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/HomeInventory 'TV Samsung 55' 'Living Room'",
+      "key": "links_to",
+      "expected": true,
+      "description": "TV Samsung 55 links to Living Room"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/HomeInventory 'TV Samsung 55' 'TV Warranty'",
+      "key": "links_to",
+      "expected": true,
+      "description": "TV Samsung 55 links to TV Warranty"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/HomeInventory 'Refrigerator LG' Kitchen",
+      "key": "links_to",
+      "expected": true,
+      "description": "Refrigerator LG links to Kitchen"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/HomeInventory 'Refrigerator LG' 'Fridge Warranty'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Refrigerator LG links to Fridge Warranty"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/HomeInventory 'TV Warranty' 'TV Samsung 55'",
+      "key": "links_to",
+      "expected": true,
+      "description": "TV Warranty links to TV Samsung 55"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/HomeInventory 'Fridge Warranty' expires 2028-06-01",
+      "key": "match",
+      "expected": true,
+      "description": "Fridge Warranty has expires=2028-06-01"
+    },
+    {
+      "command": "list-notes /home/user/Documents/HomeInventory",
+      "eval": "result.get('count') == 6",
+      "description": "Vault has exactly 6 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

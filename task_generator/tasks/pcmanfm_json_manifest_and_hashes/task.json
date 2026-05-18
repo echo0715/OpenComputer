@@ -1,0 +1,32 @@
+{
+  "id": "pcmanfm_json_manifest_and_hashes",
+  "app": "pcmanfm",
+  "task": "In /home/user/Documents/release/, you already have four files v1.dat, v2.dat, v3.dat, v4.dat. (1) Create a new file /home/user/Documents/release/manifest.json whose exact content is {\"files\": [\"v1.dat\", \"v2.dat\", \"v3.dat\", \"v4.dat\"], \"count\": 4}. (2) Create a sub-directory /home/user/Documents/release/backup/ and COPY (not move) every v*.dat file into it so that backup/ contains exactly 4 .dat files while the originals remain in place at /home/user/Documents/release/. After all operations, /home/user/Documents/release/ must contain exactly 6 top-level entries: v1.dat, v2.dat, v3.dat, v4.dat, manifest.json, and the backup directory.",
+  "env": {
+    "files": [
+      {"filename": "v1.dat", "sandbox_path": "/home/user/Documents/release/v1.dat"},
+      {"filename": "v2.dat", "sandbox_path": "/home/user/Documents/release/v2.dat"},
+      {"filename": "v3.dat", "sandbox_path": "/home/user/Documents/release/v3.dat"},
+      {"filename": "v4.dat", "sandbox_path": "/home/user/Documents/release/v4.dat"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-count /home/user/Documents/release 6", "key": "match", "expected": true, "description": "release top-level has 6 entries"},
+    {"command": "check-dir-exists /home/user/Documents/release/backup", "key": "exists", "expected": true, "description": "backup subdirectory exists"},
+    {"command": "check-file-count /home/user/Documents/release/backup 4", "key": "match", "expected": true, "description": "backup contains 4 files"},
+    {"command": "check-extension-match /home/user/Documents/release/backup .dat", "key": "all_match", "expected": true, "description": "backup only contains .dat files"},
+    {"command": "check-file-exists /home/user/Documents/release/v1.dat", "key": "exists", "expected": true, "description": "v1.dat still at top level"},
+    {"command": "check-file-exists /home/user/Documents/release/v4.dat", "key": "exists", "expected": true, "description": "v4.dat still at top level"},
+    {"command": "check-file-exists /home/user/Documents/release/backup/v1.dat", "key": "exists", "expected": true, "description": "v1.dat copied to backup"},
+    {"command": "check-file-exists /home/user/Documents/release/backup/v4.dat", "key": "exists", "expected": true, "description": "v4.dat copied to backup"},
+    {"command": "check-file-exists /home/user/Documents/release/manifest.json", "key": "exists", "expected": true, "description": "manifest.json exists"},
+    {"command": "check-file-contains /home/user/Documents/release/manifest.json v1.dat", "key": "contains", "expected": true, "description": "manifest mentions v1.dat"},
+    {"command": "check-file-contains /home/user/Documents/release/manifest.json count", "key": "contains", "expected": true, "description": "manifest mentions count"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "vscode_whitespace_formatting",
+  "app": "vscode",
+  "task": "Configure the following user settings (persisted to `~/.config/Code/User/settings.json`):\n\n- `editor.renderWhitespace`: `all`\n- `editor.tabSize`: 2\n- `editor.insertSpaces`: `true`\n- `editor.trimAutoWhitespace`: `true`\n- `files.trimTrailingWhitespace`: `true`\n- `files.insertFinalNewline`: `true`\n- `editor.formatOnSave`: `true`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting editor.renderWhitespace all",
+      "key": "match",
+      "expected": true,
+      "description": "renderWhitespace is all"
+    },
+    {
+      "command": "check-setting editor.tabSize 2",
+      "key": "match",
+      "expected": true,
+      "description": "tabSize is 2"
+    },
+    {
+      "command": "check-setting editor.insertSpaces true",
+      "key": "match",
+      "expected": true,
+      "description": "insertSpaces is true"
+    },
+    {
+      "command": "check-setting editor.trimAutoWhitespace true",
+      "key": "match",
+      "expected": true,
+      "description": "trimAutoWhitespace is true"
+    },
+    {
+      "command": "check-setting files.trimTrailingWhitespace true",
+      "key": "match",
+      "expected": true,
+      "description": "trimTrailingWhitespace is true"
+    },
+    {
+      "command": "check-setting files.insertFinalNewline true",
+      "key": "match",
+      "expected": true,
+      "description": "insertFinalNewline is true"
+    },
+    {
+      "command": "check-setting editor.formatOnSave true",
+      "key": "match",
+      "expected": true,
+      "description": "formatOnSave is true"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

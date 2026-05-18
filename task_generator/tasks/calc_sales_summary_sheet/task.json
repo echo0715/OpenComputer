@@ -1,0 +1,79 @@
+{
+  "id": "calc_sales_summary_sheet",
+  "app": "libreoffice_calc",
+  "task": "Open /home/user/Documents/sales_data.xlsx in LibreOffice Calc. The 'Sales' sheet has columns Product (A), Region (B), Q1 (C), Q2 (D), Q3 (E), Q4 (F); row 1 has headers and rows 2-13 contain 12 products.\n\nAdd a new sheet named 'Summary' with:\n- A1 = 'Total Revenue' (bold), B1 = `=SUM(Sales.C2:F13)`.\n- A2 = 'Average Per Quarter' (bold), B2 = `=B1/4`.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "sales_data.xlsx",
+        "sandbox_path": "/home/user/Documents/sales_data.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-sheet-exists Summary",
+      "key": "exists",
+      "expected": true,
+      "description": "Sheet 'Summary' exists"
+    },
+    {
+      "command": "check-cell-value A1 \"Total Revenue\" Summary",
+      "key": "match",
+      "expected": true,
+      "description": "Summary A1 = 'Total Revenue'"
+    },
+    {
+      "command": "cell-value B1 Summary",
+      "eval": "result.get('formula','').upper().replace(' ','').find('SUM') >= 0",
+      "description": "Summary B1 contains a SUM formula"
+    },
+    {
+      "command": "check-cell-value B1 66050 Summary",
+      "key": "match",
+      "expected": true,
+      "description": "Summary B1 = 66050 (total of all quarterly revenue)"
+    },
+    {
+      "command": "check-cell-value A2 \"Average Per Quarter\" Summary",
+      "key": "match",
+      "expected": true,
+      "description": "Summary A2 = 'Average Per Quarter'"
+    },
+    {
+      "command": "cell-value B2 Summary",
+      "eval": "result.get('formula') is not None and 'B1' in result.get('formula','').upper()",
+      "description": "Summary B2 contains a formula referencing B1"
+    },
+    {
+      "command": "check-cell-value B2 16512.5 Summary",
+      "key": "match",
+      "expected": true,
+      "description": "Summary B2 = 16512.5 (66050/4)"
+    },
+    {
+      "command": "check-cell-formatted A1 true Summary",
+      "key": "match",
+      "expected": true,
+      "description": "Summary A1 is bold"
+    },
+    {
+      "command": "check-cell-formatted A2 true Summary",
+      "key": "match",
+      "expected": true,
+      "description": "Summary A2 is bold"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

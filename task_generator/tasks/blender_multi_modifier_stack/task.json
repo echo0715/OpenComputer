@@ -1,0 +1,87 @@
+{
+  "id": "blender_multi_modifier_stack",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/modifier_stack.blend:\n- Rename the default Cube to 'DetailCube' and add three modifiers in this exact top-to-bottom order: Subdivision Surface, Bevel, Solidify.\n- Add a Cylinder named 'Pipe' with a Solidify modifier.\n- Create a collection named 'Geometry' containing both 'DetailCube' and 'Pipe'.\n\nSet the render resolution to 2560x1440, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "modifier_stack.blend",
+        "sandbox_path": "/home/user/Documents/modifier_stack.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/modifier_stack.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/modifier_stack.blend DetailCube",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'DetailCube' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/modifier_stack.blend DetailCube MESH",
+      "key": "match",
+      "expected": true,
+      "description": "DetailCube is a MESH object"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/modifier_stack.blend DetailCube SUBSURF",
+      "key": "exists",
+      "expected": true,
+      "description": "DetailCube has Subdivision Surface modifier"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/modifier_stack.blend DetailCube BEVEL",
+      "key": "exists",
+      "expected": true,
+      "description": "DetailCube has Bevel modifier"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/modifier_stack.blend DetailCube SOLIDIFY",
+      "key": "exists",
+      "expected": true,
+      "description": "DetailCube has Solidify modifier"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/modifier_stack.blend Pipe",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Pipe' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/modifier_stack.blend Pipe MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Pipe is a MESH object"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/modifier_stack.blend Pipe SOLIDIFY",
+      "key": "exists",
+      "expected": true,
+      "description": "Pipe has Solidify modifier"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/modifier_stack.blend Geometry",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Geometry' exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/modifier_stack.blend 2560 1440",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 2560x1440"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

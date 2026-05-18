@@ -1,0 +1,6 @@
+{
+  "task_id": "firefox_local_form_submit_dom",
+  "files": [
+    {"filename": "survey.html", "sandbox_path": "/home/user/Documents/survey.html", "type": "html"}
+  ]
+}

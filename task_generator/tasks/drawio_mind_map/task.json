@@ -1,0 +1,93 @@
+{
+  "id": "drawio_mind_map",
+  "app": "drawio",
+  "task": "Create a mind map in /home/user/Documents/mind_map.drawio with a central shape labeled 'Project Planning' branching out to 4 main shapes: 'Budget', 'Timeline', 'Resources', 'Risks'. Add 2 sub-branches from 'Budget' ('Hardware Costs', 'Software Costs') and 2 sub-branches from 'Timeline' ('Phase 1', 'Phase 2').\n\nEdges:\n- Project Planning -> Budget, Timeline, Resources, Risks (4 edges)\n- Budget -> Hardware Costs, Software Costs (2 edges)\n- Timeline -> Phase 1, Phase 2 (2 edges)\n\nFinal counts: exactly 9 vertices and exactly 8 edges. Persist to /home/user/Documents/mind_map.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "mind_map.drawio",
+        "sandbox_path": "/home/user/Documents/mind_map.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/mind_map.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists at expected path"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio \"Project Planning\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Central shape 'Project Planning' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio Budget",
+      "key": "exists",
+      "expected": true,
+      "description": "Branch 'Budget' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio Timeline",
+      "key": "exists",
+      "expected": true,
+      "description": "Branch 'Timeline' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio Resources",
+      "key": "exists",
+      "expected": true,
+      "description": "Branch 'Resources' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio Risks",
+      "key": "exists",
+      "expected": true,
+      "description": "Branch 'Risks' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio \"Hardware Costs\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Sub-branch 'Hardware Costs' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio \"Software Costs\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Sub-branch 'Software Costs' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio \"Phase 1\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Sub-branch 'Phase 1' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/mind_map.drawio \"Phase 2\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Sub-branch 'Phase 2' exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/mind_map.drawio 9",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 9 vertices (1 center + 4 branches + 4 sub-branches)"
+    },
+    {
+      "command": "check-edge-count /home/user/Documents/mind_map.drawio 8",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 8 edges connecting all branches"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "cloudcompare_subsample_min_distance",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/thick.ply is a densely-packed ASCII PLY with 1500 points inside a 10x10x10 cube.\n\nSubsample the cloud using the 'Space' (minimum-distance) method with a minimum distance large enough to thin the cloud to at least 80 but strictly fewer than 1500 points (e.g., a min distance around 1.0 unit). Export only the subsampled cloud as an ASCII PLY at /home/user/Documents/thick_thin.ply. Do not export the original 1500-point cloud.",
+  "env": {
+    "files": [
+      {
+        "filename": "thick.ply",
+        "sandbox_path": "/home/user/Documents/thick.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/thick_thin.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Subsampled PLY exists"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/thick_thin.ply ascii",
+      "key": "match",
+      "expected": true,
+      "description": "Output is ASCII PLY"
+    },
+    {
+      "command": "check-point-count-at-least /home/user/Documents/thick_thin.ply 80",
+      "key": "match",
+      "expected": true,
+      "description": "At least 80 points remain"
+    },
+    {
+      "command": "cloud-info /home/user/Documents/thick_thin.ply",
+      "eval": "result.get('vertex_count', 1500) < 1500",
+      "description": "Point count strictly less than original 1500"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

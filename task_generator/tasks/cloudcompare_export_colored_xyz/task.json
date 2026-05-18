@@ -1,0 +1,39 @@
+{
+  "id": "cloudcompare_export_colored_xyz",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/colored.ply is an ASCII PLY with 300 points that carry RGB color.\n\nExport this cloud as an ASCII cloud at /home/user/Documents/colored.asc with all 6 columns enabled (X Y Z R G B), so the RGB color is preserved. Do not drop any points.",
+  "env": {
+    "files": [
+      {
+        "filename": "colored.ply",
+        "sandbox_path": "/home/user/Documents/colored.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/colored.asc",
+      "key": "exists",
+      "expected": true,
+      "description": "ASC output exists"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/colored.asc 300",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 300 points"
+    },
+    {
+      "command": "check-has-color /home/user/Documents/colored.asc",
+      "key": "has_color",
+      "expected": true,
+      "description": "Output preserves RGB color"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

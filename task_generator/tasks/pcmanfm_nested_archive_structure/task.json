@@ -1,0 +1,88 @@
+{
+  "id": "pcmanfm_nested_archive_structure",
+  "app": "pcmanfm",
+  "task": "Create a nested archive directory structure under /home/user/Documents/archive/2025/ with two quarter directories (Q1, Q2). Under Q1 create month directories jan, feb, mar; under Q2 create apr, may, jun. In each month directory, create a file named summary.txt with this exact content:\n- Q1/jan/summary.txt: 'January revenue: 50000'\n- Q1/feb/summary.txt: 'February revenue: 48000'\n- Q1/mar/summary.txt: 'March revenue: 52000'\n- Q2/apr/summary.txt: 'April revenue: 55000'\n- Q2/may/summary.txt: 'May revenue: 53000'\n- Q2/jun/summary.txt: 'June revenue: 58000'",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/Documents/archive/2025/Q1/jan",
+      "key": "exists",
+      "expected": true,
+      "description": "jan directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Documents/archive/2025/Q1/feb",
+      "key": "exists",
+      "expected": true,
+      "description": "feb directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Documents/archive/2025/Q1/mar",
+      "key": "exists",
+      "expected": true,
+      "description": "mar directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Documents/archive/2025/Q2/apr",
+      "key": "exists",
+      "expected": true,
+      "description": "apr directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Documents/archive/2025/Q2/may",
+      "key": "exists",
+      "expected": true,
+      "description": "may directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Documents/archive/2025/Q2/jun",
+      "key": "exists",
+      "expected": true,
+      "description": "jun directory exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/archive/2025/Q1/jan/summary.txt January revenue: 50000",
+      "key": "contains",
+      "expected": true,
+      "description": "jan summary has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/archive/2025/Q1/feb/summary.txt February revenue: 48000",
+      "key": "contains",
+      "expected": true,
+      "description": "feb summary has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/archive/2025/Q1/mar/summary.txt March revenue: 52000",
+      "key": "contains",
+      "expected": true,
+      "description": "mar summary has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/archive/2025/Q2/apr/summary.txt April revenue: 55000",
+      "key": "contains",
+      "expected": true,
+      "description": "apr summary has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/archive/2025/Q2/may/summary.txt May revenue: 53000",
+      "key": "contains",
+      "expected": true,
+      "description": "may summary has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/archive/2025/Q2/jun/summary.txt June revenue: 58000",
+      "key": "contains",
+      "expected": true,
+      "description": "jun summary has correct content"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

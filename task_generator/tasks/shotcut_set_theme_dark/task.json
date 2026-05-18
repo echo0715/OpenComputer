@@ -1,0 +1,33 @@
+{
+  "id": "shotcut_set_theme_dark",
+  "app": "shotcut",
+  "task": "Shotcut is open with a placeholder project /home/user/Documents/empty.mlt.\n\nChange the application theme to Dark so the setting is persisted to `~/.config/Meltytech/Shotcut.conf` under the `[General]` section as `theme=dark`.",
+  "env": {
+    "files": [
+      {
+        "filename": "empty.mlt",
+        "sandbox_path": "/home/user/Documents/empty.mlt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.config/Meltytech/Shotcut.conf",
+      "key": "exists",
+      "expected": true,
+      "description": "Shotcut configuration file exists"
+    },
+    {
+      "command": "check-config-value General theme dark",
+      "key": "match",
+      "expected": true,
+      "description": "General.theme setting equals 'dark'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 3
+  }
+}

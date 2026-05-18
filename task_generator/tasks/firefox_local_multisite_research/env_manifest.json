@@ -1,0 +1,10 @@
+{
+  "task_id": "firefox_local_multisite_research",
+  "files": [
+    {"filename": "index.html", "sandbox_path": "/home/user/Documents/site/index.html", "type": "html"},
+    {"filename": "products.html", "sandbox_path": "/home/user/Documents/site/products.html", "type": "html"},
+    {"filename": "services.html", "sandbox_path": "/home/user/Documents/site/services.html", "type": "html"},
+    {"filename": "about.html", "sandbox_path": "/home/user/Documents/site/about.html", "type": "html"},
+    {"filename": "contact.html", "sandbox_path": "/home/user/Documents/site/contact.html", "type": "html"}
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "godot4_set_project_name_and_main_scene",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/blank_game/project.godot so that, inside the `[application]` section:\n- `config/name` = `\"Space Runner\"`\n- `run/main_scene` = `\"res://main.tscn\"`\n\nDo not add or remove any other sections.",
+  "env": {
+    "files": [
+      {
+        "filename": "project.godot",
+        "sandbox_path": "/home/user/godot_projects/blank_game/project.godot"
+      },
+      {
+        "filename": "main.tscn",
+        "sandbox_path": "/home/user/godot_projects/blank_game/main.tscn"
+      },
+      {
+        "filename": "icon.svg",
+        "sandbox_path": "/home/user/godot_projects/blank_game/icon.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "file-exists /home/user/godot_projects/blank_game/project.godot",
+      "key": "exists",
+      "expected": true,
+      "description": "project.godot still exists"
+    },
+    {
+      "command": "check-project-setting /home/user/godot_projects/blank_game/project.godot application/config/name '\"Space Runner\"'",
+      "key": "match",
+      "expected": true,
+      "description": "config/name is 'Space Runner'"
+    },
+    {
+      "command": "check-project-setting /home/user/godot_projects/blank_game/project.godot application/run/main_scene '\"res://main.tscn\"'",
+      "key": "match",
+      "expected": true,
+      "description": "run/main_scene is res://main.tscn"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

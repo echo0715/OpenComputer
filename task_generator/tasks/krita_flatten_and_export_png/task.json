@@ -1,0 +1,56 @@
+{
+  "id": "krita_flatten_and_export_png",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/multilayer.kra loaded — currently 5 paint layers, canvas 1024x768.\n\nFlatten all layers into a single merged paint layer renamed exactly 'Flattened', then export the flattened image as PNG to /home/user/Pictures/multilayer_flat.png.\n\nSave the .kra in place so /home/user/Documents/multilayer.kra contains exactly one layer named 'Flattened' with the canvas dimensions preserved.",
+  "env": {
+    "files": [
+      {
+        "filename": "multilayer.kra",
+        "sandbox_path": "/home/user/Documents/multilayer.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multilayer.kra",
+      "key": "exists",
+      "expected": true,
+      "description": ".kra saved"
+    },
+    {
+      "command": "check-layer-count /home/user/Documents/multilayer.kra 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one layer remains"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/multilayer.kra Flattened",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer named Flattened exists"
+    },
+    {
+      "command": "check-image-size /home/user/Documents/multilayer.kra 1024 768",
+      "key": "match",
+      "expected": true,
+      "description": "Canvas dimensions preserved"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/multilayer_flat.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported PNG exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/multilayer_flat.png",
+      "eval": "result.get('size_bytes',0) > 500",
+      "expected": true,
+      "description": "Exported PNG non-trivial"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

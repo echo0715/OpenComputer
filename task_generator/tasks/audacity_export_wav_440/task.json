@@ -1,0 +1,57 @@
+{
+  "id": "audacity_export_wav_440",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/tone.wav already loaded as a single mono 44.1 kHz audio track.\n\nExport the audio to /home/user/Music/exported.wav as 'WAV (Microsoft) signed 16-bit PCM' at 44100 Hz. Do not rename the file or change any other settings.",
+  "env": {
+    "files": [
+      {
+        "filename": "tone.wav",
+        "sandbox_path": "/home/user/Music/tone.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Music/exported.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported WAV exists at /home/user/Music/exported.wav"
+    },
+    {
+      "command": "check-export-codec /home/user/Music/exported.wav pcm_s16le",
+      "key": "match",
+      "expected": true,
+      "description": "Exported codec is pcm_s16le (16-bit PCM)"
+    },
+    {
+      "command": "check-export-sample-rate /home/user/Music/exported.wav 44100",
+      "key": "match",
+      "expected": true,
+      "description": "Sample rate is 44100 Hz"
+    },
+    {
+      "command": "check-export-channels /home/user/Music/exported.wav 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exported file has 1 channel (mono)"
+    },
+    {
+      "command": "check-export-duration-min /home/user/Music/exported.wav 1.5",
+      "key": "match",
+      "expected": true,
+      "description": "Exported duration is at least 1.5 seconds"
+    },
+    {
+      "command": "check-export-format /home/user/Music/exported.wav wav",
+      "key": "match",
+      "expected": true,
+      "description": "Container format is WAV"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

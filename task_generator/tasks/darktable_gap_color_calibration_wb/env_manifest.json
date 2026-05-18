@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_gap_color_calibration_wb",
+  "files": [
+    {
+      "filename": "wb_source.jpg",
+      "sandbox_path": "/home/user/Pictures/wb_source.jpg",
+      "type": "jpg"
+    }
+  ]
+}

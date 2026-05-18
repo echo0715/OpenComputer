@@ -1,0 +1,7 @@
+{
+  "task_id": "vlc_gap_subtitle_load_and_delay",
+  "files": [
+    {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4", "type": "mp4"},
+    {"filename": "sample.srt", "sandbox_path": "/home/user/Videos/sample.srt", "type": "srt"}
+  ]
+}

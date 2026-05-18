@@ -1,0 +1,74 @@
+{
+  "id": "obs_gap_crop_pad_scaling_filters",
+  "app": "obs",
+  "task": "Create a letterboxed 720p view of a desktop capture stand-in in OBS Studio. The final collection must contain exactly one scene named 'Framed' (no default 'Scene' left over).\n\nThe 'Framed' scene must contain an Image source named exactly 'Desktop' with file /home/user/Pictures/desktop_shot.png.\n\nApply two filters to 'Desktop' in this exact order, with these exact names, types, and settings:\n1. 'Trim' — Crop/Pad with Left = 40, Right = 40, Top = 20, Bottom = 20\n2. 'Resize' — Scaling/Aspect Ratio with resolution 1280x720\n\nPersist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "desktop_shot.png",
+        "sandbox_path": "/home/user/Pictures/desktop_shot.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Framed",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Framed' exists"
+    },
+    {
+      "command": "check-source-in-scene Desktop Framed",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Desktop' is in 'Framed'"
+    },
+    {
+      "command": "check-source-has-filter Desktop Trim",
+      "key": "exists",
+      "expected": true,
+      "description": "Crop/Pad filter 'Trim' exists"
+    },
+    {
+      "command": "source-filter-info Desktop Trim",
+      "eval": "'crop' in (result.get('type') or '').lower()",
+      "expected": true,
+      "description": "'Trim' filter is a crop/pad filter"
+    },
+    {
+      "command": "source-filter-info Desktop Trim",
+      "eval": "int(result.get('settings', {}).get('left', 0)) == 40 and int(result.get('settings', {}).get('right', 0)) == 40 and int(result.get('settings', {}).get('top', 0)) == 20 and int(result.get('settings', {}).get('bottom', 0)) == 20",
+      "expected": true,
+      "description": "Crop/Pad values left=40 right=40 top=20 bottom=20"
+    },
+    {
+      "command": "check-source-has-filter Desktop Resize",
+      "key": "exists",
+      "expected": true,
+      "description": "Scaling filter 'Resize' exists"
+    },
+    {
+      "command": "source-filter-info Desktop Resize",
+      "eval": "'scale' in (result.get('type') or '').lower() or 'aspect' in (result.get('type') or '').lower()",
+      "expected": true,
+      "description": "'Resize' filter is a scaling/aspect filter"
+    },
+    {
+      "command": "source-filter-info Desktop Resize",
+      "eval": "str(result.get('settings', {}).get('resolution', '')) == '1280x720'",
+      "expected": true,
+      "description": "Scaling filter resolution is 1280x720"
+    },
+    {
+      "command": "source-filters Desktop",
+      "eval": "[f.get('name') for f in result].index('Trim') < [f.get('name') for f in result].index('Resize')",
+      "expected": true,
+      "description": "Filter order: 'Trim' comes before 'Resize'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

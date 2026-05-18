@@ -1,0 +1,45 @@
+{
+  "id": "musescore3_export_png_and_midi",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/chorale.mscz — 4 measures of quarter notes in C major 4/4.\n\nExport the score to both of these formats at exactly these paths:\n- PNG Images: /home/user/Documents/chorale.png\n- Standard MIDI File: /home/user/Documents/chorale.mid\n\nThe original /home/user/Documents/chorale.mscz must still exist. The PNG must have a valid PNG header, and the MIDI must contain at least 4 notes.",
+  "env": {
+    "files": [
+      {
+        "filename": "chorale.mscz",
+        "sandbox_path": "/home/user/Documents/chorale.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/chorale.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "chorale.mscz still exists"
+    },
+    {
+      "command": "check-png-exists /home/user/Documents/chorale.png",
+      "key": "match",
+      "expected": true,
+      "description": "Exported chorale.png exists with valid PNG header"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/chorale.mid",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported chorale.mid exists"
+    },
+    {
+      "command": "check-midi-has-notes /home/user/Documents/chorale.mid 4",
+      "key": "match",
+      "expected": true,
+      "description": "chorale.mid has at least 4 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

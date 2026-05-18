@@ -1,0 +1,6 @@
+{
+  "task_id": "draw_network_topology",
+  "files": [
+    {"filename": "topology_base.odg", "sandbox_path": "/home/user/Documents/topology_base.odg", "type": "odg"}
+  ]
+}

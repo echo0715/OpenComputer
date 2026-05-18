@@ -1,0 +1,43 @@
+{
+  "id": "audacity_change_project_rate_48k",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/project.aup loaded; the project's current Project Rate is 44100 Hz.\n\nChange the project rate to 48000 Hz and save the project so the .aup XML `rate` attribute is updated to 48000.0. Do not add, remove, rename, or otherwise modify any tracks.",
+  "env": {
+    "files": [
+      {
+        "filename": "project.aup",
+        "sandbox_path": "/home/user/Music/project.aup"
+      },
+      {
+        "filename": "project_data/e00/d00/e000001.au",
+        "sandbox_path": "/home/user/Music/project_data/e00/d00/e000001.au"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-valid-aup /home/user/Music/project.aup",
+      "key": "valid",
+      "expected": true,
+      "description": "project.aup is still valid"
+    },
+    {
+      "command": "check-project-rate /home/user/Music/project.aup 48000",
+      "key": "match",
+      "expected": true,
+      "description": "Project rate is 48000 Hz"
+    },
+    {
+      "command": "check-track-count /home/user/Music/project.aup 1",
+      "key": "match",
+      "expected": true,
+      "description": "Track count unchanged (1 wavetrack)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

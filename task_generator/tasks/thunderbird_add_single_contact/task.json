@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_add_single_contact",
+  "app": "thunderbird",
+  "task": "Add a new contact to Thunderbird's Address Book with these exact fields:\n- Display Name: Elena Rodriguez\n- Email: elena.rodriguez@globaltech.com\n- Company: GlobalTech Solutions\n- Job Title: Senior Engineer\n- Work Phone: 555-0142",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Elena Rodriguez",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Elena Rodriguez exists"
+    },
+    {
+      "command": "check-contact-field Elena Rodriguez primary_email elena.rodriguez@globaltech.com",
+      "key": "match",
+      "expected": true,
+      "description": "Email is elena.rodriguez@globaltech.com"
+    },
+    {
+      "command": "check-contact-field Elena Rodriguez company GlobalTech Solutions",
+      "key": "match",
+      "expected": true,
+      "description": "Company is GlobalTech Solutions"
+    },
+    {
+      "command": "check-contact-field Elena Rodriguez job_title Senior Engineer",
+      "key": "match",
+      "expected": true,
+      "description": "Job title is Senior Engineer"
+    },
+    {
+      "command": "check-contact-field Elena Rodriguez work_phone 555-0142",
+      "key": "match",
+      "expected": true,
+      "description": "Work phone is 555-0142"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

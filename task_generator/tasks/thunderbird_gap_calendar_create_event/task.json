@@ -1,0 +1,39 @@
+{
+  "id": "thunderbird_gap_calendar_create_event",
+  "app": "thunderbird",
+  "task": "In Thunderbird's built-in Calendar (Lightning), create a new local calendar named exactly `Team Planning` (any color) and add three local events to it:\n1. `Sprint Kickoff` — 2026-05-04, 10:00–11:00.\n2. `Architecture Review` — 2026-05-07, 14:00–15:30, location `Conference Room B`.\n3. `Retrospective` — 2026-05-15, 16:00–17:00, repeating weekly for 4 occurrences.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-event-exists 'Sprint Kickoff'",
+      "key": "found",
+      "expected": true,
+      "description": "Sprint Kickoff event exists"
+    },
+    {
+      "command": "check-event-exists 'Architecture Review'",
+      "key": "found",
+      "expected": true,
+      "description": "Architecture Review event exists"
+    },
+    {
+      "command": "check-event-exists Retrospective",
+      "key": "found",
+      "expected": true,
+      "description": "Retrospective event exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

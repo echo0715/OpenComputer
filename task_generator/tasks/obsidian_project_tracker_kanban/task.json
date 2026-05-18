@@ -1,0 +1,152 @@
+{
+  "id": "obsidian_project_tracker_kanban",
+  "app": "obsidian",
+  "task": "Build a folder-and-note kanban board in the Obsidian vault at /home/user/Documents/KanbanVault.\n\n1. Create folders 'Backlog', 'InProgress', 'Done' in the vault root.\n2. Create these 7 task notes. Each must have the YAML frontmatter listed, a level-1 heading `Task T-00X: <title>`, a level-2 `Description` heading with a one-paragraph summary, and the inline tag #task:\n   - 'Backlog/T-001.md' — status: backlog, priority: high, estimate: 5, title: 'Research authentication providers'\n   - 'Backlog/T-002.md' — status: backlog, priority: low, estimate: 2, title: 'Update favicon'\n   - 'Backlog/T-003.md' — status: backlog, priority: medium, estimate: 3, title: 'Write integration test suite'\n   - 'InProgress/T-004.md' — status: inprogress, priority: high, estimate: 8, title: 'Implement OAuth login'\n   - 'InProgress/T-005.md' — status: inprogress, priority: medium, estimate: 5, title: 'Refactor database layer'\n   - 'Done/T-006.md' — status: done, priority: medium, estimate: 3, title: 'Set up logging pipeline'\n   - 'Done/T-007.md' — status: done, priority: low, estimate: 1, title: 'Fix typo in README'\n3. Create 'Board.md' in the vault root with:\n   - Level-1 heading `Project Board`\n   - Level-2 `Backlog` heading followed by a bulleted list of [[T-001]], [[T-002]], [[T-003]]\n   - Level-2 `In Progress` heading followed by a bulleted list of [[T-004]], [[T-005]]\n   - Level-2 `Done` heading followed by a bulleted list of [[T-006]], [[T-007]]\n   - The inline tag #board\n\nThe vault must end up with exactly 8 notes total.",
+  "env": {
+    "files": [
+      {
+        "filename": "app.json",
+        "sandbox_path": "/home/user/Documents/KanbanVault/.obsidian/app.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/KanbanVault Backlog",
+      "key": "exists",
+      "expected": true,
+      "description": "Backlog folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/KanbanVault InProgress",
+      "key": "exists",
+      "expected": true,
+      "description": "InProgress folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/KanbanVault Done",
+      "key": "exists",
+      "expected": true,
+      "description": "Done folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'Backlog/T-001' status backlog",
+      "key": "match",
+      "expected": true,
+      "description": "T-001 status=backlog"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'Backlog/T-001' priority high",
+      "key": "match",
+      "expected": true,
+      "description": "T-001 priority=high"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'Backlog/T-001' estimate 5",
+      "key": "match",
+      "expected": true,
+      "description": "T-001 estimate=5"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/KanbanVault 'Backlog/T-001' Description 2",
+      "key": "has_heading",
+      "expected": true,
+      "description": "T-001 has Description heading"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/KanbanVault 'Backlog/T-001' task",
+      "key": "has_tag",
+      "expected": true,
+      "description": "T-001 has #task"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'Backlog/T-002' priority low",
+      "key": "match",
+      "expected": true,
+      "description": "T-002 priority=low"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'Backlog/T-003' priority medium",
+      "key": "match",
+      "expected": true,
+      "description": "T-003 priority=medium"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'InProgress/T-004' status inprogress",
+      "key": "match",
+      "expected": true,
+      "description": "T-004 status=inprogress"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'InProgress/T-004' estimate 8",
+      "key": "match",
+      "expected": true,
+      "description": "T-004 estimate=8"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'InProgress/T-005' status inprogress",
+      "key": "match",
+      "expected": true,
+      "description": "T-005 status=inprogress"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'Done/T-006' status done",
+      "key": "match",
+      "expected": true,
+      "description": "T-006 status=done"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/KanbanVault 'Done/T-007' status done",
+      "key": "match",
+      "expected": true,
+      "description": "T-007 status=done"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/KanbanVault Board 'Project Board' 1",
+      "key": "has_heading",
+      "expected": true,
+      "description": "Board has Project Board heading"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/KanbanVault Board 'In Progress' 2",
+      "key": "has_heading",
+      "expected": true,
+      "description": "Board has In Progress heading"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/KanbanVault Board T-001",
+      "key": "links_to",
+      "expected": true,
+      "description": "Board links T-001"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/KanbanVault Board T-004",
+      "key": "links_to",
+      "expected": true,
+      "description": "Board links T-004"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/KanbanVault Board T-007",
+      "key": "links_to",
+      "expected": true,
+      "description": "Board links T-007"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/KanbanVault Board board",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Board has #board"
+    },
+    {
+      "command": "list-notes /home/user/Documents/KanbanVault",
+      "eval": "result.get('count') == 8",
+      "description": "Vault has exactly 8 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

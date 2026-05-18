@@ -1,0 +1,55 @@
+{
+  "id": "thunderbird_gap_calendar_ics_import",
+  "app": "thunderbird",
+  "task": "In Thunderbird's built-in Calendar, create a new local calendar named exactly `Conference 2026` and import every event from `/home/user/Documents/conference_schedule.ics` into it. After import, the calendar must contain all five events from the ICS file with their titles, start/end times, locations, and descriptions preserved.",
+  "env": {
+    "files": [
+      {
+        "filename": "conference_schedule.ics",
+        "sandbox_path": "/home/user/Documents/conference_schedule.ics"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-event-exists 'Opening Keynote'",
+      "key": "found",
+      "expected": true,
+      "description": "Imported event 'Opening Keynote'"
+    },
+    {
+      "command": "check-event-exists 'LLM Agents Panel'",
+      "key": "found",
+      "expected": true,
+      "description": "Imported event 'LLM Agents Panel'"
+    },
+    {
+      "command": "check-event-exists 'GUI Agent Workshop'",
+      "key": "found",
+      "expected": true,
+      "description": "Imported event 'GUI Agent Workshop'"
+    },
+    {
+      "command": "check-event-exists 'Day 2 Keynote'",
+      "key": "found",
+      "expected": true,
+      "description": "Imported event 'Day 2 Keynote'"
+    },
+    {
+      "command": "check-event-exists 'Closing Remarks'",
+      "key": "found",
+      "expected": true,
+      "description": "Imported event 'Closing Remarks'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

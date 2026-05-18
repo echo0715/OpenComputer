@@ -1,0 +1,74 @@
+{
+  "id": "freecad_gap_partdesign_circular_pattern_lugs",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/disk_start.FCStd, which contains a PartDesign Body 'DiskBody' with a circular Pad 'Disk' (diameter 100 mm, thickness 10 mm, centered on origin on the XY plane).\n\nInside DiskBody, add:\n1. A Pad named exactly 'Lug' built from a sketch on the top face of Disk consisting of a single 8 mm diameter circle centered at (35, 0), padded 5 mm upward.\n2. A PolarPattern named exactly 'LugPattern' that replicates 'Lug' 6 times evenly around the Z axis over a total angle of 360 degrees.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "disk_start.FCStd",
+        "sandbox_path": "/home/user/Documents/disk_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/disk_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/disk_start.FCStd Disk",
+      "key": "exists",
+      "expected": true,
+      "description": "Disk preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/disk_start.FCStd Lug",
+      "key": "exists",
+      "expected": true,
+      "description": "Lug pad exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/disk_start.FCStd Lug PartDesign::Pad",
+      "key": "match",
+      "expected": true,
+      "description": "Lug is PartDesign::Pad"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/disk_start.FCStd Lug Length 5",
+      "key": "match",
+      "expected": true,
+      "description": "Lug Length = 5"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/disk_start.FCStd LugPattern",
+      "key": "exists",
+      "expected": true,
+      "description": "LugPattern exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/disk_start.FCStd LugPattern PartDesign::PolarPattern",
+      "key": "match",
+      "expected": true,
+      "description": "LugPattern is PartDesign::PolarPattern"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/disk_start.FCStd LugPattern Occurrences 6",
+      "key": "match",
+      "expected": true,
+      "description": "Occurrences = 6"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/disk_start.FCStd LugPattern Angle 360",
+      "key": "match",
+      "expected": true,
+      "description": "Angle = 360"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "id": "draw_mind_map_topics",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/mindmap_seed.odg is open in LibreOffice Draw — page 1 already contains a single central ellipse labeled 'Machine Learning'.\n\nBuild a mind map around the central node, preserving it:\n- Four secondary ellipses around the central node, labelled exactly 'Supervised', 'Unsupervised', 'Reinforcement', 'Deep Learning'.\n- Leaf rectangles attached to specific secondary ellipses: from 'Supervised' — 'Regression' and 'Classification'; from 'Unsupervised' — 'Clustering'; from 'Deep Learning' — 'CNN' and 'RNN'.\n- Connectors linking each secondary ellipse to the central 'Machine Learning' ellipse, and each leaf rectangle to its parent ellipse.\n\nPage 1 must end up with at least 10 shapes (1 central + 4 secondary ellipses + 5 leaf rectangles). Save the file in-place to /home/user/Documents/mindmap_seed.odg.",
+  "env": {
+    "files": [
+      {
+        "filename": "mindmap_seed.odg",
+        "sandbox_path": "/home/user/Documents/mindmap_seed.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 \"Machine Learning\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Machine Learning'"
+    },
+    {
+      "command": "check-page-contains 0 Supervised",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Supervised'"
+    },
+    {
+      "command": "check-page-contains 0 Unsupervised",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Unsupervised'"
+    },
+    {
+      "command": "check-page-contains 0 Reinforcement",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Reinforcement'"
+    },
+    {
+      "command": "check-page-contains 0 \"Deep Learning\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Deep Learning'"
+    },
+    {
+      "command": "check-page-contains 0 Regression",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Regression'"
+    },
+    {
+      "command": "check-page-contains 0 Classification",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Classification'"
+    },
+    {
+      "command": "check-page-contains 0 Clustering",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Clustering'"
+    },
+    {
+      "command": "check-page-contains 0 CNN",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'CNN'"
+    },
+    {
+      "command": "check-page-contains 0 RNN",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'RNN'"
+    },
+    {
+      "command": "check-shape-exists 0 EllipseShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has ellipse shapes"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 10",
+      "description": "Page 1 has at least 10 shapes (central + 4 secondary ellipses + 5 leaf rectangles)"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

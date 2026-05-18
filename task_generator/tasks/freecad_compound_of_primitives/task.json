@@ -1,0 +1,64 @@
+{
+  "id": "freecad_compound_of_primitives",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/assembly.FCStd, which contains three primitive objects: a Part::Box named 'Box' (12x12x12), a Part::Cylinder named 'Cylinder' (Radius 5, Height 15), and a Part::Cone named 'Cone' (Radius1 6, Radius2 0, Height 10).\n\nCombine all three primitives into a new Part::Compound object with Label exactly 'AssemblyGroup'. The original Box, Cylinder, and Cone must all still exist as objects in the document, so the final document contains exactly 4 objects total. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "assembly.FCStd",
+        "sandbox_path": "/home/user/Documents/assembly.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/assembly.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/assembly.FCStd Box",
+      "key": "exists",
+      "expected": true,
+      "description": "Box still exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/assembly.FCStd Cylinder",
+      "key": "exists",
+      "expected": true,
+      "description": "Cylinder still exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/assembly.FCStd Cone",
+      "key": "exists",
+      "expected": true,
+      "description": "Cone still exists"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/assembly.FCStd Part::Compound 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one Part::Compound"
+    },
+    {
+      "command": "check-object-count /home/user/Documents/assembly.FCStd 4",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 4 objects"
+    },
+    {
+      "judge": "llm",
+      "prompt": "Does the FreeCAD document contain exactly one object whose type is 'Part::Compound' AND whose Label property equals 'AssemblyGroup'? Answer yes only if both conditions are true.",
+      "command": "objects /home/user/Documents/assembly.FCStd",
+      "context": "command_output",
+      "description": "Compound labelled 'AssemblyGroup'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

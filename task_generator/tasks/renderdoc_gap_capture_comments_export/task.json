@@ -1,0 +1,57 @@
+{
+  "id": "renderdoc_gap_capture_comments_export",
+  "app": "renderdoc",
+  "task": "Configure the Comments panel in /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document). Apply all of the following edits in a single save:\n\n1. Set `\"Comments_ShowOnLoad\"` to `false` (do not auto-show the panel on capture load).\n2. Set `\"Comments_FontSize\"` to the integer `11`.\n3. Set `\"Comments_Monospaced\"` to `true`.\n4. Set `\"CommentsPanel_History\"` to a JSON array with exactly three integer entries in this order, with NO whitespace between tokens: `[0,1,2]`.\n\nThe top-level `\"rdocConfigData\": 1` marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting Comments_ShowOnLoad false",
+      "key": "match",
+      "expected": true,
+      "description": "ShowOnLoad false"
+    },
+    {
+      "command": "check-setting Comments_FontSize 11",
+      "key": "match",
+      "expected": true,
+      "description": "FontSize 11"
+    },
+    {
+      "command": "check-setting Comments_Monospaced true",
+      "key": "match",
+      "expected": true,
+      "description": "Monospaced true"
+    },
+    {
+      "command": "check-setting CommentsPanel_History [0,1,2]",
+      "key": "match",
+      "expected": true,
+      "description": "History array equals [0,1,2]"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

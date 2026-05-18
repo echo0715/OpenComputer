@@ -1,0 +1,87 @@
+{
+  "id": "blender_text_curve_objects",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/title_card.blend, build a title-card scene using non-mesh object types. Delete the default Cube and add:\n- A Text object named 'Title' with a new material 'TitleMat' assigned\n- A Bezier Curve named 'Underline'\n- A Plane named 'Backdrop'\n\nSet the render engine to Eevee, the resolution to 1280x720, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "title_card.blend",
+        "sandbox_path": "/home/user/Documents/title_card.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/title_card.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/title_card.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/title_card.blend Title",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Title' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/title_card.blend Title FONT",
+      "key": "match",
+      "expected": true,
+      "description": "'Title' is a FONT (text) object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/title_card.blend Underline",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Underline' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/title_card.blend Underline CURVE",
+      "key": "match",
+      "expected": true,
+      "description": "'Underline' is a CURVE"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/title_card.blend Backdrop",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Backdrop' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/title_card.blend Backdrop MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Backdrop' is MESH"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/title_card.blend TitleMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'TitleMat' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/title_card.blend BLENDER_EEVEE",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is Eevee"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/title_card.blend 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 1280x720"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

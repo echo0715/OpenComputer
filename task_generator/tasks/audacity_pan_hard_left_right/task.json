@@ -1,0 +1,65 @@
+{
+  "id": "audacity_pan_hard_left_right",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/balance.aup loaded. The project has two wavetracks in this top-to-bottom order: 'Left Inst' (index 0) and 'Right Inst' (index 1). Both tracks currently have pan = 0.0 (centered).\n\nSet 'Left Inst' to hard left (pan = -1.0) and 'Right Inst' to hard right (pan = +1.0), then save the project so the pan values are written into /home/user/Music/balance.aup. Do not change track names, gain, mute, or solo.",
+  "env": {
+    "files": [
+      {
+        "filename": "balance.aup",
+        "sandbox_path": "/home/user/Music/balance.aup"
+      },
+      {
+        "filename": "balance_data/e00/d00/e000001.au",
+        "sandbox_path": "/home/user/Music/balance_data/e00/d00/e000001.au"
+      },
+      {
+        "filename": "balance_data/e00/d00/e000002.au",
+        "sandbox_path": "/home/user/Music/balance_data/e00/d00/e000002.au"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-valid-aup /home/user/Music/balance.aup",
+      "key": "valid",
+      "expected": true,
+      "description": "balance.aup is still valid"
+    },
+    {
+      "command": "check-track-count /home/user/Music/balance.aup 2",
+      "key": "match",
+      "expected": true,
+      "description": "Project still has 2 wavetracks"
+    },
+    {
+      "command": "check-track-pan /home/user/Music/balance.aup 0 -1.0",
+      "key": "match",
+      "expected": true,
+      "description": "Track 0 (Left Inst) pan is -1.0"
+    },
+    {
+      "command": "check-track-pan /home/user/Music/balance.aup 1 1.0",
+      "key": "match",
+      "expected": true,
+      "description": "Track 1 (Right Inst) pan is 1.0"
+    },
+    {
+      "command": "check-track-gain /home/user/Music/balance.aup 0 1.0",
+      "key": "match",
+      "expected": true,
+      "description": "Track 0 gain is unchanged at 1.0"
+    },
+    {
+      "command": "check-track-gain /home/user/Music/balance.aup 1 1.0",
+      "key": "match",
+      "expected": true,
+      "description": "Track 1 gain is unchanged at 1.0"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

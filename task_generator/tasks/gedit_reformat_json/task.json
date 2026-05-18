@@ -1,0 +1,62 @@
+{
+  "id": "gedit_reformat_json",
+  "app": "gedit",
+  "task": "/home/user/Documents/data.json currently contains a minified single-line JSON object:\n\n```\n{\"name\": \"my-project\", \"version\": \"1.0.0\", \"dependencies\": {\"express\": \"4.18.2\", \"lodash\": \"4.17.21\", \"axios\": \"1.6.0\"}, \"scripts\": {\"start\": \"node index.js\", \"test\": \"jest\"}}\n```\n\nReformat it as pretty-printed JSON with 2-space indentation per level, opening `{` on line 1, top-level keys each on their own line, nested objects indented with 2 more spaces, and closing `}` on the last line. The final file must have exactly 14 lines and must still contain `my-project`, `dependencies`, `scripts`, and `express`.",
+  "env": {
+    "files": [
+      {
+        "filename": "data.json",
+        "sandbox_path": "/home/user/Documents/data.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/data.json",
+      "key": "exists",
+      "expected": true,
+      "description": "data.json file exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/data.json \"my-project\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File still contains project name"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/data.json \"dependencies\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File still contains dependencies key"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/data.json \"scripts\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File still contains scripts key"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/data.json \"express\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File still contains express dependency"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/data.json 14",
+      "key": "matches",
+      "expected": true,
+      "description": "Reformatted file has exactly 14 lines"
+    },
+    {
+      "command": "file-content /home/user/Documents/data.json",
+      "eval": "result.get('content', '').count('\\n') >= 13",
+      "description": "File has multiple lines (not still minified)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

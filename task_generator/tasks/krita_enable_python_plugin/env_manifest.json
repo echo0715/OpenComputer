@@ -1,0 +1,10 @@
+{
+  "task_id": "krita_enable_python_plugin",
+  "files": [
+    {
+      "filename": "plugin_test.kra",
+      "sandbox_path": "/home/user/Documents/plugin_test.kra",
+      "type": "kra"
+    }
+  ]
+}

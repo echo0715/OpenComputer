@@ -1,0 +1,85 @@
+{
+  "id": "obs_add_sources_to_existing",
+  "app": "obs",
+  "task": "OBS Studio is open with a scene collection that already has a single scene named 'Live Stream' containing one Display Capture source named 'Screen'.\n\nAdd four more sources to the 'Live Stream' scene, each with these exact names and types:\n- Video Capture Device named 'Camera'\n- Text (FreeType 2) named 'Now Playing' (text content can be any value)\n- Image named 'Channel Logo' with file path /home/user/Pictures/channel_logo.png\n- Color Source named 'Lower Third BG'\n\nAll five sources (the original 'Screen' plus the four new ones) must be visible. Do NOT create or delete any scenes — the collection must still contain exactly 1 scene named 'Live Stream'. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "scene_collection.json",
+        "sandbox_path": "/home/user/.config/obs-studio/basic/scenes/Untitled.json"
+      },
+      {
+        "filename": "channel_logo.png",
+        "sandbox_path": "/home/user/Pictures/channel_logo.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists 'Live Stream'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Live Stream' exists"
+    },
+    {
+      "command": "check-scene-count 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 1 scene in the collection"
+    },
+    {
+      "command": "check-source-in-scene Screen 'Live Stream'",
+      "key": "exists",
+      "expected": true,
+      "description": "Original source 'Screen' still exists in 'Live Stream' scene"
+    },
+    {
+      "command": "check-source-in-scene Camera 'Live Stream'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Camera' exists in 'Live Stream' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Now Playing' 'Live Stream'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Now Playing' exists in 'Live Stream' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Channel Logo' 'Live Stream'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Channel Logo' exists in 'Live Stream' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Lower Third BG' 'Live Stream'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Lower Third BG' exists in 'Live Stream' scene"
+    },
+    {
+      "command": "check-source-visible Screen",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Screen' is visible"
+    },
+    {
+      "command": "check-source-visible Camera",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Camera' is visible"
+    },
+    {
+      "command": "check-source-visible 'Channel Logo'",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Channel Logo' is visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

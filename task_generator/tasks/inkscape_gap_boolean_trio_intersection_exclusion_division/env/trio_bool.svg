@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="700" height="600" viewBox="0 0 700 600">
+  <!-- Row 1: Intersection -->
+  <circle id="r1a" cx="200" cy="100" r="70" fill="#aa2288"/>
+  <circle id="r1b" cx="280" cy="100" r="70" fill="#22aaee"/>
+  <!-- Row 2: Exclusion -->
+  <rect id="r2a" x="130" y="240" width="140" height="140" fill="#ddcc22"/>
+  <circle id="r2b" cx="300" cy="310" r="70" fill="#cc4444"/>
+  <!-- Row 3: Division -->
+  <rect id="r3a" x="120" y="440" width="240" height="120" fill="#337744"/>
+  <rect id="r3b" x="220" y="470" width="60" height="160" fill="#ffffff"/>
+</svg>

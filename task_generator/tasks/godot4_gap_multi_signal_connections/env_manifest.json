@@ -1,0 +1,25 @@
+{
+  "task_id": "godot4_gap_multi_signal_connections",
+  "files": [
+    {
+      "filename": "project.godot",
+      "sandbox_path": "/home/user/godot_projects/multi_signal_game/project.godot",
+      "type": "godot"
+    },
+    {
+      "filename": "menu.tscn",
+      "sandbox_path": "/home/user/godot_projects/multi_signal_game/menu.tscn",
+      "type": "tscn"
+    },
+    {
+      "filename": "scripts/menu_controller.gd",
+      "sandbox_path": "/home/user/godot_projects/multi_signal_game/scripts/menu_controller.gd",
+      "type": "gd"
+    },
+    {
+      "filename": "icon.svg",
+      "sandbox_path": "/home/user/godot_projects/multi_signal_game/icon.svg",
+      "type": "svg"
+    }
+  ]
+}

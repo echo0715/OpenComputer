@@ -1,0 +1,7 @@
+{
+  "task_id": "cloudcompare_gap_point_pair_alignment",
+  "files": [
+    {"filename": "floor_rotated.ply", "sandbox_path": "/home/user/Documents/floor_rotated.ply", "type": "ply"},
+    {"filename": "floor_ref.ply", "sandbox_path": "/home/user/Documents/floor_ref.ply", "type": "ply"}
+  ]
+}

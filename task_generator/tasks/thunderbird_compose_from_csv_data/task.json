@@ -1,0 +1,97 @@
+{
+  "id": "thunderbird_compose_from_csv_data",
+  "app": "thunderbird",
+  "task": "The CSV at /home/user/Documents/prospects.csv (columns Name, Email, Company, JobTitle) contains four prospects. Act only on the first two rows (Felix Zhou and Maya Okafor) — do NOT process Soren Aalborg or Ingrid Halvorsen.\n\n1. Add a Thunderbird Address Book contact for Felix Zhou with primary email `felix.zhou@quantumforge.example` and company `QuantumForge Labs`.\n2. Add a contact for Maya Okafor with primary email `maya.okafor@helixpharm.example` and company `Helix Pharmaceuticals`.\n3. Create a draft (do NOT send) to felix.zhou@quantumforge.example:\n   - Subject: Intro - QuantumForge partnership\n   - Body: Hi Felix, I noticed your work at QuantumForge Labs and would love to explore a hardware collaboration. Let me know if you have a 30 minute slot next week.\n4. Create a second draft (do NOT send) to maya.okafor@helixpharm.example:\n   - Subject: Intro - Helix Pharmaceuticals partnership\n   - Body: Hi Maya, I came across your clinical research program at Helix Pharmaceuticals and would love to discuss a joint study on adherence outcomes. Are you free for a brief call next week?",
+  "env": {
+    "files": [
+      {
+        "filename": "prospects.csv",
+        "sandbox_path": "/home/user/Documents/prospects.csv"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists 'Felix Zhou'",
+      "key": "found",
+      "expected": true,
+      "description": "Felix Zhou contact exists"
+    },
+    {
+      "command": "check-contact-field 'Felix Zhou' primary_email felix.zhou@quantumforge.example",
+      "key": "match",
+      "expected": true,
+      "description": "Felix email correct"
+    },
+    {
+      "command": "check-contact-field 'Felix Zhou' company 'QuantumForge Labs'",
+      "key": "match",
+      "expected": true,
+      "description": "Felix company correct"
+    },
+    {
+      "command": "check-contact-exists 'Maya Okafor'",
+      "key": "found",
+      "expected": true,
+      "description": "Maya Okafor contact exists"
+    },
+    {
+      "command": "check-contact-field 'Maya Okafor' primary_email maya.okafor@helixpharm.example",
+      "key": "match",
+      "expected": true,
+      "description": "Maya email correct"
+    },
+    {
+      "command": "check-contact-field 'Maya Okafor' company 'Helix Pharmaceuticals'",
+      "key": "match",
+      "expected": true,
+      "description": "Maya company correct"
+    },
+    {
+      "command": "check-draft-exists 'QuantumForge partnership'",
+      "key": "found",
+      "expected": true,
+      "description": "QuantumForge draft exists"
+    },
+    {
+      "command": "check-message-to Drafts 'QuantumForge' felix.zhou@quantumforge.example",
+      "key": "match",
+      "expected": true,
+      "description": "QuantumForge draft addressed to Felix"
+    },
+    {
+      "command": "check-draft-content 'QuantumForge' 'QuantumForge Labs'",
+      "key": "found",
+      "expected": true,
+      "description": "QuantumForge draft mentions company"
+    },
+    {
+      "command": "check-draft-exists 'Helix Pharmaceuticals partnership'",
+      "key": "found",
+      "expected": true,
+      "description": "Helix draft exists"
+    },
+    {
+      "command": "check-message-to Drafts 'Helix Pharmaceuticals' maya.okafor@helixpharm.example",
+      "key": "match",
+      "expected": true,
+      "description": "Helix draft addressed to Maya"
+    },
+    {
+      "command": "check-draft-content 'Helix Pharmaceuticals' 'Helix Pharmaceuticals'",
+      "key": "found",
+      "expected": true,
+      "description": "Helix draft mentions company"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

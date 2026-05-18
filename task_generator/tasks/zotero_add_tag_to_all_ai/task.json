@@ -1,0 +1,45 @@
+{
+  "id": "zotero_add_tag_to_all_ai",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite.\n\nCreate a new tag named exactly 'reviewed' (lowercase, no punctuation) and assign it to both of these items:\n1. 'Attention Is All You Need'\n2. 'BERT: Pre-training of Deep Bidirectional Transformers'\n\nLeave Zotero running so the new tag and its assignments are persisted.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists"
+    },
+    {
+      "command": "check-tag-exists reviewed",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'reviewed' exists"
+    },
+    {
+      "command": "check-item-tag 'Attention Is All You Need' reviewed",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Attention paper has tag 'reviewed'"
+    },
+    {
+      "command": "check-item-tag 'BERT: Pre-training' reviewed",
+      "key": "has_tag",
+      "expected": true,
+      "description": "BERT paper has tag 'reviewed'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

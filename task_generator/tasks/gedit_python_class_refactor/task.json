@@ -1,0 +1,80 @@
+{
+  "id": "gedit_python_class_refactor",
+  "app": "gedit",
+  "task": "/home/user/Documents/calculator.py currently contains three standalone functions (`add`, `subtract`, `multiply`) followed by demo `print()` calls.\n\nRefactor it into a class-based implementation in the same file:\n- Define a class `Calculator` at the top of the file with three methods (taking `self` as the first parameter): `def add(self, a, b): return a + b`, `def subtract(self, a, b): return a - b`, `def multiply(self, a, b): return a * b`. The arithmetic return lines (`return a + b`, `return a - b`, `return a * b`) must all still appear in the file.\n- Below the class, instantiate it with `calc = Calculator()` and call all three methods in `print()` statements using the same arguments as the original demo section.\n\nThe final file must be at least 18 lines long and must still live at /home/user/Documents/calculator.py.",
+  "env": {
+    "files": [
+      {
+        "filename": "calculator.py",
+        "sandbox_path": "/home/user/Documents/calculator.py"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/calculator.py",
+      "key": "exists",
+      "expected": true,
+      "description": "calculator.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"class Calculator:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File defines class Calculator"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"def add(self\"",
+      "key": "contains",
+      "expected": true,
+      "description": "add is a method on the class"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"def subtract(self\"",
+      "key": "contains",
+      "expected": true,
+      "description": "subtract is a method on the class"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"def multiply(self\"",
+      "key": "contains",
+      "expected": true,
+      "description": "multiply is a method on the class"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"return a + b\"",
+      "key": "contains",
+      "expected": true,
+      "description": "add logic preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"return a - b\"",
+      "key": "contains",
+      "expected": true,
+      "description": "subtract logic preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"return a * b\"",
+      "key": "contains",
+      "expected": true,
+      "description": "multiply logic preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/calculator.py \"Calculator()\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Class is instantiated"
+    },
+    {
+      "command": "file-line-count /home/user/Documents/calculator.py",
+      "eval": "result.get('line_count', 0) >= 18",
+      "description": "File has at least 18 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

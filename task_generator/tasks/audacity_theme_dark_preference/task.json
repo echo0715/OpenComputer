@@ -1,0 +1,22 @@
+{
+  "id": "audacity_theme_dark_preference",
+  "app": "audacity",
+  "task": "Audacity is already running with an empty project (no file opened). Set the Interface theme preference to 'Dark' so Audacity writes the new value to `~/.audacity-data/audacity.cfg` under the `[Theme]` section as `Name=dark`. You do not need to save any project.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-preference Theme Name dark",
+      "key": "match",
+      "expected": true,
+      "description": "Theme Name is 'dark' in audacity.cfg"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

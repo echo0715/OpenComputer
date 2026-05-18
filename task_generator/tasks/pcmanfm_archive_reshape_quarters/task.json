@@ -1,0 +1,40 @@
+{
+  "id": "pcmanfm_archive_reshape_quarters",
+  "app": "pcmanfm",
+  "task": "Reorganize the 12 monthly csv files in /home/user/Documents/financials/ (named 2024-01.csv through 2024-12.csv) into quarter directories. Create /home/user/Documents/financials/quarters/ and under it sub-directories Q1, Q2, Q3, Q4. MOVE 2024-01.csv, 2024-02.csv, 2024-03.csv into Q1; 2024-04.csv, 2024-05.csv, 2024-06.csv into Q2; 2024-07.csv, 2024-08.csv, 2024-09.csv into Q3; 2024-10.csv, 2024-11.csv, 2024-12.csv into Q4. Each quarter directory must end up with exactly 3 csv files. Additionally create /home/user/Documents/financials/README.txt with the exact content 'Reorganized into 4 quarters, 3 months each'. After all operations, /home/user/Documents/financials/ must contain exactly 2 top-level entries: quarters/ and README.txt.",
+  "env": {
+    "files": [
+      {"filename": "2024-01.csv", "sandbox_path": "/home/user/Documents/financials/2024-01.csv"},
+      {"filename": "2024-02.csv", "sandbox_path": "/home/user/Documents/financials/2024-02.csv"},
+      {"filename": "2024-03.csv", "sandbox_path": "/home/user/Documents/financials/2024-03.csv"},
+      {"filename": "2024-04.csv", "sandbox_path": "/home/user/Documents/financials/2024-04.csv"},
+      {"filename": "2024-05.csv", "sandbox_path": "/home/user/Documents/financials/2024-05.csv"},
+      {"filename": "2024-06.csv", "sandbox_path": "/home/user/Documents/financials/2024-06.csv"},
+      {"filename": "2024-07.csv", "sandbox_path": "/home/user/Documents/financials/2024-07.csv"},
+      {"filename": "2024-08.csv", "sandbox_path": "/home/user/Documents/financials/2024-08.csv"},
+      {"filename": "2024-09.csv", "sandbox_path": "/home/user/Documents/financials/2024-09.csv"},
+      {"filename": "2024-10.csv", "sandbox_path": "/home/user/Documents/financials/2024-10.csv"},
+      {"filename": "2024-11.csv", "sandbox_path": "/home/user/Documents/financials/2024-11.csv"},
+      {"filename": "2024-12.csv", "sandbox_path": "/home/user/Documents/financials/2024-12.csv"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-count /home/user/Documents/financials 2", "key": "match", "expected": true, "description": "financials top-level has 2 entries"},
+    {"command": "check-file-count /home/user/Documents/financials/quarters/Q1 3", "key": "match", "expected": true, "description": "Q1 has 3 files"},
+    {"command": "check-file-count /home/user/Documents/financials/quarters/Q2 3", "key": "match", "expected": true, "description": "Q2 has 3 files"},
+    {"command": "check-file-count /home/user/Documents/financials/quarters/Q3 3", "key": "match", "expected": true, "description": "Q3 has 3 files"},
+    {"command": "check-file-count /home/user/Documents/financials/quarters/Q4 3", "key": "match", "expected": true, "description": "Q4 has 3 files"},
+    {"command": "check-extension-match /home/user/Documents/financials/quarters/Q1 .csv", "key": "all_match", "expected": true, "description": "Q1 only csv files"},
+    {"command": "check-extension-match /home/user/Documents/financials/quarters/Q4 .csv", "key": "all_match", "expected": true, "description": "Q4 only csv files"},
+    {"command": "check-file-exists /home/user/Documents/financials/quarters/Q1/2024-02.csv", "key": "exists", "expected": true, "description": "2024-02 in Q1"},
+    {"command": "check-file-exists /home/user/Documents/financials/quarters/Q3/2024-08.csv", "key": "exists", "expected": true, "description": "2024-08 in Q3"},
+    {"command": "check-file-exists /home/user/Documents/financials/README.txt", "key": "exists", "expected": true, "description": "README.txt exists"},
+    {"command": "check-file-contains /home/user/Documents/financials/README.txt quarters", "key": "contains", "expected": true, "description": "README.txt mentions quarters"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

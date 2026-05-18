@@ -1,0 +1,85 @@
+{
+  "id": "godot4_gap_preload_and_instantiate",
+  "app": "godot4",
+  "task": "Replace the contents of /home/user/godot_projects/preload_game/scripts/spawner.gd with a valid GDScript class that satisfies all of the following:\n\n1. `class_name Spawner`\n2. `extends Node2D`\n3. Declares `const BULLET_SCENE = preload(\"res://scenes/bullet.tscn\")`\n4. Defines `func spawn() -> Node:` that calls `BULLET_SCENE.instantiate()`, calls `add_child(...)` on the instance, and returns the instance.",
+  "env": {
+    "files": [
+      {
+        "filename": "project.godot",
+        "sandbox_path": "/home/user/godot_projects/preload_game/project.godot"
+      },
+      {
+        "filename": "main.tscn",
+        "sandbox_path": "/home/user/godot_projects/preload_game/main.tscn"
+      },
+      {
+        "filename": "scenes/bullet.tscn",
+        "sandbox_path": "/home/user/godot_projects/preload_game/scenes/bullet.tscn"
+      },
+      {
+        "filename": "scripts/spawner.gd",
+        "sandbox_path": "/home/user/godot_projects/preload_game/scripts/spawner.gd"
+      },
+      {
+        "filename": "icon.svg",
+        "sandbox_path": "/home/user/godot_projects/preload_game/icon.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-script-class-name /home/user/godot_projects/preload_game/scripts/spawner.gd Spawner",
+      "key": "match",
+      "expected": true,
+      "description": "class_name Spawner"
+    },
+    {
+      "command": "check-script-extends /home/user/godot_projects/preload_game/scripts/spawner.gd Node2D",
+      "key": "match",
+      "expected": true,
+      "description": "extends Node2D"
+    },
+    {
+      "command": "check-script-func /home/user/godot_projects/preload_game/scripts/spawner.gd spawn",
+      "key": "exists",
+      "expected": true,
+      "description": "spawn() function exists"
+    },
+    {
+      "command": "check-file-contains /home/user/godot_projects/preload_game/scripts/spawner.gd res://scenes/bullet.tscn",
+      "key": "contains",
+      "expected": true,
+      "description": "preload references bullet.tscn"
+    },
+    {
+      "command": "check-file-contains /home/user/godot_projects/preload_game/scripts/spawner.gd preload",
+      "key": "contains",
+      "expected": true,
+      "description": "preload keyword used"
+    },
+    {
+      "command": "check-file-contains /home/user/godot_projects/preload_game/scripts/spawner.gd BULLET_SCENE",
+      "key": "contains",
+      "expected": true,
+      "description": "constant name BULLET_SCENE declared"
+    },
+    {
+      "command": "check-file-contains /home/user/godot_projects/preload_game/scripts/spawner.gd instantiate",
+      "key": "contains",
+      "expected": true,
+      "description": "calls instantiate()"
+    },
+    {
+      "command": "check-file-contains /home/user/godot_projects/preload_game/scripts/spawner.gd add_child",
+      "key": "contains",
+      "expected": true,
+      "description": "calls add_child(...)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

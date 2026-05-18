@@ -1,0 +1,69 @@
+{
+  "id": "musescore3_export_five_formats",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/suite.mscz — 6 measures of quarter notes in C major 4/4.\n\nExport the score to all five of these formats at exactly these paths:\n- Standard MIDI File: /home/user/Documents/suite.mid\n- Uncompressed MusicXML: /home/user/Documents/suite.musicxml\n- PDF File: /home/user/Documents/suite.pdf\n- PNG Images: /home/user/Documents/suite.png (a single PNG file)\n- Wave Audio: /home/user/Documents/suite.wav\n\nThe original /home/user/Documents/suite.mscz must still exist. The MIDI must contain at least 4 notes, the MusicXML must have at least 1 part, the PDF must have a valid %PDF- header, the PNG must have a valid PNG header, and the WAV must have a duration of at least 1 second.",
+  "env": {
+    "files": [
+      {
+        "filename": "suite.mscz",
+        "sandbox_path": "/home/user/Documents/suite.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/suite.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "suite.mscz still exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/suite.mid",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported suite.mid exists"
+    },
+    {
+      "command": "check-midi-has-notes /home/user/Documents/suite.mid 4",
+      "key": "match",
+      "expected": true,
+      "description": "suite.mid has at least 4 notes"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/suite.musicxml",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported suite.musicxml exists"
+    },
+    {
+      "command": "check-musicxml-parts /home/user/Documents/suite.musicxml 1",
+      "key": "match",
+      "expected": true,
+      "description": "suite.musicxml has exactly 1 part"
+    },
+    {
+      "command": "check-pdf-exists /home/user/Documents/suite.pdf",
+      "key": "match",
+      "expected": true,
+      "description": "Exported suite.pdf exists with %PDF- header"
+    },
+    {
+      "command": "check-png-exists /home/user/Documents/suite.png",
+      "key": "match",
+      "expected": true,
+      "description": "Exported suite.png exists with PNG header"
+    },
+    {
+      "command": "check-wav-duration /home/user/Documents/suite.wav 1",
+      "key": "match",
+      "expected": true,
+      "description": "suite.wav duration is at least 1 second"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "inkscape_isometric_cube",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/cube.svg — a blank 500x500 canvas.\n\nBuild an isometric cube in /home/user/Documents/cube.svg with these exact contents:\n\n- Layer named 'Cube' containing three `<path>` elements (one per cube face) with these exact ids and fills (geometry is unimportant as long as they are `<path>` elements):\n  - face_top fill #dddddd\n  - face_left fill #999999\n  - face_right fill #555555\n- One text element with the exact text: Isometric Cube.\n\nThe page must remain 500x500. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "cube.svg",
+        "sandbox_path": "/home/user/Documents/cube.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/cube.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "cube.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/cube.svg 500 500",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 500x500"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/cube.svg Cube",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Cube' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/cube.svg face_top",
+      "key": "exists",
+      "expected": true,
+      "description": "face_top exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/cube.svg face_top fill #dddddd",
+      "key": "match",
+      "expected": true,
+      "description": "face_top fill is #dddddd"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/cube.svg face_left",
+      "key": "exists",
+      "expected": true,
+      "description": "face_left exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/cube.svg face_left fill #999999",
+      "key": "match",
+      "expected": true,
+      "description": "face_left fill is #999999"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/cube.svg face_right",
+      "key": "exists",
+      "expected": true,
+      "description": "face_right exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/cube.svg face_right fill #555555",
+      "key": "match",
+      "expected": true,
+      "description": "face_right fill is #555555"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/cube.svg path",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains path elements"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/cube.svg 'Isometric Cube'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Isometric Cube' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

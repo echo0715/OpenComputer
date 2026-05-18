@@ -1,0 +1,6 @@
+{
+  "task_id": "draw_org_chart",
+  "files": [
+    {"filename": "org_template.odg", "sandbox_path": "/home/user/Documents/org_template.odg", "type": "odg"}
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "freecad_gap_partdesign_linear_pattern_holes",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/strip_start.FCStd, which contains a PartDesign Body 'StripBody' with a Pad 'Strip' (120 x 40 x 10 mm) and a single Pocket 'PilotHole' (5 mm diameter through-hole centered at X=-50, Y=0 on the top face).\n\nInside StripBody, create a LinearPattern named exactly 'HolePattern' that replicates 'PilotHole' 5 times along the +X axis with a total pattern length of 100 mm (25 mm spacing between consecutive occurrences), producing 5 evenly spaced holes. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "strip_start.FCStd",
+        "sandbox_path": "/home/user/Documents/strip_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/strip_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/strip_start.FCStd Strip",
+      "key": "exists",
+      "expected": true,
+      "description": "Strip pad preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/strip_start.FCStd PilotHole",
+      "key": "exists",
+      "expected": true,
+      "description": "PilotHole preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/strip_start.FCStd HolePattern",
+      "key": "exists",
+      "expected": true,
+      "description": "HolePattern exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/strip_start.FCStd HolePattern PartDesign::LinearPattern",
+      "key": "match",
+      "expected": true,
+      "description": "HolePattern is PartDesign::LinearPattern"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/strip_start.FCStd HolePattern Occurrences 5",
+      "key": "match",
+      "expected": true,
+      "description": "Occurrences = 5"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/strip_start.FCStd HolePattern Length 100",
+      "key": "match",
+      "expected": true,
+      "description": "Pattern Length = 100"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

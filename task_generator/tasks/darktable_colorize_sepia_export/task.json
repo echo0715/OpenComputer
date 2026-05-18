@@ -1,0 +1,57 @@
+{
+  "id": "darktable_colorize_sepia_export",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/old_photo.png into the darktable library.\n\nEnable the 'monochrome' module to convert the image to black and white, then enable the 'colorize' module to apply a warm sepia tint over the monochrome result. Apply the tag 'sepia' to the image, set its star rating to 3 stars, and export it as a JPEG to /home/user/Pictures/old_photo_sepia.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "old_photo.png",
+        "sandbox_path": "/home/user/Pictures/old_photo.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported old_photo.png",
+      "key": "imported",
+      "expected": true,
+      "description": "old_photo.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation old_photo.png monochrome",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'monochrome' operation"
+    },
+    {
+      "command": "check-db-has-operation old_photo.png colorize",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'colorize' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename old_photo.png sepia",
+      "key": "tagged",
+      "expected": true,
+      "description": "old_photo.png is tagged with 'sepia'"
+    },
+    {
+      "command": "check-image-rating-by-filename old_photo.png 3",
+      "key": "matches",
+      "expected": true,
+      "description": "old_photo.png rating is 3 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/old_photo_sepia.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG exists at /home/user/Pictures/old_photo_sepia.jpg"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

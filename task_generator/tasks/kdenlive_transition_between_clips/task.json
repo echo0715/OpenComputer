@@ -1,0 +1,65 @@
+{
+  "id": "kdenlive_transition_between_clips",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/transition_project.kdenlive (1920x1080, 25fps).\n\nImport /home/user/Videos/scene1.mp4 and /home/user/Videos/scene2.mp4 into the project. Place scene1.mp4 on one video track and scene2.mp4 on a second video track with the two clips slightly overlapping in time, and add a Luma (`luma`) transition between them across the overlap. Save the project so both clips and the transition are persisted to /home/user/Documents/transition_project.kdenlive. The project must remain at 1920x1080, 25fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "transition_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/transition_project.kdenlive"
+      },
+      {
+        "filename": "scene1.mp4",
+        "sandbox_path": "/home/user/Videos/scene1.mp4"
+      },
+      {
+        "filename": "scene2.mp4",
+        "sandbox_path": "/home/user/Videos/scene2.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/transition_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/transition_project.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/transition_project.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/transition_project.kdenlive 25",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 25 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/transition_project.kdenlive scene1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip scene1.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/transition_project.kdenlive scene2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip scene2.mp4 is in the project"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/transition_project.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "A luma transition exists in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

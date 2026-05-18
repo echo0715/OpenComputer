@@ -1,0 +1,69 @@
+{
+  "id": "drawio_state_machine",
+  "app": "drawio",
+  "task": "Create an order-lifecycle state machine in /home/user/Documents/state_machine.drawio with exactly 5 rounded-rectangle state shapes labeled: 'New', 'Confirmed', 'Shipped', 'Delivered', 'Cancelled'.\n\nTransition edges:\n1. New -> Confirmed\n2. Confirmed -> Shipped\n3. Shipped -> Delivered\n4. New -> Cancelled\n5. Confirmed -> Cancelled\n\nFinal counts: exactly 5 vertices and exactly 5 edges. Persist to /home/user/Documents/state_machine.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "state_machine.drawio",
+        "sandbox_path": "/home/user/Documents/state_machine.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/state_machine.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists at expected path"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/state_machine.drawio New",
+      "key": "exists",
+      "expected": true,
+      "description": "State 'New' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/state_machine.drawio Confirmed",
+      "key": "exists",
+      "expected": true,
+      "description": "State 'Confirmed' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/state_machine.drawio Shipped",
+      "key": "exists",
+      "expected": true,
+      "description": "State 'Shipped' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/state_machine.drawio Delivered",
+      "key": "exists",
+      "expected": true,
+      "description": "State 'Delivered' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/state_machine.drawio Cancelled",
+      "key": "exists",
+      "expected": true,
+      "description": "State 'Cancelled' exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/state_machine.drawio 5",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 5 state shapes"
+    },
+    {
+      "command": "check-edge-count /home/user/Documents/state_machine.drawio 5",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 5 transition edges"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

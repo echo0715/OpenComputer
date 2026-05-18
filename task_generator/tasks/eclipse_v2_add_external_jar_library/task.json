@@ -1,0 +1,79 @@
+{
+  "id": "eclipse_v2_add_external_jar_library",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the Java project 'JsonTools' sits at /home/user/workspace/JsonTools (import it if it is not yet in the workspace). The project already has a JAR at /home/user/workspace/JsonTools/lib/gson-2.10.1.jar but it is NOT yet on the build path.\n\nMake the following changes to 'JsonTools':\n\n- Add `lib/gson-2.10.1.jar` to the project's Java build path as a library entry (the .classpath must contain a classpathentry of kind 'lib' with path 'lib/gson-2.10.1.jar').\n- In the existing 'src' source folder, in package `com.jsontools`, create src/com/jsontools/JsonFormatter.java containing exactly:\n\n```\npackage com.jsontools;\n\npublic class JsonFormatter {\n    public String format(String json) {\n        return json.trim();\n    }\n}\n```\n\nDo NOT modify or delete the existing src/com/jsontools/JsonMain.java file.",
+  "env": {
+    "files": [
+      {
+        "filename": "JsonTools/.project",
+        "sandbox_path": "/home/user/workspace/JsonTools/.project"
+      },
+      {
+        "filename": "JsonTools/.classpath",
+        "sandbox_path": "/home/user/workspace/JsonTools/.classpath"
+      },
+      {
+        "filename": "JsonTools/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/JsonTools/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "JsonTools/src/com/jsontools/JsonMain.java",
+        "sandbox_path": "/home/user/workspace/JsonTools/src/com/jsontools/JsonMain.java"
+      },
+      {
+        "filename": "JsonTools/lib/gson-2.10.1.jar",
+        "sandbox_path": "/home/user/workspace/JsonTools/lib/gson-2.10.1.jar"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace JsonTools",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'JsonTools' exists in workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/JsonTools org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/JsonTools src src",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has src entry 'src'"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/JsonTools lib lib/gson-2.10.1.jar",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has lib entry for gson JAR"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/JsonTools src/com/jsontools/JsonMain.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Existing JsonMain.java still present"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/JsonTools src/com/jsontools/JsonFormatter.java",
+      "key": "exists",
+      "expected": true,
+      "description": "New JsonFormatter.java exists"
+    },
+    {
+      "command": "check-file-exists /home/user/workspace/JsonTools/lib/gson-2.10.1.jar",
+      "key": "exists",
+      "expected": true,
+      "description": "JAR file still present in lib folder"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

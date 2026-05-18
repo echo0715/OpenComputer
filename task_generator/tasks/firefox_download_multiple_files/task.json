@@ -1,0 +1,52 @@
+{
+  "id": "firefox_download_multiple_files",
+  "app": "firefox",
+  "task": "Download these three files from httpbin.org into /home/user/Downloads/ with the exact filenames shown:\n- https://httpbin.org/image/jpeg -> /home/user/Downloads/photo.jpeg\n- https://httpbin.org/image/png -> /home/user/Downloads/icon.png\n- https://httpbin.org/robots.txt -> /home/user/Downloads/robots.txt\n\nThen open a new tab and navigate to https://example.com so it is the active tab.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-download photo.jpeg",
+      "key": "downloaded",
+      "expected": true,
+      "description": "photo.jpeg was downloaded to /home/user/Downloads/"
+    },
+    {
+      "command": "check-download icon.png",
+      "key": "downloaded",
+      "expected": true,
+      "description": "icon.png was downloaded to /home/user/Downloads/"
+    },
+    {
+      "command": "check-download robots.txt",
+      "key": "downloaded",
+      "expected": true,
+      "description": "robots.txt was downloaded to /home/user/Downloads/"
+    },
+    {
+      "command": "check-tab-open example.com",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab shows example.com"
+    },
+    {
+      "command": "check-url-visited httpbin.org/image/jpeg",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/image/jpeg was visited"
+    },
+    {
+      "command": "check-url-visited httpbin.org/image/png",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/image/png was visited"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

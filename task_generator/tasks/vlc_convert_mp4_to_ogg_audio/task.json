@@ -1,0 +1,51 @@
+{
+  "id": "vlc_convert_mp4_to_ogg_audio",
+  "app": "vlc",
+  "task": "VLC is already running. Extract the audio track of /home/user/Videos/ogg_src.mp4 into an OGG Vorbis audio file at /home/user/Music/extracted.ogg using the 'Audio - Vorbis (OGG)' profile (audio-only).\n\nThe resulting /home/user/Music/extracted.ogg must be a valid OGG container with an audio stream and NO video stream. Create /home/user/Music if it does not yet exist.",
+  "env": {
+    "files": [
+      {
+        "filename": "ogg_src.mp4",
+        "sandbox_path": "/home/user/Videos/ogg_src.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/ogg_src.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source ogg_src.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Music/extracted.ogg",
+      "key": "exists",
+      "expected": true,
+      "description": "Extracted extracted.ogg exists"
+    },
+    {
+      "command": "check-media-format /home/user/Music/extracted.ogg ogg",
+      "key": "match",
+      "expected": true,
+      "description": "extracted.ogg container is OGG"
+    },
+    {
+      "command": "check-media-has-audio /home/user/Music/extracted.ogg",
+      "key": "has_audio",
+      "expected": true,
+      "description": "extracted.ogg has an audio stream"
+    },
+    {
+      "command": "check-media-has-video /home/user/Music/extracted.ogg",
+      "key": "has_video",
+      "expected": false,
+      "description": "extracted.ogg has NO video stream"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

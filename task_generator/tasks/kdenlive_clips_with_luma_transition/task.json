@@ -1,0 +1,71 @@
+{
+  "id": "kdenlive_clips_with_luma_transition",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/tracks_transition.kdenlive (1920x1080, 30fps).\n\nImport /home/user/Videos/alpha.mp4 and /home/user/Videos/beta.mp4 into the project. Place alpha.mp4 on Video Track 1 and beta.mp4 on Video Track 2 with the two clips overlapping in time, and add a Luma (`luma`) transition between the two tracks across the overlap. Apply the Glow effect (`frei0r.glow`) to the alpha.mp4 timeline clip. Save the project so the changes are persisted to /home/user/Documents/tracks_transition.kdenlive. The project must remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "tracks_transition.kdenlive",
+        "sandbox_path": "/home/user/Documents/tracks_transition.kdenlive"
+      },
+      {
+        "filename": "alpha.mp4",
+        "sandbox_path": "/home/user/Videos/alpha.mp4"
+      },
+      {
+        "filename": "beta.mp4",
+        "sandbox_path": "/home/user/Videos/beta.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/tracks_transition.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/tracks_transition.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/tracks_transition.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/tracks_transition.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/tracks_transition.kdenlive alpha.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip alpha.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/tracks_transition.kdenlive beta.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip beta.mp4 is in the project"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/tracks_transition.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "A luma transition exists in the project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/tracks_transition.kdenlive frei0r.glow",
+      "key": "exists",
+      "expected": true,
+      "description": "Glow effect (frei0r.glow) is applied in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

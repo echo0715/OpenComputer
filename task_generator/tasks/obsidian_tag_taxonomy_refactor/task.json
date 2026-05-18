@@ -1,0 +1,156 @@
+{
+  "id": "obsidian_tag_taxonomy_refactor",
+  "app": "obsidian",
+  "task": "The Obsidian vault at /home/user/Documents/TaxonomyVault contains 7 pre-existing project notes (A.md through G.md) with inconsistent mixed-case status tags (#TODO, #Todo, #done, #Done, #Wip). Refactor the tags to a consistent hierarchical lowercase taxonomy.\n\n1. Replace every occurrence of #TODO, #Todo, #done, #Done, #Wip with the corresponding hierarchical tag:\n   - A.md → #status/todo\n   - B.md → #status/todo\n   - C.md → #status/done\n   - D.md → #status/done\n   - E.md → #status/wip\n   - F.md → #status/todo\n   - G.md → #status/done\n2. Every note must still carry the inline tag #project (already present — do not remove it).\n3. Do not leave any of #TODO, #Todo, #done, #Done, #Wip anywhere. Each note's body (above the tags line) must be preserved.\n4. Create 'Taxonomy.md' in the vault root with a level-1 heading 'Tag Taxonomy', a bulleted list of the three status tags (status/todo, status/done, status/wip) with short descriptions, the inline tag #project, and the inline tag #taxonomy.\n\nThe vault must end up with exactly 8 notes.",
+  "env": {
+    "files": [
+      {
+        "filename": "app.json",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/.obsidian/app.json"
+      },
+      {
+        "filename": "A.md",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/A.md"
+      },
+      {
+        "filename": "B.md",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/B.md"
+      },
+      {
+        "filename": "C.md",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/C.md"
+      },
+      {
+        "filename": "D.md",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/D.md"
+      },
+      {
+        "filename": "E.md",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/E.md"
+      },
+      {
+        "filename": "F.md",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/F.md"
+      },
+      {
+        "filename": "G.md",
+        "sandbox_path": "/home/user/Documents/TaxonomyVault/G.md"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault A status/todo",
+      "key": "has_tag",
+      "expected": true,
+      "description": "A has status/todo"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault B status/todo",
+      "key": "has_tag",
+      "expected": true,
+      "description": "B has status/todo"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault C status/done",
+      "key": "has_tag",
+      "expected": true,
+      "description": "C has status/done"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault D status/done",
+      "key": "has_tag",
+      "expected": true,
+      "description": "D has status/done"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault E status/wip",
+      "key": "has_tag",
+      "expected": true,
+      "description": "E has status/wip"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault F status/todo",
+      "key": "has_tag",
+      "expected": true,
+      "description": "F has status/todo"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault G status/done",
+      "key": "has_tag",
+      "expected": true,
+      "description": "G has status/done"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault A project",
+      "key": "has_tag",
+      "expected": true,
+      "description": "A has project tag"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault G project",
+      "key": "has_tag",
+      "expected": true,
+      "description": "G has project tag"
+    },
+    {
+      "command": "get-vault-tags /home/user/Documents/TaxonomyVault",
+      "eval": "'TODO' not in (result.get('tags') or {}) and 'Todo' not in (result.get('tags') or {})",
+      "description": "No TODO/Todo tag remains"
+    },
+    {
+      "command": "get-vault-tags /home/user/Documents/TaxonomyVault",
+      "eval": "'Done' not in (result.get('tags') or {}) and 'Wip' not in (result.get('tags') or {})",
+      "description": "No Done/Wip tag remains"
+    },
+    {
+      "command": "get-vault-tags /home/user/Documents/TaxonomyVault",
+      "eval": "'done' not in (result.get('tags') or {}) and 'todo' not in (result.get('tags') or {})",
+      "description": "No plain lowercase done/todo tag remains"
+    },
+    {
+      "command": "get-vault-tags /home/user/Documents/TaxonomyVault",
+      "eval": "(result.get('tags') or {}).get('status/todo', 0) >= 3",
+      "description": "At least 3 notes tagged status/todo"
+    },
+    {
+      "command": "get-vault-tags /home/user/Documents/TaxonomyVault",
+      "eval": "(result.get('tags') or {}).get('status/done', 0) >= 3",
+      "description": "At least 3 notes tagged status/done"
+    },
+    {
+      "command": "get-vault-tags /home/user/Documents/TaxonomyVault",
+      "eval": "(result.get('tags') or {}).get('status/wip', 0) >= 1",
+      "description": "At least 1 note tagged status/wip"
+    },
+    {
+      "command": "check-note-exists /home/user/Documents/TaxonomyVault Taxonomy",
+      "key": "exists",
+      "expected": true,
+      "description": "Taxonomy note exists"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/TaxonomyVault Taxonomy 'Tag Taxonomy' 1",
+      "key": "has_heading",
+      "expected": true,
+      "description": "Taxonomy has Tag Taxonomy heading"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TaxonomyVault Taxonomy taxonomy",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Taxonomy has taxonomy tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/TaxonomyVault",
+      "eval": "result.get('count') == 8",
+      "description": "Vault has exactly 8 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

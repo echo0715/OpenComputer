@@ -1,0 +1,21 @@
+{
+  "id": "godot4_gap_navigation_agent_setup",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/nav_agent_game/main.tscn. The scene contains a root CharacterBody2D node named 'Agent'. Add a NavigationAgent2D child named 'NavAgent' under Agent (parent=\"Agent\"). Set radius = 16.0 and path_desired_distance = 4.0 on NavAgent. The resulting file should have:\n\n[node name=\"NavAgent\" type=\"NavigationAgent2D\" parent=\".\"]\nradius = 16.0\npath_desired_distance = 4.0\n\nSave the file.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/nav_agent_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/nav_agent_game/main.tscn"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/nav_agent_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-node-exists /home/user/godot_projects/nav_agent_game/main.tscn NavAgent", "key": "exists", "expected": true, "description": "NavAgent node exists"},
+    {"command": "check-node-type /home/user/godot_projects/nav_agent_game/main.tscn NavAgent NavigationAgent2D", "key": "match", "expected": true, "description": "NavAgent is NavigationAgent2D"},
+    {"command": "check-node-parent /home/user/godot_projects/nav_agent_game/main.tscn NavAgent .", "key": "match", "expected": true, "description": "NavAgent is child of Agent (root)"},
+    {"command": "check-node-property /home/user/godot_projects/nav_agent_game/main.tscn NavAgent radius 16.0", "key": "match", "expected": true, "description": "radius is 16.0"},
+    {"command": "check-node-property /home/user/godot_projects/nav_agent_game/main.tscn NavAgent path_desired_distance 4.0", "key": "match", "expected": true, "description": "path_desired_distance is 4.0"},
+    {"command": "check-node-exists /home/user/godot_projects/nav_agent_game/main.tscn Agent", "key": "exists", "expected": true, "description": "Agent root still exists"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 4}
+}

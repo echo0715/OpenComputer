@@ -1,0 +1,70 @@
+{
+  "id": "firefox_wikipedia_topic_trail",
+  "app": "firefox",
+  "task": "Visit these six Wikipedia articles in order, fully loading each before moving on, so all six end up in browsing history:\n\n1. https://en.wikipedia.org/wiki/Operating_system\n2. https://en.wikipedia.org/wiki/Unix\n3. https://en.wikipedia.org/wiki/Linux\n4. https://en.wikipedia.org/wiki/Linux_kernel\n5. https://en.wikipedia.org/wiki/GNU_Project\n6. https://en.wikipedia.org/wiki/Free_software\n\nAdd bookmarks for https://en.wikipedia.org/wiki/Linux and https://en.wikipedia.org/wiki/GNU_Project (default page titles are fine). The active tab when you finish must be https://en.wikipedia.org/wiki/Free_software.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Operating_system",
+      "key": "visited",
+      "expected": true,
+      "description": "Operating system article was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Unix",
+      "key": "visited",
+      "expected": true,
+      "description": "Unix article was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Linux",
+      "key": "visited",
+      "expected": true,
+      "description": "Linux article was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Linux_kernel",
+      "key": "visited",
+      "expected": true,
+      "description": "Linux kernel article was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/GNU_Project",
+      "key": "visited",
+      "expected": true,
+      "description": "GNU Project article was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Free_software",
+      "key": "visited",
+      "expected": true,
+      "description": "Free software article was visited"
+    },
+    {
+      "command": "check-tab-open wikipedia.org/wiki/Free_software",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab is the Free software article"
+    },
+    {
+      "command": "check-bookmark Linux",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for the Linux article exists"
+    },
+    {
+      "command": "check-bookmark GNU",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for the GNU Project article exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

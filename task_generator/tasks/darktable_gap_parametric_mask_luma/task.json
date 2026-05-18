@@ -1,0 +1,50 @@
+{
+  "id": "darktable_gap_parametric_mask_luma",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/landscape_luma.jpg into the darktable library.\n\nEnable the 'exposure' module at about +1 EV with a parametric mask that restricts the effect to midtones only using the luma range sliders (shadow and highlight endpoints pulled in so mostly the middle luminance range is affected). Apply the tag 'param_masked' to the image, set its star rating to 4 stars, and export it as a JPEG to /home/user/Pictures/landscape_luma_masked.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "landscape_luma.jpg",
+        "sandbox_path": "/home/user/Pictures/landscape_luma.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported landscape_luma.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "landscape_luma.jpg imported"
+    },
+    {
+      "command": "check-db-has-operation landscape_luma.jpg exposure",
+      "key": "has_operation",
+      "expected": true,
+      "description": "exposure module applied (parametric mask lives inside exposure's blendop)"
+    },
+    {
+      "command": "check-image-tagged-by-filename landscape_luma.jpg param_masked",
+      "key": "tagged",
+      "expected": true,
+      "description": "image tagged 'param_masked'"
+    },
+    {
+      "command": "check-image-rating-by-filename landscape_luma.jpg 4",
+      "key": "matches",
+      "expected": true,
+      "description": "rating is 4 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/landscape_luma_masked.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

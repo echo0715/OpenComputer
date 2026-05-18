@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_vignette_borders_frame",
+  "files": [
+    {
+      "filename": "artwork.png",
+      "sandbox_path": "/home/user/Pictures/artwork.png",
+      "type": "png"
+    }
+  ]
+}

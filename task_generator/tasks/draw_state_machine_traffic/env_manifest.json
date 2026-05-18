@@ -1,0 +1,6 @@
+{
+  "task_id": "draw_state_machine_traffic",
+  "files": [
+    {"filename": "state_seed.odg", "sandbox_path": "/home/user/Documents/state_seed.odg", "type": "odg"}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_calendar_event",
+  "files": [
+    {
+      "filename": "calendar.html",
+      "sandbox_path": "/home/user/Documents/calendar.html",
+      "type": "html"
+    }
+  ]
+}

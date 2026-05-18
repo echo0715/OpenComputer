@@ -1,0 +1,126 @@
+{
+  "id": "calc_month_over_month_growth",
+  "app": "libreoffice_calc",
+  "task": "Open /home/user/Documents/revenue.xlsx in LibreOffice Calc. The 'Revenue' sheet has headers Month (A) and Revenue (B) in row 1, and 12 months Jan-Dec with revenue values in rows 2-13.\n\nExtend the sheet:\n- Bold headers: C1='Running Total', D1='MoM Growth %', E1='Status'.\n- C2 = `=B2`; C3:C13 = `=C2+B3`-style running sum filled down.\n- D2 = literal text 'N/A'; D3:D13 = `=(B3-B2)/B2*100` filled down (month-over-month growth from the previous month).\n- E2 = literal text 'N/A'; E3:E13 = `=IF(D3<0,\"Down\",\"Up\")` filled down.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "revenue.xlsx",
+        "sandbox_path": "/home/user/Documents/revenue.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-cell-value C1 \"Running Total\" Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "C1 = Running Total"
+    },
+    {
+      "command": "check-cell-formatted C1 true Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "C1 bold"
+    },
+    {
+      "command": "check-cell-value D1 \"MoM Growth %\" Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "D1 = MoM Growth %"
+    },
+    {
+      "command": "check-cell-formatted D1 true Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "D1 bold"
+    },
+    {
+      "command": "check-cell-value E1 Status Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "E1 = Status"
+    },
+    {
+      "command": "check-cell-formatted E1 true Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "E1 bold"
+    },
+    {
+      "command": "check-cell-value C2 100000 Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "C2 running total = 100000"
+    },
+    {
+      "command": "check-cell-value C3 210000 Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "C3 running total = 210000"
+    },
+    {
+      "command": "check-cell-value C13 1558000 Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "C13 final running total = 1558000"
+    },
+    {
+      "command": "check-cell-value D2 N/A Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "D2 = N/A"
+    },
+    {
+      "command": "cell-value D3 Revenue",
+      "eval": "abs((result.get('value') or 0) - 10.0) < 0.01",
+      "description": "D3 growth = 10.0"
+    },
+    {
+      "command": "cell-value D4 Revenue",
+      "eval": "abs((result.get('value') or 0) - (-4.545454545454546)) < 0.01",
+      "description": "D4 growth approx -4.5454"
+    },
+    {
+      "command": "check-cell-value E2 N/A Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "E2 = N/A"
+    },
+    {
+      "command": "check-cell-value E3 Up Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "E3 = Up"
+    },
+    {
+      "command": "check-cell-value E4 Down Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "E4 = Down"
+    },
+    {
+      "command": "check-cell-value E13 Down Revenue",
+      "key": "match",
+      "expected": true,
+      "description": "E13 = Down"
+    },
+    {
+      "command": "cell-value E8 Revenue",
+      "eval": "result.get('formula') is not None and result.get('formula','').upper().startswith('=IF')",
+      "description": "E8 uses IF formula"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mlt LC_NUMERIC="C" producer="main_bin" version="7.14.0" root="/home/user/Videos">
+  <profile description="4K Vertical 30fps" width="2160" height="3840"
+           progressive="1" sample_aspect_num="1" sample_aspect_den="1"
+           display_aspect_num="9" display_aspect_den="16"
+           frame_rate_num="30" frame_rate_den="1" colorspace="709"/>
+  <playlist id="main_bin"/>
+  <tractor id="tractor0">
+    <track producer="main_bin"/>
+  </tractor>
+</mlt>

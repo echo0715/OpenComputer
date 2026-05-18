@@ -1,0 +1,52 @@
+{
+  "id": "firefox_history_multi_site_visit",
+  "app": "firefox",
+  "task": "Visit these five URLs in order, fully loading each before moving on, so all five end up in browsing history:\n\n1. https://example.com\n2. https://httpbin.org/get\n3. https://en.wikipedia.org/wiki/Linux\n4. https://www.w3.org/TR/\n5. https://httpbin.org/headers\n\nThen open a new tab and navigate to https://en.wikipedia.org/wiki/World_Wide_Web so it is the active tab.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited example.com",
+      "key": "visited",
+      "expected": true,
+      "description": "example.com appears in browsing history"
+    },
+    {
+      "command": "check-url-visited httpbin.org/get",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/get appears in browsing history"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Linux",
+      "key": "visited",
+      "expected": true,
+      "description": "Linux Wikipedia page appears in browsing history"
+    },
+    {
+      "command": "check-url-visited w3.org/TR",
+      "key": "visited",
+      "expected": true,
+      "description": "w3.org/TR appears in browsing history"
+    },
+    {
+      "command": "check-url-visited httpbin.org/headers",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/headers appears in browsing history"
+    },
+    {
+      "command": "check-tab-open wikipedia.org/wiki/World_Wide_Web",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab shows World Wide Web Wikipedia article"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

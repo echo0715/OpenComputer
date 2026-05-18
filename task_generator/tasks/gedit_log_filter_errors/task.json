@@ -1,0 +1,71 @@
+{
+  "id": "gedit_log_filter_errors",
+  "app": "gedit",
+  "task": "/home/user/Documents/server.log contains 30 log lines mixing four severity levels (INFO, WARN, DEBUG, ERROR), with exactly 8 ERROR lines.\n\nFilter the file in place so only the ERROR lines remain — delete every INFO, WARN, and DEBUG line and keep the remaining ERROR lines in their original order. The file must end up with exactly 8 lines, must still live at /home/user/Documents/server.log, and must still contain the ERROR lines `Connection timeout after 5000ms` (first ERROR) and `Cron job backup-db failed` (last ERROR).",
+  "env": {
+    "files": [
+      {
+        "filename": "server.log",
+        "sandbox_path": "/home/user/Documents/server.log"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/server.log",
+      "key": "exists",
+      "expected": true,
+      "description": "server.log still exists"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/server.log 8",
+      "key": "matches",
+      "expected": true,
+      "description": "File has exactly 8 lines after filtering"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/server.log \"ERROR\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File still contains ERROR lines"
+    },
+    {
+      "command": "file-content /home/user/Documents/server.log",
+      "eval": "'INFO ' not in result.get('content', '')",
+      "description": "No INFO lines remain"
+    },
+    {
+      "command": "file-content /home/user/Documents/server.log",
+      "eval": "'WARN ' not in result.get('content', '')",
+      "description": "No WARN lines remain"
+    },
+    {
+      "command": "file-content /home/user/Documents/server.log",
+      "eval": "'DEBUG ' not in result.get('content', '')",
+      "description": "No DEBUG lines remain"
+    },
+    {
+      "command": "file-content /home/user/Documents/server.log",
+      "eval": "all('ERROR' in line for line in result.get('content', '').strip().split('\\n'))",
+      "description": "Every remaining line contains ERROR"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/server.log \"Connection timeout after 5000ms\"",
+      "key": "contains",
+      "expected": true,
+      "description": "First ERROR line preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/server.log \"Cron job backup-db failed\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Last ERROR line preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

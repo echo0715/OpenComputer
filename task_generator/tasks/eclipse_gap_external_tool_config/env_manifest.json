@@ -1,0 +1,30 @@
+{
+  "task_id": "eclipse_gap_external_tool_config",
+  "files": [
+    {
+      "filename": "DemoApp/.project",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_external_tool_config/env/DemoApp/.project",
+      "sandbox_path": "/home/user/workspace/DemoApp/.project"
+    },
+    {
+      "filename": "DemoApp/.classpath",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_external_tool_config/env/DemoApp/.classpath",
+      "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+    },
+    {
+      "filename": "DemoApp/src/com/example/App.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_external_tool_config/env/DemoApp/src/com/example/App.java",
+      "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+    },
+    {
+      "filename": "DemoApp/src/com/example/Service.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_external_tool_config/env/DemoApp/src/com/example/Service.java",
+      "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+    },
+    {
+      "filename": "DemoApp/scripts/build.sh",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_external_tool_config/env/DemoApp/scripts/build.sh",
+      "sandbox_path": "/home/user/workspace/DemoApp/scripts/build.sh"
+    }
+  ]
+}

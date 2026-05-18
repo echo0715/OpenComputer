@@ -1,0 +1,30 @@
+{
+  "id": "godot4_input_map_four_actions",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/rpg_game/project.godot. The [input] section already defines move_left (A) and move_right (D). Preserve those entries and add four new input actions inside the same [input] section: move_up bound to W, move_down bound to S, attack bound to J, and interact bound to E. For every new action use the same dictionary format as the existing move_left entry (deadzone=0.5 and a single InputEventKey event with the physical_keycode set to the ASCII uppercase code of the letter — W=87, S=83, J=74, E=69). Save the file.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/rpg_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/rpg_game/main.tscn"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/rpg_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-input-action /home/user/godot_projects/rpg_game/project.godot move_left", "key": "exists", "expected": true, "description": "Existing move_left preserved"},
+    {"command": "check-input-action /home/user/godot_projects/rpg_game/project.godot move_right", "key": "exists", "expected": true, "description": "Existing move_right preserved"},
+    {"command": "check-input-action /home/user/godot_projects/rpg_game/project.godot move_up", "key": "exists", "expected": true, "description": "move_up action added"},
+    {"command": "check-input-action-key /home/user/godot_projects/rpg_game/project.godot move_up W", "key": "match", "expected": true, "description": "move_up bound to W"},
+    {"command": "check-input-action /home/user/godot_projects/rpg_game/project.godot move_down", "key": "exists", "expected": true, "description": "move_down action added"},
+    {"command": "check-input-action-key /home/user/godot_projects/rpg_game/project.godot move_down S", "key": "match", "expected": true, "description": "move_down bound to S"},
+    {"command": "check-input-action /home/user/godot_projects/rpg_game/project.godot attack", "key": "exists", "expected": true, "description": "attack action added"},
+    {"command": "check-input-action-key /home/user/godot_projects/rpg_game/project.godot attack J", "key": "match", "expected": true, "description": "attack bound to J"},
+    {"command": "check-input-action /home/user/godot_projects/rpg_game/project.godot interact", "key": "exists", "expected": true, "description": "interact action added"},
+    {"command": "check-input-action-key /home/user/godot_projects/rpg_game/project.godot interact E", "key": "match", "expected": true, "description": "interact bound to E"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

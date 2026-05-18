@@ -1,0 +1,58 @@
+{
+  "id": "gedit_create_bash_script",
+  "app": "gedit",
+  "task": "Create a new bash script at /home/user/Documents/backup.sh containing exactly these 7 lines:\n\n- Line 1: `#!/bin/bash`\n- Line 2: `BACKUP_DIR='/home/user/backups'`\n- Line 3: `SOURCE_DIR='/home/user/Documents'`\n- Line 4: (blank line)\n- Line 5: `mkdir -p $BACKUP_DIR`\n- Line 6: `cp $SOURCE_DIR/*.txt $BACKUP_DIR/`\n- Line 7: `echo \"Backup completed successfully\"`\n\nThe file must have exactly 7 lines.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/backup.sh",
+      "key": "exists",
+      "expected": true,
+      "description": "backup.sh file was created"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/backup.sh 1 \"#!/bin/bash\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 1 is the shebang line"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/backup.sh BACKUP_DIR",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains BACKUP_DIR variable"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/backup.sh SOURCE_DIR",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains SOURCE_DIR variable"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/backup.sh \"mkdir -p\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains mkdir command"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/backup.sh \"Backup completed successfully\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains success echo message"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/backup.sh 7",
+      "key": "matches",
+      "expected": true,
+      "description": "File has exactly 7 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

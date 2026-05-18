@@ -1,0 +1,75 @@
+{
+  "id": "eclipse_change_compiler_and_output",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the imported Java project 'ReportEngine' at /home/user/workspace/ReportEngine.\n\nChange the project's Java Compiler settings (with project-specific settings enabled) so that compiler compliance, source compatibility, and generated .class file compatibility are all set to 21. Change the project's default output folder from 'ReportEngine/bin' to 'ReportEngine/build'.\n\nDo NOT modify the existing source file at src/com/report/ReportGenerator.java.",
+  "env": {
+    "files": [
+      {
+        "filename": "ReportEngine/.project",
+        "sandbox_path": "/home/user/workspace/ReportEngine/.project"
+      },
+      {
+        "filename": "ReportEngine/.classpath",
+        "sandbox_path": "/home/user/workspace/ReportEngine/.classpath"
+      },
+      {
+        "filename": "ReportEngine/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/ReportEngine/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "ReportEngine/src/com/report/ReportGenerator.java",
+        "sandbox_path": "/home/user/workspace/ReportEngine/src/com/report/ReportGenerator.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace ReportEngine",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'ReportEngine' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/ReportEngine org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-setting /home/user/workspace/ReportEngine org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 21",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler compliance level is set to 21"
+    },
+    {
+      "command": "check-setting /home/user/workspace/ReportEngine org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.source 21",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler source level is set to 21"
+    },
+    {
+      "command": "check-setting /home/user/workspace/ReportEngine org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.codegen.targetPlatform 21",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler target platform is set to 21"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/ReportEngine output build",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath output directory is 'build'"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/ReportEngine src/com/report/ReportGenerator.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Original source file ReportGenerator.java still exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "thunderbird_add_multiple_contacts",
+  "app": "thunderbird",
+  "task": "Add three contacts to Thunderbird's Address Book with these exact fields:\n1. Marcus Chen — email: marcus@designlab.io, company: DesignLab\n2. Priya Patel — email: priya@dataworks.net, company: DataWorks\n3. James Wilson — email: james@cloudserv.com, company: CloudServ",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Marcus Chen",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Marcus Chen exists"
+    },
+    {
+      "command": "check-contact-field Marcus Chen primary_email marcus@designlab.io",
+      "key": "match",
+      "expected": true,
+      "description": "Marcus email correct"
+    },
+    {
+      "command": "check-contact-field Marcus Chen company DesignLab",
+      "key": "match",
+      "expected": true,
+      "description": "Marcus company correct"
+    },
+    {
+      "command": "check-contact-exists Priya Patel",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Priya Patel exists"
+    },
+    {
+      "command": "check-contact-field Priya Patel primary_email priya@dataworks.net",
+      "key": "match",
+      "expected": true,
+      "description": "Priya email correct"
+    },
+    {
+      "command": "check-contact-field Priya Patel company DataWorks",
+      "key": "match",
+      "expected": true,
+      "description": "Priya company correct"
+    },
+    {
+      "command": "check-contact-exists James Wilson",
+      "key": "found",
+      "expected": true,
+      "description": "Contact James Wilson exists"
+    },
+    {
+      "command": "check-contact-field James Wilson primary_email james@cloudserv.com",
+      "key": "match",
+      "expected": true,
+      "description": "James email correct"
+    },
+    {
+      "command": "check-contact-field James Wilson company CloudServ",
+      "key": "match",
+      "expected": true,
+      "description": "James company correct"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

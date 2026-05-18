@@ -1,0 +1,10 @@
+{
+  "task_id": "cloudcompare_subsample_random",
+  "files": [
+    {
+      "filename": "dense.ply",
+      "sandbox_path": "/home/user/Documents/dense.ply",
+      "type": "ply"
+    }
+  ]
+}

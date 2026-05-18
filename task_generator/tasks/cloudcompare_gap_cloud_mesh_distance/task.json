@@ -1,0 +1,47 @@
+{
+  "id": "cloudcompare_gap_cloud_mesh_distance",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/cloud.ply is an ASCII PLY with 800 points offset above the Z=0 plane; /home/user/Documents/plane.obj is a triangulated planar square mesh on Z=0.\n\nCompute per-point cloud-to-mesh (C2M) distances from cloud.ply (compared) to plane.obj (reference mesh) with default settings, attaching the resulting per-point distances as a scalar field on cloud.ply. Export the cloud with its scalar field as an ASCII PLY at /home/user/Documents/cloud_c2m.ply. The exported file must include an extra scalar (distance) property per vertex beyond x,y,z, and the 800-point count must be preserved.",
+  "env": {
+    "files": [
+      {
+        "filename": "cloud.ply",
+        "sandbox_path": "/home/user/Documents/cloud.ply"
+      },
+      {
+        "filename": "plane.obj",
+        "sandbox_path": "/home/user/Documents/plane.obj"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/cloud_c2m.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Output exists"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/cloud_c2m.ply 800",
+      "key": "match",
+      "expected": true,
+      "description": "Point count preserved"
+    },
+    {
+      "command": "ply-header /home/user/Documents/cloud_c2m.ply",
+      "eval": "len(result['elements'][0]['properties']) >= 4",
+      "description": "Scalar field property present beyond x,y,z"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/cloud_c2m.ply ascii",
+      "key": "match",
+      "expected": true,
+      "description": "ASCII PLY"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,16 @@
+# Host-side development/runtime dependencies for GUI_synth_env.
+# Docker support uses the system `docker` CLI and does not require a Python SDK.
+
+e2b
+e2b-desktop
+anthropic
+backoff
+dashscope
+httpx
+openai
+Pillow
+python-dotenv
+requests
+boto3
+tencentcloud-sdk-python
+cos-python-sdk-v5

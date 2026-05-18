@@ -1,0 +1,57 @@
+{
+  "id": "darktable_filmic_tone_workflow",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/contrast.png into the darktable library.\n\nEnable the 'filmic rgb' module to apply filmic tone mapping, and also enable the 'tone curve' module with an adjusted curve. Apply the tag 'tone_mapped' to the image, set its star rating to 4 stars, and export it as a JPEG to /home/user/Pictures/contrast_filmic.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "contrast.png",
+        "sandbox_path": "/home/user/Pictures/contrast.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported contrast.png",
+      "key": "imported",
+      "expected": true,
+      "description": "contrast.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation contrast.png filmicrgb",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'filmicrgb' operation"
+    },
+    {
+      "command": "check-db-has-operation contrast.png tonecurve",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'tonecurve' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename contrast.png tone_mapped",
+      "key": "tagged",
+      "expected": true,
+      "description": "contrast.png is tagged with 'tone_mapped'"
+    },
+    {
+      "command": "check-image-rating-by-filename contrast.png 4",
+      "key": "matches",
+      "expected": true,
+      "description": "contrast.png rating is 4 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/contrast_filmic.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG exists at /home/user/Pictures/contrast_filmic.jpg"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

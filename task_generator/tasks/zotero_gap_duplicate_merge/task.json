@@ -1,0 +1,32 @@
+{
+  "id": "zotero_gap_duplicate_merge",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. The library currently contains two items titled 'Attention Is All You Need' — one has DOI `10.48550/arXiv.1706.03762`, the other has no DOI.\n\nMerge the two duplicate items into a single item, keeping the master with DOI `10.48550/arXiv.1706.03762` so the merged result retains that DOI. After merging, exactly one item titled 'Attention Is All You Need' must remain and it must have DOI `10.48550/arXiv.1706.03762`. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-item-exists 'Attention Is All You Need'",
+      "key": "match_count",
+      "expected": 1,
+      "description": "Exactly 1 Attention item remains"
+    },
+    {
+      "command": "check-item-field 'Attention Is All You Need' DOI 10.48550/arXiv.1706.03762",
+      "key": "match",
+      "expected": true,
+      "description": "Remaining item has the correct DOI"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

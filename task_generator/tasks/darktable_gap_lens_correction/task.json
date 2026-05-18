@@ -1,0 +1,44 @@
+{
+  "id": "darktable_gap_lens_correction",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/lens_source.jpg into the darktable library.\n\nEnable the 'lens correction' module (manual / generic correction is acceptable if no EXIF lens metadata is available). Apply the tag 'lens_corrected' to the image and export it as a JPEG to /home/user/Pictures/lens_result.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "lens_source.jpg",
+        "sandbox_path": "/home/user/Pictures/lens_source.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported lens_source.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation lens_source.jpg lens",
+      "key": "has_operation",
+      "expected": true,
+      "description": "lens correction operation applied"
+    },
+    {
+      "command": "check-image-tagged-by-filename lens_source.jpg lens_corrected",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged lens_corrected"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/lens_result.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

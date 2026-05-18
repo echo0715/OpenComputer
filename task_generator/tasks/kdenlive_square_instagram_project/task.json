@@ -1,0 +1,81 @@
+{
+  "id": "kdenlive_square_instagram_project",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/square_ig.kdenlive (1080x1080, 30fps — a square Instagram profile).\n\nImport ig1.mp4, ig2.mp4, and ig3.mp4 from /home/user/Videos/ into the project and place them sequentially on a single video track in this exact order: ig1 → ig2 → ig3. Apply the Sepia effect (`sepia`) to the middle clip (ig2.mp4) on the timeline. Save the project so the changes are persisted to /home/user/Documents/square_ig.kdenlive. The project must contain exactly 3 clips and remain at 1080x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "square_ig.kdenlive",
+        "sandbox_path": "/home/user/Documents/square_ig.kdenlive"
+      },
+      {
+        "filename": "ig1.mp4",
+        "sandbox_path": "/home/user/Videos/ig1.mp4"
+      },
+      {
+        "filename": "ig2.mp4",
+        "sandbox_path": "/home/user/Videos/ig2.mp4"
+      },
+      {
+        "filename": "ig3.mp4",
+        "sandbox_path": "/home/user/Videos/ig3.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/square_ig.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/square_ig.kdenlive 1080 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1080x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/square_ig.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/square_ig.kdenlive ig1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "ig1.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/square_ig.kdenlive ig2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "ig2.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/square_ig.kdenlive ig3.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "ig3.mp4 in project"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/square_ig.kdenlive 3",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 3 clips in project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/square_ig.kdenlive sepia",
+      "key": "exists",
+      "expected": true,
+      "description": "Sepia effect applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

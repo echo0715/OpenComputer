@@ -1,0 +1,44 @@
+{
+  "id": "darktable_gap_tone_equalizer",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/tone_eq_source.jpg into the darktable library.\n\nEnable the 'tone equalizer' module with the darker bands set to positive EV (shadows lifted) and the brightest bands set to negative EV (highlights compressed). Apply the tag 'tone_eq' to the image and export it as a JPEG to /home/user/Pictures/tone_eq_result.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "tone_eq_source.jpg",
+        "sandbox_path": "/home/user/Pictures/tone_eq_source.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported tone_eq_source.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation tone_eq_source.jpg toneequal",
+      "key": "has_operation",
+      "expected": true,
+      "description": "tone equalizer operation applied"
+    },
+    {
+      "command": "check-image-tagged-by-filename tone_eq_source.jpg tone_eq",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged tone_eq"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/tone_eq_result.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

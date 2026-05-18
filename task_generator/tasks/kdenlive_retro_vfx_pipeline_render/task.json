@@ -1,0 +1,131 @@
+{
+  "id": "kdenlive_retro_vfx_pipeline_render",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/retro_project.kdenlive (1440x1080, 25fps \u2014 a 4:3 PAL HD profile).\n\nImport four video clips from /home/user/Videos/: reel_a.mp4, reel_b.mp4, reel_c.mp4, and reel_d.mp4. Arrange reel_a.mp4, reel_b.mp4, reel_c.mp4, and reel_d.mp4 sequentially on a video track in that order. Create a slight overlap between reel_a and reel_b and add a Dissolve (`luma`) transition bridging that overlap. Create a slight overlap between reel_c and reel_d and add another Dissolve (`luma`) transition bridging that second overlap. Apply the following retro effect stack to the project: the Posterize effect (`frei0r.posterize`) to the reel_a.mp4 clip, the Pixelate effect (`frei0r.pixeliz0r`) to the reel_b.mp4 clip, and the Vignette effect (`frei0r.vignette`) to the reel_c.mp4 clip. Also apply a Volume effect (`volume`) to any audio track in the project. Save the project so the changes are persisted to /home/user/Documents/retro_project.kdenlive, then render the project to /home/user/Documents/retro_out.mp4 using the MP4 / H.264 preset. The project must remain at 1440x1080, 25fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "retro_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/retro_project.kdenlive"
+      },
+      {
+        "filename": "reel_a.mp4",
+        "sandbox_path": "/home/user/Videos/reel_a.mp4"
+      },
+      {
+        "filename": "reel_b.mp4",
+        "sandbox_path": "/home/user/Videos/reel_b.mp4"
+      },
+      {
+        "filename": "reel_c.mp4",
+        "sandbox_path": "/home/user/Videos/reel_c.mp4"
+      },
+      {
+        "filename": "reel_d.mp4",
+        "sandbox_path": "/home/user/Videos/reel_d.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/retro_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/retro_project.kdenlive 1440 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 1440x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/retro_project.kdenlive 25",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate is 25fps"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/retro_project.kdenlive 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 clips in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/retro_project.kdenlive reel_a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "reel_a.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/retro_project.kdenlive reel_b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "reel_b.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/retro_project.kdenlive reel_c.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "reel_c.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/retro_project.kdenlive reel_d.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "reel_d.mp4 imported"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/retro_project.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "Dissolve (luma) transition exists"
+    },
+    {
+      "command": "transitions /home/user/Documents/retro_project.kdenlive",
+      "eval": "sum(1 for t in result if t.get('mlt_service') == 'luma') >= 2",
+      "description": "At least 2 luma dissolve transitions"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/retro_project.kdenlive frei0r.posterize",
+      "key": "exists",
+      "expected": true,
+      "description": "Posterize effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/retro_project.kdenlive frei0r.pixeliz0r",
+      "key": "exists",
+      "expected": true,
+      "description": "Pixelate effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/retro_project.kdenlive frei0r.vignette",
+      "key": "exists",
+      "expected": true,
+      "description": "Vignette effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/retro_project.kdenlive volume",
+      "key": "exists",
+      "expected": true,
+      "description": "Volume effect applied to audio"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/retro_out.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Rendered output file exists"
+    },
+    {
+      "command": "check-render-output /home/user/Documents/retro_out.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Rendered output is valid media"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

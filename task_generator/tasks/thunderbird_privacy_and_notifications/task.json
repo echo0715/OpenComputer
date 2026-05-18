@@ -1,0 +1,45 @@
+{
+  "id": "thunderbird_privacy_and_notifications",
+  "app": "thunderbird",
+  "task": "Configure Thunderbird so the following four privacy/notification preferences are persisted (do NOT compose any email):\n\n1. `mailnews.message_display.disable_remote_image` = `true` (remote images/content blocked by default).\n2. `mail.biff.show_alert` = `false` (new-mail alert popup disabled).\n3. `mail.biff.play_sound` = `false` (new-mail sound disabled).\n4. `toolkit.telemetry.enabled` = `false` (telemetry/data reporting disabled).",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mailnews.message_display.disable_remote_image true",
+      "key": "match",
+      "expected": true,
+      "description": "Remote images blocked"
+    },
+    {
+      "command": "check-pref-value mail.biff.show_alert false",
+      "key": "match",
+      "expected": true,
+      "description": "New-mail alert popup disabled"
+    },
+    {
+      "command": "check-pref-value mail.biff.play_sound false",
+      "key": "match",
+      "expected": true,
+      "description": "New-mail sound disabled"
+    },
+    {
+      "command": "check-pref-value toolkit.telemetry.enabled false",
+      "key": "match",
+      "expected": true,
+      "description": "Telemetry disabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

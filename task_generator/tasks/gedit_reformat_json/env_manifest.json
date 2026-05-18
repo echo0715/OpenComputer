@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_reformat_json",
+  "files": [
+    {"filename": "data.json", "sandbox_path": "/home/user/Documents/data.json", "type": "json"}
+  ]
+}

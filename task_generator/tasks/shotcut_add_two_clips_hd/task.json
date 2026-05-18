@@ -1,0 +1,59 @@
+{
+  "id": "shotcut_add_two_clips_hd",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/my_project.mlt — a 1920x1080, 30 fps project. Two short video files exist at /home/user/Videos/clip_a.mp4 and /home/user/Videos/clip_b.mp4.\n\nPlace clip_a.mp4 and clip_b.mp4 on the V1 video track in that order (clip_a.mp4 first, then clip_b.mp4 immediately after, both on the same track), and save the project. The saved /home/user/Documents/my_project.mlt must keep its 1920x1080 30 fps profile and reference both clips.",
+  "env": {
+    "files": [
+      {
+        "filename": "my_project.mlt",
+        "sandbox_path": "/home/user/Documents/my_project.mlt"
+      },
+      {
+        "filename": "clip_a.mp4",
+        "sandbox_path": "/home/user/Videos/clip_a.mp4"
+      },
+      {
+        "filename": "clip_b.mp4",
+        "sandbox_path": "/home/user/Videos/clip_b.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/my_project.mlt",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/my_project.mlt"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/my_project.mlt 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/my_project.mlt 30",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/my_project.mlt clip_a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip clip_a.mp4 is referenced in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/my_project.mlt clip_b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip clip_b.mp4 is referenced in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

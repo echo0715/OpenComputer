@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_math_quiz",
+  "files": [
+    {
+      "filename": "quiz.html",
+      "sandbox_path": "/home/user/Documents/quiz.html",
+      "type": "html"
+    }
+  ]
+}

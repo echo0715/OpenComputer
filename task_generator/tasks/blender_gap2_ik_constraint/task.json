@@ -1,0 +1,48 @@
+{
+  "id": "blender_gap2_ik_constraint",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/ik_scene.blend, delete the default Cube and add an Armature object named 'IKRig' at the origin containing these bones:\n- 'Upper' from (0,0,0) to (0,0,1)\n- 'Lower' from (0,0,1) to (0,0,2), parented to 'Upper' and connected\n- 'IKTarget' (e.g., from (0.3,0,2) to (0.3,0,2.3)), NOT connected to the chain\n\nOn the 'Lower' pose bone, add an Inverse Kinematics constraint with Target = 'IKRig', Bone subtarget = 'IKTarget', and Chain Length = 2. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "ik_scene.blend",
+        "sandbox_path": "/home/user/Documents/ik_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/ik_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/ik_scene.blend IKRig",
+      "key": "exists",
+      "expected": true,
+      "description": "IKRig exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/ik_scene.blend IKRig ARMATURE",
+      "key": "match",
+      "expected": true,
+      "description": "IKRig is ARMATURE"
+    },
+    {
+      "command": "armature-bones /home/user/Documents/ik_scene.blend IKRig",
+      "eval": "{b['name'] for b in result.get('bones',[])} >= {'Upper','Lower','IKTarget'}",
+      "description": "Three bones present"
+    },
+    {
+      "command": "pose-constraints /home/user/Documents/ik_scene.blend IKRig Lower",
+      "eval": "any(c.get('type')=='IK' and c.get('subtarget')=='IKTarget' and c.get('chain_count')==2 for c in result.get('constraints',[]))",
+      "description": "Lower has IK constraint with subtarget=IKTarget, chain_count=2"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

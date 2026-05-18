@@ -1,0 +1,6 @@
+{
+  "task_id": "vscode_yaml_ci_pipeline",
+  "files": [
+    {"filename": "ci.yml", "sandbox_path": "/home/user/projects/api-svc/.github/workflows/ci.yml", "type": "yaml"}
+  ]
+}

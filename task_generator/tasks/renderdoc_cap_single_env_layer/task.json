@@ -1,0 +1,55 @@
+{
+  "id": "renderdoc_cap_single_env_layer",
+  "app": "renderdoc",
+  "task": "Create a minimal RenderDoc capture-settings file at /home/user/captures/layer_only.cap that injects exactly one environment variable to preload the Vulkan capture layer.\n\nThe file must be valid JSON with a top-level \"rdocConfigData\": 1 marker and a nested \"settings\" object containing:\n- executable = \"/usr/local/games/vk_only\"\n- workingDir = \"/home/user\"\n- commandLine = \"\"  (empty string)\n- environment = a JSON array with EXACTLY ONE entry, the object {\"name\": \"VK_INSTANCE_LAYERS\", \"value\": \"VK_LAYER_RENDERDOC_Capture\", \"separator\": \"Platform\", \"mod\": \"Replace\"}\n- options = {\"APIValidation\": false, \"CaptureCallstacks\": false, \"HookIntoChildren\": false, \"CaptureAllCmdLists\": false, \"DebugOutputMute\": false, \"RefAllResources\": false, \"VerifyBufferAccess\": false}\n- autoStart = false\n- queueFrameCap = 0\n- numQueuedFrames = 0",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-cap-executable /home/user/captures/layer_only.cap /usr/local/games/vk_only",
+      "key": "match",
+      "expected": true,
+      "description": "executable"
+    },
+    {
+      "command": "check-cap-env /home/user/captures/layer_only.cap VK_INSTANCE_LAYERS",
+      "key": "present",
+      "expected": true,
+      "description": "VK_INSTANCE_LAYERS env present"
+    },
+    {
+      "command": "cap-parse /home/user/captures/layer_only.cap",
+      "eval": "isinstance(result.get('environment'), list) and len(result['environment']) == 1",
+      "description": "environment has exactly 1 entry"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/layer_only.cap APIValidation false",
+      "key": "match",
+      "expected": true,
+      "description": "APIValidation false"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/layer_only.cap HookIntoChildren false",
+      "key": "match",
+      "expected": true,
+      "description": "HookIntoChildren false"
+    },
+    {
+      "command": "cap-parse /home/user/captures/layer_only.cap",
+      "eval": "result.get('autoStart') is False",
+      "description": "autoStart false"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

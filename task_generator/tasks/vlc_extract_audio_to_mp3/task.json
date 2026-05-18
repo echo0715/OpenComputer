@@ -1,0 +1,51 @@
+{
+  "id": "vlc_extract_audio_to_mp3",
+  "app": "vlc",
+  "task": "VLC is already running. Extract the audio track of /home/user/Videos/source_audio.mp4 into an MP3 file at /home/user/Music/extracted.mp3 using the 'Audio - MP3' profile (audio-only).\n\nThe resulting /home/user/Music/extracted.mp3 must be a valid MP3 file containing an audio stream and NO video stream. Create /home/user/Music if it does not yet exist.",
+  "env": {
+    "files": [
+      {
+        "filename": "source_audio.mp4",
+        "sandbox_path": "/home/user/Videos/source_audio.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/source_audio.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source source_audio.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Music/extracted.mp3",
+      "key": "exists",
+      "expected": true,
+      "description": "Converted extracted.mp3 exists"
+    },
+    {
+      "command": "check-media-format /home/user/Music/extracted.mp3 mp3",
+      "key": "match",
+      "expected": true,
+      "description": "extracted.mp3 format is mp3"
+    },
+    {
+      "command": "check-media-has-audio /home/user/Music/extracted.mp3",
+      "key": "has_audio",
+      "expected": true,
+      "description": "extracted.mp3 contains an audio stream"
+    },
+    {
+      "command": "check-media-has-video /home/user/Music/extracted.mp3",
+      "key": "has_video",
+      "expected": false,
+      "description": "extracted.mp3 does NOT contain a video stream"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

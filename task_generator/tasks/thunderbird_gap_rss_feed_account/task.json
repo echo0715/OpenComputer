@@ -1,0 +1,39 @@
+{
+  "id": "thunderbird_gap_rss_feed_account",
+  "app": "thunderbird",
+  "task": "Add a new RSS/Atom (Feeds) account to Thunderbird named exactly `Tech News Feeds`, subscribed to these three feeds with the destination folder set to the account root:\n- https://feeds.bbci.co.uk/news/technology/rss.xml\n- https://www.theverge.com/rss/index.xml\n- https://hnrss.org/frontpage\n\nAlso create a regular subfolder (not a feed folder) named exactly `Headlines` under the `Tech News Feeds` account.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-feed-subscription bbci.co.uk",
+      "key": "found",
+      "expected": true,
+      "description": "BBC technology feed is subscribed"
+    },
+    {
+      "command": "check-feed-subscription theverge.com",
+      "key": "found",
+      "expected": true,
+      "description": "The Verge feed is subscribed"
+    },
+    {
+      "command": "check-feed-subscription hnrss.org",
+      "key": "found",
+      "expected": true,
+      "description": "Hacker News feed is subscribed"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

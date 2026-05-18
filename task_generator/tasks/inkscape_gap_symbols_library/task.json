@@ -1,0 +1,68 @@
+{
+  "id": "inkscape_gap_symbols_library",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/symbols.svg (currently an empty canvas). Build a reusable symbol library:\n\n1. Define two <symbol> elements inside <defs>:\n   - symbol id='sGear' \u2014 an 8-tooth cog / gear shape (approximation is fine).\n   - symbol id='sStar' \u2014 a 5-point star.\n2. Instantiate each symbol THREE times using <use> elements, at different positions with different scales. So the final document must contain at least six <use> elements, three referencing #sGear and three referencing #sStar.\n\nSave /home/user/Documents/symbols.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "symbols.svg",
+        "sandbox_path": "/home/user/Documents/symbols.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/symbols.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/symbols.svg sGear",
+      "key": "exists",
+      "expected": true,
+      "description": "Gear symbol defined"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/symbols.svg sStar",
+      "key": "exists",
+      "expected": true,
+      "description": "Star symbol defined"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/symbols.svg symbol",
+      "key": "contains",
+      "expected": true,
+      "description": "symbol elements exist"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/symbols.svg sGear",
+      "key": "contains",
+      "expected": true,
+      "description": "Gear referenced"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/symbols.svg sStar",
+      "key": "contains",
+      "expected": true,
+      "description": "Star referenced"
+    },
+    {
+      "command": "elements /home/user/Documents/symbols.svg",
+      "eval": "sum(1 for e in result if e.get('tag') == 'use' and 'sGear' in (e.get('href') or e.get('xlink:href') or '')) >= 3",
+      "expected": true,
+      "description": "At least 3 uses of sGear"
+    },
+    {
+      "command": "elements /home/user/Documents/symbols.svg",
+      "eval": "sum(1 for e in result if e.get('tag') == 'use' and 'sStar' in (e.get('href') or e.get('xlink:href') or '')) >= 3",
+      "expected": true,
+      "description": "At least 3 uses of sStar"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

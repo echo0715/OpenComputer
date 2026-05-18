@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://multisignal"]
+
+[ext_resource type="Script" path="res://scripts/menu_controller.gd" id="1_mc"]
+
+[node name="MenuController" type="Control"]
+script = ExtResource("1_mc")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+
+[node name="PlayButton" type="Button" parent="Menu"]
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="Menu"]
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="Menu"]
+text = "Quit"

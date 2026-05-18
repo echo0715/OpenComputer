@@ -1,0 +1,33 @@
+{
+  "id": "musescore3_set_autosave_interval",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with the placeholder file /home/user/Documents/placeholder.mscz. You do not need to edit the placeholder score; this task is only about MuseScore 3 application preferences.\n\nEnable Auto Save and set the Auto Save interval to exactly 7 minutes, so that `~/.config/MuseScore/MuseScore3.ini` ends up with `autoSave = true` and `autoSaveInterval = 7`.",
+  "env": {
+    "files": [
+      {
+        "filename": "placeholder.mscz",
+        "sandbox_path": "/home/user/Documents/placeholder.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-preference application.autoSave true",
+      "key": "match",
+      "expected": true,
+      "description": "Auto Save is enabled in MuseScore3.ini"
+    },
+    {
+      "command": "check-preference application.autoSaveInterval 7",
+      "key": "match",
+      "expected": true,
+      "description": "Auto Save interval is set to 7 minutes"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

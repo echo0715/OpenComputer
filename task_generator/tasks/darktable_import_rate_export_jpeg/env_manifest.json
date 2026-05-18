@@ -1,0 +1,6 @@
+{
+  "task_id": "darktable_import_rate_export_jpeg",
+  "files": [
+    {"filename": "sunset.png", "sandbox_path": "/home/user/Pictures/sunset.png", "type": "png"}
+  ]
+}

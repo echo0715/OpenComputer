@@ -1,0 +1,82 @@
+{
+  "id": "vscode_rust_cargo_workspace",
+  "app": "vscode",
+  "task": "Create a Rust project at `/home/user/projects/rust-cli` with the following files:\n\n- `Cargo.toml`:\n  ```toml\n  [package]\n  name = \"rust-cli\"\n  version = \"0.1.0\"\n  edition = \"2021\"\n\n  [dependencies]\n  ```\n- `src/main.rs`:\n  ```rust\n  mod lib;\n  use lib::greet;\n  fn main() {\n      println!(\"{}\", greet(\"world\"));\n  }\n  ```\n- `src/lib.rs`:\n  ```rust\n  pub fn greet(name: &str) -> String {\n      format!(\"Hello, {}!\", name)\n  }\n  ```\n- `.vscode/settings.json`:\n  - `rust-analyzer.checkOnSave.command`: `clippy`\n  - `editor.formatOnSave`: `true`\n- `.vscode/tasks.json` — two shell tasks:\n  - `Cargo Build` — runs `cargo build`\n  - `Cargo Test` — runs `cargo test`\n- `.vscode/extensions.json` — recommends `rust-lang.rust-analyzer`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/rust-cli/Cargo.toml",
+      "key": "exists",
+      "expected": true,
+      "description": "Cargo.toml exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/rust-cli/Cargo.toml rust-cli",
+      "key": "contains",
+      "expected": true,
+      "description": "Cargo.toml has package name"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/rust-cli/src/main.rs",
+      "key": "exists",
+      "expected": true,
+      "description": "src/main.rs exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/rust-cli/src/main.rs fn main",
+      "key": "contains",
+      "expected": true,
+      "description": "main.rs has fn main"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/rust-cli/src/lib.rs",
+      "key": "exists",
+      "expected": true,
+      "description": "src/lib.rs exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/rust-cli/src/lib.rs fn greet",
+      "key": "contains",
+      "expected": true,
+      "description": "lib.rs defines greet"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/rust-cli rust-analyzer.checkOnSave.command clippy",
+      "key": "match",
+      "expected": true,
+      "description": "rust-analyzer set to clippy"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/rust-cli editor.formatOnSave true",
+      "key": "match",
+      "expected": true,
+      "description": "formatOnSave true"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/rust-cli Cargo Build",
+      "key": "exists",
+      "expected": true,
+      "description": "Cargo Build task exists"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/rust-cli Cargo Test",
+      "key": "exists",
+      "expected": true,
+      "description": "Cargo Test task exists"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/rust-cli rust-lang.rust-analyzer",
+      "key": "recommended",
+      "expected": true,
+      "description": "rust-analyzer extension recommended"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "inkscape_multipage_diagram",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/diagram.svg — a blank 1024x768 document.\n\nBuild a layered diagram in /home/user/Documents/diagram.svg with these exact contents:\n\n- Layer named 'Header' containing one text element with the exact text: Architecture Diagram.\n- Layer named 'Content' containing three rectangles and two circles (positions unimportant — all five shapes must be present on this layer).\n- Layer named 'Footer' containing one text element with the exact text: Version 1.0.\n\nThe page must remain 1024x768. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "diagram.svg",
+        "sandbox_path": "/home/user/Documents/diagram.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/diagram.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File diagram.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/diagram.svg 1024 768",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 1024x768 pixels"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/diagram.svg Header",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Header' exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/diagram.svg Content",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Content' exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/diagram.svg Footer",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Footer' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/diagram.svg 'Architecture Diagram'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Architecture Diagram' exists in the document"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/diagram.svg 'Version 1.0'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Version 1.0' exists in the document"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/diagram.svg rect",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains rectangle elements"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/diagram.svg circle",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains circle elements"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

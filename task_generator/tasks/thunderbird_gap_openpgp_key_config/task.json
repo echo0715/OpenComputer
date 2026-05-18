@@ -1,0 +1,43 @@
+{
+  "id": "thunderbird_gap_openpgp_key_config",
+  "app": "thunderbird",
+  "task": "Configure OpenPGP for Thunderbird's default identity (`id1`) so that:\n- The secret key from `/home/user/Documents/test_openpgp_secret.asc` is imported into Thunderbird's OpenPGP key store.\n- That imported key is selected as the personal OpenPGP key for `id1` (`mail.identity.id1.openpgp_key_id` is populated with a non-empty value).\n- `mail.identity.id1.sign_mail` = `true` (digital signature added by default).\n- `mail.identity.id1.encryptionpolicy` = `2` (Require encryption).",
+  "env": {
+    "files": [
+      {
+        "filename": "test_openpgp_secret.asc",
+        "sandbox_path": "/home/user/Documents/test_openpgp_secret.asc"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.identity.id1.sign_mail true",
+      "key": "match",
+      "expected": true,
+      "description": "Default identity signs by default"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.encryptionpolicy 2",
+      "key": "match",
+      "expected": true,
+      "description": "Default identity requires encryption"
+    },
+    {
+      "command": "check-openpgp-configured id1",
+      "key": "configured",
+      "expected": true,
+      "description": "OpenPGP key id is set for default identity"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

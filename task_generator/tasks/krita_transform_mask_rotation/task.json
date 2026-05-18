@@ -1,0 +1,44 @@
+{
+  "id": "krita_transform_mask_rotation",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/transform.kra loaded — a single paint layer named 'Subject'.\n\nAdd a transform mask named exactly 'Rotate15' as a child of the 'Subject' layer, with a rotation of roughly 15 degrees applied through the mask.\n\nSave the file in place at /home/user/Documents/transform.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "transform.kra",
+        "sandbox_path": "/home/user/Documents/transform.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/transform.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "transform.kra still exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/transform.kra Subject",
+      "key": "exists",
+      "expected": true,
+      "description": "Subject layer preserved"
+    },
+    {
+      "command": "check-mask-of /home/user/Documents/transform.kra Subject Rotate15",
+      "key": "exists",
+      "expected": true,
+      "description": "Rotate15 mask is a child of Subject"
+    },
+    {
+      "command": "check-layer-node-type /home/user/Documents/transform.kra Rotate15 transformmask",
+      "key": "match",
+      "expected": true,
+      "description": "Rotate15 node type is transformmask"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

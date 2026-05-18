@@ -1,0 +1,57 @@
+{
+  "id": "renderdoc_gap_texture_mip_selection",
+  "app": "renderdoc",
+  "task": "Reconfigure the Texture Viewer in /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document) so it defaults to inspecting mip level 2 of packed integer textures. Apply all of the following edits in a single save:\n\n1. Set `\"TextureViewer_MipLevel\"` to the integer `2`.\n2. Set `\"TextureViewer_PerTexYFlip\"` to `true`.\n3. Set `\"TextureViewer_HexDisplay\"` to `true` (raw integer display).\n4. Set `\"TextureViewer_ResetRange\"` to `false` (remember manual range tweaks).\n\nThe top-level `\"rdocConfigData\": 1` marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting TextureViewer_MipLevel 2",
+      "key": "match",
+      "expected": true,
+      "description": "Mip level is 2"
+    },
+    {
+      "command": "check-setting TextureViewer_PerTexYFlip true",
+      "key": "match",
+      "expected": true,
+      "description": "Per-texture Y-flip is true"
+    },
+    {
+      "command": "check-setting TextureViewer_HexDisplay true",
+      "key": "match",
+      "expected": true,
+      "description": "Hex display is true"
+    },
+    {
+      "command": "check-setting TextureViewer_ResetRange false",
+      "key": "match",
+      "expected": true,
+      "description": "ResetRange is false"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "id": "obs_gaming_stream_layout",
+  "app": "obs",
+  "task": "Build an OBS Studio gaming-stream layout. The final collection must contain exactly 3 scenes (no default 'Scene' left over) with these exact names: 'Gaming', 'Just Chatting', 'Starting Soon'.\n\nSources required per scene, with these exact names and types:\n- 'Gaming': Display Capture named 'Game'; Video Capture Device named 'Webcam'; Text (FreeType 2) named 'Stream Title' (any text)\n- 'Just Chatting': Video Capture Device named 'Main Camera'; Image named 'Chat Frame' (file /home/user/Pictures/frame.png)\n- 'Starting Soon': Image named 'Start Screen' (file /home/user/Pictures/starting.png); Color Source named 'Backdrop'\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "frame.png",
+        "sandbox_path": "/home/user/Pictures/frame.png"
+      },
+      {
+        "filename": "starting.png",
+        "sandbox_path": "/home/user/Pictures/starting.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Gaming",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Gaming' exists"
+    },
+    {
+      "command": "check-scene-exists 'Just Chatting'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Just Chatting' exists"
+    },
+    {
+      "command": "check-scene-exists 'Starting Soon'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Starting Soon' exists"
+    },
+    {
+      "command": "check-scene-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 3 scenes in the collection"
+    },
+    {
+      "command": "check-source-in-scene Game Gaming",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Game' exists in 'Gaming' scene"
+    },
+    {
+      "command": "check-source-in-scene Webcam Gaming",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Webcam' exists in 'Gaming' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Stream Title' Gaming",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Stream Title' exists in 'Gaming' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Main Camera' 'Just Chatting'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Main Camera' exists in 'Just Chatting' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Chat Frame' 'Just Chatting'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Chat Frame' exists in 'Just Chatting' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Start Screen' 'Starting Soon'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Start Screen' exists in 'Starting Soon' scene"
+    },
+    {
+      "command": "check-source-in-scene Backdrop 'Starting Soon'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Backdrop' exists in 'Starting Soon' scene"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

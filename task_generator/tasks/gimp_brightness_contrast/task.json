@@ -1,0 +1,39 @@
+{
+  "id": "gimp_brightness_contrast",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/dark_photo.png in GIMP — a 400x300 image where every pixel is approximately RGB (30,30,30).\n\nIncrease the brightness by +80 (so each pixel becomes approximately RGB (110,110,110)) and export the brightened image as PNG to /home/user/Documents/bright_photo.png.",
+  "env": {
+    "files": [
+      {
+        "filename": "dark_photo.png",
+        "sandbox_path": "/home/user/Documents/dark_photo.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/bright_photo.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported brightened PNG file exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/bright_photo.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Output file is in PNG format"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/bright_photo.png 200 150 110 110 110 25",
+      "key": "match",
+      "expected": true,
+      "description": "Center pixel is brightened from ~30 to ~110 (brightness +80)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_full_account_setup",
+  "app": "thunderbird",
+  "task": "Configure Thunderbird's default identity and create one draft:\n\n1. Set display name to `Morgan Rivera` (pref `mail.identity.id1.fullName`).\n2. Set organization to `Rivera Consulting LLC` (pref `mail.identity.id1.organization`).\n3. Create a draft (do NOT send) with:\n   - To: client@bigcorp.com\n   - Subject: Consulting Engagement Proposal\n   - Body: Thank you for considering Rivera Consulting for your digital transformation project. Our team of 15 consultants specializes in cloud migration and DevOps practices.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.identity.id1.fullName Morgan Rivera",
+      "key": "match",
+      "expected": true,
+      "description": "Display name is Morgan Rivera"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.organization Rivera Consulting LLC",
+      "key": "match",
+      "expected": true,
+      "description": "Organization is Rivera Consulting LLC"
+    },
+    {
+      "command": "check-draft-exists Consulting Engagement Proposal",
+      "key": "found",
+      "expected": true,
+      "description": "Draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Consulting Engagement client@bigcorp.com",
+      "key": "match",
+      "expected": true,
+      "description": "Draft to client@bigcorp.com"
+    },
+    {
+      "command": "check-draft-content Consulting Engagement digital transformation",
+      "key": "found",
+      "expected": true,
+      "description": "Draft mentions digital transformation"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

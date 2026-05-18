@@ -1,0 +1,70 @@
+{
+  "id": "obsidian_toggle_core_features",
+  "app": "obsidian",
+  "task": "In the Obsidian vault at /home/user/Documents/ToggleVault, configure these core plugins and editor settings:\n\nCore plugins:\n- Disable `graph` ('Graph view')\n- Disable `tag-pane` ('Tag pane')\n- Enable `outgoing-link` ('Outgoing links')\n- Enable `page-preview` ('Page preview')\n- Disable `starred` ('Starred')\n\nEditor settings:\n- Enable `spellcheck` ('Spell check')\n- Enable `showLineNumber` ('Show line number')\n\nThen create 'Changes.md' in the vault root with body:\n\n```\n# Changes Made\n## Plugins Disabled\n- Graph view\n- Tag pane\n- Starred\n## Plugins Enabled\n- Outgoing links\n- Page preview\n## Editor Settings\n- Spell check: on\n- Line numbers: on\n#changelog\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-plugin-enabled /home/user/Documents/ToggleVault graph core",
+      "key": "enabled",
+      "expected": false,
+      "description": "Graph view disabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/ToggleVault tag-pane core",
+      "key": "enabled",
+      "expected": false,
+      "description": "Tag pane disabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/ToggleVault outgoing-link core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Outgoing links enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/ToggleVault page-preview core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Page preview enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/ToggleVault starred core",
+      "key": "enabled",
+      "expected": false,
+      "description": "Starred disabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/ToggleVault spellcheck true",
+      "key": "match",
+      "expected": true,
+      "description": "Spellcheck enabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/ToggleVault showLineNumber true",
+      "key": "match",
+      "expected": true,
+      "description": "Show line number enabled"
+    },
+    {
+      "command": "check-note-exists /home/user/Documents/ToggleVault Changes",
+      "key": "exists",
+      "expected": true,
+      "description": "Changes note exists"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/ToggleVault Changes changelog",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Changes has #changelog tag"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

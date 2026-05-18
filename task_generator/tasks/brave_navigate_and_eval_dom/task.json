@@ -1,0 +1,46 @@
+{
+  "id": "brave_navigate_and_eval_dom",
+  "app": "brave",
+  "task": "In Brave, in the first tab visit https://httpbin.org/html and then navigate that same tab to https://httpbin.org/forms/post (a pizza order form). Then open a second tab to https://example.com and bookmark it.\n\nWhen done, two tabs must be open: one showing https://httpbin.org/forms/post and one showing https://example.com. The example.com tab must contain an `h1` element, and https://httpbin.org/html must appear in browsing history.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open httpbin.org/forms/post",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/forms/post is open"
+    },
+    {
+      "command": "check-tab-open example.com",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with example.com is open"
+    },
+    {
+      "command": "check-element-exists \"h1\" 1",
+      "key": "exists",
+      "expected": true,
+      "description": "example.com page has an h1 element"
+    },
+    {
+      "command": "check-bookmark example.com",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for example.com exists"
+    },
+    {
+      "command": "check-url-visited httpbin.org/html",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/html was visited in browsing history"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

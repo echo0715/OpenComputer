@@ -1,0 +1,152 @@
+{
+  "id": "blender_complex_product_shot",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/product_shot.blend (which starts empty), assemble a product-shot scene with these objects, modifiers, materials, and collections:\n\nObjects:\n- Cylinder named 'Bottle' with a Subdivision Surface modifier and a Bevel modifier\n- Plane named 'Stage' with a Subdivision Surface modifier\n- Camera named 'ProductCam', set as the scene's active camera\n- Point light named 'KeyLight'\n- Point light named 'RimLight'\n\nMaterials: 'BottleMat' assigned to 'Bottle', 'StageMat' assigned to 'Stage'.\n\nCollections (siblings at scene root): 'ProductSet' containing 'Bottle' and 'Stage'; 'Lighting' containing 'KeyLight' and 'RimLight'.\n\nSet the render engine to Cycles, the resolution to 2560x1440, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "product_shot.blend",
+        "sandbox_path": "/home/user/Documents/product_shot.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/product_shot.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/product_shot.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/product_shot.blend Bottle",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Bottle' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/product_shot.blend Bottle MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Bottle' is MESH"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/product_shot.blend Bottle SUBSURF",
+      "key": "exists",
+      "expected": true,
+      "description": "'Bottle' has SUBSURF modifier"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/product_shot.blend Bottle BEVEL",
+      "key": "exists",
+      "expected": true,
+      "description": "'Bottle' has BEVEL modifier"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/product_shot.blend Stage",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Stage' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/product_shot.blend Stage MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Stage' is MESH"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/product_shot.blend Stage SUBSURF",
+      "key": "exists",
+      "expected": true,
+      "description": "'Stage' has SUBSURF modifier"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/product_shot.blend ProductCam",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'ProductCam' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/product_shot.blend ProductCam CAMERA",
+      "key": "match",
+      "expected": true,
+      "description": "'ProductCam' is CAMERA"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/product_shot.blend KeyLight",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'KeyLight' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/product_shot.blend KeyLight LIGHT",
+      "key": "match",
+      "expected": true,
+      "description": "'KeyLight' is LIGHT"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/product_shot.blend RimLight",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'RimLight' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/product_shot.blend RimLight LIGHT",
+      "key": "match",
+      "expected": true,
+      "description": "'RimLight' is LIGHT"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/product_shot.blend BottleMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'BottleMat' exists"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/product_shot.blend StageMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'StageMat' exists"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/product_shot.blend ProductSet",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'ProductSet' exists"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/product_shot.blend Lighting",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Lighting' exists"
+    },
+    {
+      "command": "scene-info /home/user/Documents/product_shot.blend",
+      "eval": "result.get('active_camera') == 'ProductCam'",
+      "description": "Active camera is 'ProductCam'"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/product_shot.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is Cycles"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/product_shot.blend 2560 1440",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 2560x1440"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

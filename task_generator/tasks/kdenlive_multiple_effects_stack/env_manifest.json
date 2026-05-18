@@ -1,0 +1,6 @@
+{
+  "task_id": "kdenlive_multiple_effects_stack",
+  "files": [
+    {"filename": "setup_clips.sh", "sandbox_path": "/home/user/setup_clips.sh", "type": "sh"}
+  ]
+}

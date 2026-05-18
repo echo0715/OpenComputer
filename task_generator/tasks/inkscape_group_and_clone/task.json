@@ -1,0 +1,57 @@
+{
+  "id": "inkscape_group_and_clone",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/shapes.svg — an 800x400 document containing three horizontally arranged rectangles with ids `box1`, `box2`, `box3`.\n\nEdit /home/user/Documents/shapes.svg so that:\n- All three rectangles `box1`, `box2`, `box3` are preserved as children of a single `<g>` group element.\n- A new text element exists anywhere with the exact text: Grouped Boxes.\n\nSave the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "shapes.svg",
+        "sandbox_path": "/home/user/Documents/shapes.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/shapes.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File shapes.svg exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/shapes.svg box1",
+      "key": "exists",
+      "expected": true,
+      "description": "Element box1 still exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/shapes.svg box2",
+      "key": "exists",
+      "expected": true,
+      "description": "Element box2 still exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/shapes.svg box3",
+      "key": "exists",
+      "expected": true,
+      "description": "Element box3 still exists"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/shapes.svg g",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains at least one group element"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/shapes.svg 'Grouped Boxes'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Grouped Boxes' exists in the document"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

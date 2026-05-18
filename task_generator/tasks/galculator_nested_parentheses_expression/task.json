@@ -1,0 +1,28 @@
+{
+  "id": "galculator_nested_parentheses_expression",
+  "app": "galculator",
+  "task": "In galculator, switch to Scientific mode (so parenthesis keys are available) and evaluate the nested expression exactly as written, with parentheses enforcing grouping:\n\n    ((7 + 3) * (4 + 6)) - ((9 - 2) * (3 + 4))\n\nComputed left-to-right this is `(10 * 10) - (7 * 7)` = `100 - 49` = `51`. The final display must show exactly `51`. Leave galculator open.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-running",
+      "key": "running",
+      "expected": true,
+      "description": "galculator is running"
+    },
+    {
+      "command": "check-display-value 51",
+      "key": "match",
+      "expected": true,
+      "description": "Display shows 51 (nested expression result)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

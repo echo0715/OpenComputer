@@ -1,0 +1,44 @@
+{
+  "id": "krita_onion_skinning_enable",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/walk_cycle.kra loaded — an animated paint layer named 'Character' with three existing keyframes at frames 0, 6, and 12.\n\nEnable onion skinning on the 'Character' layer; the 'Character' layer must remain in the timeline.\n\nSave the file in place at /home/user/Documents/walk_cycle.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "walk_cycle.kra",
+        "sandbox_path": "/home/user/Documents/walk_cycle.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/walk_cycle.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "walk_cycle.kra still exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/walk_cycle.kra Character",
+      "key": "exists",
+      "expected": true,
+      "description": "Character layer preserved"
+    },
+    {
+      "command": "check-layer-animated /home/user/Documents/walk_cycle.kra Character",
+      "key": "animated",
+      "expected": true,
+      "description": "Character layer still in timeline"
+    },
+    {
+      "command": "check-layer-onionskin /home/user/Documents/walk_cycle.kra Character",
+      "key": "onionskin",
+      "expected": true,
+      "description": "Onion skin enabled on Character layer"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

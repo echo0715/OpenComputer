@@ -1,0 +1,45 @@
+{
+  "id": "vlc_enable_loop_playback",
+  "app": "vlc",
+  "task": "VLC is already running. Open /home/user/Videos/sample.mp4 and start playback, then enable 'Loop all' mode (loop-all, NOT the single-item 'repeat one' state) so the playlist loops continuously. Leave VLC playing sample.mp4 with loop-all enabled.",
+  "env": {
+    "files": [
+      {
+        "filename": "sample.mp4",
+        "sandbox_path": "/home/user/Videos/sample.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/sample.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source sample.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded sample.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "sample.mp4 is loaded in VLC"
+    },
+    {
+      "command": "check-playing",
+      "key": "playing",
+      "expected": true,
+      "description": "VLC is currently playing"
+    },
+    {
+      "command": "check-loop true",
+      "key": "match",
+      "expected": true,
+      "description": "Loop-all mode is enabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

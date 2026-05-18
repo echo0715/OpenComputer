@@ -1,0 +1,75 @@
+{
+  "id": "thunderbird_three_drafts_with_fields",
+  "app": "thunderbird",
+  "task": "Create three distinct Thunderbird drafts (do NOT send any of them):\n\n1. Incident postmortem:\n   - To: oncall@statuspage.example\n   - Subject: Incident Postmortem 2026-04-02\n   - Body: Summary of the April 2nd outage. The root cause was a stale DNS cache on the primary load balancer that routed 38% of traffic to a decommissioned region. Timeline, impact, and corrective actions are captured below. Please review by end of week.\n\n2. Invoice reminder:\n   - To: billing@acme-client.example\n   - Subject: Invoice #INV-10482 Follow Up\n   - Body: This is a friendly reminder that Invoice INV-10482 issued March 10 has not yet been paid. Per our agreement the net 30 terms are now past due. Please process payment or reply with a projected payment date.\n\n3. Beta welcome kit:\n   - To: betausers@ourproduct.example\n   - Subject: Beta Tester Welcome Kit\n   - Body: Welcome to the 2026 closed beta program. Attached below you will find the installation guide, the changelog, and the feedback survey link. We are excited to have you testing the new collaboration features.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists 'Incident Postmortem'",
+      "key": "found",
+      "expected": true,
+      "description": "Incident Postmortem draft exists"
+    },
+    {
+      "command": "check-message-to Drafts 'Incident Postmortem' oncall@statuspage.example",
+      "key": "match",
+      "expected": true,
+      "description": "Incident draft to on-call"
+    },
+    {
+      "command": "check-draft-content 'Incident Postmortem' 'stale DNS cache'",
+      "key": "found",
+      "expected": true,
+      "description": "Incident body mentions stale DNS cache"
+    },
+    {
+      "command": "check-draft-exists 'Invoice'",
+      "key": "found",
+      "expected": true,
+      "description": "Invoice draft exists"
+    },
+    {
+      "command": "check-message-to Drafts 'Invoice' billing@acme-client.example",
+      "key": "match",
+      "expected": true,
+      "description": "Invoice draft to billing"
+    },
+    {
+      "command": "check-draft-content 'Invoice' 'net 30 terms'",
+      "key": "found",
+      "expected": true,
+      "description": "Invoice body mentions net 30 terms"
+    },
+    {
+      "command": "check-draft-exists 'Beta Tester Welcome Kit'",
+      "key": "found",
+      "expected": true,
+      "description": "Beta draft exists"
+    },
+    {
+      "command": "check-message-to Drafts 'Beta Tester' betausers@ourproduct.example",
+      "key": "match",
+      "expected": true,
+      "description": "Beta draft to beta users"
+    },
+    {
+      "command": "check-draft-content 'Beta Tester' 'feedback survey link'",
+      "key": "found",
+      "expected": true,
+      "description": "Beta body mentions feedback survey link"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

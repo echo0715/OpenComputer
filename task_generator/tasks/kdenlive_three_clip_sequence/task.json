@@ -1,0 +1,75 @@
+{
+  "id": "kdenlive_three_clip_sequence",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/sequence_project.kdenlive (1920x1080, 30fps).\n\nImport /home/user/Videos/part1.mp4, /home/user/Videos/part2.mp4, and /home/user/Videos/part3.mp4 into the project, and place them sequentially on a single video track in this exact order with each clip immediately following the previous one: part1.mp4 → part2.mp4 → part3.mp4. Save the project so all three clips are persisted to /home/user/Documents/sequence_project.kdenlive. The project must contain exactly 3 clips and remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "sequence_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/sequence_project.kdenlive"
+      },
+      {
+        "filename": "part1.mp4",
+        "sandbox_path": "/home/user/Videos/part1.mp4"
+      },
+      {
+        "filename": "part2.mp4",
+        "sandbox_path": "/home/user/Videos/part2.mp4"
+      },
+      {
+        "filename": "part3.mp4",
+        "sandbox_path": "/home/user/Videos/part3.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/sequence_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/sequence_project.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/sequence_project.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/sequence_project.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/sequence_project.kdenlive part1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip part1.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/sequence_project.kdenlive part2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip part2.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/sequence_project.kdenlive part3.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip part3.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/sequence_project.kdenlive 3",
+      "key": "match",
+      "expected": true,
+      "description": "Project contains exactly 3 clips"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

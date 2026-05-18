@@ -1,0 +1,89 @@
+{
+  "id": "drawio_styled_data_pipeline",
+  "app": "drawio",
+  "task": "Build a data pipeline diagram in /home/user/Documents/data_pipeline.drawio on page 0 with exactly 6 shapes and exactly 5 arrows.\n\nShapes (exact labels and shape kinds):\n- 'Source' — ellipse\n- 'Extract' — rectangle\n- 'Transform' — rectangle\n- 'Validate' — diamond/rhombus\n- 'Load' — rectangle\n- 'Warehouse' — cylinder\n\nFill colors:\n- 'Source' — fillColor #e1d5e7 (purple)\n- 'Validate' — fillColor #fff2cc (yellow)\n- 'Warehouse' — fillColor #d5e8d4 (green)\n\nSequential edges: Source -> Extract -> Transform -> Validate -> Load -> Warehouse (5 edges total). Persist to /home/user/Documents/data_pipeline.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "data_pipeline.drawio",
+        "sandbox_path": "/home/user/Documents/data_pipeline.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/data_pipeline.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/data_pipeline.drawio 6 0",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 6 vertices"
+    },
+    {
+      "command": "check-edge-count /home/user/Documents/data_pipeline.drawio 5 0",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 5 edges"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/data_pipeline.drawio Source",
+      "key": "exists",
+      "expected": true,
+      "description": "Source label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/data_pipeline.drawio Extract",
+      "key": "exists",
+      "expected": true,
+      "description": "Extract label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/data_pipeline.drawio Transform",
+      "key": "exists",
+      "expected": true,
+      "description": "Transform label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/data_pipeline.drawio Validate",
+      "key": "exists",
+      "expected": true,
+      "description": "Validate label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/data_pipeline.drawio Load",
+      "key": "exists",
+      "expected": true,
+      "description": "Load label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/data_pipeline.drawio Warehouse",
+      "key": "exists",
+      "expected": true,
+      "description": "Warehouse label exists"
+    },
+    {
+      "judge": "llm",
+      "prompt": "Inspect the vertices list. Does the vertex labeled 'Source' have fillColor=#e1d5e7 in its style, the vertex labeled 'Validate' have fillColor=#fff2cc, and the vertex labeled 'Warehouse' have fillColor=#d5e8d4? All three must match.",
+      "command": "vertices /home/user/Documents/data_pipeline.drawio 0",
+      "context": "command_output",
+      "description": "Source/Validate/Warehouse have correct fill colors"
+    },
+    {
+      "judge": "llm",
+      "prompt": "Using the connections and vertices lists, verify the diagram contains an edge whose source label is 'Source' and target label is 'Extract'.",
+      "command": "connections /home/user/Documents/data_pipeline.drawio 0",
+      "context": "command_output",
+      "description": "Connection Source -> Extract exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "id": "draw_user_journey_multi_page",
+  "app": "libreoffice_draw",
+  "task": "Create a new three-page LibreOffice Draw drawing that maps user journeys for three personas (one persona per page), and save it to /home/user/Documents/user_journey.odg.\n\nEach page must contain a persona label (text or rectangle) with the exact text shown below, plus five journey-stage rectangles with the exact labels listed:\n- Page 1 — persona label 'Persona: New Shopper'; stages: 'Discover', 'Browse', 'Add to Cart', 'Checkout', 'Reorder'.\n- Page 2 — persona label 'Persona: Returning Shopper'; stages: 'Login', 'View Recommendations', 'Compare', 'Buy Again', 'Refer Friend'.\n- Page 3 — persona label 'Persona: Loyalty Member'; stages: 'Member Portal', 'Claim Rewards', 'Exclusive Drops', 'Early Access', 'Refer & Earn'.\n\nEach page must end up with at least 5 shapes. The document must end up with exactly 3 pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/user_journey.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Output ODG file exists"
+    },
+    {
+      "command": "check-page-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 3 pages"
+    },
+    {
+      "command": "check-page-contains 0 \"Persona: New Shopper\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 persona label"
+    },
+    {
+      "command": "check-page-contains 0 Discover",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 stage Discover"
+    },
+    {
+      "command": "check-page-contains 0 Browse",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 stage Browse"
+    },
+    {
+      "command": "check-page-contains 0 \"Add to Cart\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 stage Add to Cart"
+    },
+    {
+      "command": "check-page-contains 0 Checkout",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 stage Checkout"
+    },
+    {
+      "command": "check-page-contains 0 Reorder",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 stage Reorder"
+    },
+    {
+      "command": "check-page-contains 1 \"Persona: Returning Shopper\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 persona label"
+    },
+    {
+      "command": "check-page-contains 1 Login",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 stage Login"
+    },
+    {
+      "command": "check-page-contains 1 \"View Recommendations\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 stage View Recommendations"
+    },
+    {
+      "command": "check-page-contains 1 Compare",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 stage Compare"
+    },
+    {
+      "command": "check-page-contains 1 \"Buy Again\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 stage Buy Again"
+    },
+    {
+      "command": "check-page-contains 1 \"Refer Friend\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 stage Refer Friend"
+    },
+    {
+      "command": "check-page-contains 2 \"Persona: Loyalty Member\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 persona label"
+    },
+    {
+      "command": "check-page-contains 2 \"Member Portal\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 stage Member Portal"
+    },
+    {
+      "command": "check-page-contains 2 \"Claim Rewards\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 stage Claim Rewards"
+    },
+    {
+      "command": "check-page-contains 2 \"Exclusive Drops\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 stage Exclusive Drops"
+    },
+    {
+      "command": "check-page-contains 2 \"Early Access\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 stage Early Access"
+    },
+    {
+      "command": "check-page-contains 2 \"Refer\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 stage Refer & Earn"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 5 and result['pages'][1]['shape_count'] >= 5 and result['pages'][2]['shape_count'] >= 5",
+      "description": "All 3 pages have at least 5 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

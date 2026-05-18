@@ -1,0 +1,93 @@
+{
+  "id": "obs_podcast_two_person",
+  "app": "obs",
+  "task": "Build an OBS Studio podcast recording setup. The final collection must contain exactly 4 scenes (no default 'Scene' left over) with these exact names: 'Solo', 'Dual', 'Screen Demo', 'Intermission'.\n\nSources required per scene, with these exact names and types:\n- 'Solo': Video Capture Device named 'Host Camera'; Color Source named 'Solo BG'\n- 'Dual': Video Capture Device named 'Host'; Video Capture Device named 'Guest'\n- 'Screen Demo': Display Capture named 'Shared Screen'; Text (FreeType 2) named 'Topic' (any text)\n- 'Intermission': Image named 'Break Slide' (file /home/user/Pictures/break.png)\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "break.png",
+        "sandbox_path": "/home/user/Pictures/break.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Solo",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Solo' exists"
+    },
+    {
+      "command": "check-scene-exists Dual",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Dual' exists"
+    },
+    {
+      "command": "check-scene-exists 'Screen Demo'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Screen Demo' exists"
+    },
+    {
+      "command": "check-scene-exists Intermission",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Intermission' exists"
+    },
+    {
+      "command": "check-scene-count 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 scenes in the collection"
+    },
+    {
+      "command": "check-source-in-scene 'Host Camera' Solo",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Host Camera' exists in 'Solo' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Solo BG' Solo",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Solo BG' exists in 'Solo' scene"
+    },
+    {
+      "command": "check-source-in-scene Host Dual",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Host' exists in 'Dual' scene"
+    },
+    {
+      "command": "check-source-in-scene Guest Dual",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Guest' exists in 'Dual' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Shared Screen' 'Screen Demo'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Shared Screen' exists in 'Screen Demo' scene"
+    },
+    {
+      "command": "check-source-in-scene Topic 'Screen Demo'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Topic' exists in 'Screen Demo' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Break Slide' Intermission",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Break Slide' exists in 'Intermission' scene"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

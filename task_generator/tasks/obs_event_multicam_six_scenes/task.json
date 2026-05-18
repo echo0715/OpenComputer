@@ -1,0 +1,147 @@
+{
+  "id": "obs_event_multicam_six_scenes",
+  "app": "obs",
+  "task": "Build a fresh OBS Studio scene collection for a multi-camera live event. The final collection must contain exactly 6 scenes (no default 'Scene' left over) with these exact names: 'Pre-Show', 'Keynote', 'Q and A', 'Demo', 'Interview', 'Wrap-Up'.\n\nSources required per scene, with these exact names and types:\n- 'Pre-Show': Image named 'Countdown' (file /home/user/Pictures/countdown.png); Text (FreeType 2) named 'Welcome Message'\n- 'Keynote': Display Capture named 'Keynote Screen'; Video Capture Device named 'Speaker Cam'\n- 'Q and A': Video Capture Device named 'Audience Cam'; Text (FreeType 2) named 'Question Prompt'\n- 'Demo': Display Capture named 'Demo Screen'; Video Capture Device named 'Demo Presenter'\n- 'Interview': Video Capture Device named 'Interviewer'; Video Capture Device named 'Guest'\n- 'Wrap-Up': Color Source named 'Outro BG'; Text (FreeType 2) named 'Thanks'\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "countdown.png",
+        "sandbox_path": "/home/user/Pictures/countdown.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Pre-Show",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Pre-Show' exists"
+    },
+    {
+      "command": "check-scene-exists Keynote",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Keynote' exists"
+    },
+    {
+      "command": "check-scene-exists 'Q and A'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Q and A' exists"
+    },
+    {
+      "command": "check-scene-exists Demo",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Demo' exists"
+    },
+    {
+      "command": "check-scene-exists Interview",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Interview' exists"
+    },
+    {
+      "command": "check-scene-exists Wrap-Up",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Wrap-Up' exists"
+    },
+    {
+      "command": "check-scene-count 6",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 6 scenes"
+    },
+    {
+      "command": "check-source-in-scene Countdown Pre-Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Countdown' in 'Pre-Show'"
+    },
+    {
+      "command": "check-source-in-scene 'Welcome Message' Pre-Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Welcome Message' in 'Pre-Show'"
+    },
+    {
+      "command": "check-source-in-scene 'Keynote Screen' Keynote",
+      "key": "exists",
+      "expected": true,
+      "description": "'Keynote Screen' in 'Keynote'"
+    },
+    {
+      "command": "check-source-in-scene 'Speaker Cam' Keynote",
+      "key": "exists",
+      "expected": true,
+      "description": "'Speaker Cam' in 'Keynote'"
+    },
+    {
+      "command": "check-source-in-scene 'Audience Cam' 'Q and A'",
+      "key": "exists",
+      "expected": true,
+      "description": "'Audience Cam' in 'Q and A'"
+    },
+    {
+      "command": "check-source-in-scene 'Question Prompt' 'Q and A'",
+      "key": "exists",
+      "expected": true,
+      "description": "'Question Prompt' in 'Q and A'"
+    },
+    {
+      "command": "check-source-in-scene 'Demo Screen' Demo",
+      "key": "exists",
+      "expected": true,
+      "description": "'Demo Screen' in 'Demo'"
+    },
+    {
+      "command": "check-source-in-scene 'Demo Presenter' Demo",
+      "key": "exists",
+      "expected": true,
+      "description": "'Demo Presenter' in 'Demo'"
+    },
+    {
+      "command": "check-source-in-scene Interviewer Interview",
+      "key": "exists",
+      "expected": true,
+      "description": "'Interviewer' in 'Interview'"
+    },
+    {
+      "command": "check-source-in-scene Guest Interview",
+      "key": "exists",
+      "expected": true,
+      "description": "'Guest' in 'Interview'"
+    },
+    {
+      "command": "check-source-in-scene 'Outro BG' Wrap-Up",
+      "key": "exists",
+      "expected": true,
+      "description": "'Outro BG' in 'Wrap-Up'"
+    },
+    {
+      "command": "check-source-in-scene Thanks Wrap-Up",
+      "key": "exists",
+      "expected": true,
+      "description": "'Thanks' in 'Wrap-Up'"
+    },
+    {
+      "command": "check-source-visible Countdown",
+      "key": "visible",
+      "expected": true,
+      "description": "'Countdown' visible"
+    },
+    {
+      "command": "check-source-visible 'Speaker Cam'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Speaker Cam' visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_delete_comment_lines",
+  "files": [
+    {"filename": "settings.conf", "sandbox_path": "/home/user/Documents/settings.conf", "type": "conf"}
+  ]
+}

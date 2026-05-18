@@ -1,0 +1,39 @@
+{
+  "id": "pcmanfm_multi_extension_split",
+  "app": "pcmanfm",
+  "task": "In /home/user/Documents/mixed/, split the 12 mixed files by type into four subdirectories under /home/user/Documents/mixed/sorted/. Create the following subdirectories and MOVE files into them as described. (1) /home/user/Documents/mixed/sorted/code/ must receive main.py, util.py, app.js. (2) /home/user/Documents/mixed/sorted/docs/ must receive README.md, notes.md, todo.txt, changelog.txt. (3) /home/user/Documents/mixed/sorted/data/ must receive users.csv, metrics.csv, config.json. (4) /home/user/Documents/mixed/sorted/media/ must receive icon.png, logo.png. After the operation, /home/user/Documents/mixed/ must contain exactly 1 entry at its top level (the sorted directory). The code/ folder must contain exactly 3 files, docs/ exactly 4, data/ exactly 3, and media/ exactly 2.",
+  "env": {
+    "files": [
+      {"filename": "main.py", "sandbox_path": "/home/user/Documents/mixed/main.py"},
+      {"filename": "util.py", "sandbox_path": "/home/user/Documents/mixed/util.py"},
+      {"filename": "app.js", "sandbox_path": "/home/user/Documents/mixed/app.js"},
+      {"filename": "README.md", "sandbox_path": "/home/user/Documents/mixed/README.md"},
+      {"filename": "notes.md", "sandbox_path": "/home/user/Documents/mixed/notes.md"},
+      {"filename": "todo.txt", "sandbox_path": "/home/user/Documents/mixed/todo.txt"},
+      {"filename": "changelog.txt", "sandbox_path": "/home/user/Documents/mixed/changelog.txt"},
+      {"filename": "users.csv", "sandbox_path": "/home/user/Documents/mixed/users.csv"},
+      {"filename": "metrics.csv", "sandbox_path": "/home/user/Documents/mixed/metrics.csv"},
+      {"filename": "config.json", "sandbox_path": "/home/user/Documents/mixed/config.json"},
+      {"filename": "icon.png", "sandbox_path": "/home/user/Documents/mixed/icon.png"},
+      {"filename": "logo.png", "sandbox_path": "/home/user/Documents/mixed/logo.png"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-count /home/user/Documents/mixed 1", "key": "match", "expected": true, "description": "mixed top-level has exactly 1 entry (sorted/)"},
+    {"command": "check-file-count /home/user/Documents/mixed/sorted/code 3", "key": "match", "expected": true, "description": "code/ has 3 files"},
+    {"command": "check-file-count /home/user/Documents/mixed/sorted/docs 4", "key": "match", "expected": true, "description": "docs/ has 4 files"},
+    {"command": "check-file-count /home/user/Documents/mixed/sorted/data 3", "key": "match", "expected": true, "description": "data/ has 3 files"},
+    {"command": "check-file-count /home/user/Documents/mixed/sorted/media 2", "key": "match", "expected": true, "description": "media/ has 2 files"},
+    {"command": "check-extension-match /home/user/Documents/mixed/sorted/media .png", "key": "all_match", "expected": true, "description": "media/ only contains png files"},
+    {"command": "check-file-exists /home/user/Documents/mixed/sorted/code/main.py", "key": "exists", "expected": true, "description": "main.py moved into code/"},
+    {"command": "check-file-exists /home/user/Documents/mixed/sorted/docs/README.md", "key": "exists", "expected": true, "description": "README.md moved into docs/"},
+    {"command": "check-file-exists /home/user/Documents/mixed/sorted/data/config.json", "key": "exists", "expected": true, "description": "config.json moved into data/"},
+    {"command": "check-file-exists /home/user/Documents/mixed/sorted/media/logo.png", "key": "exists", "expected": true, "description": "logo.png moved into media/"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

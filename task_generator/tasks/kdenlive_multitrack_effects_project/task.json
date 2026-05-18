@@ -1,0 +1,77 @@
+{
+  "id": "kdenlive_multitrack_effects_project",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/multitrack_fx.kdenlive (1920x1080, 24fps).\n\nImport /home/user/Videos/main.mp4 and /home/user/Videos/overlay.mp4 into the project. Place main.mp4 on Video Track 1 and overlay.mp4 on Video Track 2. Apply the Cartoon effect (`frei0r.cartoon`) to the main.mp4 timeline clip and the Glow effect (`frei0r.glow`) to the overlay.mp4 timeline clip. Ensure the project has at least 4 tracks total (video and audio combined). Save the project so the changes are persisted to /home/user/Documents/multitrack_fx.kdenlive. The project must remain at 1920x1080, 24fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "multitrack_fx.kdenlive",
+        "sandbox_path": "/home/user/Documents/multitrack_fx.kdenlive"
+      },
+      {
+        "filename": "main.mp4",
+        "sandbox_path": "/home/user/Videos/main.mp4"
+      },
+      {
+        "filename": "overlay.mp4",
+        "sandbox_path": "/home/user/Videos/overlay.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multitrack_fx.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/multitrack_fx.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/multitrack_fx.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/multitrack_fx.kdenlive 24",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 24 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multitrack_fx.kdenlive main.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip main.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multitrack_fx.kdenlive overlay.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip overlay.mp4 is in the project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multitrack_fx.kdenlive frei0r.cartoon",
+      "key": "exists",
+      "expected": true,
+      "description": "Cartoon effect (frei0r.cartoon) is applied in the project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multitrack_fx.kdenlive frei0r.glow",
+      "key": "exists",
+      "expected": true,
+      "description": "Glow effect (frei0r.glow) is applied in the project"
+    },
+    {
+      "command": "check-track-count /home/user/Documents/multitrack_fx.kdenlive 4",
+      "key": "match",
+      "expected": true,
+      "description": "Project has at least 4 tracks"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

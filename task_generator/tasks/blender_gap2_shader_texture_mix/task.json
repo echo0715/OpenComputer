@@ -1,0 +1,57 @@
+{
+  "id": "blender_gap2_shader_texture_mix",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/mix_shader_scene.blend, create a node-based material named 'MixedMat' and assign it to the default Cube. The material's node graph must contain:\n- A Principled BSDF with Base Color = (0.2, 0.6, 0.9, 1.0)\n- A Diffuse BSDF with Color = (1.0, 0.8, 0.2, 1.0)\n- A Mix Shader with Factor = 0.5, first shader input from Principled BSDF, second shader input from Diffuse BSDF, and output connected to Material Output Surface\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "mix_shader_scene.blend",
+        "sandbox_path": "/home/user/Documents/mix_shader_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/mix_shader_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/mix_shader_scene.blend MixedMat",
+      "key": "exists",
+      "expected": true,
+      "description": "MixedMat exists"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/mix_shader_scene.blend MixedMat",
+      "eval": "{n.get('type') for n in result.get('nodes',[])} >= {'BSDF_PRINCIPLED','BSDF_DIFFUSE','MIX_SHADER','OUTPUT_MATERIAL'}",
+      "description": "All four required nodes present"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/mix_shader_scene.blend MixedMat",
+      "eval": "any(n.get('type')=='MIX_SHADER' and abs(n['inputs'].get('Fac',0)-0.5)<0.02 for n in result.get('nodes',[]))",
+      "description": "Mix Shader factor = 0.5"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/mix_shader_scene.blend MixedMat",
+      "eval": "any(l.get('to_socket')=='Surface' and any(n.get('name')==l.get('from_node') and n.get('type')=='MIX_SHADER' for n in result.get('nodes',[])) for l in result.get('links',[]))",
+      "description": "Mix Shader output linked to Material Output Surface"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/mix_shader_scene.blend MixedMat",
+      "eval": "any(n.get('type')=='BSDF_PRINCIPLED' and abs(n['inputs'].get('Base Color',[0,0,0,0])[0]-0.2)<0.05 and abs(n['inputs'].get('Base Color',[0,0,0,0])[1]-0.6)<0.05 and abs(n['inputs'].get('Base Color',[0,0,0,0])[2]-0.9)<0.05 for n in result.get('nodes',[]))",
+      "description": "Principled BSDF base color ~ (0.2, 0.6, 0.9)"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/mix_shader_scene.blend MixedMat",
+      "eval": "any(n.get('type')=='BSDF_DIFFUSE' and abs(n['inputs'].get('Color',[0,0,0,0])[0]-1.0)<0.05 and abs(n['inputs'].get('Color',[0,0,0,0])[1]-0.8)<0.05 and abs(n['inputs'].get('Color',[0,0,0,0])[2]-0.2)<0.05 for n in result.get('nodes',[]))",
+      "description": "Diffuse BSDF color ~ (1.0, 0.8, 0.2)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

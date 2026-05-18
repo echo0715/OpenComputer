@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_compose_defaults_pack",
+  "app": "thunderbird",
+  "task": "Configure Thunderbird so the following five compose-related preferences are persisted:\n\n1. `mail.forward_message_mode` = `0` (forward inline, not as attachment)\n2. `mail.compose.autosave` = `true` (draft autosave enabled)\n3. `mail.compose.autosaveinterval` = `2` (autosave every 2 minutes)\n4. `mailnews.send_default_charset` = `UTF-8`\n5. `mail.SpellCheckBeforeSend` = `false` (spell-check-before-send disabled)",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.forward_message_mode 0",
+      "key": "match",
+      "expected": true,
+      "description": "Forward mode is inline (0)"
+    },
+    {
+      "command": "check-pref-value mail.compose.autosave true",
+      "key": "match",
+      "expected": true,
+      "description": "Draft autosave enabled"
+    },
+    {
+      "command": "check-pref-value mail.compose.autosaveinterval 2",
+      "key": "match",
+      "expected": true,
+      "description": "Autosave interval is 2 minutes"
+    },
+    {
+      "command": "check-pref-value mailnews.send_default_charset UTF-8",
+      "key": "match",
+      "expected": true,
+      "description": "Default send charset is UTF-8"
+    },
+    {
+      "command": "check-pref-value mail.SpellCheckBeforeSend false",
+      "key": "match",
+      "expected": true,
+      "description": "Spell check before send disabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

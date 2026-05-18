@@ -1,0 +1,52 @@
+{
+  "id": "blender_gap2_compositor_blur_glare",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/compositor_scene.blend, enable 'Use Nodes' on the scene's Compositor and build this node graph:\n\nNodes: Render Layers, Blur (type GAUSS, Size X = 10, Size Y = 10), Glare (type FOG_GLOW), Composite, and Viewer.\n\nLinks:\n- Render Layers Image -> Blur Image\n- Blur Image -> Glare Image\n- Glare Image -> Composite Image\n- Glare Image -> Viewer Image\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "compositor_scene.blend",
+        "sandbox_path": "/home/user/Documents/compositor_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/compositor_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/compositor_scene.blend",
+      "key": "use_nodes",
+      "expected": true,
+      "description": "Compositor use_nodes enabled"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/compositor_scene.blend",
+      "eval": "{n.get('type') for n in result.get('nodes',[])} >= {'R_LAYERS','BLUR','GLARE','COMPOSITE','VIEWER'}",
+      "description": "All five compositor nodes present"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/compositor_scene.blend",
+      "eval": "any(n.get('type')=='BLUR' and n.get('size_x',0)==10 and n.get('size_y',0)==10 for n in result.get('nodes',[]))",
+      "description": "Blur size_x=10, size_y=10"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/compositor_scene.blend",
+      "eval": "any(n.get('type')=='GLARE' and str(n.get('glare_type','')).upper().replace(' ','_')=='FOG_GLOW' for n in result.get('nodes',[]))",
+      "description": "Glare type FOG_GLOW"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/compositor_scene.blend",
+      "eval": "any(any(n.get('name')==l['from_node'] and n.get('type')=='GLARE' for n in result.get('nodes',[])) and any(n.get('name')==l['to_node'] and n.get('type')=='COMPOSITE' for n in result.get('nodes',[])) for l in result.get('links',[]))",
+      "description": "Glare output linked to Composite"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

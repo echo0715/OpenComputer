@@ -1,0 +1,56 @@
+{
+  "id": "impress_add_entry_animations_to_bullets",
+  "app": "libreoffice_impress",
+  "task": "/home/user/Documents/product_overview.odp is open in LibreOffice Impress. The 4-slide deck contains: Slide 1 — title 'Orbit CRM', subtitle 'Learn more'; Slide 2 — 'Features' with 3 bullets; Slide 3 — 'Pricing' with 3 bullets; Slide 4 — 'Contact' with 3 lines.\n\nMake the following changes:\n\n1. On Slides 2, 3, and 4, add an entrance (Entry) animation to the body/bullet-list placeholder so that the bullets animate in when the slide is presented. Any entrance effect is acceptable (Appear, Fly In, Fade In, etc.).\n2. On Slide 1, turn the text 'Learn more' inside the subtitle into a hyperlink pointing to https://www.libreoffice.org.\n\nSave the file, overwriting /home/user/Documents/product_overview.odp and keeping the .odp format. The deck must still have exactly 4 slides.",
+  "env": {
+    "files": [
+      {
+        "filename": "product_overview.odp",
+        "sandbox_path": "/home/user/Documents/product_overview.odp"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/product_overview.odp",
+      "key": "exists",
+      "expected": true,
+      "description": "product_overview.odp is saved on disk"
+    },
+    {
+      "command": "check-slide-count 4",
+      "key": "match",
+      "expected": true,
+      "description": "Deck still has exactly 4 slides"
+    },
+    {
+      "command": "check-has-animation /home/user/Documents/product_overview.odp 1",
+      "key": "has_animation",
+      "expected": true,
+      "description": "Slide 2 has at least one animation element"
+    },
+    {
+      "command": "check-has-animation /home/user/Documents/product_overview.odp 2",
+      "key": "has_animation",
+      "expected": true,
+      "description": "Slide 3 has at least one animation element"
+    },
+    {
+      "command": "check-has-animation /home/user/Documents/product_overview.odp 3",
+      "key": "has_animation",
+      "expected": true,
+      "description": "Slide 4 has at least one animation element"
+    },
+    {
+      "command": "check-hyperlink-exists /home/user/Documents/product_overview.odp libreoffice.org \"Learn more\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Slide 1 has a hyperlink on text 'Learn more' to libreoffice.org"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

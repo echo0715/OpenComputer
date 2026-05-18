@@ -1,0 +1,63 @@
+{
+  "id": "inkscape_layer_management",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/layers_base.svg — an 800x600 document with a single empty default layer.\n\nEdit /home/user/Documents/layers_base.svg so it contains four new layers with these exact names: 'Sky', 'Mountains', 'Trees', 'Ground'. The contents must be:\n\n- On 'Sky': a rectangle with fill #87CEEB.\n- On 'Ground': a rectangle with fill #228B22.\n- On 'Trees': a text element with the exact text: Pine Forest.\n- 'Mountains' may remain empty.\n\nSave the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "layers_base.svg",
+        "sandbox_path": "/home/user/Documents/layers_base.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/layers_base.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File layers_base.svg exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/layers_base.svg Sky",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Sky' exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/layers_base.svg Mountains",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Mountains' exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/layers_base.svg Trees",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Trees' exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/layers_base.svg Ground",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Ground' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/layers_base.svg 'Pine Forest'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Pine Forest' exists in the document"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/layers_base.svg rect",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains rectangle elements"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

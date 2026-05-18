@@ -1,0 +1,53 @@
+{
+  "id": "shotcut_two_clips_with_luma_transition",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/transition_project.mlt (1920x1080, 30 fps). Two short video files exist at /home/user/Videos/alpha.mp4 and /home/user/Videos/beta.mp4.\n\nPlace alpha.mp4 and beta.mp4 on the V1 timeline track so that beta.mp4's start overlaps the end of alpha.mp4 by about half a second, producing Shotcut's default dissolve transition in the overlap region. Save the project so /home/user/Documents/transition_project.mlt references both clips and contains a 'luma' transition (Shotcut's storage format for the default dissolve).",
+  "env": {
+    "files": [
+      {
+        "filename": "transition_project.mlt",
+        "sandbox_path": "/home/user/Documents/transition_project.mlt"
+      },
+      {
+        "filename": "alpha.mp4",
+        "sandbox_path": "/home/user/Videos/alpha.mp4"
+      },
+      {
+        "filename": "beta.mp4",
+        "sandbox_path": "/home/user/Videos/beta.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/transition_project.mlt",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/transition_project.mlt alpha.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "alpha.mp4 is referenced in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/transition_project.mlt beta.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "beta.mp4 is referenced in the project"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/transition_project.mlt luma",
+      "key": "exists",
+      "expected": true,
+      "description": "A luma (dissolve) transition is present"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

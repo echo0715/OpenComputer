@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_convert_wav_from_mp3_source",
+  "files": [
+    {"filename": "source_audio.mp3", "sandbox_path": "/home/user/Music/source_audio.mp3", "type": "mp3"}
+  ]
+}

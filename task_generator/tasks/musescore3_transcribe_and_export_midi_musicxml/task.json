@@ -1,0 +1,63 @@
+{
+  "id": "musescore3_transcribe_and_export_midi_musicxml",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/morning.mscz — 4 measures of quarter notes in C major 4/4, current title 'Untitled', empty Composer.\n\nSet the Work Title to exactly 'Morning Prelude' and the Composer to exactly 'Anna Kowalski', and save in place at /home/user/Documents/morning.mscz so the updated metadata is persisted. Then export the score to both of these formats at exactly these paths:\n- Standard MIDI File: /home/user/Documents/morning.mid\n- Uncompressed MusicXML: /home/user/Documents/morning.musicxml\n\nThe original /home/user/Documents/morning.mscz must still exist with workTitle 'Morning Prelude' and composer 'Anna Kowalski'. The exported MIDI must have at least 4 notes, and the MusicXML must have exactly 1 part.",
+  "env": {
+    "files": [
+      {
+        "filename": "morning.mscz",
+        "sandbox_path": "/home/user/Documents/morning.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/morning.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "morning.mscz still exists"
+    },
+    {
+      "command": "check-meta-tag /home/user/Documents/morning.mscz workTitle Morning Prelude",
+      "key": "match",
+      "expected": true,
+      "description": "workTitle is 'Morning Prelude'"
+    },
+    {
+      "command": "check-meta-tag /home/user/Documents/morning.mscz composer Anna Kowalski",
+      "key": "match",
+      "expected": true,
+      "description": "composer is 'Anna Kowalski'"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/morning.mid",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported morning.mid exists"
+    },
+    {
+      "command": "check-midi-has-notes /home/user/Documents/morning.mid 4",
+      "key": "match",
+      "expected": true,
+      "description": "morning.mid has at least 4 notes"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/morning.musicxml",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported morning.musicxml exists"
+    },
+    {
+      "command": "check-musicxml-parts /home/user/Documents/morning.musicxml 1",
+      "key": "match",
+      "expected": true,
+      "description": "morning.musicxml has exactly 1 part"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

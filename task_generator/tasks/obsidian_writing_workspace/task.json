@@ -1,0 +1,91 @@
+{
+  "id": "obsidian_writing_workspace",
+  "app": "obsidian",
+  "task": "Set up a distraction-free writing environment in the Obsidian vault at /home/user/Documents/WritingVault.\n\n1. Appearance settings: base font size 20, theme set to 'moonstone' (light mode).\n2. Editor settings: enable `readableLineLength`, `spellcheck`, `foldHeading`; disable `showLineNumber`.\n3. Create folder 'Chapters'.\n4. Create 'Chapters/Chapter 1.md' with frontmatter `type: chapter`, `number: 1`, `status: draft` and body:\n\n```\n# Chapter 1: The Beginning\n\nIt was a dark and stormy night. The wind howled through the trees as Sarah made her way down the narrow path.\n\n## Scene 1\nThe old house loomed ahead, its windows dark and empty.\n\n## Scene 2\nInside, the floorboards creaked with every step.\n\n#chapter #draft\n```\n\n5. Create 'Chapters/Chapter 2.md' with frontmatter `type: chapter`, `number: 2`, `status: outline` and body:\n\n```\n# Chapter 2: The Discovery\n\n## Scene 1\nSarah finds the hidden room.\n\n## Scene 2\nThe journal reveals the truth.\n\nPrevious: [[Chapter 1]]\n#chapter #outline\n```\n\n6. Create 'Outline.md' in the vault root with body:\n\n```\n# Novel Outline\n## Part 1\n- [[Chapter 1]]: The Beginning\n- [[Chapter 2]]: The Discovery\n## Notes\n- Setting: Victorian England\n- Genre: Mystery\n#outline #novel\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "appearance /home/user/Documents/WritingVault baseFontSize",
+      "eval": "result.get('value') == 20",
+      "description": "Font size set to 20"
+    },
+    {
+      "command": "appearance /home/user/Documents/WritingVault theme",
+      "eval": "result.get('value') == 'moonstone'",
+      "description": "Theme set to moonstone"
+    },
+    {
+      "command": "check-setting /home/user/Documents/WritingVault readableLineLength true",
+      "key": "match",
+      "expected": true,
+      "description": "Readable line length enabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/WritingVault spellcheck true",
+      "key": "match",
+      "expected": true,
+      "description": "Spellcheck enabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/WritingVault foldHeading true",
+      "key": "match",
+      "expected": true,
+      "description": "Fold heading enabled"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/WritingVault Chapters",
+      "key": "exists",
+      "expected": true,
+      "description": "Chapters folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/WritingVault 'Chapter 1' status draft",
+      "key": "match",
+      "expected": true,
+      "description": "Chapter 1 has status=draft"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/WritingVault 'Chapter 1' 'Scene 1'",
+      "key": "has_heading",
+      "expected": true,
+      "description": "Chapter 1 has Scene 1 heading"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/WritingVault 'Chapter 2' 'Chapter 1'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Chapter 2 links to Chapter 1"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/WritingVault 'Chapter 2' outline",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Chapter 2 has #outline tag"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/WritingVault Outline 'Chapter 1'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Outline links to Chapter 1"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/WritingVault Outline 'Chapter 2'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Outline links to Chapter 2"
+    },
+    {
+      "command": "list-notes /home/user/Documents/WritingVault",
+      "eval": "result.get('count') == 3",
+      "description": "Vault has exactly 3 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

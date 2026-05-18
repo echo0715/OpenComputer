@@ -1,0 +1,39 @@
+{
+  "id": "gimp_color_invert_bmp",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/solid_red.png in GIMP.\n\nInvert the colors of the image (so pure red (255,0,0) becomes cyan (0,255,255)) and export the result as a BMP file to /home/user/Documents/inverted.bmp.",
+  "env": {
+    "files": [
+      {
+        "filename": "solid_red.png",
+        "sandbox_path": "/home/user/Documents/solid_red.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/inverted.bmp",
+      "key": "exists",
+      "expected": true,
+      "description": "Output BMP file exists at /home/user/Documents/inverted.bmp"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/inverted.bmp BMP",
+      "key": "match",
+      "expected": true,
+      "description": "Output file is in BMP format"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/inverted.bmp 100 100 0 255 255",
+      "key": "match",
+      "expected": true,
+      "description": "Pixel at (100,100) is cyan (0,255,255) which is the inverse of red (255,0,0)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

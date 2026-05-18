@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_signature_and_identity",
+  "app": "thunderbird",
+  "task": "Configure Thunderbird's default identity (`id1`) so the following preferences are persisted (do NOT send or compose any new email):\n1. `mail.identity.id1.fullName` = `Dr. Helena Voss`\n2. `mail.identity.id1.organization` = `Voss Biomedical`\n3. `mail.identity.id1.reply_to` = `replies@vossbio.example`\n4. `mail.identity.id1.sig_on_reply` = `true` (include signature for replies)\n5. `mail.identity.id1.sig_on_fwd` = `true` (include signature for forwards)",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.identity.id1.fullName 'Dr. Helena Voss'",
+      "key": "match",
+      "expected": true,
+      "description": "Display name is Dr. Helena Voss"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.organization 'Voss Biomedical'",
+      "key": "match",
+      "expected": true,
+      "description": "Organization is Voss Biomedical"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.reply_to replies@vossbio.example",
+      "key": "match",
+      "expected": true,
+      "description": "Reply-To is replies@vossbio.example"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.sig_on_reply true",
+      "key": "match",
+      "expected": true,
+      "description": "Signature enabled for replies"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.sig_on_fwd true",
+      "key": "match",
+      "expected": true,
+      "description": "Signature enabled for forwards"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

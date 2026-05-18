@@ -1,0 +1,45 @@
+{
+  "id": "thunderbird_preferences_comprehensive",
+  "app": "thunderbird",
+  "task": "Configure Thunderbird so the following four preferences are persisted:\n1. `mail.identity.id1.fullName` = `Sam Rivera` (display name).\n2. `mail.identity.id1.reply_on_top` = `1` (replies placed above the quoted text).\n3. `mail.biff.play_sound` = `false` (new-mail sound disabled).\n4. `mail.identity.id1.compose_html` = `false` (HTML composition disabled — plain text).",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.identity.id1.fullName Sam Rivera",
+      "key": "match",
+      "expected": true,
+      "description": "Display name is Sam Rivera"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.reply_on_top 1",
+      "key": "match",
+      "expected": true,
+      "description": "Reply on top enabled"
+    },
+    {
+      "command": "check-pref-value mail.biff.play_sound false",
+      "key": "match",
+      "expected": true,
+      "description": "Sound notification disabled"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.compose_html false",
+      "key": "match",
+      "expected": true,
+      "description": "HTML compose disabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

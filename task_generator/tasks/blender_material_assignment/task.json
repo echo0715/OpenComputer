@@ -1,0 +1,93 @@
+{
+  "id": "blender_material_assignment",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/materials_scene.blend:\n- Rename the default Cube to 'ColorBox' and assign a new material 'BlueMaterial' to it.\n- Add a UV Sphere named 'GoldSphere' and assign a new material 'GoldMaterial' to it.\n- Add a Plane named 'Floor' and assign a new material 'FloorMat' to it.\n\nSet the render engine to Cycles, the render resolution to 1920x1080, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "materials_scene.blend",
+        "sandbox_path": "/home/user/Documents/materials_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/materials_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/materials_scene.blend ColorBox",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'ColorBox' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/materials_scene.blend ColorBox MESH",
+      "key": "match",
+      "expected": true,
+      "description": "ColorBox is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/materials_scene.blend GoldSphere",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'GoldSphere' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/materials_scene.blend GoldSphere MESH",
+      "key": "match",
+      "expected": true,
+      "description": "GoldSphere is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/materials_scene.blend Floor",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Floor' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/materials_scene.blend Floor MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Floor is a MESH object"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/materials_scene.blend BlueMaterial",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'BlueMaterial' exists"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/materials_scene.blend GoldMaterial",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'GoldMaterial' exists"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/materials_scene.blend FloorMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'FloorMat' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/materials_scene.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine set to CYCLES"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/materials_scene.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 1920x1080"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "kdenlive_blur_and_invert_stack",
+  "files": [
+    {
+      "filename": "blur_invert.kdenlive",
+      "sandbox_path": "/home/user/Documents/blur_invert.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "target.mp4",
+      "sandbox_path": "/home/user/Videos/target.mp4",
+      "type": "mp4"
+    }
+  ]
+}

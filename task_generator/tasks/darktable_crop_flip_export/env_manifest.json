@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_crop_flip_export",
+  "files": [
+    {
+      "filename": "portrait_raw.png",
+      "sandbox_path": "/home/user/Pictures/portrait_raw.png",
+      "type": "png"
+    }
+  ]
+}

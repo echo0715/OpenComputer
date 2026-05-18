@@ -1,0 +1,52 @@
+{
+  "id": "brave_wikipedia_research",
+  "app": "brave",
+  "task": "In Brave, open and bookmark each of these three Wikipedia pages, each in its own tab:\n1. https://en.wikipedia.org/wiki/Python_(programming_language)\n2. https://en.wikipedia.org/wiki/JavaScript\n3. https://en.wikipedia.org/wiki/Rust_(programming_language)\n\nThen close the JavaScript tab so exactly two tabs remain open: the Python and Rust pages. All three bookmarks (Python, JavaScript, Rust) must still exist.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open Python_(programming_language)",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with Python_(programming_language) Wikipedia page is open"
+    },
+    {
+      "command": "check-tab-open Rust_(programming_language)",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with Rust_(programming_language) Wikipedia page is open"
+    },
+    {
+      "command": "check-tab-open JavaScript",
+      "key": "found",
+      "expected": false,
+      "description": "JavaScript tab has been closed"
+    },
+    {
+      "command": "check-bookmark Python_(programming_language)",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Python_(programming_language) exists"
+    },
+    {
+      "command": "check-bookmark JavaScript",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for JavaScript exists even though tab was closed"
+    },
+    {
+      "command": "check-bookmark Rust_(programming_language)",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Rust_(programming_language) exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

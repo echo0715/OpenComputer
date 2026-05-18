@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_convert_mp4_to_hd_mp4_resolution",
+  "files": [
+    {"filename": "src_hd.mp4", "sandbox_path": "/home/user/Videos/src_hd.mp4", "type": "mp4"}
+  ]
+}

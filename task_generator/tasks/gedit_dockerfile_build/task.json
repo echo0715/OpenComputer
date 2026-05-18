@@ -1,0 +1,75 @@
+{
+  "id": "gedit_dockerfile_build",
+  "app": "gedit",
+  "task": "Create a Dockerfile at /home/user/Documents/Dockerfile (no extension) for a Python 3.11 Flask application. The file must contain these seven directives, in order, on separate lines, with line 1 being the `FROM` directive:\n\n1. `FROM python:3.11-slim`\n2. `WORKDIR /app`\n3. `COPY requirements.txt /app/requirements.txt`\n4. `RUN pip install --no-cache-dir -r requirements.txt`\n5. `COPY . .`\n6. `EXPOSE 5000`\n7. `CMD [\"python\", \"app.py\"]`\n\nBlank lines or comments between directives are allowed. The final file must have at least 10 lines total.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/Dockerfile",
+      "key": "exists",
+      "expected": true,
+      "description": "Dockerfile was created"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/Dockerfile 1 \"FROM python:3.11-slim\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 1 is the FROM directive"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/Dockerfile \"WORKDIR /app\"",
+      "key": "contains",
+      "expected": true,
+      "description": "WORKDIR directive present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/Dockerfile \"COPY requirements.txt\"",
+      "key": "contains",
+      "expected": true,
+      "description": "requirements.txt is copied first"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/Dockerfile \"RUN pip install\"",
+      "key": "contains",
+      "expected": true,
+      "description": "pip install directive present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/Dockerfile \"COPY . .\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Application code is copied"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/Dockerfile \"EXPOSE 5000\"",
+      "key": "contains",
+      "expected": true,
+      "description": "EXPOSE 5000 directive present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/Dockerfile \"CMD\"",
+      "key": "contains",
+      "expected": true,
+      "description": "CMD directive present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/Dockerfile \"app.py\"",
+      "key": "contains",
+      "expected": true,
+      "description": "CMD references app.py"
+    },
+    {
+      "command": "file-line-count /home/user/Documents/Dockerfile",
+      "eval": "result.get('line_count', 0) >= 10",
+      "description": "File has at least 10 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "draw_annotate_diagram",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/network_diagram.odg is open in LibreOffice Draw — page 1 has three existing rectangles labeled 'Server', 'Client', and 'Switch'.\n\nAdd four new shapes to page 1 with these exact text contents (one label per shape): 'Firewall', 'Database Server', 'Router A', 'Router B'. The 'Router A' and 'Router B' shapes must be rectangles. The original 'Server', 'Client', and 'Switch' shapes must be preserved, so page 1 ends up with at least 7 shapes total.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "network_diagram.odg",
+        "sandbox_path": "/home/user/Documents/network_diagram.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 Firewall",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Firewall'"
+    },
+    {
+      "command": "check-page-contains 0 \"Database Server\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Database Server'"
+    },
+    {
+      "command": "check-page-contains 0 \"Router A\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Router A'"
+    },
+    {
+      "command": "check-page-contains 0 \"Router B\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Router B'"
+    },
+    {
+      "command": "check-shape-count 0 7",
+      "key": "match",
+      "expected": true,
+      "description": "Page 1 has at least 7 shapes"
+    },
+    {
+      "command": "check-page-contains 0 Server",
+      "key": "contains",
+      "expected": true,
+      "description": "Original 'Server' shape still present"
+    },
+    {
+      "command": "check-page-contains 0 Client",
+      "key": "contains",
+      "expected": true,
+      "description": "Original 'Client' shape still present"
+    },
+    {
+      "command": "check-page-contains 0 Switch",
+      "key": "contains",
+      "expected": true,
+      "description": "Original 'Switch' shape still present"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "inkscape_gap_boolean_trio_intersection_exclusion_division",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/trio_bool.svg. Perform three boolean operations, one per row:\n- Row 1 (r1a and r1b circles): INTERSECTION. Result path id 'rowIntersect', fill '#ff8800'.\n- Row 2 (r2a rect and r2b circle): EXCLUSION (symmetric difference). Result id 'rowExclusion', fill '#0088ff'.\n- Row 3 (r3a large rect, r3b small rect overlapping it): DIVISION (cut r3a with r3b). Tag the LARGER resulting piece with id 'rowDivide' and fill '#22aa44'.\nSave /home/user/Documents/trio_bool.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "trio_bool.svg",
+        "sandbox_path": "/home/user/Documents/trio_bool.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/trio_bool.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/trio_bool.svg rowIntersect",
+      "key": "exists",
+      "expected": true,
+      "description": "Intersection result"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/trio_bool.svg rowExclusion",
+      "key": "exists",
+      "expected": true,
+      "description": "Exclusion result"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/trio_bool.svg rowDivide",
+      "key": "exists",
+      "expected": true,
+      "description": "Division result"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/trio_bool.svg rowIntersect fill #ff8800",
+      "key": "match",
+      "expected": true,
+      "description": "Intersect fill"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/trio_bool.svg rowExclusion fill #0088ff",
+      "key": "match",
+      "expected": true,
+      "description": "Exclusion fill"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/trio_bool.svg rowDivide fill #22aa44",
+      "key": "match",
+      "expected": true,
+      "description": "Division fill"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "blender_collection_hierarchy",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/organized_scene.blend, delete the default Cube and create these five mesh objects:\n1. Cube named 'House'\n2. Cylinder named 'Chimney'\n3. Plane named 'Lawn'\n4. UV Sphere named 'Tree'\n5. Cone named 'Roof'\n\nCreate two collections, 'Buildings' and 'Landscape'. Place 'House', 'Chimney', and 'Roof' in 'Buildings'; place 'Lawn' and 'Tree' in 'Landscape'.\n\nSet the render engine to Cycles, the render resolution to 1920x1080, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "organized_scene.blend",
+        "sandbox_path": "/home/user/Documents/organized_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/organized_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/organized_scene.blend House",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'House' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/organized_scene.blend House MESH",
+      "key": "match",
+      "expected": true,
+      "description": "House is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/organized_scene.blend Chimney",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Chimney' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/organized_scene.blend Chimney MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Chimney is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/organized_scene.blend Lawn",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Lawn' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/organized_scene.blend Lawn MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Lawn is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/organized_scene.blend Tree",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Tree' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/organized_scene.blend Tree MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Tree is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/organized_scene.blend Roof",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Roof' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/organized_scene.blend Roof MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Roof is a MESH object"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/organized_scene.blend Buildings",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Buildings' exists"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/organized_scene.blend Landscape",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Landscape' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/organized_scene.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine set to CYCLES"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/organized_scene.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 1920x1080"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

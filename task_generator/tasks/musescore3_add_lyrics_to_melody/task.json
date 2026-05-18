@@ -1,0 +1,39 @@
+{
+  "id": "musescore3_add_lyrics_to_melody",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/melody.mscz — a single piano staff with 8 quarter notes (2 measures of 4 notes) in 4/4 time and no lyrics.\n\nAdd lyric syllables under the first four notes of the melody, in this order: 'hello', 'world', 'sing', 'out'. Save in place at /home/user/Documents/melody.mscz so the score contains at least one lyric syllable and at least one syllable contains the substring 'hel'.",
+  "env": {
+    "files": [
+      {
+        "filename": "melody.mscz",
+        "sandbox_path": "/home/user/Documents/melody.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/melody.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "melody.mscz still exists"
+    },
+    {
+      "command": "check-has-lyrics /home/user/Documents/melody.mscz",
+      "key": "has_lyrics",
+      "expected": true,
+      "description": "Score contains at least one lyric syllable"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/melody.mscz hel",
+      "key": "match",
+      "expected": true,
+      "description": "A lyric syllable contains the substring 'hel'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

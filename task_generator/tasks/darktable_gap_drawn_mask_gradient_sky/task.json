@@ -1,0 +1,50 @@
+{
+  "id": "darktable_gap_drawn_mask_gradient_sky",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/sky_gradient.jpg into the darktable library.\n\nEnable the 'exposure' module with a negative EV (reduce exposure), and add a drawn gradient mask oriented so that the upper half (sky) is affected while the lower half (ground) is left alone. Apply the tag 'grad_sky' to the image, set its star rating to 3 stars, and export it as a JPEG to /home/user/Pictures/sky_gradient_sky_darkened.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "sky_gradient.jpg",
+        "sandbox_path": "/home/user/Pictures/sky_gradient.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported sky_gradient.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation sky_gradient.jpg exposure",
+      "key": "has_operation",
+      "expected": true,
+      "description": "exposure module with gradient drawn mask"
+    },
+    {
+      "command": "check-image-tagged-by-filename sky_gradient.jpg grad_sky",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged grad_sky"
+    },
+    {
+      "command": "check-image-rating-by-filename sky_gradient.jpg 3",
+      "key": "matches",
+      "expected": true,
+      "description": "rating is 3"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/sky_gradient_sky_darkened.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

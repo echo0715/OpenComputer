@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_gap_pattern_fill",
+  "files": [
+    {
+      "filename": "pattern.svg",
+      "sandbox_path": "/home/user/Documents/pattern.svg",
+      "type": "svg"
+    }
+  ]
+}

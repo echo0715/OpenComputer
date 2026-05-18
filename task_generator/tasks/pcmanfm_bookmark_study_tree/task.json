@@ -1,0 +1,28 @@
+{
+  "id": "pcmanfm_bookmark_study_tree",
+  "app": "pcmanfm",
+  "task": "Build a study-material tree at /home/user/Study/. Create three subject directories: /home/user/Study/math, /home/user/Study/physics, /home/user/Study/chemistry. Inside each subject directory create (1) a file notes.md with content 'Subject notes' and (2) a sub-directory exercises/ that contains a file problem1.txt with content 'Problem 1'. Add each of the three subject directories (/home/user/Study/math, /home/user/Study/physics, /home/user/Study/chemistry) as a GTK bookmark in PCManFM's sidebar. Finally, at the top level of /home/user/Study/ create a file index.md containing the text 'Subjects: math, physics, chemistry'. /home/user/Study/ must contain exactly 4 entries at the top level (3 subject directories + index.md).",
+  "env": {"files": []},
+  "verification": [
+    {"command": "check-dir-exists /home/user/Study", "key": "exists", "expected": true, "description": "Study directory exists"},
+    {"command": "check-file-count /home/user/Study 4", "key": "match", "expected": true, "description": "Study top-level has 4 entries"},
+    {"command": "check-file-exists /home/user/Study/math/notes.md", "key": "exists", "expected": true, "description": "math notes.md exists"},
+    {"command": "check-file-exists /home/user/Study/physics/notes.md", "key": "exists", "expected": true, "description": "physics notes.md exists"},
+    {"command": "check-file-exists /home/user/Study/chemistry/notes.md", "key": "exists", "expected": true, "description": "chemistry notes.md exists"},
+    {"command": "check-file-exists /home/user/Study/math/exercises/problem1.txt", "key": "exists", "expected": true, "description": "math problem1.txt exists"},
+    {"command": "check-file-exists /home/user/Study/physics/exercises/problem1.txt", "key": "exists", "expected": true, "description": "physics problem1.txt exists"},
+    {"command": "check-file-exists /home/user/Study/chemistry/exercises/problem1.txt", "key": "exists", "expected": true, "description": "chemistry problem1.txt exists"},
+    {"command": "check-bookmark-exists /home/user/Study/math", "key": "exists", "expected": true, "description": "math directory bookmarked"},
+    {"command": "check-bookmark-exists /home/user/Study/physics", "key": "exists", "expected": true, "description": "physics directory bookmarked"},
+    {"command": "check-bookmark-exists /home/user/Study/chemistry", "key": "exists", "expected": true, "description": "chemistry directory bookmarked"},
+    {"command": "check-file-contains /home/user/Study/index.md math", "key": "contains", "expected": true, "description": "index.md mentions math"},
+    {"command": "check-file-contains /home/user/Study/index.md physics", "key": "contains", "expected": true, "description": "index.md mentions physics"},
+    {"command": "check-file-contains /home/user/Study/index.md chemistry", "key": "contains", "expected": true, "description": "index.md mentions chemistry"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "darktable_rate_reject_workflow",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/good_shot.png and /home/user/Pictures/bad_shot.png into the darktable library.\n\nSet good_shot.png to 5 stars and apply the tag 'keeper' to it; set bad_shot.png to 1 star and apply the tag 'reject' to it. Export only good_shot.png as a JPEG to /home/user/Pictures/selected/good_shot_final.jpg (create the 'selected' directory if it does not exist). Do NOT export bad_shot.png.",
+  "env": {
+    "files": [
+      {
+        "filename": "good_shot.png",
+        "sandbox_path": "/home/user/Pictures/good_shot.png"
+      },
+      {
+        "filename": "bad_shot.png",
+        "sandbox_path": "/home/user/Pictures/bad_shot.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported good_shot.png",
+      "key": "imported",
+      "expected": true,
+      "description": "good_shot.png is imported into darktable library"
+    },
+    {
+      "command": "check-image-imported bad_shot.png",
+      "key": "imported",
+      "expected": true,
+      "description": "bad_shot.png is imported into darktable library"
+    },
+    {
+      "command": "check-image-rating 1 5",
+      "key": "matches",
+      "expected": true,
+      "description": "good_shot.png rating is 5 stars"
+    },
+    {
+      "command": "check-image-rating 2 1",
+      "key": "matches",
+      "expected": true,
+      "description": "bad_shot.png rating is 1 star"
+    },
+    {
+      "command": "check-tag-exists keeper",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'keeper' exists"
+    },
+    {
+      "command": "check-tag-exists reject",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'reject' exists"
+    },
+    {
+      "command": "check-image-tagged 1 keeper",
+      "key": "tagged",
+      "expected": true,
+      "description": "good_shot is tagged with 'keeper'"
+    },
+    {
+      "command": "check-image-tagged 2 reject",
+      "key": "tagged",
+      "expected": true,
+      "description": "bad_shot is tagged with 'reject'"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/selected/good_shot_final.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "good_shot exported as JPEG to selected directory"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

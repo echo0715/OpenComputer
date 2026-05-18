@@ -1,0 +1,45 @@
+{
+  "id": "audacity_resample_export_22050",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/tone44.wav already loaded (a 2-second mono 44.1 kHz WAV).\n\nResample both the track audio and the project rate down to 22050 Hz, then export to /home/user/Music/tone22.wav as 'WAV (Microsoft) signed 16-bit PCM' at the project rate of 22050 Hz.",
+  "env": {
+    "files": [
+      {
+        "filename": "tone44.wav",
+        "sandbox_path": "/home/user/Music/tone44.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Music/tone22.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "Resampled WAV exists"
+    },
+    {
+      "command": "check-export-sample-rate /home/user/Music/tone22.wav 22050",
+      "key": "match",
+      "expected": true,
+      "description": "Sample rate is 22050 Hz"
+    },
+    {
+      "command": "check-export-channels /home/user/Music/tone22.wav 1",
+      "key": "match",
+      "expected": true,
+      "description": "Channel count is 1 (mono)"
+    },
+    {
+      "command": "check-export-codec /home/user/Music/tone22.wav pcm_s16le",
+      "key": "match",
+      "expected": true,
+      "description": "Codec is pcm_s16le"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

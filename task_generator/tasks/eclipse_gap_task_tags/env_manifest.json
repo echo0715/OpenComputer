@@ -1,0 +1,10 @@
+{
+  "task_id": "eclipse_gap_task_tags",
+  "files": [
+    {
+      "filename": "README.txt",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_task_tags/env/README.txt",
+      "sandbox_path": "/home/user/workspace/README.txt"
+    }
+  ]
+}

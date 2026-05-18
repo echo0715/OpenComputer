@@ -1,0 +1,58 @@
+{
+  "id": "obsidian_custom_hotkeys",
+  "app": "obsidian",
+  "task": "In the Obsidian vault at /home/user/Documents/HotkeyVault, configure these custom hotkey bindings:\n- `editor:toggle-bold` ('Toggle bold') → Ctrl+B\n- `editor:toggle-italic` ('Toggle italic') → Ctrl+I\n- `editor:toggle-strikethrough` ('Toggle strikethrough') → Ctrl+Shift+X\n- `editor:toggle-highlight` ('Toggle highlight') → Ctrl+Shift+H\n- `insert-template` ('Insert template') → Ctrl+T\n\nThen create 'HotkeyCheatsheet.md' in the vault root with body:\n\n```\n# Hotkey Cheatsheet\n## Formatting\n- Bold: Ctrl+B\n- Italic: Ctrl+I\n- Strikethrough: Ctrl+Shift+X\n- Highlight: Ctrl+Shift+H\n## Templates\n- Insert: Ctrl+T\n#hotkeys #cheatsheet\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-hotkey /home/user/Documents/HotkeyVault editor:toggle-bold",
+      "key": "has_hotkey",
+      "expected": true,
+      "description": "Bold hotkey set"
+    },
+    {
+      "command": "check-hotkey /home/user/Documents/HotkeyVault editor:toggle-italic",
+      "key": "has_hotkey",
+      "expected": true,
+      "description": "Italic hotkey set"
+    },
+    {
+      "command": "check-hotkey /home/user/Documents/HotkeyVault editor:toggle-strikethrough",
+      "key": "has_hotkey",
+      "expected": true,
+      "description": "Strikethrough hotkey set"
+    },
+    {
+      "command": "check-hotkey /home/user/Documents/HotkeyVault editor:toggle-highlight",
+      "key": "has_hotkey",
+      "expected": true,
+      "description": "Highlight hotkey set"
+    },
+    {
+      "command": "check-hotkey /home/user/Documents/HotkeyVault insert-template",
+      "key": "has_hotkey",
+      "expected": true,
+      "description": "Insert template hotkey set"
+    },
+    {
+      "command": "check-note-exists /home/user/Documents/HotkeyVault HotkeyCheatsheet",
+      "key": "exists",
+      "expected": true,
+      "description": "HotkeyCheatsheet note exists"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/HotkeyVault HotkeyCheatsheet hotkeys",
+      "key": "has_tag",
+      "expected": true,
+      "description": "HotkeyCheatsheet has #hotkeys tag"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

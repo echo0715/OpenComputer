@@ -1,0 +1,49 @@
+{
+  "id": "thunderbird_edit_existing_contact",
+  "app": "thunderbird",
+  "task": "Thunderbird's Address Book already contains a contact `David Lee` with email `david@oldcompany.com`. Update that contact so:\n- primary email = `david.lee@newtech.com`\n- company = `NewTech Industries`\n- notes contain `Transferred from OldCompany in March 2026`\n\nThe contact name must remain `David Lee`.",
+  "env": {
+    "files": [
+      {
+        "filename": "setup_contact.py",
+        "sandbox_path": "/home/user/setup_contact.py"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists David Lee",
+      "key": "found",
+      "expected": true,
+      "description": "Contact David Lee still exists"
+    },
+    {
+      "command": "check-contact-field David Lee primary_email david.lee@newtech.com",
+      "key": "match",
+      "expected": true,
+      "description": "Email updated to david.lee@newtech.com"
+    },
+    {
+      "command": "check-contact-field David Lee company NewTech Industries",
+      "key": "match",
+      "expected": true,
+      "description": "Company updated to NewTech Industries"
+    },
+    {
+      "command": "check-contact-field David Lee notes Transferred from OldCompany",
+      "key": "match",
+      "expected": true,
+      "description": "Notes contain transfer info"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

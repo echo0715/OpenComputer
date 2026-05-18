@@ -1,0 +1,6 @@
+{
+  "task_id": "inkscape_edit_svg_styles",
+  "files": [
+    {"filename": "input.svg", "sandbox_path": "/home/user/Documents/input.svg", "type": "svg"}
+  ]
+}

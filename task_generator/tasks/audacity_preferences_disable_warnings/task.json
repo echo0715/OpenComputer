@@ -1,0 +1,40 @@
+{
+  "id": "audacity_preferences_disable_warnings",
+  "app": "audacity",
+  "task": "Audacity is already running. Disable both of the following Warnings preferences while leaving every other warning unchanged:\n- 'First project save' (the warning shown the first time a project is saved)\n- 'Saving projects as compressed files' (the compressed-save warning)\n\nThe change must be persisted to `~/.audacity-data/audacity.cfg` under the `[Warnings]` section as `FirstProjectSave=0` and `SaveCompressed=0`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-preference Warnings FirstProjectSave 0",
+      "key": "match",
+      "expected": true,
+      "description": "[Warnings] FirstProjectSave=0"
+    },
+    {
+      "command": "check-preference Warnings SaveCompressed 0",
+      "key": "match",
+      "expected": true,
+      "description": "[Warnings] SaveCompressed=0"
+    },
+    {
+      "command": "check-preference-exists Warnings FirstProjectSave",
+      "key": "exists",
+      "expected": true,
+      "description": "FirstProjectSave key is written to audacity.cfg"
+    },
+    {
+      "command": "check-preference-exists Warnings SaveCompressed",
+      "key": "exists",
+      "expected": true,
+      "description": "SaveCompressed key is written to audacity.cfg"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

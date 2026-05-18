@@ -1,0 +1,15 @@
+{
+  "task_id": "thunderbird_edit_existing_contact",
+  "files": [
+    {
+      "filename": "setup_contact.py",
+      "sandbox_path": "/home/user/setup_contact.py",
+      "type": "py"
+    },
+    {
+      "filename": "thunderbird-profile.tar.gz",
+      "sandbox_path": "/tmp/thunderbird-profile.tar.gz",
+      "type": "archive"
+    }
+  ]
+}

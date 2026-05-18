@@ -1,0 +1,28 @@
+{
+  "id": "galculator_hex_arithmetic",
+  "app": "galculator",
+  "task": "In galculator, switch to Paper mode and set the number base to HEX, then compute `FF + 1` in hexadecimal (result is `100` hex, equivalent to 256 decimal).\n\nGalculator must remain in HEX mode so the hexadecimal representation is what is shown. The final display must show exactly the string `100`. Leave galculator open.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-running",
+      "key": "running",
+      "expected": true,
+      "description": "galculator is running"
+    },
+    {
+      "command": "check-display-value 100",
+      "key": "match",
+      "expected": true,
+      "description": "Display shows 100 (which is FF + 1 in hexadecimal)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

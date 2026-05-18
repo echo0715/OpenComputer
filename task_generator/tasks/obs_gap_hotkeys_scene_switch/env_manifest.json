@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_gap_hotkeys_scene_switch",
+  "files": [
+    {
+      "filename": ".keep",
+      "sandbox_path": "/home/user/Documents/.obs_hotkey_task",
+      "type": "placeholder"
+    }
+  ]
+}

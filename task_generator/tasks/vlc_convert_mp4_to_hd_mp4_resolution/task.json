@@ -1,0 +1,57 @@
+{
+  "id": "vlc_convert_mp4_to_hd_mp4_resolution",
+  "app": "vlc",
+  "task": "VLC is already running. Transcode /home/user/Videos/src_hd.mp4 (1920x1080) into a new MP4 file at /home/user/Videos/out_hd.mp4 whose video stream is downscaled to exactly 1280x720, using an MP4 container profile (e.g. H.264 + MP3 or H.264 + AAC).\n\nThe resulting /home/user/Videos/out_hd.mp4 must be an MP4 container holding a video stream at exactly 1280x720 with roughly the same 20-second duration as the source.",
+  "env": {
+    "files": [
+      {
+        "filename": "src_hd.mp4",
+        "sandbox_path": "/home/user/Videos/src_hd.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/src_hd.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source src_hd.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Videos/out_hd.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Converted out_hd.mp4 exists"
+    },
+    {
+      "command": "check-media-format /home/user/Videos/out_hd.mp4 mp4",
+      "key": "match",
+      "expected": true,
+      "description": "out_hd.mp4 is an MP4 container"
+    },
+    {
+      "command": "check-media-has-video /home/user/Videos/out_hd.mp4",
+      "key": "has_video",
+      "expected": true,
+      "description": "out_hd.mp4 has a video stream"
+    },
+    {
+      "command": "check-media-resolution /home/user/Videos/out_hd.mp4 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "out_hd.mp4 video resolution is 1280x720"
+    },
+    {
+      "command": "check-media-duration /home/user/Videos/out_hd.mp4 20 4",
+      "key": "match",
+      "expected": true,
+      "description": "out_hd.mp4 duration is approximately 20 seconds (+/- 4s)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

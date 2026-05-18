@@ -1,0 +1,73 @@
+{
+  "id": "darktable_multi_import_tag",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/photo_a.png and /home/user/Pictures/photo_b.png into the darktable library.\n\nApply the tag 'portfolio' to photo_a.png only and the tag 'review' to photo_b.png only. Set photo_a.png's star rating to 5 stars and photo_b.png's star rating to 3 stars.",
+  "env": {
+    "files": [
+      {
+        "filename": "photo_a.png",
+        "sandbox_path": "/home/user/Pictures/photo_a.png"
+      },
+      {
+        "filename": "photo_b.png",
+        "sandbox_path": "/home/user/Pictures/photo_b.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported photo_a.png",
+      "key": "imported",
+      "expected": true,
+      "description": "photo_a.png is imported into darktable library"
+    },
+    {
+      "command": "check-image-imported photo_b.png",
+      "key": "imported",
+      "expected": true,
+      "description": "photo_b.png is imported into darktable library"
+    },
+    {
+      "command": "check-tag-exists portfolio",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'portfolio' exists"
+    },
+    {
+      "command": "check-tag-exists review",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'review' exists"
+    },
+    {
+      "command": "check-image-tagged 1 portfolio",
+      "key": "tagged",
+      "expected": true,
+      "description": "photo_a is tagged with 'portfolio'"
+    },
+    {
+      "command": "check-image-tagged 2 review",
+      "key": "tagged",
+      "expected": true,
+      "description": "photo_b is tagged with 'review'"
+    },
+    {
+      "command": "check-image-rating 1 5",
+      "key": "matches",
+      "expected": true,
+      "description": "photo_a rating is 5 stars"
+    },
+    {
+      "command": "check-image-rating 2 3",
+      "key": "matches",
+      "expected": true,
+      "description": "photo_b rating is 3 stars"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

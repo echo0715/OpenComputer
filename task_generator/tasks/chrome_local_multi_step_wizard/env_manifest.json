@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_multi_step_wizard",
+  "files": [
+    {
+      "filename": "wizard.html",
+      "sandbox_path": "/home/user/Documents/wizard.html",
+      "type": "html"
+    }
+  ]
+}

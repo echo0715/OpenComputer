@@ -1,0 +1,106 @@
+{
+  "id": "drawio_fix_and_color_workflow",
+  "app": "drawio",
+  "task": "/home/user/Documents/wf_fix.drawio contains 5 series-connected shapes with white fill: 'Input' (cell id 2), 'Clean' (cell id 3), 'Transform' (cell id 4), 'Check' (cell id 5, a diamond/rhombus), 'Save' (cell id 6).\n\nApply these changes:\n1. fillColor 'Input' (id 2) → #dae8fc (blue)\n2. fillColor 'Clean' (id 3) → #d5e8d4 (green)\n3. fillColor 'Transform' (id 4) → #d5e8d4 (green)\n4. fillColor 'Check' (id 5) → #fff2cc (yellow)\n5. fillColor 'Save' (id 6) → #f8cecc (red)\n6. Add a new shape labeled 'Reject'.\n7. Draw an arrow from 'Check' to 'Reject' (the failure branch).\n\nThe page must end up with exactly 6 vertices total. Persist to /home/user/Documents/wf_fix.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "wf_fix.drawio",
+        "sandbox_path": "/home/user/Documents/wf_fix.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/wf_fix.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/wf_fix.drawio 6 0",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 6 vertices (5 original + Reject)"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/wf_fix.drawio Input",
+      "key": "exists",
+      "expected": true,
+      "description": "Input label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/wf_fix.drawio Clean",
+      "key": "exists",
+      "expected": true,
+      "description": "Clean label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/wf_fix.drawio Transform",
+      "key": "exists",
+      "expected": true,
+      "description": "Transform label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/wf_fix.drawio Check",
+      "key": "exists",
+      "expected": true,
+      "description": "Check label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/wf_fix.drawio Save",
+      "key": "exists",
+      "expected": true,
+      "description": "Save label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/wf_fix.drawio Reject",
+      "key": "exists",
+      "expected": true,
+      "description": "Reject added"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/wf_fix.drawio 2 fillColor \"#dae8fc\"",
+      "key": "match",
+      "expected": true,
+      "description": "Input (id 2) fill is blue #dae8fc"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/wf_fix.drawio 3 fillColor \"#d5e8d4\"",
+      "key": "match",
+      "expected": true,
+      "description": "Clean (id 3) fill is green #d5e8d4"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/wf_fix.drawio 4 fillColor \"#d5e8d4\"",
+      "key": "match",
+      "expected": true,
+      "description": "Transform (id 4) fill is green #d5e8d4"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/wf_fix.drawio 5 fillColor \"#fff2cc\"",
+      "key": "match",
+      "expected": true,
+      "description": "Check (id 5) fill is yellow #fff2cc"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/wf_fix.drawio 6 fillColor \"#f8cecc\"",
+      "key": "match",
+      "expected": true,
+      "description": "Save (id 6) fill is red #f8cecc"
+    },
+    {
+      "judge": "llm",
+      "prompt": "Using the connections list (source/target IDs) and the vertices list (IDs to labels), verify that there is an edge whose source label is 'Check' and target label is 'Reject'. Answer yes only if this edge exists.",
+      "command": "connections /home/user/Documents/wf_fix.drawio 0",
+      "context": "command_output",
+      "description": "Connection Check -> Reject exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

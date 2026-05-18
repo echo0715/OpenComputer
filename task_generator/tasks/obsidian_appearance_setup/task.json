@@ -1,0 +1,43 @@
+{
+  "id": "obsidian_appearance_setup",
+  "app": "obsidian",
+  "task": "In the Obsidian vault at /home/user/Documents/ThemeVault, configure the appearance settings as follows:\n- Base theme: light mode (theme set to 'moonstone')\n- Base font size: 18\n- Accent color: '#E11D48' (rose)\n\nThen create 'ThemeTest.md' in the vault root with body:\n\n```\n# Theme Test\nThis note verifies the theme was changed.\nThe editor should now show light mode with larger text.\n#test #appearance\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "appearance /home/user/Documents/ThemeVault theme",
+      "eval": "result.get('value') == 'moonstone'",
+      "description": "Theme set to moonstone (light)"
+    },
+    {
+      "command": "appearance /home/user/Documents/ThemeVault baseFontSize",
+      "eval": "result.get('value') == 18",
+      "description": "Font size set to 18"
+    },
+    {
+      "command": "appearance /home/user/Documents/ThemeVault accentColor",
+      "eval": "result.get('value') == '#E11D48'",
+      "description": "Accent color set to rose"
+    },
+    {
+      "command": "check-note-exists /home/user/Documents/ThemeVault ThemeTest",
+      "key": "exists",
+      "expected": true,
+      "description": "ThemeTest note exists"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/ThemeVault ThemeTest appearance",
+      "key": "has_tag",
+      "expected": true,
+      "description": "ThemeTest has #appearance tag"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

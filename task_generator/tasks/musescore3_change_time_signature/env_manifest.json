@@ -1,0 +1,10 @@
+{
+  "task_id": "musescore3_change_time_signature",
+  "files": [
+    {
+      "filename": "waltz_sketch.mscz",
+      "sandbox_path": "/home/user/Documents/waltz_sketch.mscz",
+      "type": "mscz"
+    }
+  ]
+}

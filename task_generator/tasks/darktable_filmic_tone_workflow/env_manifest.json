@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_filmic_tone_workflow",
+  "files": [
+    {
+      "filename": "contrast.png",
+      "sandbox_path": "/home/user/Pictures/contrast.png",
+      "type": "png"
+    }
+  ]
+}

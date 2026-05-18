@@ -1,0 +1,39 @@
+{
+  "id": "zoom_video_off_on_join",
+  "app": "zoom",
+  "task": "A baseline Zoom config file exists at /home/user/.config/zoomus.conf with `[General]autoTurnOffVideo=false`.\n\nSet `[General]autoTurnOffVideo` to `true` so Zoom turns the camera off whenever a meeting is joined. Save the file in-place at /home/user/.config/zoomus.conf. Do not change any other keys (leave `[General]autoMuteMic` untouched).",
+  "env": {
+    "files": [
+      {
+        "filename": "zoomus.conf",
+        "sandbox_path": "/home/user/.config/zoomus.conf"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-config-exists",
+      "key": "exists",
+      "expected": true,
+      "description": "zoomus.conf exists"
+    },
+    {
+      "command": "check-config General autoTurnOffVideo true",
+      "key": "match",
+      "expected": true,
+      "description": "[General]autoTurnOffVideo is true"
+    },
+    {
+      "command": "check-config General autoMuteMic false",
+      "key": "match",
+      "expected": true,
+      "description": "autoMuteMic left untouched"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

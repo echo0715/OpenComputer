@@ -1,0 +1,52 @@
+{
+  "id": "vscode_workspace_extension_recs",
+  "app": "vscode",
+  "task": "Create a project at `/home/user/projects/fullstack-app` with the following files:\n\n- `.vscode/extensions.json` — recommends these extensions:\n  - `dbaeumer.vscode-eslint`\n  - `esbenp.prettier-vscode`\n  - `bradlc.vscode-tailwindcss`\n  - `ms-python.python`\n- `README.md`:\n  ```\n  # Fullstack App\n  A sample fullstack application.\n  ```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/fullstack-app dbaeumer.vscode-eslint",
+      "key": "recommended",
+      "expected": true,
+      "description": "eslint extension recommended"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/fullstack-app esbenp.prettier-vscode",
+      "key": "recommended",
+      "expected": true,
+      "description": "prettier extension recommended"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/fullstack-app bradlc.vscode-tailwindcss",
+      "key": "recommended",
+      "expected": true,
+      "description": "tailwindcss extension recommended"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/fullstack-app ms-python.python",
+      "key": "recommended",
+      "expected": true,
+      "description": "python extension recommended"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/fullstack-app/README.md",
+      "key": "exists",
+      "expected": true,
+      "description": "README.md exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/fullstack-app/README.md Fullstack App",
+      "key": "contains",
+      "expected": true,
+      "description": "README contains project name"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "id": "draw_network_topology",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/topology_base.odg is open in LibreOffice Draw — page 1 already contains a single ellipse labeled 'Internet'.\n\nBuild a small corporate network topology on page 1, preserving the 'Internet' ellipse:\n- Rectangles labelled exactly 'Firewall', 'Core Router', 'Switch A', 'Switch B', 'PC 01', 'PC 02', 'PC 03', 'PC 04'.\n- Connectors representing these links: 'Internet' → 'Firewall'; 'Firewall' → 'Core Router'; 'Core Router' → 'Switch A'; 'Core Router' → 'Switch B'; 'Switch A' → 'PC 01'; 'Switch A' → 'PC 02'; 'Switch B' → 'PC 03'; 'Switch B' → 'PC 04'.\n\nPage 1 must end up with at least 9 shapes. Also add a custom layer named exactly 'Annotations'. Save the file in-place to /home/user/Documents/topology_base.odg.",
+  "env": {
+    "files": [
+      {
+        "filename": "topology_base.odg",
+        "sandbox_path": "/home/user/Documents/topology_base.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 Internet",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Internet'"
+    },
+    {
+      "command": "check-page-contains 0 Firewall",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Firewall'"
+    },
+    {
+      "command": "check-page-contains 0 \"Core Router\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Core Router'"
+    },
+    {
+      "command": "check-page-contains 0 \"Switch A\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Switch A'"
+    },
+    {
+      "command": "check-page-contains 0 \"Switch B\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Switch B'"
+    },
+    {
+      "command": "check-page-contains 0 \"PC 01\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'PC 01'"
+    },
+    {
+      "command": "check-page-contains 0 \"PC 02\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'PC 02'"
+    },
+    {
+      "command": "check-page-contains 0 \"PC 03\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'PC 03'"
+    },
+    {
+      "command": "check-page-contains 0 \"PC 04\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'PC 04'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 9",
+      "description": "Page 1 has at least 9 shapes"
+    },
+    {
+      "command": "check-layer-exists Annotations",
+      "key": "exists",
+      "expected": true,
+      "description": "A layer named 'Annotations' exists"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

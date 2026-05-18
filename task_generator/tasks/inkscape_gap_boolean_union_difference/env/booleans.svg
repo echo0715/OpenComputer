@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="600" height="400" viewBox="0 0 600 400">
+  <circle id="circA" cx="150" cy="120" r="70" fill="#cc3333"/>
+  <circle id="circB" cx="210" cy="120" r="70" fill="#3333cc"/>
+  <rect id="sqA" x="340" y="60" width="140" height="140" fill="#33aa33"/>
+  <rect id="sqB" x="420" y="140" width="140" height="140" fill="#ee8833"/>
+</svg>

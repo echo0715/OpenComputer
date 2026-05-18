@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_seek_near_end",
+  "files": [
+    {"filename": "long_clip.mp4", "sandbox_path": "/home/user/Videos/long_clip.mp4", "type": "mp4"}
+  ]
+}

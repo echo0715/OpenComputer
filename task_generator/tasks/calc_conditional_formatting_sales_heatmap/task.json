@@ -1,0 +1,57 @@
+{
+  "id": "calc_conditional_formatting_sales_heatmap",
+  "app": "libreoffice_calc",
+  "task": "Open /home/user/Documents/regional_sales.xlsx in LibreOffice Calc. The 'Sales' sheet has bold headers in row 1 (A='Region', B='Q1', C='Q2', D='Q3', E='Q4', F='Total') and 12 regions in rows 2-13. F2:F13 already contain `=SUM(B2:E2)`-style formulas.\n\nApply two conditional-formatting rules:\n- On range B2:E13: a Color Scale (2- or 3-color, red-to-green) so low values shade red and high values shade green.\n- On range F2:F13: a 'Cell value is > 100000' rule that applies a cell style with RED font color and BOLD weight (you may create a new style called 'HighTotal' or reuse the built-in 'Bad' style).\n\nSave the file in xlsx format back to /home/user/Documents/regional_sales.xlsx.",
+  "env": {
+    "files": [
+      {
+        "filename": "regional_sales.xlsx",
+        "sandbox_path": "/home/user/Documents/regional_sales.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-sheet-exists Sales",
+      "key": "exists",
+      "expected": true,
+      "description": "'Sales' sheet exists"
+    },
+    {
+      "command": "check-cell-value A1 Region Sales",
+      "key": "match",
+      "expected": true,
+      "description": "Sales!A1 = 'Region'"
+    },
+    {
+      "command": "check-cell-value F1 Total Sales",
+      "key": "match",
+      "expected": true,
+      "description": "Sales!F1 = 'Total'"
+    },
+    {
+      "command": "check-conditional-format B2:E13 Sales",
+      "key": "match",
+      "expected": true,
+      "description": "Conditional formatting exists on B2:E13"
+    },
+    {
+      "command": "check-conditional-format F2:F13 Sales",
+      "key": "match",
+      "expected": true,
+      "description": "Conditional formatting exists on F2:F13"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/regional_sales.xlsx",
+      "key": "exists",
+      "expected": true,
+      "description": "Saved file exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

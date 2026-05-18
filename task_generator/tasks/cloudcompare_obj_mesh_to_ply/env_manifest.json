@@ -1,0 +1,10 @@
+{
+  "task_id": "cloudcompare_obj_mesh_to_ply",
+  "files": [
+    {
+      "filename": "part.obj",
+      "sandbox_path": "/home/user/Documents/part.obj",
+      "type": "obj"
+    }
+  ]
+}

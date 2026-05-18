@@ -1,0 +1,68 @@
+{
+  "id": "renderdoc_cap_extended_frames",
+  "app": "renderdoc",
+  "task": "Create an extended-capture RenderDoc preset at /home/user/captures/extended.cap for a long-running frame sweep. The file must be valid JSON with a top-level \"rdocConfigData\": 1 marker and a nested \"settings\" object.\n\nUnder settings:\n- executable = \"/usr/local/games/sweep_target\"\n- workingDir = \"/home/user/sweeps\"\n- commandLine = \"--sweep-frames 5000\"\n- environment = [{\"name\": \"RDOC_SWEEP_MODE\", \"value\": \"extended\", \"separator\": \"Platform\", \"mod\": \"Replace\"}]\n- options = {\"APIValidation\": true, \"CaptureCallstacks\": true, \"CaptureAllCmdLists\": true, \"HookIntoChildren\": false, \"RefAllResources\": true, \"VerifyBufferAccess\": false, \"DebugOutputMute\": false}\n- autoStart = false\n- queueFrameCap = 10\n- numQueuedFrames = 30",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-cap-executable /home/user/captures/extended.cap /usr/local/games/sweep_target",
+      "key": "match",
+      "expected": true,
+      "description": "executable"
+    },
+    {
+      "command": "check-cap-working-dir /home/user/captures/extended.cap /home/user/sweeps",
+      "key": "match",
+      "expected": true,
+      "description": "workingDir"
+    },
+    {
+      "command": "check-cap-command-line /home/user/captures/extended.cap --sweep-frames",
+      "key": "match",
+      "expected": true,
+      "description": "--sweep-frames flag"
+    },
+    {
+      "command": "check-cap-env /home/user/captures/extended.cap RDOC_SWEEP_MODE",
+      "key": "present",
+      "expected": true,
+      "description": "RDOC_SWEEP_MODE env present"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/extended.cap APIValidation true",
+      "key": "match",
+      "expected": true,
+      "description": "APIValidation true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/extended.cap CaptureAllCmdLists true",
+      "key": "match",
+      "expected": true,
+      "description": "CaptureAllCmdLists true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/extended.cap RefAllResources true",
+      "key": "match",
+      "expected": true,
+      "description": "RefAllResources true"
+    },
+    {
+      "command": "cap-parse /home/user/captures/extended.cap",
+      "eval": "result.get('queueFrameCap') == 10 and result.get('numQueuedFrames') == 30",
+      "description": "queueFrameCap=10, numQueuedFrames=30"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

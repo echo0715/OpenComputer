@@ -1,0 +1,6 @@
+{
+  "task_id": "firefox_local_js_form_validation",
+  "files": [
+    {"filename": "signup.html", "sandbox_path": "/home/user/Documents/signup.html", "type": "html"}
+  ]
+}

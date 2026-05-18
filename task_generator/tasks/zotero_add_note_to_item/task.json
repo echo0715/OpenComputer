@@ -1,0 +1,39 @@
+{
+  "id": "zotero_add_note_to_item",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. The library contains a book item titled 'Deep Learning' (by Goodfellow and Bengio).\n\nAdd a child note to the 'Deep Learning' item whose body contains exactly the sentence: `foundational textbook on deep learning`. Leave Zotero running so the note is persisted.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists"
+    },
+    {
+      "command": "check-item-note 'Deep Learning'",
+      "key": "has_note",
+      "expected": true,
+      "description": "Deep Learning item has a child note"
+    },
+    {
+      "command": "check-note-contains 'foundational textbook on deep learning'",
+      "key": "contains",
+      "expected": true,
+      "description": "A note contains the required phrase"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "id": "renderdoc_gap_texture_range_channels",
+  "app": "renderdoc",
+  "task": "Reconfigure the Texture Viewer defaults in /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document) so only the red channel is visible and the range is clamped. Apply all of the following edits in a single save:\n\n1. Set `\"TextureViewer_ResetRange\"` to `false` (range persists across captures).\n2. Set `\"TextureViewer_PerTexSettings\"` to `true` (per-texture memory).\n3. Set `\"TextureViewer_ChannelsR\"` to `true`.\n4. Set `\"TextureViewer_ChannelsG\"` to `false`.\n5. Set `\"TextureViewer_ChannelsB\"` to `false`.\n6. Set `\"TextureViewer_ChannelsA\"` to `false`.\n7. Set `\"TextureViewer_RangeMin\"` to the JSON number `0.0`.\n8. Set `\"TextureViewer_RangeMax\"` to the JSON number `0.5`.\n\nThe top-level `\"rdocConfigData\": 1` marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting TextureViewer_ResetRange false",
+      "key": "match",
+      "expected": true,
+      "description": "TextureViewer_ResetRange is false"
+    },
+    {
+      "command": "check-setting TextureViewer_PerTexSettings true",
+      "key": "match",
+      "expected": true,
+      "description": "TextureViewer_PerTexSettings is true"
+    },
+    {
+      "command": "check-setting TextureViewer_ChannelsR true",
+      "key": "match",
+      "expected": true,
+      "description": "Red channel enabled"
+    },
+    {
+      "command": "check-setting TextureViewer_ChannelsG false",
+      "key": "match",
+      "expected": true,
+      "description": "Green channel disabled"
+    },
+    {
+      "command": "check-setting TextureViewer_ChannelsB false",
+      "key": "match",
+      "expected": true,
+      "description": "Blue channel disabled"
+    },
+    {
+      "command": "check-setting TextureViewer_ChannelsA false",
+      "key": "match",
+      "expected": true,
+      "description": "Alpha channel disabled"
+    },
+    {
+      "command": "check-setting TextureViewer_RangeMin 0.0",
+      "key": "match",
+      "expected": true,
+      "description": "Range min is 0.0"
+    },
+    {
+      "command": "check-setting TextureViewer_RangeMax 0.5",
+      "key": "match",
+      "expected": true,
+      "description": "Range max is 0.5"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

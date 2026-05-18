@@ -1,0 +1,111 @@
+{
+  "id": "inkscape_bar_chart_svg",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/barchart.svg — a blank 700x500 canvas.\n\nBuild a bar chart in /home/user/Documents/barchart.svg with these exact contents:\n\n- Layer named 'Chart' containing five vertical bar rectangles side by side, with these exact ids and fills:\n  - bar_q1 fill #1f77b4\n  - bar_q2 fill #ff7f0e\n  - bar_q3 fill #2ca02c\n  - bar_q4 fill #d62728\n  - bar_q5 fill #9467bd\n- One text element with the exact text: Quarterly Revenue\n- A second text element with the exact text: Q1 Q2 Q3 Q4 Q5\n\nThe page must remain 700x500. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "barchart.svg",
+        "sandbox_path": "/home/user/Documents/barchart.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/barchart.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "barchart.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/barchart.svg 700 500",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 700x500"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/barchart.svg Chart",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Chart' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/barchart.svg bar_q1",
+      "key": "exists",
+      "expected": true,
+      "description": "bar_q1 exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/barchart.svg bar_q1 fill #1f77b4",
+      "key": "match",
+      "expected": true,
+      "description": "bar_q1 fill is #1f77b4"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/barchart.svg bar_q2",
+      "key": "exists",
+      "expected": true,
+      "description": "bar_q2 exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/barchart.svg bar_q2 fill #ff7f0e",
+      "key": "match",
+      "expected": true,
+      "description": "bar_q2 fill is #ff7f0e"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/barchart.svg bar_q3",
+      "key": "exists",
+      "expected": true,
+      "description": "bar_q3 exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/barchart.svg bar_q3 fill #2ca02c",
+      "key": "match",
+      "expected": true,
+      "description": "bar_q3 fill is #2ca02c"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/barchart.svg bar_q4",
+      "key": "exists",
+      "expected": true,
+      "description": "bar_q4 exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/barchart.svg bar_q4 fill #d62728",
+      "key": "match",
+      "expected": true,
+      "description": "bar_q4 fill is #d62728"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/barchart.svg bar_q5",
+      "key": "exists",
+      "expected": true,
+      "description": "bar_q5 exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/barchart.svg bar_q5 fill #9467bd",
+      "key": "match",
+      "expected": true,
+      "description": "bar_q5 fill is #9467bd"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/barchart.svg 'Quarterly Revenue'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Quarterly Revenue' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/barchart.svg 'Q1 Q2 Q3 Q4 Q5'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Q1 Q2 Q3 Q4 Q5' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

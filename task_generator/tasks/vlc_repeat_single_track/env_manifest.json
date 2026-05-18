@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_repeat_single_track",
+  "files": [
+    {"filename": "loopme.mp4", "sandbox_path": "/home/user/Videos/loopme.mp4", "type": "mp4"}
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "renderdoc_appearance_monospace_profile",
+  "app": "renderdoc",
+  "task": "Reconfigure the RenderDoc UI for a monospaced reading profile. Edit the JSON document at /home/user/.local/share/qrenderdoc/UI.config and apply ALL of these changes in a single save:\n\n1. Set \"UIStyle\" to the string \"Light\".\n2. Set \"Font_GlobalScale\" to the number 1.25.\n3. Set \"Font_Family\" to the string \"DejaVu Sans\".\n4. Set \"Font_MonoFamily\" to the string \"DejaVu Sans Mono\".\n5. Set \"Font_PreferMonospaced\" to the boolean true.\n\nThe top-level \"rdocConfigData\": 1 marker must remain present. Do not remove any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-theme Light",
+      "key": "match",
+      "expected": true,
+      "description": "UIStyle Light"
+    },
+    {
+      "command": "check-font-scale 1.25",
+      "key": "match",
+      "expected": true,
+      "description": "Font_GlobalScale 1.25"
+    },
+    {
+      "command": "check-setting Font_Family \"DejaVu Sans\"",
+      "key": "match",
+      "expected": true,
+      "description": "Font_Family DejaVu Sans"
+    },
+    {
+      "command": "check-setting Font_MonoFamily \"DejaVu Sans Mono\"",
+      "key": "match",
+      "expected": true,
+      "description": "Font_MonoFamily DejaVu Sans Mono"
+    },
+    {
+      "command": "check-setting Font_PreferMonospaced true",
+      "key": "match",
+      "expected": true,
+      "description": "Font_PreferMonospaced true"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

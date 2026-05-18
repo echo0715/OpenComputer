@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_gap_video_crop_filter",
+  "files": [
+    {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4", "type": "mp4"}
+  ]
+}

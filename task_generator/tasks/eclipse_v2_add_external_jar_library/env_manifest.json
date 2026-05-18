@@ -1,0 +1,30 @@
+{
+  "task_id": "eclipse_v2_add_external_jar_library",
+  "files": [
+    {
+      "filename": "JsonTools/.project",
+      "sandbox_path": "/home/user/workspace/JsonTools/.project",
+      "type": "project"
+    },
+    {
+      "filename": "JsonTools/.classpath",
+      "sandbox_path": "/home/user/workspace/JsonTools/.classpath",
+      "type": "classpath"
+    },
+    {
+      "filename": "JsonTools/.settings/org.eclipse.jdt.core.prefs",
+      "sandbox_path": "/home/user/workspace/JsonTools/.settings/org.eclipse.jdt.core.prefs",
+      "type": "prefs"
+    },
+    {
+      "filename": "JsonTools/src/com/jsontools/JsonMain.java",
+      "sandbox_path": "/home/user/workspace/JsonTools/src/com/jsontools/JsonMain.java",
+      "type": "java"
+    },
+    {
+      "filename": "JsonTools/lib/gson-2.10.1.jar",
+      "sandbox_path": "/home/user/workspace/JsonTools/lib/gson-2.10.1.jar",
+      "type": "jar"
+    }
+  ]
+}

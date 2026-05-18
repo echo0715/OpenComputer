@@ -1,0 +1,44 @@
+{
+  "id": "audacity_export_segment_wav",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/long.wav already loaded (a 5-second mono 44.1 kHz WAV file).\n\nExport only the first second of the audio (from 0.0s to 1.0s) as a WAV file to /home/user/Music/first_second.wav in 'WAV (Microsoft) signed 16-bit PCM' format.",
+  "env": {
+    "files": [
+      {
+        "filename": "long.wav",
+        "sandbox_path": "/home/user/Music/long.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Music/first_second.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "Selection WAV exists"
+    },
+    {
+      "command": "check-export-codec /home/user/Music/first_second.wav pcm_s16le",
+      "key": "match",
+      "expected": true,
+      "description": "Codec is pcm_s16le"
+    },
+    {
+      "command": "check-export-sample-rate /home/user/Music/first_second.wav 44100",
+      "key": "match",
+      "expected": true,
+      "description": "Sample rate is 44100"
+    },
+    {
+      "command": "export-info /home/user/Music/first_second.wav",
+      "eval": "0.7 <= float(result.get('format', {}).get('duration', 0)) <= 1.4",
+      "description": "Duration is approximately 1 second (between 0.7s and 1.4s)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

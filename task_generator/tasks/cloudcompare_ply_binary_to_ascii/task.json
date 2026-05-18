@@ -1,0 +1,39 @@
+{
+  "id": "cloudcompare_ply_binary_to_ascii",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/scan_binary.ply is a binary PLY with 500 points.\n\nSave the same cloud as an ASCII PLY at /home/user/Documents/scan_ascii.ply (ASCII encoding). Do not modify the point data — only the file format should change.",
+  "env": {
+    "files": [
+      {
+        "filename": "scan_binary.ply",
+        "sandbox_path": "/home/user/Documents/scan_binary.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/scan_ascii.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "ASCII PLY output exists"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/scan_ascii.ply ascii",
+      "key": "match",
+      "expected": true,
+      "description": "Output PLY is ASCII encoded"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/scan_ascii.ply 500",
+      "key": "match",
+      "expected": true,
+      "description": "Output has exactly 500 points"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

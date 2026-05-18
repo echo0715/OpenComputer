@@ -1,0 +1,57 @@
+{
+  "id": "firefox_form_fill_httpbin",
+  "app": "firefox",
+  "task": "On https://httpbin.org/forms/post, fill the form with these exact values:\n- Customer name: Alice Johnson\n- Telephone: 555-0142\n- E-mail: alice@example.com\n- Size: Medium\n- Topping: 'Bacon' and 'Cheese' checked, all other toppings unchecked\n- Delivery instructions: Ring the doorbell twice\n\nDo NOT submit the form. Leave the tab on https://httpbin.org/forms/post with all the values visible in the form fields.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited httpbin.org/forms/post",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/forms/post was visited"
+    },
+    {
+      "command": "input \"input[name='custname']\"",
+      "eval": "result.get('value') == 'Alice Johnson'",
+      "description": "Customer name field contains 'Alice Johnson'"
+    },
+    {
+      "command": "input \"input[name='custtel']\"",
+      "eval": "result.get('value') == '555-0142'",
+      "description": "Telephone field contains '555-0142'"
+    },
+    {
+      "command": "input \"input[name='custemail']\"",
+      "eval": "result.get('value') == 'alice@example.com'",
+      "description": "Email field contains 'alice@example.com'"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=size][value=medium]').checked\"",
+      "eval": "result.get('value') == True or result.get('value') == 'true'",
+      "description": "Medium size radio button is selected"
+    },
+    {
+      "command": "input \"textarea[name='delivery']\"",
+      "eval": "result.get('value') == 'Ring the doorbell twice'",
+      "description": "Delivery instructions contain 'Ring the doorbell twice'"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=topping][value=bacon]').checked\"",
+      "eval": "result.get('value') == True or result.get('value') == 'true'",
+      "description": "Bacon topping is checked"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=topping][value=cheese]').checked\"",
+      "eval": "result.get('value') == True or result.get('value') == 'true'",
+      "description": "Cheese topping is checked"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 3
+  }
+}

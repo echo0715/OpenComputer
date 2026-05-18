@@ -1,0 +1,46 @@
+{
+  "id": "firefox_set_multiple_preferences",
+  "app": "firefox",
+  "task": "Configure these four Firefox preferences so they persist:\n- `browser.tabs.closeWindowWithLastTab` -> false\n- `browser.search.suggest.enabled` -> false\n- `browser.urlbar.showSearchSuggestionsFirst` -> false\n- `dom.webnotifications.enabled` -> false\n\nThen navigate to https://example.com to confirm the browser still loads pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-pref browser.tabs.closeWindowWithLastTab false",
+      "key": "match",
+      "expected": true,
+      "description": "browser.tabs.closeWindowWithLastTab is set to false"
+    },
+    {
+      "command": "check-pref browser.search.suggest.enabled false",
+      "key": "match",
+      "expected": true,
+      "description": "browser.search.suggest.enabled is set to false"
+    },
+    {
+      "command": "check-pref browser.urlbar.showSearchSuggestionsFirst false",
+      "key": "match",
+      "expected": true,
+      "description": "browser.urlbar.showSearchSuggestionsFirst is set to false"
+    },
+    {
+      "command": "check-pref dom.webnotifications.enabled false",
+      "key": "match",
+      "expected": true,
+      "description": "dom.webnotifications.enabled is set to false"
+    },
+    {
+      "command": "check-url-visited example.com",
+      "key": "visited",
+      "expected": true,
+      "description": "example.com was visited after preference changes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

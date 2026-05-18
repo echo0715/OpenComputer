@@ -1,0 +1,25 @@
+{
+  "task_id": "kdenlive_square_instagram_project",
+  "files": [
+    {
+      "filename": "square_ig.kdenlive",
+      "sandbox_path": "/home/user/Documents/square_ig.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "ig1.mp4",
+      "sandbox_path": "/home/user/Videos/ig1.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "ig2.mp4",
+      "sandbox_path": "/home/user/Videos/ig2.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "ig3.mp4",
+      "sandbox_path": "/home/user/Videos/ig3.mp4",
+      "type": "mp4"
+    }
+  ]
+}

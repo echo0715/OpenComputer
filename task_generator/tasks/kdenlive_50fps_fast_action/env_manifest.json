@@ -1,0 +1,20 @@
+{
+  "task_id": "kdenlive_50fps_fast_action",
+  "files": [
+    {
+      "filename": "fast_action.kdenlive",
+      "sandbox_path": "/home/user/Documents/fast_action.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "action1.mp4",
+      "sandbox_path": "/home/user/Videos/action1.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "action2.mp4",
+      "sandbox_path": "/home/user/Videos/action2.mp4",
+      "type": "mp4"
+    }
+  ]
+}

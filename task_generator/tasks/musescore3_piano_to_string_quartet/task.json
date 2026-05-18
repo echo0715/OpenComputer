@@ -1,0 +1,122 @@
+{
+  "id": "musescore3_piano_to_string_quartet",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/piano_sketch.mscz — a single Piano part in C major 4/4 with 4 measures of 4 quarter notes each (16 notes total), no other instruments, no dynamics, no articulations.\n\nArrange this piano solo as a piano quartet (Piano + Violin + Viola + Violoncello), then save and export:\n\n- Add three string instruments below the Piano so the final score has exactly 4 parts in this order: Piano, Violin, Viola, Violoncello.\n- Copy the Piano melody onto the Violin staff so Violin plays the exact same 16 quarter-note pitches and rhythms as the Piano.\n- Fill the Viola staff with one whole note per measure (4 whole notes total) at exactly these pitches: A3, D4, G3, C4.\n- Fill the Violoncello staff with 4 quarter notes per measure (16 total) as a walking bass at exactly these pitches in order:\n  - m1: C3, E3, G3, E3\n  - m2: F3, A3, C4, A3\n  - m3: G3, B3, D4, B3\n  - m4: C3, E3, G3, C4\n- Add dynamic markings at the start of each measure: m1 = mp, m2 = mf, m3 = p, m4 = f.\n- Add a staccato articulation to every one of the 4 cello quarter notes in measure 4. Do not add staccato anywhere else.\n- Save in place at /home/user/Documents/piano_sketch.mscz.\n- Export an Uncompressed MusicXML to exactly /home/user/Documents/piano_sketch.musicxml.\n\nAfter saving, the score must have exactly 4 parts (Piano, Violin, Viola, Violoncello), still 4 measures, at least 52 notes total (16 Piano + 16 Violin + 4 Viola + 16 Violoncello), the time signature still 4/4, the dynamics mp/mf/p/f present at measures 1/2/3/4, a staccato in measure 4, and exactly 4 staccato articulations in the whole score. The MusicXML export at /home/user/Documents/piano_sketch.musicxml must have exactly 4 parts.",
+  "env": {
+    "files": [
+      {
+        "filename": "piano_sketch.mscz",
+        "sandbox_path": "/home/user/Documents/piano_sketch.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/piano_sketch.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "piano_sketch.mscz still exists"
+    },
+    {
+      "command": "check-part-count /home/user/Documents/piano_sketch.mscz 4",
+      "key": "match",
+      "expected": true,
+      "description": "Score has exactly 4 parts (piano quartet)"
+    },
+    {
+      "command": "check-instrument /home/user/Documents/piano_sketch.mscz Piano",
+      "key": "exists",
+      "expected": true,
+      "description": "Piano instrument still present"
+    },
+    {
+      "command": "check-instrument /home/user/Documents/piano_sketch.mscz Violin",
+      "key": "exists",
+      "expected": true,
+      "description": "Violin instrument present"
+    },
+    {
+      "command": "check-instrument /home/user/Documents/piano_sketch.mscz Viola",
+      "key": "exists",
+      "expected": true,
+      "description": "Viola instrument present"
+    },
+    {
+      "command": "check-instrument /home/user/Documents/piano_sketch.mscz Violoncello",
+      "key": "exists",
+      "expected": true,
+      "description": "Violoncello instrument present"
+    },
+    {
+      "command": "check-measure-count /home/user/Documents/piano_sketch.mscz 4",
+      "key": "match",
+      "expected": true,
+      "description": "Still 4 measures"
+    },
+    {
+      "command": "check-time-signature /home/user/Documents/piano_sketch.mscz 4 4",
+      "key": "match",
+      "expected": true,
+      "description": "Time signature still 4/4"
+    },
+    {
+      "command": "check-note-count-at-least /home/user/Documents/piano_sketch.mscz 52",
+      "key": "match",
+      "expected": true,
+      "description": "At least 52 notes total (16 + 16 + 4 + 16)"
+    },
+    {
+      "command": "check-dynamic-in-measure /home/user/Documents/piano_sketch.mscz 1 mp",
+      "key": "match",
+      "expected": true,
+      "description": "mp dynamic at measure 1"
+    },
+    {
+      "command": "check-dynamic-in-measure /home/user/Documents/piano_sketch.mscz 2 mf",
+      "key": "match",
+      "expected": true,
+      "description": "mf dynamic at measure 2"
+    },
+    {
+      "command": "check-dynamic-in-measure /home/user/Documents/piano_sketch.mscz 3 p",
+      "key": "match",
+      "expected": true,
+      "description": "p dynamic at measure 3"
+    },
+    {
+      "command": "check-dynamic-in-measure /home/user/Documents/piano_sketch.mscz 4 f",
+      "key": "match",
+      "expected": true,
+      "description": "f dynamic at measure 4"
+    },
+    {
+      "command": "check-articulation-in-measure /home/user/Documents/piano_sketch.mscz 4 staccato",
+      "key": "match",
+      "expected": true,
+      "description": "Staccato articulation in measure 4"
+    },
+    {
+      "command": "check-articulation-count /home/user/Documents/piano_sketch.mscz staccato 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 staccato articulations in the score"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/piano_sketch.musicxml",
+      "key": "exists",
+      "expected": true,
+      "description": "MusicXML export exists"
+    },
+    {
+      "command": "check-musicxml-parts /home/user/Documents/piano_sketch.musicxml 4",
+      "key": "match",
+      "expected": true,
+      "description": "MusicXML export has exactly 4 parts"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

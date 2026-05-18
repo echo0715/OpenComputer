@@ -1,0 +1,57 @@
+{
+  "id": "audacity_gap_generate_tone",
+  "app": "audacity",
+  "task": "Audacity is open with an empty project (no tracks loaded).\n\nGenerate a mono sine tone with frequency 880 Hz, amplitude 0.6, duration 3.0 seconds, at the default project rate of 44100 Hz, and export it to /home/user/Music/generated_tone.wav as 'WAV (Microsoft) signed 16-bit PCM' at 44100 Hz mono.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Music/generated_tone.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "Generated tone WAV exists"
+    },
+    {
+      "command": "check-export-codec /home/user/Music/generated_tone.wav pcm_s16le",
+      "key": "match",
+      "expected": true,
+      "description": "Codec pcm_s16le"
+    },
+    {
+      "command": "check-export-sample-rate /home/user/Music/generated_tone.wav 44100",
+      "key": "match",
+      "expected": true,
+      "description": "44100 Hz"
+    },
+    {
+      "command": "check-export-channels /home/user/Music/generated_tone.wav 1",
+      "key": "match",
+      "expected": true,
+      "description": "Mono"
+    },
+    {
+      "command": "check-export-duration-min /home/user/Music/generated_tone.wav 2.9",
+      "key": "match",
+      "expected": true,
+      "description": "Duration ~3s"
+    },
+    {
+      "command": "check-export-peak-db /home/user/Music/generated_tone.wav -5.5 -3.5",
+      "key": "match",
+      "expected": true,
+      "description": "Peak near -4.4 dBFS (0.6 amplitude sine)"
+    },
+    {
+      "command": "check-export-dominant-freq /home/user/Music/generated_tone.wav 0.5 2.5 880 2",
+      "key": "match",
+      "expected": true,
+      "description": "Dominant frequency is 880 Hz"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

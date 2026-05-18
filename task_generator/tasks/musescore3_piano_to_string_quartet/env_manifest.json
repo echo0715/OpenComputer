@@ -1,0 +1,10 @@
+{
+  "task_id": "musescore3_piano_to_string_quartet",
+  "files": [
+    {
+      "filename": "piano_sketch.mscz",
+      "sandbox_path": "/home/user/Documents/piano_sketch.mscz",
+      "type": "mscz"
+    }
+  ]
+}

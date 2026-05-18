@@ -1,0 +1,68 @@
+{
+  "id": "freecad_gap_partdesign_pad_bracket",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/bracket_start.FCStd (empty document).\n\nCreate a PartDesign Body named exactly 'BracketBody' containing:\n- A Sketch on the XY plane with a closed L-shaped profile bounded by 60 mm (X) by 40 mm (Y) with leg thickness 10 mm, e.g. corners (0,0) -> (60,0) -> (60,10) -> (10,10) -> (10,40) -> (0,40) -> (0,0).\n- A Pad from that sketch named exactly 'LBracket', with Length = 30 mm and Midplane enabled (symmetric along Z).\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "bracket_start.FCStd",
+        "sandbox_path": "/home/user/Documents/bracket_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/bracket_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/bracket_start.FCStd BracketBody",
+      "key": "exists",
+      "expected": true,
+      "description": "BracketBody exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/bracket_start.FCStd BracketBody PartDesign::Body",
+      "key": "match",
+      "expected": true,
+      "description": "BracketBody is a PartDesign::Body"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/bracket_start.FCStd LBracket",
+      "key": "exists",
+      "expected": true,
+      "description": "LBracket Pad exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/bracket_start.FCStd LBracket PartDesign::Pad",
+      "key": "match",
+      "expected": true,
+      "description": "LBracket is a PartDesign::Pad"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/bracket_start.FCStd LBracket Length 30",
+      "key": "match",
+      "expected": true,
+      "description": "Pad Length = 30"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/bracket_start.FCStd LBracket Midplane true",
+      "key": "match",
+      "expected": true,
+      "description": "Pad Midplane enabled"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/bracket_start.FCStd Sketcher::SketchObject 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one Sketch in document"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

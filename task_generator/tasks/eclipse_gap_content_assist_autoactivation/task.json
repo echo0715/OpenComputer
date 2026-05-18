@@ -1,0 +1,44 @@
+{
+  "id": "eclipse_gap_content_assist_autoactivation",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nConfigure the Java editor's Content Assist preferences so the auto-activation triggers are exactly '.@' and the auto-activation delay is 50 milliseconds. The change must be persisted to the workspace preferences (`org.eclipse.jdt.ui.prefs`: `content_assist_autoactivation_triggers_java=.@`, `content_assist_autoactivation_delay=50`).",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.ui.prefs content_assist_autoactivation_triggers_java .@",
+      "key": "matches",
+      "expected": true,
+      "description": "Auto-activation triggers = .@"
+    },
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.ui.prefs content_assist_autoactivation_delay 50",
+      "key": "matches",
+      "expected": true,
+      "description": "Auto-activation delay = 50"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quick Notes</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 30px auto; padding: 20px; }
+  h1 { margin-top: 0; }
+  .form { background: #fafafa; border: 1px solid #ccc; padding: 14px; border-radius: 6px; margin-bottom: 16px; }
+  .form input, .form textarea { display: block; width: 100%; margin: 6px 0; padding: 6px; font-family: inherit; font-size: 14px; }
+  .form textarea { min-height: 60px; }
+  .note { border: 1px solid #ddd; padding: 12px; border-radius: 6px; margin-bottom: 10px; background: #fff; }
+  .note h3 { margin: 0 0 6px; }
+  .note button { background: #f44; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; }
+  #note-count-wrap { margin-bottom: 12px; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>Quick Notes</h1>
+<div id="note-count-wrap">Total notes: <span id="note-count">0</span></div>
+<div class="form">
+  <input id="note-title" placeholder="Note title">
+  <textarea id="note-body" placeholder="Note body"></textarea>
+  <button id="add-note">Add Note</button>
+</div>
+<div id="notes-list"></div>
+<script>
+  const notes = [];
+  function render() {
+    const box = document.getElementById("notes-list");
+    box.innerHTML = "";
+    notes.forEach((n, i) => {
+      const d = document.createElement("div");
+      d.className = "note";
+      const h = document.createElement("h3");
+      h.textContent = n.title;
+      d.appendChild(h);
+      const p = document.createElement("p");
+      p.textContent = n.body;
+      d.appendChild(p);
+      const del = document.createElement("button");
+      del.textContent = "Delete";
+      del.onclick = () => { notes.splice(i, 1); render(); };
+      d.appendChild(del);
+      box.appendChild(d);
+    });
+    document.getElementById("note-count").textContent = notes.length;
+  }
+  document.getElementById("add-note").onclick = () => {
+    const t = document.getElementById("note-title").value.trim();
+    const b = document.getElementById("note-body").value.trim();
+    if (!t) return;
+    notes.push({ title: t, body: b });
+    document.getElementById("note-title").value = "";
+    document.getElementById("note-body").value = "";
+    render();
+  };
+  render();
+</script>
+</body>
+</html>

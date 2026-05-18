@@ -1,0 +1,25 @@
+{
+  "task_id": "godot4_create_standard_material_resource",
+  "files": [
+    {
+      "filename": "project.godot",
+      "sandbox_path": "/home/user/godot_projects/material_game/project.godot",
+      "type": "godot"
+    },
+    {
+      "filename": "main.tscn",
+      "sandbox_path": "/home/user/godot_projects/material_game/main.tscn",
+      "type": "tscn"
+    },
+    {
+      "filename": "materials/red_material.tres",
+      "sandbox_path": "/home/user/godot_projects/material_game/materials/red_material.tres",
+      "type": "tres"
+    },
+    {
+      "filename": "icon.svg",
+      "sandbox_path": "/home/user/godot_projects/material_game/icon.svg",
+      "type": "svg"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "inkscape_business_card_layout",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/card.svg — a blank 350x200 canvas.\n\nBuild a business card in /home/user/Documents/card.svg with these exact contents:\n\n- Layer named 'Card' containing:\n  - A rectangle covering the entire page with id `card_bg` and fill #0B3D91.\n  - A small circle (avatar placeholder) with id `avatar_circle` and fill #ffffff.\n- Three text elements with the exact strings: 'Jane Doe', 'Senior Engineer', 'jane@example.com'.\n\nThe page must remain 350x200. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "card.svg",
+        "sandbox_path": "/home/user/Documents/card.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/card.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "card.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/card.svg 350 200",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 350x200"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/card.svg Card",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Card' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/card.svg card_bg",
+      "key": "exists",
+      "expected": true,
+      "description": "card_bg exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/card.svg card_bg fill #0B3D91",
+      "key": "match",
+      "expected": true,
+      "description": "card_bg fill is #0B3D91"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/card.svg avatar_circle",
+      "key": "exists",
+      "expected": true,
+      "description": "avatar_circle exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/card.svg avatar_circle fill #ffffff",
+      "key": "match",
+      "expected": true,
+      "description": "avatar_circle fill is #ffffff"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/card.svg 'Jane Doe'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Jane Doe' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/card.svg 'Senior Engineer'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Senior Engineer' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/card.svg jane",
+      "key": "contains",
+      "expected": true,
+      "description": "Email text containing 'jane' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

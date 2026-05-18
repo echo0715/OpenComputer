@@ -1,0 +1,64 @@
+{
+  "id": "pcmanfm_symlink_dotfile_mirror",
+  "app": "pcmanfm",
+  "task": "Set up a dotfiles mirror using symbolic links:\n1. Create a real dotfiles directory at /home/user/dotfiles/ containing three files with these exact contents:\n   - .vimrc — 'set number'\n   - .bashrc_extra — 'alias ll=ls -la'\n   - .gitignore_global — '*.swp'\n2. In /home/user/, create three symlinks (using absolute path targets):\n   - /home/user/.vimrc_link → /home/user/dotfiles/.vimrc\n   - /home/user/.bashrc_link → /home/user/dotfiles/.bashrc_extra\n   - /home/user/.gitignore_link → /home/user/dotfiles/.gitignore_global\n3. Add /home/user/dotfiles as a GTK bookmark.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/dotfiles",
+      "key": "exists",
+      "expected": true,
+      "description": "dotfiles directory exists"
+    },
+    {
+      "command": "check-file-contains /home/user/dotfiles/.vimrc set",
+      "key": "contains",
+      "expected": true,
+      "description": ".vimrc has expected content"
+    },
+    {
+      "command": "check-file-contains /home/user/dotfiles/.bashrc_extra alias",
+      "key": "contains",
+      "expected": true,
+      "description": ".bashrc_extra has expected content"
+    },
+    {
+      "command": "check-file-contains /home/user/dotfiles/.gitignore_global swp",
+      "key": "contains",
+      "expected": true,
+      "description": ".gitignore_global has expected content"
+    },
+    {
+      "command": "check-symlink /home/user/.vimrc_link /home/user/dotfiles/.vimrc",
+      "key": "target_matches",
+      "expected": true,
+      "description": ".vimrc_link points to dotfiles/.vimrc"
+    },
+    {
+      "command": "check-symlink /home/user/.bashrc_link /home/user/dotfiles/.bashrc_extra",
+      "key": "target_matches",
+      "expected": true,
+      "description": ".bashrc_link points to dotfiles/.bashrc_extra"
+    },
+    {
+      "command": "check-symlink /home/user/.gitignore_link /home/user/dotfiles/.gitignore_global",
+      "key": "target_matches",
+      "expected": true,
+      "description": ".gitignore_link points to dotfiles/.gitignore_global"
+    },
+    {
+      "command": "check-bookmark-exists /home/user/dotfiles",
+      "key": "exists",
+      "expected": true,
+      "description": "dotfiles is a GTK bookmark"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "cloudcompare_translate_origin_bbox",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/offset.ply is an ASCII PLY with 400 points whose bounding box is roughly (95, 95, 95)..(105, 105, 105).\n\nTranslate the cloud by approximately (-100, -100, -100) so the entire cloud lies fully inside the axis-aligned box (-10, -10, -10)..(10, 10, 10), and export the translated cloud as a binary little-endian PLY at /home/user/Documents/offset_translated.ply. Do not drop any points.",
+  "env": {
+    "files": [
+      {
+        "filename": "offset.ply",
+        "sandbox_path": "/home/user/Documents/offset.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/offset_translated.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Translated PLY exists"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/offset_translated.ply binary_little_endian",
+      "key": "match",
+      "expected": true,
+      "description": "Output is binary little-endian PLY"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/offset_translated.ply 400",
+      "key": "match",
+      "expected": true,
+      "description": "All 400 points preserved"
+    },
+    {
+      "command": "check-bbox-within /home/user/Documents/offset_translated.ply -10 -10 -10 10 10 10",
+      "key": "match",
+      "expected": true,
+      "description": "Cloud is fully inside [-10,-10,-10]..[10,10,10]"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_gap_streaming_output_settings",
+  "files": [
+    {
+      "filename": ".keep",
+      "sandbox_path": "/home/user/Documents/.obs_stream_task",
+      "type": "placeholder"
+    }
+  ]
+}

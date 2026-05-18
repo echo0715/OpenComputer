@@ -1,0 +1,81 @@
+{
+  "id": "obsidian_add_links_to_existing",
+  "app": "obsidian",
+  "task": "The Obsidian vault at /home/user/Documents/LinkVault has 5 isolated notes with no links between them. Append a `## Related` section at the end of each note containing the listed wikilinks:\n\n- 'Python.md' — `## Related` with [[JavaScript]] and [[Git]]\n- 'JavaScript.md' — `## Related` with [[Python]] and [[React]]\n- 'React.md' — `## Related` with [[JavaScript]] and [[TypeScript]]\n- 'TypeScript.md' — `## Related` with [[JavaScript]] and [[React]]\n- 'Git.md' — `## Related` with [[Python]] and [[JavaScript]]\n\nThen create 'Map of Content.md' in the vault root with body:\n\n```\n# Map of Content\n\n## Languages\n- [[Python]]\n- [[JavaScript]]\n- [[TypeScript]]\n\n## Frameworks\n- [[React]]\n\n## Tools\n- [[Git]]\n\n#moc #overview\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault Python JavaScript",
+      "key": "links_to",
+      "expected": true,
+      "description": "Python links to JavaScript"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault Python Git",
+      "key": "links_to",
+      "expected": true,
+      "description": "Python links to Git"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault JavaScript React",
+      "key": "links_to",
+      "expected": true,
+      "description": "JavaScript links to React"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault React TypeScript",
+      "key": "links_to",
+      "expected": true,
+      "description": "React links to TypeScript"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault TypeScript React",
+      "key": "links_to",
+      "expected": true,
+      "description": "TypeScript links to React"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault Git Python",
+      "key": "links_to",
+      "expected": true,
+      "description": "Git links to Python"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/LinkVault Python Related",
+      "key": "has_heading",
+      "expected": true,
+      "description": "Python has Related heading"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault 'Map of Content' Python",
+      "key": "links_to",
+      "expected": true,
+      "description": "Map of Content links to Python"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/LinkVault 'Map of Content' Git",
+      "key": "links_to",
+      "expected": true,
+      "description": "Map of Content links to Git"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/LinkVault 'Map of Content' moc",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Map of Content has #moc tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/LinkVault",
+      "eval": "result.get('count') == 6",
+      "description": "Vault has exactly 6 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "eclipse_gap_convert_to_gradle",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the plain Java project 'DemoApp'.\n\nConvert 'DemoApp' to a Gradle (Buildship) project so that:\n\n- /home/user/workspace/DemoApp/build.gradle exists, applies the 'java' plugin, and sets sourceCompatibility to 17.\n- The project's .project file declares the Buildship Gradle nature `org.eclipse.buildship.core.gradleprojectnature`.",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/workspace/DemoApp/build.gradle",
+      "key": "exists",
+      "expected": true,
+      "description": "build.gradle exists"
+    },
+    {
+      "command": "check-file-contains /home/user/workspace/DemoApp/build.gradle java",
+      "key": "contains",
+      "expected": true,
+      "description": "applies java plugin"
+    },
+    {
+      "command": "check-file-contains /home/user/workspace/DemoApp/build.gradle 17",
+      "key": "contains",
+      "expected": true,
+      "description": "sourceCompatibility 17 present"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/DemoApp org.eclipse.buildship.core.gradleprojectnature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Buildship Gradle nature added"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

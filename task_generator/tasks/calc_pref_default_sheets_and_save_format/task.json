@@ -1,0 +1,39 @@
+{
+  "id": "calc_pref_default_sheets_and_save_format",
+  "app": "libreoffice_calc",
+  "task": "In LibreOffice Calc, change three user preferences so that they persist to the user profile at `~/.config/libreoffice/4/user/registrymodifications.xcu`:\n- 'LibreOffice Calc > Defaults' — 'Number of worksheets in new document' = 5.\n- 'Load/Save > General' — 'Always save as' for 'Spreadsheet' documents = 'Excel 2007-365 (*.xlsx)'.\n- 'LibreOffice Calc > General' — 'Measurement unit' = 'Inch'.\n\nClose LibreOffice cleanly so the preferences are flushed. Do NOT create or open any spreadsheet document — this task only changes the user's default preferences.",
+  "env": {
+    "files": [
+      {
+        "filename": "blank.xlsx",
+        "sandbox_path": "/home/user/Documents/blank.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-calc-pref default_sheet_count 5",
+      "key": "match",
+      "expected": true,
+      "description": "Default sheet count for new workbooks = 5"
+    },
+    {
+      "command": "check-calc-pref default_save_filter_calc \"MS Excel 2007\"",
+      "key": "match",
+      "expected": true,
+      "description": "Default save format for Calc is MS Excel 2007 (.xlsx)"
+    },
+    {
+      "command": "check-calc-pref measurement_unit_calc 2",
+      "key": "match",
+      "expected": true,
+      "description": "Default measurement unit for Calc is Inch (enum value 2)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

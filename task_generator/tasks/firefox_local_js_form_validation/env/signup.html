@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sign Up</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 520px; margin: 2em auto; padding: 0 1em; }
+label { display: block; margin-top: 0.8em; font-weight: bold; }
+input { width: 100%; padding: 6px; box-sizing: border-box; }
+button { margin-top: 1em; padding: 8px 16px; }
+#result { margin-top: 1em; padding: 10px; border: 1px solid #8c8; background: #efffef; display: none; }
+#error { margin-top: 1em; padding: 10px; border: 1px solid #c88; background: #ffefef; color: #a00; display: none; }
+</style>
+</head>
+<body>
+<h1>Create Your Account</h1>
+<form id="signup">
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username">
+
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email">
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password">
+
+  <label for="confirm">Confirm Password</label>
+  <input type="password" id="confirm" name="confirm">
+
+  <button type="submit">Sign Up</button>
+</form>
+<div id="result"></div>
+<div id="error"></div>
+<script>
+document.getElementById('signup').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var u = document.getElementById('username').value.trim();
+  var em = document.getElementById('email').value.trim();
+  var p = document.getElementById('password').value;
+  var cp = document.getElementById('confirm').value;
+  var err = document.getElementById('error');
+  var res = document.getElementById('result');
+  err.style.display = 'none';
+  res.style.display = 'none';
+  if (!u || !em || !p) { err.textContent = 'All fields required'; err.style.display = 'block'; return; }
+  if (p !== cp) { err.textContent = 'Passwords do not match'; err.style.display = 'block'; return; }
+  if (p.length < 8) { err.textContent = 'Password too short'; err.style.display = 'block'; return; }
+  res.textContent = 'Welcome, ' + u;
+  res.style.display = 'block';
+});
+</script>
+</body>
+</html>

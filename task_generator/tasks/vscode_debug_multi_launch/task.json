@@ -1,0 +1,70 @@
+{
+  "id": "vscode_debug_multi_launch",
+  "app": "vscode",
+  "task": "Create a Python project at `/home/user/projects/debugger-lab` with the following files:\n\n- `main.py`:\n  ```python\n  def run():\n      print('running')\n\n  if __name__ == '__main__':\n      run()\n  ```\n- `test_main.py`:\n  ```python\n  import unittest\n  from main import run\n\n  class TestMain(unittest.TestCase):\n      def test_run(self):\n          run()\n  ```\n- `.vscode/launch.json` containing exactly four configurations:\n  - `Run Script` — type `python`, request `launch`, program = `main.py`\n  - `Debug Module` — type `python`, request `launch`, module = `unittest`\n  - `Debug Unit Tests` — type `python`, request `launch`, module = `pytest`\n  - `Debug Attach` — type `python`, request `attach`, port `5678`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/debugger-lab/main.py",
+      "key": "exists",
+      "expected": true,
+      "description": "main.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/debugger-lab/main.py def run",
+      "key": "contains",
+      "expected": true,
+      "description": "main.py has run function"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/debugger-lab/test_main.py",
+      "key": "exists",
+      "expected": true,
+      "description": "test_main.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/debugger-lab/test_main.py TestMain",
+      "key": "contains",
+      "expected": true,
+      "description": "test_main.py has TestMain class"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/debugger-lab/.vscode/launch.json",
+      "key": "exists",
+      "expected": true,
+      "description": "launch.json exists"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/debugger-lab Run Script",
+      "key": "exists",
+      "expected": true,
+      "description": "Run Script launch config exists"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/debugger-lab Debug Module",
+      "key": "exists",
+      "expected": true,
+      "description": "Debug Module launch config exists"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/debugger-lab Debug Unit Tests",
+      "key": "exists",
+      "expected": true,
+      "description": "Debug Unit Tests launch config exists"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/debugger-lab Debug Attach",
+      "key": "exists",
+      "expected": true,
+      "description": "Debug Attach launch config exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

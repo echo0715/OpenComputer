@@ -1,0 +1,6 @@
+{
+  "task_id": "draw_expand_existing_pages",
+  "files": [
+    {"filename": "two_page_draft.odg", "sandbox_path": "/home/user/Documents/two_page_draft.odg", "type": "odg"}
+  ]
+}

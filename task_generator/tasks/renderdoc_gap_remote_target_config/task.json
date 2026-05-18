@@ -1,0 +1,51 @@
+{
+  "id": "renderdoc_gap_remote_target_config",
+  "app": "renderdoc",
+  "task": "Configure RenderDoc for remote capture replay on development devices by editing /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document). Apply all of the following edits in a single save:\n\n1. Set `\"RemoteHosts\"` to a JSON array of exactly two objects, in this order and shape, in compact form with NO whitespace between tokens: `[{\"Hostname\":\"build-box.lan\",\"Port\":39570},{\"Hostname\":\"perf-node-01.internal\",\"Port\":39570}]`.\n2. Set `\"AdbScabbardPath\"` to the exact string `\"/opt/android-sdk/platform-tools/adb\"`.\n3. Set `\"AlwaysReplayLocally\"` to `false`.\n\nThe top-level `\"rdocConfigData\": 1` marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting RemoteHosts '[{\"Hostname\":\"build-box.lan\",\"Port\":39570},{\"Hostname\":\"perf-node-01.internal\",\"Port\":39570}]'",
+      "key": "match",
+      "expected": true,
+      "description": "RemoteHosts array contains the two hosts in the correct order"
+    },
+    {
+      "command": "check-setting AdbScabbardPath /opt/android-sdk/platform-tools/adb",
+      "key": "match",
+      "expected": true,
+      "description": "AdbScabbardPath is correct"
+    },
+    {
+      "command": "check-setting AlwaysReplayLocally false",
+      "key": "match",
+      "expected": true,
+      "description": "AlwaysReplayLocally is false"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_gap_message_filter_move_rule",
+  "app": "thunderbird",
+  "task": "Create an enabled Thunderbird message filter on the Local Folders account named exactly `Archive Newsletters` with these properties:\n- Triggers both when getting new mail and when run manually.\n- Two conditions combined with OR (not AND): From contains `newsletter@`, or Subject contains `Newsletter`.\n- One action: Move matching messages to a folder named exactly `Newsletters` under Local Folders. Create that target folder first if it does not already exist.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-filter-exists 'Archive Newsletters'",
+      "key": "found",
+      "expected": true,
+      "description": "Filter 'Archive Newsletters' exists"
+    },
+    {
+      "command": "check-filter-action 'Archive Newsletters' 'Move to folder' Newsletters",
+      "key": "match",
+      "expected": true,
+      "description": "Filter moves matching messages to 'Newsletters' folder"
+    },
+    {
+      "command": "check-filter-condition 'Archive Newsletters' newsletter@",
+      "key": "match",
+      "expected": true,
+      "description": "Filter condition matches From contains 'newsletter@'"
+    },
+    {
+      "command": "check-filter-condition 'Archive Newsletters' Newsletter",
+      "key": "match",
+      "expected": true,
+      "description": "Filter condition matches Subject contains 'Newsletter'"
+    },
+    {
+      "command": "check-folder-exists Newsletters",
+      "key": "exists",
+      "expected": true,
+      "description": "Target folder 'Newsletters' exists under Local Folders"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

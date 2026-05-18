@@ -1,0 +1,63 @@
+{
+  "id": "vscode_yaml_ci_pipeline",
+  "app": "vscode",
+  "task": "`/home/user/projects/api-svc/.github/workflows/ci.yml` currently defines two jobs: `build` and `test`. Extend the workflow (overwriting the same path) by adding a third job named `deploy` with:\n\n- `runs-on: ubuntu-latest`\n- `needs: test`\n- Exactly three steps in this order:\n  1. `Checkout` — uses `actions/checkout@v4`\n  2. `Install` — runs `pip install -r requirements.txt`\n  3. `Deploy` — runs `echo Deploying to production`\n\nAlso create `/home/user/projects/api-svc/.vscode/settings.json` containing:\n\n- `yaml.validate`: `true`\n- `files.associations`: `\"*.yml\": \"yaml\"`",
+  "env": {
+    "files": [
+      {
+        "filename": "ci.yml",
+        "sandbox_path": "/home/user/projects/api-svc/.github/workflows/ci.yml"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/api-svc/.github/workflows/ci.yml",
+      "key": "exists",
+      "expected": true,
+      "description": "ci.yml still exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/api-svc/.github/workflows/ci.yml deploy:",
+      "key": "contains",
+      "expected": true,
+      "description": "deploy job added"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/api-svc/.github/workflows/ci.yml needs: test",
+      "key": "contains",
+      "expected": true,
+      "description": "deploy job depends on test"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/api-svc/.github/workflows/ci.yml Deploying",
+      "key": "contains",
+      "expected": true,
+      "description": "Deploy step present"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/api-svc/.github/workflows/ci.yml actions/checkout@v4",
+      "key": "contains",
+      "expected": true,
+      "description": "Checkout step uses actions/checkout@v4"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/api-svc/.vscode/settings.json",
+      "key": "exists",
+      "expected": true,
+      "description": "workspace settings.json exists"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/api-svc yaml.validate true",
+      "key": "match",
+      "expected": true,
+      "description": "yaml.validate is true"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

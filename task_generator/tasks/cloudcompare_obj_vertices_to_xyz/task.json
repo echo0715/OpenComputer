@@ -1,0 +1,45 @@
+{
+  "id": "cloudcompare_obj_vertices_to_xyz",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/shape.obj is a triangular OBJ mesh with exactly 120 vertices and 240 faces.\n\nExtract only its vertices and save them as a plain 3-column ASCII XYZ point cloud at /home/user/Documents/shape.xyz. The output must be a point cloud (not a mesh), contain all 120 vertices, have no RGB color columns, and be in ASCII cloud format with only X, Y, Z columns.",
+  "env": {
+    "files": [
+      {
+        "filename": "shape.obj",
+        "sandbox_path": "/home/user/Documents/shape.obj"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/shape.xyz",
+      "key": "exists",
+      "expected": true,
+      "description": "XYZ output exists"
+    },
+    {
+      "command": "check-format /home/user/Documents/shape.xyz ascii",
+      "key": "match",
+      "expected": true,
+      "description": "Output is an ASCII cloud"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/shape.xyz 120",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 120 points"
+    },
+    {
+      "command": "check-has-color /home/user/Documents/shape.xyz",
+      "key": "has_color",
+      "expected": false,
+      "description": "Output has no RGB color"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

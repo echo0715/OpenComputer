@@ -1,0 +1,13 @@
+{
+  "task_id": "pcmanfm_photo_library_year_month",
+  "files": [
+    {"filename": "2023-06-14_beach.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2023-06-14_beach.jpg", "type": "jpg"},
+    {"filename": "2023-06-20_sunset.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2023-06-20_sunset.jpg", "type": "jpg"},
+    {"filename": "2023-11-02_autumn.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2023-11-02_autumn.jpg", "type": "jpg"},
+    {"filename": "2024-01-15_snow.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-01-15_snow.jpg", "type": "jpg"},
+    {"filename": "2024-01-31_newyear.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-01-31_newyear.jpg", "type": "jpg"},
+    {"filename": "2024-03-10_spring.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-03-10_spring.jpg", "type": "jpg"},
+    {"filename": "2024-03-22_flowers.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-03-22_flowers.jpg", "type": "jpg"},
+    {"filename": "2024-08-05_summer.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-08-05_summer.jpg", "type": "jpg"}
+  ]
+}

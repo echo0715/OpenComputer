@@ -1,0 +1,93 @@
+{
+  "id": "inkscape_color_palette_grid",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/palette.svg — a blank 500x500 document.\n\nBuild a color palette in /home/user/Documents/palette.svg with these exact contents:\n\n- Layer named 'Swatches' containing four ~100x100 square elements arranged in a 2x2 grid, with these exact ids and fills:\n  - swatch1 fill #FF0000 (top-left)\n  - swatch2 fill #00FF00 (top-right)\n  - swatch3 fill #0000FF (bottom-left)\n  - swatch4 fill #FFFF00 (bottom-right)\n- One text element with the exact text: Color Palette.\n\nThe page must remain 500x500. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "palette.svg",
+        "sandbox_path": "/home/user/Documents/palette.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/palette.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File palette.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/palette.svg 500 500",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 500x500 pixels"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/palette.svg Swatches",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Swatches' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/palette.svg swatch1",
+      "key": "exists",
+      "expected": true,
+      "description": "Element 'swatch1' exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/palette.svg swatch1 fill #FF0000",
+      "key": "match",
+      "expected": true,
+      "description": "swatch1 has red fill (#FF0000)"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/palette.svg swatch2",
+      "key": "exists",
+      "expected": true,
+      "description": "Element 'swatch2' exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/palette.svg swatch2 fill #00FF00",
+      "key": "match",
+      "expected": true,
+      "description": "swatch2 has green fill (#00FF00)"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/palette.svg swatch3",
+      "key": "exists",
+      "expected": true,
+      "description": "Element 'swatch3' exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/palette.svg swatch3 fill #0000FF",
+      "key": "match",
+      "expected": true,
+      "description": "swatch3 has blue fill (#0000FF)"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/palette.svg swatch4",
+      "key": "exists",
+      "expected": true,
+      "description": "Element 'swatch4' exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/palette.svg swatch4 fill #FFFF00",
+      "key": "match",
+      "expected": true,
+      "description": "swatch4 has yellow fill (#FFFF00)"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/palette.svg 'Color Palette'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Color Palette' exists in the document"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

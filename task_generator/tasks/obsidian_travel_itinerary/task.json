@@ -1,0 +1,93 @@
+{
+  "id": "obsidian_travel_itinerary",
+  "app": "obsidian",
+  "task": "Build a travel planning system in the Obsidian vault at /home/user/Documents/TravelVault.\n\n1. Create folders: 'Trips', 'Destinations', 'Packing'.\n2. Create 'Destinations/Tokyo.md' with frontmatter `country: Japan`, `language: Japanese`, `currency: JPY`, body with heading 'Tokyo', highlights, tips, a link to [[Japan Spring 2025]], and tags #destination #japan #city.\n3. Create 'Destinations/Kyoto.md' with frontmatter `country: Japan`, `language: Japanese`, `currency: JPY`, body with heading 'Kyoto', highlights, tips, a link to [[Japan Spring 2025]], and tags #destination #japan #city.\n4. Create 'Trips/Japan Spring 2025.md' with frontmatter `budget: 5000`, `start_date: 2025-04-01`, `end_date: 2025-04-14`, body with heading 'Japan Spring 2025', itinerary overview, links to [[Tokyo]], [[Kyoto]], and [[Japan Packing List]], and tags #trip #japan #spring.\n5. Create 'Packing/Japan Packing List.md' with frontmatter `trip: Japan Spring 2025`, `season: spring`, body with heading 'Japan Packing List', a categorized packing checklist, a link to [[Japan Spring 2025]], and tags #packing #japan.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/TravelVault Trips",
+      "key": "exists",
+      "expected": true,
+      "description": "Trips folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/TravelVault Destinations",
+      "key": "exists",
+      "expected": true,
+      "description": "Destinations folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/TravelVault Packing",
+      "key": "exists",
+      "expected": true,
+      "description": "Packing folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/TravelVault Tokyo country Japan",
+      "key": "match",
+      "expected": true,
+      "description": "Tokyo has country=Japan"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TravelVault Tokyo destination",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Tokyo has #destination tag"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/TravelVault Kyoto 'Japan Spring 2025'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Kyoto links to Japan Spring 2025"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/TravelVault 'Japan Spring 2025' budget 5000",
+      "key": "match",
+      "expected": true,
+      "description": "Japan Spring 2025 has budget=5000"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/TravelVault 'Japan Spring 2025' Tokyo",
+      "key": "links_to",
+      "expected": true,
+      "description": "Japan Spring 2025 links to Tokyo"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/TravelVault 'Japan Spring 2025' Kyoto",
+      "key": "links_to",
+      "expected": true,
+      "description": "Japan Spring 2025 links to Kyoto"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/TravelVault 'Japan Spring 2025' 'Japan Packing List'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Japan Spring 2025 links to Japan Packing List"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/TravelVault 'Japan Packing List' 'Japan Spring 2025'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Japan Packing List links to Japan Spring 2025"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TravelVault 'Japan Packing List' packing",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Japan Packing List has #packing tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/TravelVault",
+      "eval": "result.get('count') == 4",
+      "description": "Vault has exactly 4 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

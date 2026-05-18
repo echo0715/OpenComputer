@@ -1,0 +1,63 @@
+{
+  "id": "chrome_local_svg_color_toggle",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/svg_toggle.html (an inline SVG with six circles `circle-1`–`circle-6`, all starting with `fill='gray'`; each click on a circle cycles its fill through `gray -> red -> green -> blue -> yellow -> gray`).\n\nReach this final state:\n- `circle-1` = `red`\n- `circle-2` = `green`\n- `circle-3` = `green`\n- `circle-4` = `blue`\n- `circle-5` = `blue`\n- `circle-6` = `yellow`\n\nThe `#status` element must read `Clicks: 15` (1 + 2 + 2 + 3 + 3 + 4).",
+  "env": {
+    "files": [
+      {
+        "filename": "svg_toggle.html",
+        "sandbox_path": "/home/user/Documents/svg_toggle.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open svg_toggle.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for svg_toggle.html is open"
+    },
+    {
+      "command": "eval \"document.getElementById('circle-1').getAttribute('fill')\"",
+      "eval": "result.get('value') == 'red'",
+      "description": "circle-1 fill is red"
+    },
+    {
+      "command": "eval \"document.getElementById('circle-2').getAttribute('fill')\"",
+      "eval": "result.get('value') == 'green'",
+      "description": "circle-2 fill is green"
+    },
+    {
+      "command": "eval \"document.getElementById('circle-3').getAttribute('fill')\"",
+      "eval": "result.get('value') == 'green'",
+      "description": "circle-3 fill is green"
+    },
+    {
+      "command": "eval \"document.getElementById('circle-4').getAttribute('fill')\"",
+      "eval": "result.get('value') == 'blue'",
+      "description": "circle-4 fill is blue"
+    },
+    {
+      "command": "eval \"document.getElementById('circle-5').getAttribute('fill')\"",
+      "eval": "result.get('value') == 'blue'",
+      "description": "circle-5 fill is blue"
+    },
+    {
+      "command": "eval \"document.getElementById('circle-6').getAttribute('fill')\"",
+      "eval": "result.get('value') == 'yellow'",
+      "description": "circle-6 fill is yellow"
+    },
+    {
+      "command": "check-page-contains \"Clicks: 15\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Status shows 'Clicks: 15'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

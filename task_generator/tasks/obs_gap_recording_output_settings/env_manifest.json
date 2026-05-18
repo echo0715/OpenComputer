@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_gap_recording_output_settings",
+  "files": [
+    {
+      "filename": ".keep",
+      "sandbox_path": "/home/user/Videos/Recordings/.keep",
+      "type": "placeholder"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "gimp_split_image_two_halves",
+  "files": [
+    {"filename": "two_tone.png", "sandbox_path": "/home/user/Documents/two_tone.png", "type": "png"}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "task_id": "kdenlive_cinema_24fps_dissolve",
+  "files": [
+    {
+      "filename": "cinema.kdenlive",
+      "sandbox_path": "/home/user/Documents/cinema.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "intro.mp4",
+      "sandbox_path": "/home/user/Videos/intro.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "scene_a.mp4",
+      "sandbox_path": "/home/user/Videos/scene_a.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "scene_b.mp4",
+      "sandbox_path": "/home/user/Videos/scene_b.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "outro.mp4",
+      "sandbox_path": "/home/user/Videos/outro.mp4",
+      "type": "mp4"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "blender_hard_mech_anim_modifier_constraint_network",
+  "files": [
+    {
+      "filename": "mech_anim.blend",
+      "sandbox_path": "/home/user/Documents/mech_anim.blend",
+      "type": "blend",
+      "generation": "create_env.py creates an empty default Blender scene at the target path"
+    }
+  ]
+}

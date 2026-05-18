@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_gap_tasks_todo_list",
+  "app": "thunderbird",
+  "task": "Add five to-dos to Thunderbird's default local calendar (Lightning Tasks):\n1. `Draft Q2 report` — priority High, due 2026-04-20.\n2. `Review PRs` — priority Normal, due 2026-04-15.\n3. `Order office supplies` — priority Low, due 2026-04-25.\n4. `Prepare demo slides` — priority High, due 2026-04-18, progress 50%.\n5. `Backup server` — priority Normal, due 2026-04-30, status Completed.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-todo-exists 'Draft Q2 report'",
+      "key": "found",
+      "expected": true,
+      "description": "Todo 'Draft Q2 report' exists"
+    },
+    {
+      "command": "check-todo-exists 'Review PRs'",
+      "key": "found",
+      "expected": true,
+      "description": "Todo 'Review PRs' exists"
+    },
+    {
+      "command": "check-todo-exists 'Order office supplies'",
+      "key": "found",
+      "expected": true,
+      "description": "Todo 'Order office supplies' exists"
+    },
+    {
+      "command": "check-todo-exists 'Prepare demo slides'",
+      "key": "found",
+      "expected": true,
+      "description": "Todo 'Prepare demo slides' exists"
+    },
+    {
+      "command": "check-todo-exists 'Backup server'",
+      "key": "found",
+      "expected": true,
+      "description": "Todo 'Backup server' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

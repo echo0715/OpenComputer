@@ -1,0 +1,123 @@
+{
+  "id": "inkscape_icon_set_sixpack",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/icons.svg — a blank 900x300 canvas.\n\nBuild a six-icon set in /home/user/Documents/icons.svg with these exact contents:\n\n- Layer named 'Icons' containing six shape elements in a horizontal row with these exact ids and fills (shape type rect/circle/path is unimportant):\n  - icon_home fill #E53935\n  - icon_box fill #FB8C00\n  - icon_star fill #FDD835\n  - icon_play fill #43A047\n  - icon_info fill #1E88E5\n  - icon_lock fill #8E24AA\n- Layer named 'Labels' containing one text element with the exact text: Icon Set v1.\n\nThe page must remain 900x300. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "icons.svg",
+        "sandbox_path": "/home/user/Documents/icons.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/icons.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "icons.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/icons.svg 900 300",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 900x300"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/icons.svg Icons",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Icons' exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/icons.svg Labels",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Labels' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/icons.svg icon_home",
+      "key": "exists",
+      "expected": true,
+      "description": "icon_home exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/icons.svg icon_home fill #E53935",
+      "key": "match",
+      "expected": true,
+      "description": "icon_home fill is #E53935"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/icons.svg icon_box",
+      "key": "exists",
+      "expected": true,
+      "description": "icon_box exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/icons.svg icon_box fill #FB8C00",
+      "key": "match",
+      "expected": true,
+      "description": "icon_box fill is #FB8C00"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/icons.svg icon_star",
+      "key": "exists",
+      "expected": true,
+      "description": "icon_star exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/icons.svg icon_star fill #FDD835",
+      "key": "match",
+      "expected": true,
+      "description": "icon_star fill is #FDD835"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/icons.svg icon_play",
+      "key": "exists",
+      "expected": true,
+      "description": "icon_play exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/icons.svg icon_play fill #43A047",
+      "key": "match",
+      "expected": true,
+      "description": "icon_play fill is #43A047"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/icons.svg icon_info",
+      "key": "exists",
+      "expected": true,
+      "description": "icon_info exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/icons.svg icon_info fill #1E88E5",
+      "key": "match",
+      "expected": true,
+      "description": "icon_info fill is #1E88E5"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/icons.svg icon_lock",
+      "key": "exists",
+      "expected": true,
+      "description": "icon_lock exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/icons.svg icon_lock fill #8E24AA",
+      "key": "match",
+      "expected": true,
+      "description": "icon_lock fill is #8E24AA"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/icons.svg 'Icon Set v1'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Icon Set v1' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

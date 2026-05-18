@@ -1,0 +1,71 @@
+{
+  "id": "gedit_merge_text_files",
+  "app": "gedit",
+  "task": "Create /home/user/Documents/merged.txt by concatenating, in this exact order:\n\n1. All 3 lines from /home/user/Documents/header.txt\n2. One blank line as a separator\n3. All 3 lines from /home/user/Documents/body.txt\n4. One blank line as a separator\n5. All 3 lines from /home/user/Documents/footer.txt\n\nThe final file must have exactly 11 lines (3 + 1 + 3 + 1 + 3). Line 1 must be the first line of header.txt (`REPORT HEADER`), and the body and footer content (e.g. `Main body paragraph one discusses the quarterly results.`, `Report Footer - Confidential`, `End of Document`) must all be present.",
+  "env": {
+    "files": [
+      {
+        "filename": "header.txt",
+        "sandbox_path": "/home/user/Documents/header.txt"
+      },
+      {
+        "filename": "body.txt",
+        "sandbox_path": "/home/user/Documents/body.txt"
+      },
+      {
+        "filename": "footer.txt",
+        "sandbox_path": "/home/user/Documents/footer.txt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/merged.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "merged.txt file was created"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/merged.txt \"REPORT HEADER\"",
+      "key": "contains",
+      "expected": true,
+      "description": "merged.txt contains header content"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/merged.txt 1 \"REPORT HEADER\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 1 is the first line from header.txt"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/merged.txt \"Main body paragraph one discusses the quarterly results.\"",
+      "key": "contains",
+      "expected": true,
+      "description": "merged.txt contains body content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/merged.txt \"Report Footer - Confidential\"",
+      "key": "contains",
+      "expected": true,
+      "description": "merged.txt contains footer content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/merged.txt \"End of Document\"",
+      "key": "contains",
+      "expected": true,
+      "description": "merged.txt contains last line of footer"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/merged.txt 11",
+      "key": "matches",
+      "expected": true,
+      "description": "merged.txt has exactly 11 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

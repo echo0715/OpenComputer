@@ -1,0 +1,63 @@
+{
+  "id": "darktable_denoise_sharpen_workflow",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/lowlight.png into the darktable library.\n\nEnable the 'denoise (profiled)' module (internally 'denoiseprofile') to reduce noise and the 'sharpen' module to add sharpening. Apply both tags 'denoised' and 'night' to the image, set its star rating to 3 stars, and export it as a JPEG to /home/user/Pictures/lowlight_clean.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "lowlight.png",
+        "sandbox_path": "/home/user/Pictures/lowlight.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported lowlight.png",
+      "key": "imported",
+      "expected": true,
+      "description": "lowlight.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation lowlight.png denoiseprofile",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'denoiseprofile' operation"
+    },
+    {
+      "command": "check-db-has-operation lowlight.png sharpen",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'sharpen' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename lowlight.png denoised",
+      "key": "tagged",
+      "expected": true,
+      "description": "lowlight.png is tagged with 'denoised'"
+    },
+    {
+      "command": "check-image-tagged-by-filename lowlight.png night",
+      "key": "tagged",
+      "expected": true,
+      "description": "lowlight.png is tagged with 'night'"
+    },
+    {
+      "command": "check-image-rating-by-filename lowlight.png 3",
+      "key": "matches",
+      "expected": true,
+      "description": "lowlight.png rating is 3 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/lowlight_clean.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG exists at /home/user/Pictures/lowlight_clean.jpg"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

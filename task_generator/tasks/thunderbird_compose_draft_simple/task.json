@@ -1,0 +1,39 @@
+{
+  "id": "thunderbird_compose_draft_simple",
+  "app": "thunderbird",
+  "task": "Create a Thunderbird draft (do NOT send) with these exact fields:\n- To: manager@acmecorp.com\n- Subject: Monthly Status Report\n- Body: Please find the monthly status update below. All deliverables are on track for the Q2 deadline.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists Monthly Status Report",
+      "key": "found",
+      "expected": true,
+      "description": "Draft with subject Monthly Status Report exists"
+    },
+    {
+      "command": "check-message-to Drafts Monthly Status Report manager@acmecorp.com",
+      "key": "match",
+      "expected": true,
+      "description": "Draft is addressed to manager@acmecorp.com"
+    },
+    {
+      "command": "check-draft-content Monthly Status Report deliverables are on track",
+      "key": "found",
+      "expected": true,
+      "description": "Draft body contains expected text"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

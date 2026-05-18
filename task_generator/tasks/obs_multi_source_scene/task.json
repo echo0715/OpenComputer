@@ -1,0 +1,69 @@
+{
+  "id": "obs_multi_source_scene",
+  "app": "obs",
+  "task": "Build an OBS Studio scene collection containing exactly 1 scene named exactly 'Presentation' (no other scenes, including any default 'Scene', may remain).\n\nThe 'Presentation' scene must contain these three sources with these exact names and types:\n- Display Capture named 'Screen'\n- Image named 'Logo' (file /home/user/Pictures/logo.png)\n- Text (FreeType 2) named 'Title' (any text)\n\nAll three sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "logo.png",
+        "sandbox_path": "/home/user/Pictures/logo.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Presentation",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Presentation' exists"
+    },
+    {
+      "command": "check-scene-count 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 1 scene in the collection"
+    },
+    {
+      "command": "check-source-in-scene Screen Presentation",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Screen' exists in 'Presentation' scene"
+    },
+    {
+      "command": "check-source-in-scene Logo Presentation",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Logo' exists in 'Presentation' scene"
+    },
+    {
+      "command": "check-source-in-scene Title Presentation",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Title' exists in 'Presentation' scene"
+    },
+    {
+      "command": "check-source-visible Screen",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Screen' is visible"
+    },
+    {
+      "command": "check-source-visible Logo",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Logo' is visible"
+    },
+    {
+      "command": "check-source-visible Title",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Title' is visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

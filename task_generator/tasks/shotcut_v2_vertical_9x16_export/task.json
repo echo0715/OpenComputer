@@ -1,0 +1,49 @@
+{
+  "id": "shotcut_v2_vertical_9x16_export",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/reels.mlt — a vertical 1080x1920 30 fps project that already contains one clip on the V1 timeline track referencing /home/user/Videos/reels_source.mp4.\n\nExport the timeline to /home/user/Videos/reels_final.mp4 using the default H.264 preset, inheriting the project's 1080x1920 / 30 fps settings (do NOT override width, height, or frame rate). The output must be a valid H.264 MP4 with resolution 1080x1920 (vertical 9:16).",
+  "env": {
+    "files": [
+      {
+        "filename": "reels.mlt",
+        "sandbox_path": "/home/user/Documents/reels.mlt"
+      },
+      {
+        "filename": "reels_source.mp4",
+        "sandbox_path": "/home/user/Videos/reels_source.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/reels_final.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported file exists"
+    },
+    {
+      "command": "check-export-output /home/user/Videos/reels_final.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Exported file is a valid non-empty media file"
+    },
+    {
+      "command": "check-export-codec /home/user/Videos/reels_final.mp4 h264 video",
+      "key": "match",
+      "expected": true,
+      "description": "Exported video codec is h264"
+    },
+    {
+      "command": "check-export-resolution /home/user/Videos/reels_final.mp4 1080 1920",
+      "key": "match",
+      "expected": true,
+      "description": "Exported resolution is 1080x1920 (vertical 9:16)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

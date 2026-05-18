@@ -1,0 +1,25 @@
+{
+  "task_id": "eclipse_v2_migrate_java_version",
+  "files": [
+    {
+      "filename": "LegacyApp/.project",
+      "sandbox_path": "/home/user/workspace/LegacyApp/.project",
+      "type": "project"
+    },
+    {
+      "filename": "LegacyApp/.classpath",
+      "sandbox_path": "/home/user/workspace/LegacyApp/.classpath",
+      "type": "classpath"
+    },
+    {
+      "filename": "LegacyApp/.settings/org.eclipse.jdt.core.prefs",
+      "sandbox_path": "/home/user/workspace/LegacyApp/.settings/org.eclipse.jdt.core.prefs",
+      "type": "prefs"
+    },
+    {
+      "filename": "LegacyApp/src/legacy/LegacyService.java",
+      "sandbox_path": "/home/user/workspace/LegacyApp/src/legacy/LegacyService.java",
+      "type": "java"
+    }
+  ]
+}

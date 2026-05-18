@@ -1,0 +1,45 @@
+{
+  "id": "cloudcompare_obj_mesh_to_ply",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/part.obj is an OBJ cube mesh with 8 vertices and 12 triangular faces.\n\nSave the mesh as a PLY mesh at /home/user/Documents/part.ply, preserving all 8 vertices and all 12 triangular faces (export the mesh, not a vertices-only cloud).",
+  "env": {
+    "files": [
+      {
+        "filename": "part.obj",
+        "sandbox_path": "/home/user/Documents/part.obj"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/part.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "PLY mesh output exists"
+    },
+    {
+      "command": "check-is-mesh /home/user/Documents/part.ply",
+      "key": "is_mesh",
+      "expected": true,
+      "description": "Output PLY contains faces"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/part.ply 8",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 8 vertices"
+    },
+    {
+      "command": "check-face-count /home/user/Documents/part.ply 12",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 12 triangular faces"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

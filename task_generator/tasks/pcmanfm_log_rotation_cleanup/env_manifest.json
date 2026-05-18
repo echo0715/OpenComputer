@@ -1,0 +1,14 @@
+{
+  "task_id": "pcmanfm_log_rotation_cleanup",
+  "files": [
+    {"filename": "app-2024-01.log", "sandbox_path": "/home/user/Documents/logs/app-2024-01.log", "type": "text"},
+    {"filename": "app-2024-02.log", "sandbox_path": "/home/user/Documents/logs/app-2024-02.log", "type": "text"},
+    {"filename": "app-2024-03.log", "sandbox_path": "/home/user/Documents/logs/app-2024-03.log", "type": "text"},
+    {"filename": "app-2024-04.log", "sandbox_path": "/home/user/Documents/logs/app-2024-04.log", "type": "text"},
+    {"filename": "current.log", "sandbox_path": "/home/user/Documents/logs/current.log", "type": "text"},
+    {"filename": "old.log", "sandbox_path": "/home/user/Documents/logs/old.log", "type": "text"},
+    {"filename": "latest.log", "sandbox_path": "/home/user/Documents/logs/latest.log", "type": "text"},
+    {"filename": "error.log", "sandbox_path": "/home/user/Documents/logs/error.log", "type": "text"},
+    {"filename": "debug.log", "sandbox_path": "/home/user/Documents/logs/debug.log", "type": "text"}
+  ]
+}

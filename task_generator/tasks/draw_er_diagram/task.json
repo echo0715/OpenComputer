@@ -1,0 +1,105 @@
+{
+  "id": "draw_er_diagram",
+  "app": "libreoffice_draw",
+  "task": "Create a new LibreOffice Draw entity-relationship diagram for a small library system and save it to /home/user/Documents/library_erd.odg.\n\nPage 1 must contain:\n- Four entity rectangles, each showing the entity name on the first line and a key attribute on the second line (separated by a newline): 'Book\\nisbn', 'Author\\nauthor_id', 'Member\\nmember_id', 'Loan\\nloan_id'.\n- Two relationship ellipses labelled exactly 'writes' (placed between 'Author' and 'Book') and 'borrows' (placed between 'Member' and 'Loan').\n- Connectors linking 'Author' → 'writes' → 'Book', and 'Member' → 'borrows' → 'Loan'.\n\nPage 1 must end up with at least 6 shapes.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/library_erd.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File library_erd.odg exists"
+    },
+    {
+      "command": "check-page-contains 0 Book",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Book'"
+    },
+    {
+      "command": "check-page-contains 0 Author",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Author'"
+    },
+    {
+      "command": "check-page-contains 0 Member",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Member'"
+    },
+    {
+      "command": "check-page-contains 0 Loan",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Loan'"
+    },
+    {
+      "command": "check-page-contains 0 isbn",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains attribute 'isbn'"
+    },
+    {
+      "command": "check-page-contains 0 author_id",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains attribute 'author_id'"
+    },
+    {
+      "command": "check-page-contains 0 member_id",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains attribute 'member_id'"
+    },
+    {
+      "command": "check-page-contains 0 loan_id",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains attribute 'loan_id'"
+    },
+    {
+      "command": "check-page-contains 0 writes",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains relationship 'writes'"
+    },
+    {
+      "command": "check-page-contains 0 borrows",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains relationship 'borrows'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "check-shape-exists 0 EllipseShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has ellipse shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 6",
+      "description": "Page 1 has at least 6 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

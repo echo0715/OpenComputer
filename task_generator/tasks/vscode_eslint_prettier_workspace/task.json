@@ -1,0 +1,94 @@
+{
+  "id": "vscode_eslint_prettier_workspace",
+  "app": "vscode",
+  "task": "Create a JavaScript project at `/home/user/projects/js-linter` with the following files:\n\n- `package.json` — `name`: `js-linter`, `version`: `1.0.0`, `devDependencies` listing `eslint` and `prettier`.\n- `.eslintrc.json` — `root: true`, env `browser` + `es2021`, `extends: eslint:recommended`, `parserOptions.ecmaVersion: 2021`.\n- `.prettierrc` — `singleQuote: true`, `semi: true`, `printWidth: 100`.\n- `src/app.js`:\n  ```javascript\n  function greet(name) {\n      return 'Hello ' + name;\n  }\n  console.log(greet('world'));\n  ```\n- `.vscode/settings.json` — `editor.formatOnSave: true`, `editor.defaultFormatter: esbenp.prettier-vscode`.\n- `.vscode/tasks.json` — a shell task labeled `Lint` running `npx eslint src/`.\n- `.vscode/extensions.json` — recommends `dbaeumer.vscode-eslint` and `esbenp.prettier-vscode`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/js-linter/package.json",
+      "key": "exists",
+      "expected": true,
+      "description": "package.json exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/js-linter/package.json js-linter",
+      "key": "contains",
+      "expected": true,
+      "description": "package.json has project name"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/js-linter/.eslintrc.json",
+      "key": "exists",
+      "expected": true,
+      "description": ".eslintrc.json exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/js-linter/.eslintrc.json eslint:recommended",
+      "key": "contains",
+      "expected": true,
+      "description": ".eslintrc.json extends eslint:recommended"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/js-linter/.prettierrc",
+      "key": "exists",
+      "expected": true,
+      "description": ".prettierrc exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/js-linter/.prettierrc singleQuote",
+      "key": "contains",
+      "expected": true,
+      "description": ".prettierrc has singleQuote"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/js-linter/src/app.js",
+      "key": "exists",
+      "expected": true,
+      "description": "src/app.js exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/js-linter/src/app.js greet",
+      "key": "contains",
+      "expected": true,
+      "description": "src/app.js contains greet function"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/js-linter editor.formatOnSave true",
+      "key": "match",
+      "expected": true,
+      "description": "formatOnSave is true"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/js-linter editor.defaultFormatter esbenp.prettier-vscode",
+      "key": "match",
+      "expected": true,
+      "description": "defaultFormatter set to Prettier"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/js-linter Lint",
+      "key": "exists",
+      "expected": true,
+      "description": "Lint task exists"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/js-linter dbaeumer.vscode-eslint",
+      "key": "recommended",
+      "expected": true,
+      "description": "ESLint extension recommended"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/js-linter esbenp.prettier-vscode",
+      "key": "recommended",
+      "expected": true,
+      "description": "Prettier extension recommended"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

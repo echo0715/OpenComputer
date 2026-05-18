@@ -1,0 +1,77 @@
+{
+  "id": "kdenlive_render_720p_wipe",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/wipe_project.kdenlive (1280x720, 25fps).\n\nImport /home/user/Videos/clip_one.mp4 and /home/user/Videos/clip_two.mp4 into the project. Place clip_one.mp4 on Video Track 1 and clip_two.mp4 on Video Track 2 with the two clips overlapping in time, and add a Wipe (`luma`) transition between the two tracks across the overlap. Save the project so the changes are persisted to /home/user/Documents/wipe_project.kdenlive, then render the project to /home/user/Documents/wipe_output.mp4 using the MP4 / H.264 preset; the output file must exist and be a valid media file. The project must remain at 1280x720, 25fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "wipe_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/wipe_project.kdenlive"
+      },
+      {
+        "filename": "clip_one.mp4",
+        "sandbox_path": "/home/user/Videos/clip_one.mp4"
+      },
+      {
+        "filename": "clip_two.mp4",
+        "sandbox_path": "/home/user/Videos/clip_two.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/wipe_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/wipe_project.kdenlive 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1280x720"
+    },
+    {
+      "command": "check-fps /home/user/Documents/wipe_project.kdenlive 25",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 25 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/wipe_project.kdenlive clip_one.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "clip_one.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/wipe_project.kdenlive clip_two.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "clip_two.mp4 in project"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/wipe_project.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "Luma (wipe) transition exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/wipe_output.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Rendered output file exists"
+    },
+    {
+      "command": "check-render-output /home/user/Documents/wipe_output.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Rendered output is a valid media file"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

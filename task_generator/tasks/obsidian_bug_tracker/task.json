@@ -1,0 +1,105 @@
+{
+  "id": "obsidian_bug_tracker",
+  "app": "obsidian",
+  "task": "Build a bug tracking system in the Obsidian vault at /home/user/Documents/BugTracker:\n\n1. Create folders: 'Open', 'InProgress', 'Closed'.\n2. Create 'Open/BUG-001.md' with frontmatter `type: bug`, `severity: high`, `component: auth`, `status: open`, body with heading 'BUG-001: Authentication Failure on Login', a description, a link to [[BUG-003]], and tags #bug #open #high #auth.\n3. Create 'InProgress/BUG-002.md' with frontmatter `type: bug`, `severity: medium`, `component: api`, `status: inprogress`, body with heading 'BUG-002: API Rate Limiting Not Enforced', a description, and tags #bug #inprogress #medium #api.\n4. Create 'Closed/BUG-003.md' with frontmatter `type: bug`, `severity: critical`, `component: auth`, `status: closed`, `resolved: 2025-03-01`, body with heading 'BUG-003: SQL Injection in Login Form', a description, resolution notes, a link to [[BUG-001]], and tags #bug #closed #critical.\n5. Create 'Overview.md' in the vault root with a heading 'Bug Tracker Overview', a summary of all bugs, links to [[BUG-001]], [[BUG-002]], and [[BUG-003]], and tags #tracker #overview.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/BugTracker Open",
+      "key": "exists",
+      "expected": true,
+      "description": "Open folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/BugTracker InProgress",
+      "key": "exists",
+      "expected": true,
+      "description": "InProgress folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/BugTracker Closed",
+      "key": "exists",
+      "expected": true,
+      "description": "Closed folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/BugTracker BUG-001 severity high",
+      "key": "match",
+      "expected": true,
+      "description": "BUG-001 has severity=high"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/BugTracker BUG-001 auth",
+      "key": "has_tag",
+      "expected": true,
+      "description": "BUG-001 has #auth tag"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/BugTracker BUG-001 BUG-003",
+      "key": "links_to",
+      "expected": true,
+      "description": "BUG-001 links to BUG-003"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/BugTracker BUG-002 component api",
+      "key": "match",
+      "expected": true,
+      "description": "BUG-002 has component=api"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/BugTracker BUG-002 inprogress",
+      "key": "has_tag",
+      "expected": true,
+      "description": "BUG-002 has #inprogress tag"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/BugTracker BUG-003 resolved 2025-03-01",
+      "key": "match",
+      "expected": true,
+      "description": "BUG-003 has resolved=2025-03-01"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/BugTracker BUG-003 BUG-001",
+      "key": "links_to",
+      "expected": true,
+      "description": "BUG-003 links to BUG-001"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/BugTracker Overview BUG-001",
+      "key": "links_to",
+      "expected": true,
+      "description": "Overview links to BUG-001"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/BugTracker Overview BUG-002",
+      "key": "links_to",
+      "expected": true,
+      "description": "Overview links to BUG-002"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/BugTracker Overview BUG-003",
+      "key": "links_to",
+      "expected": true,
+      "description": "Overview links to BUG-003"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/BugTracker Overview tracker",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Overview has #tracker tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/BugTracker",
+      "eval": "result.get('count') == 4",
+      "description": "Vault has exactly 4 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

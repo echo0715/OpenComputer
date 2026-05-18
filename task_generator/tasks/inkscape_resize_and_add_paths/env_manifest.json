@@ -1,0 +1,6 @@
+{
+  "task_id": "inkscape_resize_and_add_paths",
+  "files": [
+    {"filename": "landscape.svg", "sandbox_path": "/home/user/Documents/landscape.svg", "type": "svg"}
+  ]
+}

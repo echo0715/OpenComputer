@@ -1,0 +1,52 @@
+{
+  "id": "obs_create_scene_collection",
+  "app": "obs",
+  "task": "Set up an OBS Studio scene collection that contains exactly 3 scenes with these exact names: 'Intro', 'Main Content', 'Outro'. No other scenes (including any default 'Scene') may remain.\n\nSources required, with these exact names and types:\n- 'Intro' scene: Color Source named 'Background'\n- 'Main Content' scene: Display Capture named 'Desktop'\n- 'Outro' scene: empty (no sources)\n\nAll added sources must be visible. Persist the changes to the scene collection JSON under ~/.config/obs-studio/basic/scenes/.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Intro",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Intro' exists"
+    },
+    {
+      "command": "check-scene-exists 'Main Content'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Main Content' exists"
+    },
+    {
+      "command": "check-scene-exists Outro",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Outro' exists"
+    },
+    {
+      "command": "check-scene-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 3 scenes in the collection"
+    },
+    {
+      "command": "check-source-in-scene Background Intro",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Background' exists in 'Intro' scene"
+    },
+    {
+      "command": "check-source-in-scene Desktop 'Main Content'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Desktop' exists in 'Main Content' scene"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

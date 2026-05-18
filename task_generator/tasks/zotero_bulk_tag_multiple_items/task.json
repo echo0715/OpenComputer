@@ -1,0 +1,45 @@
+{
+  "id": "zotero_bulk_tag_multiple_items",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. The 'BERT: Pre-training of Deep Bidirectional Transformers' item currently has the 'nlp' tag but not 'important'.\n\nPerform both of the following tagging operations:\n1. Create a new tag named exactly 'transformer-arch' (lowercase, with hyphen) and assign it to both 'Attention Is All You Need' and 'BERT: Pre-training of Deep Bidirectional Transformers'.\n2. Assign the existing 'important' tag to the BERT item.\n\nLeave Zotero running so the changes persist.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tag-exists transformer-arch",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'transformer-arch' exists"
+    },
+    {
+      "command": "check-item-tag 'Attention Is All You Need' transformer-arch",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Attention has transformer-arch tag"
+    },
+    {
+      "command": "check-item-tag 'BERT: Pre-training' transformer-arch",
+      "key": "has_tag",
+      "expected": true,
+      "description": "BERT has transformer-arch tag"
+    },
+    {
+      "command": "check-item-tag 'BERT: Pre-training' important",
+      "key": "has_tag",
+      "expected": true,
+      "description": "BERT has important tag"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

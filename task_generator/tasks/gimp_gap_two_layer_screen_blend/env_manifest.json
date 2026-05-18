@@ -1,0 +1,7 @@
+{
+  "task_id": "gimp_gap_two_layer_screen_blend",
+  "files": [
+    {"filename": "dark_base.png", "sandbox_path": "/home/user/Documents/dark_base.png", "type": "png"},
+    {"filename": "light_top.png", "sandbox_path": "/home/user/Documents/light_top.png", "type": "png"}
+  ]
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gadget Store</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; background: #fafafa; }
+  h1 { margin-top: 0; }
+  .layout { display: flex; gap: 20px; }
+  .products { flex: 2; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .product { background: white; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
+  .product h3 { margin: 0 0 6px; font-size: 15px; }
+  .product .price { color: #080; font-weight: bold; }
+  .cart { flex: 1; background: white; padding: 12px; border: 1px solid #ddd; border-radius: 6px; min-width: 250px; }
+  .cart h2 { margin-top: 0; }
+  .cart ul { list-style: none; padding: 0; margin: 0; }
+  .cart li { font-size: 13px; margin-bottom: 4px; }
+  .cart .total { font-weight: bold; font-size: 16px; margin-top: 10px; }
+  button { padding: 6px 10px; margin-top: 4px; }
+  #coupon { width: 90px; padding: 4px; }
+  #shipping { background: white; padding: 16px; border: 1px solid #ddd; border-radius: 6px; margin-top: 16px; display: none; max-width: 400px; }
+  #shipping input { display: block; width: 100%; margin: 6px 0; padding: 6px; }
+  #confirmation { background: #e8f5e9; padding: 16px; border: 1px solid #2e7d32; border-radius: 6px; margin-top: 16px; display: none; max-width: 520px; }
+  #confirmation h2 { color: #2e7d32; }
+</style>
+</head>
+<body>
+<h1>Gadget Store</h1>
+<div class="layout">
+  <div class="products" id="products"></div>
+  <div class="cart">
+    <h2>Cart</h2>
+    <ul id="cart-items"></ul>
+    <div>Subtotal: $<span id="subtotal">0.00</span></div>
+    <div>
+      Coupon: <input id="coupon" placeholder="code">
+      <button id="apply-coupon">Apply</button>
+    </div>
+    <div>Discount: $<span id="discount">0.00</span></div>
+    <div class="total">Total: $<span id="total">0.00</span></div>
+    <button id="checkout">Checkout</button>
+  </div>
+</div>
+<div id="shipping">
+  <h2>Shipping</h2>
+  <input id="ship-name" placeholder="Full name">
+  <input id="ship-address" placeholder="Street address">
+  <input id="ship-city" placeholder="City">
+  <input id="ship-zip" placeholder="ZIP">
+  <button id="place-order">Place Order</button>
+</div>
+<div id="confirmation"></div>
+
+<script>
+  const products = [
+    { id: "p1", name: "Wireless Mouse",    price: 15 },
+    { id: "p2", name: "Mechanical Keyboard", price: 65 },
+    { id: "p3", name: "USB-C Hub",         price: 35 },
+    { id: "p4", name: "Bluetooth Headphones", price: 49 },
+    { id: "p5", name: "Webcam 1080p",      price: 42 },
+    { id: "p6", name: "Desk Lamp",         price: 22 }
+  ];
+  const cart = [];
+  let discountPct = 0;
+
+  function renderProducts() {
+    const box = document.getElementById("products");
+    box.innerHTML = "";
+    products.forEach(p => {
+      const el = document.createElement("div");
+      el.className = "product";
+      el.innerHTML = `<h3>${p.name}</h3><div class="price">$${p.price.toFixed(2)}</div>`;
+      const btn = document.createElement("button");
+      btn.textContent = "Add to Cart";
+      btn.dataset.id = p.id;
+      btn.onclick = () => addToCart(p.id);
+      el.appendChild(btn);
+      box.appendChild(el);
+    });
+  }
+
+  function addToCart(id) {
+    const prod = products.find(p => p.id === id);
+    const existing = cart.find(i => i.id === id);
+    if (existing) existing.qty += 1;
+    else cart.push({ id, name: prod.name, price: prod.price, qty: 1 });
+    renderCart();
+  }
+
+  function renderCart() {
+    const list = document.getElementById("cart-items");
+    list.innerHTML = "";
+    let subtotal = 0;
+    cart.forEach(i => {
+      const li = document.createElement("li");
+      li.textContent = i.name + " x" + i.qty + " — $" + (i.price * i.qty).toFixed(2);
+      list.appendChild(li);
+      subtotal += i.price * i.qty;
+    });
+    const discount = subtotal * discountPct;
+    const total = subtotal - discount;
+    document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+    document.getElementById("discount").textContent = discount.toFixed(2);
+    document.getElementById("total").textContent = total.toFixed(2);
+  }
+
+  document.getElementById("apply-coupon").onclick = () => {
+    const code = document.getElementById("coupon").value.trim().toUpperCase();
+    if (code === "SAVE10") discountPct = 0.10;
+    else discountPct = 0;
+    renderCart();
+  };
+
+  document.getElementById("checkout").onclick = () => {
+    if (cart.length === 0) return;
+    document.getElementById("shipping").style.display = "block";
+  };
+
+  document.getElementById("place-order").onclick = () => {
+    const name = document.getElementById("ship-name").value.trim();
+    const addr = document.getElementById("ship-address").value.trim();
+    const city = document.getElementById("ship-city").value.trim();
+    const zip  = document.getElementById("ship-zip").value.trim();
+    if (!name || !addr || !city || !zip) return;
+    const total = document.getElementById("total").textContent;
+    const lines = cart.map(i => `${i.name} x${i.qty}`).join(", ");
+    const conf = document.getElementById("confirmation");
+    conf.style.display = "block";
+    conf.innerHTML = `<h2>Order confirmed</h2>
+      <p>Thank you, ${name}!</p>
+      <p>Ship to: ${addr}, ${city} ${zip}</p>
+      <p>Items: ${lines}</p>
+      <p><strong>Total: $${total}</strong></p>`;
+  };
+
+  renderProducts();
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "id": "firefox_httpbin_endpoints_trail",
+  "app": "firefox",
+  "task": "Visit these six httpbin.org inspection endpoints in order, fully loading each before moving on, so all six appear in browsing history:\n\n1. https://httpbin.org/get\n2. https://httpbin.org/ip\n3. https://httpbin.org/user-agent\n4. https://httpbin.org/headers\n5. https://httpbin.org/html\n6. https://httpbin.org/json\n\nAdd a bookmark for https://httpbin.org/json with title exactly 'httpbin JSON'. The active tab when you finish must be https://httpbin.org/json.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited httpbin.org/get",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/get was visited"
+    },
+    {
+      "command": "check-url-visited httpbin.org/ip",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/ip was visited"
+    },
+    {
+      "command": "check-url-visited httpbin.org/user-agent",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/user-agent was visited"
+    },
+    {
+      "command": "check-url-visited httpbin.org/headers",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/headers was visited"
+    },
+    {
+      "command": "check-url-visited httpbin.org/html",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/html was visited"
+    },
+    {
+      "command": "check-url-visited httpbin.org/json",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/json was visited"
+    },
+    {
+      "command": "check-tab-open httpbin.org/json",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab is httpbin.org/json"
+    },
+    {
+      "command": "check-bookmark httpbin",
+      "key": "exists",
+      "expected": true,
+      "description": "A bookmark for httpbin JSON exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "gedit_python_type_hints_add",
+  "app": "gedit",
+  "task": "/home/user/Documents/utils.py currently contains three untyped functions:\n\n```\ndef greet(name):\n    return \"Hello, \" + name + \"!\"\n\ndef add(a, b):\n    return a + b\n\ndef is_even(n):\n    return n % 2 == 0\n```\n\nEdit the file so that:\n- Line 1 is a module-level triple-double-quoted docstring (e.g. `\"\"\"Utility functions for string, math, and parity checks.\"\"\"`).\n- The three function signatures gain type hints: `def greet(name: str) -> str:`, `def add(a: int, b: int) -> int:`, `def is_even(n: int) -> bool:`.\n- The function bodies are unchanged — the return expressions `return \"Hello, \" + name + \"!\"`, `return a + b`, and `return n % 2 == 0` must all still be present.\n\nThe file path must remain /home/user/Documents/utils.py.",
+  "env": {
+    "files": [
+      {
+        "filename": "utils.py",
+        "sandbox_path": "/home/user/Documents/utils.py"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/utils.py",
+      "key": "exists",
+      "expected": true,
+      "description": "utils.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/utils.py \"def greet(name: str) -> str:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "greet has type hints"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/utils.py \"def add(a: int, b: int) -> int:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "add has type hints"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/utils.py \"def is_even(n: int) -> bool:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "is_even has type hints"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/utils.py \"return a + b\"",
+      "key": "contains",
+      "expected": true,
+      "description": "add body preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/utils.py \"return n % 2 == 0\"",
+      "key": "contains",
+      "expected": true,
+      "description": "is_even body preserved"
+    },
+    {
+      "command": "file-content /home/user/Documents/utils.py",
+      "eval": "result.get('content', '').lstrip().startswith('\"\"\"')",
+      "description": "File starts with a triple-quoted docstring"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

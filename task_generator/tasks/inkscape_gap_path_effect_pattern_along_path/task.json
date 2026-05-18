@@ -1,0 +1,44 @@
+{
+  "id": "inkscape_gap_path_effect_pattern_along_path",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/lpe_pap.svg. Apply Inkscape's Live Path Effect 'Pattern Along Path' to the 'spine' path, using the small 'ornament' triangle as the pattern source so the triangle is tiled along the spine. After applying the effect, ensure the SVG contains an <inkscape:path-effect effect='skeletal' ...> element inside <defs>, and that the 'spine' path has an inkscape:path-effect attribute referencing that effect. Save /home/user/Documents/lpe_pap.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "lpe_pap.svg",
+        "sandbox_path": "/home/user/Documents/lpe_pap.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/lpe_pap.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/lpe_pap.svg spine",
+      "key": "exists",
+      "expected": true,
+      "description": "spine preserved"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/lpe_pap.svg path-effect",
+      "key": "contains",
+      "expected": true,
+      "description": "inkscape:path-effect present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/lpe_pap.svg skeletal",
+      "key": "contains",
+      "expected": true,
+      "description": "Pattern Along Path effect id is skeletal"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

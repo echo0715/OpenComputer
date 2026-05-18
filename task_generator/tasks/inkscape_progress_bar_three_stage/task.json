@@ -1,0 +1,105 @@
+{
+  "id": "inkscape_progress_bar_three_stage",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/progress.svg — a blank 600x200 canvas.\n\nBuild a three-stage progress bar in /home/user/Documents/progress.svg with these exact contents:\n\n- Layer named 'Progress' containing:\n  - A long background rectangle with id `track` and fill #e0e0e0.\n  - Three smaller segment rectangles arranged horizontally on top of the track with these exact ids and fills:\n    - seg_done fill #2e7d32\n    - seg_current fill #f9a825\n    - seg_todo fill #9e9e9e\n- Three separate text elements with the exact strings: Done, Current, Todo.\n\nThe page must remain 600x200. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "progress.svg",
+        "sandbox_path": "/home/user/Documents/progress.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/progress.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "progress.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/progress.svg 600 200",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 600x200"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/progress.svg Progress",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Progress' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/progress.svg track",
+      "key": "exists",
+      "expected": true,
+      "description": "track exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/progress.svg track fill #e0e0e0",
+      "key": "match",
+      "expected": true,
+      "description": "track fill is #e0e0e0"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/progress.svg seg_done",
+      "key": "exists",
+      "expected": true,
+      "description": "seg_done exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/progress.svg seg_done fill #2e7d32",
+      "key": "match",
+      "expected": true,
+      "description": "seg_done fill is #2e7d32"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/progress.svg seg_current",
+      "key": "exists",
+      "expected": true,
+      "description": "seg_current exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/progress.svg seg_current fill #f9a825",
+      "key": "match",
+      "expected": true,
+      "description": "seg_current fill is #f9a825"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/progress.svg seg_todo",
+      "key": "exists",
+      "expected": true,
+      "description": "seg_todo exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/progress.svg seg_todo fill #9e9e9e",
+      "key": "match",
+      "expected": true,
+      "description": "seg_todo fill is #9e9e9e"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/progress.svg Done",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Done' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/progress.svg Current",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Current' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/progress.svg Todo",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Todo' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

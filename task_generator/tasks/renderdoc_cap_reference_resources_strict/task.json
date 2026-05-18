@@ -1,0 +1,87 @@
+{
+  "id": "renderdoc_cap_reference_resources_strict",
+  "app": "renderdoc",
+  "task": "Create a strict reference-all-resources RenderDoc preset at /home/user/captures/strict.cap. The file must be valid JSON with a top-level \"rdocConfigData\": 1 marker and a nested \"settings\" object.\n\nUnder settings:\n- executable = \"/usr/local/games/strict_target\"\n- workingDir = \"/home/user/strict\"\n- commandLine = \"--ref-all --verify\"\n- environment = [{\"name\": \"RDOC_STRICT_MODE\", \"value\": \"1\", \"separator\": \"Platform\", \"mod\": \"Replace\"}]\n- options must set ALL of these to true: APIValidation, CaptureCallstacks, CaptureAllCmdLists, RefAllResources, VerifyBufferAccess. And set HookIntoChildren to false, DebugOutputMute to false.\n- autoStart = false\n- queueFrameCap = 0\n- numQueuedFrames = 0",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-cap-executable /home/user/captures/strict.cap /usr/local/games/strict_target",
+      "key": "match",
+      "expected": true,
+      "description": "executable"
+    },
+    {
+      "command": "check-cap-command-line /home/user/captures/strict.cap --ref-all",
+      "key": "match",
+      "expected": true,
+      "description": "--ref-all flag"
+    },
+    {
+      "command": "check-cap-command-line /home/user/captures/strict.cap --verify",
+      "key": "match",
+      "expected": true,
+      "description": "--verify flag"
+    },
+    {
+      "command": "check-cap-env /home/user/captures/strict.cap RDOC_STRICT_MODE",
+      "key": "present",
+      "expected": true,
+      "description": "RDOC_STRICT_MODE env"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/strict.cap APIValidation true",
+      "key": "match",
+      "expected": true,
+      "description": "APIValidation true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/strict.cap CaptureCallstacks true",
+      "key": "match",
+      "expected": true,
+      "description": "CaptureCallstacks true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/strict.cap CaptureAllCmdLists true",
+      "key": "match",
+      "expected": true,
+      "description": "CaptureAllCmdLists true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/strict.cap RefAllResources true",
+      "key": "match",
+      "expected": true,
+      "description": "RefAllResources true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/strict.cap VerifyBufferAccess true",
+      "key": "match",
+      "expected": true,
+      "description": "VerifyBufferAccess true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/strict.cap HookIntoChildren false",
+      "key": "match",
+      "expected": true,
+      "description": "HookIntoChildren false"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/strict.cap DebugOutputMute false",
+      "key": "match",
+      "expected": true,
+      "description": "DebugOutputMute false"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

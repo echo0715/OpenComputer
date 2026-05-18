@@ -1,0 +1,45 @@
+{
+  "id": "inkscape_edit_svg_styles",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/drawing.svg — an 800x600 document containing a rectangle with id `rect1` (fill black) and a circle with id `circle1` (fill black).\n\nEdit /home/user/Documents/drawing.svg so that:\n- `rect1` has fill #ff0000.\n- `circle1` has fill #0000ff.\n- A new text element exists with the exact text: Styled Shapes.\n\nSave the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "drawing.svg",
+        "sandbox_path": "/home/user/Documents/drawing.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/drawing.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File drawing.svg exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/drawing.svg rect1 fill #ff0000",
+      "key": "match",
+      "expected": true,
+      "description": "Rectangle rect1 has red fill (#ff0000)"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/drawing.svg circle1 fill #0000ff",
+      "key": "match",
+      "expected": true,
+      "description": "Circle circle1 has blue fill (#0000ff)"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/drawing.svg 'Styled Shapes'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Styled Shapes' exists in the document"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

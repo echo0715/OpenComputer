@@ -1,0 +1,62 @@
+{
+  "id": "eclipse_gap_convert_to_maven",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the plain Java project 'DemoApp'.\n\nConvert 'DemoApp' to a Maven (m2e) project with groupId `com.example`, artifactId `demo-app`, version `1.0.0`, and packaging `jar`, so that:\n\n- A pom.xml is created at /home/user/workspace/DemoApp/pom.xml containing those groupId, artifactId, and version values.\n- The project's .project file declares the m2e Maven nature `org.eclipse.m2e.core.maven2Nature`.",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/workspace/DemoApp/pom.xml",
+      "key": "exists",
+      "expected": true,
+      "description": "pom.xml exists"
+    },
+    {
+      "command": "check-file-contains /home/user/workspace/DemoApp/pom.xml com.example",
+      "key": "contains",
+      "expected": true,
+      "description": "pom.xml has groupId com.example"
+    },
+    {
+      "command": "check-file-contains /home/user/workspace/DemoApp/pom.xml demo-app",
+      "key": "contains",
+      "expected": true,
+      "description": "pom.xml has artifactId demo-app"
+    },
+    {
+      "command": "check-file-contains /home/user/workspace/DemoApp/pom.xml 1.0.0",
+      "key": "contains",
+      "expected": true,
+      "description": "pom.xml has version 1.0.0"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/DemoApp org.eclipse.m2e.core.maven2Nature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "m2e Maven nature added"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

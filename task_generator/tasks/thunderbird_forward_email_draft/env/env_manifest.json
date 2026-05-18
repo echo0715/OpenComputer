@@ -1,0 +1,15 @@
+{
+  "task_id": "thunderbird_forward_email_draft",
+  "files": [
+    {
+      "filename": "setup_inbox.py",
+      "sandbox_path": "/home/user/setup_inbox.py",
+      "type": "py"
+    },
+    {
+      "filename": "thunderbird-profile.tar.gz",
+      "sandbox_path": "/tmp/thunderbird-profile.tar.gz",
+      "type": "archive"
+    }
+  ]
+}

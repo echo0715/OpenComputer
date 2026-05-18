@@ -1,0 +1,10 @@
+{
+  "task_id": "thunderbird_gap_openpgp_key_config",
+  "files": [
+    {
+      "filename": "test_openpgp_secret.asc",
+      "sandbox_path": "/home/user/Documents/test_openpgp_secret.asc",
+      "type": "ascii-armored-pgp"
+    }
+  ]
+}

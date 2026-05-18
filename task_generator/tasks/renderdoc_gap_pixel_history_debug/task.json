@@ -1,0 +1,51 @@
+{
+  "id": "renderdoc_gap_pixel_history_debug",
+  "app": "renderdoc",
+  "task": "Configure the Pixel History panel for a debug workflow (always show failed fragments, color entries by primitive ID, and enable shader debugger auto-step) by editing /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document). Apply all of the following edits in a single save:\n\n1. Set `\"PixelHistory_ShowFailures\"` to `true`.\n2. Set `\"PixelHistory_ColorByPrimitive\"` to `true`.\n3. Set `\"ShaderViewer_AutoStep\"` to `true`.\n\nThe top-level `\"rdocConfigData\": 1` marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting PixelHistory_ShowFailures true",
+      "key": "match",
+      "expected": true,
+      "description": "ShowFailures true"
+    },
+    {
+      "command": "check-setting PixelHistory_ColorByPrimitive true",
+      "key": "match",
+      "expected": true,
+      "description": "ColorByPrimitive true"
+    },
+    {
+      "command": "check-setting ShaderViewer_AutoStep true",
+      "key": "match",
+      "expected": true,
+      "description": "AutoStep true"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

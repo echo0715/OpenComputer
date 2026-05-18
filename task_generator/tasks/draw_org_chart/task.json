@@ -1,0 +1,57 @@
+{
+  "id": "draw_org_chart",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/org_template.odg is open in LibreOffice Draw — an empty drawing with one blank page.\n\nBuild an organizational chart on page 1:\n- One rectangle near the top center with the exact text 'CEO - Alice'.\n- Three rectangles side-by-side below it with exact texts 'CTO - Bob' (left), 'CFO - Carol' (center), 'COO - Dave' (right).\n- Connectors from the 'CEO - Alice' rectangle to each of 'CTO - Bob', 'CFO - Carol', and 'COO - Dave'.\n\nSave the file in-place.",
+  "env": {
+    "files": [
+      {
+        "filename": "org_template.odg",
+        "sandbox_path": "/home/user/Documents/org_template.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 \"CEO - Alice\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'CEO - Alice'"
+    },
+    {
+      "command": "check-page-contains 0 \"CTO - Bob\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'CTO - Bob'"
+    },
+    {
+      "command": "check-page-contains 0 \"CFO - Carol\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'CFO - Carol'"
+    },
+    {
+      "command": "check-page-contains 0 \"COO - Dave\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'COO - Dave'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 contains rectangle shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "gedit_edit_csv_data",
+  "app": "gedit",
+  "task": "/home/user/Documents/employees.csv currently contains:\n\n```\nName,Age,Salary\nAlice,30,72000\nBob,25,58000\nCharlie,35,85000\n```\n\nAdd a `Department` column and a new row for David, so the final file has exactly 5 lines (1 header + 4 data rows) matching:\n\n```\nName,Age,Salary,Department\nAlice,30,72000,Engineering\nBob,25,58000,Marketing\nCharlie,35,85000,Engineering\nDavid,28,55000,Sales\n```",
+  "env": {
+    "files": [
+      {
+        "filename": "employees.csv",
+        "sandbox_path": "/home/user/Documents/employees.csv"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/employees.csv",
+      "key": "exists",
+      "expected": true,
+      "description": "employees.csv file exists"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/employees.csv 1 Name,Age,Salary,Department",
+      "key": "matches",
+      "expected": true,
+      "description": "Header row includes Department column"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/employees.csv Alice,30,72000,Engineering",
+      "key": "contains",
+      "expected": true,
+      "description": "Alice has Engineering department"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/employees.csv Bob,25,58000,Marketing",
+      "key": "contains",
+      "expected": true,
+      "description": "Bob has Marketing department"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/employees.csv Charlie,35,85000,Engineering",
+      "key": "contains",
+      "expected": true,
+      "description": "Charlie has Engineering department"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/employees.csv David,28,55000,Sales",
+      "key": "contains",
+      "expected": true,
+      "description": "New employee David row exists"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/employees.csv 5",
+      "key": "matches",
+      "expected": true,
+      "description": "File has exactly 5 lines (1 header + 4 data rows)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

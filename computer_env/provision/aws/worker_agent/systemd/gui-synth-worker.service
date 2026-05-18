@@ -1,0 +1,16 @@
+[Unit]
+Description=OpenComputer remote docker worker
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/opencomputer/worker-agent.env
+WorkingDirectory=/opt/opencomputer/worker-agent
+ExecStart=/usr/bin/python3 /opt/opencomputer/worker-agent/app.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

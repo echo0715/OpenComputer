@@ -1,0 +1,39 @@
+{
+  "id": "freecad_export_cylinder_to_step",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/pipe.FCStd, which contains a single Part::Cylinder named 'Cylinder' (Radius 10, Height 40).\n\nExport the 'Cylinder' object as a 'STEP (*.step *.stp)' file to exactly /home/user/exports/pipe.step (creating /home/user/exports/ if necessary), then save the FCStd document.",
+  "env": {
+    "files": [
+      {
+        "filename": "pipe.FCStd",
+        "sandbox_path": "/home/user/Documents/pipe.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/exports/pipe.step",
+      "key": "exists",
+      "expected": true,
+      "description": "STEP file was written"
+    },
+    {
+      "command": "check-step-valid /home/user/exports/pipe.step",
+      "key": "valid",
+      "expected": true,
+      "description": "STEP file has ISO-10303-21 header and entities"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/pipe.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "FCStd source still exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

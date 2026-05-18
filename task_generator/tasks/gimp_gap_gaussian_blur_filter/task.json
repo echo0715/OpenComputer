@@ -1,0 +1,48 @@
+{
+  "id": "gimp_gap_gaussian_blur_filter",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/checkerboard_sharp.png in GIMP.\n\nApply a Gaussian Blur with horizontal and vertical radius = 15 pixels, then export the blurred image as PNG to /home/user/Documents/blurred.png. The output must remain 400x400 pixels and the previously sharp black-and-white checkerboard squares should be averaged into mid-tone gray.",
+  "env": {
+    "files": [
+      {
+        "filename": "checkerboard_sharp.png",
+        "sandbox_path": "/home/user/Documents/checkerboard_sharp.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/blurred.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Output PNG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/blurred.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Output is PNG"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/blurred.png 400 400",
+      "key": "match",
+      "expected": true,
+      "description": "Output is 400x400"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/blurred.png 50 50",
+      "eval": "30 < result.get('r', 0) < 225",
+      "description": "Interior pixel is mid-tone gray (not pure black or pure white) — blur averaged neighboring squares"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/blurred.png 200 200",
+      "eval": "30 < result.get('r', 0) < 225",
+      "description": "Center pixel is mid-tone gray"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

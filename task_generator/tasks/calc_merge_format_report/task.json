@@ -1,0 +1,69 @@
+{
+  "id": "calc_merge_format_report",
+  "app": "libreoffice_calc",
+  "task": "Open /home/user/Documents/report_data.xlsx in LibreOffice Calc. The 'Data' sheet has columns Month (A), Revenue (B), Expenses (C); row 1 has headers and rows 2-7 contain data for January through June.\n\nReshape the sheet so that:\n- Row 1 is a single merged cell across A1:C1 containing the bold title 'Financial Report H1 2025'.\n- Row 2 holds the headers: A2='Month', B2='Revenue', C2='Expenses', plus D2='Profit' (re-enter the original headers if the merge replaced them).\n- Rows 3-8 hold the original 6 months of data (Jan-Jun).\n- D3:D8 = `=B3-C3` (Revenue - Expenses) for each month.\n- A9 = 'TOTAL' (bold).\n- B9 = `=SUM(B3:B8)`, C9 = `=SUM(C3:C8)`, D9 = `=SUM(D3:D8)`.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "report_data.xlsx",
+        "sandbox_path": "/home/user/Documents/report_data.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-merged-cells A1:C1 Data",
+      "key": "merged",
+      "expected": true,
+      "description": "A1:C1 is merged"
+    },
+    {
+      "command": "cell-value A1 Data",
+      "eval": "'Financial Report H1 2025' in str(result.get('display','')) or 'Financial Report H1 2025' in str(result.get('value',''))",
+      "description": "A1 contains 'Financial Report H1 2025'"
+    },
+    {
+      "command": "check-cell-formatted A1 true Data",
+      "key": "match",
+      "expected": true,
+      "description": "A1 is bold"
+    },
+    {
+      "command": "cell-value D2 Data",
+      "eval": "str(result.get('value','')).strip() == 'Profit' or str(result.get('display','')).strip() == 'Profit'",
+      "description": "D2 = 'Profit'"
+    },
+    {
+      "command": "sheet-data Data",
+      "eval": "any('TOTAL' in str(row) for row in result.get('data',[]) if row)",
+      "description": "Sheet contains a 'TOTAL' row"
+    },
+    {
+      "command": "sheet-data Data",
+      "eval": "any(337000 == val or 337000.0 == val for row in result.get('data',[]) if row for val in row if isinstance(val,(int,float)))",
+      "description": "Total revenue = 337000 appears in the sheet"
+    },
+    {
+      "command": "sheet-data Data",
+      "eval": "any(271000 == val or 271000.0 == val for row in result.get('data',[]) if row for val in row if isinstance(val,(int,float)))",
+      "description": "Total expenses = 271000 appears in the sheet"
+    },
+    {
+      "command": "sheet-data Data",
+      "eval": "any(66000 == val or 66000.0 == val for row in result.get('data',[]) if row for val in row if isinstance(val,(int,float)))",
+      "description": "Total profit = 66000 appears in the sheet"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

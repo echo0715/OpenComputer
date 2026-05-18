@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_complex_product_shot",
+  "files": [
+    {"filename": "product_shot.blend", "sandbox_path": "/home/user/Documents/product_shot.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

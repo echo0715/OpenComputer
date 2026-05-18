@@ -1,0 +1,45 @@
+{
+  "id": "renderdoc_set_dark_theme",
+  "app": "renderdoc",
+  "task": "The RenderDoc UI configuration file at /home/user/.local/share/qrenderdoc/UI.config is a plain JSON document (despite the `.config` extension). Make exactly these two changes, leaving every other key unchanged:\n\n1. Set `\"UIStyle\"` to the exact string `\"Dark\"` (case-sensitive).\n2. Set `\"Font_GlobalScale\"` to the JSON number `1.25` (not the string `\"1.25\"`).\n\nThe top-level key `\"rdocConfigData\"` must remain present with the value `1` — do not delete it.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-theme Dark",
+      "key": "match",
+      "expected": true,
+      "description": "UIStyle is Dark"
+    },
+    {
+      "command": "check-font-scale 1.25",
+      "key": "match",
+      "expected": true,
+      "description": "Font_GlobalScale is 1.25"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

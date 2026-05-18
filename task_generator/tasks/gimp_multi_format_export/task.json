@@ -1,0 +1,63 @@
+{
+  "id": "gimp_multi_format_export",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/source.png in GIMP — a 500x400 image.\n\nExport the same image in three formats at the original 500x400 dimensions:\n- JPEG to /home/user/Documents/output.jpg\n- BMP to /home/user/Documents/output.bmp\n- TIFF to /home/user/Documents/output.tiff",
+  "env": {
+    "files": [
+      {
+        "filename": "source.png",
+        "sandbox_path": "/home/user/Documents/source.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/output.jpg",
+      "key": "exists",
+      "expected": true,
+      "description": "JPEG output file exists at /home/user/Documents/output.jpg"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/output.jpg JPEG",
+      "key": "match",
+      "expected": true,
+      "description": "output.jpg is in JPEG format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/output.jpg 500 400",
+      "key": "match",
+      "expected": true,
+      "description": "JPEG output maintains original 500x400 dimensions"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/output.bmp",
+      "key": "exists",
+      "expected": true,
+      "description": "BMP output file exists at /home/user/Documents/output.bmp"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/output.bmp BMP",
+      "key": "match",
+      "expected": true,
+      "description": "output.bmp is in BMP format"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/output.tiff",
+      "key": "exists",
+      "expected": true,
+      "description": "TIFF output file exists at /home/user/Documents/output.tiff"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/output.tiff TIFF",
+      "key": "match",
+      "expected": true,
+      "description": "output.tiff is in TIFF format"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

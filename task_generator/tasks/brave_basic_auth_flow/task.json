@@ -1,0 +1,76 @@
+{
+  "id": "brave_basic_auth_flow",
+  "app": "brave",
+  "task": "Complete two HTTP Basic Auth flows in Brave, each in its own tab:\n- Tab 0: https://httpbin.org/basic-auth/claude/secret — authenticate with username `claude` / password `secret`. The successful JSON response body shows `{\"authenticated\": true, \"user\": \"claude\"}`. Bookmark this page.\n- Tab 1: https://httpbin.org/basic-auth/demo/hunter2 — authenticate with username `demo` / password `hunter2`. The successful JSON response body shows the user as `demo`. Do NOT bookmark this page.\n\nWhen done: both URLs must appear in history, both tabs must be open, tab 0 DOM must contain `authenticated` and `claude`, and tab 1 DOM must contain `authenticated` and `demo`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open basic-auth/claude",
+      "key": "found",
+      "expected": true,
+      "description": "basic-auth/claude tab is open"
+    },
+    {
+      "command": "check-tab-open basic-auth/demo",
+      "key": "found",
+      "expected": true,
+      "description": "basic-auth/demo tab is open"
+    },
+    {
+      "command": "check-page-contains authenticated 0",
+      "key": "contains",
+      "expected": true,
+      "description": "Tab 0 DOM contains 'authenticated'"
+    },
+    {
+      "command": "check-page-contains claude 0",
+      "key": "contains",
+      "expected": true,
+      "description": "Tab 0 DOM contains 'claude' (the authenticated user)"
+    },
+    {
+      "command": "check-page-contains authenticated 1",
+      "key": "contains",
+      "expected": true,
+      "description": "Tab 1 DOM contains 'authenticated'"
+    },
+    {
+      "command": "check-page-contains demo 1",
+      "key": "contains",
+      "expected": true,
+      "description": "Tab 1 DOM contains 'demo' (the authenticated user)"
+    },
+    {
+      "command": "check-url-visited basic-auth/claude/secret",
+      "key": "visited",
+      "expected": true,
+      "description": "basic-auth/claude/secret appears in history"
+    },
+    {
+      "command": "check-url-visited basic-auth/demo/hunter2",
+      "key": "visited",
+      "expected": true,
+      "description": "basic-auth/demo/hunter2 appears in history"
+    },
+    {
+      "command": "check-bookmark basic-auth/claude",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for the claude basic-auth page exists"
+    },
+    {
+      "command": "check-bookmark basic-auth/demo",
+      "key": "exists",
+      "expected": false,
+      "description": "Bookmark for the demo basic-auth page does NOT exist"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "id": "obs_gap_audio_mixer_monitor_tracks",
+  "app": "obs",
+  "task": "Configure Advanced Audio Properties in OBS Studio for a two-guest podcast. The final collection must contain exactly one scene named 'Show' (no default 'Scene' left over).\n\nThe 'Show' scene must contain two Media Sources:\n- 'Host' playing /home/user/Music/host.wav\n- 'Guest' playing /home/user/Music/guest.wav\n\nSet the Advanced Audio Properties for each source as follows:\n- 'Host': Volume = -6.0 dB; Audio Monitoring = 'Monitor and Output'; assigned to Audio Tracks 1 and 2 only\n- 'Guest': Volume = -9.0 dB; Audio Monitoring = 'Monitor Only (mute output)'; assigned to Audio Tracks 1 and 3 only\n\nPersist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "host.wav",
+        "sandbox_path": "/home/user/Music/host.wav"
+      },
+      {
+        "filename": "guest.wav",
+        "sandbox_path": "/home/user/Music/guest.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Show",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Show' exists"
+    },
+    {
+      "command": "check-source-in-scene Host Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Host' source in 'Show'"
+    },
+    {
+      "command": "check-source-in-scene Guest Show",
+      "key": "exists",
+      "expected": true,
+      "description": "'Guest' source in 'Show'"
+    },
+    {
+      "command": "source-info Host",
+      "eval": "int(result.get('mixers', 0)) == 0b011",
+      "expected": true,
+      "description": "'Host' assigned to audio tracks 1 and 2 (mixers bitmask = 3)"
+    },
+    {
+      "command": "source-info Host",
+      "eval": "int(result.get('monitoring_type', 0)) == 2",
+      "expected": true,
+      "description": "'Host' monitoring_type = 2 (Monitor and Output)"
+    },
+    {
+      "command": "source-info Host",
+      "eval": "abs(20.0 * __import__('math').log10(max(float(result.get('volume', 1.0)), 1e-9)) - (-6.0)) < 0.5",
+      "expected": true,
+      "description": "'Host' volume ≈ -6 dB"
+    },
+    {
+      "command": "source-info Guest",
+      "eval": "int(result.get('mixers', 0)) == 0b101",
+      "expected": true,
+      "description": "'Guest' assigned to audio tracks 1 and 3 (mixers bitmask = 5)"
+    },
+    {
+      "command": "source-info Guest",
+      "eval": "int(result.get('monitoring_type', 0)) == 1",
+      "expected": true,
+      "description": "'Guest' monitoring_type = 1 (Monitor Only)"
+    },
+    {
+      "command": "source-info Guest",
+      "eval": "abs(20.0 * __import__('math').log10(max(float(result.get('volume', 1.0)), 1e-9)) - (-9.0)) < 0.5",
+      "expected": true,
+      "description": "'Guest' volume ≈ -9 dB"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "task_id": "darktable_import_folder_tag_all",
+  "files": [
+    {"filename": "beach.png", "sandbox_path": "/home/user/Pictures/vacation/beach.png", "type": "png"},
+    {"filename": "forest.png", "sandbox_path": "/home/user/Pictures/vacation/forest.png", "type": "png"},
+    {"filename": "lake.png", "sandbox_path": "/home/user/Pictures/vacation/lake.png", "type": "png"}
+  ]
+}

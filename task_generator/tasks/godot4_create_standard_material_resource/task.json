@@ -1,0 +1,51 @@
+{
+  "id": "godot4_create_standard_material_resource",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/material_game/materials/red_material.tres. It is already a StandardMaterial3D resource with default placeholder values. Modify its [resource] section so that albedo_color = Color(1, 0, 0, 1) and metallic = 0.5. Leave the file's gd_resource type set to StandardMaterial3D. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "project.godot",
+        "sandbox_path": "/home/user/godot_projects/material_game/project.godot"
+      },
+      {
+        "filename": "main.tscn",
+        "sandbox_path": "/home/user/godot_projects/material_game/main.tscn"
+      },
+      {
+        "filename": "materials/red_material.tres",
+        "sandbox_path": "/home/user/godot_projects/material_game/materials/red_material.tres"
+      },
+      {
+        "filename": "icon.svg",
+        "sandbox_path": "/home/user/godot_projects/material_game/icon.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-resource-type /home/user/godot_projects/material_game/materials/red_material.tres StandardMaterial3D",
+      "key": "match",
+      "expected": true,
+      "description": "Resource type is StandardMaterial3D"
+    },
+    {
+      "command": "check-resource-property /home/user/godot_projects/material_game/materials/red_material.tres albedo_color 'Color(1, 0, 0, 1)'",
+      "key": "match",
+      "expected": true,
+      "description": "albedo_color is red"
+    },
+    {
+      "command": "check-resource-property /home/user/godot_projects/material_game/materials/red_material.tres metallic 0.5",
+      "key": "match",
+      "expected": true,
+      "description": "metallic is 0.5"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

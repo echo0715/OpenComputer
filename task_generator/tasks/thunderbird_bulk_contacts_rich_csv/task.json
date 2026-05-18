@@ -1,0 +1,108 @@
+{
+  "id": "thunderbird_bulk_contacts_rich_csv",
+  "app": "thunderbird",
+  "task": "Import every row of /home/user/Documents/crm_contacts.csv (8 contacts; columns: First Name, Last Name, Display Name, Primary Email, Work Phone, Company, Job Title, Notes) into Thunderbird's Address Book so each row becomes a contact with every column mapped to the matching address book field.",
+  "env": {
+    "files": [
+      {
+        "filename": "crm_contacts.csv",
+        "sandbox_path": "/home/user/Documents/crm_contacts.csv"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists 'Harper Okonkwo'",
+      "key": "found",
+      "expected": true,
+      "description": "Harper Okonkwo imported"
+    },
+    {
+      "command": "check-contact-exists 'Delphine Marchetti'",
+      "key": "found",
+      "expected": true,
+      "description": "Delphine Marchetti imported"
+    },
+    {
+      "command": "check-contact-exists 'Rashid Jafari'",
+      "key": "found",
+      "expected": true,
+      "description": "Rashid Jafari imported"
+    },
+    {
+      "command": "check-contact-exists 'Giselle Nordstrom'",
+      "key": "found",
+      "expected": true,
+      "description": "Giselle Nordstrom imported"
+    },
+    {
+      "command": "check-contact-exists 'Akihiro Takeda'",
+      "key": "found",
+      "expected": true,
+      "description": "Akihiro Takeda imported"
+    },
+    {
+      "command": "check-contact-exists 'Lindiwe Dlamini'",
+      "key": "found",
+      "expected": true,
+      "description": "Lindiwe Dlamini imported"
+    },
+    {
+      "command": "check-contact-exists 'Roscoe Beaumont'",
+      "key": "found",
+      "expected": true,
+      "description": "Roscoe Beaumont imported"
+    },
+    {
+      "command": "check-contact-exists 'Yelena Volkova'",
+      "key": "found",
+      "expected": true,
+      "description": "Yelena Volkova imported"
+    },
+    {
+      "command": "check-contact-field 'Harper Okonkwo' primary_email harper.okonkwo@ironclad.example",
+      "key": "match",
+      "expected": true,
+      "description": "Harper email correct"
+    },
+    {
+      "command": "check-contact-field 'Harper Okonkwo' work_phone 555-0411",
+      "key": "match",
+      "expected": true,
+      "description": "Harper work phone imported"
+    },
+    {
+      "command": "check-contact-field 'Delphine Marchetti' company 'Verdance Analytics'",
+      "key": "match",
+      "expected": true,
+      "description": "Delphine company imported"
+    },
+    {
+      "command": "check-contact-field 'Rashid Jafari' job_title 'Director of Engineering'",
+      "key": "match",
+      "expected": true,
+      "description": "Rashid job title imported"
+    },
+    {
+      "command": "check-contact-field 'Yelena Volkova' primary_email yelena.volkova@meridianlabs.example",
+      "key": "match",
+      "expected": true,
+      "description": "Yelena email correct"
+    },
+    {
+      "command": "contact-count",
+      "eval": "result.get('count', 0) >= 8",
+      "description": "At least 8 contacts total"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "task_id": "kdenlive_six_track_project",
+  "files": [
+    {
+      "filename": "six_tracks.kdenlive",
+      "sandbox_path": "/home/user/Documents/six_tracks.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "a.mp4",
+      "sandbox_path": "/home/user/Videos/a.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "b.mp4",
+      "sandbox_path": "/home/user/Videos/b.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "c.mp4",
+      "sandbox_path": "/home/user/Videos/c.mp4",
+      "type": "mp4"
+    }
+  ]
+}

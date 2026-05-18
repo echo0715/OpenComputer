@@ -1,0 +1,39 @@
+{
+  "id": "zotero_add_collection",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite.\n\nCreate a new top-level collection under 'My Library' named exactly 'Literature Review' (not as a subcollection of any existing collection). The existing 'AI Research' collection must remain. Leave Zotero running so the new collection is saved.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists on disk"
+    },
+    {
+      "command": "check-collection-exists 'Literature Review'",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Literature Review' exists"
+    },
+    {
+      "command": "check-collection-exists 'AI Research'",
+      "key": "exists",
+      "expected": true,
+      "description": "Original 'AI Research' collection still present"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

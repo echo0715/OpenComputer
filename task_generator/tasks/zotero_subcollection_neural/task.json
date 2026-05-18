@@ -1,0 +1,39 @@
+{
+  "id": "zotero_subcollection_neural",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. There is an existing top-level collection 'AI Research' under 'My Library'.\n\nCreate a new collection named exactly 'Neural Networks' as a direct subcollection of 'AI Research' (not a sibling). Leave Zotero running so the new subcollection is saved.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists"
+    },
+    {
+      "command": "check-collection-exists 'Neural Networks'",
+      "key": "exists",
+      "expected": true,
+      "description": "'Neural Networks' collection exists"
+    },
+    {
+      "command": "check-subcollection 'AI Research' 'Neural Networks'",
+      "key": "is_subcollection",
+      "expected": true,
+      "description": "'Neural Networks' is a subcollection of 'AI Research'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "id": "pcmanfm_cleanup_temp_files",
+  "app": "pcmanfm",
+  "task": "In /home/user/Documents/project/, delete all files ending in .tmp, .bak, or .log while keeping all .py, .txt, and .json files intact. After cleanup, exactly 5 files must remain: main.py, config.json, notes.txt, utils.py, and data.json.",
+  "env": {
+    "files": [
+      {
+        "filename": "main.py",
+        "sandbox_path": "/home/user/Documents/project/main.py"
+      },
+      {
+        "filename": "config.json",
+        "sandbox_path": "/home/user/Documents/project/config.json"
+      },
+      {
+        "filename": "notes.txt",
+        "sandbox_path": "/home/user/Documents/project/notes.txt"
+      },
+      {
+        "filename": "utils.py",
+        "sandbox_path": "/home/user/Documents/project/utils.py"
+      },
+      {
+        "filename": "data.json",
+        "sandbox_path": "/home/user/Documents/project/data.json"
+      },
+      {
+        "filename": "cache.tmp",
+        "sandbox_path": "/home/user/Documents/project/cache.tmp"
+      },
+      {
+        "filename": "old_config.bak",
+        "sandbox_path": "/home/user/Documents/project/old_config.bak"
+      },
+      {
+        "filename": "debug.log",
+        "sandbox_path": "/home/user/Documents/project/debug.log"
+      },
+      {
+        "filename": "session.tmp",
+        "sandbox_path": "/home/user/Documents/project/session.tmp"
+      },
+      {
+        "filename": "error.log",
+        "sandbox_path": "/home/user/Documents/project/error.log"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-count /home/user/Documents/project 5",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 5 files remain in project directory after cleanup"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/main.py",
+      "key": "exists",
+      "expected": true,
+      "description": "main.py is kept"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/config.json",
+      "key": "exists",
+      "expected": true,
+      "description": "config.json is kept"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/notes.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "notes.txt is kept"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/utils.py",
+      "key": "exists",
+      "expected": true,
+      "description": "utils.py is kept"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/data.json",
+      "key": "exists",
+      "expected": true,
+      "description": "data.json is kept"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/cache.tmp",
+      "key": "exists",
+      "expected": false,
+      "description": "cache.tmp is deleted"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/session.tmp",
+      "key": "exists",
+      "expected": false,
+      "description": "session.tmp is deleted"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/debug.log",
+      "key": "exists",
+      "expected": false,
+      "description": "debug.log is deleted"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project/error.log",
+      "key": "exists",
+      "expected": false,
+      "description": "error.log is deleted"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

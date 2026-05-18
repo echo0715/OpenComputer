@@ -1,0 +1,49 @@
+{
+  "id": "libreoffice_writer_find_replace",
+  "app": "libreoffice_writer",
+  "task": "/home/user/Documents/contract.odt is an existing LibreOffice Writer document.\n\nReplace all occurrences of 'ACME Corp' with 'GlobalTech Industries' and all occurrences of '2025' with '2026' (no occurrences of 'ACME Corp' or '2025' may remain), then save the file at its original path.",
+  "env": {
+    "files": [
+      {
+        "filename": "contract.odt",
+        "sandbox_path": "/home/user/Documents/contract.odt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "search \"ACME Corp\"",
+      "eval": "result.get('found', True) == False",
+      "description": "No occurrences of 'ACME Corp' remain"
+    },
+    {
+      "command": "check-text-contains \"GlobalTech Industries\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Document contains 'GlobalTech Industries'"
+    },
+    {
+      "command": "search 2025",
+      "eval": "result.get('found', True) == False",
+      "description": "No occurrences of '2025' remain"
+    },
+    {
+      "command": "check-text-contains 2026",
+      "key": "contains",
+      "expected": true,
+      "description": "Document contains '2026'"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File is saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

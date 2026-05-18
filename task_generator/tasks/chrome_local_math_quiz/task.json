@@ -1,0 +1,64 @@
+{
+  "id": "chrome_local_math_quiz",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/quiz.html (a five-question arithmetic quiz with numeric inputs `q1`–`q5`). Submit these correct answers:\n- `q1` (12 + 8) = `20`\n- `q2` (15 × 4) = `60`\n- `q3` (100 − 37) = `63`\n- `q4` (144 ÷ 12) = `12`\n- `q5` (7 × 9) = `63`\n\nAfter submission, the page must display `Score: 5/5` and `Perfect Score!`.",
+  "env": {
+    "files": [
+      {
+        "filename": "quiz.html",
+        "sandbox_path": "/home/user/Documents/quiz.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open quiz.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for quiz.html is open"
+    },
+    {
+      "command": "input #q1",
+      "eval": "str(result.get('value')).strip() == '20'",
+      "description": "Q1 input has value 20"
+    },
+    {
+      "command": "input #q2",
+      "eval": "str(result.get('value')).strip() == '60'",
+      "description": "Q2 input has value 60"
+    },
+    {
+      "command": "input #q3",
+      "eval": "str(result.get('value')).strip() == '63'",
+      "description": "Q3 input has value 63"
+    },
+    {
+      "command": "input #q4",
+      "eval": "str(result.get('value')).strip() == '12'",
+      "description": "Q4 input has value 12"
+    },
+    {
+      "command": "input #q5",
+      "eval": "str(result.get('value')).strip() == '63'",
+      "description": "Q5 input has value 63"
+    },
+    {
+      "command": "check-page-contains \"Score: 5/5\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page shows 'Score: 5/5'"
+    },
+    {
+      "command": "check-page-contains \"Perfect Score\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page shows 'Perfect Score' message"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

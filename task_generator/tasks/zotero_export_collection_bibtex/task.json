@@ -1,0 +1,39 @@
+{
+  "id": "zotero_export_collection_bibtex",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite.\n\nExport every item in the 'Reinforcement Learning' collection to BibTeX format at exactly /home/user/Documents/rl_export.bib. The output file must contain exactly 1 BibTeX entry whose title contains 'Survey of RL Methods'. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/rl_export.bib",
+      "key": "exists",
+      "expected": true,
+      "description": "rl_export.bib exists on disk"
+    },
+    {
+      "command": "check-bibtex-count /home/user/Documents/rl_export.bib 1",
+      "key": "match",
+      "expected": true,
+      "description": "BibTeX file has exactly 1 entry"
+    },
+    {
+      "command": "check-bibtex-title /home/user/Documents/rl_export.bib 'Survey of RL Methods'",
+      "key": "contains",
+      "expected": true,
+      "description": "BibTeX file contains the survey paper title"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

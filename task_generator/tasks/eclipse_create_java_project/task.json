@@ -1,0 +1,46 @@
+{
+  "id": "eclipse_create_java_project",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nCreate a new Java project 'InventoryApp' in this workspace (Java nature, default 'src' source folder), with a Java class at src/com/inventory/Main.java containing exactly:\n\n```\npackage com.inventory;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello Inventory\");\n    }\n}\n```\n\nFinal source file path: /home/user/workspace/InventoryApp/src/com/inventory/Main.java.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace InventoryApp",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'InventoryApp' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/InventoryApp org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/InventoryApp src src",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has 'src' source entry"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/InventoryApp src/com/inventory/Main.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Source file Main.java exists at src/com/inventory/Main.java"
+    },
+    {
+      "command": "check-file-exists /home/user/workspace/InventoryApp/.project",
+      "key": "exists",
+      "expected": true,
+      "description": "Eclipse .project file exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "id": "draw_meeting_room_layout",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/room_template.odg is open in LibreOffice Draw — a single page with one large rectangle labeled 'Room'.\n\nInside the room boundary on page 1, add these shapes (preserving the original 'Room' rectangle):\n- One ellipse in the center area with the text 'Table'.\n- Six small seat rectangles arranged around the table, labelled exactly 'Seat 1' (top-left), 'Seat 2' (top-right), 'Seat 3' (right), 'Seat 4' (bottom-right), 'Seat 5' (bottom-left), 'Seat 6' (left).\n- One rectangle near the top edge of the room with the text 'Whiteboard'.\n\nPage 1 must end up with exactly 9 shapes total. Save the file in-place.",
+  "env": {
+    "files": [
+      {
+        "filename": "room_template.odg",
+        "sandbox_path": "/home/user/Documents/room_template.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 Room",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Room' (original shape)"
+    },
+    {
+      "command": "check-page-contains 0 Table",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Table'"
+    },
+    {
+      "command": "check-page-contains 0 \"Seat 1\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Seat 1'"
+    },
+    {
+      "command": "check-page-contains 0 \"Seat 2\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Seat 2'"
+    },
+    {
+      "command": "check-page-contains 0 \"Seat 3\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Seat 3'"
+    },
+    {
+      "command": "check-page-contains 0 \"Seat 4\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Seat 4'"
+    },
+    {
+      "command": "check-page-contains 0 \"Seat 5\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Seat 5'"
+    },
+    {
+      "command": "check-page-contains 0 \"Seat 6\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Seat 6'"
+    },
+    {
+      "command": "check-page-contains 0 Whiteboard",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Whiteboard'"
+    },
+    {
+      "command": "check-shape-count 0 9",
+      "key": "match",
+      "expected": true,
+      "description": "Page 1 has exactly 9 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

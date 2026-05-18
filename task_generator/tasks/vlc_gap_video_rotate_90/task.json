@@ -1,0 +1,17 @@
+{
+  "id": "vlc_gap_video_rotate_90",
+  "app": "vlc",
+  "task": "Enable the video transform filter in VLC (video-filter chain must include 'transform') with the rotation type set to 90 degrees (transform-type = 90). Save preferences so they persist in ~/.config/vlc/vlcrc, then play /home/user/Videos/sample.mp4.",
+  "env": {
+    "files": [
+      {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/Videos/sample.mp4", "key": "exists", "expected": true, "description": "sample.mp4 is present"},
+    {"command": "config video-filter", "eval": "'transform' in (result.get('value') or '')", "description": "video-filter chain contains transform"},
+    {"command": "check-config transform-type 90", "key": "match", "expected": true, "description": "Transform type is 90 degrees"},
+    {"command": "check-media-loaded sample.mp4", "key": "loaded", "expected": true, "description": "sample.mp4 is playing"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "estimated_difficulty": 4}
+}

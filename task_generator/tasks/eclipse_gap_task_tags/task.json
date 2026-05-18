@@ -1,0 +1,38 @@
+{
+  "id": "eclipse_gap_task_tags",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nConfigure the Java compiler's Task Tags preferences so that the final tag list is exactly `TODO,FIXME,XXX,HACK` with priorities `NORMAL,HIGH,NORMAL,LOW` (i.e., add a custom 'HACK' tag at Low priority while preserving the default TODO/FIXME/XXX entries and their existing priorities) and case-sensitive task tags are enabled. The change must be persisted to the workspace preferences `org.eclipse.jdt.core.prefs`:\n\n- `org.eclipse.jdt.core.compiler.taskTags=TODO,FIXME,XXX,HACK`\n- `org.eclipse.jdt.core.compiler.taskPriorities=NORMAL,HIGH,NORMAL,LOW`\n- `org.eclipse.jdt.core.compiler.taskCaseSensitive=enabled`",
+  "env": {
+    "files": [
+      {
+        "filename": "README.txt",
+        "sandbox_path": "/home/user/workspace/README.txt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.taskTags TODO,FIXME,XXX,HACK",
+      "key": "matches",
+      "expected": true,
+      "description": "Task tag list = TODO,FIXME,XXX,HACK"
+    },
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.taskPriorities NORMAL,HIGH,NORMAL,LOW",
+      "key": "matches",
+      "expected": true,
+      "description": "Task priorities aligned"
+    },
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.taskCaseSensitive enabled",
+      "key": "matches",
+      "expected": true,
+      "description": "Task tag case sensitivity enabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

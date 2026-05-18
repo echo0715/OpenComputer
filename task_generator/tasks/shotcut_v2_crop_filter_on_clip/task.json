@@ -1,0 +1,55 @@
+{
+  "id": "shotcut_v2_crop_filter_on_clip",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/crop_me.mlt (1920x1080 30 fps). The project already contains one clip on the V1 timeline track referencing /home/user/Videos/wide_shot.mp4.\n\nApply a 'Crop: Rectangle' video filter (default parameters) to the existing V1 clip and save the project. /home/user/Documents/crop_me.mlt must keep its 1920x1080 profile, still reference wide_shot.mp4, and contain exactly one filter — a crop filter.",
+  "env": {
+    "files": [
+      {
+        "filename": "crop_me.mlt",
+        "sandbox_path": "/home/user/Documents/crop_me.mlt"
+      },
+      {
+        "filename": "wide_shot.mp4",
+        "sandbox_path": "/home/user/Videos/wide_shot.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/crop_me.mlt",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/crop_me.mlt 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/crop_me.mlt wide_shot.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "wide_shot.mp4 is still referenced"
+    },
+    {
+      "command": "check-filter-exists /home/user/Documents/crop_me.mlt crop",
+      "key": "exists",
+      "expected": true,
+      "description": "A crop filter is present"
+    },
+    {
+      "command": "check-filter-count /home/user/Documents/crop_me.mlt 1",
+      "key": "match",
+      "expected": true,
+      "description": "Project has exactly 1 filter"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

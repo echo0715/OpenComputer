@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_python_type_hints_add",
+  "files": [
+    {"filename": "utils.py", "sandbox_path": "/home/user/Documents/utils.py", "type": "python"}
+  ]
+}

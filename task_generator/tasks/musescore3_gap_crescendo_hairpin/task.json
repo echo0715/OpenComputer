@@ -1,0 +1,38 @@
+{
+  "id": "musescore3_gap_crescendo_hairpin",
+  "app": "musescore3",
+  "task": "MuseScore 3 is open with /home/user/Documents/swell.mscz — 4 measures.\n\nAdd a crescendo hairpin spanning measures 1 through 2, and a decrescendo hairpin spanning measures 3 through 4. Save in place at /home/user/Documents/swell.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "swell.mscz",
+        "sandbox_path": "/home/user/Documents/swell.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/swell.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-has-hairpin /home/user/Documents/swell.mscz crescendo",
+      "key": "match",
+      "expected": true,
+      "description": "Crescendo hairpin present"
+    },
+    {
+      "command": "check-has-hairpin /home/user/Documents/swell.mscz decrescendo",
+      "key": "match",
+      "expected": true,
+      "description": "Decrescendo hairpin present"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

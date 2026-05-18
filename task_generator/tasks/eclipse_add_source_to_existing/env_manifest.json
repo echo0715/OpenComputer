@@ -1,0 +1,9 @@
+{
+  "task_id": "eclipse_add_source_to_existing",
+  "files": [
+    {"filename": "TaskManager/.project", "sandbox_path": "/home/user/workspace/TaskManager/.project", "type": "xml"},
+    {"filename": "TaskManager/.classpath", "sandbox_path": "/home/user/workspace/TaskManager/.classpath", "type": "xml"},
+    {"filename": "TaskManager/.settings/org.eclipse.jdt.core.prefs", "sandbox_path": "/home/user/workspace/TaskManager/.settings/org.eclipse.jdt.core.prefs", "type": "properties"},
+    {"filename": "TaskManager/src/com/tasks/Task.java", "sandbox_path": "/home/user/workspace/TaskManager/src/com/tasks/Task.java", "type": "java"}
+  ]
+}

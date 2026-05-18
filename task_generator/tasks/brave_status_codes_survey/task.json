@@ -1,0 +1,82 @@
+{
+  "id": "brave_status_codes_survey",
+  "app": "brave",
+  "task": "In Brave, visit these four httpbin.org status-code endpoints, each fully loaded in its own tab:\n1. https://httpbin.org/status/200 (OK — empty body)\n2. https://httpbin.org/status/201 (Created — empty body)\n3. https://httpbin.org/status/404 (Not Found)\n4. https://httpbin.org/status/418 (I'm a teapot)\n\nBookmark ONLY the /status/404 and /status/418 pages; do NOT bookmark /status/200 or /status/201. When done, all four URLs must appear in browsing history and all four tabs must remain open.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open status/200",
+      "key": "found",
+      "expected": true,
+      "description": "status/200 tab is open"
+    },
+    {
+      "command": "check-tab-open status/201",
+      "key": "found",
+      "expected": true,
+      "description": "status/201 tab is open"
+    },
+    {
+      "command": "check-tab-open status/404",
+      "key": "found",
+      "expected": true,
+      "description": "status/404 tab is open"
+    },
+    {
+      "command": "check-tab-open status/418",
+      "key": "found",
+      "expected": true,
+      "description": "status/418 tab is open"
+    },
+    {
+      "command": "check-url-visited status/200",
+      "key": "visited",
+      "expected": true,
+      "description": "status/200 URL appears in history"
+    },
+    {
+      "command": "check-url-visited status/201",
+      "key": "visited",
+      "expected": true,
+      "description": "status/201 URL appears in history"
+    },
+    {
+      "command": "check-url-visited status/418",
+      "key": "visited",
+      "expected": true,
+      "description": "status/418 URL appears in history"
+    },
+    {
+      "command": "check-bookmark status/404",
+      "key": "exists",
+      "expected": true,
+      "description": "status/404 is bookmarked"
+    },
+    {
+      "command": "check-bookmark status/418",
+      "key": "exists",
+      "expected": true,
+      "description": "status/418 is bookmarked"
+    },
+    {
+      "command": "check-bookmark status/200",
+      "key": "exists",
+      "expected": false,
+      "description": "status/200 is NOT bookmarked"
+    },
+    {
+      "command": "check-bookmark status/201",
+      "key": "exists",
+      "expected": false,
+      "description": "status/201 is NOT bookmarked"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

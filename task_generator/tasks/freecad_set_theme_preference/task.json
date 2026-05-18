@@ -1,0 +1,33 @@
+{
+  "id": "freecad_set_theme_preference",
+  "app": "freecad",
+  "task": "FreeCAD is open. Apply the following General preference values so they are written to `/home/user/.config/FreeCAD/user.cfg`:\n- Theme = `Dark`\n- Auto save interval = 120 seconds (the value written to user.cfg must be exactly 120)",
+  "env": {
+    "files": [
+      {
+        "filename": "empty.FCStd",
+        "sandbox_path": "/home/user/Documents/empty.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-preference BaseApp/Preferences/General/ThemeName Dark",
+      "key": "match",
+      "expected": true,
+      "description": "Theme set to Dark"
+    },
+    {
+      "command": "check-preference BaseApp/Preferences/General/AutoSaveInterval 120",
+      "key": "match",
+      "expected": true,
+      "description": "AutoSaveInterval == 120"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

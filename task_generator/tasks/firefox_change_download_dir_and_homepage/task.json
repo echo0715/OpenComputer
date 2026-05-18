@@ -1,0 +1,40 @@
+{
+  "id": "firefox_change_download_dir_and_homepage",
+  "app": "firefox",
+  "task": "Ensure the directory /home/user/Downloads/reports exists, then configure Firefox so:\n- The default download location is /home/user/Downloads/reports.\n- The homepage is https://en.wikipedia.org.\n\nBoth preference changes must persist in Firefox's configuration.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-pref browser.download.dir /home/user/Downloads/reports",
+      "key": "match",
+      "expected": true,
+      "description": "Download directory is set to /home/user/Downloads/reports"
+    },
+    {
+      "command": "check-pref browser.startup.homepage https://en.wikipedia.org",
+      "key": "match",
+      "expected": true,
+      "description": "Homepage is set to https://en.wikipedia.org"
+    },
+    {
+      "command": "check-url-visited en.wikipedia.org",
+      "key": "visited",
+      "expected": true,
+      "description": "Wikipedia was visited to confirm homepage works"
+    },
+    {
+      "command": "check-pref browser.download.folderList 2",
+      "key": "match",
+      "expected": true,
+      "description": "Download folder preference is set to use custom directory (value 2)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

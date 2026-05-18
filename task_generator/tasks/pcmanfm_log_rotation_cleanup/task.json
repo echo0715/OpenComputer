@@ -1,0 +1,119 @@
+{
+  "id": "pcmanfm_log_rotation_cleanup",
+  "app": "pcmanfm",
+  "task": "Rotate and compact the log files in /home/user/Documents/logs/:\n1. Create the sub-directory /home/user/Documents/logs/archive/ and MOVE the four monthly log files (app-2024-01.log, app-2024-02.log, app-2024-03.log, app-2024-04.log) into it so they no longer exist at the top level.\n2. Rename old.log to backup.log at the top level.\n3. Leave current.log, latest.log, error.log, and debug.log untouched at the top level.\n4. Set permissions 600 on /home/user/Documents/logs/error.log and 644 on /home/user/Documents/logs/debug.log.\n\nAfter all changes, /home/user/Documents/logs/ must contain exactly 6 top-level entries: archive, current.log, backup.log, latest.log, error.log, debug.log.",
+  "env": {
+    "files": [
+      {
+        "filename": "app-2024-01.log",
+        "sandbox_path": "/home/user/Documents/logs/app-2024-01.log"
+      },
+      {
+        "filename": "app-2024-02.log",
+        "sandbox_path": "/home/user/Documents/logs/app-2024-02.log"
+      },
+      {
+        "filename": "app-2024-03.log",
+        "sandbox_path": "/home/user/Documents/logs/app-2024-03.log"
+      },
+      {
+        "filename": "app-2024-04.log",
+        "sandbox_path": "/home/user/Documents/logs/app-2024-04.log"
+      },
+      {
+        "filename": "current.log",
+        "sandbox_path": "/home/user/Documents/logs/current.log"
+      },
+      {
+        "filename": "old.log",
+        "sandbox_path": "/home/user/Documents/logs/old.log"
+      },
+      {
+        "filename": "latest.log",
+        "sandbox_path": "/home/user/Documents/logs/latest.log"
+      },
+      {
+        "filename": "error.log",
+        "sandbox_path": "/home/user/Documents/logs/error.log"
+      },
+      {
+        "filename": "debug.log",
+        "sandbox_path": "/home/user/Documents/logs/debug.log"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/Documents/logs/archive",
+      "key": "exists",
+      "expected": true,
+      "description": "archive directory exists"
+    },
+    {
+      "command": "check-file-count /home/user/Documents/logs/archive 4",
+      "key": "match",
+      "expected": true,
+      "description": "archive contains exactly 4 files"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/logs/archive/app-2024-01.log",
+      "key": "exists",
+      "expected": true,
+      "description": "app-2024-01.log moved into archive"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/logs/archive/app-2024-04.log",
+      "key": "exists",
+      "expected": true,
+      "description": "app-2024-04.log moved into archive"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/logs/backup.log",
+      "key": "exists",
+      "expected": true,
+      "description": "backup.log exists (renamed from old.log)"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/logs/old.log",
+      "key": "exists",
+      "expected": false,
+      "description": "old.log no longer exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/logs/current.log",
+      "key": "exists",
+      "expected": true,
+      "description": "current.log preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/logs/latest.log CRITICAL",
+      "key": "contains",
+      "expected": true,
+      "description": "latest.log contains CRITICAL"
+    },
+    {
+      "command": "check-permissions /home/user/Documents/logs/error.log 600",
+      "key": "match",
+      "expected": true,
+      "description": "error.log permissions are 600"
+    },
+    {
+      "command": "check-permissions /home/user/Documents/logs/debug.log 644",
+      "key": "match",
+      "expected": true,
+      "description": "debug.log permissions are 644"
+    },
+    {
+      "command": "check-file-count /home/user/Documents/logs 6",
+      "key": "match",
+      "expected": true,
+      "description": "logs top level has exactly 6 entries"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

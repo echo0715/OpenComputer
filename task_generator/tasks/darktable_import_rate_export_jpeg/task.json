@@ -1,0 +1,45 @@
+{
+  "id": "darktable_import_rate_export_jpeg",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/sunset.png into the darktable library.\n\nSet the image's star rating to 2 stars and export it as a JPEG to /home/user/Pictures/exports/sunset_out.jpg (create the 'exports' directory if it does not exist).",
+  "env": {
+    "files": [
+      {
+        "filename": "sunset.png",
+        "sandbox_path": "/home/user/Pictures/sunset.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported sunset.png",
+      "key": "imported",
+      "expected": true,
+      "description": "sunset.png is imported into darktable library"
+    },
+    {
+      "command": "check-image-rating 1 2",
+      "key": "matches",
+      "expected": true,
+      "description": "Image rating is 2 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/exports/sunset_out.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG file exists at the expected path"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/exports/sunset_out.jpg",
+      "key": "exists",
+      "expected": true,
+      "description": "Output file exists on disk"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "blender_gap2_rigid_body_drop",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/rigidbody_scene.blend, configure a rigid-body simulation:\n- Keep the default Cube and give it a Rigid Body with Type = Active and Mass = 2.0.\n- Add a Plane named 'Floor' at z = 0 with a Rigid Body of Type = Passive.\n- Set scene gravity to (0, 0, -9.81).\n- Ensure a Rigid Body World exists with its cache frame range set to start = 1, end = 120.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "rigidbody_scene.blend",
+        "sandbox_path": "/home/user/Documents/rigidbody_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/rigidbody_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rigidbody_scene.blend Floor",
+      "key": "exists",
+      "expected": true,
+      "description": "Floor plane exists"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/rigidbody_scene.blend",
+      "eval": "abs(result.get('gravity',[0,0,0])[2] - (-9.81)) < 0.01",
+      "description": "Gravity z = -9.81"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/rigidbody_scene.blend",
+      "eval": "any(o.get('name')=='Cube' and str(o.get('type'))=='ACTIVE' and abs(float(o.get('mass',0))-2.0)<0.05 for o in result.get('objects',[]))",
+      "description": "Cube has ACTIVE rigid body with mass 2.0"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/rigidbody_scene.blend",
+      "eval": "any(o.get('name')=='Floor' and str(o.get('type'))=='PASSIVE' for o in result.get('objects',[]))",
+      "description": "Floor has PASSIVE rigid body"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/rigidbody_scene.blend",
+      "eval": "result.get('rigidbody_world') is not None and int(result['rigidbody_world'].get('frame_start',0))<=1 and int(result['rigidbody_world'].get('frame_end',0))>=120",
+      "description": "Rigid body world cache covers frames 1-120"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "shotcut_v2_default_profile_uhd_2160p_30",
+  "app": "shotcut",
+  "task": "Shotcut is open with a placeholder project /home/user/Documents/prefs_uhd.mlt.\n\nSet Shotcut's default Video Mode to 'UHD 2160p 30 fps' so the change is persisted to `~/.config/Meltytech/Shotcut.conf` under the `[Settings]` section as `defaultProfile=uhd_2160p_30`.",
+  "env": {
+    "files": [
+      {
+        "filename": "prefs_uhd.mlt",
+        "sandbox_path": "/home/user/Documents/prefs_uhd.mlt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.config/Meltytech/Shotcut.conf",
+      "key": "exists",
+      "expected": true,
+      "description": "Shotcut configuration file exists"
+    },
+    {
+      "command": "check-config-value Settings defaultProfile uhd_2160p_30",
+      "key": "match",
+      "expected": true,
+      "description": "Settings.defaultProfile equals 'uhd_2160p_30'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

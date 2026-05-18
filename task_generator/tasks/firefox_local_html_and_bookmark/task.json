@@ -1,0 +1,50 @@
+{
+  "id": "firefox_local_html_and_bookmark",
+  "app": "firefox",
+  "task": "Load the local HTML file file:///home/user/Documents/report.html (page title 'Quarterly Report Q4 2025') in Firefox and add a bookmark for it. Then open a second tab and navigate to https://example.com.\n\nWhen finished, two tabs must be open: one on file:///home/user/Documents/report.html and one on https://example.com.",
+  "env": {
+    "files": [
+      {
+        "filename": "report.html",
+        "sandbox_path": "/home/user/Documents/report.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open file:///home/user/Documents/report.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with local report.html file is open"
+    },
+    {
+      "command": "check-bookmark Quarterly Report",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for the Quarterly Report page exists"
+    },
+    {
+      "command": "check-tab-open example.com",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with example.com is open"
+    },
+    {
+      "command": "check-page-contains \"Quarterly Report Q4 2025\" 0",
+      "key": "contains",
+      "expected": true,
+      "description": "Page contains the title text 'Quarterly Report Q4 2025'"
+    },
+    {
+      "command": "tabs",
+      "eval": "len(result) >= 2",
+      "description": "At least 2 tabs are open"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

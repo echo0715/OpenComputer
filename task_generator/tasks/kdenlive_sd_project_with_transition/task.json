@@ -1,0 +1,71 @@
+{
+  "id": "kdenlive_sd_project_with_transition",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/sd_project.kdenlive (720x480, 30fps).\n\nImport /home/user/Videos/clip_x.mp4 and /home/user/Videos/clip_y.mp4 into the project. Place clip_x.mp4 on one video track and clip_y.mp4 on a second video track with the two clips overlapping in time, and add a Luma (`luma`) transition between the two clips across the overlap. Save the project so the changes are persisted to /home/user/Documents/sd_project.kdenlive. The project must contain exactly 2 clips and remain at 720x480, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "sd_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/sd_project.kdenlive"
+      },
+      {
+        "filename": "clip_x.mp4",
+        "sandbox_path": "/home/user/Videos/clip_x.mp4"
+      },
+      {
+        "filename": "clip_y.mp4",
+        "sandbox_path": "/home/user/Videos/clip_y.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/sd_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/sd_project.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/sd_project.kdenlive 720 480",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 720x480"
+    },
+    {
+      "command": "check-fps /home/user/Documents/sd_project.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/sd_project.kdenlive clip_x.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip clip_x.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/sd_project.kdenlive clip_y.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip clip_y.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/sd_project.kdenlive 2",
+      "key": "match",
+      "expected": true,
+      "description": "Project contains exactly 2 clips"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/sd_project.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "A luma transition exists in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

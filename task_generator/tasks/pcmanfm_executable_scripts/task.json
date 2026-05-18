@@ -1,0 +1,100 @@
+{
+  "id": "pcmanfm_executable_scripts",
+  "app": "pcmanfm",
+  "task": "Create the directory /home/user/scripts/ containing four shell scripts with these exact contents:\n- backup.sh — '#!/bin/bash\\ntar -czf /tmp/backup.tar.gz /home/user/Documents'\n- cleanup.sh — '#!/bin/bash\\nfind /tmp -name \"*.tmp\" -delete'\n- deploy.sh — '#!/bin/bash\\necho \"Deploying application...\"'\n- monitor.sh — '#!/bin/bash\\ndf -h && free -m'\n\nAll four scripts must have permissions 755. Also create a symbolic link at /home/user/Desktop/run_backup pointing to /home/user/scripts/backup.sh.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/scripts",
+      "key": "exists",
+      "expected": true,
+      "description": "scripts directory exists"
+    },
+    {
+      "command": "check-file-exists /home/user/scripts/backup.sh",
+      "key": "exists",
+      "expected": true,
+      "description": "backup.sh exists"
+    },
+    {
+      "command": "check-file-exists /home/user/scripts/cleanup.sh",
+      "key": "exists",
+      "expected": true,
+      "description": "cleanup.sh exists"
+    },
+    {
+      "command": "check-file-exists /home/user/scripts/deploy.sh",
+      "key": "exists",
+      "expected": true,
+      "description": "deploy.sh exists"
+    },
+    {
+      "command": "check-file-exists /home/user/scripts/monitor.sh",
+      "key": "exists",
+      "expected": true,
+      "description": "monitor.sh exists"
+    },
+    {
+      "command": "check-file-contains /home/user/scripts/backup.sh tar -czf",
+      "key": "contains",
+      "expected": true,
+      "description": "backup.sh has tar command"
+    },
+    {
+      "command": "check-file-contains /home/user/scripts/cleanup.sh find /tmp",
+      "key": "contains",
+      "expected": true,
+      "description": "cleanup.sh has find command"
+    },
+    {
+      "command": "check-file-contains /home/user/scripts/deploy.sh Deploying application",
+      "key": "contains",
+      "expected": true,
+      "description": "deploy.sh has deploy message"
+    },
+    {
+      "command": "check-file-contains /home/user/scripts/monitor.sh df -h",
+      "key": "contains",
+      "expected": true,
+      "description": "monitor.sh has df command"
+    },
+    {
+      "command": "check-permissions /home/user/scripts/backup.sh 755",
+      "key": "match",
+      "expected": true,
+      "description": "backup.sh has 755 permissions"
+    },
+    {
+      "command": "check-permissions /home/user/scripts/cleanup.sh 755",
+      "key": "match",
+      "expected": true,
+      "description": "cleanup.sh has 755 permissions"
+    },
+    {
+      "command": "check-permissions /home/user/scripts/deploy.sh 755",
+      "key": "match",
+      "expected": true,
+      "description": "deploy.sh has 755 permissions"
+    },
+    {
+      "command": "check-permissions /home/user/scripts/monitor.sh 755",
+      "key": "match",
+      "expected": true,
+      "description": "monitor.sh has 755 permissions"
+    },
+    {
+      "command": "check-symlink /home/user/Desktop/run_backup /home/user/scripts/backup.sh",
+      "key": "target_matches",
+      "expected": true,
+      "description": "Desktop symlink points to backup.sh"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

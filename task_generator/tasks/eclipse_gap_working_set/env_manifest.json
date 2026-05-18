@@ -1,0 +1,45 @@
+{
+  "task_id": "eclipse_gap_working_set",
+  "files": [
+    {
+      "filename": "ApiService/.project",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/ApiService/.project",
+      "sandbox_path": "/home/user/workspace/ApiService/.project"
+    },
+    {
+      "filename": "ApiService/.classpath",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/ApiService/.classpath",
+      "sandbox_path": "/home/user/workspace/ApiService/.classpath"
+    },
+    {
+      "filename": "ApiService/src/com/example/App.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/ApiService/src/com/example/App.java",
+      "sandbox_path": "/home/user/workspace/ApiService/src/com/example/App.java"
+    },
+    {
+      "filename": "ApiService/src/com/example/Service.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/ApiService/src/com/example/Service.java",
+      "sandbox_path": "/home/user/workspace/ApiService/src/com/example/Service.java"
+    },
+    {
+      "filename": "DataLayer/.project",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/DataLayer/.project",
+      "sandbox_path": "/home/user/workspace/DataLayer/.project"
+    },
+    {
+      "filename": "DataLayer/.classpath",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/DataLayer/.classpath",
+      "sandbox_path": "/home/user/workspace/DataLayer/.classpath"
+    },
+    {
+      "filename": "DataLayer/src/com/example/App.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/DataLayer/src/com/example/App.java",
+      "sandbox_path": "/home/user/workspace/DataLayer/src/com/example/App.java"
+    },
+    {
+      "filename": "DataLayer/src/com/example/Service.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_working_set/env/DataLayer/src/com/example/Service.java",
+      "sandbox_path": "/home/user/workspace/DataLayer/src/com/example/Service.java"
+    }
+  ]
+}

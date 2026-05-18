@@ -1,0 +1,77 @@
+{
+  "id": "renderdoc_preset_and_capture_bundle",
+  "app": "renderdoc",
+  "task": "A valid RenderDoc capture file already exists at /home/user/captures/demo_frame.rdc (seeded as part of this task). You must complete the bundle as follows:\n\n1. Create a matching capture-settings file at /home/user/captures/demo.cap. It must be valid JSON with a top-level \"rdocConfigData\": 1 marker and a nested \"settings\" object containing:\n   - executable = \"/usr/local/games/demo_target\"\n   - workingDir = \"/home/user/captures\"\n   - commandLine = \"--demo\"\n   - environment = []\n   - options = {\"APIValidation\": true, \"CaptureCallstacks\": false, \"HookIntoChildren\": false, \"DebugOutputMute\": false, \"RefAllResources\": false, \"VerifyBufferAccess\": false, \"CaptureAllCmdLists\": false}\n   - autoStart = false\n   - queueFrameCap = 0\n   - numQueuedFrames = 0\n\n2. Edit /home/user/.local/share/qrenderdoc/UI.config so that:\n   - \"RecentCaptureFiles\" is the JSON array [\"/home/user/captures/demo_frame.rdc\"]\n   - \"RecentCaptureSettings\" is the JSON array [\"/home/user/captures/demo.cap\"]\n   - the \"rdocConfigData\": 1 marker is still present.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      },
+      {
+        "filename": "demo_frame.rdc",
+        "sandbox_path": "/home/user/captures/demo_frame.rdc"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/captures/demo_frame.rdc",
+      "key": "exists",
+      "expected": true,
+      "description": "demo_frame.rdc exists"
+    },
+    {
+      "command": "check-rdc-valid /home/user/captures/demo_frame.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "demo_frame.rdc is valid"
+    },
+    {
+      "command": "check-file-exists /home/user/captures/demo.cap",
+      "key": "exists",
+      "expected": true,
+      "description": "demo.cap exists"
+    },
+    {
+      "command": "check-cap-executable /home/user/captures/demo.cap /usr/local/games/demo_target",
+      "key": "match",
+      "expected": true,
+      "description": "demo.cap executable"
+    },
+    {
+      "command": "check-cap-working-dir /home/user/captures/demo.cap /home/user/captures",
+      "key": "match",
+      "expected": true,
+      "description": "demo.cap workingDir"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/demo.cap APIValidation true",
+      "key": "match",
+      "expected": true,
+      "description": "APIValidation true"
+    },
+    {
+      "command": "recent-captures",
+      "eval": "result.get('files') == ['/home/user/captures/demo_frame.rdc']",
+      "description": "RecentCaptureFiles = [demo_frame.rdc]"
+    },
+    {
+      "command": "recent-settings",
+      "eval": "result.get('settings') == ['/home/user/captures/demo.cap']",
+      "description": "RecentCaptureSettings = [demo.cap]"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

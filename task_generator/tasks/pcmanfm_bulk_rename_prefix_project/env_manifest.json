@@ -1,0 +1,11 @@
+{
+  "task_id": "pcmanfm_bulk_rename_prefix_project",
+  "files": [
+    {"filename": "biology.pdf", "sandbox_path": "/home/user/Documents/research_papers/biology.pdf", "type": "pdf"},
+    {"filename": "chemistry.pdf", "sandbox_path": "/home/user/Documents/research_papers/chemistry.pdf", "type": "pdf"},
+    {"filename": "data_science.pdf", "sandbox_path": "/home/user/Documents/research_papers/data_science.pdf", "type": "pdf"},
+    {"filename": "economics.pdf", "sandbox_path": "/home/user/Documents/research_papers/economics.pdf", "type": "pdf"},
+    {"filename": "physics.pdf", "sandbox_path": "/home/user/Documents/research_papers/physics.pdf", "type": "pdf"},
+    {"filename": "statistics.pdf", "sandbox_path": "/home/user/Documents/research_papers/statistics.pdf", "type": "pdf"}
+  ]
+}

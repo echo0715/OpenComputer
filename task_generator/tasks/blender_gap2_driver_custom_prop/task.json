@@ -1,0 +1,41 @@
+{
+  "id": "blender_gap2_driver_custom_prop",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/driver_scene.blend, on the default Cube add a float custom property named 'control' with default value 0.5, Min = 0.0, and Max = 1.0.\n\nAdd a driver on the Cube's Z location with expression `var * 3`, using a single 'Single Property' variable named 'var' whose target is the Cube's own custom property `['control']` (data path `['control']`). Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "driver_scene.blend",
+        "sandbox_path": "/home/user/Documents/driver_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/driver_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "drivers /home/user/Documents/driver_scene.blend Cube",
+      "eval": "abs(float(result.get('custom_properties',{}).get('control',0))-0.5)<0.01",
+      "description": "Cube custom property control=0.5"
+    },
+    {
+      "command": "drivers /home/user/Documents/driver_scene.blend Cube",
+      "eval": "any(d.get('data_path')=='location' and int(d.get('array_index',-1))==2 and str(d.get('expression','')).replace(' ','')=='var*3' for d in result.get('drivers',[]))",
+      "description": "Driver on location Z with expression var*3"
+    },
+    {
+      "command": "drivers /home/user/Documents/driver_scene.blend Cube",
+      "eval": "any(any(v.get('name')=='var' and any('control' in str(t.get('data_path','')) for t in v.get('targets',[])) for v in d.get('variables',[])) for d in result.get('drivers',[]))",
+      "description": "Driver variable 'var' targets ['control']"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

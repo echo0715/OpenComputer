@@ -1,0 +1,75 @@
+{
+  "id": "obs_tutorial_overlay_scene",
+  "app": "obs",
+  "task": "Build an OBS Studio scene collection for recording tutorials with overlay sources. The final collection must contain exactly 2 scenes (no default 'Scene' left over) with these exact names: 'Tutorial' and 'Facecam Only'.\n\nSources required per scene, with these exact names and types:\n- 'Tutorial': Display Capture named 'Desktop Capture'; Video Capture Device named 'Facecam'; Image named 'Watermark' (file /home/user/Pictures/watermark.png); Text (FreeType 2) named 'Episode Label' (any text)\n- 'Facecam Only': Video Capture Device named 'Facecam Full'\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "watermark.png",
+        "sandbox_path": "/home/user/Pictures/watermark.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Tutorial",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Tutorial' exists"
+    },
+    {
+      "command": "check-scene-exists 'Facecam Only'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Facecam Only' exists"
+    },
+    {
+      "command": "check-scene-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 2 scenes in the collection"
+    },
+    {
+      "command": "check-source-in-scene 'Desktop Capture' Tutorial",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Desktop Capture' exists in 'Tutorial' scene"
+    },
+    {
+      "command": "check-source-in-scene Facecam Tutorial",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Facecam' exists in 'Tutorial' scene"
+    },
+    {
+      "command": "check-source-in-scene Watermark Tutorial",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Watermark' exists in 'Tutorial' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Episode Label' Tutorial",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Episode Label' exists in 'Tutorial' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Facecam Full' 'Facecam Only'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Facecam Full' exists in 'Facecam Only' scene"
+    },
+    {
+      "command": "check-source-visible Watermark",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Watermark' is visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

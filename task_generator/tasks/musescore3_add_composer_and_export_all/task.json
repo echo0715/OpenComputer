@@ -1,0 +1,63 @@
+{
+  "id": "musescore3_add_composer_and_export_all",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/fanfare.mscz — 4 measures of quarter notes with Composer set to 'Anonymous'.\n\nSet the Composer to exactly 'Test Composer' and save so the updated composer is written into /home/user/Documents/fanfare.mscz. Then export the score to all three of these formats at exactly these paths:\n- Standard MIDI File: /home/user/Documents/fanfare.mid\n- Uncompressed MusicXML: /home/user/Documents/fanfare.musicxml\n- PDF File: /home/user/Documents/fanfare.pdf\n\nThe original fanfare.mscz must still exist with the updated composer. The MIDI must contain at least 2 notes, the MusicXML must have at least 1 part, and the PDF must have a valid %PDF- header.",
+  "env": {
+    "files": [
+      {
+        "filename": "fanfare.mscz",
+        "sandbox_path": "/home/user/Documents/fanfare.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/fanfare.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "fanfare.mscz still exists"
+    },
+    {
+      "command": "check-meta-tag /home/user/Documents/fanfare.mscz composer Test Composer",
+      "key": "match",
+      "expected": true,
+      "description": "Composer is 'Test Composer'"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/fanfare.mid",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported fanfare.mid exists"
+    },
+    {
+      "command": "check-midi-has-notes /home/user/Documents/fanfare.mid 2",
+      "key": "match",
+      "expected": true,
+      "description": "fanfare.mid has at least 2 notes"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/fanfare.musicxml",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported fanfare.musicxml exists"
+    },
+    {
+      "command": "check-musicxml-parts /home/user/Documents/fanfare.musicxml 1",
+      "key": "match",
+      "expected": true,
+      "description": "fanfare.musicxml has exactly 1 part"
+    },
+    {
+      "command": "check-pdf-exists /home/user/Documents/fanfare.pdf",
+      "key": "match",
+      "expected": true,
+      "description": "Exported fanfare.pdf exists and has %PDF- header"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

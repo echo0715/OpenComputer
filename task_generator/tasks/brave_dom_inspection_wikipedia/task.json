@@ -1,0 +1,76 @@
+{
+  "id": "brave_dom_inspection_wikipedia",
+  "app": "brave",
+  "task": "In Brave, open two tabs and fully load each Wikipedia article:\n- Tab 0: https://en.wikipedia.org/wiki/Lisp\n- Tab 1: https://en.wikipedia.org/wiki/Haskell\n\nBookmark both articles. When done, both tabs must be open, both articles must be in browsing history, both bookmarks must exist, and each tab must have an `h1` element and a `table.infobox` element.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open wikipedia.org/wiki/Lisp",
+      "key": "found",
+      "expected": true,
+      "description": "Lisp Wikipedia tab is open"
+    },
+    {
+      "command": "check-tab-open wikipedia.org/wiki/Haskell",
+      "key": "found",
+      "expected": true,
+      "description": "Haskell Wikipedia tab is open"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Lisp",
+      "key": "visited",
+      "expected": true,
+      "description": "Lisp Wikipedia page was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Haskell",
+      "key": "visited",
+      "expected": true,
+      "description": "Haskell Wikipedia page was visited"
+    },
+    {
+      "command": "check-element-exists h1 0",
+      "key": "exists",
+      "expected": true,
+      "description": "Tab 0 has an h1 element"
+    },
+    {
+      "command": "check-element-exists h1 1",
+      "key": "exists",
+      "expected": true,
+      "description": "Tab 1 has an h1 element"
+    },
+    {
+      "command": "check-element-exists table.infobox 0",
+      "key": "exists",
+      "expected": true,
+      "description": "Tab 0 has a Wikipedia infobox table"
+    },
+    {
+      "command": "check-element-exists table.infobox 1",
+      "key": "exists",
+      "expected": true,
+      "description": "Tab 1 has a Wikipedia infobox table"
+    },
+    {
+      "command": "check-bookmark wikipedia.org/wiki/Lisp",
+      "key": "exists",
+      "expected": true,
+      "description": "Lisp Wikipedia page is bookmarked"
+    },
+    {
+      "command": "check-bookmark wikipedia.org/wiki/Haskell",
+      "key": "exists",
+      "expected": true,
+      "description": "Haskell Wikipedia page is bookmarked"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

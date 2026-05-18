@@ -1,0 +1,56 @@
+{
+  "id": "krita_toggle_visibility_and_rename",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/multi.kra loaded — three paint layers named 'A', 'B', and 'C' from top to bottom.\n\nApply the following changes:\n- Rename layer 'A' to 'Main'\n- Rename layer 'C' to 'Accent'\n- Hide layer 'B' (visibility off); 'B' must still exist, only hidden, not deleted\n- Set the opacity of the renamed 'Main' layer to 80% (≈204/255)\n\nThe document must end with exactly three layers. Save the file in place at /home/user/Documents/multi.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "multi.kra",
+        "sandbox_path": "/home/user/Documents/multi.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-layer-exists /home/user/Documents/multi.kra Main",
+      "key": "exists",
+      "expected": true,
+      "description": "A renamed to Main"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/multi.kra Accent",
+      "key": "exists",
+      "expected": true,
+      "description": "C renamed to Accent"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/multi.kra B",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer B still exists"
+    },
+    {
+      "command": "check-layer-count /home/user/Documents/multi.kra 3",
+      "key": "match",
+      "expected": true,
+      "description": "Three layers preserved"
+    },
+    {
+      "command": "check-layer-visible /home/user/Documents/multi.kra B",
+      "key": "visible",
+      "expected": false,
+      "description": "Layer B is hidden"
+    },
+    {
+      "command": "layer-info /home/user/Documents/multi.kra Main",
+      "eval": "190 <= int(result.get('opacity',0)) <= 215",
+      "expected": true,
+      "description": "Main opacity ≈ 80% (204±)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

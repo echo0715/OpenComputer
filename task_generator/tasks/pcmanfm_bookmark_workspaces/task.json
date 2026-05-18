@@ -1,0 +1,70 @@
+{
+  "id": "pcmanfm_bookmark_workspaces",
+  "app": "pcmanfm",
+  "task": "Create three workspace directories: /home/user/Workspaces/design, /home/user/Workspaces/development, and /home/user/Workspaces/research. Add each of these three directories as a GTK bookmark. In each directory, create a file called workspace.txt with the following exact content:\n- design/workspace.txt: 'Design workspace for UI mockups'\n- development/workspace.txt: 'Development workspace for source code'\n- research/workspace.txt: 'Research workspace for papers and notes'",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/Workspaces/design",
+      "key": "exists",
+      "expected": true,
+      "description": "design workspace directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Workspaces/development",
+      "key": "exists",
+      "expected": true,
+      "description": "development workspace directory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Workspaces/research",
+      "key": "exists",
+      "expected": true,
+      "description": "research workspace directory exists"
+    },
+    {
+      "command": "check-bookmark-exists /home/user/Workspaces/design",
+      "key": "exists",
+      "expected": true,
+      "description": "design directory is bookmarked"
+    },
+    {
+      "command": "check-bookmark-exists /home/user/Workspaces/development",
+      "key": "exists",
+      "expected": true,
+      "description": "development directory is bookmarked"
+    },
+    {
+      "command": "check-bookmark-exists /home/user/Workspaces/research",
+      "key": "exists",
+      "expected": true,
+      "description": "research directory is bookmarked"
+    },
+    {
+      "command": "check-file-contains /home/user/Workspaces/design/workspace.txt Design workspace for UI mockups",
+      "key": "contains",
+      "expected": true,
+      "description": "design workspace.txt has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Workspaces/development/workspace.txt Development workspace for source code",
+      "key": "contains",
+      "expected": true,
+      "description": "development workspace.txt has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Workspaces/research/workspace.txt Research workspace for papers and notes",
+      "key": "contains",
+      "expected": true,
+      "description": "research workspace.txt has correct content"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

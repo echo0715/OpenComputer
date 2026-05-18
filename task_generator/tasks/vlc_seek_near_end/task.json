@@ -1,0 +1,45 @@
+{
+  "id": "vlc_seek_near_end",
+  "app": "vlc",
+  "task": "VLC is already running. Open the 60-second video /home/user/Videos/long_clip.mp4 and start playback, then seek forward to approximately the 50-second mark (close to the end of the clip) and let it continue playing. Leave the playhead within a few seconds of 50s and the clip still playing; do not pause.",
+  "env": {
+    "files": [
+      {
+        "filename": "long_clip.mp4",
+        "sandbox_path": "/home/user/Videos/long_clip.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/long_clip.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source long_clip.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded long_clip.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "long_clip.mp4 is loaded in VLC"
+    },
+    {
+      "command": "check-playing",
+      "key": "playing",
+      "expected": true,
+      "description": "VLC is currently playing"
+    },
+    {
+      "command": "check-position 50 5",
+      "key": "match",
+      "expected": true,
+      "description": "Playhead is within +/- 5s of the 50-second mark"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

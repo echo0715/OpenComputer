@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_env_file_sanitize",
+  "files": [
+    {"filename": "app.env", "sandbox_path": "/home/user/Documents/app.env", "type": "env"}
+  ]
+}

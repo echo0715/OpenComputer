@@ -1,0 +1,68 @@
+{
+  "id": "freecad_gap_fem_analysis_cantilever",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/fem_start.FCStd, which contains a Part::Box named 'Beam' (200 x 20 x 10 mm).\n\nCreate an FEM Analysis container named exactly 'Analysis' that contains all of the following:\n1. A Fixed Constraint on the -X face of Beam (at X = 0).\n2. A Force Constraint on the +X face of Beam (at X = 200) with Force = 100 N pointing in the -Z direction.\n3. A Solid Material using the CalculiX default steel preset.\n4. A Gmsh FEM mesh of Beam.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "fem_start.FCStd",
+        "sandbox_path": "/home/user/Documents/fem_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/fem_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/fem_start.FCStd Beam",
+      "key": "exists",
+      "expected": true,
+      "description": "Beam preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/fem_start.FCStd Analysis",
+      "key": "exists",
+      "expected": true,
+      "description": "Analysis container exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/fem_start.FCStd Analysis Fem::FemAnalysis",
+      "key": "match",
+      "expected": true,
+      "description": "Analysis is Fem::FemAnalysis"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/fem_start.FCStd Fem::ConstraintFixed 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one fixed constraint"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/fem_start.FCStd Fem::ConstraintForce 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one force constraint"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/fem_start.FCStd Fem::MaterialSolid 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one solid material"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/fem_start.FCStd Fem::FemMeshGmsh 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one Gmsh mesh"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

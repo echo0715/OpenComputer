@@ -1,0 +1,57 @@
+{
+  "id": "renderdoc_gap_mesh_output_view",
+  "app": "renderdoc",
+  "task": "Configure the Mesh Viewer defaults in /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document) so meshes open in the post-vertex-shader view with wireframe and normals on. Apply all of the following edits in a single save:\n\n1. Set `\"Mesh_CurrentStage\"` to the exact string `\"VSOut\"` (no space).\n2. Set `\"Mesh_ShowNormals\"` to `true`.\n3. Set `\"Mesh_Wireframe\"` to `true`.\n4. Set `\"Mesh_SolidShadeMode\"` to the exact string `\"secondary\"`.\n\nThe top-level `\"rdocConfigData\": 1` marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting Mesh_CurrentStage VSOut",
+      "key": "match",
+      "expected": true,
+      "description": "Mesh_CurrentStage VSOut"
+    },
+    {
+      "command": "check-setting Mesh_ShowNormals true",
+      "key": "match",
+      "expected": true,
+      "description": "ShowNormals true"
+    },
+    {
+      "command": "check-setting Mesh_Wireframe true",
+      "key": "match",
+      "expected": true,
+      "description": "Wireframe true"
+    },
+    {
+      "command": "check-setting Mesh_SolidShadeMode secondary",
+      "key": "match",
+      "expected": true,
+      "description": "SolidShadeMode secondary"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

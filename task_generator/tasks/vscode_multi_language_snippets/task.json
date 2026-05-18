@@ -1,0 +1,52 @@
+{
+  "id": "vscode_multi_language_snippets",
+  "app": "vscode",
+  "task": "Create the following user snippets (persisted under `~/.config/Code/User/snippets/`):\n\n`typescript.json`:\n- prefix `iface` — body `interface IName {\\n    \\n}` — description `TypeScript interface`\n- prefix `asyncfn` — body `async function name() {\\n    \\n}` — description `Async function`\n\n`go.json`:\n- prefix `mainfn` — body `package main\\n\\nfunc main() {\\n    \\n}` — description `Go main function`\n- prefix `errcheck` — body `if err != nil {\\n    return err\\n}` — description `Error check`\n\n`rust.json`:\n- prefix `impl` — body `impl Name {\\n    \\n}` — description `Rust impl block`\n- prefix `derive` — body `#[derive(Debug, Clone)]` — description `Derive macro`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-snippet-exists typescript iface",
+      "key": "exists",
+      "expected": true,
+      "description": "TypeScript iface snippet exists"
+    },
+    {
+      "command": "check-snippet-exists typescript asyncfn",
+      "key": "exists",
+      "expected": true,
+      "description": "TypeScript asyncfn snippet exists"
+    },
+    {
+      "command": "check-snippet-exists go mainfn",
+      "key": "exists",
+      "expected": true,
+      "description": "Go mainfn snippet exists"
+    },
+    {
+      "command": "check-snippet-exists go errcheck",
+      "key": "exists",
+      "expected": true,
+      "description": "Go errcheck snippet exists"
+    },
+    {
+      "command": "check-snippet-exists rust impl",
+      "key": "exists",
+      "expected": true,
+      "description": "Rust impl snippet exists"
+    },
+    {
+      "command": "check-snippet-exists rust derive",
+      "key": "exists",
+      "expected": true,
+      "description": "Rust derive snippet exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

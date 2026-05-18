@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_vertex_count_cylinder",
+  "files": [
+    {"filename": "parametric_shapes.blend", "sandbox_path": "/home/user/Documents/parametric_shapes.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "thunderbird_forward_email_draft",
+  "app": "thunderbird",
+  "task": "Thunderbird's Inbox already contains a message from `legal@company.com` with subject `Contract Review Notes`. Create a forward draft of that message (do NOT send) addressed to `ceo@company.com`, with the following note prepended at the top of the forwarded body: `FYI - Legal has completed their review. Please see their notes below.`",
+  "env": {
+    "files": [
+      {
+        "filename": "setup_inbox.py",
+        "sandbox_path": "/home/user/setup_inbox.py"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists Contract Review",
+      "key": "found",
+      "expected": true,
+      "description": "Forward draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Contract Review ceo@company.com",
+      "key": "match",
+      "expected": true,
+      "description": "Forward is to ceo@company.com"
+    },
+    {
+      "command": "check-draft-content Contract Review Legal has completed their review",
+      "key": "found",
+      "expected": true,
+      "description": "Forward contains added note"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

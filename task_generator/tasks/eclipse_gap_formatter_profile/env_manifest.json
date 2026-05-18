@@ -1,0 +1,10 @@
+{
+  "task_id": "eclipse_gap_formatter_profile",
+  "files": [
+    {
+      "filename": "formatter_profile.xml",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_formatter_profile/env/formatter_profile.xml",
+      "sandbox_path": "/home/user/workspace/formatter_profile.xml"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "id": "blender_hard_rigged_character_driven_expression",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/rigged_char.blend, build a mini character rig with driven facial expression and dual-track NLA animation. Delete the default Cube.\n\nArmature: an Armature object named 'CharRig' at the origin containing these bones:\n- 'Spine' from (0,0,0) to (0,0,1)\n- 'UpperArm' from (0,0,1) to (0.5,0,1), parented to 'Spine' but NOT connected\n- 'LowerArm' from (0.5,0,1) to (1.0,0,1), connected to 'UpperArm'\n- 'HandTarget' from (1.0,0,1) to (1.1,0,1.1), unparented (IK goal)\n\nIK: on the 'LowerArm' pose bone, an Inverse Kinematics constraint with Target = 'CharRig', Bone subtarget = 'HandTarget', Chain Length = 2.\n\nMesh:\n- UV Sphere 'Head' at (0,0,1.3) with shape keys in order 'Basis', 'Smile', 'Frown' (both 'Smile' and 'Frown' with slider min = -1, max = 2).\n- Cube 'Body' at (0,0,0.5) with an Armature modifier whose Object = 'CharRig'.\n\nCustom property: 'mood' on CharRig (float, default 0.0, min -1.0, max 1.0).\n\nShape-key drivers (each using a Single-Property variable named 'mood' targeting CharRig's `['mood']`):\n- Head shape key 'Smile' value: expression `max(mood, 0)`\n- Head shape key 'Frown' value: expression `max(-mood, 0)`\n\nActions and NLA:\n- Action 'WaveArm' keyframing UpperArm pose bone Z rotation: 0 at frame 1, 0.8 at frame 15, 0 at frame 30.\n- Action 'MoodSweep' keyframing CharRig['mood']: -1 at frame 1, 1 at frame 30.\n- Push each into CharRig's NLA as tracks 'ArmTrack' (containing the WaveArm strip) and 'MoodTrack' (containing the MoodSweep strip).\n\nScene frame range 1 to 30. Render engine = CYCLES. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "rigged_char.blend",
+        "sandbox_path": "/home/user/Documents/rigged_char.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/rigged_char.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rigged_char.blend CharRig",
+      "key": "exists",
+      "expected": true,
+      "description": "CharRig armature exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/rigged_char.blend CharRig ARMATURE",
+      "key": "match",
+      "expected": true,
+      "description": "CharRig is an ARMATURE"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rigged_char.blend Head",
+      "key": "exists",
+      "expected": true,
+      "description": "Head sphere exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rigged_char.blend Body",
+      "key": "exists",
+      "expected": true,
+      "description": "Body cube exists"
+    },
+    {
+      "command": "armature-bones /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "{b['name'] for b in result.get('bones',[])} >= {'Spine','UpperArm','LowerArm','HandTarget'}",
+      "description": "All four bones present"
+    },
+    {
+      "command": "armature-bones /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "any(b['name']=='LowerArm' and b.get('parent')=='UpperArm' and b.get('use_connect') is True for b in result.get('bones',[]))",
+      "description": "LowerArm is parented (connected) to UpperArm"
+    },
+    {
+      "command": "armature-bones /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "any(b['name']=='UpperArm' and b.get('parent')=='Spine' for b in result.get('bones',[]))",
+      "description": "UpperArm is parented to Spine"
+    },
+    {
+      "command": "pose-constraints /home/user/Documents/rigged_char.blend CharRig LowerArm",
+      "eval": "any(c.get('type')=='IK' and c.get('subtarget')=='HandTarget' and int(c.get('chain_count') or 0)==2 for c in result.get('constraints',[]))",
+      "description": "LowerArm has IK constraint (subtarget=HandTarget, chain=2)"
+    },
+    {
+      "command": "shape-keys /home/user/Documents/rigged_char.blend Head",
+      "eval": "{k['name'] for k in result.get('keys',[])} >= {'Basis','Smile','Frown'}",
+      "description": "Head has Basis, Smile, Frown shape keys"
+    },
+    {
+      "command": "shape-keys /home/user/Documents/rigged_char.blend Head",
+      "eval": "all(abs(k.get('slider_min',0)-(-1.0))<0.02 and abs(k.get('slider_max',0)-2.0)<0.02 for k in result.get('keys',[]) if k['name'] in ('Smile','Frown'))",
+      "description": "Smile and Frown slider range = (-1, 2)"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/rigged_char.blend Body ARMATURE",
+      "key": "exists",
+      "expected": true,
+      "description": "Body has an Armature modifier"
+    },
+    {
+      "command": "modifiers /home/user/Documents/rigged_char.blend Body",
+      "eval": "any(m.get('type')=='ARMATURE' and m.get('object')=='CharRig' for m in result.get('modifiers',[]))",
+      "description": "Body's Armature modifier targets CharRig"
+    },
+    {
+      "command": "drivers /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "'mood' in result.get('custom_properties',{})",
+      "description": "CharRig has a 'mood' custom property"
+    },
+    {
+      "command": "drivers /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "isinstance(result.get('custom_property_ranges',{}).get('mood'), dict) and abs(result['custom_property_ranges']['mood'].get('min',0)-(-1.0))<0.02 and abs(result['custom_property_ranges']['mood'].get('max',0)-1.0)<0.02",
+      "description": "mood custom property range is (-1, 1)"
+    },
+    {
+      "command": "drivers /home/user/Documents/rigged_char.blend Head",
+      "eval": "any('Smile' in str(d.get('data_path','')) and 'mood' in str(d.get('expression','')) and 'max' in str(d.get('expression','')) for d in result.get('shape_key_drivers',[]))",
+      "description": "Smile shape-key driver uses max(mood, ...)"
+    },
+    {
+      "command": "drivers /home/user/Documents/rigged_char.blend Head",
+      "eval": "any('Frown' in str(d.get('data_path','')) and '-mood' in str(d.get('expression','')).replace(' ','') for d in result.get('shape_key_drivers',[]))",
+      "description": "Frown shape-key driver uses -mood in expression"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "{'WaveArm','MoodSweep'} <= set(result.get('actions_in_file',[]))",
+      "description": "Both actions WaveArm and MoodSweep exist"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "any(t['name']=='ArmTrack' and any(s.get('action')=='WaveArm' for s in t.get('strips',[])) for t in result.get('nla_tracks',[]))",
+      "description": "ArmTrack has strip referencing WaveArm"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/rigged_char.blend CharRig",
+      "eval": "any(t['name']=='MoodTrack' and any(s.get('action')=='MoodSweep' for s in t.get('strips',[])) for t in result.get('nla_tracks',[]))",
+      "description": "MoodTrack has strip referencing MoodSweep"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/rigged_char.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is CYCLES"
+    },
+    {
+      "command": "scene-info /home/user/Documents/rigged_char.blend",
+      "eval": "int(result.get('frame_start',0))==1 and int(result.get('frame_end',0))==30",
+      "description": "Scene frame range 1-30"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

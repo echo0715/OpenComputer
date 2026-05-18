@@ -1,0 +1,50 @@
+{
+  "id": "cloudcompare_gap_fit_cylinder",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/cylinder_points.ply is an ASCII PLY with 1500 points sampled on a vertical cylinder (axis along Z) centered at the origin with radius 1.5 and height 6.\n\nFit a cylinder primitive to the cloud (the fit yields a triangulated cylinder mesh) and export only the fitted cylinder entity as a PLY mesh at /home/user/Documents/fitted_cylinder.ply. Do not export the original cloud. The output must be a mesh with at least 30 vertices, a bounding box that fits within [-2, -2, -3.3]..[2, 2, 3.3] (approximately diameter 3, height 6), and a Z extent of at least 5.5.",
+  "env": {
+    "files": [
+      {
+        "filename": "cylinder_points.ply",
+        "sandbox_path": "/home/user/Documents/cylinder_points.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/fitted_cylinder.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Output exists"
+    },
+    {
+      "command": "check-is-mesh /home/user/Documents/fitted_cylinder.ply",
+      "key": "is_mesh",
+      "expected": true,
+      "description": "Output is a mesh"
+    },
+    {
+      "command": "check-bbox-within /home/user/Documents/fitted_cylinder.ply -2 -2 -3.3 2 2 3.3",
+      "key": "match",
+      "expected": true,
+      "description": "Cylinder bbox matches parameters"
+    },
+    {
+      "command": "check-bbox-min-extent /home/user/Documents/fitted_cylinder.ply z 5.5",
+      "key": "match",
+      "expected": true,
+      "description": "Z extent at least 5.5 (height ~6)"
+    },
+    {
+      "command": "check-point-count-at-least /home/user/Documents/fitted_cylinder.ply 30",
+      "key": "match",
+      "expected": true,
+      "description": "At least 30 vertices in cylinder mesh"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

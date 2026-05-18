@@ -1,0 +1,76 @@
+{
+  "id": "draw_multipage_presentation",
+  "app": "libreoffice_draw",
+  "task": "Create a new 3-page LibreOffice Draw project overview drawing and save it to /home/user/Documents/multipage.odg.\n\nPage 1: two rectangles with exact texts 'Title Page' and 'Project Alpha'.\n\nPage 2: three ellipses arranged horizontally with exact texts 'Phase 1', 'Phase 2', 'Phase 3'.\n\nPage 3: two rectangles with exact texts 'Summary' and 'End'.\n\nThe document must end up with exactly 3 pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multipage.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File multipage.odg exists"
+    },
+    {
+      "command": "check-page-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 3 pages"
+    },
+    {
+      "command": "check-page-contains 0 \"Title Page\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Title Page'"
+    },
+    {
+      "command": "check-page-contains 0 \"Project Alpha\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Project Alpha'"
+    },
+    {
+      "command": "check-page-contains 1 \"Phase 1\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Phase 1'"
+    },
+    {
+      "command": "check-page-contains 1 \"Phase 2\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Phase 2'"
+    },
+    {
+      "command": "check-page-contains 1 \"Phase 3\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Phase 3'"
+    },
+    {
+      "command": "check-page-contains 2 Summary",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains text 'Summary'"
+    },
+    {
+      "command": "check-page-contains 2 End",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains text 'End'"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

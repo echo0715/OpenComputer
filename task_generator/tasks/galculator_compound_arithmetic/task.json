@@ -1,0 +1,28 @@
+{
+  "id": "galculator_compound_arithmetic",
+  "app": "galculator",
+  "task": "In galculator, evaluate the compound arithmetic expression `((45 + 78) * 3 - 15) / 6`. The final display must show exactly `59`.\n\nLeave galculator open with the result showing on the display.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-running",
+      "key": "running",
+      "expected": true,
+      "description": "galculator is running"
+    },
+    {
+      "command": "check-display-value 59",
+      "key": "match",
+      "expected": true,
+      "description": "Display shows 59"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

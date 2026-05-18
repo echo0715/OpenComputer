@@ -1,0 +1,39 @@
+{
+  "id": "draw_default_measurement_unit_inch",
+  "app": "libreoffice_draw",
+  "task": "Change the following LibreOffice Draw application preferences, then ensure LibreOffice fully exits so the changes are flushed to `~/.config/libreoffice/4/user/registrymodifications.xcu`:\n\n- LibreOffice Draw > General: default measurement unit = Inch; default tab stop = 1.25\".\n- LibreOffice Draw > Grid: 'Snap to grid' enabled.\n\nThe settings must persist in `registrymodifications.xcu` after LibreOffice exits.",
+  "env": {
+    "files": [
+      {
+        "filename": "placeholder.odg",
+        "sandbox_path": "/home/user/Documents/placeholder.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draw-pref measurement_unit_draw 8",
+      "key": "match",
+      "expected": true,
+      "description": "Draw measurement unit is Inch (Metric enum 8)"
+    },
+    {
+      "command": "check-draw-pref default_tab_stop_draw 3175",
+      "key": "match",
+      "expected": true,
+      "description": "Default tab stop is 1.25 inch (3175 * 1/100 mm)"
+    },
+    {
+      "command": "check-draw-pref snap_to_grid_draw true",
+      "key": "match",
+      "expected": true,
+      "description": "Snap to grid is enabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

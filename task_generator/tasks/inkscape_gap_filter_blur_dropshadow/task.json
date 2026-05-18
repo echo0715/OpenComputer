@@ -1,0 +1,56 @@
+{
+  "id": "inkscape_gap_filter_blur_dropshadow",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/filters.svg. Apply two SVG filters:\n\n1. Apply a GAUSSIAN BLUR filter with stdDeviation of 4 to the text element 'title'.\n2. Apply a DROP SHADOW filter to the rectangle 'card' (offset approximately 6,6; blur radius around 3; shadow color #000000 at roughly 50 percent opacity).\n\nEach element must have a 'filter' attribute referencing a defined <filter> in <defs>. Save /home/user/Documents/filters.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "filters.svg",
+        "sandbox_path": "/home/user/Documents/filters.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/filters.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/filters.svg title",
+      "key": "exists",
+      "expected": true,
+      "description": "title preserved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/filters.svg card",
+      "key": "exists",
+      "expected": true,
+      "description": "card preserved"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/filters.svg feGaussianBlur",
+      "key": "contains",
+      "expected": true,
+      "description": "Gaussian blur primitive present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/filters.svg feOffset",
+      "key": "contains",
+      "expected": true,
+      "description": "feOffset (drop shadow) present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/filters.svg filter",
+      "key": "contains",
+      "expected": true,
+      "description": "filter reference present"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

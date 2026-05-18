@@ -1,0 +1,63 @@
+{
+  "id": "inkscape_text_formatting",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/formatted_text.svg — a blank 800x400 document.\n\nBuild a formatted text layout in /home/user/Documents/formatted_text.svg with these exact contents:\n- A text element near the top of the page with the exact content `Title Text` and font size 48px.\n- A divider rectangle below the title with id `divider`, width 600, height 4, and fill #888888.\n- A second text element below the divider with the exact content: Body paragraph for the document layout.\n\nThe page must remain 800x400. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "formatted_text.svg",
+        "sandbox_path": "/home/user/Documents/formatted_text.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/formatted_text.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File formatted_text.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/formatted_text.svg 800 400",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 800x400 pixels"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/formatted_text.svg 'Title Text'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Title Text' exists in the document"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/formatted_text.svg 'Body paragraph for the document layout.'",
+      "key": "contains",
+      "expected": true,
+      "description": "Body text exists in the document"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/formatted_text.svg divider",
+      "key": "exists",
+      "expected": true,
+      "description": "Rectangle element with id 'divider' exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/formatted_text.svg divider fill #888888",
+      "key": "match",
+      "expected": true,
+      "description": "Divider rectangle has gray fill (#888888)"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/formatted_text.svg rect",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains rectangle elements"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

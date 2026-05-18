@@ -1,0 +1,25 @@
+{
+  "task_id": "eclipse_v2_configure_encoding_utf8",
+  "files": [
+    {
+      "filename": "Unicode/.project",
+      "sandbox_path": "/home/user/workspace/Unicode/.project",
+      "type": "project"
+    },
+    {
+      "filename": "Unicode/.classpath",
+      "sandbox_path": "/home/user/workspace/Unicode/.classpath",
+      "type": "classpath"
+    },
+    {
+      "filename": "Unicode/.settings/org.eclipse.jdt.core.prefs",
+      "sandbox_path": "/home/user/workspace/Unicode/.settings/org.eclipse.jdt.core.prefs",
+      "type": "prefs"
+    },
+    {
+      "filename": "Unicode/src/uni/TextProcessor.java",
+      "sandbox_path": "/home/user/workspace/Unicode/src/uni/TextProcessor.java",
+      "type": "java"
+    }
+  ]
+}

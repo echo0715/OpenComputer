@@ -1,0 +1,57 @@
+{
+  "id": "vlc_combo_loop_volume_fullscreen",
+  "app": "vlc",
+  "task": "VLC is already running. Open /home/user/Videos/combo.mp4 and start playback, then configure all of the following simultaneously and leave them active:\n\n1. Audio volume set to exactly 40%.\n2. 'Loop all' playback mode enabled (loop-all, NOT 'repeat one').\n3. Fullscreen mode active.\n\nDo not pause or close VLC. Final state: combo.mp4 is playing in fullscreen at 40% volume with loop-all enabled.",
+  "env": {
+    "files": [
+      {
+        "filename": "combo.mp4",
+        "sandbox_path": "/home/user/Videos/combo.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/combo.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source combo.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded combo.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "combo.mp4 is loaded in VLC"
+    },
+    {
+      "command": "check-playing",
+      "key": "playing",
+      "expected": true,
+      "description": "VLC is currently playing"
+    },
+    {
+      "command": "check-volume 40",
+      "key": "match",
+      "expected": true,
+      "description": "Volume is at 40%"
+    },
+    {
+      "command": "check-loop true",
+      "key": "match",
+      "expected": true,
+      "description": "Loop-all mode is enabled"
+    },
+    {
+      "command": "check-fullscreen true",
+      "key": "match",
+      "expected": true,
+      "description": "VLC is in fullscreen mode"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

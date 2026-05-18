@@ -1,0 +1,57 @@
+{
+  "id": "thunderbird_add_contact_with_notes",
+  "app": "thunderbird",
+  "task": "Add a contact to Thunderbird's Address Book with these exact fields:\n- Display Name: Dr. Robert Hayes\n- First Name: Robert\n- Last Name: Hayes\n- Email: r.hayes@university.edu\n- Company: State University\n- Job Title: Professor of Computer Science\n- Work Phone: 555-0234\n- Home Phone: 555-0235\n- Notes: Department head. Available Tuesdays and Thursdays for meetings.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Robert Hayes",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Robert Hayes exists"
+    },
+    {
+      "command": "check-contact-field Robert Hayes primary_email r.hayes@university.edu",
+      "key": "match",
+      "expected": true,
+      "description": "Email is r.hayes@university.edu"
+    },
+    {
+      "command": "check-contact-field Robert Hayes company State University",
+      "key": "match",
+      "expected": true,
+      "description": "Company is State University"
+    },
+    {
+      "command": "check-contact-field Robert Hayes job_title Professor of Computer Science",
+      "key": "match",
+      "expected": true,
+      "description": "Job title correct"
+    },
+    {
+      "command": "check-contact-field Robert Hayes work_phone 555-0234",
+      "key": "match",
+      "expected": true,
+      "description": "Work phone correct"
+    },
+    {
+      "command": "check-contact-field Robert Hayes notes Department head",
+      "key": "match",
+      "expected": true,
+      "description": "Notes contain Department head"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

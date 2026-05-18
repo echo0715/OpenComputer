@@ -1,0 +1,45 @@
+{
+  "id": "cloudcompare_colorize_add_rgb",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/plain.ply is an ASCII PLY with 350 points and no color.\n\nGive every point an RGB color (any colorization method is fine — uniform color, height ramp, etc.) and export the colored cloud as a binary little-endian PLY at /home/user/Documents/plain_colored.ply with RGB color columns included. The output must still contain all 350 points and carry RGB color.",
+  "env": {
+    "files": [
+      {
+        "filename": "plain.ply",
+        "sandbox_path": "/home/user/Documents/plain.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/plain_colored.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Colored PLY exists"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/plain_colored.ply binary_little_endian",
+      "key": "match",
+      "expected": true,
+      "description": "Output is binary little-endian PLY"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/plain_colored.ply 350",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 350 points"
+    },
+    {
+      "command": "check-has-color /home/user/Documents/plain_colored.ply",
+      "key": "has_color",
+      "expected": true,
+      "description": "Output carries RGB color"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

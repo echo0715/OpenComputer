@@ -1,0 +1,39 @@
+{
+  "id": "musescore3_tempo_and_timesig_combo",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/jig.mscz — 8 measures of quarter notes in 4/4 time with a tempo marking of 90 BPM on the first measure.\n\nChange the time signature at the start of the score to 6/8 and change the tempo marking on the first measure to exactly 168 BPM (quarter = 168). Save in place at /home/user/Documents/jig.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "jig.mscz",
+        "sandbox_path": "/home/user/Documents/jig.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/jig.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "jig.mscz still exists"
+    },
+    {
+      "command": "check-time-signature /home/user/Documents/jig.mscz 6 8",
+      "key": "match",
+      "expected": true,
+      "description": "First TimeSig equals 6/8"
+    },
+    {
+      "command": "check-tempo /home/user/Documents/jig.mscz 168",
+      "key": "match",
+      "expected": true,
+      "description": "First Tempo marking equals 168 BPM"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

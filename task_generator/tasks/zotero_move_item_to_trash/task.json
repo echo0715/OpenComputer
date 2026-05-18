@@ -1,0 +1,39 @@
+{
+  "id": "zotero_move_item_to_trash",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite containing 4 regular items.\n\nMove the item titled 'A Survey of RL Methods' to the Trash without emptying the Trash. After the action, the item must still exist in the Trash, and the regular (non-trashed) item count must be exactly 3. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists"
+    },
+    {
+      "command": "check-item-in-trash 'Survey of RL Methods'",
+      "key": "in_trash",
+      "expected": true,
+      "description": "Survey item is in trash"
+    },
+    {
+      "command": "check-item-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Non-deleted item count is 3"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

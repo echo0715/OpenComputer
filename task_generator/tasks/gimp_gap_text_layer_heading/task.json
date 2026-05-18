@@ -1,0 +1,56 @@
+{
+  "id": "gimp_gap_text_layer_heading",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/blank_banner.png in GIMP — an 800x200 white canvas.\n\nAdd the text 'SYNTH ENV' in black at font size 72, horizontally and vertically centered on the canvas. Flatten and export the result as PNG to /home/user/Documents/banner_text.png. The output must remain 800x200, with corners and outer margins still white (text must be centered, not flush to any edge).",
+  "env": {
+    "files": [
+      {
+        "filename": "blank_banner.png",
+        "sandbox_path": "/home/user/Documents/blank_banner.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/banner_text.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Output PNG exists"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/banner_text.png 800 200",
+      "key": "match",
+      "expected": true,
+      "description": "Output is 800x200"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/banner_text.png 10 10 255 255 255 10",
+      "key": "match",
+      "expected": true,
+      "description": "Top-left corner still white"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/banner_text.png 790 10 255 255 255 10",
+      "key": "match",
+      "expected": true,
+      "description": "Top-right corner still white"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/banner_text.png 25 100 255 255 255 10",
+      "key": "match",
+      "expected": true,
+      "description": "Left margin still white (text is centered, not flush left)"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/banner_text.png 775 100 255 255 255 10",
+      "key": "match",
+      "expected": true,
+      "description": "Right margin still white (text is centered, not flush right)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

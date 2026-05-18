@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_nested_collections",
+  "files": [
+    {"filename": "nested_cols.blend", "sandbox_path": "/home/user/Documents/nested_cols.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

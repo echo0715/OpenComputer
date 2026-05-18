@@ -1,0 +1,16 @@
+{
+  "id": "vlc_gap_audio_filter_headphones",
+  "app": "vlc",
+  "task": "Enable the 'Headphones virtualization' audio filter in VLC (audio-filter must include 'headphone'). Save preferences so the setting persists in ~/.config/vlc/vlcrc. Then play /home/user/Videos/sample.mp4.",
+  "env": {
+    "files": [
+      {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/Videos/sample.mp4", "key": "exists", "expected": true, "description": "sample.mp4 is present"},
+    {"command": "config audio-filter", "eval": "'headphone' in (result.get('value') or '')", "description": "audio-filter chain contains 'headphone'"},
+    {"command": "check-media-loaded sample.mp4", "key": "loaded", "expected": true, "description": "sample.mp4 is loaded in VLC"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "estimated_difficulty": 4}
+}

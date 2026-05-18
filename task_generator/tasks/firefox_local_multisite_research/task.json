@@ -1,0 +1,97 @@
+{
+  "id": "firefox_local_multisite_research",
+  "app": "firefox",
+  "task": "A small local HTML site for 'Acme Corp' is at /home/user/Documents/site/, with five cross-linked pages: index.html, products.html, services.html, about.html, contact.html.\n\nLoad each of the five pages so they all appear in browsing history:\n- file:///home/user/Documents/site/index.html\n- file:///home/user/Documents/site/products.html\n- file:///home/user/Documents/site/services.html\n- file:///home/user/Documents/site/about.html\n- file:///home/user/Documents/site/contact.html\n\nAdd bookmarks with these exact titles:\n- file:///home/user/Documents/site/products.html -> 'Acme Products'\n- file:///home/user/Documents/site/services.html -> 'Acme Services'\n- file:///home/user/Documents/site/about.html -> 'Acme About Us'\n\nThe active tab when you finish must be file:///home/user/Documents/site/contact.html.",
+  "env": {
+    "files": [
+      {
+        "filename": "index.html",
+        "sandbox_path": "/home/user/Documents/site/index.html"
+      },
+      {
+        "filename": "products.html",
+        "sandbox_path": "/home/user/Documents/site/products.html"
+      },
+      {
+        "filename": "services.html",
+        "sandbox_path": "/home/user/Documents/site/services.html"
+      },
+      {
+        "filename": "about.html",
+        "sandbox_path": "/home/user/Documents/site/about.html"
+      },
+      {
+        "filename": "contact.html",
+        "sandbox_path": "/home/user/Documents/site/contact.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-url-visited site/index.html",
+      "key": "visited",
+      "expected": true,
+      "description": "index.html was visited"
+    },
+    {
+      "command": "check-url-visited site/products.html",
+      "key": "visited",
+      "expected": true,
+      "description": "products.html was visited"
+    },
+    {
+      "command": "check-url-visited site/services.html",
+      "key": "visited",
+      "expected": true,
+      "description": "services.html was visited"
+    },
+    {
+      "command": "check-url-visited site/about.html",
+      "key": "visited",
+      "expected": true,
+      "description": "about.html was visited"
+    },
+    {
+      "command": "check-url-visited site/contact.html",
+      "key": "visited",
+      "expected": true,
+      "description": "contact.html was visited"
+    },
+    {
+      "command": "check-tab-open site/contact.html",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab shows contact.html"
+    },
+    {
+      "command": "check-page-contains \"Contact Acme Corp\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Active tab contains 'Contact Acme Corp'"
+    },
+    {
+      "command": "check-bookmark Products",
+      "key": "exists",
+      "expected": true,
+      "description": "A bookmark whose title contains 'Products' exists"
+    },
+    {
+      "command": "check-bookmark Services",
+      "key": "exists",
+      "expected": true,
+      "description": "A bookmark whose title contains 'Services' exists"
+    },
+    {
+      "command": "check-bookmark About",
+      "key": "exists",
+      "expected": true,
+      "description": "A bookmark whose title contains 'About' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

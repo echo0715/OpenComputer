@@ -1,0 +1,57 @@
+{
+  "id": "thunderbird_gap_folder_hierarchy_project",
+  "app": "thunderbird",
+  "task": "Under Thunderbird's Local Folders account, create the following nested mail folder hierarchy (all regular mail folders — NOT saved-search/virtual folders), each empty and parented correctly:\n- Projects\n- Projects/Atlas\n- Projects/Borealis\n- Projects/Citrine\n- Projects/Atlas/Active\n- Projects/Atlas/Archive",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists Projects",
+      "key": "exists",
+      "expected": true,
+      "description": "Folder 'Projects' exists"
+    },
+    {
+      "command": "check-folder-exists Projects/Atlas",
+      "key": "exists",
+      "expected": true,
+      "description": "Folder 'Projects/Atlas' exists"
+    },
+    {
+      "command": "check-folder-exists Projects/Borealis",
+      "key": "exists",
+      "expected": true,
+      "description": "Folder 'Projects/Borealis' exists"
+    },
+    {
+      "command": "check-folder-exists Projects/Citrine",
+      "key": "exists",
+      "expected": true,
+      "description": "Folder 'Projects/Citrine' exists"
+    },
+    {
+      "command": "check-folder-exists Projects/Atlas/Active",
+      "key": "exists",
+      "expected": true,
+      "description": "Folder 'Projects/Atlas/Active' exists"
+    },
+    {
+      "command": "check-folder-exists Projects/Atlas/Archive",
+      "key": "exists",
+      "expected": true,
+      "description": "Folder 'Projects/Atlas/Archive' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

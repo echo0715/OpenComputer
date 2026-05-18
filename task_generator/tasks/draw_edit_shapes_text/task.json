@@ -1,0 +1,75 @@
+{
+  "id": "draw_edit_shapes_text",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/draft_diagram.odg is open in LibreOffice Draw — page 1 has four rectangles arranged vertically, labeled 'Box A', 'Box B', 'Box C', 'Box D' top-to-bottom.\n\nOn page 1:\n- Replace the text in the 'Box A' rectangle with 'Input Stage'.\n- Replace the text in the 'Box D' rectangle with 'Output Stage'.\n- Leave the 'Box B' and 'Box C' rectangle texts unchanged.\n- Add an ellipse with the text 'Processing' between the 'Box B' and 'Box C' rectangles.\n- Page 1 must end up with exactly 5 shapes.\n\nAdd a second page containing a single rectangle with the text 'Revision Notes'. The document must end up with exactly 2 pages.\n\nSave the file in-place.",
+  "env": {
+    "files": [
+      {
+        "filename": "draft_diagram.odg",
+        "sandbox_path": "/home/user/Documents/draft_diagram.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 \"Input Stage\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Input Stage' (renamed from Box A)"
+    },
+    {
+      "command": "check-page-contains 0 \"Output Stage\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Output Stage' (renamed from Box D)"
+    },
+    {
+      "command": "check-page-contains 0 Processing",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Processing' (new ellipse)"
+    },
+    {
+      "command": "check-page-contains 0 \"Box B\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Box B' (unchanged)"
+    },
+    {
+      "command": "check-page-contains 0 \"Box C\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Box C' (unchanged)"
+    },
+    {
+      "command": "check-shape-count 0 5",
+      "key": "match",
+      "expected": true,
+      "description": "Page 1 has exactly 5 shapes"
+    },
+    {
+      "command": "check-page-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 2 pages"
+    },
+    {
+      "command": "check-page-contains 1 \"Revision Notes\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Revision Notes'"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

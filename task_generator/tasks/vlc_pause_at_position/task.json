@@ -1,0 +1,45 @@
+{
+  "id": "vlc_pause_at_position",
+  "app": "vlc",
+  "task": "VLC is already running. Open the 30-second video /home/user/Videos/sample.mp4 and start playback, then seek to approximately the 15-second mark (half way through the clip) and pause playback there. Leave VLC with sample.mp4 loaded and paused, with the playhead within a few seconds of 15s; do not close VLC.",
+  "env": {
+    "files": [
+      {
+        "filename": "sample.mp4",
+        "sandbox_path": "/home/user/Videos/sample.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/sample.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source sample.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded sample.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "sample.mp4 is loaded in VLC"
+    },
+    {
+      "command": "check-state paused",
+      "key": "match",
+      "expected": true,
+      "description": "VLC is in paused state"
+    },
+    {
+      "command": "check-position 15 5",
+      "key": "match",
+      "expected": true,
+      "description": "Playhead is within ±5s of the 15-second mark"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

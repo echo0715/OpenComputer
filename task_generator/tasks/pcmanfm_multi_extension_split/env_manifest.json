@@ -1,0 +1,17 @@
+{
+  "task_id": "pcmanfm_multi_extension_split",
+  "files": [
+    {"filename": "main.py", "sandbox_path": "/home/user/Documents/mixed/main.py", "type": "text"},
+    {"filename": "util.py", "sandbox_path": "/home/user/Documents/mixed/util.py", "type": "text"},
+    {"filename": "app.js", "sandbox_path": "/home/user/Documents/mixed/app.js", "type": "text"},
+    {"filename": "README.md", "sandbox_path": "/home/user/Documents/mixed/README.md", "type": "text"},
+    {"filename": "notes.md", "sandbox_path": "/home/user/Documents/mixed/notes.md", "type": "text"},
+    {"filename": "todo.txt", "sandbox_path": "/home/user/Documents/mixed/todo.txt", "type": "text"},
+    {"filename": "changelog.txt", "sandbox_path": "/home/user/Documents/mixed/changelog.txt", "type": "text"},
+    {"filename": "users.csv", "sandbox_path": "/home/user/Documents/mixed/users.csv", "type": "csv"},
+    {"filename": "metrics.csv", "sandbox_path": "/home/user/Documents/mixed/metrics.csv", "type": "csv"},
+    {"filename": "config.json", "sandbox_path": "/home/user/Documents/mixed/config.json", "type": "json"},
+    {"filename": "icon.png", "sandbox_path": "/home/user/Documents/mixed/icon.png", "type": "png"},
+    {"filename": "logo.png", "sandbox_path": "/home/user/Documents/mixed/logo.png", "type": "png"}
+  ]
+}

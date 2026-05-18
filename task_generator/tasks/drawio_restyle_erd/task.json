@@ -1,0 +1,112 @@
+{
+  "id": "drawio_restyle_erd",
+  "app": "drawio",
+  "task": "/home/user/Documents/erd.drawio contains 5 entity shapes with white fill: 'Customer' (cell id 2), 'Product' (cell id 3), 'Order' (cell id 4), 'Category' (cell id 5), 'AuditLog' (cell id 6).\n\nApply these changes:\n1. fillColor 'Customer' (id 2) → #dae8fc (blue)\n2. fillColor 'Order' (id 4) → #dae8fc (blue)\n3. fillColor 'Product' (id 3) → #fff2cc (yellow)\n4. fillColor 'Category' (id 5) → #fff2cc (yellow)\n5. fillColor 'AuditLog' (id 6) → #f8cecc (red)\n6. Add 2 new entity shapes labeled 'OrderItem' and 'Payment'.\n7. Add edges: 'Order' -> 'OrderItem', 'Order' -> 'Payment'.\n\nThe page must end up with exactly 7 vertices. Persist to /home/user/Documents/erd.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "erd.drawio",
+        "sandbox_path": "/home/user/Documents/erd.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/erd.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/erd.drawio 7 0",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 7 vertices after edits"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/erd.drawio Customer",
+      "key": "exists",
+      "expected": true,
+      "description": "Customer label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/erd.drawio Product",
+      "key": "exists",
+      "expected": true,
+      "description": "Product label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/erd.drawio Order",
+      "key": "exists",
+      "expected": true,
+      "description": "Order label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/erd.drawio Category",
+      "key": "exists",
+      "expected": true,
+      "description": "Category label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/erd.drawio AuditLog",
+      "key": "exists",
+      "expected": true,
+      "description": "AuditLog label remains"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/erd.drawio OrderItem",
+      "key": "exists",
+      "expected": true,
+      "description": "OrderItem added"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/erd.drawio Payment",
+      "key": "exists",
+      "expected": true,
+      "description": "Payment added"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/erd.drawio 2 fillColor \"#dae8fc\"",
+      "key": "match",
+      "expected": true,
+      "description": "Customer (id 2) is blue #dae8fc"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/erd.drawio 3 fillColor \"#fff2cc\"",
+      "key": "match",
+      "expected": true,
+      "description": "Product (id 3) is yellow #fff2cc"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/erd.drawio 4 fillColor \"#dae8fc\"",
+      "key": "match",
+      "expected": true,
+      "description": "Order (id 4) is blue #dae8fc"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/erd.drawio 5 fillColor \"#fff2cc\"",
+      "key": "match",
+      "expected": true,
+      "description": "Category (id 5) is yellow #fff2cc"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/erd.drawio 6 fillColor \"#f8cecc\"",
+      "key": "match",
+      "expected": true,
+      "description": "AuditLog (id 6) is red #f8cecc"
+    },
+    {
+      "judge": "llm",
+      "prompt": "Using the connections list and the vertices list, verify that the diagram contains an edge from 'Order' to 'OrderItem' and another edge from 'Order' to 'Payment'. Both edges must exist. Answer yes only if both are present.",
+      "command": "connections /home/user/Documents/erd.drawio 0",
+      "context": "command_output",
+      "description": "Order->OrderItem and Order->Payment edges exist"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

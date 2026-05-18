@@ -1,0 +1,88 @@
+{
+  "id": "vscode_dockerfile_and_compose",
+  "app": "vscode",
+  "task": "Create a Docker-based Python project at `/home/user/projects/docker-app` with the following files:\n\n- `Dockerfile`:\n  ```\n  FROM python:3.11-slim\n  WORKDIR /app\n  COPY requirements.txt .\n  RUN pip install --no-cache-dir -r requirements.txt\n  COPY . .\n  CMD [\"python\", \"app.py\"]\n  ```\n- `docker-compose.yml` defining two services:\n  - `web` — built from the current directory, exposes port 5000, depends on `db`\n  - `db` — image `postgres:15`, environment variables `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`\n- `requirements.txt` containing at minimum:\n  ```\n  flask\n  psycopg2-binary\n  ```\n- `app.py`:\n  ```python\n  from flask import Flask\n  app = Flask(__name__)\n\n  @app.route('/')\n  def home():\n      return 'Hello from Docker'\n\n  if __name__ == '__main__':\n      app.run(host='0.0.0.0', port=5000)\n  ```\n- `.vscode/extensions.json` recommending `ms-azuretools.vscode-docker`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/docker-app/Dockerfile",
+      "key": "exists",
+      "expected": true,
+      "description": "Dockerfile exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/docker-app/Dockerfile python:3.11-slim",
+      "key": "contains",
+      "expected": true,
+      "description": "Dockerfile uses python:3.11-slim base image"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/docker-app/Dockerfile WORKDIR",
+      "key": "contains",
+      "expected": true,
+      "description": "Dockerfile sets WORKDIR"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/docker-app/docker-compose.yml",
+      "key": "exists",
+      "expected": true,
+      "description": "docker-compose.yml exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/docker-app/docker-compose.yml web:",
+      "key": "contains",
+      "expected": true,
+      "description": "docker-compose defines web service"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/docker-app/docker-compose.yml db:",
+      "key": "contains",
+      "expected": true,
+      "description": "docker-compose defines db service"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/docker-app/docker-compose.yml postgres",
+      "key": "contains",
+      "expected": true,
+      "description": "docker-compose uses postgres image"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/docker-app/requirements.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "requirements.txt exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/docker-app/requirements.txt flask",
+      "key": "contains",
+      "expected": true,
+      "description": "requirements.txt lists flask"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/docker-app/app.py",
+      "key": "exists",
+      "expected": true,
+      "description": "app.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/docker-app/app.py Flask",
+      "key": "contains",
+      "expected": true,
+      "description": "app.py imports Flask"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/docker-app ms-azuretools.vscode-docker",
+      "key": "recommended",
+      "expected": true,
+      "description": "Docker extension recommended"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

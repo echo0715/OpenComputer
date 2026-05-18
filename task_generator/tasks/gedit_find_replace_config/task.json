@@ -1,0 +1,55 @@
+{
+  "id": "gedit_find_replace_config",
+  "app": "gedit",
+  "task": "/home/user/Documents/config.ini is an INI file with three sections (`[server]`, `[database]`, `[cache]`); each contains a `host=localhost` and a `port=8080` entry (3 occurrences of each, one per section).\n\nIn this file, replace every `localhost` with `192.168.1.100` and every `port=8080` with `port=9090`. Do not add or remove any lines — the file must remain 17 lines.",
+  "env": {
+    "files": [
+      {
+        "filename": "config.ini",
+        "sandbox_path": "/home/user/Documents/config.ini"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/config.ini",
+      "key": "exists",
+      "expected": true,
+      "description": "config.ini file exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/config.ini 192.168.1.100",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains the replacement IP address 192.168.1.100"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/config.ini port=9090",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains the replacement port=9090"
+    },
+    {
+      "command": "file-content /home/user/Documents/config.ini",
+      "eval": "'localhost' not in result.get('content', '')",
+      "description": "File no longer contains 'localhost' (all occurrences replaced)"
+    },
+    {
+      "command": "file-content /home/user/Documents/config.ini",
+      "eval": "'port=8080' not in result.get('content', '')",
+      "description": "File no longer contains 'port=8080' (all occurrences replaced)"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/config.ini 17",
+      "key": "matches",
+      "expected": true,
+      "description": "File still has 17 lines (no lines added or removed)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

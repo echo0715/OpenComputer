@@ -1,0 +1,69 @@
+{
+  "id": "freecad_three_primitives_scene",
+  "app": "freecad",
+  "task": "FreeCAD is open with the empty document /home/user/Documents/scene.FCStd.\n\nAdd three primitive objects to the document at their default parameter values, with internal names 'Box', 'Sphere', and 'Cone' and Labels set exactly to:\n- Part::Box (internal name 'Box') -> Label `Ground`\n- Part::Sphere (internal name 'Sphere') -> Label `Orb`\n- Part::Cone (internal name 'Cone') -> Label `Peak`\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "scene.FCStd",
+        "sandbox_path": "/home/user/Documents/scene.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/scene.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-count /home/user/Documents/scene.FCStd 3",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 3 objects in the document"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/scene.FCStd Box Part::Box",
+      "key": "match",
+      "expected": true,
+      "description": "Box is Part::Box"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/scene.FCStd Sphere Part::Sphere",
+      "key": "match",
+      "expected": true,
+      "description": "Sphere is Part::Sphere"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/scene.FCStd Cone Part::Cone",
+      "key": "match",
+      "expected": true,
+      "description": "Cone is Part::Cone"
+    },
+    {
+      "command": "check-label /home/user/Documents/scene.FCStd Box Ground",
+      "key": "match",
+      "expected": true,
+      "description": "Box Label == 'Ground'"
+    },
+    {
+      "command": "check-label /home/user/Documents/scene.FCStd Sphere Orb",
+      "key": "match",
+      "expected": true,
+      "description": "Sphere Label == 'Orb'"
+    },
+    {
+      "command": "check-label /home/user/Documents/scene.FCStd Cone Peak",
+      "key": "match",
+      "expected": true,
+      "description": "Cone Label == 'Peak'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

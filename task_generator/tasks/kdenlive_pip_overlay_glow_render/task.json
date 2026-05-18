@@ -1,0 +1,83 @@
+{
+  "id": "kdenlive_pip_overlay_glow_render",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/pip_project.kdenlive (1920x1080, 30fps).\n\nImport /home/user/Videos/background.mp4 and /home/user/Videos/overlay.mp4 into the project. Place background.mp4 on Video Track 1 and overlay.mp4 on Video Track 2 with the two tracks overlapping in time, and add a Composite and Transform (`qtblend`) transition between the two tracks across the overlap. Apply the Glow effect (`frei0r.glow`) to the overlay.mp4 timeline clip on Video Track 2. Save the project so the changes are persisted to /home/user/Documents/pip_project.kdenlive, then render the project to /home/user/Documents/pip_out.mp4 using the MP4 / H.264 preset; the output file must exist and be a valid media file. The project must remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "pip_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/pip_project.kdenlive"
+      },
+      {
+        "filename": "background.mp4",
+        "sandbox_path": "/home/user/Videos/background.mp4"
+      },
+      {
+        "filename": "overlay.mp4",
+        "sandbox_path": "/home/user/Videos/overlay.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/pip_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/pip_project.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/pip_project.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/pip_project.kdenlive background.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "background.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/pip_project.kdenlive overlay.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "overlay.mp4 in project"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/pip_project.kdenlive qtblend",
+      "key": "exists",
+      "expected": true,
+      "description": "qtblend composite transition exists"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/pip_project.kdenlive frei0r.glow",
+      "key": "exists",
+      "expected": true,
+      "description": "Glow effect applied"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/pip_out.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Rendered output exists"
+    },
+    {
+      "command": "check-render-output /home/user/Documents/pip_out.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Rendered output is a valid media file"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

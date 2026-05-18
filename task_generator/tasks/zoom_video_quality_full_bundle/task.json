@@ -1,0 +1,63 @@
+{
+  "id": "zoom_video_quality_full_bundle",
+  "app": "zoom",
+  "task": "A baseline Zoom config file exists at /home/user/.config/zoomus.conf. Reconfigure Zoom's `[Video]` section for premium quality and a clean, natural preview by updating four keys:\n- `HDVideo` = `true`\n- `TouchUpMyAppearance` = `false`\n- `mirrorMyVideo` = `false`\n- `AdjustForLowLight` = `true`\n\nSave the file in-place at /home/user/.config/zoomus.conf. Do not modify any other keys or sections (in particular, leave `[Video]FrameRate=30` and `[Video]VideoDevice=IntegratedWebcam` untouched).",
+  "env": {
+    "files": [
+      {
+        "filename": "zoomus.conf",
+        "sandbox_path": "/home/user/.config/zoomus.conf"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-config-exists",
+      "key": "exists",
+      "expected": true,
+      "description": "zoomus.conf exists"
+    },
+    {
+      "command": "check-config Video HDVideo true",
+      "key": "match",
+      "expected": true,
+      "description": "[Video]HDVideo == true"
+    },
+    {
+      "command": "check-config Video TouchUpMyAppearance false",
+      "key": "match",
+      "expected": true,
+      "description": "[Video]TouchUpMyAppearance == false"
+    },
+    {
+      "command": "check-config Video mirrorMyVideo false",
+      "key": "match",
+      "expected": true,
+      "description": "[Video]mirrorMyVideo == false"
+    },
+    {
+      "command": "check-config Video AdjustForLowLight true",
+      "key": "match",
+      "expected": true,
+      "description": "[Video]AdjustForLowLight == true"
+    },
+    {
+      "command": "check-config Video FrameRate 30",
+      "key": "match",
+      "expected": true,
+      "description": "Other [Video] keys untouched"
+    },
+    {
+      "command": "check-config Video VideoDevice IntegratedWebcam",
+      "key": "match",
+      "expected": true,
+      "description": "VideoDevice untouched"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

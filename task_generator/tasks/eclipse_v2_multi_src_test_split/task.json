@@ -1,0 +1,64 @@
+{
+  "id": "eclipse_v2_multi_src_test_split",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nCreate a new Java project 'LibrarySystem' (root: /home/user/workspace/LibrarySystem, Java nature) with the following configuration:\n\n- TWO source folders registered on the build path: `src/main/java` and `src/test/java`.\n- Default output folder: `target/classes` (not the default 'bin').\n- Java compiler compliance level 17 (source and target compatibility both 17).\n\nAdd the following files:\n\n1. src/main/java/library/BookCatalog.java:\n\n```\npackage library;\n\npublic class BookCatalog {\n    public static void main(String[] args) {\n        System.out.println(\"Catalog loaded\");\n    }\n}\n```\n\n2. src/test/java/library/BookCatalogTest.java:\n\n```\npackage library;\n\npublic class BookCatalogTest {\n    public void testLoad() {\n        System.out.println(\"test\");\n    }\n}\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace LibrarySystem",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'LibrarySystem' exists in workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/LibrarySystem org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/LibrarySystem src src/main/java",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has src entry 'src/main/java'"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/LibrarySystem src src/test/java",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has src entry 'src/test/java'"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/LibrarySystem output target/classes",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath output entry is 'target/classes'"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/LibrarySystem src/main/java/library/BookCatalog.java",
+      "key": "exists",
+      "expected": true,
+      "description": "BookCatalog.java exists under src/main/java/library"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/LibrarySystem src/test/java/library/BookCatalogTest.java",
+      "key": "exists",
+      "expected": true,
+      "description": "BookCatalogTest.java exists under src/test/java/library"
+    },
+    {
+      "command": "check-setting /home/user/workspace/LibrarySystem org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler compliance is 17"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

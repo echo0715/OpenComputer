@@ -1,0 +1,57 @@
+{
+  "id": "darktable_color_balance_export",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/overexposed.png into the darktable library.\n\nEnable the 'color balance rgb' module (internally named 'colorbalancergb') and adjust its settings to correct the overexposed image. Apply the tag 'color_corrected' to the image, set its star rating to 3 stars, and export it as a JPEG to /home/user/Pictures/overexposed_fixed.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "overexposed.png",
+        "sandbox_path": "/home/user/Pictures/overexposed.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported overexposed.png",
+      "key": "imported",
+      "expected": true,
+      "description": "overexposed.png is imported into darktable library"
+    },
+    {
+      "command": "check-xmp-has-operation /home/user/Pictures/overexposed.png.xmp colorbalancergb",
+      "key": "has_operation",
+      "expected": true,
+      "description": "XMP sidecar contains 'colorbalancergb' operation"
+    },
+    {
+      "command": "check-tag-exists color_corrected",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'color_corrected' exists in the library"
+    },
+    {
+      "command": "check-image-tagged 1 color_corrected",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'color_corrected'"
+    },
+    {
+      "command": "check-image-rating 1 3",
+      "key": "matches",
+      "expected": true,
+      "description": "Image rating is 3 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/overexposed_fixed.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG file exists and is a valid image"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

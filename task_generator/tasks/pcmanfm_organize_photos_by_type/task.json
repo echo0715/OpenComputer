@@ -1,0 +1,105 @@
+{
+  "id": "pcmanfm_organize_photos_by_type",
+  "app": "pcmanfm",
+  "task": "Organize the files in /home/user/Documents/unsorted/ into subdirectories by extension. Create three subdirectories inside /home/user/Documents/unsorted/ — 'images' (for .png files), 'documents' (for .txt files), 'data' (for .csv files) — and MOVE each file into the matching subdirectory. After the operation, /home/user/Documents/unsorted/ must contain exactly those 3 subdirectories at its top level, with images/ holding 3 .png files, documents/ holding 2 .txt files, and data/ holding 2 .csv files.",
+  "env": {
+    "files": [
+      {
+        "filename": "photo1.png",
+        "sandbox_path": "/home/user/Documents/unsorted/photo1.png"
+      },
+      {
+        "filename": "photo2.png",
+        "sandbox_path": "/home/user/Documents/unsorted/photo2.png"
+      },
+      {
+        "filename": "photo3.png",
+        "sandbox_path": "/home/user/Documents/unsorted/photo3.png"
+      },
+      {
+        "filename": "notes.txt",
+        "sandbox_path": "/home/user/Documents/unsorted/notes.txt"
+      },
+      {
+        "filename": "readme.txt",
+        "sandbox_path": "/home/user/Documents/unsorted/readme.txt"
+      },
+      {
+        "filename": "sales.csv",
+        "sandbox_path": "/home/user/Documents/unsorted/sales.csv"
+      },
+      {
+        "filename": "inventory.csv",
+        "sandbox_path": "/home/user/Documents/unsorted/inventory.csv"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/Documents/unsorted/images",
+      "key": "exists",
+      "expected": true,
+      "description": "images subdirectory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Documents/unsorted/documents",
+      "key": "exists",
+      "expected": true,
+      "description": "documents subdirectory exists"
+    },
+    {
+      "command": "check-dir-exists /home/user/Documents/unsorted/data",
+      "key": "exists",
+      "expected": true,
+      "description": "data subdirectory exists"
+    },
+    {
+      "command": "check-file-count /home/user/Documents/unsorted/images 3",
+      "key": "match",
+      "expected": true,
+      "description": "images directory contains 3 files"
+    },
+    {
+      "command": "check-file-count /home/user/Documents/unsorted/documents 2",
+      "key": "match",
+      "expected": true,
+      "description": "documents directory contains 2 files"
+    },
+    {
+      "command": "check-file-count /home/user/Documents/unsorted/data 2",
+      "key": "match",
+      "expected": true,
+      "description": "data directory contains 2 files"
+    },
+    {
+      "command": "check-extension-match /home/user/Documents/unsorted/images .png",
+      "key": "all_match",
+      "expected": true,
+      "description": "all files in images have .png extension"
+    },
+    {
+      "command": "check-extension-match /home/user/Documents/unsorted/documents .txt",
+      "key": "all_match",
+      "expected": true,
+      "description": "all files in documents have .txt extension"
+    },
+    {
+      "command": "check-extension-match /home/user/Documents/unsorted/data .csv",
+      "key": "all_match",
+      "expected": true,
+      "description": "all files in data have .csv extension"
+    },
+    {
+      "command": "check-file-count /home/user/Documents/unsorted 3",
+      "key": "match",
+      "expected": true,
+      "description": "unsorted root contains only 3 subdirectories"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

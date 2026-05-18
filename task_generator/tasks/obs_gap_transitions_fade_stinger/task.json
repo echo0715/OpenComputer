@@ -1,0 +1,56 @@
+{
+  "id": "obs_gap_transitions_fade_stinger",
+  "app": "obs",
+  "task": "Configure scene transitions in OBS Studio. At least two scenes must exist (the default 'Scene' is fine, or scenes such as 'Scene 1' and 'Scene 2').\n\nSet the current transition to type 'Fade' with Duration = 600 ms, and add a new Stinger transition named exactly 'Swipe' that uses video file /home/user/Videos/stinger.mp4 with Transition Point (Time) = 1000 ms. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "stinger.mp4",
+        "sandbox_path": "/home/user/Videos/stinger.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "collection-meta",
+      "eval": "'fade' in str(result.get('current_transition', '')).lower()",
+      "expected": true,
+      "description": "Default transition is Fade"
+    },
+    {
+      "command": "collection-meta",
+      "eval": "int(result.get('transition_duration', 0)) == 600",
+      "expected": true,
+      "description": "Default transition duration = 600 ms"
+    },
+    {
+      "command": "check-transition-exists Swipe",
+      "key": "exists",
+      "expected": true,
+      "description": "Stinger transition 'Swipe' exists"
+    },
+    {
+      "command": "check-transition-exists Swipe",
+      "eval": "'stinger' in (result.get('type') or '').lower()",
+      "expected": true,
+      "description": "'Swipe' is a stinger transition"
+    },
+    {
+      "command": "check-transition-exists Swipe",
+      "eval": "'stinger.mp4' in str(result.get('settings', {}).get('path', ''))",
+      "expected": true,
+      "description": "'Swipe' stinger references stinger.mp4"
+    },
+    {
+      "command": "check-transition-exists Swipe",
+      "eval": "int(result.get('settings', {}).get('transition_point', 0)) == 1000",
+      "expected": true,
+      "description": "'Swipe' transition point = 1000 ms"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

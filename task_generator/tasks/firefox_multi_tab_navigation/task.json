@@ -1,0 +1,50 @@
+{
+  "id": "firefox_multi_tab_navigation",
+  "app": "firefox",
+  "task": "Have exactly 4 tabs open, each loaded to a different URL, in this tab order:\n- Tab 0: https://example.com\n- Tab 1: https://httpbin.org\n- Tab 2: https://en.wikipedia.org/wiki/Internet\n- Tab 3: https://www.w3.org\n\nTab 2 (the Wikipedia 'Internet' article) must be the active/focused tab when you finish.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open example.com",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with example.com is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org is open"
+    },
+    {
+      "command": "check-tab-open wikipedia.org/wiki/Internet",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with Wikipedia Internet article is open"
+    },
+    {
+      "command": "check-tab-open w3.org",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with w3.org is open"
+    },
+    {
+      "command": "eval \"len([t for t in result if t.get('active') and 'wikipedia.org/wiki/Internet' in t.get('url', '')])\"",
+      "eval": "len([t for t in result if t.get('active') and 'wikipedia.org/wiki/Internet' in t.get('url', '')]) > 0",
+      "description": "Active tab is the Wikipedia Internet article (verified via tabs command)"
+    },
+    {
+      "command": "tabs",
+      "eval": "len(result) >= 4",
+      "description": "At least 4 tabs are open"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

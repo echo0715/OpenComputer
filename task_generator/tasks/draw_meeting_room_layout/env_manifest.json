@@ -1,0 +1,6 @@
+{
+  "task_id": "draw_meeting_room_layout",
+  "files": [
+    {"filename": "room_template.odg", "sandbox_path": "/home/user/Documents/room_template.odg", "type": "odg"}
+  ]
+}

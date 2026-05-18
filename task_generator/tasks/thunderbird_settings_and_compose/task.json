@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_settings_and_compose",
+  "app": "thunderbird",
+  "task": "Configure Thunderbird and create one draft:\n\n1. `mail.identity.id1.fullName` = `Jordan Blake` (display name).\n2. `mail.identity.id1.compose_html` = `false` (plain text composition).\n3. Create a draft (do NOT send) with:\n   - To: team@startup.io\n   - Subject: Weekly Standup Notes\n   - Body: Completed: API integration testing. In Progress: Frontend dashboard redesign. Blocked: Waiting for design assets from the creative team.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.identity.id1.fullName Jordan Blake",
+      "key": "match",
+      "expected": true,
+      "description": "Display name is Jordan Blake"
+    },
+    {
+      "command": "check-pref-value mail.identity.id1.compose_html false",
+      "key": "match",
+      "expected": true,
+      "description": "HTML compose disabled"
+    },
+    {
+      "command": "check-draft-exists Weekly Standup Notes",
+      "key": "found",
+      "expected": true,
+      "description": "Draft Weekly Standup Notes exists"
+    },
+    {
+      "command": "check-message-to Drafts Weekly Standup team@startup.io",
+      "key": "match",
+      "expected": true,
+      "description": "Draft is to team@startup.io"
+    },
+    {
+      "command": "check-draft-content Weekly Standup API integration testing",
+      "key": "found",
+      "expected": true,
+      "description": "Draft contains expected text"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

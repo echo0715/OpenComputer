@@ -1,0 +1,63 @@
+# Secrets
+.env
+.env.local
+.env.dev
+
+# Nested git repos
+E2B/.git
+OSWorld/.git
+infra/.git
+
+# Dependencies
+node_modules/
+
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Large binaries
+synth_env/infra/packages/orchestrator/bin/
+synth_env/infra/packages/nomad-nodepool-apm/bin/
+synth_env/infra/packages/envd/bin/
+infra/packages/orchestrator/bin/
+
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+evaluation/runs
+evaluation/repair/runs
+task_generator/rewrites
+task_generator/tasks/unverifiable_*.md
+
+smoke/runs/
+smoke/smoke_tasks/
+# Screenshots (optional - remove if you want these tracked)
+# screenshots/
+
+# tests
+tests/
+
+
+dashboard/static/demo.html
+dashboard/static/demo_recording.mp4
+dashboard/static/demo_recording.webm
+
+
+training/
+# log files
+*.log

@@ -1,0 +1,44 @@
+{
+  "id": "darktable_gap_color_calibration_wb",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/wb_source.jpg into the darktable library.\n\nEnable the 'color calibration' module (internally named 'channelmixerrgb') and on its CAT tab change the illuminant to a warmer preset (for example 'D50' / tungsten / incandescent) so the image takes on a warmer tone shift. Apply the tag 'color_calib' to the image and export it as a JPEG to /home/user/Pictures/wb_result.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "wb_source.jpg",
+        "sandbox_path": "/home/user/Pictures/wb_source.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported wb_source.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation wb_source.jpg channelmixerrgb",
+      "key": "has_operation",
+      "expected": true,
+      "description": "color calibration operation applied"
+    },
+    {
+      "command": "check-image-tagged-by-filename wb_source.jpg color_calib",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged color_calib"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/wb_result.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

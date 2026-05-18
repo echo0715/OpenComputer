@@ -1,0 +1,44 @@
+{
+  "id": "darktable_gap_drawn_mask_circle_vignette",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/portrait_circle.jpg into the darktable library.\n\nEnable the 'exposure' module with a negative EV (decrease exposure), and apply a drawn circle mask centered on the subject's face with the mask inverted/polarized so the exposure reduction only affects the area outside the circle (yielding a soft vignette while the face is protected). Apply the tag 'drawn_circle_mask' to the image and export it as a JPEG to /home/user/Pictures/portrait_circle_vignette.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "portrait_circle.jpg",
+        "sandbox_path": "/home/user/Pictures/portrait_circle.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported portrait_circle.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation portrait_circle.jpg exposure",
+      "key": "has_operation",
+      "expected": true,
+      "description": "exposure module with drawn mask applied"
+    },
+    {
+      "command": "check-image-tagged-by-filename portrait_circle.jpg drawn_circle_mask",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged drawn_circle_mask"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/portrait_circle_vignette.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

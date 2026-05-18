@@ -1,0 +1,81 @@
+{
+  "id": "vscode_markdown_tech_spec",
+  "app": "vscode",
+  "task": "Extend `/home/user/Documents/tech_spec.md` (overwriting the same path) with these additions in this order:\n\n1. After the existing `Non-Goals` section, add a `## API Endpoints` section containing a markdown table with columns `Method`, `Path`, `Description` and exactly these three rows:\n   - `GET | /users | List users`\n   - `POST | /users | Create a user`\n   - `DELETE | /users/:id | Delete a user by id`\n2. Below `API Endpoints`, add a `## Data Model` section describing the `User` entity with fields `id`, `email`, and `created_at`.\n3. At the very bottom, add a `## Changelog` section with a single entry line that contains both the version `1.0.0` and the date `2024-01-15`.\n\nAlso configure the following user settings (persisted to `~/.config/Code/User/settings.json`):\n\n- `editor.wordWrap`: `on`\n- `markdown.preview.fontSize`: 16",
+  "env": {
+    "files": [
+      {
+        "filename": "tech_spec.md",
+        "sandbox_path": "/home/user/Documents/tech_spec.md"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/tech_spec.md",
+      "key": "exists",
+      "expected": true,
+      "description": "tech_spec.md still exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/tech_spec.md API Endpoints",
+      "key": "contains",
+      "expected": true,
+      "description": "API Endpoints section added"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/tech_spec.md GET",
+      "key": "contains",
+      "expected": true,
+      "description": "GET method row present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/tech_spec.md DELETE",
+      "key": "contains",
+      "expected": true,
+      "description": "DELETE method row present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/tech_spec.md Data Model",
+      "key": "contains",
+      "expected": true,
+      "description": "Data Model section added"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/tech_spec.md Changelog",
+      "key": "contains",
+      "expected": true,
+      "description": "Changelog section added"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/tech_spec.md 1.0.0",
+      "key": "contains",
+      "expected": true,
+      "description": "Changelog has 1.0.0 entry"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/tech_spec.md 2024-01-15",
+      "key": "contains",
+      "expected": true,
+      "description": "Changelog date is present"
+    },
+    {
+      "command": "check-setting editor.wordWrap on",
+      "key": "match",
+      "expected": true,
+      "description": "editor.wordWrap is on"
+    },
+    {
+      "command": "check-setting markdown.preview.fontSize 16",
+      "key": "match",
+      "expected": true,
+      "description": "markdown.preview.fontSize is 16"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

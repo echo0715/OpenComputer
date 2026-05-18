@@ -1,0 +1,6 @@
+Plan project
+Gather requirements
+Design architecture
+Implement features
+Write tests
+Deploy application

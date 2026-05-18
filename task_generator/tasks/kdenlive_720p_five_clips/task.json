@@ -1,0 +1,95 @@
+{
+  "id": "kdenlive_720p_five_clips",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/five_clips.kdenlive (1280x720, 25fps).\n\nImport these five video files into the project and place them sequentially on a single video track in this exact order: v1.mp4, v2.mp4, v3.mp4, v4.mp4, v5.mp4 (all from /home/user/Videos/). Save the project so the changes are persisted to /home/user/Documents/five_clips.kdenlive. The project must contain exactly 5 clips and remain at 1280x720, 25fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "five_clips.kdenlive",
+        "sandbox_path": "/home/user/Documents/five_clips.kdenlive"
+      },
+      {
+        "filename": "v1.mp4",
+        "sandbox_path": "/home/user/Videos/v1.mp4"
+      },
+      {
+        "filename": "v2.mp4",
+        "sandbox_path": "/home/user/Videos/v2.mp4"
+      },
+      {
+        "filename": "v3.mp4",
+        "sandbox_path": "/home/user/Videos/v3.mp4"
+      },
+      {
+        "filename": "v4.mp4",
+        "sandbox_path": "/home/user/Videos/v4.mp4"
+      },
+      {
+        "filename": "v5.mp4",
+        "sandbox_path": "/home/user/Videos/v5.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/five_clips.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/five_clips.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/five_clips.kdenlive 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1280x720"
+    },
+    {
+      "command": "check-fps /home/user/Documents/five_clips.kdenlive 25",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 25 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/five_clips.kdenlive v1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip v1.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/five_clips.kdenlive v2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip v2.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/five_clips.kdenlive v3.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip v3.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/five_clips.kdenlive v4.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip v4.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/five_clips.kdenlive v5.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip v5.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/five_clips.kdenlive 5",
+      "key": "match",
+      "expected": true,
+      "description": "Project contains exactly 5 clips"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

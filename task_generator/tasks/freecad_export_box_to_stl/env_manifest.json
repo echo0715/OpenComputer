@@ -1,0 +1,6 @@
+{
+  "task_id": "freecad_export_box_to_stl",
+  "files": [
+    {"filename": "box_to_export.FCStd", "sandbox_path": "/home/user/Documents/box_to_export.FCStd", "type": "fcstd"}
+  ]
+}

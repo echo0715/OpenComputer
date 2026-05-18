@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_gap_audio_track_select_second",
+  "files": [
+    {"filename": "multi_audio.mp4", "sandbox_path": "/home/user/Videos/multi_audio.mp4", "type": "mp4"}
+  ]
+}

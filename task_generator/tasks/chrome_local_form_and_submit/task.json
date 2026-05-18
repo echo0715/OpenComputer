@@ -1,0 +1,57 @@
+{
+  "id": "chrome_local_form_and_submit",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/survey_form.html (a local customer survey form) and submit it with these exact values:\n- Name: `Alice Johnson`\n- Email: `alice@example.com`\n- Rating: `5 - Excellent`\n- Feedback: `Great service and fast delivery`\n\nAfter submission, the form must be replaced by a confirmation showing `Thank you for your feedback!` plus the submitted name `Alice Johnson` and feedback text. In a second tab, load https://example.com. Both tabs must remain open.",
+  "env": {
+    "files": [
+      {
+        "filename": "survey_form.html",
+        "sandbox_path": "/home/user/Documents/survey_form.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open survey_form.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with local survey_form.html is open"
+    },
+    {
+      "command": "check-page-contains \"Thank you\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation message 'Thank you' is displayed after form submission"
+    },
+    {
+      "command": "check-page-contains \"Alice Johnson\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Submitted name 'Alice Johnson' appears in confirmation"
+    },
+    {
+      "command": "check-page-contains \"Great service and fast delivery\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Submitted feedback text appears in confirmation"
+    },
+    {
+      "command": "check-tab-open example.com",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with example.com is open"
+    },
+    {
+      "command": "check-url-visited example.com",
+      "key": "visited",
+      "expected": true,
+      "description": "example.com appears in browsing history"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_keyframe_triple_anim",
+  "files": [
+    {"filename": "keyframe_count.blend", "sandbox_path": "/home/user/Documents/keyframe_count.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "musescore3_gap_pedal_marks",
+  "app": "musescore3",
+  "task": "MuseScore 3 is open with /home/user/Documents/pedal_study.mscz — a piano staff with 4 measures.\n\nAdd a piano sustain pedal line (Ped. ... *) spanning from the start of measure 1 to the end of measure 2. Save in place at /home/user/Documents/pedal_study.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "pedal_study.mscz",
+        "sandbox_path": "/home/user/Documents/pedal_study.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/pedal_study.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-has-pedal /home/user/Documents/pedal_study.mscz",
+      "key": "match",
+      "expected": true,
+      "description": "Pedal line present in score"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

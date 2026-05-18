@@ -1,0 +1,62 @@
+{
+  "id": "eclipse_gap_create_java_launch_config",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the Java project 'DemoApp'.\n\nCreate a Java Application launch configuration named 'RunMain' (type `org.eclipse.jdt.launching.localJavaApplication`) with:\n\n- Project: DemoApp\n- Main type: com.example.App\n- Program arguments: exactly `hello world`\n- VM arguments: must include `-Xmx512m`\n\nThe configuration must be persisted as a .launch file under the workspace .metadata (or the project's .launches/ folder).",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-launch-config /home/user/workspace RunMain org.eclipse.jdt.launching.localJavaApplication",
+      "key": "type_matches",
+      "expected": true,
+      "description": "RunMain launch config exists with Java Application type"
+    },
+    {
+      "command": "check-launch-attribute /home/user/workspace RunMain org.eclipse.jdt.launching.MAIN_TYPE com.example.App",
+      "key": "matches",
+      "expected": true,
+      "description": "Main type = com.example.App"
+    },
+    {
+      "command": "check-launch-attribute /home/user/workspace RunMain org.eclipse.jdt.launching.PROJECT_ATTR DemoApp",
+      "key": "matches",
+      "expected": true,
+      "description": "Project = DemoApp"
+    },
+    {
+      "command": "check-launch-attribute /home/user/workspace RunMain org.eclipse.jdt.launching.PROGRAM_ARGUMENTS 'hello world'",
+      "key": "matches",
+      "expected": true,
+      "description": "Program arguments = hello world"
+    },
+    {
+      "command": "check-launch-attribute-contains /home/user/workspace RunMain org.eclipse.jdt.launching.VM_ARGUMENTS -Xmx512m",
+      "key": "contains",
+      "expected": true,
+      "description": "VM arguments contain -Xmx512m"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

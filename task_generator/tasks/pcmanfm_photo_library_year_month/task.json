@@ -1,0 +1,35 @@
+{
+  "id": "pcmanfm_photo_library_year_month",
+  "app": "pcmanfm",
+  "task": "Reorganize the photos in /home/user/Pictures/camera_roll/ into a year/month hierarchy under /home/user/Pictures/library/. File names follow the pattern YYYY-MM-DD_label.jpg. For each photo, create the destination path /home/user/Pictures/library/YYYY/MM/ (2-digit month) if needed and MOVE the photo into it. After moving, /home/user/Pictures/library/2023/06 must contain 2 jpgs, /home/user/Pictures/library/2023/11 must contain 1 jpg, /home/user/Pictures/library/2024/01 must contain 2 jpgs, /home/user/Pictures/library/2024/03 must contain 2 jpgs, and /home/user/Pictures/library/2024/08 must contain 1 jpg. The original /home/user/Pictures/camera_roll/ must end up empty (0 entries).",
+  "env": {
+    "files": [
+      {"filename": "2023-06-14_beach.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2023-06-14_beach.jpg"},
+      {"filename": "2023-06-20_sunset.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2023-06-20_sunset.jpg"},
+      {"filename": "2023-11-02_autumn.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2023-11-02_autumn.jpg"},
+      {"filename": "2024-01-15_snow.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-01-15_snow.jpg"},
+      {"filename": "2024-01-31_newyear.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-01-31_newyear.jpg"},
+      {"filename": "2024-03-10_spring.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-03-10_spring.jpg"},
+      {"filename": "2024-03-22_flowers.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-03-22_flowers.jpg"},
+      {"filename": "2024-08-05_summer.jpg", "sandbox_path": "/home/user/Pictures/camera_roll/2024-08-05_summer.jpg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-count /home/user/Pictures/camera_roll 0", "key": "match", "expected": true, "description": "camera_roll is empty"},
+    {"command": "check-file-count /home/user/Pictures/library/2023/06 2", "key": "match", "expected": true, "description": "2023/06 has 2 jpgs"},
+    {"command": "check-file-count /home/user/Pictures/library/2023/11 1", "key": "match", "expected": true, "description": "2023/11 has 1 jpg"},
+    {"command": "check-file-count /home/user/Pictures/library/2024/01 2", "key": "match", "expected": true, "description": "2024/01 has 2 jpgs"},
+    {"command": "check-file-count /home/user/Pictures/library/2024/03 2", "key": "match", "expected": true, "description": "2024/03 has 2 jpgs"},
+    {"command": "check-file-count /home/user/Pictures/library/2024/08 1", "key": "match", "expected": true, "description": "2024/08 has 1 jpg"},
+    {"command": "check-extension-match /home/user/Pictures/library/2023/06 .jpg", "key": "all_match", "expected": true, "description": "2023/06 only jpg files"},
+    {"command": "check-extension-match /home/user/Pictures/library/2024/01 .jpg", "key": "all_match", "expected": true, "description": "2024/01 only jpg files"},
+    {"command": "check-file-exists /home/user/Pictures/library/2023/06/2023-06-14_beach.jpg", "key": "exists", "expected": true, "description": "beach.jpg in correct folder"},
+    {"command": "check-file-exists /home/user/Pictures/library/2024/08/2024-08-05_summer.jpg", "key": "exists", "expected": true, "description": "summer.jpg in correct folder"}
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

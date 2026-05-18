@@ -1,0 +1,46 @@
+{
+  "id": "vscode_ui_layout_settings",
+  "app": "vscode",
+  "task": "Configure the following user settings (persisted to `~/.config/Code/User/settings.json`):\n\n- `editor.minimap.enabled`: `false`\n- `editor.glyphMargin`: `false`\n- `workbench.activityBar.visible`: `false`\n- `breadcrumbs.enabled`: `true`\n- `editor.rulers`: `[80]` (an array with the single element `80`)\n- `workbench.statusBar.visible`: `true`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting editor.minimap.enabled false",
+      "key": "match",
+      "expected": true,
+      "description": "minimap is disabled"
+    },
+    {
+      "command": "check-setting editor.glyphMargin false",
+      "key": "match",
+      "expected": true,
+      "description": "glyphMargin is disabled"
+    },
+    {
+      "command": "check-setting workbench.activityBar.visible false",
+      "key": "match",
+      "expected": true,
+      "description": "activityBar is hidden"
+    },
+    {
+      "command": "check-setting breadcrumbs.enabled true",
+      "key": "match",
+      "expected": true,
+      "description": "breadcrumbs are enabled"
+    },
+    {
+      "command": "check-setting workbench.statusBar.visible true",
+      "key": "match",
+      "expected": true,
+      "description": "statusBar is visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

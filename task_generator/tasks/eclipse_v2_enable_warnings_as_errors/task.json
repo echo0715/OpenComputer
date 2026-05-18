@@ -1,0 +1,75 @@
+{
+  "id": "eclipse_v2_enable_warnings_as_errors",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the Java project 'StrictMode' sits at /home/user/workspace/StrictMode (import it if necessary) with current compiler compliance 11.\n\nWith project-specific Java compiler settings enabled on 'StrictMode', apply the following strict-compiler configuration:\n\n- Raise compiler compliance, source compatibility, and generated .class file compatibility all to 17.\n- Promote two warnings to errors so /home/user/workspace/StrictMode/.settings/org.eclipse.jdt.core.prefs contains:\n  - `org.eclipse.jdt.core.compiler.problem.unusedImport=error` ('Unused import')\n  - `org.eclipse.jdt.core.compiler.problem.missingSerialVersion=error` ('Serializable class without serialVersionUID')\n\nDo NOT modify the existing src/strict/Main.java file.",
+  "env": {
+    "files": [
+      {
+        "filename": "StrictMode/.project",
+        "sandbox_path": "/home/user/workspace/StrictMode/.project"
+      },
+      {
+        "filename": "StrictMode/.classpath",
+        "sandbox_path": "/home/user/workspace/StrictMode/.classpath"
+      },
+      {
+        "filename": "StrictMode/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/StrictMode/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "StrictMode/src/strict/Main.java",
+        "sandbox_path": "/home/user/workspace/StrictMode/src/strict/Main.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace StrictMode",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'StrictMode' exists"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/StrictMode org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-setting /home/user/workspace/StrictMode org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler compliance = 17"
+    },
+    {
+      "command": "check-setting /home/user/workspace/StrictMode org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.source 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler source = 17"
+    },
+    {
+      "command": "check-setting /home/user/workspace/StrictMode org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.problem.unusedImport error",
+      "key": "matches",
+      "expected": true,
+      "description": "Unused import is an error"
+    },
+    {
+      "command": "check-setting /home/user/workspace/StrictMode org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.problem.missingSerialVersion error",
+      "key": "matches",
+      "expected": true,
+      "description": "Missing serialVersionUID is an error"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/StrictMode src/strict/Main.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Existing Main.java still present"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

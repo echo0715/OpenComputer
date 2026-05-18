@@ -1,0 +1,9 @@
+ProductID,Name,InternalCode,Price,Quantity
+P001,Widget,IC-A1,10,5
+P002,Gadget,IC-B2,25,4
+P003,Gizmo,IC-C3,15,10
+P004,Thingamajig,IC-D4,100,2
+P005,Doohickey,IC-E5,8,20
+P006,Contraption,IC-F6,50,3
+P007,Whatsit,IC-G7,12,8
+P008,Apparatus,IC-H8,200,1

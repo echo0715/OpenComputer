@@ -1,0 +1,44 @@
+{
+  "id": "vlc_gap_audio_track_select_second",
+  "app": "vlc",
+  "task": "Set the default audio track index in VLC's preferences to `audio-track-id = 2` so VLC selects the second audio stream when loading files, and persist the change. Then open /home/user/Videos/multi_audio.mp4, which contains two audio tracks (English and Spanish).",
+  "env": {
+    "files": [
+      {
+        "filename": "multi_audio.mp4",
+        "sandbox_path": "/home/user/Videos/multi_audio.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/multi_audio.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "multi-audio MP4 is present"
+    },
+    {
+      "command": "check-media-has-audio /home/user/Videos/multi_audio.mp4",
+      "key": "has_audio",
+      "expected": true,
+      "description": "File has an audio stream"
+    },
+    {
+      "command": "check-media-loaded multi_audio.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "multi_audio.mp4 is loaded in VLC"
+    },
+    {
+      "command": "check-config audio-track-id 2",
+      "key": "match",
+      "expected": true,
+      "description": "Default audio track id is set to 2"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

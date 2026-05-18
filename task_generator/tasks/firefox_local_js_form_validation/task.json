@@ -1,0 +1,52 @@
+{
+  "id": "firefox_local_js_form_validation",
+  "app": "firefox",
+  "task": "Open the local signup form at file:///home/user/Documents/signup.html and submit it with these exact values:\n- Username: alice_builder\n- Email: alice@builder.dev\n- Password: SuperSecret42\n- Confirm Password: SuperSecret42\n\nThe page's JavaScript validates that all fields are non-empty, the password is at least 8 chars, and confirm matches password; on success it writes a welcome message into the #result element. After submission, the #result element must be visible and must contain the text 'Welcome, alice_builder'. Leave the tab on file:///home/user/Documents/signup.html with the success message visible.",
+  "env": {
+    "files": [
+      {
+        "filename": "signup.html",
+        "sandbox_path": "/home/user/Documents/signup.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open signup.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for signup.html is open"
+    },
+    {
+      "command": "input \"#username\"",
+      "eval": "result.get('value') == 'alice_builder'",
+      "description": "Username is 'alice_builder'"
+    },
+    {
+      "command": "input \"#email\"",
+      "eval": "result.get('value') == 'alice@builder.dev'",
+      "description": "Email is 'alice@builder.dev'"
+    },
+    {
+      "command": "input \"#password\"",
+      "eval": "result.get('value') == 'SuperSecret42'",
+      "description": "Password is 'SuperSecret42'"
+    },
+    {
+      "command": "input \"#confirm\"",
+      "eval": "result.get('value') == 'SuperSecret42'",
+      "description": "Confirm Password is 'SuperSecret42'"
+    },
+    {
+      "command": "eval \"document.getElementById('result').textContent\"",
+      "eval": "'Welcome, alice_builder' in (result.get('value') or '')",
+      "description": "#result contains 'Welcome, alice_builder'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

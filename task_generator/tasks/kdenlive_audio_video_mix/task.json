@@ -1,0 +1,65 @@
+{
+  "id": "kdenlive_audio_video_mix",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/av_mix.kdenlive (1920x1080, 25fps).\n\nImport /home/user/Videos/footage.mp4 onto a video track and /home/user/Music/music.wav onto an audio track in the timeline, then apply a Volume effect (the keyframable Volume or plain Volume effect) to the music.wav audio clip. Save the project so the changes are persisted to /home/user/Documents/av_mix.kdenlive. The project must remain at 1920x1080, 25fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "av_mix.kdenlive",
+        "sandbox_path": "/home/user/Documents/av_mix.kdenlive"
+      },
+      {
+        "filename": "footage.mp4",
+        "sandbox_path": "/home/user/Videos/footage.mp4"
+      },
+      {
+        "filename": "music.wav",
+        "sandbox_path": "/home/user/Music/music.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/av_mix.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/av_mix.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/av_mix.kdenlive 25",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 25 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/av_mix.kdenlive footage.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "footage.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/av_mix.kdenlive music.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "music.wav in project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/av_mix.kdenlive volume",
+      "key": "exists",
+      "expected": true,
+      "description": "A volume effect is applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

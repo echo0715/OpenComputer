@@ -1,0 +1,56 @@
+{
+  "id": "inkscape_gap_clip_and_mask",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/clipmask.svg. The file has two groups of colorful rectangles ('grid' and 'grid2') plus a circle 'clipShape' and a white rectangle 'maskShape'.\n\n1. CLIP the 'grid' group using 'clipShape' (circular clip). The 'grid' element id must be preserved and it must gain a clip-path attribute referencing the clip.\n2. MASK the 'grid2' group using 'maskShape' so it appears partially transparent. The 'grid2' element must gain a mask attribute referencing the mask.\n\nSave /home/user/Documents/clipmask.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "clipmask.svg",
+        "sandbox_path": "/home/user/Documents/clipmask.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/clipmask.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/clipmask.svg grid",
+      "key": "exists",
+      "expected": true,
+      "description": "grid preserved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/clipmask.svg grid2",
+      "key": "exists",
+      "expected": true,
+      "description": "grid2 preserved"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/clipmask.svg clipPath",
+      "key": "contains",
+      "expected": true,
+      "description": "clipPath defined"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/clipmask.svg clip-path",
+      "key": "contains",
+      "expected": true,
+      "description": "clip-path attribute used"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/clipmask.svg mask",
+      "key": "contains",
+      "expected": true,
+      "description": "mask construct present"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

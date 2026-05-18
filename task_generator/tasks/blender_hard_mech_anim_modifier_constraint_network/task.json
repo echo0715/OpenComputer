@@ -1,0 +1,136 @@
+{
+  "id": "blender_hard_mech_anim_modifier_constraint_network",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/mech_anim.blend, build a procedurally animated mechanical rig combining an exactly ordered modifier stack, custom-property-driven rotations, an object constraint, and NLA organization. Delete the default Cube.\n\nGear: a new Cube named 'Gear' at the origin with these FOUR modifiers in this EXACT top-to-bottom order (first must be Bevel, last must be Array):\n1. Bevel — Width = 0.05, Segments = 2\n2. Subdivision Surface — Levels = 2\n3. Mirror — Axis X\n4. Array — Count = 6, Relative Offset enabled with X = 1.5, Y = 0, Z = 0\n\nController empty: an Empty named 'Controller' at (-3, 0, 0) with two float custom properties:\n- 'speed' (default 1.0, min 0.0, max 5.0)\n- 'tilt' (default 0.0, min -1.0, max 1.0)\n\nDrivers on Gear:\n- Gear.rotation_euler[2] (Z): expression `frame * speed * 0.1`, Single-Property variable 'speed' targeting Controller['speed'].\n- Gear.rotation_euler[0] (X): expression `tilt`, Single-Property variable 'tilt' targeting Controller['tilt'].\n\nFollower empty: an Empty named 'Follower' at (2, 0, 0) with a Copy Rotation constraint: Target = Gear, use_x = False, use_y = False, use_z = True, Influence = 0.5.\n\nKeyframes on Controller:\n- Controller['speed']: 0.0 at frame 1, 3.0 at frame 30, 1.0 at frame 60\n- Controller['tilt']: 0.0 at frame 1, 0.5 at frame 30, 0.0 at frame 60\n\nNLA: push Controller's current action down into the NLA as a track named 'CtrlTrack'.\n\nScene frame range 1 to 60. Render engine = CYCLES. Resolution = 1920 x 1080. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "mech_anim.blend",
+        "sandbox_path": "/home/user/Documents/mech_anim.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/mech_anim.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/mech_anim.blend Gear",
+      "key": "exists",
+      "expected": true,
+      "description": "Gear exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/mech_anim.blend Controller",
+      "key": "exists",
+      "expected": true,
+      "description": "Controller empty exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/mech_anim.blend Follower",
+      "key": "exists",
+      "expected": true,
+      "description": "Follower empty exists"
+    },
+    {
+      "command": "modifiers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "[m.get('type') for m in result.get('modifiers',[])] == ['BEVEL','SUBSURF','MIRROR','ARRAY']",
+      "description": "Gear modifier stack order is Bevel -> Subsurf -> Mirror -> Array"
+    },
+    {
+      "command": "modifiers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "any(m.get('type')=='BEVEL' and abs(float(m.get('width') or 0)-0.05)<1e-3 and int(m.get('segments') or 0)==2 for m in result.get('modifiers',[]))",
+      "description": "Bevel modifier: width 0.05, segments 2"
+    },
+    {
+      "command": "modifiers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "any(m.get('type')=='SUBSURF' and int(m.get('levels') or 0)==2 for m in result.get('modifiers',[]))",
+      "description": "Subsurf levels = 2"
+    },
+    {
+      "command": "modifiers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "any(m.get('type')=='MIRROR' and (m.get('use_axis') or [False,False,False])[0] is True for m in result.get('modifiers',[]))",
+      "description": "Mirror axis X enabled"
+    },
+    {
+      "command": "modifiers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "any(m.get('type')=='ARRAY' and int(m.get('count') or 0)==6 and m.get('use_relative_offset') is True and abs((m.get('relative_offset_displace') or [0,0,0])[0]-1.5)<1e-3 for m in result.get('modifiers',[]))",
+      "description": "Array modifier: count 6, relative offset X 1.5"
+    },
+    {
+      "command": "drivers /home/user/Documents/mech_anim.blend Controller",
+      "eval": "'speed' in result.get('custom_properties',{}) and 'tilt' in result.get('custom_properties',{})",
+      "description": "Controller has both 'speed' and 'tilt' custom properties"
+    },
+    {
+      "command": "drivers /home/user/Documents/mech_anim.blend Controller",
+      "eval": "isinstance(result.get('custom_property_ranges',{}).get('speed'), dict) and abs(result['custom_property_ranges']['speed'].get('min',99)-0.0)<1e-3 and abs(result['custom_property_ranges']['speed'].get('max',0)-5.0)<1e-3",
+      "description": "speed range is (0, 5)"
+    },
+    {
+      "command": "drivers /home/user/Documents/mech_anim.blend Controller",
+      "eval": "isinstance(result.get('custom_property_ranges',{}).get('tilt'), dict) and abs(result['custom_property_ranges']['tilt'].get('min',99)-(-1.0))<1e-3 and abs(result['custom_property_ranges']['tilt'].get('max',0)-1.0)<1e-3",
+      "description": "tilt range is (-1, 1)"
+    },
+    {
+      "command": "drivers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "any(d.get('data_path')=='rotation_euler' and int(d.get('array_index') or -1)==2 and 'speed' in str(d.get('expression','')) for d in result.get('drivers',[]))",
+      "description": "Gear has Z-rotation driver with 'speed' in expression"
+    },
+    {
+      "command": "drivers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "any(d.get('data_path')=='rotation_euler' and int(d.get('array_index') or -1)==0 and 'tilt' in str(d.get('expression','')) for d in result.get('drivers',[]))",
+      "description": "Gear has X-rotation driver with 'tilt' in expression"
+    },
+    {
+      "command": "drivers /home/user/Documents/mech_anim.blend Gear",
+      "eval": "any(any(v.get('name')=='speed' and any('speed' in str(t.get('data_path','')) for t in v.get('targets',[])) for v in d.get('variables',[])) for d in result.get('drivers',[]))",
+      "description": "Driver variable 'speed' targets Controller['speed']"
+    },
+    {
+      "command": "object-constraints /home/user/Documents/mech_anim.blend Follower",
+      "eval": "any(c.get('type')=='COPY_ROTATION' and c.get('target')=='Gear' and c.get('use_x') is False and c.get('use_y') is False and c.get('use_z') is True and abs(float(c.get('influence') or 0)-0.5)<1e-3 for c in result.get('constraints',[]))",
+      "description": "Follower has Copy Rotation (target=Gear, Z only, influence 0.5)"
+    },
+    {
+      "command": "animations /home/user/Documents/mech_anim.blend Controller",
+      "eval": "any('speed' in str(k.get('data_path','')) and int(k.get('frame') or 0)==1 and abs(float(k.get('value') or 99)-0.0)<1e-3 for k in result.get('keyframes',[])) and any('speed' in str(k.get('data_path','')) and int(k.get('frame') or 0)==30 and abs(float(k.get('value') or 0)-3.0)<1e-3 for k in result.get('keyframes',[])) and any('speed' in str(k.get('data_path','')) and int(k.get('frame') or 0)==60 and abs(float(k.get('value') or 0)-1.0)<1e-3 for k in result.get('keyframes',[]))",
+      "description": "Controller speed keyframes: 0.0@1, 3.0@30, 1.0@60"
+    },
+    {
+      "command": "animations /home/user/Documents/mech_anim.blend Controller",
+      "eval": "any('tilt' in str(k.get('data_path','')) and int(k.get('frame') or 0)==30 and abs(float(k.get('value') or 0)-0.5)<1e-3 for k in result.get('keyframes',[]))",
+      "description": "Controller tilt keyframe 0.5 @ frame 30"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/mech_anim.blend Controller",
+      "eval": "'CtrlTrack' in {t.get('name') for t in result.get('nla_tracks',[])}",
+      "description": "NLA track CtrlTrack exists on Controller"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/mech_anim.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine CYCLES"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/mech_anim.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1920 x 1080"
+    },
+    {
+      "command": "scene-info /home/user/Documents/mech_anim.blend",
+      "eval": "int(result.get('frame_start',0))==1 and int(result.get('frame_end',0))==60",
+      "description": "Scene frame range 1-60"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

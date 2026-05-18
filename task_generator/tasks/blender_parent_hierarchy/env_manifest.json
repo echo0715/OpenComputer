@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_parent_hierarchy",
+  "files": [
+    {"filename": "rig_hierarchy.blend", "sandbox_path": "/home/user/Documents/rig_hierarchy.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

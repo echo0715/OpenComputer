@@ -1,0 +1,64 @@
+{
+  "id": "vscode_keybindings_and_settings_combo",
+  "app": "vscode",
+  "task": "Configure the following user settings (`~/.config/Code/User/settings.json`):\n\n- `editor.fontSize`: 14\n- `editor.tabSize`: 4\n- `editor.cursorStyle`: `block`\n\nAdd the following custom keybindings (`~/.config/Code/User/keybindings.json`):\n\n- `ctrl+shift+n` → `workbench.action.files.newUntitledFile`\n- `ctrl+shift+w` → `workbench.action.closeAllEditors`\n- `ctrl+alt+s` → `workbench.action.files.saveAll`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting editor.fontSize 14",
+      "key": "match",
+      "expected": true,
+      "description": "fontSize is 14"
+    },
+    {
+      "command": "check-setting editor.tabSize 4",
+      "key": "match",
+      "expected": true,
+      "description": "tabSize is 4"
+    },
+    {
+      "command": "check-setting editor.cursorStyle block",
+      "key": "match",
+      "expected": true,
+      "description": "cursorStyle is block"
+    },
+    {
+      "command": "check-keybinding-exists ctrl+shift+n",
+      "key": "exists",
+      "expected": true,
+      "description": "Ctrl+Shift+N keybinding exists"
+    },
+    {
+      "command": "check-keybinding-command workbench.action.files.newUntitledFile",
+      "key": "exists",
+      "expected": true,
+      "description": "newUntitledFile has keybinding"
+    },
+    {
+      "command": "check-keybinding-exists ctrl+shift+w",
+      "key": "exists",
+      "expected": true,
+      "description": "Ctrl+Shift+W keybinding exists"
+    },
+    {
+      "command": "check-keybinding-exists ctrl+alt+s",
+      "key": "exists",
+      "expected": true,
+      "description": "Ctrl+Alt+S keybinding exists"
+    },
+    {
+      "command": "check-keybinding-command workbench.action.files.saveAll",
+      "key": "exists",
+      "expected": true,
+      "description": "saveAll has keybinding"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

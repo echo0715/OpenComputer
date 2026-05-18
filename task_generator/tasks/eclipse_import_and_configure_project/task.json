@@ -1,0 +1,63 @@
+{
+  "id": "eclipse_import_and_configure_project",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; an existing Java project sits on disk at /home/user/workspace/DataProcessor but is not yet imported into the workspace.\n\nImport the 'DataProcessor' project into the workspace, then change its Java compiler compliance level and source level both to 11 (down from the current 17). Do NOT modify the existing source file at src/com/data/Processor.java.",
+  "env": {
+    "files": [
+      {
+        "filename": "DataProcessor/.project",
+        "sandbox_path": "/home/user/workspace/DataProcessor/.project"
+      },
+      {
+        "filename": "DataProcessor/.classpath",
+        "sandbox_path": "/home/user/workspace/DataProcessor/.classpath"
+      },
+      {
+        "filename": "DataProcessor/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/DataProcessor/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "DataProcessor/src/com/data/Processor.java",
+        "sandbox_path": "/home/user/workspace/DataProcessor/src/com/data/Processor.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace DataProcessor",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'DataProcessor' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/DataProcessor org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-setting /home/user/workspace/DataProcessor org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.source 11",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler source level is set to 11"
+    },
+    {
+      "command": "check-setting /home/user/workspace/DataProcessor org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 11",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler compliance level is set to 11"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/DataProcessor src/com/data/Processor.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Source file Processor.java still exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

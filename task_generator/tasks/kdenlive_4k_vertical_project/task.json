@@ -1,0 +1,61 @@
+{
+  "id": "kdenlive_4k_vertical_project",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/vertical_4k.kdenlive (2160x3840, 30fps — a 4K UHD vertical profile).\n\nImport /home/user/Videos/vertical.mp4 into the project, place it on a video track in the timeline, and apply both the Distort effect (`frei0r.distort0r`) and the Brightness effect (`frei0r.brightness`) to that timeline clip. Save the project so the changes are persisted to /home/user/Documents/vertical_4k.kdenlive. Do not change the project profile (must remain 2160x3840 at 30fps).",
+  "env": {
+    "files": [
+      {
+        "filename": "vertical_4k.kdenlive",
+        "sandbox_path": "/home/user/Documents/vertical_4k.kdenlive"
+      },
+      {
+        "filename": "vertical.mp4",
+        "sandbox_path": "/home/user/Videos/vertical.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/vertical_4k.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/vertical_4k.kdenlive 2160 3840",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 2160x3840 (4K vertical)"
+    },
+    {
+      "command": "check-fps /home/user/Documents/vertical_4k.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/vertical_4k.kdenlive vertical.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "vertical.mp4 is in the project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/vertical_4k.kdenlive frei0r.distort0r",
+      "key": "exists",
+      "expected": true,
+      "description": "Distort effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/vertical_4k.kdenlive frei0r.brightness",
+      "key": "exists",
+      "expected": true,
+      "description": "Brightness effect applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

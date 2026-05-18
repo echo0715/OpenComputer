@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_gap_stream_http_output",
+  "files": [
+    {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4", "type": "mp4"}
+  ]
+}

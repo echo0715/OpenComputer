@@ -1,0 +1,99 @@
+{
+  "id": "blender_vertex_count_cylinder",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/parametric_shapes.blend (which starts empty), add three parametric meshes with exact vertex counts:\n- Cylinder named 'Pillar' with Vertices = 16 (resulting in 34 vertices including two cap centers; note Blender's default cylinder has 32 segments, so this requires overriding the default)\n- Cone named 'Spire' with Vertices = 24 (resulting in 25 vertices)\n- UV Sphere named 'Dome' with Segments = 16 and Rings = 8 (resulting in 114 vertices)\n\nSet the render engine to Cycles, the resolution to 1920x1080, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "parametric_shapes.blend",
+        "sandbox_path": "/home/user/Documents/parametric_shapes.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/parametric_shapes.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/parametric_shapes.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/parametric_shapes.blend Pillar",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Pillar' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/parametric_shapes.blend Pillar MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Pillar' is MESH"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/parametric_shapes.blend Pillar 34",
+      "key": "match",
+      "expected": true,
+      "description": "'Pillar' vertex count is 34 (16 segments cylinder)"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/parametric_shapes.blend Spire",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Spire' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/parametric_shapes.blend Spire MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Spire' is MESH"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/parametric_shapes.blend Spire 25",
+      "key": "match",
+      "expected": true,
+      "description": "'Spire' vertex count is 25 (24-segment cone)"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/parametric_shapes.blend Dome",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Dome' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/parametric_shapes.blend Dome MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Dome' is MESH"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/parametric_shapes.blend Dome 114",
+      "key": "match",
+      "expected": true,
+      "description": "'Dome' vertex count is 114 (16x8 UV sphere)"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/parametric_shapes.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is Cycles"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/parametric_shapes.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 1920x1080"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

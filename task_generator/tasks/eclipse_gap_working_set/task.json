@@ -1,0 +1,66 @@
+{
+  "id": "eclipse_gap_working_set",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the projects 'ApiService' and 'DataLayer'.\n\nCreate a Java working set named 'Backend' (page id `org.eclipse.jdt.ui.JavaWorkingSetPage`) whose members are exactly 'ApiService' and 'DataLayer'. The working set must be persisted in the workspace metadata.",
+  "env": {
+    "files": [
+      {
+        "filename": "ApiService/.project",
+        "sandbox_path": "/home/user/workspace/ApiService/.project"
+      },
+      {
+        "filename": "ApiService/.classpath",
+        "sandbox_path": "/home/user/workspace/ApiService/.classpath"
+      },
+      {
+        "filename": "ApiService/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/ApiService/src/com/example/App.java"
+      },
+      {
+        "filename": "ApiService/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/ApiService/src/com/example/Service.java"
+      },
+      {
+        "filename": "DataLayer/.project",
+        "sandbox_path": "/home/user/workspace/DataLayer/.project"
+      },
+      {
+        "filename": "DataLayer/.classpath",
+        "sandbox_path": "/home/user/workspace/DataLayer/.classpath"
+      },
+      {
+        "filename": "DataLayer/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DataLayer/src/com/example/App.java"
+      },
+      {
+        "filename": "DataLayer/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DataLayer/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-working-set /home/user/workspace Backend org.eclipse.jdt.ui.JavaWorkingSetPage",
+      "key": "page_matches",
+      "expected": true,
+      "description": "'Backend' working set exists with Java type"
+    },
+    {
+      "command": "check-working-set-member /home/user/workspace Backend ApiService",
+      "key": "contains",
+      "expected": true,
+      "description": "Backend contains ApiService"
+    },
+    {
+      "command": "check-working-set-member /home/user/workspace Backend DataLayer",
+      "key": "contains",
+      "expected": true,
+      "description": "Backend contains DataLayer"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

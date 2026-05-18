@@ -1,0 +1,140 @@
+{
+  "id": "draw_product_spec_sheet_two_pages",
+  "app": "libreoffice_draw",
+  "task": "Create a new two-page LibreOffice Draw product spec sheet for 'ChargePad Pro 200W' and save it to /home/user/Documents/chargepad_spec.odg.\n\nPage 1 (marketing page) must contain shapes with these exact text strings (one string per shape): 'ChargePad Pro 200W', 'Qi2 Compatible', 'USB-PD 3.1', 'Ships May 2026', 'MSRP 129 USD'. At least 5 shapes total.\n\nPage 2 (technical page) must contain shapes with these exact text strings: 'Dimensions 120mm x 80mm x 12mm', 'Weight 185g', 'Input 20V / 5A', 'Output 5-20V / up to 10A', 'Parts List'. It must additionally contain four rectangles labelled exactly 'Top Plate', 'Coil Assembly', 'Control PCB', 'Base Housing'. At least 9 shapes total.\n\nAlso add a custom layer named exactly 'Callouts'. The document must end up with exactly 2 pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/chargepad_spec.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Output ODG file exists"
+    },
+    {
+      "command": "check-page-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 2 pages"
+    },
+    {
+      "command": "check-layer-exists Callouts",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Callouts' exists"
+    },
+    {
+      "command": "check-page-contains 0 \"ChargePad Pro 200W\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains product name"
+    },
+    {
+      "command": "check-page-contains 0 \"Qi2 Compatible\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains Qi2"
+    },
+    {
+      "command": "check-page-contains 0 \"USB-PD 3.1\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains USB-PD 3.1"
+    },
+    {
+      "command": "check-page-contains 0 \"Ships May 2026\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains ship date"
+    },
+    {
+      "command": "check-page-contains 0 \"MSRP 129 USD\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains MSRP"
+    },
+    {
+      "command": "check-page-contains 1 \"Dimensions 120mm x 80mm x 12mm\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 has dimensions"
+    },
+    {
+      "command": "check-page-contains 1 \"Weight 185g\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 has weight"
+    },
+    {
+      "command": "check-page-contains 1 \"Input 20V / 5A\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 has input spec"
+    },
+    {
+      "command": "check-page-contains 1 \"Output 5-20V / up to 10A\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 has output spec"
+    },
+    {
+      "command": "check-page-contains 1 \"Parts List\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 says 'Parts List'"
+    },
+    {
+      "command": "check-page-contains 1 \"Top Plate\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 Top Plate"
+    },
+    {
+      "command": "check-page-contains 1 \"Coil Assembly\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 Coil Assembly"
+    },
+    {
+      "command": "check-page-contains 1 \"Control PCB\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 Control PCB"
+    },
+    {
+      "command": "check-page-contains 1 \"Base Housing\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 Base Housing"
+    },
+    {
+      "command": "check-shape-exists 1 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 2 has rectangles"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 5",
+      "description": "Page 1 has at least 5 shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][1]['shape_count'] >= 9",
+      "description": "Page 2 has at least 9 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "musescore3_rebuild_score_header",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/waltz_draft.mscz — 4 measures in C major (no sharps or flats), 4/4 time, first-measure tempo 120 BPM, empty Composer.\n\nRebuild the score header so it reads as a D-major waltz, then save in place:\n- Change the time signature at measure 1 to 3/4.\n- Change the first tempo marking to exactly 108 BPM (quarter = 108).\n- Change the key signature at the start to D major (two sharps).\n- Set the Composer to exactly 'Yvette Chauvire'.\n\nSave in place at /home/user/Documents/waltz_draft.mscz so the first TimeSig = 3/4, the first Tempo = 108 BPM, the first KeySig accidental count = 2, and composer = 'Yvette Chauvire'.",
+  "env": {
+    "files": [
+      {
+        "filename": "waltz_draft.mscz",
+        "sandbox_path": "/home/user/Documents/waltz_draft.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/waltz_draft.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "waltz_draft.mscz still exists"
+    },
+    {
+      "command": "check-time-signature /home/user/Documents/waltz_draft.mscz 3 4",
+      "key": "match",
+      "expected": true,
+      "description": "First TimeSig equals 3/4"
+    },
+    {
+      "command": "check-tempo /home/user/Documents/waltz_draft.mscz 108",
+      "key": "match",
+      "expected": true,
+      "description": "First Tempo equals 108 BPM"
+    },
+    {
+      "command": "check-key-signature /home/user/Documents/waltz_draft.mscz 2",
+      "key": "match",
+      "expected": true,
+      "description": "First KeySig has 2 accidentals (D major, two sharps)"
+    },
+    {
+      "command": "check-meta-tag /home/user/Documents/waltz_draft.mscz composer Yvette Chauvire",
+      "key": "match",
+      "expected": true,
+      "description": "composer metaTag equals 'Yvette Chauvire'"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

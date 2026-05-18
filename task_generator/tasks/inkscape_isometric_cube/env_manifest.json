@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_isometric_cube",
+  "files": [
+    {
+      "filename": "cube.svg",
+      "sandbox_path": "/home/user/Documents/cube.svg",
+      "type": "svg"
+    }
+  ]
+}

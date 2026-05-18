@@ -1,0 +1,87 @@
+{
+  "id": "thunderbird_contact_full_fields",
+  "app": "thunderbird",
+  "task": "Add a single contact to Thunderbird's Address Book with every field below populated:\n\n- First name: Priscilla\n- Last name: Hendricks\n- Display name: Priscilla Hendricks\n- Primary email: priscilla.hendricks@orbitalworks.io\n- Secondary email: p.hendricks@personal.net\n- Nickname: PriHen\n- Work phone: 555-0144\n- Home phone: 555-0199\n- Company / Organization: OrbitalWorks Research\n- Job title: Chief Systems Architect\n- Notes: Keynote speaker 2026 DevSummit — prefers morning meetings",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists 'Priscilla Hendricks'",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Priscilla Hendricks exists"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' first_name Priscilla",
+      "key": "match",
+      "expected": true,
+      "description": "First name is Priscilla"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' last_name Hendricks",
+      "key": "match",
+      "expected": true,
+      "description": "Last name is Hendricks"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' primary_email priscilla.hendricks@orbitalworks.io",
+      "key": "match",
+      "expected": true,
+      "description": "Primary email correct"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' second_email p.hendricks@personal.net",
+      "key": "match",
+      "expected": true,
+      "description": "Secondary email correct"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' nickname PriHen",
+      "key": "match",
+      "expected": true,
+      "description": "Nickname is PriHen"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' work_phone 555-0144",
+      "key": "match",
+      "expected": true,
+      "description": "Work phone correct"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' home_phone 555-0199",
+      "key": "match",
+      "expected": true,
+      "description": "Home phone correct"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' company 'OrbitalWorks Research'",
+      "key": "match",
+      "expected": true,
+      "description": "Company is OrbitalWorks Research"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' job_title 'Chief Systems Architect'",
+      "key": "match",
+      "expected": true,
+      "description": "Job title correct"
+    },
+    {
+      "command": "check-contact-field 'Priscilla Hendricks' notes 'Keynote speaker 2026 DevSummit'",
+      "key": "match",
+      "expected": true,
+      "description": "Notes contain keynote reference"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

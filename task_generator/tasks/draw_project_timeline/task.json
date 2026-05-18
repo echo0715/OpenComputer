@@ -1,0 +1,82 @@
+{
+  "id": "draw_project_timeline",
+  "app": "libreoffice_draw",
+  "task": "Create a new LibreOffice Draw project timeline diagram and save it to /home/user/Documents/timeline.odg.\n\nPage 1 must contain five ellipses arranged left-to-right with these exact labels in order: 'Q1 Planning', 'Q2 Development', 'Q3 Testing', 'Q4 Launch', 'Post-Launch'. Connectors link them in sequence: 'Q1 Planning' → 'Q2 Development' → 'Q3 Testing' → 'Q4 Launch' → 'Post-Launch'.\n\nBelow the timeline, add one rectangle with the exact text 'Project Roadmap 2026'. Page 1 must end up with at least 6 non-connector shapes (5 ellipses + 1 rectangle).",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/timeline.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File timeline.odg exists"
+    },
+    {
+      "command": "check-page-contains 0 \"Q1 Planning\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Q1 Planning'"
+    },
+    {
+      "command": "check-page-contains 0 \"Q2 Development\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Q2 Development'"
+    },
+    {
+      "command": "check-page-contains 0 \"Q3 Testing\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Q3 Testing'"
+    },
+    {
+      "command": "check-page-contains 0 \"Q4 Launch\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Q4 Launch'"
+    },
+    {
+      "command": "check-page-contains 0 Post-Launch",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Post-Launch'"
+    },
+    {
+      "command": "check-page-contains 0 \"Project Roadmap 2026\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Project Roadmap 2026'"
+    },
+    {
+      "command": "check-shape-exists 0 EllipseShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 contains ellipse shapes"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 contains rectangle shapes"
+    },
+    {
+      "command": "check-shape-count 0 6",
+      "key": "match",
+      "expected": true,
+      "description": "Page 1 has at least 6 shapes (5 ellipses + 1 rectangle, not counting connectors)"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

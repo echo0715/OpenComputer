@@ -1,0 +1,93 @@
+{
+  "id": "inkscape_flowchart_connectors",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/flowchart.svg — a blank 900x600 document.\n\nBuild a flowchart in /home/user/Documents/flowchart.svg with these exact contents:\n\n- Layer named 'Flowchart' containing:\n  - A rectangle near the top-center with id `start_box` and fill #4CAF50, plus a text element with the exact text: Start.\n  - A rectangle near the center with id `process_box` and fill #2196F3, plus a text element with the exact text: Process.\n  - A rectangle near the bottom-center with id `end_box` and fill #f44336, plus a text element with the exact text: End.\n  - Connector line/path elements joining `start_box` to `process_box` and `process_box` to `end_box`.\n\nThe page must remain 900x600. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "flowchart.svg",
+        "sandbox_path": "/home/user/Documents/flowchart.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/flowchart.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File flowchart.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/flowchart.svg 900 600",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 900x600 pixels"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/flowchart.svg Flowchart",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Flowchart' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/flowchart.svg start_box",
+      "key": "exists",
+      "expected": true,
+      "description": "Element 'start_box' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/flowchart.svg process_box",
+      "key": "exists",
+      "expected": true,
+      "description": "Element 'process_box' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/flowchart.svg end_box",
+      "key": "exists",
+      "expected": true,
+      "description": "Element 'end_box' exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/flowchart.svg start_box fill #4CAF50",
+      "key": "match",
+      "expected": true,
+      "description": "start_box has green fill (#4CAF50)"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/flowchart.svg process_box fill #2196F3",
+      "key": "match",
+      "expected": true,
+      "description": "process_box has blue fill (#2196F3)"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/flowchart.svg end_box fill #f44336",
+      "key": "match",
+      "expected": true,
+      "description": "end_box has red fill (#f44336)"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/flowchart.svg Start",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Start' exists in the document"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/flowchart.svg Process",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Process' exists in the document"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/flowchart.svg End",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'End' exists in the document"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

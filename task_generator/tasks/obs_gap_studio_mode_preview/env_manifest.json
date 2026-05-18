@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_gap_studio_mode_preview",
+  "files": [
+    {
+      "filename": ".keep",
+      "sandbox_path": "/home/user/Documents/.obs_studio_mode_task",
+      "type": "placeholder"
+    }
+  ]
+}

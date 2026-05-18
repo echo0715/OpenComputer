@@ -1,0 +1,20 @@
+{
+  "task_id": "kdenlive_pip_overlay_glow_render",
+  "files": [
+    {
+      "filename": "pip_project.kdenlive",
+      "sandbox_path": "/home/user/Documents/pip_project.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "background.mp4",
+      "sandbox_path": "/home/user/Videos/background.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "overlay.mp4",
+      "sandbox_path": "/home/user/Videos/overlay.mp4",
+      "type": "mp4"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "vscode_edit_html_file",
+  "app": "vscode",
+  "task": "Edit `/home/user/Documents/index.html` so that the final file is a valid HTML document with proper `html`, `head`, and `body` tags, where:\n\n- The `title` element contains `My Portfolio`.\n- The body contains an `h1` element with the text `Welcome to My Portfolio`.\n- The body contains a paragraph with the text `This site showcases my work`.",
+  "env": {
+    "files": [
+      {
+        "filename": "index.html",
+        "sandbox_path": "/home/user/Documents/index.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/index.html",
+      "key": "exists",
+      "expected": true,
+      "description": "index.html exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/index.html My Portfolio",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains My Portfolio in title"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/index.html Welcome to My Portfolio",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains h1 text"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/index.html This site showcases my work",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains paragraph text"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "shotcut_v2_default_profile_dv_pal",
+  "app": "shotcut",
+  "task": "Shotcut is open with a placeholder project /home/user/Documents/pal_prefs.mlt.\n\nSet Shotcut's default Video Mode to 'PAL' (dv_pal) so the change is persisted to `~/.config/Meltytech/Shotcut.conf` under the `[Settings]` section as `defaultProfile=dv_pal`.",
+  "env": {
+    "files": [
+      {
+        "filename": "pal_prefs.mlt",
+        "sandbox_path": "/home/user/Documents/pal_prefs.mlt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.config/Meltytech/Shotcut.conf",
+      "key": "exists",
+      "expected": true,
+      "description": "Shotcut configuration file exists"
+    },
+    {
+      "command": "check-config-value Settings defaultProfile dv_pal",
+      "key": "match",
+      "expected": true,
+      "description": "Settings.defaultProfile equals 'dv_pal'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

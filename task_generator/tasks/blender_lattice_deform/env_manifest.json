@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_lattice_deform",
+  "files": [
+    {"filename": "lattice_demo.blend", "sandbox_path": "/home/user/Documents/lattice_demo.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

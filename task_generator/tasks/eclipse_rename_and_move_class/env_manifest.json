@@ -1,0 +1,9 @@
+{
+  "task_id": "eclipse_rename_and_move_class",
+  "files": [
+    {"filename": "Refactor/.project", "sandbox_path": "/home/user/workspace/Refactor/.project", "type": "xml"},
+    {"filename": "Refactor/.classpath", "sandbox_path": "/home/user/workspace/Refactor/.classpath", "type": "xml"},
+    {"filename": "Refactor/.settings/org.eclipse.jdt.core.prefs", "sandbox_path": "/home/user/workspace/Refactor/.settings/org.eclipse.jdt.core.prefs", "type": "properties"},
+    {"filename": "Refactor/src/com/old/Helper.java", "sandbox_path": "/home/user/workspace/Refactor/src/com/old/Helper.java", "type": "java"}
+  ]
+}

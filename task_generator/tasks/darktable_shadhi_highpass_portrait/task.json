@@ -1,0 +1,63 @@
+{
+  "id": "darktable_shadhi_highpass_portrait",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/face.png into the darktable library.\n\nEnable the 'shadows and highlights' module (internally 'shadhi') to balance the shadow/highlight regions, and enable the 'highpass' module. Apply both tags 'portrait' and 'retouched' to the image, set its star rating to 4 stars, and export it as a JPEG to /home/user/Pictures/face_retouched.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "face.png",
+        "sandbox_path": "/home/user/Pictures/face.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported face.png",
+      "key": "imported",
+      "expected": true,
+      "description": "face.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation face.png shadhi",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'shadhi' operation"
+    },
+    {
+      "command": "check-db-has-operation face.png highpass",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'highpass' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename face.png portrait",
+      "key": "tagged",
+      "expected": true,
+      "description": "face.png is tagged with 'portrait'"
+    },
+    {
+      "command": "check-image-tagged-by-filename face.png retouched",
+      "key": "tagged",
+      "expected": true,
+      "description": "face.png is tagged with 'retouched'"
+    },
+    {
+      "command": "check-image-rating-by-filename face.png 4",
+      "key": "matches",
+      "expected": true,
+      "description": "face.png rating is 4 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/face_retouched.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG exists at /home/user/Pictures/face_retouched.jpg"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

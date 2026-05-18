@@ -1,0 +1,111 @@
+{
+  "id": "inkscape_axes_and_plot_points",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/axes.svg — a blank 600x600 canvas.\n\nBuild a two-layer scatter plot in /home/user/Documents/axes.svg with these exact contents:\n\n- Layer named 'Axes' containing two separate path/line elements forming an X axis (horizontal) and Y axis (vertical).\n- Layer named 'Points' containing four circle elements with these exact ids and fills, all #ff5722: pt_a, pt_b, pt_c, pt_d.\n- One text element anywhere with the exact text: Scatter Plot.\n\nThe page must remain 600x600. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "axes.svg",
+        "sandbox_path": "/home/user/Documents/axes.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/axes.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "axes.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/axes.svg 600 600",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 600x600"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/axes.svg Axes",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Axes' exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/axes.svg Points",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Points' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/axes.svg pt_a",
+      "key": "exists",
+      "expected": true,
+      "description": "pt_a exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/axes.svg pt_a fill #ff5722",
+      "key": "match",
+      "expected": true,
+      "description": "pt_a fill is #ff5722"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/axes.svg pt_b",
+      "key": "exists",
+      "expected": true,
+      "description": "pt_b exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/axes.svg pt_b fill #ff5722",
+      "key": "match",
+      "expected": true,
+      "description": "pt_b fill is #ff5722"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/axes.svg pt_c",
+      "key": "exists",
+      "expected": true,
+      "description": "pt_c exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/axes.svg pt_c fill #ff5722",
+      "key": "match",
+      "expected": true,
+      "description": "pt_c fill is #ff5722"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/axes.svg pt_d",
+      "key": "exists",
+      "expected": true,
+      "description": "pt_d exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/axes.svg pt_d fill #ff5722",
+      "key": "match",
+      "expected": true,
+      "description": "pt_d fill is #ff5722"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/axes.svg circle",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains circle elements"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/axes.svg path",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains path elements"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/axes.svg 'Scatter Plot'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Scatter Plot' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

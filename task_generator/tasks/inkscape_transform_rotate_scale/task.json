@@ -1,0 +1,93 @@
+{
+  "id": "inkscape_transform_rotate_scale",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/transforms.svg — a 600x600 document containing three rectangles with ids `box_a`, `box_b`, `box_c` (currently black, no transform).\n\nEdit /home/user/Documents/transforms.svg so that the three rectangles have these exact `transform` attribute strings (literal strings, no spaces) and fills:\n- box_a transform `rotate(45)`, fill #ff0000\n- box_b transform `scale(2)`, fill #00aa00\n- box_c transform `translate(50,50)`, fill #0055ff\n\nAlso add a text element anywhere with the exact text: Transformed. The page must remain 600x600. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "transforms.svg",
+        "sandbox_path": "/home/user/Documents/transforms.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/transforms.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "transforms.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/transforms.svg 600 600",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 600x600"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/transforms.svg box_a",
+      "key": "exists",
+      "expected": true,
+      "description": "box_a exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/transforms.svg box_b",
+      "key": "exists",
+      "expected": true,
+      "description": "box_b exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/transforms.svg box_c",
+      "key": "exists",
+      "expected": true,
+      "description": "box_c exists"
+    },
+    {
+      "command": "check-element-attribute /home/user/Documents/transforms.svg box_a transform 'rotate(45)'",
+      "key": "match",
+      "expected": true,
+      "description": "box_a transform is rotate(45)"
+    },
+    {
+      "command": "check-element-attribute /home/user/Documents/transforms.svg box_b transform 'scale(2)'",
+      "key": "match",
+      "expected": true,
+      "description": "box_b transform is scale(2)"
+    },
+    {
+      "command": "check-element-attribute /home/user/Documents/transforms.svg box_c transform 'translate(50,50)'",
+      "key": "match",
+      "expected": true,
+      "description": "box_c transform is translate(50,50)"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/transforms.svg box_a fill #ff0000",
+      "key": "match",
+      "expected": true,
+      "description": "box_a fill is #ff0000"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/transforms.svg box_b fill #00aa00",
+      "key": "match",
+      "expected": true,
+      "description": "box_b fill is #00aa00"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/transforms.svg box_c fill #0055ff",
+      "key": "match",
+      "expected": true,
+      "description": "box_c fill is #0055ff"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/transforms.svg Transformed",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Transformed' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

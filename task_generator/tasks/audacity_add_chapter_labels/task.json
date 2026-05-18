@@ -1,0 +1,73 @@
+{
+  "id": "audacity_add_chapter_labels",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/audiobook.aup loaded — a single 5-second narration wavetrack and no label tracks.\n\nAdd one label track containing exactly four labels with these exact titles, in order from earliest to latest: 'Intro', 'Chapter 1', 'Chapter 2', 'Outro'. The labels should be reasonably distributed across the 5 seconds (e.g., near 0.5s, 1.5s, 2.5s, 4.0s); exact timestamps do not matter.\n\nSave the project so the label track and four labels are persisted to /home/user/Music/audiobook.aup.",
+  "env": {
+    "files": [
+      {
+        "filename": "audiobook.aup",
+        "sandbox_path": "/home/user/Music/audiobook.aup"
+      },
+      {
+        "filename": "audiobook_data/e00/d00/e000001.au",
+        "sandbox_path": "/home/user/Music/audiobook_data/e00/d00/e000001.au"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-valid-aup /home/user/Music/audiobook.aup",
+      "key": "valid",
+      "expected": true,
+      "description": "audiobook.aup is still valid"
+    },
+    {
+      "command": "check-labeltrack-count /home/user/Music/audiobook.aup 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 1 label track exists"
+    },
+    {
+      "command": "check-label-count /home/user/Music/audiobook.aup 4",
+      "key": "match",
+      "expected": true,
+      "description": "Label track has exactly 4 labels"
+    },
+    {
+      "command": "check-label-exists /home/user/Music/audiobook.aup Intro",
+      "key": "match",
+      "expected": true,
+      "description": "Label 'Intro' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Music/audiobook.aup 'Chapter 1'",
+      "key": "match",
+      "expected": true,
+      "description": "Label 'Chapter 1' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Music/audiobook.aup 'Chapter 2'",
+      "key": "match",
+      "expected": true,
+      "description": "Label 'Chapter 2' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Music/audiobook.aup Outro",
+      "key": "match",
+      "expected": true,
+      "description": "Label 'Outro' exists"
+    },
+    {
+      "command": "check-track-count /home/user/Music/audiobook.aup 1",
+      "key": "match",
+      "expected": true,
+      "description": "Original wavetrack count preserved (1)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

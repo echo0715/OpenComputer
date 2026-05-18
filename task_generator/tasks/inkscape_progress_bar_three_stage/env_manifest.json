@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_progress_bar_three_stage",
+  "files": [
+    {
+      "filename": "progress.svg",
+      "sandbox_path": "/home/user/Documents/progress.svg",
+      "type": "svg"
+    }
+  ]
+}

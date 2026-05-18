@@ -1,0 +1,99 @@
+{
+  "id": "obsidian_reorganize_tags",
+  "app": "obsidian",
+  "task": "The Obsidian vault at /home/user/Documents/TagVault contains 6 notes with no frontmatter or tags. Add YAML frontmatter at the top of each note and append the listed inline tags on a new line at the end of the note body:\n\n- 'Meeting Notes.md' — frontmatter `type: meeting`, `date: 2025-03-01`; trailing tags #meeting #work\n- 'Project Plan.md' — frontmatter `type: project`, `status: active`; trailing tags #project #planning\n- 'Reading List.md' — frontmatter `type: list`, `category: books`; trailing tags #reading #books\n- 'Quick Ideas.md' — frontmatter `type: fleeting`, `priority: low`; trailing tags #ideas #fleeting\n- 'Weekly Review.md' — frontmatter `type: review`, `week: 10`; trailing tags #review #weekly\n- 'Contacts.md' — frontmatter `type: reference`, `category: people`; trailing tags #contacts #reference\n\nThen create 'Tag Index.md' in the vault root with body:\n\n```\n# Tag Index\n## By Type\n- meeting: [[Meeting Notes]]\n- project: [[Project Plan]]\n- list: [[Reading List]]\n- fleeting: [[Quick Ideas]]\n- review: [[Weekly Review]]\n- reference: [[Contacts]]\n#index #tags\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/TagVault 'Meeting Notes' type meeting",
+      "key": "match",
+      "expected": true,
+      "description": "Meeting Notes has type=meeting"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TagVault 'Meeting Notes' work",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Meeting Notes has #work tag"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/TagVault 'Project Plan' status active",
+      "key": "match",
+      "expected": true,
+      "description": "Project Plan has status=active"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TagVault 'Project Plan' planning",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Project Plan has #planning tag"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/TagVault 'Reading List' category books",
+      "key": "match",
+      "expected": true,
+      "description": "Reading List has category=books"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/TagVault 'Quick Ideas' priority low",
+      "key": "match",
+      "expected": true,
+      "description": "Quick Ideas has priority=low"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TagVault 'Quick Ideas' fleeting",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Quick Ideas has #fleeting tag"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/TagVault 'Weekly Review' week 10",
+      "key": "match",
+      "expected": true,
+      "description": "Weekly Review has week=10"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TagVault 'Weekly Review' weekly",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Weekly Review has #weekly tag"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TagVault Contacts reference",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Contacts has #reference tag"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/TagVault 'Tag Index' 'Meeting Notes'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Tag Index links to Meeting Notes"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/TagVault 'Tag Index' 'Quick Ideas'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Tag Index links to Quick Ideas"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/TagVault 'Tag Index' index",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Tag Index has #index tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/TagVault",
+      "eval": "result.get('count') == 7",
+      "description": "Vault has exactly 7 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

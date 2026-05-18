@@ -1,0 +1,45 @@
+{
+  "id": "thunderbird_gap_imap_subscription_offline",
+  "app": "thunderbird",
+  "task": "The Thunderbird profile already has an IMAP account for `user@example.com` (server key `server1` under ImapMail). Configure folder subscription and offline storage so that:\n\n- The server's Subscriptions.dat contains exactly these three subscribed folders and no others: `INBOX`, `INBOX/Work`, `INBOX/Personal`.\n- \"Keep messages for this account on this computer\" is enabled, and only `INBOX` and `INBOX/Work` are flagged for offline sync.\n- `mail.server.server1.ageLimit` = `90` (only download messages from the last 90 days).",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-subscribed-folder server1 INBOX",
+      "key": "subscribed",
+      "expected": true,
+      "description": "INBOX is subscribed"
+    },
+    {
+      "command": "check-subscribed-folder server1 INBOX/Work",
+      "key": "subscribed",
+      "expected": true,
+      "description": "INBOX/Work is subscribed"
+    },
+    {
+      "command": "check-subscribed-folder server1 INBOX/Personal",
+      "key": "subscribed",
+      "expected": true,
+      "description": "INBOX/Personal is subscribed"
+    },
+    {
+      "command": "check-pref-value mail.server.server1.ageLimit 90",
+      "key": "match",
+      "expected": true,
+      "description": "Offline age limit is 90 days"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

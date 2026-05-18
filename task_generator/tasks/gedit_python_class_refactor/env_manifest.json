@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_python_class_refactor",
+  "files": [
+    {"filename": "calculator.py", "sandbox_path": "/home/user/Documents/calculator.py", "type": "python"}
+  ]
+}

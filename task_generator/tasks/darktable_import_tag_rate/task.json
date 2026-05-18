@@ -1,0 +1,51 @@
+{
+  "id": "darktable_import_tag_rate",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/landscape.png into the darktable library.\n\nApply the tag 'nature' to the image, set its star rating to 4 stars, and export it as a JPEG to /home/user/Pictures/landscape_export.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "landscape.png",
+        "sandbox_path": "/home/user/Pictures/landscape.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported landscape.png",
+      "key": "imported",
+      "expected": true,
+      "description": "landscape.png is imported into darktable library"
+    },
+    {
+      "command": "check-tag-exists nature",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'nature' exists in the library"
+    },
+    {
+      "command": "check-image-tagged 1 nature",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'nature'"
+    },
+    {
+      "command": "check-image-rating 1 4",
+      "key": "matches",
+      "expected": true,
+      "description": "Image rating is 4 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/landscape_export.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG file exists and is a valid image"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "krita_crop_and_add_border",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/photo_crop.kra loaded — canvas currently 1600x900.\n\nCrop the canvas down to a centered 1200x800 region, then expand the canvas outwards by 30 pixels on every side so the final canvas is exactly 1260x860. The original 1200x800 image content must sit centered inside a 30-pixel-wide solid black border.\n\nSave the file in place at /home/user/Documents/photo_crop.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "photo_crop.kra",
+        "sandbox_path": "/home/user/Documents/photo_crop.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/photo_crop.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-image-size /home/user/Documents/photo_crop.kra 1260 860",
+      "key": "match",
+      "expected": true,
+      "description": "Final canvas is 1260x860"
+    },
+    {
+      "command": "preview /home/user/Documents/photo_crop.kra",
+      "eval": "result.get('width') == 1260 and result.get('height') == 860",
+      "expected": true,
+      "description": "Merged preview matches new canvas size"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

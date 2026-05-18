@@ -1,0 +1,10 @@
+{
+  "task_id": "zotero_export_library_bibtex_4",
+  "files": [
+    {
+      "filename": "zotero.sqlite",
+      "sandbox_path": "/home/user/Zotero/zotero.sqlite",
+      "type": "sqlite"
+    }
+  ]
+}

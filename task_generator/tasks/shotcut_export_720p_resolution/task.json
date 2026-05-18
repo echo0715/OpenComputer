@@ -1,0 +1,49 @@
+{
+  "id": "shotcut_export_720p_resolution",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/hd_export.mlt — a 1280x720, 25 fps project that already contains one clip on the V1 timeline track referencing /home/user/Videos/master.mp4.\n\nExport the timeline to /home/user/Videos/output_720p.mp4 using the default H.264 preset, inheriting the project's 1280x720 / 25 fps settings (do NOT override width, height, or frame rate). The output must be a valid H.264 MP4 file at 1280x720 resolution.",
+  "env": {
+    "files": [
+      {
+        "filename": "hd_export.mlt",
+        "sandbox_path": "/home/user/Documents/hd_export.mlt"
+      },
+      {
+        "filename": "master.mp4",
+        "sandbox_path": "/home/user/Videos/master.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/output_720p.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported file exists at /home/user/Videos/output_720p.mp4"
+    },
+    {
+      "command": "check-export-output /home/user/Videos/output_720p.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Exported file is a valid non-empty media file"
+    },
+    {
+      "command": "check-export-codec /home/user/Videos/output_720p.mp4 h264 video",
+      "key": "match",
+      "expected": true,
+      "description": "Exported video codec is h264"
+    },
+    {
+      "command": "check-export-resolution /home/user/Videos/output_720p.mp4 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Exported video resolution is 1280x720"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

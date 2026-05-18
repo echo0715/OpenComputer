@@ -1,0 +1,6 @@
+{
+  "task_id": "kdenlive_effect_and_render",
+  "files": [
+    {"filename": "render_project.kdenlive", "sandbox_path": "/home/user/Documents/render_project.kdenlive", "type": "kdenlive"}
+  ]
+}

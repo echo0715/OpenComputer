@@ -1,0 +1,105 @@
+{
+  "id": "draw_kanban_board",
+  "app": "libreoffice_draw",
+  "task": "Create a new LibreOffice Draw Kanban task board and save it to /home/user/Documents/kanban.odg.\n\nPage 1 must contain three wide column rectangles arranged left-to-right with the exact column titles 'To Do', 'In Progress', 'Done'. Under each column, place two smaller rectangle task cards with these exact labels:\n- Under 'To Do': 'Task Alpha', 'Task Beta'.\n- Under 'In Progress': 'Task Gamma', 'Task Delta'.\n- Under 'Done': 'Task Epsilon', 'Task Zeta'.\n\nPage 1 must end up with at least 9 shapes (3 columns + 6 cards).\n\nPage 2 must contain a single rectangle with the exact text 'Sprint 12 Review'. The document must end up with exactly 2 pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/kanban.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File kanban.odg exists"
+    },
+    {
+      "command": "check-page-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 2 pages"
+    },
+    {
+      "command": "check-page-contains 0 \"To Do\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has column 'To Do'"
+    },
+    {
+      "command": "check-page-contains 0 \"In Progress\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has column 'In Progress'"
+    },
+    {
+      "command": "check-page-contains 0 Done",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has column 'Done'"
+    },
+    {
+      "command": "check-page-contains 0 \"Task Alpha\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has card 'Task Alpha'"
+    },
+    {
+      "command": "check-page-contains 0 \"Task Beta\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has card 'Task Beta'"
+    },
+    {
+      "command": "check-page-contains 0 \"Task Gamma\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has card 'Task Gamma'"
+    },
+    {
+      "command": "check-page-contains 0 \"Task Delta\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has card 'Task Delta'"
+    },
+    {
+      "command": "check-page-contains 0 \"Task Epsilon\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has card 'Task Epsilon'"
+    },
+    {
+      "command": "check-page-contains 0 \"Task Zeta\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 has card 'Task Zeta'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 9",
+      "description": "Page 1 has at least 9 shapes (3 columns + 6 cards)"
+    },
+    {
+      "command": "check-page-contains 1 \"Sprint 12 Review\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 has 'Sprint 12 Review'"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

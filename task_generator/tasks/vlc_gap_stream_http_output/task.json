@@ -1,0 +1,16 @@
+{
+  "id": "vlc_gap_stream_http_output",
+  "app": "vlc",
+  "task": "Configure VLC's default stream output (sout) to stream media as HTTP on port 8080 with a TS mux. Set the 'sout' preference to '#http{mux=ts,dst=:8080/}' in VLC's advanced preferences so it persists in ~/.config/vlc/vlcrc. Save preferences, then start streaming /home/user/Videos/sample.mp4.",
+  "env": {
+    "files": [
+      {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/Videos/sample.mp4", "key": "exists", "expected": true, "description": "sample.mp4 is present"},
+    {"command": "config sout", "eval": "'http' in (result.get('value') or '') and '8080' in (result.get('value') or '')", "description": "sout config contains http output on port 8080"},
+    {"command": "check-media-loaded sample.mp4", "key": "loaded", "expected": true, "description": "sample.mp4 is loaded in VLC"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "estimated_difficulty": 5}
+}

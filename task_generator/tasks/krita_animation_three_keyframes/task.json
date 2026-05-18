@@ -1,0 +1,50 @@
+{
+  "id": "krita_animation_three_keyframes",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/bounce.kra loaded — a single paint layer named 'Ball' with the document framerate currently 12 fps.\n\nChange the document framerate to 24 fps, add the 'Ball' layer to the animation timeline, and create at least 3 keyframes on the 'Ball' layer (e.g., at frames 0, 12, and 24; empty keyframes are acceptable).\n\nSave the file in place at /home/user/Documents/bounce.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "bounce.kra",
+        "sandbox_path": "/home/user/Documents/bounce.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/bounce.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "bounce.kra still exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/bounce.kra Ball",
+      "key": "exists",
+      "expected": true,
+      "description": "Ball layer preserved"
+    },
+    {
+      "command": "check-framerate /home/user/Documents/bounce.kra 24",
+      "key": "match",
+      "expected": true,
+      "description": "Document framerate is 24"
+    },
+    {
+      "command": "check-layer-animated /home/user/Documents/bounce.kra Ball",
+      "key": "animated",
+      "expected": true,
+      "description": "Ball layer is in the timeline"
+    },
+    {
+      "command": "check-keyframe-count /home/user/Documents/bounce.kra Ball 3",
+      "key": "match",
+      "expected": true,
+      "description": "Ball layer has at least 3 keyframes"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

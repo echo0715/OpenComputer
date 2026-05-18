@@ -1,0 +1,59 @@
+{
+  "id": "godot4_configure_physics_2d",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/physics_game/project.godot so that:\n\n1. In the `[application]` section, `config/name` is exactly `\"Gravity Game\"`.\n2. A `[physics]` section exists (add it if missing) with these keys:\n   - `physics/2d/default_gravity=1200`\n   - `physics/2d/default_gravity_vector=Vector2(0, 1)`\n   - `physics/2d/sleep_threshold_linear=2.5`\n\nLeave the rest of the file intact.",
+  "env": {
+    "files": [
+      {
+        "filename": "project.godot",
+        "sandbox_path": "/home/user/godot_projects/physics_game/project.godot"
+      },
+      {
+        "filename": "main.tscn",
+        "sandbox_path": "/home/user/godot_projects/physics_game/main.tscn"
+      },
+      {
+        "filename": "icon.svg",
+        "sandbox_path": "/home/user/godot_projects/physics_game/icon.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "file-exists /home/user/godot_projects/physics_game/project.godot",
+      "key": "exists",
+      "expected": true,
+      "description": "project.godot still exists"
+    },
+    {
+      "command": "check-project-setting /home/user/godot_projects/physics_game/project.godot application/config/name '\"Gravity Game\"'",
+      "key": "match",
+      "expected": true,
+      "description": "config/name is 'Gravity Game'"
+    },
+    {
+      "command": "check-project-setting /home/user/godot_projects/physics_game/project.godot physics/2d/default_gravity 1200",
+      "key": "match",
+      "expected": true,
+      "description": "2D default gravity is 1200"
+    },
+    {
+      "command": "check-project-setting /home/user/godot_projects/physics_game/project.godot physics/2d/default_gravity_vector 'Vector2(0, 1)'",
+      "key": "match",
+      "expected": true,
+      "description": "Gravity vector is Vector2(0, 1)"
+    },
+    {
+      "command": "check-project-setting /home/user/godot_projects/physics_game/project.godot physics/2d/sleep_threshold_linear 2.5",
+      "key": "match",
+      "expected": true,
+      "description": "Sleep threshold linear is 2.5"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "eclipse_change_source_target_level",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the Java project 'MigrationApp' at /home/user/workspace/MigrationApp is already imported and currently uses Java 11 compiler settings.\n\nEnable project-specific Java Compiler settings on 'MigrationApp' and set compiler compliance, source compatibility, and generated .class file compatibility all to 17.\n\nDo NOT modify the existing source file at src/com/migration/App.java.",
+  "env": {
+    "files": [
+      {
+        "filename": "MigrationApp/.project",
+        "sandbox_path": "/home/user/workspace/MigrationApp/.project"
+      },
+      {
+        "filename": "MigrationApp/.classpath",
+        "sandbox_path": "/home/user/workspace/MigrationApp/.classpath"
+      },
+      {
+        "filename": "MigrationApp/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/MigrationApp/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "MigrationApp/src/com/migration/App.java",
+        "sandbox_path": "/home/user/workspace/MigrationApp/src/com/migration/App.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace MigrationApp",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'MigrationApp' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/MigrationApp org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-setting /home/user/workspace/MigrationApp org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler compliance level is set to 17"
+    },
+    {
+      "command": "check-setting /home/user/workspace/MigrationApp org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.source 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler source level is set to 17"
+    },
+    {
+      "command": "check-setting /home/user/workspace/MigrationApp org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.codegen.targetPlatform 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Java compiler target platform is set to 17"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/MigrationApp src/com/migration/App.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Original source file App.java still exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

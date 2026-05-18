@@ -1,0 +1,48 @@
+{
+  "id": "gimp_gap_script_fu_plasma_export",
+  "app": "gimp",
+  "task": "Create a new 400x400 RGB image in GIMP filled with white.\n\nRender plasma noise into the canvas (any seed/turbulence is fine, but the result must have multi-colored variation — not a flat color and not pure white). Export the result as PNG to /home/user/Documents/plasma.png. The output must be 400x400 with the plasma fill clearly applied (e.g., pixels at (50,50) and (350,350) must not still be near-white).",
+  "env": {
+    "files": [
+      {
+        "filename": "placeholder.png",
+        "sandbox_path": "/home/user/Documents/placeholder.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/plasma.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Output PNG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/plasma.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Output is PNG"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/plasma.png 400 400",
+      "key": "match",
+      "expected": true,
+      "description": "Output is 400x400"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/plasma.png 50 50",
+      "eval": "not (result.get('r',255) > 245 and result.get('g',255) > 245 and result.get('b',255) > 245)",
+      "description": "Pixel (50,50) is not pure white — plasma fill applied"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/plasma.png 350 350",
+      "eval": "not (result.get('r',255) > 245 and result.get('g',255) > 245 and result.get('b',255) > 245)",
+      "description": "Pixel (350,350) is not pure white — plasma fill applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

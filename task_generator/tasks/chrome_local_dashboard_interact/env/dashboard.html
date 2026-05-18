@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q4 Sales Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #ecf0f1; }
+        .header { background: #2c3e50; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .header h1 { margin: 0; }
+        .controls { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; gap: 15px; align-items: center; }
+        .controls label { font-weight: bold; color: #2c3e50; }
+        .controls select { padding: 8px 12px; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 14px; }
+        .controls button {
+            background: #3498db; color: white; padding: 8px 20px;
+            border: none; border-radius: 4px; font-size: 14px; cursor: pointer;
+        }
+        .controls button:hover { background: #2980b9; }
+        .report-area { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-height: 200px; }
+        .report-area h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #3498db; color: white; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #eee; }
+        .summary { display: flex; gap: 20px; margin-top: 15px; }
+        .summary-card { background: #f8f9fa; padding: 15px; border-radius: 8px; flex: 1; text-align: center; }
+        .summary-card .value { font-size: 24px; font-weight: bold; color: #2c3e50; }
+        .summary-card .label { color: #7f8c8d; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Q4 Sales Dashboard</h1>
+        <p>October - December 2025</p>
+    </div>
+
+    <div class="controls">
+        <label for="region">Region:</label>
+        <select id="region">
+            <option value="">-- Select Region --</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="East">East</option>
+            <option value="West">West</option>
+        </select>
+        <button id="generateBtn">Generate Report</button>
+    </div>
+
+    <div class="report-area" id="reportArea">
+        <h2 id="reportTitle">Select a region and click Generate Report</h2>
+        <p id="reportPlaceholder">Choose a region from the dropdown above to view the sales report.</p>
+    </div>
+
+    <script>
+        var regionData = {
+            "North": {total: "$245,000", orders: 1820, topProduct: "Winter Jackets", growth: "+12%"},
+            "South": {total: "$198,500", orders: 1540, topProduct: "Sunscreen SPF50", growth: "+8%"},
+            "East": {total: "$312,000", orders: 2100, topProduct: "Electronics Bundle", growth: "+15%"},
+            "West": {total: "$278,750", orders: 1950, topProduct: "Organic Coffee", growth: "+11%"}
+        };
+
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            var region = document.getElementById('region').value;
+            if (!region) {
+                alert('Please select a region first.');
+                return;
+            }
+            var data = regionData[region];
+            var area = document.getElementById('reportArea');
+            area.innerHTML = '<h2>' + region + ' Region Report</h2>' +
+                '<div class="summary">' +
+                '<div class="summary-card"><div class="value">' + data.total + '</div><div class="label">Total Revenue</div></div>' +
+                '<div class="summary-card"><div class="value">' + data.orders + '</div><div class="label">Total Orders</div></div>' +
+                '<div class="summary-card"><div class="value">' + data.growth + '</div><div class="label">YoY Growth</div></div>' +
+                '</div>' +
+                '<table><thead><tr><th>Month</th><th>Revenue</th><th>Orders</th><th>Top Product</th></tr></thead>' +
+                '<tbody>' +
+                '<tr><td>October</td><td>' + data.total + '</td><td>' + Math.round(data.orders * 0.3) + '</td><td>' + data.topProduct + '</td></tr>' +
+                '<tr><td>November</td><td>' + data.total + '</td><td>' + Math.round(data.orders * 0.35) + '</td><td>' + data.topProduct + '</td></tr>' +
+                '<tr><td>December</td><td>' + data.total + '</td><td>' + Math.round(data.orders * 0.35) + '</td><td>' + data.topProduct + '</td></tr>' +
+                '</tbody></table>';
+        });
+    </script>
+</body>
+</html>

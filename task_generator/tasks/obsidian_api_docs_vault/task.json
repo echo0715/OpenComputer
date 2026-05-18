@@ -1,0 +1,158 @@
+{
+  "id": "obsidian_api_docs_vault",
+  "app": "obsidian",
+  "task": "Build an API reference documentation vault in the Obsidian vault at /home/user/Documents/APIVault.\n\n1. Create folders 'Endpoints' and 'Schemas' in the vault root.\n2. Inside 'Endpoints', create these 5 endpoint notes. Each must have YAML frontmatter with `method` and `path`, a level-1 heading matching the filename, a level-2 `Request` and level-2 `Response` heading, the listed inline tags, and wikilinks to the referenced schemas:\n   - 'Endpoints/GET-users.md' — method: GET, path: /users. Tags: #endpoint #users. Links: [[User]].\n   - 'Endpoints/POST-users.md' — method: POST, path: /users. Tags: #endpoint #users. Links: [[User]], [[CreateUserInput]].\n   - 'Endpoints/GET-orders.md' — method: GET, path: /orders. Tags: #endpoint #orders. Links: [[Order]].\n   - 'Endpoints/POST-orders.md' — method: POST, path: /orders. Tags: #endpoint #orders. Links: [[Order]], [[CreateOrderInput]].\n   - 'Endpoints/DELETE-orders.md' — method: DELETE, path: /orders. Tags: #endpoint #orders. Links: [[Order]].\n3. Inside 'Schemas', create these 4 schema notes. Each must have a level-1 heading matching its name, a level-2 `Fields` heading with a bulleted list of at least 3 fields, and the inline tag #schema:\n   - 'Schemas/User.md'\n   - 'Schemas/Order.md'\n   - 'Schemas/CreateUserInput.md'\n   - 'Schemas/CreateOrderInput.md'\n4. Create 'API Overview.md' in the vault root with a level-1 heading 'API Overview', wikilinks to all 5 endpoint notes ([[GET-users]], [[POST-users]], [[GET-orders]], [[POST-orders]], [[DELETE-orders]]), and the inline tags #overview #api.\n\nThe vault must end up with exactly 10 notes total.",
+  "env": {
+    "files": [
+      {
+        "filename": "app.json",
+        "sandbox_path": "/home/user/Documents/APIVault/.obsidian/app.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/APIVault Endpoints",
+      "key": "exists",
+      "expected": true,
+      "description": "Endpoints folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/APIVault Schemas",
+      "key": "exists",
+      "expected": true,
+      "description": "Schemas folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/APIVault GET-users method GET",
+      "key": "match",
+      "expected": true,
+      "description": "GET-users method=GET"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/APIVault GET-users path /users",
+      "key": "match",
+      "expected": true,
+      "description": "GET-users path=/users"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/APIVault GET-users User",
+      "key": "links_to",
+      "expected": true,
+      "description": "GET-users links User"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/APIVault GET-users endpoint",
+      "key": "has_tag",
+      "expected": true,
+      "description": "GET-users has endpoint tag"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/APIVault GET-users Request 2",
+      "key": "has_heading",
+      "expected": true,
+      "description": "GET-users has Request heading"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/APIVault GET-users Response 2",
+      "key": "has_heading",
+      "expected": true,
+      "description": "GET-users has Response heading"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/APIVault POST-users method POST",
+      "key": "match",
+      "expected": true,
+      "description": "POST-users method=POST"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/APIVault POST-users CreateUserInput",
+      "key": "links_to",
+      "expected": true,
+      "description": "POST-users links CreateUserInput"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/APIVault GET-orders method GET",
+      "key": "match",
+      "expected": true,
+      "description": "GET-orders method=GET"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/APIVault GET-orders Order",
+      "key": "links_to",
+      "expected": true,
+      "description": "GET-orders links Order"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/APIVault POST-orders method POST",
+      "key": "match",
+      "expected": true,
+      "description": "POST-orders method=POST"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/APIVault POST-orders CreateOrderInput",
+      "key": "links_to",
+      "expected": true,
+      "description": "POST-orders links CreateOrderInput"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/APIVault DELETE-orders method DELETE",
+      "key": "match",
+      "expected": true,
+      "description": "DELETE-orders method=DELETE"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/APIVault User Fields 2",
+      "key": "has_heading",
+      "expected": true,
+      "description": "User schema has Fields heading"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/APIVault User schema",
+      "key": "has_tag",
+      "expected": true,
+      "description": "User schema has #schema tag"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/APIVault Order Fields 2",
+      "key": "has_heading",
+      "expected": true,
+      "description": "Order schema has Fields heading"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/APIVault 'API Overview' GET-users",
+      "key": "links_to",
+      "expected": true,
+      "description": "API Overview links GET-users"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/APIVault 'API Overview' POST-orders",
+      "key": "links_to",
+      "expected": true,
+      "description": "API Overview links POST-orders"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/APIVault 'API Overview' DELETE-orders",
+      "key": "links_to",
+      "expected": true,
+      "description": "API Overview links DELETE-orders"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/APIVault 'API Overview' overview",
+      "key": "has_tag",
+      "expected": true,
+      "description": "API Overview has #overview tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/APIVault",
+      "eval": "result.get('count') == 10",
+      "description": "Vault has exactly 10 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

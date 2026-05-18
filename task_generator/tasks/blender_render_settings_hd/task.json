@@ -1,0 +1,93 @@
+{
+  "id": "blender_render_settings_hd",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/hd_render_setup.blend, delete the default Cube and add:\n- A Monkey mesh named 'Head' with material 'SkinMat' assigned\n- A Plane named 'Stage' with material 'StageMat' assigned\n- An Empty (Plain Axes) named 'Origin'\n\nCreate a collection 'Characters' containing 'Head'. Set the render engine to Cycles, the render resolution to 3840x2160, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "hd_render_setup.blend",
+        "sandbox_path": "/home/user/Documents/hd_render_setup.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/hd_render_setup.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/hd_render_setup.blend Head",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Head' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/hd_render_setup.blend Head MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Head is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/hd_render_setup.blend Stage",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Stage' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/hd_render_setup.blend Stage MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Stage is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/hd_render_setup.blend Origin",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Origin' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/hd_render_setup.blend Origin EMPTY",
+      "key": "match",
+      "expected": true,
+      "description": "Origin is an EMPTY object"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/hd_render_setup.blend SkinMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'SkinMat' exists"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/hd_render_setup.blend StageMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'StageMat' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/hd_render_setup.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine set to CYCLES"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/hd_render_setup.blend 3840 2160",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 3840x2160 (4K)"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/hd_render_setup.blend Characters",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Characters' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "musescore3_change_time_signature",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/waltz_sketch.mscz — 4 measures in 4/4 time with quarter-note content in each measure.\n\nChange the time signature at the start of the score from 4/4 to 3/4 and save in place at /home/user/Documents/waltz_sketch.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "waltz_sketch.mscz",
+        "sandbox_path": "/home/user/Documents/waltz_sketch.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/waltz_sketch.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "waltz_sketch.mscz still exists"
+    },
+    {
+      "command": "check-time-signature /home/user/Documents/waltz_sketch.mscz 3 4",
+      "key": "match",
+      "expected": true,
+      "description": "First time signature is 3/4"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "chrome_local_kanban_workflow",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/kanban.html (a three-column board: To Do, In Progress, Done). Starting state: To Do contains `Draft report` and `Review PR`; In Progress contains `Deploy staging` and `Write tests`; Done is empty.\n\nReach this final state:\n- Move `Draft report` from To Do to Done.\n- Move `Review PR` from To Do to In Progress.\n- Add a new task titled `Ship v2.1` to the Done column via the `New done task...` input.\n\nWhen done, the Done column must contain exactly `Draft report` and `Ship v2.1`, and the Done-column counter must read `Done: 2`.",
+  "env": {
+    "files": [
+      {
+        "filename": "kanban.html",
+        "sandbox_path": "/home/user/Documents/kanban.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open kanban.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for kanban.html is open"
+    },
+    {
+      "command": "eval \"Array.from(document.querySelectorAll('#done .card')).map(c => c.getAttribute('data-title'))\"",
+      "eval": "'Draft report' in (result.get('value') or [])",
+      "description": "'Draft report' is in the Done column"
+    },
+    {
+      "command": "eval \"Array.from(document.querySelectorAll('#inprogress .card')).map(c => c.getAttribute('data-title'))\"",
+      "eval": "'Review PR' in (result.get('value') or [])",
+      "description": "'Review PR' is in the In Progress column"
+    },
+    {
+      "command": "eval \"Array.from(document.querySelectorAll('#done .card')).map(c => c.getAttribute('data-title'))\"",
+      "eval": "'Ship v2.1' in (result.get('value') or [])",
+      "description": "'Ship v2.1' was added to the Done column"
+    },
+    {
+      "command": "eval \"document.querySelector('#done .count').textContent\"",
+      "eval": "str(result.get('value')).strip() == '2'",
+      "description": "Done column counter shows 2"
+    },
+    {
+      "command": "check-page-contains \"Team Kanban Board\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page shows the Kanban board heading"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

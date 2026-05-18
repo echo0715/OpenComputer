@@ -1,0 +1,218 @@
+{
+  "id": "musescore3_compose_16bar_leadsheet",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/moonlight_scaffold.mscz — a single Piano part in G major (1 sharp), 3/4 time, 16 measures of whole-measure rests, current tempo quarter = 90 BPM, Work Title 'Untitled Score', empty Composer, no chord symbols, no lyrics.\n\nCompose and annotate a 16-measure lead sheet in place, then export as MusicXML:\n\n- Set Work Title to exactly 'Moonlight Waltz' and Composer to exactly 'Claire Dubois'.\n- Change the first tempo marking to exactly 108 BPM (quarter = 108).\n- Fill every measure with exactly three quarter notes (48 notes total), staying diatonic in G major; specific pitches are your choice.\n- Add a chord symbol above the downbeat of each measure, one per measure from m1 to m16, in this exact order: m1=G, m2=D, m3=Em, m4=C, m5=G, m6=D, m7=G, m8=G, m9=Em, m10=C, m11=G, m12=D, m13=Em, m14=Am, m15=D7, m16=G.\n- Add lyrics under the first 9 notes (the first three measures only), in this exact order: 'Moon', 'light', 'waltz', 'be', 'neath', 'the', 'stars', 'so', 'bright'.\n- Save in place at /home/user/Documents/moonlight_scaffold.mscz.\n- Export an Uncompressed MusicXML to exactly /home/user/Documents/moonlight_waltz.musicxml.\n\nAfter saving, workTitle must be 'Moonlight Waltz', composer must be 'Claire Dubois', first tempo must be 108 BPM, time signature must still be 3/4, key signature must still be 1 sharp, and the score must have 16 measures with at least 48 notes. All 16 chord symbols must appear at the specified measures, each of the 9 listed syllables must appear as lyric text, and the MusicXML export at /home/user/Documents/moonlight_waltz.musicxml must have exactly 1 part.",
+  "env": {
+    "files": [
+      {
+        "filename": "moonlight_scaffold.mscz",
+        "sandbox_path": "/home/user/Documents/moonlight_scaffold.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/moonlight_scaffold.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "moonlight_scaffold.mscz still exists"
+    },
+    {
+      "command": "check-meta-tag /home/user/Documents/moonlight_scaffold.mscz workTitle Moonlight Waltz",
+      "key": "match",
+      "expected": true,
+      "description": "workTitle is 'Moonlight Waltz'"
+    },
+    {
+      "command": "check-meta-tag /home/user/Documents/moonlight_scaffold.mscz composer Claire Dubois",
+      "key": "match",
+      "expected": true,
+      "description": "composer is 'Claire Dubois'"
+    },
+    {
+      "command": "check-tempo /home/user/Documents/moonlight_scaffold.mscz 108",
+      "key": "match",
+      "expected": true,
+      "description": "First tempo is 108 BPM"
+    },
+    {
+      "command": "check-time-signature /home/user/Documents/moonlight_scaffold.mscz 3 4",
+      "key": "match",
+      "expected": true,
+      "description": "Time signature is still 3/4"
+    },
+    {
+      "command": "check-key-signature /home/user/Documents/moonlight_scaffold.mscz 1",
+      "key": "match",
+      "expected": true,
+      "description": "Key signature is still G major (1 sharp)"
+    },
+    {
+      "command": "check-measure-count /home/user/Documents/moonlight_scaffold.mscz 16",
+      "key": "match",
+      "expected": true,
+      "description": "Score has 16 measures"
+    },
+    {
+      "command": "check-note-count-at-least /home/user/Documents/moonlight_scaffold.mscz 48",
+      "key": "match",
+      "expected": true,
+      "description": "Score has at least 48 notes"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 1 G",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol G at measure 1"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 2 D",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol D at measure 2"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 3 Em",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol Em at measure 3"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 4 C",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol C at measure 4"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 5 G",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol G at measure 5"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 6 D",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol D at measure 6"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 7 G",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol G at measure 7"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 8 G",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol G at measure 8"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 9 Em",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol Em at measure 9"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 10 C",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol C at measure 10"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 11 G",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol G at measure 11"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 12 D",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol D at measure 12"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 13 Em",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol Em at measure 13"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 14 Am",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol Am at measure 14"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 15 D7",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol D7 at measure 15"
+    },
+    {
+      "command": "check-chord-symbol-in-measure /home/user/Documents/moonlight_scaffold.mscz 16 G",
+      "key": "match",
+      "expected": true,
+      "description": "Chord symbol G at measure 16"
+    },
+    {
+      "command": "check-has-lyrics /home/user/Documents/moonlight_scaffold.mscz",
+      "key": "has_lyrics",
+      "expected": true,
+      "description": "Score has at least one lyric"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/moonlight_scaffold.mscz Moon",
+      "key": "match",
+      "expected": true,
+      "description": "Lyric syllable 'Moon' present"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/moonlight_scaffold.mscz light",
+      "key": "match",
+      "expected": true,
+      "description": "Lyric syllable 'light' present"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/moonlight_scaffold.mscz waltz",
+      "key": "match",
+      "expected": true,
+      "description": "Lyric syllable 'waltz' present"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/moonlight_scaffold.mscz neath",
+      "key": "match",
+      "expected": true,
+      "description": "Lyric syllable 'neath' present"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/moonlight_scaffold.mscz stars",
+      "key": "match",
+      "expected": true,
+      "description": "Lyric syllable 'stars' present"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/moonlight_scaffold.mscz bright",
+      "key": "match",
+      "expected": true,
+      "description": "Lyric syllable 'bright' present"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/moonlight_waltz.musicxml",
+      "key": "exists",
+      "expected": true,
+      "description": "MusicXML export exists"
+    },
+    {
+      "command": "check-musicxml-parts /home/user/Documents/moonlight_waltz.musicxml 1",
+      "key": "match",
+      "expected": true,
+      "description": "MusicXML export has exactly 1 part"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

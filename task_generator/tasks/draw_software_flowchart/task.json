@@ -1,0 +1,64 @@
+{
+  "id": "draw_software_flowchart",
+  "app": "libreoffice_draw",
+  "task": "Create a new LibreOffice Draw software development flowchart and save it to /home/user/Documents/flowchart.odg.\n\nPage 1 must contain five rectangles arranged vertically top-to-bottom with these exact texts in order: 'Start', 'Design', 'Implement', 'Test', 'Deploy'. Connectors link each consecutive pair: 'Start' → 'Design' → 'Implement' → 'Test' → 'Deploy'.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/flowchart.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File flowchart.odg exists"
+    },
+    {
+      "command": "check-page-contains 0 Start",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Start'"
+    },
+    {
+      "command": "check-page-contains 0 Design",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Design'"
+    },
+    {
+      "command": "check-page-contains 0 Implement",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Implement'"
+    },
+    {
+      "command": "check-page-contains 0 Test",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Test'"
+    },
+    {
+      "command": "check-page-contains 0 Deploy",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Deploy'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 contains rectangle shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

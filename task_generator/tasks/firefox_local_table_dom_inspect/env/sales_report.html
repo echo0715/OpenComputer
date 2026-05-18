@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quarterly Sales Report</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 760px; margin: 2em auto; padding: 0 1em; }
+table { border-collapse: collapse; width: 100%; margin-top: 1em; }
+th, td { border: 1px solid #999; padding: 6px 10px; text-align: left; }
+th { background: #eee; }
+#total { font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Quarterly Sales</h1>
+<p>Summary of regional sales for Q4 2025.</p>
+<table id="sales">
+  <thead>
+    <tr><th>Region</th><th>Units</th><th>Revenue</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Europe</td><td>1200</td><td>9800</td></tr>
+    <tr><td>North America</td><td>1850</td><td>14200</td></tr>
+    <tr><td>Asia Pacific</td><td>1600</td><td>11250</td></tr>
+    <tr><td>Latin America</td><td>900</td><td>7000</td></tr>
+    <tr><td>Middle East</td><td>720</td><td>6000</td></tr>
+  </tbody>
+</table>
+<h2 id="totals">Totals</h2>
+<p>Grand total revenue: <span id="total">48250</span></p>
+</body>
+</html>

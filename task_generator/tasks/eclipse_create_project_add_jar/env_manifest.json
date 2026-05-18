@@ -1,0 +1,6 @@
+{
+  "task_id": "eclipse_create_project_add_jar",
+  "files": [
+    {"filename": "commons-lang3.jar", "sandbox_path": "/home/user/Downloads/commons-lang3.jar", "type": "jar"}
+  ]
+}

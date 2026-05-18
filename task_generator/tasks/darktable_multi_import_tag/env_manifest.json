@@ -1,0 +1,7 @@
+{
+  "task_id": "darktable_multi_import_tag",
+  "files": [
+    {"filename": "photo_a.png", "sandbox_path": "/home/user/Pictures/photo_a.png", "type": "png"},
+    {"filename": "photo_b.png", "sandbox_path": "/home/user/Pictures/photo_b.png", "type": "png"}
+  ]
+}

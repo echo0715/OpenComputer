@@ -1,0 +1,39 @@
+{
+  "id": "thunderbird_gap_saved_search_unread_important",
+  "app": "thunderbird",
+  "task": "Under Thunderbird's Local Folders account, create a Saved Search (Virtual) folder named exactly `Unread Important Mail` with these criteria:\n- Scope: the Inbox and its subfolders.\n- Match: message is unread AND tagged with the `Important` label (tag key `$label1`) — combined with AND.\n- Local-only saved search — do NOT enable online/server search.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-virtual-folder-exists 'Unread Important Mail'",
+      "key": "found",
+      "expected": true,
+      "description": "Virtual folder 'Unread Important Mail' exists"
+    },
+    {
+      "command": "check-virtual-folder-terms 'Unread Important Mail' read",
+      "key": "match",
+      "expected": true,
+      "description": "Saved search uses read/unread status"
+    },
+    {
+      "command": "check-virtual-folder-terms 'Unread Important Mail' label1",
+      "key": "match",
+      "expected": true,
+      "description": "Saved search matches Important ($label1) tag"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "inkscape_modify_attributes",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/blueprint.svg — an 800x600 document containing a rectangle with id `frame` (200x100, black stroke, no fill) and an ellipse with id `oval` (fill #cccccc, no stroke).\n\nEdit /home/user/Documents/blueprint.svg so that:\n- `frame` has stroke #ff6600 and stroke-width 3.\n- `oval` has fill #ffcc00, stroke #003399, and stroke-width 2.\n- A text element exists anywhere with the exact text: Modified Blueprint.\n\nSave the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "blueprint.svg",
+        "sandbox_path": "/home/user/Documents/blueprint.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/blueprint.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File blueprint.svg exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/blueprint.svg frame stroke #ff6600",
+      "key": "match",
+      "expected": true,
+      "description": "Rectangle 'frame' has orange stroke (#ff6600)"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/blueprint.svg oval fill #ffcc00",
+      "key": "match",
+      "expected": true,
+      "description": "Ellipse 'oval' has yellow fill (#ffcc00)"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/blueprint.svg oval stroke #003399",
+      "key": "match",
+      "expected": true,
+      "description": "Ellipse 'oval' has dark blue stroke (#003399)"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/blueprint.svg 'Modified Blueprint'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Modified Blueprint' exists in the document"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

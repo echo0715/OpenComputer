@@ -1,0 +1,54 @@
+{
+  "id": "chrome_local_notes_crud",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/notes.html ('Quick Notes', with a title input, body textarea, Add Note button, and a list with delete buttons).\n\nCreate these three notes in this exact order:\n1. title `Grocery List`, body `Milk, eggs, bread, coffee`\n2. title `Sprint Planning`, body `Review backlog and assign Monday stories`\n3. title `Scratch`, body `temporary placeholder`\n\nThen delete the `Scratch` note so only `Grocery List` and `Sprint Planning` remain. The `Total notes` counter must read `2`, and `Scratch` must no longer be present.",
+  "env": {
+    "files": [
+      {
+        "filename": "notes.html",
+        "sandbox_path": "/home/user/Documents/notes.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open notes.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for notes.html is open"
+    },
+    {
+      "command": "check-page-contains \"Grocery List\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Note 'Grocery List' is on the page"
+    },
+    {
+      "command": "check-page-contains \"Sprint Planning\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Note 'Sprint Planning' is on the page"
+    },
+    {
+      "command": "eval \"document.body.innerText.includes('Scratch')\"",
+      "eval": "result.get('value') is False",
+      "description": "'Scratch' note is no longer on the page"
+    },
+    {
+      "command": "eval \"document.getElementById('note-count').textContent\"",
+      "eval": "str(result.get('value')).strip() == '2'",
+      "description": "#note-count shows 2"
+    },
+    {
+      "command": "eval \"document.querySelectorAll('#notes-list .note').length\"",
+      "eval": "int(result.get('value') or 0) == 2",
+      "description": "Exactly two .note elements are in #notes-list"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

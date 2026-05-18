@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_log_filter_errors",
+  "files": [
+    {"filename": "server.log", "sandbox_path": "/home/user/Documents/server.log", "type": "log"}
+  ]
+}

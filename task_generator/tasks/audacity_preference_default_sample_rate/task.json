@@ -1,0 +1,22 @@
+{
+  "id": "audacity_preference_default_sample_rate",
+  "app": "audacity",
+  "task": "Audacity is already running. Set the Quality preference 'Default Sample Rate' to 48000 Hz so the new value is written to `~/.audacity-data/audacity.cfg`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-preference Quality DefaultSampleRate 48000",
+      "key": "match",
+      "expected": true,
+      "description": "Default sample rate in audacity.cfg is 48000"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

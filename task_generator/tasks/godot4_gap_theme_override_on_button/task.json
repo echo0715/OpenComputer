@@ -1,0 +1,19 @@
+{
+  "id": "godot4_gap_theme_override_on_button",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/theme_override_game/main.tscn. The scene contains a root Control node 'Root' and a Button child 'BigButton' with text = \"Big\". Add the following theme override properties to the BigButton node (under its [node] block):\n\ntheme_override_font_sizes/font_size = 24\ntheme_override_colors/font_color = Color(1, 0, 0, 1)\n\nKeep the existing text property on BigButton. Save the file.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/theme_override_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/theme_override_game/main.tscn"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/theme_override_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-node-exists /home/user/godot_projects/theme_override_game/main.tscn BigButton", "key": "exists", "expected": true, "description": "BigButton still exists"},
+    {"command": "check-node-type /home/user/godot_projects/theme_override_game/main.tscn BigButton Button", "key": "match", "expected": true, "description": "BigButton is Button"},
+    {"command": "check-node-property /home/user/godot_projects/theme_override_game/main.tscn BigButton theme_override_font_sizes/font_size 24", "key": "match", "expected": true, "description": "font_size override is 24"},
+    {"command": "check-node-property /home/user/godot_projects/theme_override_game/main.tscn BigButton theme_override_colors/font_color 'Color(1, 0, 0, 1)'", "key": "match", "expected": true, "description": "font_color override is Color(1, 0, 0, 1)"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 4}
+}

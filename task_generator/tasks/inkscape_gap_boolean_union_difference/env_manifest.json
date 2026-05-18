@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_gap_boolean_union_difference",
+  "files": [
+    {
+      "filename": "booleans.svg",
+      "sandbox_path": "/home/user/Documents/booleans.svg",
+      "type": "svg"
+    }
+  ]
+}

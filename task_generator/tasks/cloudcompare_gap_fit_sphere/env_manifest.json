@@ -1,0 +1,6 @@
+{
+  "task_id": "cloudcompare_gap_fit_sphere",
+  "files": [
+    {"filename": "sphere_points.ply", "sandbox_path": "/home/user/Documents/sphere_points.ply", "type": "ply"}
+  ]
+}

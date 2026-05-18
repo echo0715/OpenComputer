@@ -1,0 +1,34 @@
+{
+  "id": "pcmanfm_bulk_rename_prefix_project",
+  "app": "pcmanfm",
+  "task": "In /home/user/Documents/research_papers/, rename each of the 6 existing PDF files by adding the prefix PROJ_ALPHA- followed by a zero-padded two-digit counter starting at 01. The counter assignment is based on sorting the original filenames alphabetically: biology.pdf becomes PROJ_ALPHA-01_biology.pdf, chemistry.pdf becomes PROJ_ALPHA-02_chemistry.pdf, data_science.pdf becomes PROJ_ALPHA-03_data_science.pdf, economics.pdf becomes PROJ_ALPHA-04_economics.pdf, physics.pdf becomes PROJ_ALPHA-05_physics.pdf, statistics.pdf becomes PROJ_ALPHA-06_statistics.pdf. Then create a new sub-directory /home/user/Documents/research_papers/archived/ and MOVE PROJ_ALPHA-01_biology.pdf and PROJ_ALPHA-02_chemistry.pdf into it. After all operations, /home/user/Documents/research_papers/ must contain exactly 5 entries at the top level: the archived directory plus the 4 remaining PROJ_ALPHA- prefixed pdfs, and archived/ must contain exactly 2 pdfs.",
+  "env": {
+    "files": [
+      {"filename": "biology.pdf", "sandbox_path": "/home/user/Documents/research_papers/biology.pdf"},
+      {"filename": "chemistry.pdf", "sandbox_path": "/home/user/Documents/research_papers/chemistry.pdf"},
+      {"filename": "data_science.pdf", "sandbox_path": "/home/user/Documents/research_papers/data_science.pdf"},
+      {"filename": "economics.pdf", "sandbox_path": "/home/user/Documents/research_papers/economics.pdf"},
+      {"filename": "physics.pdf", "sandbox_path": "/home/user/Documents/research_papers/physics.pdf"},
+      {"filename": "statistics.pdf", "sandbox_path": "/home/user/Documents/research_papers/statistics.pdf"}
+    ]
+  },
+  "verification": [
+    {"command": "check-dir-exists /home/user/Documents/research_papers/archived", "key": "exists", "expected": true, "description": "archived subdirectory exists"},
+    {"command": "check-file-count /home/user/Documents/research_papers 5", "key": "match", "expected": true, "description": "research_papers has 5 entries at top level"},
+    {"command": "check-file-count /home/user/Documents/research_papers/archived 2", "key": "match", "expected": true, "description": "archived has exactly 2 files"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/biology.pdf", "key": "exists", "expected": false, "description": "biology.pdf no longer at top level with old name"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/physics.pdf", "key": "exists", "expected": false, "description": "physics.pdf no longer at top level with old name"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/archived/PROJ_ALPHA-01_biology.pdf", "key": "exists", "expected": true, "description": "biology renamed and moved to archived"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/archived/PROJ_ALPHA-02_chemistry.pdf", "key": "exists", "expected": true, "description": "chemistry renamed and moved to archived"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/PROJ_ALPHA-03_data_science.pdf", "key": "exists", "expected": true, "description": "data_science renamed at top level"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/PROJ_ALPHA-04_economics.pdf", "key": "exists", "expected": true, "description": "economics renamed at top level"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/PROJ_ALPHA-05_physics.pdf", "key": "exists", "expected": true, "description": "physics renamed at top level"},
+    {"command": "check-file-exists /home/user/Documents/research_papers/PROJ_ALPHA-06_statistics.pdf", "key": "exists", "expected": true, "description": "statistics renamed at top level"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

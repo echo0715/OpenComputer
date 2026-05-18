@@ -1,0 +1,69 @@
+{
+  "id": "chrome_local_cart_checkout",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/store.html ('Gadget Store', six products). Add exactly these three products to the cart, once each, so the subtotal becomes `$129.00`:\n- `Wireless Mouse` ($15)\n- `Mechanical Keyboard` ($65)\n- `Bluetooth Headphones` ($49)\n\nApply coupon code `SAVE10` for a 10% discount so the total becomes `$116.10`. Then submit the shipping form with these exact values and place the order:\n- Full name: `Priya Patel`\n- Street address: `42 Birch Lane`\n- City: `Boston`\n- ZIP: `02108`\n\nThe final confirmation block must show `Order confirmed`, the name `Priya Patel`, and the total `$116.10`.",
+  "env": {
+    "files": [
+      {
+        "filename": "store.html",
+        "sandbox_path": "/home/user/Documents/store.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open store.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for store.html is open"
+    },
+    {
+      "command": "check-page-contains \"Order confirmed\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation text 'Order confirmed' is shown"
+    },
+    {
+      "command": "check-page-contains \"Priya Patel\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Shipping name 'Priya Patel' is in the confirmation"
+    },
+    {
+      "command": "check-page-contains \"Boston\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Shipping city 'Boston' is in the confirmation"
+    },
+    {
+      "command": "check-page-contains \"116.10\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Final total 116.10 is shown (after 10% coupon)"
+    },
+    {
+      "command": "check-page-contains \"Wireless Mouse\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation lists 'Wireless Mouse' as an item"
+    },
+    {
+      "command": "check-page-contains \"Mechanical Keyboard\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation lists 'Mechanical Keyboard' as an item"
+    },
+    {
+      "command": "check-page-contains \"Bluetooth Headphones\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation lists 'Bluetooth Headphones' as an item"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

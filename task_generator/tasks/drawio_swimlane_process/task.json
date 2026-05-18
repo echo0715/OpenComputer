@@ -1,0 +1,98 @@
+{
+  "id": "drawio_swimlane_process",
+  "app": "drawio",
+  "task": "Build a cross-functional swimlane order-fulfillment diagram in /home/user/Documents/swimlane_process.drawio.\n\nCreate 3 swimlane header shapes (or labeled containers) labeled 'Customer', 'Sales', 'Warehouse'. Inside those lanes, create 6 rectangle activity shapes with these exact labels and lane assignments:\n- 'Place Order' — in 'Customer' lane\n- 'Verify Stock' — in 'Sales' lane\n- 'Approve Sale' — in 'Sales' lane\n- 'Pick Items' — in 'Warehouse' lane\n- 'Pack Items' — in 'Warehouse' lane\n- 'Ship Order' — in 'Warehouse' lane\n\nSequential arrows: Place Order -> Verify Stock -> Approve Sale -> Pick Items -> Pack Items -> Ship Order (5 connections).\n\nThe page must end up with at least 9 vertices and at least 5 edges. Persist to /home/user/Documents/swimlane_process.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "swimlane_process.drawio",
+        "sandbox_path": "/home/user/Documents/swimlane_process.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/swimlane_process.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio Customer",
+      "key": "exists",
+      "expected": true,
+      "description": "Customer lane label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio Sales",
+      "key": "exists",
+      "expected": true,
+      "description": "Sales lane label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio Warehouse",
+      "key": "exists",
+      "expected": true,
+      "description": "Warehouse lane label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio \"Place Order\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Place Order activity exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio \"Verify Stock\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Verify Stock activity exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio \"Approve Sale\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Approve Sale activity exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio \"Pick Items\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Pick Items activity exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio \"Pack Items\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Pack Items activity exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/swimlane_process.drawio \"Ship Order\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Ship Order activity exists"
+    },
+    {
+      "command": "vertices /home/user/Documents/swimlane_process.drawio 0",
+      "eval": "len(result) >= 9",
+      "description": "At least 9 vertices on page 0"
+    },
+    {
+      "command": "edges /home/user/Documents/swimlane_process.drawio 0",
+      "eval": "len(result) >= 5",
+      "description": "At least 5 edges on page 0"
+    },
+    {
+      "judge": "llm",
+      "prompt": "Inspect the connections list (edges with source/target IDs) and the vertices list. Does the diagram contain an edge whose source vertex label is 'Place Order' and whose target vertex label is 'Verify Stock'?",
+      "command": "connections /home/user/Documents/swimlane_process.drawio 0",
+      "context": "command_output",
+      "description": "Connection Place Order -> Verify Stock exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

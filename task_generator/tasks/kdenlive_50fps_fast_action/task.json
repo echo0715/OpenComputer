@@ -1,0 +1,71 @@
+{
+  "id": "kdenlive_50fps_fast_action",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/fast_action.kdenlive (1920x1080, 50fps — a high frame rate profile for fast action).\n\nImport /home/user/Videos/action1.mp4 and /home/user/Videos/action2.mp4 into the project, place them sequentially on a single video track in order (action1 first, then action2 immediately after), and apply the Saturation effect (`frei0r.saturat0r`) to both timeline clips. Save the project so the changes are persisted to /home/user/Documents/fast_action.kdenlive. The project must contain exactly these 2 clips and remain at 1920x1080, 50fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "fast_action.kdenlive",
+        "sandbox_path": "/home/user/Documents/fast_action.kdenlive"
+      },
+      {
+        "filename": "action1.mp4",
+        "sandbox_path": "/home/user/Videos/action1.mp4"
+      },
+      {
+        "filename": "action2.mp4",
+        "sandbox_path": "/home/user/Videos/action2.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/fast_action.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/fast_action.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/fast_action.kdenlive 50",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 50 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/fast_action.kdenlive action1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "action1.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/fast_action.kdenlive action2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "action2.mp4 in project"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/fast_action.kdenlive 2",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 2 clips"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/fast_action.kdenlive frei0r.saturat0r",
+      "key": "exists",
+      "expected": true,
+      "description": "Saturation effect applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

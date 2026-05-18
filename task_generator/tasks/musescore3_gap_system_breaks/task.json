@@ -1,0 +1,38 @@
+{
+  "id": "musescore3_gap_system_breaks",
+  "app": "musescore3",
+  "task": "MuseScore 3 is open with /home/user/Documents/break_study.mscz — 12 measures on a single piano staff.\n\nInsert a system (line) break at the end of measure 4 and another at the end of measure 8, so the score is laid out as three systems of four measures each. Save in place at /home/user/Documents/break_study.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "break_study.mscz",
+        "sandbox_path": "/home/user/Documents/break_study.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/break_study.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-layout-break-at /home/user/Documents/break_study.mscz 4 line",
+      "key": "match",
+      "expected": true,
+      "description": "System break at measure 4"
+    },
+    {
+      "command": "check-layout-break-at /home/user/Documents/break_study.mscz 8 line",
+      "key": "match",
+      "expected": true,
+      "description": "System break at measure 8"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

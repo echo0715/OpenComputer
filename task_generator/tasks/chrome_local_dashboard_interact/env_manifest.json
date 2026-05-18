@@ -1,0 +1,6 @@
+{
+  "task_id": "chrome_local_dashboard_interact",
+  "files": [
+    {"filename": "dashboard.html", "sandbox_path": "/home/user/Documents/dashboard.html", "type": "html"}
+  ]
+}

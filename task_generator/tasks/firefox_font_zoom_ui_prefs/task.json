@@ -1,0 +1,46 @@
+{
+  "id": "firefox_font_zoom_ui_prefs",
+  "app": "firefox",
+  "task": "Configure these four Firefox preferences so they persist:\n- `font.size.variable.x-western` -> 18 (integer)\n- `browser.display.use_document_fonts` -> 0 (integer)\n- `browser.uidensity` -> 1 (integer, compact density)\n- `layout.css.devPixelsPerPx` -> \"1.2\" (string)\n\nThen navigate to https://example.com to confirm the browser still loads pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-pref font.size.variable.x-western 18",
+      "key": "match",
+      "expected": true,
+      "description": "font.size.variable.x-western is 18"
+    },
+    {
+      "command": "check-pref browser.display.use_document_fonts 0",
+      "key": "match",
+      "expected": true,
+      "description": "browser.display.use_document_fonts is 0"
+    },
+    {
+      "command": "check-pref browser.uidensity 1",
+      "key": "match",
+      "expected": true,
+      "description": "browser.uidensity is 1 (compact)"
+    },
+    {
+      "command": "check-pref layout.css.devPixelsPerPx 1.2",
+      "key": "match",
+      "expected": true,
+      "description": "layout.css.devPixelsPerPx is 1.2"
+    },
+    {
+      "command": "check-url-visited example.com",
+      "key": "visited",
+      "expected": true,
+      "description": "example.com was visited after prefs applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "freecad_export_multi_format",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/widget.FCStd, which contains a single Part::Box named 'Box' (Length=40, Width=30, Height=25).\n\nExport the 'Box' object into /home/user/exports/ (creating the directory if necessary) in all three of these formats with these exact filenames:\n1. /home/user/exports/box.stl as 'STL Mesh (*.stl)'\n2. /home/user/exports/box.step as 'STEP (*.step *.stp)'\n3. /home/user/exports/box.obj as 'Wavefront OBJ (*.obj)'\n\nAfter all three exports are written, save the FCStd document.",
+  "env": {
+    "files": [
+      {
+        "filename": "widget.FCStd",
+        "sandbox_path": "/home/user/Documents/widget.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/widget.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "FCStd source still exists"
+    },
+    {
+      "command": "check-file-exists /home/user/exports/box.stl",
+      "key": "exists",
+      "expected": true,
+      "description": "STL export exists"
+    },
+    {
+      "command": "check-stl-min-triangles /home/user/exports/box.stl 12",
+      "key": "match",
+      "expected": true,
+      "description": "STL has >= 12 triangles (closed box has 12)"
+    },
+    {
+      "command": "check-file-exists /home/user/exports/box.step",
+      "key": "exists",
+      "expected": true,
+      "description": "STEP export exists"
+    },
+    {
+      "command": "check-step-valid /home/user/exports/box.step",
+      "key": "valid",
+      "expected": true,
+      "description": "STEP file is valid"
+    },
+    {
+      "command": "check-file-exists /home/user/exports/box.obj",
+      "key": "exists",
+      "expected": true,
+      "description": "OBJ export exists"
+    },
+    {
+      "command": "check-obj-min-vertices /home/user/exports/box.obj 8",
+      "key": "match",
+      "expected": true,
+      "description": "OBJ has >= 8 vertices (a box has 8 corners)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

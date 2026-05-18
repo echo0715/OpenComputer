@@ -1,0 +1,68 @@
+{
+  "id": "inkscape_gap_markers_arrows",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/markers.svg. Add an end-arrow MARKER to each of the three polylines (arr1, arr2, arr3):\n- arr1 must use a TRIANGLE marker defined as <marker id='arrowTri' ...> in <defs>.\n- arr2 must use a DOT/CIRCLE marker defined as <marker id='arrowDot' ...>.\n- arr3 must use a DIAMOND marker defined as <marker id='arrowDia' ...>.\n\nEach polyline should have marker-end='url(#arrowTri|arrowDot|arrowDia)' as appropriate. Save /home/user/Documents/markers.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "markers.svg",
+        "sandbox_path": "/home/user/Documents/markers.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/markers.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/markers.svg arrowTri",
+      "key": "exists",
+      "expected": true,
+      "description": "Triangle marker defined"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/markers.svg arrowDot",
+      "key": "exists",
+      "expected": true,
+      "description": "Dot marker defined"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/markers.svg arrowDia",
+      "key": "exists",
+      "expected": true,
+      "description": "Diamond marker defined"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/markers.svg marker-end",
+      "key": "contains",
+      "expected": true,
+      "description": "marker-end attribute used"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/markers.svg arrowTri",
+      "key": "contains",
+      "expected": true,
+      "description": "arrowTri referenced"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/markers.svg arrowDot",
+      "key": "contains",
+      "expected": true,
+      "description": "arrowDot referenced"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/markers.svg arrowDia",
+      "key": "contains",
+      "expected": true,
+      "description": "arrowDia referenced"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

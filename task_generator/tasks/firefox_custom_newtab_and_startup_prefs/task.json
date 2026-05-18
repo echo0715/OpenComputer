@@ -1,0 +1,40 @@
+{
+  "id": "firefox_custom_newtab_and_startup_prefs",
+  "app": "firefox",
+  "task": "Configure these three Firefox preferences so they persist:\n- `browser.newtabpage.enabled` -> false\n- `browser.startup.page` -> 1\n- `browser.startup.homepage` -> `https://httpbin.org`\n\nThen open a new tab and navigate to https://example.com in it.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-pref browser.newtabpage.enabled false",
+      "key": "match",
+      "expected": true,
+      "description": "browser.newtabpage.enabled is set to false"
+    },
+    {
+      "command": "check-pref browser.startup.page 1",
+      "key": "match",
+      "expected": true,
+      "description": "browser.startup.page is set to 1"
+    },
+    {
+      "command": "check-pref browser.startup.homepage https://httpbin.org",
+      "key": "match",
+      "expected": true,
+      "description": "browser.startup.homepage is set to https://httpbin.org"
+    },
+    {
+      "command": "check-url-visited example.com",
+      "key": "visited",
+      "expected": true,
+      "description": "example.com was visited in the new tab"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

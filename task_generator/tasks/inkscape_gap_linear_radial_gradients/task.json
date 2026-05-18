@@ -1,0 +1,74 @@
+{
+  "id": "inkscape_gap_linear_radial_gradients",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/gradients.svg. Replace the solid fills with gradients:\n\n1. rectL: a LINEAR gradient from #ff0000 at offset 0 to #0000ff at offset 1, running left to right (horizontal).\n2. circR: a RADIAL gradient from #ffff00 at the center to #000088 at the edge.\n\nThe gradient definitions must live under <defs>. Save /home/user/Documents/gradients.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "gradients.svg",
+        "sandbox_path": "/home/user/Documents/gradients.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/gradients.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/gradients.svg rectL",
+      "key": "exists",
+      "expected": true,
+      "description": "rectL preserved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/gradients.svg circR",
+      "key": "exists",
+      "expected": true,
+      "description": "circR preserved"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/gradients.svg linearGradient",
+      "key": "contains",
+      "expected": true,
+      "description": "Linear gradient defined"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/gradients.svg radialGradient",
+      "key": "contains",
+      "expected": true,
+      "description": "Radial gradient defined"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/gradients.svg ff0000",
+      "key": "contains",
+      "expected": true,
+      "description": "Red stop present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/gradients.svg 0000ff",
+      "key": "contains",
+      "expected": true,
+      "description": "Blue stop present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/gradients.svg ffff00",
+      "key": "contains",
+      "expected": true,
+      "description": "Yellow stop present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/gradients.svg 000088",
+      "key": "contains",
+      "expected": true,
+      "description": "Dark blue stop present"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

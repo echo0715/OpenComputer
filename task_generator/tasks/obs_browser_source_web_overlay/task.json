@@ -1,0 +1,87 @@
+{
+  "id": "obs_browser_source_web_overlay",
+  "app": "obs",
+  "task": "Build a fresh OBS Studio scene collection for a streamer using web-based overlays. The final collection must contain exactly 2 scenes (no default 'Scene' left over) with these exact names: 'Stream' and 'Offline'.\n\nThe 'Stream' scene must contain these four sources with these exact names and types:\n- Display Capture named 'Desktop'\n- Browser named 'Chat Widget' (any URL)\n- Browser named 'Alerts' (any URL)\n- Text (FreeType 2) named 'Ticker' (any text content)\n\nThe 'Offline' scene must contain these two sources:\n- Image named 'Offline Card' with file path /home/user/Pictures/offline.png\n- Color Source named 'Offline BG'\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "offline.png",
+        "sandbox_path": "/home/user/Pictures/offline.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Stream",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Stream' exists"
+    },
+    {
+      "command": "check-scene-exists Offline",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Offline' exists"
+    },
+    {
+      "command": "check-scene-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 2 scenes"
+    },
+    {
+      "command": "check-source-in-scene Desktop Stream",
+      "key": "exists",
+      "expected": true,
+      "description": "'Desktop' in 'Stream'"
+    },
+    {
+      "command": "check-source-in-scene 'Chat Widget' Stream",
+      "key": "exists",
+      "expected": true,
+      "description": "'Chat Widget' in 'Stream'"
+    },
+    {
+      "command": "check-source-in-scene Alerts Stream",
+      "key": "exists",
+      "expected": true,
+      "description": "'Alerts' in 'Stream'"
+    },
+    {
+      "command": "check-source-in-scene Ticker Stream",
+      "key": "exists",
+      "expected": true,
+      "description": "'Ticker' in 'Stream'"
+    },
+    {
+      "command": "check-source-in-scene 'Offline Card' Offline",
+      "key": "exists",
+      "expected": true,
+      "description": "'Offline Card' in 'Offline'"
+    },
+    {
+      "command": "check-source-in-scene 'Offline BG' Offline",
+      "key": "exists",
+      "expected": true,
+      "description": "'Offline BG' in 'Offline'"
+    },
+    {
+      "command": "check-source-visible 'Chat Widget'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Chat Widget' visible"
+    },
+    {
+      "command": "check-source-visible 'Offline Card'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Offline Card' visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "task_id": "obs_gap_audio_mixer_monitor_tracks",
+  "files": [
+    {
+      "filename": "host.wav",
+      "sandbox_path": "/home/user/Music/host.wav",
+      "type": "wav"
+    },
+    {
+      "filename": "guest.wav",
+      "sandbox_path": "/home/user/Music/guest.wav",
+      "type": "wav"
+    }
+  ]
+}

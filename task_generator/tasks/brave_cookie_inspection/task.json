@@ -1,0 +1,46 @@
+{
+  "id": "brave_cookie_inspection",
+  "app": "brave",
+  "task": "In Brave, set two cookies on httpbin.org and view them, in three separate tabs:\n1. https://httpbin.org/cookies/set/session_token/abc123 — sets cookie `session_token=abc123` on httpbin.org\n2. https://httpbin.org/cookies/set/user_pref/dark_mode — sets cookie `user_pref=dark_mode` on httpbin.org\n3. https://httpbin.org/cookies — viewing all set cookies; bookmark this page\n\nWhen done, three tabs must be open and the https://httpbin.org/cookies page must be bookmarked.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-cookie session_token httpbin.org",
+      "key": "exists",
+      "expected": true,
+      "description": "Cookie 'session_token' exists on httpbin.org"
+    },
+    {
+      "command": "check-cookie user_pref httpbin.org",
+      "key": "exists",
+      "expected": true,
+      "description": "Cookie 'user_pref' exists on httpbin.org"
+    },
+    {
+      "command": "check-tab-open httpbin.org/cookies",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/cookies is open"
+    },
+    {
+      "command": "check-bookmark httpbin.org/cookies",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/cookies exists"
+    },
+    {
+      "command": "check-url-visited httpbin.org/cookies/set/session_token",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/cookies/set/session_token was visited"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

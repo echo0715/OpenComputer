@@ -1,0 +1,88 @@
+{
+  "id": "draw_data_flow_diagram",
+  "app": "libreoffice_draw",
+  "task": "Create a new two-page LibreOffice Draw data flow diagram and save it to /home/user/Documents/dataflow.odg.\n\nPage 1 must contain four ellipses arranged left-to-right with these exact labels in order: 'User Input', 'Validation', 'Processing', 'Storage'. Connectors link them in sequence: 'User Input' → 'Validation' → 'Processing' → 'Storage'.\n\nPage 2 must contain three rectangles with these exact labels: 'Error Log', 'Audit Trail', 'Backup'. A connector links 'Error Log' to 'Audit Trail'.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/dataflow.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File dataflow.odg exists"
+    },
+    {
+      "command": "check-page-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 2 pages"
+    },
+    {
+      "command": "check-page-contains 0 \"User Input\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'User Input'"
+    },
+    {
+      "command": "check-page-contains 0 Validation",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Validation'"
+    },
+    {
+      "command": "check-page-contains 0 Processing",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Processing'"
+    },
+    {
+      "command": "check-page-contains 0 Storage",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Storage'"
+    },
+    {
+      "command": "check-shape-exists 0 EllipseShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 contains ellipse shapes"
+    },
+    {
+      "command": "check-page-contains 1 \"Error Log\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Error Log'"
+    },
+    {
+      "command": "check-page-contains 1 \"Audit Trail\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Audit Trail'"
+    },
+    {
+      "command": "check-page-contains 1 Backup",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains text 'Backup'"
+    },
+    {
+      "command": "check-shape-exists 1 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 2 contains rectangle shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "renderdoc_shader_debug_profile",
+  "app": "renderdoc",
+  "task": "Configure the RenderDoc UI for an advanced shader-debugging workflow by editing /home/user/.local/share/qrenderdoc/UI.config (a plain JSON document). Apply all of the following changes in a single save:\n\n1. Set `\"UIStyle\"` to the exact string `\"Dark\"`.\n2. Set `\"Font_GlobalScale\"` to the JSON number `1.4` (not a string).\n3. Set `\"Font_PreferMonospaced\"` to `true`.\n4. Set `\"TextureViewer_ResetRange\"` to `true`.\n5. Set `\"TextureViewer_PerTexSettings\"` to `true`.\n6. Set `\"EventBrowser_ApplyColors\"` to `true`.\n7. Set `\"Comments_ShowOnLoad\"` to `false`.\n\nThe top-level `\"rdocConfigData\": 1` marker must remain present and unchanged. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-theme Dark",
+      "key": "match",
+      "expected": true,
+      "description": "UIStyle is Dark"
+    },
+    {
+      "command": "check-font-scale 1.4",
+      "key": "match",
+      "expected": true,
+      "description": "Font_GlobalScale is 1.4"
+    },
+    {
+      "command": "check-setting Font_PreferMonospaced true",
+      "key": "match",
+      "expected": true,
+      "description": "Font_PreferMonospaced true"
+    },
+    {
+      "command": "check-setting TextureViewer_ResetRange true",
+      "key": "match",
+      "expected": true,
+      "description": "TextureViewer_ResetRange true"
+    },
+    {
+      "command": "check-setting TextureViewer_PerTexSettings true",
+      "key": "match",
+      "expected": true,
+      "description": "TextureViewer_PerTexSettings true"
+    },
+    {
+      "command": "check-setting EventBrowser_ApplyColors true",
+      "key": "match",
+      "expected": true,
+      "description": "EventBrowser_ApplyColors true"
+    },
+    {
+      "command": "check-setting Comments_ShowOnLoad false",
+      "key": "match",
+      "expected": true,
+      "description": "Comments_ShowOnLoad false"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

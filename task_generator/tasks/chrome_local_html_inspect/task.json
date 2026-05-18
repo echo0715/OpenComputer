@@ -1,0 +1,45 @@
+{
+  "id": "chrome_local_html_inspect",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/test_page.html so the page renders with the heading `Test Page Heading` and a product-data table. In a second tab, load https://httpbin.org/html and bookmark that page. Both tabs must remain open.",
+  "env": {
+    "files": [
+      {
+        "filename": "test_page.html",
+        "sandbox_path": "/home/user/Documents/test_page.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open test_page.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with local test_page.html is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/html is open"
+    },
+    {
+      "command": "check-bookmark httpbin.org/html",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/html exists"
+    },
+    {
+      "command": "check-url-visited httpbin.org/html",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/html appears in browsing history"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

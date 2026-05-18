@@ -1,0 +1,69 @@
+{
+  "id": "blender_animated_object",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/animation_demo.blend, rename the default Cube to 'Mover' and animate its location with two Location keyframes: one at frame 1 at its starting position and another at frame 50 at a clearly different position (e.g., translated 5 units along the X axis). Set the scene frame range to start = 1 and end = 50.\n\nAdd a Plane named 'Ground'. Create a material named 'GroundMat' and assign it to 'Ground'. Set the render resolution to 1280x720, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "animation_demo.blend",
+        "sandbox_path": "/home/user/Documents/animation_demo.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/animation_demo.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session to disk before verification checks"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/animation_demo.blend Mover",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Mover' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/animation_demo.blend Mover MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Mover is a MESH object"
+    },
+    {
+      "command": "check-animation-exists /home/user/Documents/animation_demo.blend Mover",
+      "key": "animated",
+      "expected": true,
+      "description": "Mover has animation keyframes"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/animation_demo.blend Ground",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Ground' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/animation_demo.blend Ground MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Ground is a MESH object"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/animation_demo.blend GroundMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'GroundMat' exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/animation_demo.blend 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 1280x720"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

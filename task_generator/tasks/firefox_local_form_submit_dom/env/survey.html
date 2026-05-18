@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Feedback Survey</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 640px; margin: 2em auto; padding: 0 1em; }
+label { display: block; margin: 0.6em 0 0.2em; font-weight: bold; }
+input[type=text], input[type=number], select, textarea { width: 100%; padding: 6px; box-sizing: border-box; }
+button { margin-top: 1em; padding: 8px 16px; }
+#result { margin-top: 1em; padding: 8px; background: #e8ffe8; border: 1px solid #88cc88; display: none; }
+</style>
+</head>
+<body>
+<h1>Customer Feedback Survey</h1>
+<form id="survey">
+  <label for="fullname">Full name</label>
+  <input type="text" id="fullname" name="fullname">
+
+  <label for="age">Age</label>
+  <input type="number" id="age" name="age">
+
+  <label for="country">Country</label>
+  <select id="country" name="country">
+    <option value="">Select a country</option>
+    <option value="USA">USA</option>
+    <option value="Canada">Canada</option>
+    <option value="UK">UK</option>
+    <option value="Germany">Germany</option>
+    <option value="Japan">Japan</option>
+  </select>
+
+  <label><input type="checkbox" id="newsletter" name="newsletter"> Subscribe to newsletter</label>
+
+  <label for="comments">Comments</label>
+  <textarea id="comments" name="comments" rows="4"></textarea>
+
+  <button type="submit">Submit</button>
+</form>
+<div id="result"></div>
+<script>
+document.getElementById('survey').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var name = document.getElementById('fullname').value;
+  var r = document.getElementById('result');
+  r.textContent = 'Submitted ' + name;
+  r.style.display = 'block';
+});
+</script>
+</body>
+</html>

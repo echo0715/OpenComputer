@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_combo_loop_volume_fullscreen",
+  "files": [
+    {"filename": "combo.mp4", "sandbox_path": "/home/user/Videos/combo.mp4", "type": "mp4"}
+  ]
+}

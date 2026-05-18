@@ -1,0 +1,25 @@
+{
+  "task_id": "eclipse_v2_enable_warnings_as_errors",
+  "files": [
+    {
+      "filename": "StrictMode/.project",
+      "sandbox_path": "/home/user/workspace/StrictMode/.project",
+      "type": "project"
+    },
+    {
+      "filename": "StrictMode/.classpath",
+      "sandbox_path": "/home/user/workspace/StrictMode/.classpath",
+      "type": "classpath"
+    },
+    {
+      "filename": "StrictMode/.settings/org.eclipse.jdt.core.prefs",
+      "sandbox_path": "/home/user/workspace/StrictMode/.settings/org.eclipse.jdt.core.prefs",
+      "type": "prefs"
+    },
+    {
+      "filename": "StrictMode/src/strict/Main.java",
+      "sandbox_path": "/home/user/workspace/StrictMode/src/strict/Main.java",
+      "type": "java"
+    }
+  ]
+}

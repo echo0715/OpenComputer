@@ -1,0 +1,104 @@
+{
+  "id": "gedit_yaml_k8s_deployment",
+  "app": "gedit",
+  "task": "/home/user/Documents/deployment.yaml is a partial Kubernetes Deployment manifest with several `TODO` placeholders.\n\nEdit the file in place so that:\n- `replicas: TODO` becomes `replicas: 3`\n- `image: TODO` becomes `image: nginx:1.25-alpine`\n- `containerPort: TODO` becomes `containerPort: 80`\n- The `# TODO: add resources block here` comment is replaced with a real resources block under the container, using exactly this structure and indentation (YAML is indentation-sensitive):\n\n  ```\n          resources:\n            limits:\n              cpu: 500m\n              memory: 256Mi\n            requests:\n              cpu: 250m\n              memory: 128Mi\n  ```\n\n- No `TODO` placeholders remain anywhere in the file.\n- The `apiVersion: apps/v1`, `kind: Deployment`, `metadata`, and `selector` sections are not modified and must still be present.\n\nThe file path must remain /home/user/Documents/deployment.yaml.",
+  "env": {
+    "files": [
+      {
+        "filename": "deployment.yaml",
+        "sandbox_path": "/home/user/Documents/deployment.yaml"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/deployment.yaml",
+      "key": "exists",
+      "expected": true,
+      "description": "deployment.yaml exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"apiVersion: apps/v1\"",
+      "key": "contains",
+      "expected": true,
+      "description": "apiVersion preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"kind: Deployment\"",
+      "key": "contains",
+      "expected": true,
+      "description": "kind preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"replicas: 3\"",
+      "key": "contains",
+      "expected": true,
+      "description": "replicas set to 3"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"image: nginx:1.25-alpine\"",
+      "key": "contains",
+      "expected": true,
+      "description": "image set to nginx:1.25-alpine"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"containerPort: 80\"",
+      "key": "contains",
+      "expected": true,
+      "description": "containerPort set to 80"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"resources:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "resources block added"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"limits:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "limits sub-block added"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"requests:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "requests sub-block added"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"cpu: 500m\"",
+      "key": "contains",
+      "expected": true,
+      "description": "CPU limit set"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"memory: 256Mi\"",
+      "key": "contains",
+      "expected": true,
+      "description": "memory limit set"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"cpu: 250m\"",
+      "key": "contains",
+      "expected": true,
+      "description": "CPU request set"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/deployment.yaml \"memory: 128Mi\"",
+      "key": "contains",
+      "expected": true,
+      "description": "memory request set"
+    },
+    {
+      "command": "file-content /home/user/Documents/deployment.yaml",
+      "eval": "'TODO' not in result.get('content', '')",
+      "description": "No TODO placeholders remain"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

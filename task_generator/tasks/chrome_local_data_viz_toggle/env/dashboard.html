@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Analytics Dashboard</title>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 20px; }
+  h1 { margin-top: 0; }
+  .controls { margin-bottom: 16px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chart { border: 1px solid #ccc; padding: 12px; min-height: 140px; background: #fafafa; border-radius: 6px; display: none; }
+  .chart.visible { display: block; }
+  .chart h3 { margin: 0 0 6px; }
+  .bars { display: flex; gap: 6px; align-items: flex-end; height: 80px; }
+  .bar { width: 24px; background: steelblue; }
+  #legend { margin-top: 12px; font-size: 13px; }
+  #legend span { display: inline-block; margin-right: 10px; padding: 2px 8px; background: #e3efff; border-radius: 3px; }
+</style>
+</head>
+<body>
+<h1>Analytics Dashboard</h1>
+<div class="controls">
+  <label><input type="checkbox" id="chart-bar"> Bar</label>
+  <label><input type="checkbox" id="chart-line"> Line</label>
+  <label><input type="checkbox" id="chart-pie"> Pie</label>
+  <label><input type="checkbox" id="chart-area"> Area</label>
+  <label>Series:
+    <select id="series">
+      <option value="Q1 2024">Q1 2024</option>
+      <option value="Q2 2024">Q2 2024</option>
+      <option value="Q3 2024">Q3 2024</option>
+    </select>
+  </label>
+</div>
+<div class="charts">
+  <div class="chart" data-type="bar">
+    <h3 id="bar-title">Revenue</h3>
+    <div class="bars" id="bars"></div>
+  </div>
+  <div class="chart" data-type="line">
+    <h3 id="line-title">Trend</h3>
+    <div id="line-body">Line chart placeholder</div>
+  </div>
+  <div class="chart" data-type="pie">
+    <h3 id="pie-title">Share</h3>
+    <div id="pie-body">Pie chart placeholder</div>
+  </div>
+  <div class="chart" data-type="area">
+    <h3 id="area-title">Cumulative</h3>
+    <div id="area-body">Area chart placeholder</div>
+  </div>
+</div>
+<div id="legend"></div>
+<script>
+  const data = {
+    "Q1 2024": { values: [10, 14, 18, 20, 16], regions: ["Region A", "Region B"] },
+    "Q2 2024": { values: [12, 16, 22, 25, 19], regions: ["Region A", "Region C"] },
+    "Q3 2024": { values: [15, 19, 24, 28, 22], regions: ["Region A", "Region D"] }
+  };
+  function update() {
+    const s = document.getElementById("series").value;
+    document.getElementById("bar-title").textContent = s + " Revenue";
+    document.getElementById("line-title").textContent = s + " Trend";
+    document.getElementById("pie-title").textContent = s + " Share";
+    document.getElementById("area-title").textContent = s + " Cumulative";
+
+    const bars = document.getElementById("bars");
+    bars.innerHTML = "";
+    for (const v of data[s].values) {
+      const b = document.createElement("div");
+      b.className = "bar";
+      b.style.height = (v * 4) + "px";
+      bars.appendChild(b);
+    }
+
+    const leg = document.getElementById("legend");
+    leg.innerHTML = "";
+    for (const r of data[s].regions) {
+      const sp = document.createElement("span");
+      sp.textContent = r;
+      leg.appendChild(sp);
+    }
+
+    for (const t of ["bar", "line", "pie", "area"]) {
+      const cb = document.getElementById("chart-" + t);
+      const card = document.querySelector('.chart[data-type="' + t + '"]');
+      card.classList.toggle("visible", cb.checked);
+    }
+  }
+  document.getElementById("series").onchange = update;
+  for (const t of ["bar", "line", "pie", "area"]) {
+    document.getElementById("chart-" + t).onchange = update;
+  }
+  update();
+</script>
+</body>
+</html>

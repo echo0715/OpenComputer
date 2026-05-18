@@ -1,0 +1,27 @@
+{
+  "id": "godot4_gap_area2d_with_collision",
+  "app": "godot4",
+  "task": "Edit the Godot project at /home/user/godot_projects/area2d_game/.\n\n1. In /home/user/godot_projects/area2d_game/main.tscn add:\n   - An Area2D node named 'Trigger' as a child of the Root node.\n   - A CollisionShape2D named 'Hitbox' as a child of Trigger.\n   - An embedded [sub_resource type=\"RectangleShape2D\" id=\"TriggerShape\"] with size = Vector2(64, 64).\n   - Set Hitbox's shape property to SubResource(\"TriggerShape\").\n   - Add a [connection] block wiring Trigger's 'body_entered' signal to the Root node method '_on_trigger_body_entered':\n\n   [connection signal=\"body_entered\" from=\"Trigger\" to=\".\" method=\"_on_trigger_body_entered\"]\n\n2. In /home/user/godot_projects/area2d_game/scripts/root.gd (extends Node2D), define:\n\nfunc _on_trigger_body_entered(body: Node) -> void:\n\tprint(\"Body entered: \", body.name)\n\nSave both files.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/area2d_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/area2d_game/main.tscn"},
+      {"filename": "scripts/root.gd", "sandbox_path": "/home/user/godot_projects/area2d_game/scripts/root.gd"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/area2d_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-node-exists /home/user/godot_projects/area2d_game/main.tscn Trigger", "key": "exists", "expected": true, "description": "Trigger node exists"},
+    {"command": "check-node-type /home/user/godot_projects/area2d_game/main.tscn Trigger Area2D", "key": "match", "expected": true, "description": "Trigger is Area2D"},
+    {"command": "check-node-exists /home/user/godot_projects/area2d_game/main.tscn Hitbox", "key": "exists", "expected": true, "description": "Hitbox node exists"},
+    {"command": "check-node-type /home/user/godot_projects/area2d_game/main.tscn Hitbox CollisionShape2D", "key": "match", "expected": true, "description": "Hitbox is CollisionShape2D"},
+    {"command": "check-node-parent /home/user/godot_projects/area2d_game/main.tscn Hitbox Trigger", "key": "match", "expected": true, "description": "Hitbox is child of Trigger"},
+    {"command": "check-file-contains /home/user/godot_projects/area2d_game/main.tscn RectangleShape2D", "key": "contains", "expected": true, "description": "RectangleShape2D sub_resource present"},
+    {"command": "check-file-contains /home/user/godot_projects/area2d_game/main.tscn Vector2", "key": "contains", "expected": true, "description": "Vector2 size value present"},
+    {"command": "check-file-contains /home/user/godot_projects/area2d_game/main.tscn body_entered", "key": "contains", "expected": true, "description": "body_entered connection present"},
+    {"command": "check-file-contains /home/user/godot_projects/area2d_game/main.tscn _on_trigger_body_entered", "key": "contains", "expected": true, "description": "connection targets _on_trigger_body_entered"},
+    {"command": "check-script-func /home/user/godot_projects/area2d_game/scripts/root.gd _on_trigger_body_entered", "key": "exists", "expected": true, "description": "_on_trigger_body_entered defined"},
+    {"command": "check-script-extends /home/user/godot_projects/area2d_game/scripts/root.gd Node2D", "key": "match", "expected": true, "description": "root.gd extends Node2D"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 5}
+}

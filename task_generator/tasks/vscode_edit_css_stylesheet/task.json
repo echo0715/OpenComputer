@@ -1,0 +1,63 @@
+{
+  "id": "vscode_edit_css_stylesheet",
+  "app": "vscode",
+  "task": "Edit `/home/user/Documents/styles.css` so it contains the following CSS rules:\n\n- `body` — `background-color: #f0f0f0;` and `font-family: Arial, sans-serif;`\n- `.container` — `max-width: 1200px;` and `margin: 0 auto;`\n- `.header` — `background-color: #333333;`, `color: #ffffff;`, and `padding: 20px;`\n- `.footer` — `text-align: center;` and `padding: 10px;`",
+  "env": {
+    "files": [
+      {
+        "filename": "styles.css",
+        "sandbox_path": "/home/user/Documents/styles.css"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/styles.css",
+      "key": "exists",
+      "expected": true,
+      "description": "styles.css exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/styles.css background-color",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains background-color"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/styles.css #f0f0f0",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains body background color"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/styles.css .container",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains .container rule"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/styles.css 1200px",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains max-width value"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/styles.css .header",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains .header rule"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/styles.css .footer",
+      "key": "contains",
+      "expected": true,
+      "description": "file contains .footer rule"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

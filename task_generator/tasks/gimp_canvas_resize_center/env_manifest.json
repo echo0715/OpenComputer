@@ -1,0 +1,6 @@
+{
+  "task_id": "gimp_canvas_resize_center",
+  "files": [
+    {"filename": "small_icon.png", "sandbox_path": "/home/user/Documents/small_icon.png", "type": "png"}
+  ]
+}

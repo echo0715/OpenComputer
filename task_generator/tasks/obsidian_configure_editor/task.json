@@ -1,0 +1,52 @@
+{
+  "id": "obsidian_configure_editor",
+  "app": "obsidian",
+  "task": "In the Obsidian vault at /home/user/Documents/EditorVault, configure these editor settings:\n- Enable `spellcheck` ('Spell check')\n- Enable `strictLineBreaks` ('Strict line breaks')\n- Disable `readableLineLength` ('Readable line length')\n- Enable `foldHeading` ('Fold heading')\n- Enable `foldIndent` ('Fold indent')\n- Enable `showLineNumber` ('Show line number')",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting /home/user/Documents/EditorVault spellcheck true",
+      "key": "match",
+      "expected": true,
+      "description": "Spellcheck enabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/EditorVault strictLineBreaks true",
+      "key": "match",
+      "expected": true,
+      "description": "Strict line breaks enabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/EditorVault readableLineLength false",
+      "key": "match",
+      "expected": true,
+      "description": "Readable line length disabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/EditorVault foldHeading true",
+      "key": "match",
+      "expected": true,
+      "description": "Fold heading enabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/EditorVault foldIndent true",
+      "key": "match",
+      "expected": true,
+      "description": "Fold indent enabled"
+    },
+    {
+      "command": "check-setting /home/user/Documents/EditorVault showLineNumber true",
+      "key": "match",
+      "expected": true,
+      "description": "Show line number enabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

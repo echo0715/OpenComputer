@@ -1,0 +1,22 @@
+{
+  "id": "godot4_gap_animation_player_fade",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/anim_fade_game/main.tscn. The scene currently contains a Node2D root named 'Root' and a Sprite2D child named 'Sprite2D'.\n\nAdd an AnimationPlayer node named 'AnimationPlayer' as a child of Root, plus an embedded Animation sub_resource named 'fade_in' (length 1.0 seconds) that animates the Sprite2D's 'modulate:a' property from 0.0 at time 0 to 1.0 at time 1.0. Wire the animation into an AnimationLibrary sub_resource and assign it to the AnimationPlayer's 'libraries' property under the empty library name \"\".\n\nThe scene must include these text fragments exactly:\n\n[sub_resource type=\"Animation\" id=\"Anim_fade\"]\nresource_name = \"fade_in\"\nlength = 1.0\ntracks/0/path = NodePath(\"Sprite2D:modulate:a\")\n\n[sub_resource type=\"AnimationLibrary\" id=\"AnimLib_1\"]\n\n[node name=\"AnimationPlayer\" type=\"AnimationPlayer\" parent=\".\"]\n\nSave the file.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/anim_fade_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/anim_fade_game/main.tscn"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/anim_fade_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-node-exists /home/user/godot_projects/anim_fade_game/main.tscn AnimationPlayer", "key": "exists", "expected": true, "description": "AnimationPlayer node exists"},
+    {"command": "check-node-type /home/user/godot_projects/anim_fade_game/main.tscn AnimationPlayer AnimationPlayer", "key": "match", "expected": true, "description": "AnimationPlayer node type"},
+    {"command": "check-node-parent /home/user/godot_projects/anim_fade_game/main.tscn AnimationPlayer .", "key": "match", "expected": true, "description": "AnimationPlayer under root"},
+    {"command": "check-file-contains /home/user/godot_projects/anim_fade_game/main.tscn \"Animation\"", "key": "contains", "expected": true, "description": "Animation sub_resource type present"},
+    {"command": "check-file-contains /home/user/godot_projects/anim_fade_game/main.tscn \"fade_in\"", "key": "contains", "expected": true, "description": "animation named fade_in"},
+    {"command": "check-file-contains /home/user/godot_projects/anim_fade_game/main.tscn Sprite2D:modulate:a", "key": "contains", "expected": true, "description": "track path targets Sprite2D modulate alpha"},
+    {"command": "check-file-contains /home/user/godot_projects/anim_fade_game/main.tscn AnimationLibrary", "key": "contains", "expected": true, "description": "AnimationLibrary sub_resource exists"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 5}
+}

@@ -1,0 +1,23 @@
+{
+  "id": "pcmanfm_view_mode_list_sort_name",
+  "app": "pcmanfm",
+  "task": "Configure PCManFM's preferences so the file manager uses list view by default, sorts files by name in ascending order, and shows hidden files. The underlying INI config ~/.config/pcmanfm/default/pcmanfm.conf must have (in the [ui] section): view_mode=list, sort_type=name, sort_order=ascending, show_hidden=1. After changing preferences, create a demo directory /home/user/Documents/preferences_demo/ containing two files: README.md with content 'Preferences configured' and .hidden_note with content 'hidden'. The demo directory must contain exactly 2 entries (counting hidden files).",
+  "env": {"files": []},
+  "verification": [
+    {"command": "check-config-value ui view_mode list", "key": "match", "expected": true, "description": "view mode set to list"},
+    {"command": "check-config-value ui sort_type name", "key": "match", "expected": true, "description": "sort type is name"},
+    {"command": "check-config-value ui sort_order ascending", "key": "match", "expected": true, "description": "sort order ascending"},
+    {"command": "check-config-value ui show_hidden 1", "key": "match", "expected": true, "description": "show hidden enabled"},
+    {"command": "check-dir-exists /home/user/Documents/preferences_demo", "key": "exists", "expected": true, "description": "preferences_demo directory exists"},
+    {"command": "check-file-exists /home/user/Documents/preferences_demo/README.md", "key": "exists", "expected": true, "description": "README.md exists"},
+    {"command": "check-file-contains /home/user/Documents/preferences_demo/README.md Preferences", "key": "contains", "expected": true, "description": "README.md contains expected content"},
+    {"command": "check-file-exists /home/user/Documents/preferences_demo/.hidden_note", "key": "exists", "expected": true, "description": ".hidden_note exists"},
+    {"command": "check-file-count /home/user/Documents/preferences_demo 2 --hidden", "key": "match", "expected": true, "description": "preferences_demo has exactly 2 entries counting hidden"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

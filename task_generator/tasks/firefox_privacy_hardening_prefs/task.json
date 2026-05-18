@@ -1,0 +1,52 @@
+{
+  "id": "firefox_privacy_hardening_prefs",
+  "app": "firefox",
+  "task": "Configure these five Firefox privacy preferences so they persist:\n- `privacy.donottrackheader.enabled` -> true\n- `network.cookie.cookieBehavior` -> 1\n- `privacy.trackingprotection.enabled` -> true\n- `geo.enabled` -> false\n- `media.peerconnection.enabled` -> false\n\nThen navigate to https://example.com to confirm the browser still loads pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-pref privacy.donottrackheader.enabled true",
+      "key": "match",
+      "expected": true,
+      "description": "privacy.donottrackheader.enabled is true"
+    },
+    {
+      "command": "check-pref network.cookie.cookieBehavior 1",
+      "key": "match",
+      "expected": true,
+      "description": "network.cookie.cookieBehavior is 1 (block third-party cookies)"
+    },
+    {
+      "command": "check-pref privacy.trackingprotection.enabled true",
+      "key": "match",
+      "expected": true,
+      "description": "privacy.trackingprotection.enabled is true"
+    },
+    {
+      "command": "check-pref geo.enabled false",
+      "key": "match",
+      "expected": true,
+      "description": "geo.enabled is false"
+    },
+    {
+      "command": "check-pref media.peerconnection.enabled false",
+      "key": "match",
+      "expected": true,
+      "description": "media.peerconnection.enabled is false"
+    },
+    {
+      "command": "check-url-visited example.com",
+      "key": "visited",
+      "expected": true,
+      "description": "example.com was visited after pref changes"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

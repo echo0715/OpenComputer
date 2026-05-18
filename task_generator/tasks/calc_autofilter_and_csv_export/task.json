@@ -1,0 +1,80 @@
+{
+  "id": "calc_autofilter_and_csv_export",
+  "app": "libreoffice_calc",
+  "task": "Open /home/user/Documents/employees.xlsx in LibreOffice Calc. The 'Employees' sheet has bold headers in row 1 (A='EmployeeID', B='Name', C='Department', D='Salary', E='HireDate') and 20 employees in rows 2-21; exactly 5 of them have Salary > 80000.\n\nDo all of the following:\n- On the 'Employees' sheet, enable AutoFilter so filter dropdowns appear on the header row.\n- On the 'Employees' sheet, freeze the top row so row 1 stays visible while scrolling.\n- Add a new sheet named exactly 'HighEarners'. Copy the header row from Employees A1:E1 into HighEarners A1:E1, then copy every employee row with Salary (column D) > 80000 into HighEarners starting at row 2. HighEarners must have exactly 5 data rows (rows 2-6).\n- Save the HighEarners sheet as a CSV at /home/user/Documents/high_earners.csv. The CSV must have exactly 6 lines (1 header + 5 data rows), be UTF-8 encoded, and use comma as the field separator.\n- Save the original .xlsx back to /home/user/Documents/employees.xlsx.",
+  "env": {
+    "files": [
+      {
+        "filename": "employees.xlsx",
+        "sandbox_path": "/home/user/Documents/employees.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-sheet-exists Employees",
+      "key": "exists",
+      "expected": true,
+      "description": "'Employees' sheet exists"
+    },
+    {
+      "command": "check-autofilter Employees",
+      "key": "match",
+      "expected": true,
+      "description": "AutoFilter enabled on Employees"
+    },
+    {
+      "command": "check-frozen-rows 1 Employees",
+      "key": "match",
+      "expected": true,
+      "description": "First row frozen on Employees"
+    },
+    {
+      "command": "check-sheet-exists HighEarners",
+      "key": "exists",
+      "expected": true,
+      "description": "'HighEarners' sheet exists"
+    },
+    {
+      "command": "check-cell-value A1 EmployeeID HighEarners",
+      "key": "match",
+      "expected": true,
+      "description": "HighEarners!A1 = 'EmployeeID'"
+    },
+    {
+      "command": "check-cell-value D1 Salary HighEarners",
+      "key": "match",
+      "expected": true,
+      "description": "HighEarners!D1 = 'Salary'"
+    },
+    {
+      "command": "range-values A2:D6 HighEarners",
+      "eval": "len(result.get('data', [])) == 5 and all(isinstance(row[3], (int, float)) and row[3] > 80000 for row in result.get('data', []))",
+      "description": "HighEarners A2:D6 has 5 rows, all with Salary > 80000"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/high_earners.csv",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported CSV file exists"
+    },
+    {
+      "command": "check-csv-rows /home/user/Documents/high_earners.csv 5 true",
+      "key": "match",
+      "expected": true,
+      "description": "CSV has 5 data rows (plus header)"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/employees.xlsx",
+      "key": "exists",
+      "expected": true,
+      "description": "Original .xlsx file still saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

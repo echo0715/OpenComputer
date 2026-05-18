@@ -1,0 +1,87 @@
+{
+  "id": "obs_consolidate_into_single_scene",
+  "app": "obs",
+  "task": "OBS Studio is open with a scene collection that already contains three scenes, each with one source:\n- 'Cam A' containing source 'Webcam A'\n- 'Cam B' containing source 'Webcam B'\n- 'Graphics' containing source 'Lower Third'\n\nConsolidate everything into a single new scene named exactly 'Unified' that contains three sources with these exact names: 'Webcam A', 'Webcam B', 'Lower Third' (any source type — only names matter). Delete the three original scenes. The final collection must have exactly 1 scene ('Unified') containing those three sources, all visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "scene_collection.json",
+        "sandbox_path": "/home/user/.config/obs-studio/basic/scenes/Untitled.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Unified",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Unified' exists"
+    },
+    {
+      "command": "check-scene-exists 'Cam A'",
+      "key": "exists",
+      "expected": false,
+      "description": "Original 'Cam A' deleted"
+    },
+    {
+      "command": "check-scene-exists 'Cam B'",
+      "key": "exists",
+      "expected": false,
+      "description": "Original 'Cam B' deleted"
+    },
+    {
+      "command": "check-scene-exists Graphics",
+      "key": "exists",
+      "expected": false,
+      "description": "Original 'Graphics' deleted"
+    },
+    {
+      "command": "check-scene-count 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 1 scene"
+    },
+    {
+      "command": "check-source-in-scene 'Webcam A' Unified",
+      "key": "exists",
+      "expected": true,
+      "description": "'Webcam A' in 'Unified'"
+    },
+    {
+      "command": "check-source-in-scene 'Webcam B' Unified",
+      "key": "exists",
+      "expected": true,
+      "description": "'Webcam B' in 'Unified'"
+    },
+    {
+      "command": "check-source-in-scene 'Lower Third' Unified",
+      "key": "exists",
+      "expected": true,
+      "description": "'Lower Third' in 'Unified'"
+    },
+    {
+      "command": "check-source-visible 'Webcam A'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Webcam A' visible"
+    },
+    {
+      "command": "check-source-visible 'Webcam B'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Webcam B' visible"
+    },
+    {
+      "command": "check-source-visible 'Lower Third'",
+      "key": "visible",
+      "expected": true,
+      "description": "'Lower Third' visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

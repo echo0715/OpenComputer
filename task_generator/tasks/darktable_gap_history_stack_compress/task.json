@@ -1,0 +1,56 @@
+{
+  "id": "darktable_gap_history_stack_compress",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/history_source.jpg into the darktable library.\n\nEnable the 'exposure' module, then 'color balance rgb' (internally 'colorbalancergb'), then 'filmic rgb', and then compress the history stack so the history is flattened. Apply the tag 'compressed_history' to the image and set its star rating to 5 stars.",
+  "env": {
+    "files": [
+      {
+        "filename": "history_source.jpg",
+        "sandbox_path": "/home/user/Pictures/history_source.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported history_source.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation history_source.jpg exposure",
+      "key": "has_operation",
+      "expected": true,
+      "description": "exposure still present after compress"
+    },
+    {
+      "command": "check-db-has-operation history_source.jpg colorbalancergb",
+      "key": "has_operation",
+      "expected": true,
+      "description": "color balance rgb present"
+    },
+    {
+      "command": "check-db-has-operation history_source.jpg filmicrgb",
+      "key": "has_operation",
+      "expected": true,
+      "description": "filmic rgb present"
+    },
+    {
+      "command": "check-image-tagged-by-filename history_source.jpg compressed_history",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged compressed_history"
+    },
+    {
+      "command": "check-image-rating-by-filename history_source.jpg 5",
+      "key": "matches",
+      "expected": true,
+      "description": "rating is 5"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

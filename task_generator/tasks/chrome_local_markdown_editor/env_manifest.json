@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_markdown_editor",
+  "files": [
+    {
+      "filename": "md_editor.html",
+      "sandbox_path": "/home/user/Documents/md_editor.html",
+      "type": "html"
+    }
+  ]
+}

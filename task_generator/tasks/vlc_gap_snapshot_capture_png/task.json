@@ -1,0 +1,18 @@
+{
+  "id": "vlc_gap_snapshot_capture_png",
+  "app": "vlc",
+  "task": "Configure VLC's video snapshot settings so that snapshots are saved to /home/user/Pictures with the filename prefix 'vlcsnap' and PNG format (snapshot-path = /home/user/Pictures, snapshot-prefix = vlcsnap, snapshot-format = png). Save preferences so they persist in ~/.config/vlc/vlcrc, then play /home/user/Videos/sample.mp4.",
+  "env": {
+    "files": [
+      {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/Videos/sample.mp4", "key": "exists", "expected": true, "description": "sample.mp4 is present"},
+    {"command": "check-config snapshot-path /home/user/Pictures", "key": "match", "expected": true, "description": "Snapshot path is /home/user/Pictures"},
+    {"command": "check-config snapshot-prefix vlcsnap", "key": "match", "expected": true, "description": "Snapshot prefix is vlcsnap"},
+    {"command": "check-config snapshot-format png", "key": "match", "expected": true, "description": "Snapshot format is png"},
+    {"command": "check-media-loaded sample.mp4", "key": "loaded", "expected": true, "description": "sample.mp4 is playing"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "estimated_difficulty": 5}
+}

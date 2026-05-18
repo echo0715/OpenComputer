@@ -1,0 +1,67 @@
+{
+  "id": "brave_form_multistep_validation",
+  "app": "brave",
+  "task": "In Brave, open the pizza order form at https://httpbin.org/forms/post and fill in these exact field values, but do NOT submit the form:\n- `input[name='custname']` = `Elena Rodriguez`\n- `input[name='custtel']` = `4155550199`\n- `input[name='custemail']` = `elena@example.org`\n- `input[name='size'][value='large']` checked (Large radio selected)\n- `input[name='topping'][value='bacon']` checked\n- `input[name='topping'][value='cheese']` checked (Extra Cheese)\n- `input[name='topping'][value='mushroom']` checked\n- `input[name='topping'][value='onion']` NOT checked\n- `textarea[name='delivery']` = `Please ring bell twice — nut allergy in household` (must contain the word `allergy`)\n\nThe https://httpbin.org/forms/post tab must remain open with all values present in the form fields and the form un-submitted.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open httpbin.org/forms/post",
+      "key": "found",
+      "expected": true,
+      "description": "Pizza order form page is open in a tab"
+    },
+    {
+      "command": "input \"input[name='custname']\"",
+      "eval": "result.get('value') == 'Elena Rodriguez'",
+      "description": "Customer name field value is 'Elena Rodriguez'"
+    },
+    {
+      "command": "input \"input[name='custtel']\"",
+      "eval": "result.get('value') == '4155550199'",
+      "description": "Telephone field value is '4155550199'"
+    },
+    {
+      "command": "input \"input[name='custemail']\"",
+      "eval": "result.get('value') == 'elena@example.org'",
+      "description": "Email field value is 'elena@example.org'"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=size][value=large]').checked\"",
+      "eval": "result.get('value') == True or result.get('value') == 'true'",
+      "description": "Pizza size radio 'large' is selected"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=topping][value=bacon]').checked\"",
+      "eval": "result.get('value') == True or result.get('value') == 'true'",
+      "description": "Topping 'bacon' checkbox is checked"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=topping][value=cheese]').checked\"",
+      "eval": "result.get('value') == True or result.get('value') == 'true'",
+      "description": "Topping 'cheese' (extra cheese) checkbox is checked"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=topping][value=mushroom]').checked\"",
+      "eval": "result.get('value') == True or result.get('value') == 'true'",
+      "description": "Topping 'mushroom' checkbox is checked"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=topping][value=onion]').checked\"",
+      "eval": "result.get('value') == False or result.get('value') == 'false'",
+      "description": "Topping 'onion' checkbox is NOT checked"
+    },
+    {
+      "command": "input \"textarea[name='delivery']\"",
+      "eval": "'allergy' in (result.get('value') or '').lower()",
+      "description": "Delivery instructions textarea contains the word 'allergy'"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "obs_gap_hotkeys_scene_switch",
+  "app": "obs",
+  "task": "Configure custom hotkeys in OBS Studio. Two scenes named exactly 'Intro' and 'Main' must exist (a default 'Scene' may remain or be removed — it is not checked).\n\nSet these hotkeys:\n- 'Switch to scene' for 'Intro' = F1\n- 'Switch to scene' for 'Main' = F2\n- Mute the default 'Desktop Audio' source = Ctrl+M\n\nPersist the changes to the OBS configuration.",
+  "env": {
+    "files": [
+      {
+        "filename": ".keep",
+        "sandbox_path": "/home/user/Documents/.obs_hotkey_task"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Intro",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Intro' exists"
+    },
+    {
+      "command": "check-scene-exists Main",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Main' exists"
+    },
+    {
+      "command": "source-hotkeys Intro",
+      "eval": "any(b.get('key') == 'OBS_KEY_F1' for b in (result.get('hotkeys', {}) or {}).get('OBSBasic.SelectScene', []))",
+      "expected": true,
+      "description": "Hotkey F1 bound to switch to 'Intro'"
+    },
+    {
+      "command": "source-hotkeys Main",
+      "eval": "any(b.get('key') == 'OBS_KEY_F2' for b in (result.get('hotkeys', {}) or {}).get('OBSBasic.SelectScene', []))",
+      "expected": true,
+      "description": "Hotkey F2 bound to switch to 'Main'"
+    },
+    {
+      "command": "source-hotkeys 'Desktop Audio'",
+      "eval": "any(b.get('key') == 'OBS_KEY_M' and b.get('control') for b in (result.get('hotkeys', {}) or {}).get('libobs.mute', []))",
+      "expected": true,
+      "description": "Ctrl+M mutes Desktop Audio"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

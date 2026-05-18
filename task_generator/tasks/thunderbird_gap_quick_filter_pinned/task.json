@@ -1,0 +1,51 @@
+{
+  "id": "thunderbird_gap_quick_filter_pinned",
+  "app": "thunderbird",
+  "task": "Configure Thunderbird's message-list view defaults so that:\n- `mail.quickFilter.showToolbar` = `true` (Quick Filter bar shown).\n- `mail.quickFilter.sticky` = `true` (Unread/Starred quick filter buttons sticky across folder changes).\n- `mailnews.default_sort_type` = `18` (sort by Date) and `mailnews.default_sort_order` = `2` (descending).\n- `mailnews.default_view_flags` = `1` (Grouped By Sort).",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.quickFilter.showToolbar true",
+      "key": "match",
+      "expected": true,
+      "description": "Quick Filter bar is shown by default"
+    },
+    {
+      "command": "check-pref-value mail.quickFilter.sticky true",
+      "key": "match",
+      "expected": true,
+      "description": "Quick Filter sticky mode is enabled"
+    },
+    {
+      "command": "check-pref-value mailnews.default_sort_type 18",
+      "key": "match",
+      "expected": true,
+      "description": "Default sort type is Date (18)"
+    },
+    {
+      "command": "check-pref-value mailnews.default_sort_order 2",
+      "key": "match",
+      "expected": true,
+      "description": "Default sort order is descending (2)"
+    },
+    {
+      "command": "check-pref-value mailnews.default_view_flags 1",
+      "key": "match",
+      "expected": true,
+      "description": "Default view is Grouped By Sort (1)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,30 @@
+2024-03-11 08:00:01 INFO  [main] Server starting on port 8080
+2024-03-11 08:00:02 INFO  [main] Loading configuration
+2024-03-11 08:00:03 DEBUG [db] Connecting to database
+2024-03-11 08:00:05 ERROR [db] Connection timeout after 5000ms
+2024-03-11 08:00:06 INFO  [db] Retrying database connection
+2024-03-11 08:00:08 INFO  [db] Connected successfully
+2024-03-11 08:00:10 DEBUG [auth] Loading user sessions
+2024-03-11 08:00:11 WARN  [auth] Expired session cleanup skipped
+2024-03-11 08:00:13 INFO  [http] HTTP listener started
+2024-03-11 08:00:14 ERROR [http] Failed to bind SSL certificate
+2024-03-11 08:00:15 INFO  [http] Falling back to HTTP-only
+2024-03-11 08:00:20 DEBUG [cache] Cache initialized with 64MB
+2024-03-11 08:00:22 ERROR [cache] Redis handshake failed
+2024-03-11 08:00:25 WARN  [cache] Using in-memory fallback
+2024-03-11 08:00:30 INFO  [worker] Worker pool started with 8 threads
+2024-03-11 08:00:35 ERROR [worker] Uncaught exception in worker-3
+2024-03-11 08:00:40 INFO  [http] First client request received
+2024-03-11 08:00:41 DEBUG [http] GET /api/status from 10.0.1.5
+2024-03-11 08:00:45 ERROR [api] NullPointerException in UserService.findById
+2024-03-11 08:00:50 INFO  [api] Returned 500 to client
+2024-03-11 08:01:00 WARN  [monitor] CPU usage above 80 percent
+2024-03-11 08:01:10 ERROR [monitor] Memory threshold breached 4096MB
+2024-03-11 08:01:15 INFO  [monitor] Triggering garbage collection
+2024-03-11 08:01:20 DEBUG [gc] Full GC completed in 234ms
+2024-03-11 08:01:30 INFO  [http] Heartbeat from client 10.0.1.7
+2024-03-11 08:01:40 ERROR [queue] Dead letter queue threshold exceeded
+2024-03-11 08:01:50 WARN  [queue] Throttling producers
+2024-03-11 08:02:00 INFO  [main] Status report: 98 active sessions
+2024-03-11 08:02:10 ERROR [scheduler] Cron job backup-db failed
+2024-03-11 08:02:20 INFO  [main] Shutdown signal received

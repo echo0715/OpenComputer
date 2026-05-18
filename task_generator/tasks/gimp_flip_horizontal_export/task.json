@@ -1,0 +1,45 @@
+{
+  "id": "gimp_flip_horizontal_export",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/arrow.png in GIMP — a 400x200 image with a red left half and a green right half.\n\nFlip the image horizontally so the green half is now on the left and the red half is on the right, then export the result as PNG to /home/user/Documents/arrow_flipped.png. The output must remain 400x200 pixels.",
+  "env": {
+    "files": [
+      {
+        "filename": "arrow.png",
+        "sandbox_path": "/home/user/Documents/arrow.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/arrow_flipped.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported flipped PNG file exists"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/arrow_flipped.png 400 200",
+      "key": "match",
+      "expected": true,
+      "description": "Image dimensions are 400x200 pixels"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/arrow_flipped.png 50 100 0 255 0",
+      "key": "match",
+      "expected": true,
+      "description": "Left side pixel is green after horizontal flip (was red before)"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/arrow_flipped.png 350 100 255 0 0",
+      "key": "match",
+      "expected": true,
+      "description": "Right side pixel is red after horizontal flip (was green before)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

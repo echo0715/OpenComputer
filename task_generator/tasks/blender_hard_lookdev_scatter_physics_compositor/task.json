@@ -1,0 +1,167 @@
+{
+  "id": "blender_hard_lookdev_scatter_physics_compositor",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/lookdev_scene.blend, build a lookdev scene that combines geometry-nodes scattering, a rigid-body stack, PBR materials, and a compositor post-effects chain. Delete the default Cube.\n\nObjects:\n- Plane 'Ground' at the origin, scale 10 on X and Y\n- Ico Sphere 'Pebble' (small, viewport visibility disabled)\n- Cubes 'Brick.001', 'Brick.002', 'Brick.003' at z = 2, 3, 4 respectively\n\nGeometry nodes: a modifier named 'Scatter' on 'Ground' whose node group is wired Group Input (Geometry) -> Distribute Points on Faces (Density = 25) -> Instance on Points (Instance input = 'Pebble' object via an Object Info node) -> Group Output (Geometry).\n\nRigid bodies:\n- 'Ground' = PASSIVE\n- 'Brick.001', 'Brick.002', 'Brick.003' = ACTIVE, each with mass = 1.5\n- Scene gravity = (0, 0, -9.81)\n- Rigid Body World exists with cache frame_start = 1, frame_end = 120\n\nMaterials:\n- 'GoldMat' (assigned to 'Brick.001'): Principled BSDF with Base Color = (1.0, 0.78, 0.34, 1.0), Metallic = 1.0, Roughness = 0.25.\n- 'GlassMat' (assigned to 'Brick.002'): Glass BSDF (not Principled) with Color = (0.9, 0.95, 1.0, 1.0), IOR = 1.52, output wired into Material Output Surface.\n\nRender settings: Engine = CYCLES, resolution = 1280 x 720, scene frame_end = 120.\n\nCompositor: Enable 'Use Nodes'. Build the chain: Render Layers Image -> Glare (type FOG_GLOW) -> Blur (type GAUSS, Size X = 5, Size Y = 5) -> Composite Image; also wire Glare Image -> Viewer Image.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "lookdev_scene.blend",
+        "sandbox_path": "/home/user/Documents/lookdev_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/lookdev_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lookdev_scene.blend Ground",
+      "key": "exists",
+      "expected": true,
+      "description": "Ground plane exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lookdev_scene.blend Pebble",
+      "key": "exists",
+      "expected": true,
+      "description": "Pebble exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lookdev_scene.blend Brick.001",
+      "key": "exists",
+      "expected": true,
+      "description": "Brick.001 exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lookdev_scene.blend Brick.002",
+      "key": "exists",
+      "expected": true,
+      "description": "Brick.002 exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lookdev_scene.blend Brick.003",
+      "key": "exists",
+      "expected": true,
+      "description": "Brick.003 exists"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/lookdev_scene.blend Ground NODES",
+      "key": "exists",
+      "expected": true,
+      "description": "Ground has a Geometry Nodes modifier"
+    },
+    {
+      "command": "geometry-nodes /home/user/Documents/lookdev_scene.blend Ground",
+      "eval": "any({n.get('type') for n in m.get('nodes',[])} >= {'DISTRIBUTE_POINTS_ON_FACES','INSTANCE_ON_POINTS'} for m in result.get('geometry_modifiers',[]))",
+      "description": "Geometry nodes graph has Distribute Points on Faces + Instance on Points"
+    },
+    {
+      "command": "geometry-nodes /home/user/Documents/lookdev_scene.blend Ground",
+      "eval": "any(any(n.get('type')=='DISTRIBUTE_POINTS_ON_FACES' and abs(float(n['inputs'].get('Density',0))-25)<0.5 for n in m.get('nodes',[])) for m in result.get('geometry_modifiers',[]))",
+      "description": "Distribute Points on Faces density = 25"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/lookdev_scene.blend",
+      "eval": "abs(result.get('gravity',[0,0,0])[2]-(-9.81)) < 0.02",
+      "description": "Scene gravity Z = -9.81"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/lookdev_scene.blend",
+      "eval": "any(o.get('name')=='Ground' and str(o.get('type'))=='PASSIVE' for o in result.get('objects',[]))",
+      "description": "Ground has a PASSIVE rigid body"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/lookdev_scene.blend",
+      "eval": "all(any(o.get('name')==bn and str(o.get('type'))=='ACTIVE' and abs(float(o.get('mass',0))-1.5)<0.05 for o in result.get('objects',[])) for bn in ('Brick.001','Brick.002','Brick.003'))",
+      "description": "All three Bricks are ACTIVE rigid bodies with mass 1.5"
+    },
+    {
+      "command": "rigid-body-info /home/user/Documents/lookdev_scene.blend",
+      "eval": "result.get('rigidbody_world') is not None and int(result['rigidbody_world'].get('frame_start') or 0)<=1 and int(result['rigidbody_world'].get('frame_end') or 0)>=120",
+      "description": "Rigid body world cache covers frames 1-120"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/lookdev_scene.blend GoldMat",
+      "key": "exists",
+      "expected": true,
+      "description": "GoldMat exists"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/lookdev_scene.blend GlassMat",
+      "key": "exists",
+      "expected": true,
+      "description": "GlassMat exists"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/lookdev_scene.blend GoldMat",
+      "eval": "any(n.get('type')=='BSDF_PRINCIPLED' and abs(n['inputs'].get('Base Color',[0,0,0,0])[0]-1.0)<0.05 and abs(n['inputs'].get('Base Color',[0,0,0,0])[1]-0.78)<0.05 and abs(n['inputs'].get('Base Color',[0,0,0,0])[2]-0.34)<0.05 and abs(float(n['inputs'].get('Metallic',0))-1.0)<0.05 and abs(float(n['inputs'].get('Roughness',0))-0.25)<0.05 for n in result.get('nodes',[]))",
+      "description": "GoldMat Principled BSDF: Base Color near (1.0, 0.78, 0.34), Metallic 1.0, Roughness 0.25"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/lookdev_scene.blend GlassMat",
+      "eval": "any(n.get('type')=='BSDF_GLASS' and abs(float(n['inputs'].get('IOR',0))-1.52)<0.02 for n in result.get('nodes',[]))",
+      "description": "GlassMat has Glass BSDF with IOR 1.52"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/lookdev_scene.blend GlassMat",
+      "eval": "any(l.get('to_socket')=='Surface' and any(n.get('name')==l.get('from_node') and n.get('type')=='BSDF_GLASS' for n in result.get('nodes',[])) for l in result.get('links',[]))",
+      "description": "Glass BSDF linked to Material Output Surface"
+    },
+    {
+      "command": "object-info /home/user/Documents/lookdev_scene.blend Brick.001",
+      "eval": "'GoldMat' in (result.get('mesh',{}).get('materials') or [])",
+      "description": "Brick.001 has GoldMat assigned"
+    },
+    {
+      "command": "object-info /home/user/Documents/lookdev_scene.blend Brick.002",
+      "eval": "'GlassMat' in (result.get('mesh',{}).get('materials') or [])",
+      "description": "Brick.002 has GlassMat assigned"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/lookdev_scene.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is CYCLES"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/lookdev_scene.blend 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 1280 x 720"
+    },
+    {
+      "command": "scene-info /home/user/Documents/lookdev_scene.blend",
+      "eval": "int(result.get('frame_end',0))==120",
+      "description": "Scene frame_end = 120"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/lookdev_scene.blend",
+      "key": "use_nodes",
+      "expected": true,
+      "description": "Compositor use_nodes enabled"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/lookdev_scene.blend",
+      "eval": "{n.get('type') for n in result.get('nodes',[])} >= {'R_LAYERS','GLARE','BLUR','COMPOSITE','VIEWER'}",
+      "description": "Compositor has Render Layers, Glare, Blur, Composite, Viewer"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/lookdev_scene.blend",
+      "eval": "any(n.get('type')=='GLARE' and str(n.get('glare_type','')).upper().replace(' ','_')=='FOG_GLOW' for n in result.get('nodes',[]))",
+      "description": "Glare node type = FOG_GLOW"
+    },
+    {
+      "command": "compositor-nodes /home/user/Documents/lookdev_scene.blend",
+      "eval": "any(n.get('type')=='BLUR' and int(n.get('size_x') or 0)==5 and int(n.get('size_y') or 0)==5 for n in result.get('nodes',[]))",
+      "description": "Blur node size = 5 x 5"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Survey</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #fafafa; }
+        h1 { color: #2c3e50; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #34495e; }
+        input[type="text"], input[type="email"], select, textarea {
+            width: 100%; max-width: 400px; padding: 8px 12px;
+            border: 1px solid #bdc3c7; border-radius: 4px; font-size: 14px;
+        }
+        textarea { height: 80px; resize: vertical; }
+        button {
+            background: #3498db; color: white; padding: 10px 24px;
+            border: none; border-radius: 4px; font-size: 16px; cursor: pointer;
+        }
+        button:hover { background: #2980b9; }
+        .confirmation { display: none; background: #d5f5e3; border: 1px solid #27ae60; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .confirmation h2 { color: #27ae60; margin-top: 0; }
+        .submitted-data { background: white; padding: 15px; border-radius: 4px; margin-top: 10px; }
+        .submitted-data p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Customer Survey</h1>
+    <p>Please share your feedback with us.</p>
+
+    <form id="surveyForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating">
+                <option value="">-- Select a rating --</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" placeholder="Tell us about your experience..."></textarea>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="confirmation" class="confirmation">
+        <h2>Thank you for your feedback!</h2>
+        <p>Your response has been recorded.</p>
+        <div class="submitted-data">
+            <p><strong>Name:</strong> <span id="confName"></span></p>
+            <p><strong>Email:</strong> <span id="confEmail"></span></p>
+            <p><strong>Rating:</strong> <span id="confRating"></span></p>
+            <p><strong>Feedback:</strong> <span id="confFeedback"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var rating = document.getElementById('rating').value;
+            var feedback = document.getElementById('feedback').value;
+
+            document.getElementById('confName').textContent = name;
+            document.getElementById('confEmail').textContent = email;
+            document.getElementById('confRating').textContent = rating;
+            document.getElementById('confFeedback').textContent = feedback;
+
+            document.getElementById('surveyForm').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

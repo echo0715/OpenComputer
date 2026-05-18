@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_gap_parametric_mask_luma",
+  "files": [
+    {
+      "filename": "landscape_luma.jpg",
+      "sandbox_path": "/home/user/Pictures/landscape_luma.jpg",
+      "type": "jpg"
+    }
+  ]
+}

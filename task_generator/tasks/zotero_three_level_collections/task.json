@@ -1,0 +1,51 @@
+{
+  "id": "zotero_three_level_collections",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite.\n\nBuild a three-level collection hierarchy under 'My Library' with these exact names, where each level is a direct child of the previous one:\n1. 'Papers' — a new top-level collection\n2. 'Vision' — a direct subcollection of 'Papers'\n3. 'Object Detection' — a direct subcollection of 'Vision'\n\nLeave Zotero running so the new collections are saved.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-collection-exists Papers",
+      "key": "exists",
+      "expected": true,
+      "description": "Top-level collection 'Papers' exists"
+    },
+    {
+      "command": "check-collection-exists Vision",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Vision' exists"
+    },
+    {
+      "command": "check-collection-exists 'Object Detection'",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Object Detection' exists"
+    },
+    {
+      "command": "check-subcollection Papers Vision",
+      "key": "is_subcollection",
+      "expected": true,
+      "description": "'Vision' is a direct child of 'Papers'"
+    },
+    {
+      "command": "check-subcollection Vision 'Object Detection'",
+      "key": "is_subcollection",
+      "expected": true,
+      "description": "'Object Detection' is a direct child of 'Vision'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

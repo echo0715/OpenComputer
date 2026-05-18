@@ -1,0 +1,127 @@
+{
+  "id": "draw_deployment_architecture",
+  "app": "libreoffice_draw",
+  "task": "Create a new three-page cloud deployment architecture in LibreOffice Draw and save it to /home/user/Documents/deployment.odg.\n\nPage 1 (Frontend layer): four rectangles with these exact texts — 'Browser Client', 'Mobile App', 'CDN', 'Load Balancer'. Connectors link 'Browser Client' → 'CDN', 'Mobile App' → 'CDN', and 'CDN' → 'Load Balancer'. At least 4 shapes.\n\nPage 2 (Services layer): four rectangles with these exact texts — 'Auth Service', 'API Gateway', 'Orders Service', 'Inventory Service'. Connectors link 'API Gateway' to each of 'Auth Service', 'Orders Service', and 'Inventory Service'. At least 4 shapes.\n\nPage 3 (Data layer): four rectangles with these exact texts — 'Primary DB', 'Read Replica', 'Cache', 'Message Queue'. A connector links 'Primary DB' → 'Read Replica'. At least 4 shapes.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/deployment.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File deployment.odg exists"
+    },
+    {
+      "command": "check-page-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 3 pages"
+    },
+    {
+      "command": "check-page-contains 0 \"Browser Client\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Browser Client'"
+    },
+    {
+      "command": "check-page-contains 0 \"Mobile App\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Mobile App'"
+    },
+    {
+      "command": "check-page-contains 0 CDN",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'CDN'"
+    },
+    {
+      "command": "check-page-contains 0 \"Load Balancer\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Load Balancer'"
+    },
+    {
+      "command": "check-page-contains 1 \"Auth Service\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Auth Service'"
+    },
+    {
+      "command": "check-page-contains 1 \"API Gateway\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'API Gateway'"
+    },
+    {
+      "command": "check-page-contains 1 \"Orders Service\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Orders Service'"
+    },
+    {
+      "command": "check-page-contains 1 \"Inventory Service\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Inventory Service'"
+    },
+    {
+      "command": "check-page-contains 2 \"Primary DB\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Primary DB'"
+    },
+    {
+      "command": "check-page-contains 2 \"Read Replica\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Read Replica'"
+    },
+    {
+      "command": "check-page-contains 2 Cache",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Cache'"
+    },
+    {
+      "command": "check-page-contains 2 \"Message Queue\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Message Queue'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 4",
+      "description": "Page 1 has at least 4 shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][1]['shape_count'] >= 4",
+      "description": "Page 2 has at least 4 shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][2]['shape_count'] >= 4",
+      "description": "Page 3 has at least 4 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "vlc_gap_video_deinterlace_on",
+  "app": "vlc",
+  "task": "Enable video deinterlacing in VLC preferences with the 'yadif' deinterlace mode (deinterlace = 1 and deinterlace-mode = yadif). Save preferences so they persist in ~/.config/vlc/vlcrc, then play /home/user/Videos/sample.mp4.",
+  "env": {
+    "files": [
+      {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/Videos/sample.mp4", "key": "exists", "expected": true, "description": "sample.mp4 is present"},
+    {"command": "check-config deinterlace 1", "key": "match", "expected": true, "description": "Deinterlace is enabled (1)"},
+    {"command": "check-config deinterlace-mode yadif", "key": "match", "expected": true, "description": "Deinterlace mode is yadif"},
+    {"command": "check-media-loaded sample.mp4", "key": "loaded", "expected": true, "description": "sample.mp4 is playing"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "estimated_difficulty": 4}
+}

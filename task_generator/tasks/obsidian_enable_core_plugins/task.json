@@ -1,0 +1,70 @@
+{
+  "id": "obsidian_enable_core_plugins",
+  "app": "obsidian",
+  "task": "In the Obsidian vault at /home/user/Documents/PluginVault, enable the following core plugins:\n- `graph` (Graph view)\n- `tag-pane` (Tag pane)\n- `daily-notes` (Daily notes)\n- `templates` (Templates)\n- `outline` (Outline)\n- `word-count` (Word count)\n- `backlinks` (Backlinks)\n\nThen create 'PluginConfig.md' in the vault root with body:\n\n```\n# Plugin Configuration\n## Enabled Core Plugins\n- Graph view\n- Tag pane\n- Daily notes\n- Templates\n- Outline\n- Word count\n- Backlinks\n#config #plugins\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-plugin-enabled /home/user/Documents/PluginVault graph core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Graph view enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/PluginVault tag-pane core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Tag pane enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/PluginVault daily-notes core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Daily notes enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/PluginVault templates core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Templates enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/PluginVault outline core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Outline enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/PluginVault word-count core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Word count enabled"
+    },
+    {
+      "command": "check-plugin-enabled /home/user/Documents/PluginVault backlinks core",
+      "key": "enabled",
+      "expected": true,
+      "description": "Backlinks enabled"
+    },
+    {
+      "command": "check-note-exists /home/user/Documents/PluginVault PluginConfig",
+      "key": "exists",
+      "expected": true,
+      "description": "PluginConfig note exists"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/PluginVault PluginConfig plugins",
+      "key": "has_tag",
+      "expected": true,
+      "description": "PluginConfig has #plugins tag"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

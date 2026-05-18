@@ -1,0 +1,75 @@
+{
+  "id": "eclipse_v2_migrate_java_version",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the Java project 'LegacyApp' sits at /home/user/workspace/LegacyApp (import it if necessary) and is currently compiled with Java 1.8.\n\nMigrate 'LegacyApp' as follows:\n\n1. Enable project-specific Java compiler settings and set compiler compliance, source compatibility, and generated .class file compatibility all to 17.\n2. In a new package `legacy.upgraded` under the existing 'src' source folder, create src/legacy/upgraded/ModernService.java containing exactly:\n\n```\npackage legacy.upgraded;\n\npublic class ModernService {\n    public String greet(String name) {\n        return \"Modern hello, \" + name;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(new ModernService().greet(\"java17\"));\n    }\n}\n```\n\nDo NOT modify the existing src/legacy/LegacyService.java file.",
+  "env": {
+    "files": [
+      {
+        "filename": "LegacyApp/.project",
+        "sandbox_path": "/home/user/workspace/LegacyApp/.project"
+      },
+      {
+        "filename": "LegacyApp/.classpath",
+        "sandbox_path": "/home/user/workspace/LegacyApp/.classpath"
+      },
+      {
+        "filename": "LegacyApp/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/LegacyApp/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "LegacyApp/src/legacy/LegacyService.java",
+        "sandbox_path": "/home/user/workspace/LegacyApp/src/legacy/LegacyService.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace LegacyApp",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'LegacyApp' exists in workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/LegacyApp org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-setting /home/user/workspace/LegacyApp org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler compliance = 17"
+    },
+    {
+      "command": "check-setting /home/user/workspace/LegacyApp org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.source 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler source = 17"
+    },
+    {
+      "command": "check-setting /home/user/workspace/LegacyApp org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.codegen.targetPlatform 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler codegen target = 17"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/LegacyApp src/legacy/LegacyService.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Existing LegacyService.java still exists"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/LegacyApp src/legacy/upgraded/ModernService.java",
+      "key": "exists",
+      "expected": true,
+      "description": "New ModernService.java exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

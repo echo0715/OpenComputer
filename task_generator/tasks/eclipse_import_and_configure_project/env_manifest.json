@@ -1,0 +1,9 @@
+{
+  "task_id": "eclipse_import_and_configure_project",
+  "files": [
+    {"filename": "DataProcessor/.project", "sandbox_path": "/home/user/workspace/DataProcessor/.project", "type": "xml"},
+    {"filename": "DataProcessor/.classpath", "sandbox_path": "/home/user/workspace/DataProcessor/.classpath", "type": "xml"},
+    {"filename": "DataProcessor/.settings/org.eclipse.jdt.core.prefs", "sandbox_path": "/home/user/workspace/DataProcessor/.settings/org.eclipse.jdt.core.prefs", "type": "properties"},
+    {"filename": "DataProcessor/src/com/data/Processor.java", "sandbox_path": "/home/user/workspace/DataProcessor/src/com/data/Processor.java", "type": "java"}
+  ]
+}

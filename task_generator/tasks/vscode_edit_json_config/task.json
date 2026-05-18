@@ -1,0 +1,57 @@
+{
+  "id": "vscode_edit_json_config",
+  "app": "vscode",
+  "task": "`/home/user/Documents/config.json` contains a JSON configuration with incorrect values. Update it as follows:\n\n- database host: `localhost` → `192.168.1.100`\n- database port: `3306` → `5432`\n- database name: `old_db` → `production_db`\n- `log_level`: `debug` → `warning`\n- `max_connections`: `10` → `50`",
+  "env": {
+    "files": [
+      {
+        "filename": "config.json",
+        "sandbox_path": "/home/user/Documents/config.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/config.json",
+      "key": "exists",
+      "expected": true,
+      "description": "config.json exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/config.json 192.168.1.100",
+      "key": "contains",
+      "expected": true,
+      "description": "host changed to 192.168.1.100"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/config.json 5432",
+      "key": "contains",
+      "expected": true,
+      "description": "port changed to 5432"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/config.json production_db",
+      "key": "contains",
+      "expected": true,
+      "description": "database name changed to production_db"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/config.json warning",
+      "key": "contains",
+      "expected": true,
+      "description": "log_level changed to warning"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/config.json 50",
+      "key": "contains",
+      "expected": true,
+      "description": "max_connections changed to 50"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

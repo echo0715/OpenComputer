@@ -1,0 +1,6 @@
+{
+  "task_id": "gimp_resize_export_jpeg",
+  "files": [
+    {"filename": "landscape.png", "sandbox_path": "/home/user/Documents/landscape.png", "type": "png"}
+  ]
+}

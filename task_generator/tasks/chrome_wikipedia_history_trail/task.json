@@ -1,0 +1,52 @@
+{
+  "id": "chrome_wikipedia_history_trail",
+  "app": "chrome",
+  "task": "In Google Chrome, perform a browsing trail that ends with all four of these Wikipedia pages in the browsing history:\n1. https://en.wikipedia.org/wiki/World_Wide_Web — visited first\n2. https://en.wikipedia.org/wiki/Tim_Berners-Lee — reached by following the in-article link from the World Wide Web page (not by typing the URL), and bookmarked\n3. https://en.wikipedia.org/wiki/CERN — opened in a separate tab and bookmarked\n4. https://en.wikipedia.org/wiki/HTML — navigated to from the CERN tab (reusing that tab, not a new one)\n\nAt least two tabs must remain open at the end.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited en.wikipedia.org/wiki/World_Wide_Web",
+      "key": "visited",
+      "expected": true,
+      "description": "World_Wide_Web Wikipedia page was visited"
+    },
+    {
+      "command": "check-url-visited en.wikipedia.org/wiki/Tim_Berners-Lee",
+      "key": "visited",
+      "expected": true,
+      "description": "Tim_Berners-Lee Wikipedia page was visited"
+    },
+    {
+      "command": "check-url-visited en.wikipedia.org/wiki/CERN",
+      "key": "visited",
+      "expected": true,
+      "description": "CERN Wikipedia page was visited"
+    },
+    {
+      "command": "check-url-visited en.wikipedia.org/wiki/HTML",
+      "key": "visited",
+      "expected": true,
+      "description": "HTML Wikipedia page was visited"
+    },
+    {
+      "command": "check-bookmark Tim_Berners-Lee",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Tim Berners-Lee page exists"
+    },
+    {
+      "command": "check-bookmark CERN",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for CERN page exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

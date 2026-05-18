@@ -1,0 +1,57 @@
+{
+  "id": "eclipse_create_project_add_jar",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; a JAR file is available at /home/user/Downloads/commons-lang3.jar.\n\nCreate a new Java project 'WebService' in this workspace (Java nature, default 'src' source folder) with the following content:\n\n- Copy /home/user/Downloads/commons-lang3.jar into the project at /home/user/workspace/WebService/lib/commons-lang3.jar.\n- Add 'lib/commons-lang3.jar' to the project's Java build path as a library entry (the resulting .classpath must contain a classpathentry of kind 'lib' with path 'lib/commons-lang3.jar').\n- Create src/com/webservice/Server.java with exactly:\n\n```\npackage com.webservice;\n\npublic class Server {\n    private int port;\n\n    public Server(int port) {\n        this.port = port;\n    }\n\n    public void start() {\n        System.out.println(\"Server started on port \" + port);\n    }\n\n    public static void main(String[] args) {\n        Server server = new Server(8080);\n        server.start();\n    }\n}\n```",
+  "env": {
+    "files": [
+      {
+        "filename": "commons-lang3.jar",
+        "sandbox_path": "/home/user/Downloads/commons-lang3.jar"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace WebService",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'WebService' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/WebService org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/WebService src src",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has 'src' source entry"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/WebService lib lib/commons-lang3.jar",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has lib entry for commons-lang3.jar"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/WebService src/com/webservice/Server.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Source file Server.java exists in com.webservice package"
+    },
+    {
+      "command": "check-file-exists /home/user/workspace/WebService/lib/commons-lang3.jar",
+      "key": "exists",
+      "expected": true,
+      "description": "JAR file exists in project lib directory"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

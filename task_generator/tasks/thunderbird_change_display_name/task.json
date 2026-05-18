@@ -1,0 +1,27 @@
+{
+  "id": "thunderbird_change_display_name",
+  "app": "thunderbird",
+  "task": "Set the default identity's display name (the name shown in the From field of outgoing mail) to `Alexandra Chen` so pref `mail.identity.id1.fullName` = `Alexandra Chen`.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value mail.identity.id1.fullName Alexandra Chen",
+      "key": "match",
+      "expected": true,
+      "description": "Display name set to Alexandra Chen"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "id": "freecad_gap_partdesign_fillet_chamfer",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/cube_start.FCStd, which already contains a PartDesign Body 'CubeBody' with a 40x40x40 mm Pad named 'Cube'.\n\nAdd the following PartDesign features inside CubeBody:\n- A Fillet named exactly 'TopFillet' with Radius = 5 mm applied to the four top edges of Cube (the edges sharing the +Z top face).\n- A Chamfer named exactly 'BottomChamfer' with Size = 2 mm applied to the four bottom edges of Cube (the edges sharing the -Z bottom face).\n\nDo not modify the Cube pad itself. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "cube_start.FCStd",
+        "sandbox_path": "/home/user/Documents/cube_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/cube_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/cube_start.FCStd Cube",
+      "key": "exists",
+      "expected": true,
+      "description": "Cube pad preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/cube_start.FCStd TopFillet",
+      "key": "exists",
+      "expected": true,
+      "description": "TopFillet exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/cube_start.FCStd TopFillet PartDesign::Fillet",
+      "key": "match",
+      "expected": true,
+      "description": "TopFillet is PartDesign::Fillet"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/cube_start.FCStd TopFillet Radius 5",
+      "key": "match",
+      "expected": true,
+      "description": "Fillet Radius = 5"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/cube_start.FCStd BottomChamfer",
+      "key": "exists",
+      "expected": true,
+      "description": "BottomChamfer exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/cube_start.FCStd BottomChamfer PartDesign::Chamfer",
+      "key": "match",
+      "expected": true,
+      "description": "BottomChamfer is PartDesign::Chamfer"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/cube_start.FCStd BottomChamfer Size 2",
+      "key": "match",
+      "expected": true,
+      "description": "Chamfer Size = 2"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

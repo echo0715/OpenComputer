@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_gap_clip_and_mask",
+  "files": [
+    {
+      "filename": "clipmask.svg",
+      "sandbox_path": "/home/user/Documents/clipmask.svg",
+      "type": "svg"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "blender_parent_hierarchy",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/rig_hierarchy.blend (which starts empty), build this Object-parented hierarchy:\n- 'Rig' (Empty, Plain Axes) at the root\n- 'Torso' (Cube) parented to 'Rig'\n- 'Arm' (Cylinder) parented to 'Rig'\n- 'Head' (UV Sphere) parented to 'Torso' (so 'Head' is a grandchild of 'Rig')\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "rig_hierarchy.blend",
+        "sandbox_path": "/home/user/Documents/rig_hierarchy.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/rig_hierarchy.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/rig_hierarchy.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rig_hierarchy.blend Rig",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Rig' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/rig_hierarchy.blend Rig EMPTY",
+      "key": "match",
+      "expected": true,
+      "description": "'Rig' is EMPTY"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rig_hierarchy.blend Torso",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Torso' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/rig_hierarchy.blend Torso MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Torso' is MESH"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rig_hierarchy.blend Head",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Head' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/rig_hierarchy.blend Head MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Head' is MESH"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rig_hierarchy.blend Arm",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Arm' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/rig_hierarchy.blend Arm MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Arm' is MESH"
+    },
+    {
+      "command": "object-info /home/user/Documents/rig_hierarchy.blend Torso",
+      "eval": "result.get('parent') == 'Rig'",
+      "description": "'Torso' parent is 'Rig'"
+    },
+    {
+      "command": "object-info /home/user/Documents/rig_hierarchy.blend Arm",
+      "eval": "result.get('parent') == 'Rig'",
+      "description": "'Arm' parent is 'Rig'"
+    },
+    {
+      "command": "object-info /home/user/Documents/rig_hierarchy.blend Head",
+      "eval": "result.get('parent') == 'Torso'",
+      "description": "'Head' parent is 'Torso'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

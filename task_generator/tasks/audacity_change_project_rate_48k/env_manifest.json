@@ -1,0 +1,15 @@
+{
+  "task_id": "audacity_change_project_rate_48k",
+  "files": [
+    {
+      "filename": "project.aup",
+      "sandbox_path": "/home/user/Music/project.aup",
+      "type": "aup"
+    },
+    {
+      "filename": "project_data/e00/d00/e000001.au",
+      "sandbox_path": "/home/user/Music/project_data/e00/d00/e000001.au",
+      "type": "au"
+    }
+  ]
+}

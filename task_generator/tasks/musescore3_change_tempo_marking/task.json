@@ -1,0 +1,33 @@
+{
+  "id": "musescore3_change_tempo_marking",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/allegretto.mscz — 8 measures of quarter notes in 4/4 time with a tempo marking on measure 1 of 90 BPM (quarter = 90).\n\nChange the first tempo marking to exactly 144 BPM (quarter = 144) and save in place at /home/user/Documents/allegretto.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "allegretto.mscz",
+        "sandbox_path": "/home/user/Documents/allegretto.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/allegretto.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "allegretto.mscz still exists"
+    },
+    {
+      "command": "check-tempo /home/user/Documents/allegretto.mscz 144",
+      "key": "match",
+      "expected": true,
+      "description": "First Tempo marking is 144 BPM (within ±0.5)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

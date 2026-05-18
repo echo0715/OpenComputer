@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_number_lines_prefix",
+  "files": [
+    {"filename": "tasks.txt", "sandbox_path": "/home/user/Documents/tasks.txt", "type": "txt"}
+  ]
+}

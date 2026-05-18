@@ -1,0 +1,44 @@
+{
+  "id": "eclipse_gap_line_breakpoint",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the project 'DemoApp'.\n\nAdd a Java line breakpoint on line 12 of `src/com/example/App.java` (class `com.example.App`), then export all breakpoints to /home/user/workspace/breakpoints.xml.",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/workspace/breakpoints.xml",
+      "key": "exists",
+      "expected": true,
+      "description": "Breakpoints export file exists"
+    },
+    {
+      "command": "check-line-breakpoint /home/user/workspace com.example.App 12",
+      "key": "exists",
+      "expected": true,
+      "description": "Line breakpoint on com.example.App line 12"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

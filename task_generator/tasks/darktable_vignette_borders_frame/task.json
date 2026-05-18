@@ -1,0 +1,57 @@
+{
+  "id": "darktable_vignette_borders_frame",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/artwork.png into the darktable library.\n\nEnable the 'vignette' module to add a vignette effect, and enable the 'framing' module (borders) to add a decorative border around the image. Apply the tag 'framed' to the image, set its star rating to 4 stars, and export it as a JPEG to /home/user/Pictures/artwork_framed.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "artwork.png",
+        "sandbox_path": "/home/user/Pictures/artwork.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported artwork.png",
+      "key": "imported",
+      "expected": true,
+      "description": "artwork.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation artwork.png vignette",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'vignette' operation"
+    },
+    {
+      "command": "check-db-has-operation artwork.png borders",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'borders' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename artwork.png framed",
+      "key": "tagged",
+      "expected": true,
+      "description": "artwork.png is tagged with 'framed'"
+    },
+    {
+      "command": "check-image-rating-by-filename artwork.png 4",
+      "key": "matches",
+      "expected": true,
+      "description": "artwork.png rating is 4 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/artwork_framed.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG exists at /home/user/Pictures/artwork_framed.jpg"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

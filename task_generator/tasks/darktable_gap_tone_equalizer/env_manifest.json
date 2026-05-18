@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_gap_tone_equalizer",
+  "files": [
+    {
+      "filename": "tone_eq_source.jpg",
+      "sandbox_path": "/home/user/Pictures/tone_eq_source.jpg",
+      "type": "jpg"
+    }
+  ]
+}

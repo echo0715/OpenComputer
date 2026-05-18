@@ -1,0 +1,63 @@
+{
+  "id": "gedit_change_font_and_save_code",
+  "app": "gedit",
+  "task": "Configure the gedit editor font preferences so that:\n- `org.gnome.gedit.preferences.editor use-default-font` is `false`\n- `org.gnome.gedit.preferences.editor editor-font` is exactly `'Monospace 14'`\n\nThen create /home/user/Documents/snippet.py containing exactly these 6 lines (no extra blank lines):\n\n```\ndef fibonacci(n):\n    if n <= 1:\n        return n\n    else:\n        return fibonacci(n-1) + fibonacci(n-2)\nprint(fibonacci(10))\n```\n\nBoth the preference changes and the file must be in place when you finish.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting-value \"org.gnome.gedit.preferences.editor use-default-font\" false",
+      "key": "matches",
+      "expected": true,
+      "description": "use-default-font set to false"
+    },
+    {
+      "command": "check-setting-value \"org.gnome.gedit.preferences.editor editor-font\" \"'Monospace 14'\"",
+      "key": "matches",
+      "expected": true,
+      "description": "editor-font is Monospace 14"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/snippet.py",
+      "key": "exists",
+      "expected": true,
+      "description": "snippet.py created"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/snippet.py \"def fibonacci(n):\"",
+      "key": "contains",
+      "expected": true,
+      "description": "fibonacci function defined"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/snippet.py \"if n <= 1:\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Base case condition present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/snippet.py \"return fibonacci(n-1) + fibonacci(n-2)\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Recursive case present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/snippet.py \"print(fibonacci(10))\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Invocation present"
+    },
+    {
+      "command": "file-line-count /home/user/Documents/snippet.py",
+      "eval": "result.get('line_count', 0) >= 6",
+      "description": "File has at least 6 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

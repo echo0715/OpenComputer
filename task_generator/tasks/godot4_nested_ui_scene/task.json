@@ -1,0 +1,37 @@
+{
+  "id": "godot4_nested_ui_scene",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/nested_ui_game/main.tscn. The scene currently contains only a root Control node named UI. Build the following nested hierarchy inside the same file:\n\n- Under UI add a VBoxContainer named Menu (parent=\".\").\n- Under Menu add three Button children (parent=\"Menu\"):\n  1. PlayButton with text=\"Play\"\n  2. OptionsButton with text=\"Options\"\n  3. QuitButton with text=\"Quit\"\n\nAfter the edits the scene must contain exactly 5 nodes total (UI + Menu + PlayButton + OptionsButton + QuitButton). Each node block should look like:\n\n[node name=\"Menu\" type=\"VBoxContainer\" parent=\".\"]\n\n[node name=\"PlayButton\" type=\"Button\" parent=\"Menu\"]\ntext = \"Play\"\n\n(etc). Save the file.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/nested_ui_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/nested_ui_game/main.tscn"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/nested_ui_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-node-exists /home/user/godot_projects/nested_ui_game/main.tscn UI", "key": "exists", "expected": true, "description": "Root UI node still exists"},
+    {"command": "check-node-exists /home/user/godot_projects/nested_ui_game/main.tscn Menu", "key": "exists", "expected": true, "description": "Menu node added"},
+    {"command": "check-node-type /home/user/godot_projects/nested_ui_game/main.tscn Menu VBoxContainer", "key": "match", "expected": true, "description": "Menu is VBoxContainer"},
+    {"command": "check-node-parent /home/user/godot_projects/nested_ui_game/main.tscn Menu .", "key": "match", "expected": true, "description": "Menu parent is root"},
+    {"command": "check-node-exists /home/user/godot_projects/nested_ui_game/main.tscn PlayButton", "key": "exists", "expected": true, "description": "PlayButton exists"},
+    {"command": "check-node-type /home/user/godot_projects/nested_ui_game/main.tscn PlayButton Button", "key": "match", "expected": true, "description": "PlayButton is Button"},
+    {"command": "check-node-parent /home/user/godot_projects/nested_ui_game/main.tscn PlayButton Menu", "key": "match", "expected": true, "description": "PlayButton parent is Menu"},
+    {"command": "check-node-property /home/user/godot_projects/nested_ui_game/main.tscn PlayButton text '\"Play\"'", "key": "match", "expected": true, "description": "PlayButton text is 'Play'"},
+    {"command": "check-node-exists /home/user/godot_projects/nested_ui_game/main.tscn OptionsButton", "key": "exists", "expected": true, "description": "OptionsButton exists"},
+    {"command": "check-node-type /home/user/godot_projects/nested_ui_game/main.tscn OptionsButton Button", "key": "match", "expected": true, "description": "OptionsButton is Button"},
+    {"command": "check-node-parent /home/user/godot_projects/nested_ui_game/main.tscn OptionsButton Menu", "key": "match", "expected": true, "description": "OptionsButton parent is Menu"},
+    {"command": "check-node-property /home/user/godot_projects/nested_ui_game/main.tscn OptionsButton text '\"Options\"'", "key": "match", "expected": true, "description": "OptionsButton text is 'Options'"},
+    {"command": "check-node-exists /home/user/godot_projects/nested_ui_game/main.tscn QuitButton", "key": "exists", "expected": true, "description": "QuitButton exists"},
+    {"command": "check-node-type /home/user/godot_projects/nested_ui_game/main.tscn QuitButton Button", "key": "match", "expected": true, "description": "QuitButton is Button"},
+    {"command": "check-node-parent /home/user/godot_projects/nested_ui_game/main.tscn QuitButton Menu", "key": "match", "expected": true, "description": "QuitButton parent is Menu"},
+    {"command": "check-node-property /home/user/godot_projects/nested_ui_game/main.tscn QuitButton text '\"Quit\"'", "key": "match", "expected": true, "description": "QuitButton text is 'Quit'"},
+    {"command": "check-node-count /home/user/godot_projects/nested_ui_game/main.tscn 5", "key": "match", "expected": true, "description": "Scene has exactly 5 nodes"}
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

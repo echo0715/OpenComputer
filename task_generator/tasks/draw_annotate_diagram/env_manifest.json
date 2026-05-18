@@ -1,0 +1,6 @@
+{
+  "task_id": "draw_annotate_diagram",
+  "files": [
+    {"filename": "network_diagram.odg", "sandbox_path": "/home/user/Documents/network_diagram.odg", "type": "odg"}
+  ]
+}

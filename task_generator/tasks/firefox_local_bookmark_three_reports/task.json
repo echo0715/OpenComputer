@@ -1,0 +1,76 @@
+{
+  "id": "firefox_local_bookmark_three_reports",
+  "app": "firefox",
+  "task": "Three local HTML reports are at /home/user/Documents/reports/: report_jan.html, report_feb.html, and report_mar.html, with document titles 'January Report', 'February Report', and 'March Report' respectively.\n\nOpen each report in its own tab via its file:// URL (so all three end up in browsing history) and add a bookmark for each with title exactly matching the document title:\n- file:///home/user/Documents/reports/report_jan.html -> 'January Report'\n- file:///home/user/Documents/reports/report_feb.html -> 'February Report'\n- file:///home/user/Documents/reports/report_mar.html -> 'March Report'\n\nThe tab showing report_feb.html must be the active tab when you finish.",
+  "env": {
+    "files": [
+      {
+        "filename": "report_jan.html",
+        "sandbox_path": "/home/user/Documents/reports/report_jan.html"
+      },
+      {
+        "filename": "report_feb.html",
+        "sandbox_path": "/home/user/Documents/reports/report_feb.html"
+      },
+      {
+        "filename": "report_mar.html",
+        "sandbox_path": "/home/user/Documents/reports/report_mar.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-url-visited report_jan.html",
+      "key": "visited",
+      "expected": true,
+      "description": "report_jan.html was visited"
+    },
+    {
+      "command": "check-url-visited report_feb.html",
+      "key": "visited",
+      "expected": true,
+      "description": "report_feb.html was visited"
+    },
+    {
+      "command": "check-url-visited report_mar.html",
+      "key": "visited",
+      "expected": true,
+      "description": "report_mar.html was visited"
+    },
+    {
+      "command": "check-tab-open report_feb.html",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab shows report_feb.html"
+    },
+    {
+      "command": "tabs",
+      "eval": "len(result) >= 3",
+      "description": "At least 3 tabs are open"
+    },
+    {
+      "command": "check-bookmark January",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for January Report exists"
+    },
+    {
+      "command": "check-bookmark February",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for February Report exists"
+    },
+    {
+      "command": "check-bookmark March",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for March Report exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

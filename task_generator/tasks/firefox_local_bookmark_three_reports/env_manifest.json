@@ -1,0 +1,8 @@
+{
+  "task_id": "firefox_local_bookmark_three_reports",
+  "files": [
+    {"filename": "report_jan.html", "sandbox_path": "/home/user/Documents/reports/report_jan.html", "type": "html"},
+    {"filename": "report_feb.html", "sandbox_path": "/home/user/Documents/reports/report_feb.html", "type": "html"},
+    {"filename": "report_mar.html", "sandbox_path": "/home/user/Documents/reports/report_mar.html", "type": "html"}
+  ]
+}

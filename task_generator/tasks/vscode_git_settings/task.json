@@ -1,0 +1,52 @@
+{
+  "id": "vscode_git_settings",
+  "app": "vscode",
+  "task": "Configure the following user settings (persisted to `~/.config/Code/User/settings.json`):\n\n- `git.autofetch`: `true`\n- `git.confirmSync`: `false`\n- `git.enableSmartCommit`: `true`\n- `git.defaultCloneDirectory`: `/home/user/repos`\n- `diffEditor.renderSideBySide`: `false`\n\nAlso create the directory `/home/user/repos` so it exists for cloning.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting git.autofetch true",
+      "key": "match",
+      "expected": true,
+      "description": "git.autofetch is true"
+    },
+    {
+      "command": "check-setting git.confirmSync false",
+      "key": "match",
+      "expected": true,
+      "description": "git.confirmSync is false"
+    },
+    {
+      "command": "check-setting git.enableSmartCommit true",
+      "key": "match",
+      "expected": true,
+      "description": "git.enableSmartCommit is true"
+    },
+    {
+      "command": "check-setting git.defaultCloneDirectory /home/user/repos",
+      "key": "match",
+      "expected": true,
+      "description": "defaultCloneDirectory is /home/user/repos"
+    },
+    {
+      "command": "check-setting diffEditor.renderSideBySide false",
+      "key": "match",
+      "expected": true,
+      "description": "diffEditor side-by-side is false"
+    },
+    {
+      "command": "check-file-exists /home/user/repos",
+      "key": "exists",
+      "expected": true,
+      "description": "repos directory exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

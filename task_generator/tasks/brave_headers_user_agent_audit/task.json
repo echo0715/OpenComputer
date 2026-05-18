@@ -1,0 +1,94 @@
+{
+  "id": "brave_headers_user_agent_audit",
+  "app": "brave",
+  "task": "In Brave, perform a request-metadata audit by opening these httpbin.org endpoints in three tabs in this order:\n- Tab 0: https://httpbin.org/headers (request headers JSON)\n- Tab 1: https://httpbin.org/user-agent (User-Agent JSON)\n- Tab 2: https://httpbin.org/ip (client IP JSON)\n\nBookmark only tab 0 (https://httpbin.org/headers); do NOT bookmark the user-agent or ip pages. All three URLs must appear in browsing history. DOM checks: tab 0 must contain `User-Agent` and `Chrome` (Brave's Chromium-derived UA), tab 1 must contain `user-agent`, tab 2 must contain `origin`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open httpbin.org/headers",
+      "key": "found",
+      "expected": true,
+      "description": "Headers tab is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/user-agent",
+      "key": "found",
+      "expected": true,
+      "description": "User-agent tab is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/ip",
+      "key": "found",
+      "expected": true,
+      "description": "IP tab is open"
+    },
+    {
+      "command": "check-page-contains User-Agent 0",
+      "key": "contains",
+      "expected": true,
+      "description": "Headers tab DOM contains 'User-Agent'"
+    },
+    {
+      "command": "check-page-contains Chrome 0",
+      "key": "contains",
+      "expected": true,
+      "description": "Headers tab DOM contains 'Chrome' in the User-Agent value"
+    },
+    {
+      "command": "check-page-contains user-agent 1",
+      "key": "contains",
+      "expected": true,
+      "description": "User-agent tab DOM contains 'user-agent'"
+    },
+    {
+      "command": "check-page-contains origin 2",
+      "key": "contains",
+      "expected": true,
+      "description": "IP tab DOM contains 'origin' key"
+    },
+    {
+      "command": "check-url-visited httpbin.org/headers",
+      "key": "visited",
+      "expected": true,
+      "description": "Headers URL appears in history"
+    },
+    {
+      "command": "check-url-visited httpbin.org/user-agent",
+      "key": "visited",
+      "expected": true,
+      "description": "User-agent URL appears in history"
+    },
+    {
+      "command": "check-url-visited httpbin.org/ip",
+      "key": "visited",
+      "expected": true,
+      "description": "IP URL appears in history"
+    },
+    {
+      "command": "check-bookmark httpbin.org/headers",
+      "key": "exists",
+      "expected": true,
+      "description": "Headers bookmark exists"
+    },
+    {
+      "command": "check-bookmark httpbin.org/user-agent",
+      "key": "exists",
+      "expected": false,
+      "description": "User-agent page is NOT bookmarked"
+    },
+    {
+      "command": "check-bookmark httpbin.org/ip",
+      "key": "exists",
+      "expected": false,
+      "description": "IP page is NOT bookmarked"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

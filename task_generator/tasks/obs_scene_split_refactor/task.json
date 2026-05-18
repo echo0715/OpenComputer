@@ -1,0 +1,105 @@
+{
+  "id": "obs_scene_split_refactor",
+  "app": "obs",
+  "task": "OBS Studio is open with a scene collection that already contains one scene named 'Everything' holding 6 sources: 'Webcam', 'Desktop', 'Game Capture', 'Intro Logo', 'BRB Text', 'End Card'.\n\nRefactor this monolithic scene into exactly 3 scenes (and delete 'Everything'). The final collection must contain exactly these scenes with these exact source memberships:\n- 'Playing' — sources: 'Webcam', 'Desktop', 'Game Capture'\n- 'BRB' — sources: 'BRB Text'\n- 'End' — sources: 'End Card', 'Intro Logo'\n\nSources may be re-created using any source type — only the names in each scene matter. All sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "scene_collection.json",
+        "sandbox_path": "/home/user/.config/obs-studio/basic/scenes/Untitled.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Playing",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Playing' exists"
+    },
+    {
+      "command": "check-scene-exists BRB",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'BRB' exists"
+    },
+    {
+      "command": "check-scene-exists End",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'End' exists"
+    },
+    {
+      "command": "check-scene-exists Everything",
+      "key": "exists",
+      "expected": false,
+      "description": "Original 'Everything' scene deleted"
+    },
+    {
+      "command": "check-scene-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 3 scenes"
+    },
+    {
+      "command": "check-source-in-scene Webcam Playing",
+      "key": "exists",
+      "expected": true,
+      "description": "'Webcam' in 'Playing'"
+    },
+    {
+      "command": "check-source-in-scene Desktop Playing",
+      "key": "exists",
+      "expected": true,
+      "description": "'Desktop' in 'Playing'"
+    },
+    {
+      "command": "check-source-in-scene 'Game Capture' Playing",
+      "key": "exists",
+      "expected": true,
+      "description": "'Game Capture' in 'Playing'"
+    },
+    {
+      "command": "check-source-in-scene 'BRB Text' BRB",
+      "key": "exists",
+      "expected": true,
+      "description": "'BRB Text' in 'BRB'"
+    },
+    {
+      "command": "check-source-in-scene 'End Card' End",
+      "key": "exists",
+      "expected": true,
+      "description": "'End Card' in 'End'"
+    },
+    {
+      "command": "check-source-in-scene 'Intro Logo' End",
+      "key": "exists",
+      "expected": true,
+      "description": "'Intro Logo' in 'End'"
+    },
+    {
+      "command": "check-source-visible Webcam",
+      "key": "visible",
+      "expected": true,
+      "description": "'Webcam' visible"
+    },
+    {
+      "command": "check-source-visible 'BRB Text'",
+      "key": "visible",
+      "expected": true,
+      "description": "'BRB Text' visible"
+    },
+    {
+      "command": "check-source-visible 'End Card'",
+      "key": "visible",
+      "expected": true,
+      "description": "'End Card' visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "thunderbird_bulk_contacts_from_csv",
+  "app": "thunderbird",
+  "task": "Import every row of /home/user/Documents/team_contacts.csv (5 contacts; columns: Name, Email, Company, Phone) into Thunderbird's Address Book so each row becomes a contact with the matching fields populated.",
+  "env": {
+    "files": [
+      {
+        "filename": "team_contacts.csv",
+        "sandbox_path": "/home/user/Documents/team_contacts.csv"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Laura Martinez",
+      "key": "found",
+      "expected": true,
+      "description": "Laura Martinez imported"
+    },
+    {
+      "command": "check-contact-exists Kevin Obrien",
+      "key": "found",
+      "expected": true,
+      "description": "Kevin Obrien imported"
+    },
+    {
+      "command": "check-contact-exists Nina Patel",
+      "key": "found",
+      "expected": true,
+      "description": "Nina Patel imported"
+    },
+    {
+      "command": "check-contact-exists Oscar Kim",
+      "key": "found",
+      "expected": true,
+      "description": "Oscar Kim imported"
+    },
+    {
+      "command": "check-contact-exists Rachel Green",
+      "key": "found",
+      "expected": true,
+      "description": "Rachel Green imported"
+    },
+    {
+      "command": "contact-count",
+      "eval": "result.get('count', 0) >= 5",
+      "description": "At least 5 contacts total"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

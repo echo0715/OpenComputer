@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_gap_history_stack_compress",
+  "files": [
+    {
+      "filename": "history_source.jpg",
+      "sandbox_path": "/home/user/Pictures/history_source.jpg",
+      "type": "jpg"
+    }
+  ]
+}

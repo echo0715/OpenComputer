@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_kanban_workflow",
+  "files": [
+    {
+      "filename": "kanban.html",
+      "sandbox_path": "/home/user/Documents/kanban.html",
+      "type": "html"
+    }
+  ]
+}

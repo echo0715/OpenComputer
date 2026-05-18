@@ -1,0 +1,28 @@
+{
+  "id": "galculator_memory_accumulate_mean",
+  "app": "galculator",
+  "task": "In galculator, compute the arithmetic mean of the four numbers 12, 18, 25, and 45 using the calculator's memory register. Required workflow:\n\n1. Clear memory so it starts at 0.\n2. Accumulate each of the four numbers (12, 18, 25, 45) into memory using `M+`, so the memory register holds their sum (100).\n3. Recall the stored sum from memory (`MR`) onto the display, then divide by 4 to produce the mean.\n\nThe final display must show exactly `25`. Leave galculator open with `25` on the display.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-running",
+      "key": "running",
+      "expected": true,
+      "description": "galculator is running"
+    },
+    {
+      "command": "check-display-value 25",
+      "key": "match",
+      "expected": true,
+      "description": "Display shows 25 (mean of 12, 18, 25, 45)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

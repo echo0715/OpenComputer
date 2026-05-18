@@ -1,0 +1,62 @@
+{
+  "id": "freecad_gap_partdesign_revolve_bottle",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/bottle_start.FCStd (empty document).\n\nCreate a PartDesign Body named exactly 'BottleBody' containing:\n- A Sketch on the XZ plane with a closed bottle-silhouette profile of straight segments through these points: (0, 0) -> (25, 0) -> (25, 60) -> (8, 75) -> (8, 120) -> (0, 120) -> (0, 0).\n- A Revolution feature named exactly 'Bottle' revolving that sketch 360 degrees about the Z axis (the sketch's vertical axis).\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "bottle_start.FCStd",
+        "sandbox_path": "/home/user/Documents/bottle_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/bottle_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/bottle_start.FCStd BottleBody",
+      "key": "exists",
+      "expected": true,
+      "description": "BottleBody exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/bottle_start.FCStd BottleBody PartDesign::Body",
+      "key": "match",
+      "expected": true,
+      "description": "BottleBody is a PartDesign::Body"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/bottle_start.FCStd Bottle",
+      "key": "exists",
+      "expected": true,
+      "description": "Bottle revolution exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/bottle_start.FCStd Bottle PartDesign::Revolution",
+      "key": "match",
+      "expected": true,
+      "description": "Bottle is a PartDesign::Revolution"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/bottle_start.FCStd Bottle Angle 360",
+      "key": "match",
+      "expected": true,
+      "description": "Revolution Angle = 360"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/bottle_start.FCStd Sketcher::SketchObject 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one Sketch in document"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

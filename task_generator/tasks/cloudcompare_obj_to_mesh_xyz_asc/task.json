@@ -1,0 +1,69 @@
+{
+  "id": "cloudcompare_obj_to_mesh_xyz_asc",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/gear.obj is an OBJ mesh with exactly 48 vertices and 80 triangular faces.\n\nProduce two output files:\n1. A PLY mesh at /home/user/Documents/gear.ply preserving all 48 vertices and all 80 triangular faces (export the mesh, not a vertices-only cloud).\n2. A 3-column ASCII XYZ point cloud at /home/user/Documents/gear.xyz containing only the 48 mesh vertices (X Y Z only — no color, no extra columns).",
+  "env": {
+    "files": [
+      {
+        "filename": "gear.obj",
+        "sandbox_path": "/home/user/Documents/gear.obj"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/gear.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "PLY mesh exists"
+    },
+    {
+      "command": "check-is-mesh /home/user/Documents/gear.ply",
+      "key": "is_mesh",
+      "expected": true,
+      "description": "PLY output is a mesh"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/gear.ply 48",
+      "key": "match",
+      "expected": true,
+      "description": "PLY has 48 vertices"
+    },
+    {
+      "command": "check-face-count /home/user/Documents/gear.ply 80",
+      "key": "match",
+      "expected": true,
+      "description": "PLY has 80 triangular faces"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/gear.xyz",
+      "key": "exists",
+      "expected": true,
+      "description": "XYZ cloud exists"
+    },
+    {
+      "command": "check-format /home/user/Documents/gear.xyz ascii",
+      "key": "match",
+      "expected": true,
+      "description": "XYZ is detected as ASCII cloud"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/gear.xyz 48",
+      "key": "match",
+      "expected": true,
+      "description": "XYZ has 48 points"
+    },
+    {
+      "command": "check-has-color /home/user/Documents/gear.xyz",
+      "key": "has_color",
+      "expected": false,
+      "description": "XYZ has no color columns"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "musescore3_add_three_word_lyrics",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/hymn.mscz — a single-staff melody with 3 measures of quarter notes in C major 4/4 and no lyrics.\n\nAdd a three-syllable lyric line to the first three notes of the first staff. The three syllables, in order, must be exactly: 'sing', 'for', 'joy'. Save in place at /home/user/Documents/hymn.mscz so the score contains at least three lyric syllables and each of 'sing', 'for', and 'joy' appears as lyric text.",
+  "env": {
+    "files": [
+      {
+        "filename": "hymn.mscz",
+        "sandbox_path": "/home/user/Documents/hymn.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/hymn.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "hymn.mscz still exists"
+    },
+    {
+      "command": "check-has-lyrics /home/user/Documents/hymn.mscz",
+      "key": "has_lyrics",
+      "expected": true,
+      "description": "Score has at least one lyric syllable"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/hymn.mscz sing",
+      "key": "match",
+      "expected": true,
+      "description": "A lyric syllable contains 'sing'"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/hymn.mscz for",
+      "key": "match",
+      "expected": true,
+      "description": "A lyric syllable contains 'for'"
+    },
+    {
+      "command": "check-lyric-text /home/user/Documents/hymn.mscz joy",
+      "key": "match",
+      "expected": true,
+      "description": "A lyric syllable contains 'joy'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

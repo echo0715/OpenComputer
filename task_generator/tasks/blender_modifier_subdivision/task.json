@@ -1,0 +1,75 @@
+{
+  "id": "blender_modifier_subdivision",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/modifiers_demo.blend:\n- Rename the default Cube to 'SmoothBox' and add a Subdivision Surface modifier to it.\n- Add a UV Sphere named 'Ball' with a Subdivision Surface modifier.\n\nSet the render engine to EEVEE, the render resolution to 1280x720, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "modifiers_demo.blend",
+        "sandbox_path": "/home/user/Documents/modifiers_demo.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/modifiers_demo.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/modifiers_demo.blend SmoothBox",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'SmoothBox' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/modifiers_demo.blend SmoothBox MESH",
+      "key": "match",
+      "expected": true,
+      "description": "SmoothBox is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/modifiers_demo.blend Ball",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Ball' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/modifiers_demo.blend Ball MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Ball is a MESH object"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/modifiers_demo.blend SmoothBox SUBSURF",
+      "key": "exists",
+      "expected": true,
+      "description": "SmoothBox has Subdivision Surface modifier"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/modifiers_demo.blend Ball SUBSURF",
+      "key": "exists",
+      "expected": true,
+      "description": "Ball has Subdivision Surface modifier"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/modifiers_demo.blend BLENDER_EEVEE",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine set to EEVEE"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/modifiers_demo.blend 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 1280x720"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

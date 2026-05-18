@@ -1,0 +1,45 @@
+{
+  "id": "vlc_high_volume_150",
+  "app": "vlc",
+  "task": "VLC is already running. Open /home/user/Videos/amp.mp4 and start playback, then amplify the audio volume to exactly 150% (above the nominal 100% ceiling, into VLC's amplified range). Leave VLC playing amp.mp4 at 150% volume; do not mute, pause, or close VLC.",
+  "env": {
+    "files": [
+      {
+        "filename": "amp.mp4",
+        "sandbox_path": "/home/user/Videos/amp.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/amp.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source amp.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded amp.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "amp.mp4 is loaded in VLC"
+    },
+    {
+      "command": "check-playing",
+      "key": "playing",
+      "expected": true,
+      "description": "VLC is currently playing"
+    },
+    {
+      "command": "check-volume 150",
+      "key": "match",
+      "expected": true,
+      "description": "Volume is at 150% (amplified)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "vlc_convert_mp4_to_mkv",
+  "app": "vlc",
+  "task": "VLC is already running. Re-package /home/user/Videos/source.mp4 into a Matroska container at /home/user/Videos/output.mkv using any profile whose encapsulation is MKV (e.g. 'Video - H.264 + MP3 (MKV)').\n\nThe resulting /home/user/Videos/output.mkv must be a valid Matroska file containing a video stream with roughly the same ~30-second duration as the source.",
+  "env": {
+    "files": [
+      {
+        "filename": "source.mp4",
+        "sandbox_path": "/home/user/Videos/source.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/source.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source source.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Videos/output.mkv",
+      "key": "exists",
+      "expected": true,
+      "description": "Converted output.mkv exists"
+    },
+    {
+      "command": "check-media-format /home/user/Videos/output.mkv matroska",
+      "key": "match",
+      "expected": true,
+      "description": "output.mkv is a Matroska container"
+    },
+    {
+      "command": "check-media-has-video /home/user/Videos/output.mkv",
+      "key": "has_video",
+      "expected": true,
+      "description": "output.mkv contains a video stream"
+    },
+    {
+      "command": "check-media-duration /home/user/Videos/output.mkv 30 4",
+      "key": "match",
+      "expected": true,
+      "description": "output.mkv duration is about 30 seconds (±4s)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

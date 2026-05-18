@@ -1,0 +1,74 @@
+{
+  "id": "musescore3_two_voice_counterpoint",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/counterpoint_study.mscz — a single piano staff in C major 4/4 with 8 measures. Voice 1 already contains 4 quarter notes per measure (32 notes total); Voice 2 is empty; there are no dynamics and no articulations.\n\nAdd a Voice 2 counter-line at exactly these pitches and rhythms:\n- m1: one whole note at C3\n- m2: one whole note at F3\n- m3: one whole note at G3\n- m4: one whole note at C3\n- m5: two half notes — A3 then E3\n- m6: two half notes — D3 then G3\n- m7: two half notes — C3 then F3\n- m8: two half notes — G2 then C3\n\nAdd a mezzo-piano (mp) dynamic at the start of measure 1 and a forte (f) dynamic at the start of measure 5. Add a staccato articulation to every Voice 1 note in measure 5 (all 4 quarter notes); do not add any staccato anywhere else in the score.\n\nSave in place at /home/user/Documents/counterpoint_study.mscz. After saving, the score must still have 8 measures in 4/4 C major, exactly 44 total notes (32 voice 1 + 4 whole-note voice 2 + 8 half-note voice 2), an mp dynamic in measure 1, an f dynamic and at least one staccato in measure 5, and exactly 4 staccato articulations in the whole score.",
+  "env": {
+    "files": [
+      {
+        "filename": "counterpoint_study.mscz",
+        "sandbox_path": "/home/user/Documents/counterpoint_study.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/counterpoint_study.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "counterpoint_study.mscz still exists"
+    },
+    {
+      "command": "check-time-signature /home/user/Documents/counterpoint_study.mscz 4 4",
+      "key": "match",
+      "expected": true,
+      "description": "Time signature is still 4/4"
+    },
+    {
+      "command": "check-key-signature /home/user/Documents/counterpoint_study.mscz 0",
+      "key": "match",
+      "expected": true,
+      "description": "Key signature is still C major (0 accidentals)"
+    },
+    {
+      "command": "check-measure-count /home/user/Documents/counterpoint_study.mscz 8",
+      "key": "match",
+      "expected": true,
+      "description": "Score still has 8 measures"
+    },
+    {
+      "command": "check-note-count /home/user/Documents/counterpoint_study.mscz 44",
+      "key": "match",
+      "expected": true,
+      "description": "Total note count is 44 (32 voice 1 + 12 voice 2)"
+    },
+    {
+      "command": "check-dynamic-in-measure /home/user/Documents/counterpoint_study.mscz 1 mp",
+      "key": "match",
+      "expected": true,
+      "description": "mp dynamic in measure 1"
+    },
+    {
+      "command": "check-dynamic-in-measure /home/user/Documents/counterpoint_study.mscz 5 f",
+      "key": "match",
+      "expected": true,
+      "description": "f dynamic in measure 5"
+    },
+    {
+      "command": "check-articulation-in-measure /home/user/Documents/counterpoint_study.mscz 5 staccato",
+      "key": "match",
+      "expected": true,
+      "description": "Staccato articulation in measure 5"
+    },
+    {
+      "command": "check-articulation-count /home/user/Documents/counterpoint_study.mscz staccato 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 staccato articulations in the whole score"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "cloudcompare_gap_point_pair_alignment",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/floor_ref.ply and /home/user/Documents/floor_rotated.ply are ASCII PLYs with 800 points each forming an L-shape on the Z=0 plane. floor_rotated.ply is the reference cloud rotated 45 degrees around Z and translated.\n\nRun point-pair-picking alignment using floor_rotated.ply as the to-be-aligned entity and floor_ref.ply as the reference, picking at least 3 matching point pairs on recognizable L-shape corners and applying the computed rigid transform. Export the transformed floor_rotated cloud as an ASCII PLY at /home/user/Documents/floor_aligned.ply. The result must have 800 points, and its bounding box must lie within [-1, -1, -0.5]..[11, 11, 0.5].",
+  "env": {
+    "files": [
+      {
+        "filename": "floor_rotated.ply",
+        "sandbox_path": "/home/user/Documents/floor_rotated.ply"
+      },
+      {
+        "filename": "floor_ref.ply",
+        "sandbox_path": "/home/user/Documents/floor_ref.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/floor_aligned.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Aligned PLY exists"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/floor_aligned.ply 800",
+      "key": "match",
+      "expected": true,
+      "description": "800 points preserved"
+    },
+    {
+      "command": "check-bbox-within /home/user/Documents/floor_aligned.ply -1 -1 -0.5 11 11 0.5",
+      "key": "match",
+      "expected": true,
+      "description": "Aligned bbox fits reference bounds"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/floor_aligned.ply ascii",
+      "key": "match",
+      "expected": true,
+      "description": "ASCII PLY format"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

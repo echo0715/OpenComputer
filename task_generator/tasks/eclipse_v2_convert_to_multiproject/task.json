@@ -1,0 +1,58 @@
+{
+  "id": "eclipse_v2_convert_to_multiproject",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nCreate TWO related Java projects in this workspace where 'UtilsConsumer' depends on 'CommonUtils' via an Eclipse project reference:\n\n1. Java project 'CommonUtils' (Java nature, default 'src' source folder) with src/common/StringUtils.java:\n\n```\npackage common;\n\npublic class StringUtils {\n    public static String reverse(String s) {\n        return new StringBuilder(s).reverse().toString();\n    }\n}\n```\n\n2. Java project 'UtilsConsumer' (Java nature, default 'src' source folder) with src/app/ConsumerMain.java:\n\n```\npackage app;\n\nimport common.StringUtils;\n\npublic class ConsumerMain {\n    public static void main(String[] args) {\n        System.out.println(StringUtils.reverse(\"hello\"));\n    }\n}\n```\n\n3. Add 'CommonUtils' to the Java build path of 'UtilsConsumer' as a required project — the resulting .classpath of 'UtilsConsumer' must contain a classpathentry of kind 'src' with path `/CommonUtils`.\n\nBoth projects must compile successfully.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace CommonUtils",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'CommonUtils' exists"
+    },
+    {
+      "command": "check-project-exists /home/user/workspace UtilsConsumer",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'UtilsConsumer' exists"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/CommonUtils org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "CommonUtils has Java nature"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/UtilsConsumer org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "UtilsConsumer has Java nature"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/CommonUtils src/common/StringUtils.java",
+      "key": "exists",
+      "expected": true,
+      "description": "StringUtils.java exists in CommonUtils"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/UtilsConsumer src/app/ConsumerMain.java",
+      "key": "exists",
+      "expected": true,
+      "description": "ConsumerMain.java exists in UtilsConsumer"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/UtilsConsumer src /CommonUtils",
+      "key": "exists",
+      "expected": true,
+      "description": "UtilsConsumer classpath references CommonUtils project"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

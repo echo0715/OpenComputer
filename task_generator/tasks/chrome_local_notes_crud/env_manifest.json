@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_notes_crud",
+  "files": [
+    {
+      "filename": "notes.html",
+      "sandbox_path": "/home/user/Documents/notes.html",
+      "type": "html"
+    }
+  ]
+}

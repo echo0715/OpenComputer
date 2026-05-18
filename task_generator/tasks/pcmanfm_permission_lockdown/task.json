@@ -1,0 +1,57 @@
+{
+  "id": "pcmanfm_permission_lockdown",
+  "app": "pcmanfm",
+  "task": "Set file permissions on the files in /home/user/Documents/secure/ as follows:\n- public.txt — 644 (owner read-write; group/others read-only)\n- private.txt — 600 (owner read-write only)\n- script.sh — 755 (owner full access; group/others read-execute)\n- secret.key — 400 (owner read-only)",
+  "env": {
+    "files": [
+      {
+        "filename": "public.txt",
+        "sandbox_path": "/home/user/Documents/secure/public.txt"
+      },
+      {
+        "filename": "private.txt",
+        "sandbox_path": "/home/user/Documents/secure/private.txt"
+      },
+      {
+        "filename": "script.sh",
+        "sandbox_path": "/home/user/Documents/secure/script.sh"
+      },
+      {
+        "filename": "secret.key",
+        "sandbox_path": "/home/user/Documents/secure/secret.key"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-permissions /home/user/Documents/secure/public.txt 644",
+      "key": "match",
+      "expected": true,
+      "description": "public.txt has permissions 644"
+    },
+    {
+      "command": "check-permissions /home/user/Documents/secure/private.txt 600",
+      "key": "match",
+      "expected": true,
+      "description": "private.txt has permissions 600"
+    },
+    {
+      "command": "check-permissions /home/user/Documents/secure/script.sh 755",
+      "key": "match",
+      "expected": true,
+      "description": "script.sh has permissions 755"
+    },
+    {
+      "command": "check-permissions /home/user/Documents/secure/secret.key 400",
+      "key": "match",
+      "expected": true,
+      "description": "secret.key has permissions 400"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

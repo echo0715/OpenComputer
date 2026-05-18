@@ -1,0 +1,110 @@
+{
+  "id": "draw_uml_class_diagram",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/class_stub.odg is open in LibreOffice Draw — page 1 already contains a single rectangle labeled 'Animal'.\n\nBuild a UML-style class inheritance diagram, preserving the 'Animal' rectangle:\n- Page 1: add four subclass rectangles below 'Animal'. Each must show the class name on the first line and one method on the second line (separated by a newline): 'Dog\\n+ bark()', 'Cat\\n+ meow()', 'Bird\\n+ fly()', 'Fish\\n+ swim()'. Add four connectors, one from 'Animal' to each subclass. Page 1 must end up with at least 5 shapes (1 seed + 4 subclasses).\n- Page 2: add a new page containing two rectangles with exact texts 'Notes' and 'Version 1.0'.\n\nThe document must end up with exactly 2 pages. Save the file in-place to /home/user/Documents/class_stub.odg.",
+  "env": {
+    "files": [
+      {
+        "filename": "class_stub.odg",
+        "sandbox_path": "/home/user/Documents/class_stub.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 2 pages"
+    },
+    {
+      "command": "check-page-contains 0 Animal",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Animal'"
+    },
+    {
+      "command": "check-page-contains 0 Dog",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Dog'"
+    },
+    {
+      "command": "check-page-contains 0 Cat",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Cat'"
+    },
+    {
+      "command": "check-page-contains 0 Bird",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Bird'"
+    },
+    {
+      "command": "check-page-contains 0 Fish",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Fish'"
+    },
+    {
+      "command": "check-page-contains 0 bark",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains method text 'bark'"
+    },
+    {
+      "command": "check-page-contains 0 meow",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains method text 'meow'"
+    },
+    {
+      "command": "check-page-contains 0 fly",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains method text 'fly'"
+    },
+    {
+      "command": "check-page-contains 0 swim",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains method text 'swim'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 contains rectangle shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 5",
+      "description": "Page 1 has at least 5 shapes (original Animal + 4 new subclasses)"
+    },
+    {
+      "command": "check-page-contains 1 Notes",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Notes'"
+    },
+    {
+      "command": "check-page-contains 1 \"Version 1.0\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Version 1.0'"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

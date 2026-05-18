@@ -1,0 +1,32 @@
+{
+  "id": "krita_enable_python_plugin",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/plugin_test.kra loaded.\n\nEnable the 'Ten Brushes' Python plugin so the change is persisted to `~/.config/kritarc` under the `[python]` section as `Enable tenbrushes=true`.\n\nSave the file in place at /home/user/Documents/plugin_test.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "plugin_test.kra",
+        "sandbox_path": "/home/user/Documents/plugin_test.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/plugin_test.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "plugin_test.kra still exists"
+    },
+    {
+      "command": "kritarc-get python Enable tenbrushes",
+      "eval": "str(result.get('value','')).lower() == 'true'",
+      "expected": true,
+      "description": "Ten Brushes plugin enabled in kritarc [python]"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

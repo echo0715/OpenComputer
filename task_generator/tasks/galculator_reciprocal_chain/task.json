@@ -1,0 +1,28 @@
+{
+  "id": "galculator_reciprocal_chain",
+  "app": "galculator",
+  "task": "In galculator, perform the following chain of calculations involving reciprocals and mixed operations, using each step's result as input to the next:\n\n1. `1 / 8` = 0.125\n2. `+ 0.375` = 0.5\n3. reciprocal (`1 / 0.5` or the `1/x` function) = 2\n4. `* 25` = 50\n\nThe final display must show exactly `50`. Leave galculator open with the result showing on the display.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-running",
+      "key": "running",
+      "expected": true,
+      "description": "galculator is running"
+    },
+    {
+      "command": "check-display-value 50",
+      "key": "match",
+      "expected": true,
+      "description": "Display shows 50"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

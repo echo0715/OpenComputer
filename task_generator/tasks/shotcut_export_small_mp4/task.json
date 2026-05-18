@@ -1,0 +1,49 @@
+{
+  "id": "shotcut_export_small_mp4",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/export_me.mlt — a 640x360, 30 fps project that already contains one clip on the V1 timeline track referencing /home/user/Videos/source.mp4.\n\nExport the timeline to /home/user/Videos/final.mp4 using the default H.264 preset, inheriting the project's 640x360 / 30 fps settings (do NOT override width, height, or frame rate). The output must be a valid H.264 MP4 file at 640x360 resolution.",
+  "env": {
+    "files": [
+      {
+        "filename": "export_me.mlt",
+        "sandbox_path": "/home/user/Documents/export_me.mlt"
+      },
+      {
+        "filename": "source.mp4",
+        "sandbox_path": "/home/user/Videos/source.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/final.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported final.mp4 exists at /home/user/Videos/final.mp4"
+    },
+    {
+      "command": "check-export-output /home/user/Videos/final.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Exported MP4 is a valid non-empty media file"
+    },
+    {
+      "command": "check-export-codec /home/user/Videos/final.mp4 h264 video",
+      "key": "match",
+      "expected": true,
+      "description": "Exported video codec is h264"
+    },
+    {
+      "command": "check-export-resolution /home/user/Videos/final.mp4 640 360",
+      "key": "match",
+      "expected": true,
+      "description": "Exported video resolution is 640x360"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

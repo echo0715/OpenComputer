@@ -1,0 +1,62 @@
+{
+  "id": "eclipse_gap_save_actions_profile",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the project 'DemoApp'.\n\nEnable project-specific Java save actions on 'DemoApp' so that on save the editor performs Format source code, Organize imports, and Additional actions including 'Add missing @Override annotations'. The change must be persisted to /home/user/workspace/DemoApp/.settings/org.eclipse.jdt.ui.prefs with:\n\n- `editor_save_participant_org.eclipse.jdt.ui.post_save_listener=true`\n- `sp_cleanup.format_source_code=true`\n- `sp_cleanup.organize_imports=true`\n- `sp_cleanup.add_missing_override_annotations=true`",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/workspace/DemoApp/.settings/org.eclipse.jdt.ui.prefs",
+      "key": "exists",
+      "expected": true,
+      "description": "JDT UI project prefs file exists"
+    },
+    {
+      "command": "check-setting /home/user/workspace/DemoApp org.eclipse.jdt.ui.prefs editor_save_participant_org.eclipse.jdt.ui.post_save_listener true",
+      "key": "matches",
+      "expected": true,
+      "description": "Save participant enabled"
+    },
+    {
+      "command": "check-setting /home/user/workspace/DemoApp org.eclipse.jdt.ui.prefs sp_cleanup.format_source_code true",
+      "key": "matches",
+      "expected": true,
+      "description": "Format source on save"
+    },
+    {
+      "command": "check-setting /home/user/workspace/DemoApp org.eclipse.jdt.ui.prefs sp_cleanup.organize_imports true",
+      "key": "matches",
+      "expected": true,
+      "description": "Organize imports on save"
+    },
+    {
+      "command": "check-setting /home/user/workspace/DemoApp org.eclipse.jdt.ui.prefs sp_cleanup.add_missing_override_annotations true",
+      "key": "matches",
+      "expected": true,
+      "description": "Add missing @Override annotations"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

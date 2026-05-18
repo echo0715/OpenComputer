@@ -1,0 +1,44 @@
+{
+  "id": "cloudcompare_gap_fit_sphere",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/sphere_points.ply is an ASCII PLY with 1500 points sampled on a sphere centered near (3, 4, 5) with radius 2.0.\n\nFit a sphere primitive to the cloud (the fit yields a triangulated sphere mesh) and export only the fitted sphere entity as a PLY mesh at /home/user/Documents/fitted_sphere.ply. Do not export the original cloud. The output must be a mesh whose bounding box fits within [0.5, 1.5, 2.5]..[5.5, 6.5, 7.5] (approximately centered at (3, 4, 5) with diameter ~4) and whose X extent is at least 3.5.",
+  "env": {
+    "files": [
+      {
+        "filename": "sphere_points.ply",
+        "sandbox_path": "/home/user/Documents/sphere_points.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/fitted_sphere.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Output exists"
+    },
+    {
+      "command": "check-is-mesh /home/user/Documents/fitted_sphere.ply",
+      "key": "is_mesh",
+      "expected": true,
+      "description": "Output is a mesh"
+    },
+    {
+      "command": "check-bbox-within /home/user/Documents/fitted_sphere.ply 0.5 1.5 2.5 5.5 6.5 7.5",
+      "key": "match",
+      "expected": true,
+      "description": "Sphere bbox centered near (3,4,5) radius ~2"
+    },
+    {
+      "command": "check-bbox-min-extent /home/user/Documents/fitted_sphere.ply x 3.5",
+      "key": "match",
+      "expected": true,
+      "description": "X extent at least 3.5 (diameter ~4)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

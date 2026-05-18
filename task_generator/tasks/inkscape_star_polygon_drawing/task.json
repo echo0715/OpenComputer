@@ -1,0 +1,57 @@
+{
+  "id": "inkscape_star_polygon_drawing",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/starpolygon.svg — a blank 600x600 document.\n\nEdit /home/user/Documents/starpolygon.svg so it contains:\n- A star shape (rendered as a `<path>` element) on the upper portion of the canvas.\n- A regular polygon, e.g., a hexagon (rendered as a `<path>` element), on the lower portion of the canvas.\n- A small circle element with id `marker` and fill #00ff00.\n- A text element with the exact text: Star and Polygon.\n\nThe page must remain 600x600. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "starpolygon.svg",
+        "sandbox_path": "/home/user/Documents/starpolygon.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/starpolygon.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File starpolygon.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/starpolygon.svg 600 600",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 600x600 pixels"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/starpolygon.svg path",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains path elements (stars and polygons render as paths)"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/starpolygon.svg marker",
+      "key": "exists",
+      "expected": true,
+      "description": "Circle element with id 'marker' exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/starpolygon.svg marker fill #00ff00",
+      "key": "match",
+      "expected": true,
+      "description": "Circle 'marker' has green fill (#00ff00)"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/starpolygon.svg 'Star and Polygon'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Star and Polygon' exists in the document"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

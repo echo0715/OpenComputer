@@ -1,0 +1,93 @@
+{
+  "id": "inkscape_stroke_width_linework",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/linework.svg — an 800x400 file containing three rectangles with ids `thin`, `mid`, `thick` (no stroke, no fill).\n\nEdit /home/user/Documents/linework.svg so that the three rectangles have these exact strokes and stroke-widths:\n- thin stroke #ff0000, stroke-width 1\n- mid stroke #00aa00, stroke-width 4\n- thick stroke #0000ff, stroke-width 10\n\nAlso add a text element anywhere with the exact text: Stroke Weights. Do not rename, move, or delete the three rectangles. The page must remain 800x400. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "linework.svg",
+        "sandbox_path": "/home/user/Documents/linework.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/linework.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "linework.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/linework.svg 800 400",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 800x400"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/linework.svg thin",
+      "key": "exists",
+      "expected": true,
+      "description": "thin rect exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/linework.svg thin stroke #ff0000",
+      "key": "match",
+      "expected": true,
+      "description": "thin stroke is #ff0000"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/linework.svg thin stroke-width 1",
+      "key": "match",
+      "expected": true,
+      "description": "thin stroke-width is 1"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/linework.svg mid",
+      "key": "exists",
+      "expected": true,
+      "description": "mid rect exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/linework.svg mid stroke #00aa00",
+      "key": "match",
+      "expected": true,
+      "description": "mid stroke is #00aa00"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/linework.svg mid stroke-width 4",
+      "key": "match",
+      "expected": true,
+      "description": "mid stroke-width is 4"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/linework.svg thick",
+      "key": "exists",
+      "expected": true,
+      "description": "thick rect exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/linework.svg thick stroke #0000ff",
+      "key": "match",
+      "expected": true,
+      "description": "thick stroke is #0000ff"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/linework.svg thick stroke-width 10",
+      "key": "match",
+      "expected": true,
+      "description": "thick stroke-width is 10"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/linework.svg 'Stroke Weights'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Stroke Weights' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

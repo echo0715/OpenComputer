@@ -1,0 +1,45 @@
+{
+  "id": "zotero_move_item_between_collections",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. The item 'BERT: Pre-training of Deep Bidirectional Transformers' currently belongs to the 'Transformers' subcollection (under 'AI Research').\n\nMove the BERT item from 'Transformers' to a new top-level 'Language Models' collection:\n1. Create a new top-level collection under 'My Library' named exactly 'Language Models'.\n2. Add the BERT item to 'Language Models'.\n3. Remove the BERT item from 'Transformers' (only the collection link is removed — the item itself must still exist in the library).\n\nAfter completion, BERT must be in 'Language Models', must not be in 'Transformers', and must still exist as an item in the library. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-collection-exists 'Language Models'",
+      "key": "exists",
+      "expected": true,
+      "description": "'Language Models' collection exists"
+    },
+    {
+      "command": "check-collection-contains 'Language Models' BERT",
+      "key": "contains",
+      "expected": true,
+      "description": "Language Models contains BERT"
+    },
+    {
+      "command": "check-collection-contains Transformers BERT",
+      "key": "contains",
+      "expected": false,
+      "description": "Transformers no longer contains BERT"
+    },
+    {
+      "command": "check-item-exists BERT",
+      "key": "exists",
+      "expected": true,
+      "description": "BERT item still exists in library"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

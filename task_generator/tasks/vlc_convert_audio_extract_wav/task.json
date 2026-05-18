@@ -1,0 +1,51 @@
+{
+  "id": "vlc_convert_audio_extract_wav",
+  "app": "vlc",
+  "task": "VLC is already running. Convert /home/user/Videos/music_clip.mp4 into an uncompressed WAV file at /home/user/Music/extracted.wav using an audio-only WAV profile (PCM audio codec, WAV encapsulation, no video stream).\n\nThe resulting /home/user/Music/extracted.wav must be a valid WAV file containing an audio stream and NO video stream. Create /home/user/Music if it does not yet exist.",
+  "env": {
+    "files": [
+      {
+        "filename": "music_clip.mp4",
+        "sandbox_path": "/home/user/Videos/music_clip.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/music_clip.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source music_clip.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Music/extracted.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "Extracted extracted.wav exists"
+    },
+    {
+      "command": "check-media-format /home/user/Music/extracted.wav wav",
+      "key": "match",
+      "expected": true,
+      "description": "extracted.wav format is WAV"
+    },
+    {
+      "command": "check-media-has-audio /home/user/Music/extracted.wav",
+      "key": "has_audio",
+      "expected": true,
+      "description": "extracted.wav has an audio stream"
+    },
+    {
+      "command": "check-media-has-video /home/user/Music/extracted.wav",
+      "key": "has_video",
+      "expected": false,
+      "description": "extracted.wav has NO video stream"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

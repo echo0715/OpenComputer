@@ -1,0 +1,59 @@
+{
+  "id": "vlc_playlist_three_clips",
+  "app": "vlc",
+  "task": "VLC is already running. Build a VLC playlist containing exactly these three video files, added in this order:\n  1. /home/user/Videos/clip1.mp4\n  2. /home/user/Videos/clip2.mp4\n  3. /home/user/Videos/clip3.mp4\n\nStart playback from the first clip and leave VLC actively playing clip1.mp4. Do not skip ahead to clip2 or clip3, do not pause, and do not close VLC.",
+  "env": {
+    "files": [
+      {
+        "filename": "clip1.mp4",
+        "sandbox_path": "/home/user/Videos/clip1.mp4"
+      },
+      {
+        "filename": "clip2.mp4",
+        "sandbox_path": "/home/user/Videos/clip2.mp4"
+      },
+      {
+        "filename": "clip3.mp4",
+        "sandbox_path": "/home/user/Videos/clip3.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/clip1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source clip1.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Videos/clip2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source clip2.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Videos/clip3.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source clip3.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded clip1.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "clip1.mp4 is the currently loaded media"
+    },
+    {
+      "command": "check-playing",
+      "key": "playing",
+      "expected": true,
+      "description": "VLC is currently playing"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

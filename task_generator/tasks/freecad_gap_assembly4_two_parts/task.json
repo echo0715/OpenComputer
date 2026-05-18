@@ -1,0 +1,56 @@
+{
+  "id": "freecad_gap_assembly4_two_parts",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/asm_start.FCStd, which already contains two App::Part containers named 'Base' and 'Lid'.\n\nCreate a new Assembly4 Model (an App::Part container) named exactly 'MainAssembly'. Inside MainAssembly, insert a link to 'Base' with identity placement (Base at the origin) and a link to 'Lid' whose AttachmentOffset translates it by 20 mm in +Z. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "asm_start.FCStd",
+        "sandbox_path": "/home/user/Documents/asm_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/asm_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/asm_start.FCStd Base",
+      "key": "exists",
+      "expected": true,
+      "description": "Base preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/asm_start.FCStd Lid",
+      "key": "exists",
+      "expected": true,
+      "description": "Lid preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/asm_start.FCStd MainAssembly",
+      "key": "exists",
+      "expected": true,
+      "description": "MainAssembly exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/asm_start.FCStd MainAssembly App::Part",
+      "key": "match",
+      "expected": true,
+      "description": "MainAssembly is App::Part"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/asm_start.FCStd App::Link 2",
+      "key": "match",
+      "expected": true,
+      "description": "Two App::Link objects (Base link + Lid link)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_gap_multi_instance_exposure",
+  "files": [
+    {
+      "filename": "multi_inst_source.jpg",
+      "sandbox_path": "/home/user/Pictures/multi_inst_source.jpg",
+      "type": "jpg"
+    }
+  ]
+}

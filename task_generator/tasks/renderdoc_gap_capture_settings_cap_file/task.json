@@ -1,0 +1,18 @@
+{
+  "id": "renderdoc_gap_capture_settings_cap_file",
+  "app": "renderdoc",
+  "task": "Two things must be true when you are done:\n\n(A) A RenderDoc capture-settings file must exist at /home/user/captures/game.cap. It must be a valid JSON document of at least 150 bytes containing at minimum a top-level object with these fields: an \"executable\" set to the string \"/usr/local/bin/my_game\", a \"workingDir\" set to \"/home/user/games/shipping\", and an \"options\" object with \"APIValidation\": true, \"CaptureCallstacks\": true, and \"VerifyBufferAccess\": true.\n\n(B) The RenderDoc UI configuration at /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document) must be edited so the key \"RecentCaptureSettings\" is the JSON array containing exactly one entry, the absolute path \"/home/user/captures/game.cap\". Use a compact JSON form with NO embedded whitespace, i.e. the literal value [\"/home/user/captures/game.cap\"].\n\nThe top-level \"rdocConfigData\": 1 marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {"filename": "UI.config", "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/captures/game.cap", "key": "exists", "expected": true, "description": "game.cap exists"},
+    {"command": "file-info /home/user/captures/game.cap", "eval": "result.get('size', 0) >= 150", "description": "game.cap is at least 150 bytes"},
+    {"command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config", "key": "exists", "expected": true, "description": "UI.config still exists"},
+    {"command": "check-setting rdocConfigData 1", "key": "match", "expected": true, "description": "rdocConfigData marker preserved"},
+    {"command": "check-setting RecentCaptureSettings '[\"/home/user/captures/game.cap\"]'", "key": "match", "expected": true, "description": "RecentCaptureSettings references game.cap"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 5}
+}

@@ -1,0 +1,17 @@
+{
+  "task_id": "pcmanfm_archive_reshape_quarters",
+  "files": [
+    {"filename": "2024-01.csv", "sandbox_path": "/home/user/Documents/financials/2024-01.csv", "type": "csv"},
+    {"filename": "2024-02.csv", "sandbox_path": "/home/user/Documents/financials/2024-02.csv", "type": "csv"},
+    {"filename": "2024-03.csv", "sandbox_path": "/home/user/Documents/financials/2024-03.csv", "type": "csv"},
+    {"filename": "2024-04.csv", "sandbox_path": "/home/user/Documents/financials/2024-04.csv", "type": "csv"},
+    {"filename": "2024-05.csv", "sandbox_path": "/home/user/Documents/financials/2024-05.csv", "type": "csv"},
+    {"filename": "2024-06.csv", "sandbox_path": "/home/user/Documents/financials/2024-06.csv", "type": "csv"},
+    {"filename": "2024-07.csv", "sandbox_path": "/home/user/Documents/financials/2024-07.csv", "type": "csv"},
+    {"filename": "2024-08.csv", "sandbox_path": "/home/user/Documents/financials/2024-08.csv", "type": "csv"},
+    {"filename": "2024-09.csv", "sandbox_path": "/home/user/Documents/financials/2024-09.csv", "type": "csv"},
+    {"filename": "2024-10.csv", "sandbox_path": "/home/user/Documents/financials/2024-10.csv", "type": "csv"},
+    {"filename": "2024-11.csv", "sandbox_path": "/home/user/Documents/financials/2024-11.csv", "type": "csv"},
+    {"filename": "2024-12.csv", "sandbox_path": "/home/user/Documents/financials/2024-12.csv", "type": "csv"}
+  ]
+}

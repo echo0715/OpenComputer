@@ -1,0 +1,58 @@
+{
+  "id": "brave_multi_tab_navigation",
+  "app": "brave",
+  "task": "In Brave, open three tabs to https://httpbin.org/get, https://httpbin.org/headers, and https://httpbin.org/ip and bookmark all three. Then redirect the https://httpbin.org/get tab to https://httpbin.org/user-agent (without removing the existing bookmark for /get).\n\nWhen done, the three open tabs must be https://httpbin.org/user-agent, https://httpbin.org/headers, and https://httpbin.org/ip; bookmarks must exist for https://httpbin.org/get, https://httpbin.org/headers, and https://httpbin.org/ip; and https://httpbin.org/get must appear in browsing history.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open httpbin.org/user-agent",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/user-agent is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/headers",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/headers is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/ip",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/ip is open"
+    },
+    {
+      "command": "check-bookmark httpbin.org/get",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/get exists"
+    },
+    {
+      "command": "check-bookmark httpbin.org/headers",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/headers exists"
+    },
+    {
+      "command": "check-bookmark httpbin.org/ip",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/ip exists"
+    },
+    {
+      "command": "check-url-visited httpbin.org/get",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/get was visited in browsing history"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

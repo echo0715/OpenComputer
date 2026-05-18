@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://navagent"]
+
+[node name="Agent" type="CharacterBody2D"]

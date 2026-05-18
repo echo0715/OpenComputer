@@ -1,0 +1,75 @@
+{
+  "id": "thunderbird_draft_meeting_series",
+  "app": "thunderbird",
+  "task": "Create three Thunderbird drafts (do NOT send any of them):\n\n1. To: team@acme.com\n   Subject: Sprint Planning - Week 14\n   Body: Sprint planning session scheduled for Monday at 10 AM in the main conference room. Please come prepared with your task estimates.\n\n2. To: stakeholders@acme.com\n   Subject: Sprint Review - Week 13 Results\n   Body: Sprint 13 is complete. We delivered 34 story points across 12 tickets. Demo recording will be shared by end of day.\n\n3. To: pm@acme.com\n   Subject: Retrospective Action Items\n   Body: Action items from the retro: improve code review turnaround time, add integration tests for the payment module, and schedule monthly architecture reviews.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists Sprint Planning",
+      "key": "found",
+      "expected": true,
+      "description": "Sprint Planning draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Sprint Planning team@acme.com",
+      "key": "match",
+      "expected": true,
+      "description": "Sprint Planning to team@acme.com"
+    },
+    {
+      "command": "check-draft-content Sprint Planning task estimates",
+      "key": "found",
+      "expected": true,
+      "description": "Sprint Planning mentions task estimates"
+    },
+    {
+      "command": "check-draft-exists Sprint Review",
+      "key": "found",
+      "expected": true,
+      "description": "Sprint Review draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Sprint Review stakeholders@acme.com",
+      "key": "match",
+      "expected": true,
+      "description": "Sprint Review to stakeholders"
+    },
+    {
+      "command": "check-draft-content Sprint Review 34 story points",
+      "key": "found",
+      "expected": true,
+      "description": "Sprint Review mentions 34 story points"
+    },
+    {
+      "command": "check-draft-exists Retrospective Action Items",
+      "key": "found",
+      "expected": true,
+      "description": "Retrospective draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Retrospective Action pm@acme.com",
+      "key": "match",
+      "expected": true,
+      "description": "Retrospective to pm@acme.com"
+    },
+    {
+      "command": "check-draft-content Retrospective Action code review turnaround",
+      "key": "found",
+      "expected": true,
+      "description": "Retrospective mentions code review"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

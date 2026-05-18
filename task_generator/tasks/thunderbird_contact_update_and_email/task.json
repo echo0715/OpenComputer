@@ -1,0 +1,61 @@
+{
+  "id": "thunderbird_contact_update_and_email",
+  "app": "thunderbird",
+  "task": "Thunderbird's Address Book already contains a contact `Emily Watson` with email `emily@oldstartup.com`.\n\n1. Update that contact so primary email = `emily.watson@newventures.io` and company = `New Ventures Inc` (keep the contact name `Emily Watson`).\n2. Create a draft (do NOT send) with:\n   - To: emily.watson@newventures.io\n   - Subject: Congratulations on the New Role\n   - Body: I heard about your move to New Ventures. Congratulations! I would love to catch up over coffee sometime next week.",
+  "env": {
+    "files": [
+      {
+        "filename": "setup_contact.py",
+        "sandbox_path": "/home/user/setup_contact.py"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Emily Watson",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Emily Watson exists"
+    },
+    {
+      "command": "check-contact-field Emily Watson primary_email emily.watson@newventures.io",
+      "key": "match",
+      "expected": true,
+      "description": "Email updated"
+    },
+    {
+      "command": "check-contact-field Emily Watson company New Ventures Inc",
+      "key": "match",
+      "expected": true,
+      "description": "Company updated"
+    },
+    {
+      "command": "check-draft-exists Congratulations",
+      "key": "found",
+      "expected": true,
+      "description": "Draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Congratulations emily.watson@newventures.io",
+      "key": "match",
+      "expected": true,
+      "description": "Draft to new email"
+    },
+    {
+      "command": "check-draft-content Congratulations catch up over coffee",
+      "key": "found",
+      "expected": true,
+      "description": "Draft body correct"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "zotero_create_collection_and_move",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite.\n\nCreate a new top-level collection under 'My Library' named exactly 'Key Papers', and add the existing item 'Attention Is All You Need' to it. The item must continue to belong to its existing collections as well. Leave Zotero running so the changes are saved.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists"
+    },
+    {
+      "command": "check-collection-exists 'Key Papers'",
+      "key": "exists",
+      "expected": true,
+      "description": "'Key Papers' collection exists"
+    },
+    {
+      "command": "check-collection-contains 'Key Papers' 'Attention Is All You Need'",
+      "key": "contains",
+      "expected": true,
+      "description": "'Key Papers' contains the Attention paper"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

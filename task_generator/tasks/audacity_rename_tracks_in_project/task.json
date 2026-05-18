@@ -1,0 +1,58 @@
+{
+  "id": "audacity_rename_tracks_in_project",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/session.aup loaded. The project contains two wavetracks, both currently named 'Audio Track'.\n\nRename the top track to 'Lead Vocal' and the bottom track to 'Acoustic Guitar', then save the project so the new names are written to /home/user/Music/session.aup. Do not add or delete any tracks, and keep the order: 'Lead Vocal' on top, 'Acoustic Guitar' below.",
+  "env": {
+    "files": [
+      {
+        "filename": "session.aup",
+        "sandbox_path": "/home/user/Music/session.aup"
+      },
+      {
+        "filename": "session_data/e00/d00/e000001.au",
+        "sandbox_path": "/home/user/Music/session_data/e00/d00/e000001.au"
+      },
+      {
+        "filename": "session_data/e00/d00/e000002.au",
+        "sandbox_path": "/home/user/Music/session_data/e00/d00/e000002.au"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-valid-aup /home/user/Music/session.aup",
+      "key": "valid",
+      "expected": true,
+      "description": "session.aup is still valid"
+    },
+    {
+      "command": "check-track-count /home/user/Music/session.aup 2",
+      "key": "match",
+      "expected": true,
+      "description": "Project still has exactly 2 wavetracks"
+    },
+    {
+      "command": "check-track-name /home/user/Music/session.aup 'Lead Vocal'",
+      "key": "match",
+      "expected": true,
+      "description": "A track named 'Lead Vocal' exists"
+    },
+    {
+      "command": "check-track-name /home/user/Music/session.aup 'Acoustic Guitar'",
+      "key": "match",
+      "expected": true,
+      "description": "A track named 'Acoustic Guitar' exists"
+    },
+    {
+      "command": "tracks /home/user/Music/session.aup",
+      "eval": "result[0].get('name') == 'Lead Vocal' and result[1].get('name') == 'Acoustic Guitar'",
+      "description": "Track order is [Lead Vocal, Acoustic Guitar]"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

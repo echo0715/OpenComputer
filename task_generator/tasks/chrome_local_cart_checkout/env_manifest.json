@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_cart_checkout",
+  "files": [
+    {
+      "filename": "store.html",
+      "sandbox_path": "/home/user/Documents/store.html",
+      "type": "html"
+    }
+  ]
+}

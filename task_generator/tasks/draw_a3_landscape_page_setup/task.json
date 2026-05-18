@@ -1,0 +1,87 @@
+{
+  "id": "draw_a3_landscape_page_setup",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/report_draft.odg is open in LibreOffice Draw — one A4 portrait page containing a rectangle labeled 'Draft Content'.\n\nUpdate the document so:\n- The page is A3 landscape (~42 cm wide × ~29.7 cm tall).\n- All four page margins (top, bottom, left, right) are 2 cm.\n- The page background is a solid color fill of #FFFFCC (light yellow).\n- The page is renamed to 'Cover'.\n- The existing 'Draft Content' rectangle is preserved (do not delete it).\n\nSave the file in-place to /home/user/Documents/report_draft.odg.",
+  "env": {
+    "files": [
+      {
+        "filename": "report_draft.odg",
+        "sandbox_path": "/home/user/Documents/report_draft.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/report_draft.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File still exists at the original path"
+    },
+    {
+      "command": "check-page-count 1",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 1 page"
+    },
+    {
+      "command": "check-page-property 0 name Cover /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page 1 is renamed to 'Cover'"
+    },
+    {
+      "command": "check-page-property 0 width_cm 42 /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page width is ~42 cm (A3 landscape)"
+    },
+    {
+      "command": "check-page-property 0 height_cm 29.7 /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page height is ~29.7 cm (A3 landscape)"
+    },
+    {
+      "command": "check-page-property 0 margin_top_cm 2 /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Top margin 2 cm"
+    },
+    {
+      "command": "check-page-property 0 margin_bottom_cm 2 /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Bottom margin 2 cm"
+    },
+    {
+      "command": "check-page-property 0 margin_left_cm 2 /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Left margin 2 cm"
+    },
+    {
+      "command": "check-page-property 0 margin_right_cm 2 /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Right margin 2 cm"
+    },
+    {
+      "command": "check-page-property 0 background_fill_color FFFFCC /home/user/Documents/report_draft.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page background fill is #FFFFCC"
+    },
+    {
+      "command": "check-page-contains 0 \"Draft Content\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Original 'Draft Content' rectangle is preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

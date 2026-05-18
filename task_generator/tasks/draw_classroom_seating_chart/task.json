@@ -1,0 +1,201 @@
+{
+  "id": "draw_classroom_seating_chart",
+  "app": "libreoffice_draw",
+  "task": "Create a new one-page LibreOffice Draw drawing representing a classroom seating chart, and save it to /home/user/Documents/seating_chart.odg.\n\nThe page must contain:\n- A 'Teacher Desk' rectangle near the top.\n- 20 student-desk rectangles labelled exactly 'S01', 'S02', 'S03', ..., 'S20' (one label per rectangle), arranged as a 5×4 grid.\n- Two shapes/labels with the exact strings 'Window Side' and 'Door Side' anchoring the layout.\n- Two accommodation marker shapes labelled exactly 'Wheelchair Access' and 'Hearing Loop'.\n\nAlso add a custom layer named exactly 'Accessibility'. Page 1 must end up with at least 25 shapes total.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/seating_chart.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Output ODG file exists"
+    },
+    {
+      "command": "check-page-count 1",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 1 page"
+    },
+    {
+      "command": "check-layer-exists Accessibility",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Accessibility' exists"
+    },
+    {
+      "command": "check-page-contains 0 \"Teacher Desk\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains Teacher Desk"
+    },
+    {
+      "command": "check-page-contains 0 \"Window Side\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 Window Side"
+    },
+    {
+      "command": "check-page-contains 0 \"Door Side\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 Door Side"
+    },
+    {
+      "command": "check-page-contains 0 \"Wheelchair Access\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 Wheelchair Access marker"
+    },
+    {
+      "command": "check-page-contains 0 \"Hearing Loop\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 Hearing Loop marker"
+    },
+    {
+      "command": "check-page-contains 0 S01",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S01"
+    },
+    {
+      "command": "check-page-contains 0 S02",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S02"
+    },
+    {
+      "command": "check-page-contains 0 S03",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S03"
+    },
+    {
+      "command": "check-page-contains 0 S04",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S04"
+    },
+    {
+      "command": "check-page-contains 0 S05",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S05"
+    },
+    {
+      "command": "check-page-contains 0 S06",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S06"
+    },
+    {
+      "command": "check-page-contains 0 S07",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S07"
+    },
+    {
+      "command": "check-page-contains 0 S08",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S08"
+    },
+    {
+      "command": "check-page-contains 0 S09",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S09"
+    },
+    {
+      "command": "check-page-contains 0 S10",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S10"
+    },
+    {
+      "command": "check-page-contains 0 S11",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S11"
+    },
+    {
+      "command": "check-page-contains 0 S12",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S12"
+    },
+    {
+      "command": "check-page-contains 0 S13",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S13"
+    },
+    {
+      "command": "check-page-contains 0 S14",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S14"
+    },
+    {
+      "command": "check-page-contains 0 S15",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S15"
+    },
+    {
+      "command": "check-page-contains 0 S16",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S16"
+    },
+    {
+      "command": "check-page-contains 0 S17",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S17"
+    },
+    {
+      "command": "check-page-contains 0 S18",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S18"
+    },
+    {
+      "command": "check-page-contains 0 S19",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S19"
+    },
+    {
+      "command": "check-page-contains 0 S20",
+      "key": "contains",
+      "expected": true,
+      "description": "Desk S20"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangles"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 25",
+      "description": "Page 1 has at least 25 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

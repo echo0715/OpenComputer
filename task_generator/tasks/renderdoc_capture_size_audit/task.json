@@ -1,0 +1,78 @@
+{
+  "id": "renderdoc_capture_size_audit",
+  "app": "renderdoc",
+  "task": "The directory /home/user/incoming contains three valid .rdc capture files of very different sizes:\n  tiny.rdc   (about 64 bytes)\n  medium.rdc (about 512 bytes)\n  large.rdc  (about 2 KB)\n\nYour job is to partition them by size into three sibling directories and then register the medium and large captures as the two most recent captures in the RenderDoc UI configuration.\n\n1. Create /home/user/sized/small, /home/user/sized/medium, and /home/user/sized/large.\n2. Move tiny.rdc -> /home/user/sized/small/tiny.rdc\n3. Move medium.rdc -> /home/user/sized/medium/medium.rdc\n4. Move large.rdc -> /home/user/sized/large/large.rdc\n5. Edit /home/user/.local/share/qrenderdoc/UI.config so that \"RecentCaptureFiles\" is the JSON array with exactly these two absolute paths in this order: [\"/home/user/sized/large/large.rdc\", \"/home/user/sized/medium/medium.rdc\"]. The \"rdocConfigData\": 1 marker must remain.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      },
+      {
+        "filename": "tiny.rdc",
+        "sandbox_path": "/home/user/incoming/tiny.rdc"
+      },
+      {
+        "filename": "medium.rdc",
+        "sandbox_path": "/home/user/incoming/medium.rdc"
+      },
+      {
+        "filename": "large.rdc",
+        "sandbox_path": "/home/user/incoming/large.rdc"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-rdc-valid /home/user/sized/small/tiny.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "tiny in small/ is valid"
+    },
+    {
+      "command": "check-rdc-valid /home/user/sized/medium/medium.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "medium in medium/ is valid"
+    },
+    {
+      "command": "check-rdc-valid /home/user/sized/large/large.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "large in large/ is valid"
+    },
+    {
+      "command": "file-info /home/user/sized/large/large.rdc",
+      "eval": "result.get('size', 0) >= 1024",
+      "description": "large.rdc is >= 1 KB"
+    },
+    {
+      "command": "file-info /home/user/sized/small/tiny.rdc",
+      "eval": "result.get('size', 0) < 200",
+      "description": "tiny.rdc is < 200 bytes"
+    },
+    {
+      "command": "check-capture-count /home/user/incoming 0",
+      "key": "match",
+      "expected": true,
+      "description": "incoming emptied"
+    },
+    {
+      "command": "recent-captures",
+      "eval": "result.get('files') == ['/home/user/sized/large/large.rdc', '/home/user/sized/medium/medium.rdc']",
+      "description": "RecentCaptureFiles ordered [large, medium]"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "vlc_convert_mkv_to_webm",
+  "app": "vlc",
+  "task": "VLC is already running. Transcode /home/user/Videos/src.mkv into a WebM file at /home/user/Videos/out.webm using VP8 video and Vorbis audio (WebM encapsulation).\n\nThe resulting /home/user/Videos/out.webm must be a valid WebM container with a video stream and a duration roughly equal to the 20-second source.",
+  "env": {
+    "files": [
+      {
+        "filename": "src.mkv",
+        "sandbox_path": "/home/user/Videos/src.mkv"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/src.mkv",
+      "key": "exists",
+      "expected": true,
+      "description": "Source src.mkv exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Videos/out.webm",
+      "key": "exists",
+      "expected": true,
+      "description": "Converted out.webm exists"
+    },
+    {
+      "command": "check-media-format /home/user/Videos/out.webm webm",
+      "key": "match",
+      "expected": true,
+      "description": "out.webm is a WebM container"
+    },
+    {
+      "command": "check-media-has-video /home/user/Videos/out.webm",
+      "key": "has_video",
+      "expected": true,
+      "description": "out.webm has a video stream"
+    },
+    {
+      "command": "check-media-duration /home/user/Videos/out.webm 20 5",
+      "key": "match",
+      "expected": true,
+      "description": "out.webm duration is approximately 20 seconds (+/- 5s)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

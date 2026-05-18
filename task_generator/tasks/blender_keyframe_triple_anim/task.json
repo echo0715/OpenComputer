@@ -1,0 +1,84 @@
+{
+  "id": "blender_keyframe_triple_anim",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/keyframe_count.blend, rename the default Cube to 'Bouncer'. Set scene frame_start = 1, frame_end = 60.\n\nAnimate 'Bouncer' with three Location keyframes: at frame 1 (start position), at frame 30 (raised, e.g., Z increased by ~3), and at frame 60 (returned to a low position).\n\nAdd a UV Sphere named 'Follower' with exactly one Location keyframe at frame 1. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "keyframe_count.blend",
+        "sandbox_path": "/home/user/Documents/keyframe_count.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/keyframe_count.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/keyframe_count.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/keyframe_count.blend Bouncer",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Bouncer' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/keyframe_count.blend Bouncer MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Bouncer' is MESH"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/keyframe_count.blend Follower",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Follower' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/keyframe_count.blend Follower MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Follower' is MESH"
+    },
+    {
+      "command": "check-animation-exists /home/user/Documents/keyframe_count.blend Bouncer",
+      "key": "animated",
+      "expected": true,
+      "description": "'Bouncer' has animation data"
+    },
+    {
+      "command": "check-animation-exists /home/user/Documents/keyframe_count.blend Follower",
+      "key": "animated",
+      "expected": true,
+      "description": "'Follower' has animation data"
+    },
+    {
+      "command": "animations /home/user/Documents/keyframe_count.blend Bouncer",
+      "eval": "result.get('keyframe_count', 0) >= 9",
+      "description": "'Bouncer' has 3 Location keyframes (9 total across X/Y/Z fcurves)"
+    },
+    {
+      "command": "animations /home/user/Documents/keyframe_count.blend Follower",
+      "eval": "result.get('keyframe_count', 0) >= 1",
+      "description": "'Follower' has at least 1 keyframe"
+    },
+    {
+      "command": "scene-info /home/user/Documents/keyframe_count.blend",
+      "eval": "result.get('frame_start') == 1 and result.get('frame_end') == 60",
+      "description": "Scene frame range is 1-60"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

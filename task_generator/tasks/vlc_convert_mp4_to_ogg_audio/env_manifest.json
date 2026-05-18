@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_convert_mp4_to_ogg_audio",
+  "files": [
+    {"filename": "ogg_src.mp4", "sandbox_path": "/home/user/Videos/ogg_src.mp4", "type": "mp4"}
+  ]
+}

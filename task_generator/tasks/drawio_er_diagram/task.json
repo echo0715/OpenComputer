@@ -1,0 +1,63 @@
+{
+  "id": "drawio_er_diagram",
+  "app": "drawio",
+  "task": "Create an Entity-Relationship diagram in /home/user/Documents/er_diagram.drawio. The diagram must have exactly 4 entity shapes with labels 'Customer', 'Order', 'Product', 'Category', and exactly 3 edges: 'Customer'->'Order', 'Order'->'Product', 'Product'->'Category'. Final counts: exactly 4 vertices and exactly 3 edges. Persist to /home/user/Documents/er_diagram.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "er_diagram.drawio",
+        "sandbox_path": "/home/user/Documents/er_diagram.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/er_diagram.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists at expected path"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/er_diagram.drawio Customer",
+      "key": "exists",
+      "expected": true,
+      "description": "Entity 'Customer' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/er_diagram.drawio Order",
+      "key": "exists",
+      "expected": true,
+      "description": "Entity 'Order' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/er_diagram.drawio Product",
+      "key": "exists",
+      "expected": true,
+      "description": "Entity 'Product' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/er_diagram.drawio Category",
+      "key": "exists",
+      "expected": true,
+      "description": "Entity 'Category' exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/er_diagram.drawio 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 entity shapes"
+    },
+    {
+      "command": "check-edge-count /home/user/Documents/er_diagram.drawio 3",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 3 relationship edges"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_sort_lines_manually",
+  "files": [
+    {"filename": "fruits.txt", "sandbox_path": "/home/user/Documents/fruits.txt", "type": "txt"}
+  ]
+}

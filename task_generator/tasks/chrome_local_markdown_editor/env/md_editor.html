@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Markdown Playground</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 20px; }
+  h1 { margin-top: 0; }
+  .panes { display: flex; gap: 20px; }
+  #source { flex: 1; min-height: 360px; font-family: ui-monospace, monospace; padding: 10px; font-size: 14px; border: 1px solid #ccc; }
+  #preview { flex: 1; min-height: 360px; border: 1px solid #ccc; padding: 14px; background: #fafafa; overflow: auto; }
+  #preview pre { background: #eee; padding: 8px; border-radius: 4px; overflow-x: auto; }
+  #preview code { font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<h1>Markdown Playground</h1>
+<p>Type Markdown on the left; preview renders on the right.</p>
+<div class="panes">
+  <textarea id="source" placeholder="# Heading\n- item"></textarea>
+  <div id="preview"></div>
+</div>
+<script>
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function render(md) {
+    const lines = md.split("\n");
+    const out = [];
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      if (line.startsWith("```")) {
+        const code = [];
+        i++;
+        while (i < lines.length && !lines[i].startsWith("```")) {
+          code.push(lines[i]);
+          i++;
+        }
+        i++;
+        out.push("<pre><code>" + escapeHtml(code.join("\n")) + "</code></pre>");
+        continue;
+      }
+      const h = line.match(/^(#{1,6})\s+(.*)$/);
+      if (h) {
+        const level = h[1].length;
+        out.push("<h" + level + ">" + escapeHtml(h[2]) + "</h" + level + ">");
+        i++;
+        continue;
+      }
+      if (/^\s*-\s+/.test(line)) {
+        const items = [];
+        while (i < lines.length && /^\s*-\s+/.test(lines[i])) {
+          items.push("<li>" + escapeHtml(lines[i].replace(/^\s*-\s+/, "")) + "</li>");
+          i++;
+        }
+        out.push("<ul>" + items.join("") + "</ul>");
+        continue;
+      }
+      if (line.trim() === "") { i++; continue; }
+      out.push("<p>" + escapeHtml(line) + "</p>");
+      i++;
+    }
+    return out.join("\n");
+  }
+  const src = document.getElementById("source");
+  const pv  = document.getElementById("preview");
+  function update() { pv.innerHTML = render(src.value); }
+  src.addEventListener("input", update);
+  update();
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "id": "gimp_add_alpha_transparent",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/icon_bg.png in GIMP — a 200x200 image with a solid white background and a red circle in the center.\n\nReplace the white background with full transparency (the red circle must remain opaque) and export the result as an RGBA PNG to /home/user/Documents/icon_transparent.png. The output must remain 200x200 pixels with an alpha channel.",
+  "env": {
+    "files": [
+      {
+        "filename": "icon_bg.png",
+        "sandbox_path": "/home/user/Documents/icon_bg.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/icon_transparent.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported transparent PNG file exists"
+    },
+    {
+      "command": "check-file-mode /home/user/Documents/icon_transparent.png RGBA",
+      "key": "match",
+      "expected": true,
+      "description": "Image has RGBA mode (alpha channel present)"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/icon_transparent.png 200 200",
+      "key": "match",
+      "expected": true,
+      "description": "Image dimensions are 200x200 pixels"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

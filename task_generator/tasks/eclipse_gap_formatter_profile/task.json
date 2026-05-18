@@ -1,0 +1,44 @@
+{
+  "id": "eclipse_gap_formatter_profile",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; a Java code-formatter profile XML file is available at /home/user/workspace/formatter_profile.xml (it defines a profile named 'TeamStyle' with tabulation char = space, tab size = 2, line split = 100).\n\nImport that formatter profile and set 'TeamStyle' as the active workspace Java formatter profile so the workspace preferences end up with:\n\n- `org.eclipse.jdt.core.prefs`: `org.eclipse.jdt.core.formatter.tabulation.char=space`, `org.eclipse.jdt.core.formatter.tabulation.size=2`, `org.eclipse.jdt.core.formatter.lineSplit=100`\n- `org.eclipse.jdt.ui.prefs`: `formatter_profile` references `TeamStyle`",
+  "env": {
+    "files": [
+      {
+        "filename": "formatter_profile.xml",
+        "sandbox_path": "/home/user/workspace/formatter_profile.xml"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.core.prefs org.eclipse.jdt.core.formatter.tabulation.char space",
+      "key": "matches",
+      "expected": true,
+      "description": "Tab policy = space"
+    },
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.core.prefs org.eclipse.jdt.core.formatter.tabulation.size 2",
+      "key": "matches",
+      "expected": true,
+      "description": "Tab size = 2"
+    },
+    {
+      "command": "check-workspace-pref /home/user/workspace org.eclipse.jdt.core.prefs org.eclipse.jdt.core.formatter.lineSplit 100",
+      "key": "matches",
+      "expected": true,
+      "description": "Line split = 100"
+    },
+    {
+      "command": "check-workspace-pref-contains /home/user/workspace org.eclipse.jdt.ui.prefs formatter_profile TeamStyle",
+      "key": "contains",
+      "expected": true,
+      "description": "Active formatter profile = TeamStyle"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

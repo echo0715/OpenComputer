@@ -1,0 +1,81 @@
+{
+  "id": "draw_export_pdf_with_bookmarks",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/project_brief.odg is open in LibreOffice Draw. It has 3 pages, each containing a rectangle labeled (respectively) 'Page One Content', 'Page Two Content', and 'Page Three Content'.\n\nRename the pages in order to 'Overview', 'Architecture', 'Roadmap', and save the ODG in-place. Then export the document as a PDF to /home/user/Documents/project_brief.pdf with the 'Export bookmarks' option enabled.\n\nThe resulting PDF must be a 3-page PDF whose outline/bookmark entries match the three page names ('Overview', 'Architecture', 'Roadmap').",
+  "env": {
+    "files": [
+      {
+        "filename": "project_brief.odg",
+        "sandbox_path": "/home/user/Documents/project_brief.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/project_brief.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "ODG still exists"
+    },
+    {
+      "command": "check-page-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "ODG has exactly 3 pages"
+    },
+    {
+      "command": "check-page-property 0 name Overview /home/user/Documents/project_brief.odg",
+      "key": "match",
+      "expected": true,
+      "description": "ODG page 1 renamed to 'Overview'"
+    },
+    {
+      "command": "check-page-property 1 name Architecture /home/user/Documents/project_brief.odg",
+      "key": "match",
+      "expected": true,
+      "description": "ODG page 2 renamed to 'Architecture'"
+    },
+    {
+      "command": "check-page-property 2 name Roadmap /home/user/Documents/project_brief.odg",
+      "key": "match",
+      "expected": true,
+      "description": "ODG page 3 renamed to 'Roadmap'"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/project_brief.pdf",
+      "key": "exists",
+      "expected": true,
+      "description": "PDF export file exists"
+    },
+    {
+      "command": "check-pdf-page-count /home/user/Documents/project_brief.pdf 3",
+      "key": "match",
+      "expected": true,
+      "description": "Exported PDF has 3 pages"
+    },
+    {
+      "command": "check-pdf-bookmark /home/user/Documents/project_brief.pdf Overview",
+      "key": "exists",
+      "expected": true,
+      "description": "PDF outline contains 'Overview' bookmark"
+    },
+    {
+      "command": "check-pdf-bookmark /home/user/Documents/project_brief.pdf Architecture",
+      "key": "exists",
+      "expected": true,
+      "description": "PDF outline contains 'Architecture' bookmark"
+    },
+    {
+      "command": "check-pdf-bookmark /home/user/Documents/project_brief.pdf Roadmap",
+      "key": "exists",
+      "expected": true,
+      "description": "PDF outline contains 'Roadmap' bookmark"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

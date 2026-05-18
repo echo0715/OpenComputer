@@ -1,0 +1,65 @@
+{
+  "id": "blender_gap2_principled_bsdf_nodes",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/bsdf_scene.blend, configure two materials:\n\n- 'RedMetal' assigned to the default Cube, using nodes with a Principled BSDF whose Base Color = (1.0, 0.0, 0.0, 1.0), Metallic = 0.8, Roughness = 0.2.\n- 'GlassMat' assigned to a new UV Sphere named 'GlassBall'. The material's surface must be a Glass BSDF (replacing the default Principled BSDF) connected to Material Output Surface, with Color = (0.9, 0.95, 1.0, 1.0) and IOR = 1.45.\n\nSet the render engine to Cycles, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "bsdf_scene.blend",
+        "sandbox_path": "/home/user/Documents/bsdf_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/bsdf_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/bsdf_scene.blend RedMetal",
+      "key": "exists",
+      "expected": true,
+      "description": "Material RedMetal exists"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/bsdf_scene.blend GlassMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material GlassMat exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/bsdf_scene.blend GlassBall",
+      "key": "exists",
+      "expected": true,
+      "description": "GlassBall object exists"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/bsdf_scene.blend RedMetal",
+      "eval": "any(n.get('type')=='BSDF_PRINCIPLED' and abs(n['inputs'].get('Base Color',[0,0,0,0])[0]-1.0)<0.02 and n['inputs'].get('Base Color',[0,0,0,0])[1]<0.05 and n['inputs'].get('Base Color',[0,0,0,0])[2]<0.05 and abs(n['inputs'].get('Metallic',0)-0.8)<0.02 and abs(n['inputs'].get('Roughness',0)-0.2)<0.02 for n in result.get('nodes',[]))",
+      "description": "Principled BSDF on RedMetal has red base color, metallic 0.8, roughness 0.2"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/bsdf_scene.blend GlassMat",
+      "eval": "any(n.get('type')=='BSDF_GLASS' and abs(n['inputs'].get('IOR',0)-1.45)<0.02 for n in result.get('nodes',[]))",
+      "description": "GlassMat has Glass BSDF with IOR 1.45"
+    },
+    {
+      "command": "material-nodes /home/user/Documents/bsdf_scene.blend GlassMat",
+      "eval": "any(l['from_node'].startswith('Glass') or 'Glass' in l.get('from_node','') for l in result.get('links',[])) and any(l.get('to_socket')=='Surface' for l in result.get('links',[]))",
+      "description": "Glass BSDF connected to Material Output Surface"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/bsdf_scene.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine CYCLES"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Dashboard</title>
+<style>
+body { font-family: Arial, sans-serif; max-width: 640px; margin: 2em auto; padding: 1em; background: #fff; color: #111; transition: all 0.2s; }
+body.dark-mode { background: #222; color: #eee; }
+button { padding: 6px 12px; margin: 4px; }
+#counter { font-size: 2em; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Interactive Dashboard</h1>
+<p>Counter value: <span id="counter">0</span></p>
+<button id="inc">Increment</button>
+<button id="dec">Decrement</button>
+<button id="toggle">Toggle Dark Mode</button>
+<p>Status: <input type="text" id="status" value="idle"></p>
+<script>
+var c = 0;
+function render() { document.getElementById('counter').textContent = String(c); }
+document.getElementById('inc').addEventListener('click', function() { c += 1; render(); });
+document.getElementById('dec').addEventListener('click', function() { c -= 1; render(); });
+document.getElementById('toggle').addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+});
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "id": "chrome_local_calendar_event",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/calendar.html (a March 2025 month-view calendar). Add a single event to March 15 with title `Team Review` (via the `#event-title` input) and time `14:30` (via the `#event-time` input). After saving, the March 15 cell must contain the event as a blue pill and the bottom counter must read `Events: 1`. Leave the calendar tab open.",
+  "env": {
+    "files": [
+      {
+        "filename": "calendar.html",
+        "sandbox_path": "/home/user/Documents/calendar.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open calendar.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for calendar.html is open"
+    },
+    {
+      "command": "check-page-contains \"Team Review\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page shows the event text 'Team Review'"
+    },
+    {
+      "command": "check-page-contains \"14:30\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page shows the event time '14:30'"
+    },
+    {
+      "command": "eval \"document.querySelector('td[data-date=15] .event')?.textContent || ''\"",
+      "eval": "'Team Review' in (result.get('value') or '')",
+      "description": "An event pill inside the March 15 cell contains 'Team Review'"
+    },
+    {
+      "command": "eval \"document.getElementById('events-count').textContent\"",
+      "eval": "str(result.get('value')).strip() == '1'",
+      "description": "#events-count element shows 1"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

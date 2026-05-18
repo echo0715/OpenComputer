@@ -1,0 +1,56 @@
+{
+  "id": "inkscape_gap_pattern_fill",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/pattern.svg. Create a PATTERN with id 'dotsPattern' consisting of a 20x20 tile with a single blue circle in the middle. Fill the rectangle 'bg' with that pattern (fill='url(#dotsPattern)'). The pattern must be defined inside <defs>. Save /home/user/Documents/pattern.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "pattern.svg",
+        "sandbox_path": "/home/user/Documents/pattern.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/pattern.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/pattern.svg bg",
+      "key": "exists",
+      "expected": true,
+      "description": "bg preserved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/pattern.svg dotsPattern",
+      "key": "exists",
+      "expected": true,
+      "description": "dotsPattern defined"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/pattern.svg pattern",
+      "key": "contains",
+      "expected": true,
+      "description": "Pattern element present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/pattern.svg dotsPattern",
+      "key": "contains",
+      "expected": true,
+      "description": "dotsPattern referenced"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/pattern.svg bg fill url(#dotsPattern)",
+      "key": "match",
+      "expected": true,
+      "description": "bg fill uses pattern"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

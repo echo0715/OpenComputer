@@ -1,0 +1,32 @@
+{
+  "id": "musescore3_gap_trill_ornament",
+  "app": "musescore3",
+  "task": "MuseScore 3 is open with /home/user/Documents/baroque_sketch.mscz — 4 measures with 4 quarter notes each.\n\nAdd a trill ornament to the last note of measure 1. Save in place at /home/user/Documents/baroque_sketch.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "baroque_sketch.mscz",
+        "sandbox_path": "/home/user/Documents/baroque_sketch.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/baroque_sketch.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-has-ornament /home/user/Documents/baroque_sketch.mscz 1 trill",
+      "key": "match",
+      "expected": true,
+      "description": "Trill ornament in measure 1"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

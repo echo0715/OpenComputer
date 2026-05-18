@@ -1,0 +1,32 @@
+{
+  "id": "thunderbird_change_compose_font",
+  "app": "thunderbird",
+  "task": "Change Thunderbird's default compose-font settings so the default serif font is `Georgia` (pref `font.name.serif.x-western` = `Georgia`) and the compose font size is `16`.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-pref-value font.name.serif.x-western Georgia",
+      "key": "match",
+      "expected": true,
+      "description": "Serif font set to Georgia"
+    },
+    {
+      "command": "prefs-matching compose.font_size",
+      "eval": "any('16' in str(v) for v in result.get('matches', {}).values()) or result.get('count', 0) == 0",
+      "description": "Compose font size check"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "kdenlive_new_project_add_clips",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/my_project.kdenlive (1920x1080, 30fps).\n\nImport /home/user/Videos/clip_a.mp4 and /home/user/Videos/clip_b.mp4 into the project, and place them on the timeline with clip_a.mp4 first and clip_b.mp4 after it (same or different video track is fine). Save the project so both clips are persisted to /home/user/Documents/my_project.kdenlive. The project must contain exactly 2 clips and remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "my_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/my_project.kdenlive"
+      },
+      {
+        "filename": "clip_a.mp4",
+        "sandbox_path": "/home/user/Videos/clip_a.mp4"
+      },
+      {
+        "filename": "clip_b.mp4",
+        "sandbox_path": "/home/user/Videos/clip_b.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/my_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/my_project.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/my_project.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/my_project.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/my_project.kdenlive clip_a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip clip_a.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/my_project.kdenlive clip_b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip clip_b.mp4 is in the project"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/my_project.kdenlive 2",
+      "key": "match",
+      "expected": true,
+      "description": "Project contains exactly 2 clips"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

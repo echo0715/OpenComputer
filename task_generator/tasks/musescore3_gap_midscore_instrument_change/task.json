@@ -1,0 +1,32 @@
+{
+  "id": "musescore3_gap_midscore_instrument_change",
+  "app": "musescore3",
+  "task": "MuseScore 3 is open with /home/user/Documents/woodwind_switch.mscz — a single Clarinet staff with 4 measures.\n\nAdd a mid-score instrument change at the start of measure 3 so the staff switches from Clarinet to Flute from measure 3 onwards. Save in place at /home/user/Documents/woodwind_switch.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "woodwind_switch.mscz",
+        "sandbox_path": "/home/user/Documents/woodwind_switch.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/woodwind_switch.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-instrument-change-at /home/user/Documents/woodwind_switch.mscz 3 flute",
+      "key": "match",
+      "expected": true,
+      "description": "Instrument change to Flute at measure 3"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

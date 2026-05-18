@@ -1,0 +1,46 @@
+{
+  "id": "brave_form_fill_httpbin",
+  "app": "brave",
+  "task": "In Brave, fill out the pizza order form at https://httpbin.org/forms/post with these exact values and submit it:\n- Customer name: `John Smith`\n- Telephone: `555-1234`\n- E-mail address: `john@example.com`\n- Pizza Size: `Medium`\n- Delivery instructions: `Extra cheese please`\n\nSubmission redirects to https://httpbin.org/post, which echoes the submitted values. Bookmark the resulting https://httpbin.org/post response page.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited httpbin.org/forms/post",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/forms/post was visited"
+    },
+    {
+      "command": "check-page-contains \"John Smith\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Response page contains submitted customer name 'John Smith'"
+    },
+    {
+      "command": "check-page-contains \"555-1234\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Response page contains submitted telephone '555-1234'"
+    },
+    {
+      "command": "check-page-contains \"john@example.com\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Response page contains submitted email 'john@example.com'"
+    },
+    {
+      "command": "check-bookmark httpbin.org/post",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/post response page exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

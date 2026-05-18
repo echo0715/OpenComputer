@@ -1,0 +1,46 @@
+{
+  "id": "blender_gap2_nla_action_strips",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/nla_scene.blend, on the default Cube create two actions:\n- 'BounceLoc' — keyframes the Cube's Z Location to 0.0 at frame 1, 2.0 at frame 10, and 0.0 at frame 20.\n- 'SpinRot' — keyframes the Cube's Z Rotation to 0.0 at frame 1 and 6.283 at frame 40.\n\nPush each action down so the Cube's animation_data has two NLA tracks named exactly 'Bounce' (containing a strip referencing 'BounceLoc') and 'Spin' (containing a strip referencing 'SpinRot'). Names must match exactly. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "nla_scene.blend",
+        "sandbox_path": "/home/user/Documents/nla_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/nla_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/nla_scene.blend Cube",
+      "eval": "{'BounceLoc','SpinRot'} <= set(result.get('actions_in_file',[]))",
+      "description": "Both actions exist in file"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/nla_scene.blend Cube",
+      "eval": "{t['name'] for t in result.get('nla_tracks',[])} >= {'Bounce','Spin'}",
+      "description": "NLA tracks 'Bounce' and 'Spin' exist"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/nla_scene.blend Cube",
+      "eval": "any(t['name']=='Bounce' and any(s.get('action')=='BounceLoc' for s in t.get('strips',[])) for t in result.get('nla_tracks',[]))",
+      "description": "Bounce track has strip referencing BounceLoc"
+    },
+    {
+      "command": "nla-tracks /home/user/Documents/nla_scene.blend Cube",
+      "eval": "any(t['name']=='Spin' and any(s.get('action')=='SpinRot' for s in t.get('strips',[])) for t in result.get('nla_tracks',[]))",
+      "description": "Spin track has strip referencing SpinRot"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

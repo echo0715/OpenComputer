@@ -1,0 +1,25 @@
+{
+  "task_id": "godot4_tool_script_plugin",
+  "files": [
+    {
+      "filename": "project.godot",
+      "sandbox_path": "/home/user/godot_projects/tool_game/project.godot",
+      "type": "godot"
+    },
+    {
+      "filename": "main.tscn",
+      "sandbox_path": "/home/user/godot_projects/tool_game/main.tscn",
+      "type": "tscn"
+    },
+    {
+      "filename": "scripts/grid_drawer.gd",
+      "sandbox_path": "/home/user/godot_projects/tool_game/scripts/grid_drawer.gd",
+      "type": "gd"
+    },
+    {
+      "filename": "icon.svg",
+      "sandbox_path": "/home/user/godot_projects/tool_game/icon.svg",
+      "type": "svg"
+    }
+  ]
+}

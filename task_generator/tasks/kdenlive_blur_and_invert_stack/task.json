@@ -1,0 +1,61 @@
+{
+  "id": "kdenlive_blur_and_invert_stack",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/blur_invert.kdenlive (1920x1080, 30fps).\n\nImport /home/user/Videos/target.mp4 onto a video track in the timeline, then apply both the Box Blur effect (`boxblur`) and the Invert effect (`invert`) to that timeline clip. Save the project so the changes are persisted to /home/user/Documents/blur_invert.kdenlive. The project must remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "blur_invert.kdenlive",
+        "sandbox_path": "/home/user/Documents/blur_invert.kdenlive"
+      },
+      {
+        "filename": "target.mp4",
+        "sandbox_path": "/home/user/Videos/target.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/blur_invert.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/blur_invert.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/blur_invert.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/blur_invert.kdenlive target.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "target.mp4 in project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/blur_invert.kdenlive boxblur",
+      "key": "exists",
+      "expected": true,
+      "description": "Box Blur effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/blur_invert.kdenlive invert",
+      "key": "exists",
+      "expected": true,
+      "description": "Invert effect applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

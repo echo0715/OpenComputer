@@ -1,0 +1,56 @@
+{
+  "id": "eclipse_gap_egit_share_project",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the Java project 'DemoApp' (not yet under version control).\n\nShare 'DemoApp' with Git so a Git repository is initialized at /home/user/workspace/DemoApp/.git, then stage all project files and create an initial commit whose message is exactly `Initial commit`. Both `.project` and `src/com/example/App.java` must be tracked in the repository.",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-git-repo /home/user/workspace/DemoApp",
+      "key": "head_exists",
+      "expected": true,
+      "description": "Git repository initialized at DemoApp"
+    },
+    {
+      "command": "check-git-commit-message /home/user/workspace/DemoApp 'Initial commit'",
+      "key": "contains",
+      "expected": true,
+      "description": "HEAD commit message is 'Initial commit'"
+    },
+    {
+      "command": "check-git-file-tracked /home/user/workspace/DemoApp src/com/example/App.java",
+      "key": "tracked",
+      "expected": true,
+      "description": "App.java tracked in git"
+    },
+    {
+      "command": "check-git-file-tracked /home/user/workspace/DemoApp .project",
+      "key": "tracked",
+      "expected": true,
+      "description": ".project tracked in git"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

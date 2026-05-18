@@ -1,0 +1,24 @@
+{
+  "id": "godot4_gap_signal_connection_button_quit",
+  "app": "godot4",
+  "task": "Edit the Godot project at /home/user/godot_projects/signal_quit_game/.\n\n1. In /home/user/godot_projects/signal_quit_game/main.tscn, add a [connection] entry that connects the QuitButton's 'pressed' signal to the root Root node's method '_on_quit_button_pressed'. The connection block must look exactly like:\n\n[connection signal=\"pressed\" from=\"QuitButton\" to=\".\" method=\"_on_quit_button_pressed\"]\n\n2. In /home/user/godot_projects/signal_quit_game/scripts/root.gd, implement:\n\nfunc _on_quit_button_pressed() -> void:\n\tget_tree().quit()\n\nKeep the existing 'extends Control' line. Save both files.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/signal_quit_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/signal_quit_game/main.tscn"},
+      {"filename": "scripts/root.gd", "sandbox_path": "/home/user/godot_projects/signal_quit_game/scripts/root.gd"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/signal_quit_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-node-exists /home/user/godot_projects/signal_quit_game/main.tscn QuitButton", "key": "exists", "expected": true, "description": "QuitButton still exists"},
+    {"command": "check-file-contains /home/user/godot_projects/signal_quit_game/main.tscn connection", "key": "contains", "expected": true, "description": "scene contains a connection block"},
+    {"command": "check-file-contains /home/user/godot_projects/signal_quit_game/main.tscn \"pressed\"", "key": "contains", "expected": true, "description": "pressed signal referenced"},
+    {"command": "check-file-contains /home/user/godot_projects/signal_quit_game/main.tscn \"QuitButton\"", "key": "contains", "expected": true, "description": "QuitButton referenced in connection"},
+    {"command": "check-file-contains /home/user/godot_projects/signal_quit_game/main.tscn _on_quit_button_pressed", "key": "contains", "expected": true, "description": "connection target method is _on_quit_button_pressed"},
+    {"command": "check-script-extends /home/user/godot_projects/signal_quit_game/scripts/root.gd Control", "key": "match", "expected": true, "description": "root.gd extends Control"},
+    {"command": "check-script-func /home/user/godot_projects/signal_quit_game/scripts/root.gd _on_quit_button_pressed", "key": "exists", "expected": true, "description": "_on_quit_button_pressed function is defined"},
+    {"command": "check-file-contains /home/user/godot_projects/signal_quit_game/scripts/root.gd get_tree().quit()", "key": "contains", "expected": true, "description": "handler calls get_tree().quit()"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 4}
+}

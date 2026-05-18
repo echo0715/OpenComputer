@@ -1,0 +1,111 @@
+{
+  "id": "draw_swimlane_process",
+  "app": "libreoffice_draw",
+  "task": "Create a new LibreOffice Draw swimlane process diagram for a customer onboarding workflow and save it to /home/user/Documents/swimlane.odg.\n\nPage 1 must contain three wide horizontal lane rectangles stacked vertically with these exact titles, top-to-bottom: 'Sales Lane', 'Engineering Lane', 'Support Lane'. Inside each lane, place three step rectangles in left-to-right order with these exact labels:\n- Sales Lane: 'Lead Captured', 'Contract Signed', 'Handoff'.\n- Engineering Lane: 'Provision Account', 'Run Import', 'Validate Data'.\n- Support Lane: 'Welcome Call', 'Training Session', 'Case Open'.\n\nConnectors link 'Handoff' → 'Provision Account' and 'Validate Data' → 'Welcome Call'. Page 1 must end up with at least 12 shapes (3 lanes + 9 step rectangles).",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/swimlane.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File swimlane.odg exists"
+    },
+    {
+      "command": "check-page-contains 0 \"Sales Lane\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Sales Lane'"
+    },
+    {
+      "command": "check-page-contains 0 \"Engineering Lane\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Engineering Lane'"
+    },
+    {
+      "command": "check-page-contains 0 \"Support Lane\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Support Lane'"
+    },
+    {
+      "command": "check-page-contains 0 \"Lead Captured\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Lead Captured'"
+    },
+    {
+      "command": "check-page-contains 0 \"Contract Signed\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Contract Signed'"
+    },
+    {
+      "command": "check-page-contains 0 Handoff",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Handoff'"
+    },
+    {
+      "command": "check-page-contains 0 \"Provision Account\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Provision Account'"
+    },
+    {
+      "command": "check-page-contains 0 \"Run Import\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Run Import'"
+    },
+    {
+      "command": "check-page-contains 0 \"Validate Data\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Validate Data'"
+    },
+    {
+      "command": "check-page-contains 0 \"Welcome Call\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Welcome Call'"
+    },
+    {
+      "command": "check-page-contains 0 \"Training Session\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Training Session'"
+    },
+    {
+      "command": "check-page-contains 0 \"Case Open\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Case Open'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 12",
+      "description": "Page 1 has at least 12 shapes (3 lanes + 9 step rectangles)"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

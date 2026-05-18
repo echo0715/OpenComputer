@@ -1,0 +1,6 @@
+{
+  "task_id": "freecad_three_primitives_scene",
+  "files": [
+    {"filename": "scene.FCStd", "sandbox_path": "/home/user/Documents/scene.FCStd", "type": "fcstd"}
+  ]
+}

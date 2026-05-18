@@ -1,0 +1,117 @@
+{
+  "id": "draw_safety_floor_plan_layers",
+  "app": "libreoffice_draw",
+  "task": "Create a new one-page LibreOffice Draw small-office safety floor plan and save it to /home/user/Documents/office_safety_plan.odg.\n\nPage 1 must contain:\n- Five room rectangles labelled exactly 'Reception', 'Conference Room A', 'Conference Room B', 'Kitchen', 'Server Room'.\n- Five safety markers (any shape or text label, one per string) labelled exactly 'Extinguisher 1', 'Extinguisher 2', 'First Aid Station', 'Emergency Exit North', 'Emergency Exit South'.\n\nPage 1 must end up with at least 10 shapes total. Also add two custom layers named exactly 'Rooms' and 'SafetyEquipment'. The document must end up with exactly 1 page.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/office_safety_plan.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Output ODG file exists"
+    },
+    {
+      "command": "check-page-count 1",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 1 page"
+    },
+    {
+      "command": "check-layer-exists Rooms",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Rooms' exists"
+    },
+    {
+      "command": "check-layer-exists SafetyEquipment",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'SafetyEquipment' exists"
+    },
+    {
+      "command": "check-page-contains 0 Reception",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Reception'"
+    },
+    {
+      "command": "check-page-contains 0 \"Conference Room A\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Conference Room A'"
+    },
+    {
+      "command": "check-page-contains 0 \"Conference Room B\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Conference Room B'"
+    },
+    {
+      "command": "check-page-contains 0 Kitchen",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Kitchen'"
+    },
+    {
+      "command": "check-page-contains 0 \"Server Room\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Server Room'"
+    },
+    {
+      "command": "check-page-contains 0 \"Extinguisher 1\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Extinguisher 1'"
+    },
+    {
+      "command": "check-page-contains 0 \"Extinguisher 2\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Extinguisher 2'"
+    },
+    {
+      "command": "check-page-contains 0 \"First Aid Station\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'First Aid Station'"
+    },
+    {
+      "command": "check-page-contains 0 \"Emergency Exit North\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Emergency Exit North'"
+    },
+    {
+      "command": "check-page-contains 0 \"Emergency Exit South\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Emergency Exit South'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has at least one rectangle"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 10",
+      "description": "Page 1 has at least 10 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

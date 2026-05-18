@@ -1,0 +1,10 @@
+{
+  "task_id": "audacity_export_wav_440",
+  "files": [
+    {
+      "filename": "tone.wav",
+      "sandbox_path": "/home/user/Music/tone.wav",
+      "type": "wav"
+    }
+  ]
+}

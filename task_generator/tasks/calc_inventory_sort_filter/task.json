@@ -1,0 +1,62 @@
+{
+  "id": "calc_inventory_sort_filter",
+  "app": "libreoffice_calc",
+  "task": "Open /home/user/Documents/inventory.xlsx in LibreOffice Calc. The 'Inventory' sheet has columns Item (A), Category (B), Quantity (C), Unit Price (D); row 1 has headers and rows 2-21 contain 20 inventory items.\n\nExtend and sort the sheet:\n- E1 = 'Total Value' (bold).\n- E2:E21 = `=C2*D2`.\n- Sort the data range A1:E21 by column E (Total Value) in descending order, treating row 1 as headers so headers stay in row 1 and the highest-value items appear at the top.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "inventory.xlsx",
+        "sandbox_path": "/home/user/Documents/inventory.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-cell-value E1 \"Total Value\" Inventory",
+      "key": "match",
+      "expected": true,
+      "description": "E1 = 'Total Value'"
+    },
+    {
+      "command": "check-cell-formatted E1 true Inventory",
+      "key": "match",
+      "expected": true,
+      "description": "E1 is bold"
+    },
+    {
+      "command": "cell-value E2 Inventory",
+      "eval": "result.get('formula') is not None",
+      "description": "E2 contains a formula"
+    },
+    {
+      "command": "check-cell-value E2 1350 Inventory",
+      "key": "match",
+      "expected": true,
+      "description": "E2 = 1350 (highest total value: Steel Plate 30*45)"
+    },
+    {
+      "command": "check-cell-value A2 \"Steel Plate 2mm\" Inventory",
+      "key": "match",
+      "expected": true,
+      "description": "A2 = 'Steel Plate 2mm' (highest value item after sort)"
+    },
+    {
+      "command": "check-column-sorted E desc 2",
+      "key": "sorted",
+      "expected": true,
+      "description": "Column E is sorted descending from row 2"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

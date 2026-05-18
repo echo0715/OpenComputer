@@ -1,0 +1,40 @@
+{
+  "id": "brave_page_text_verification",
+  "app": "brave",
+  "task": "In Brave, open two tabs and bookmark each:\n- Tab: https://httpbin.org/html (a passage from Herman Melville's Moby Dick)\n- Tab: https://httpbin.org/base64/Q2xhdWRlIENvZGUgaXMgYXdlc29tZQ== (decodes to the text `Claude Code is awesome`)\n\nBoth tabs must remain open and both pages must be bookmarked.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open httpbin.org/html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/html is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/base64",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/base64 endpoint is open"
+    },
+    {
+      "command": "check-bookmark httpbin.org/html",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/html exists"
+    },
+    {
+      "command": "check-bookmark httpbin.org/base64",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/base64 page exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

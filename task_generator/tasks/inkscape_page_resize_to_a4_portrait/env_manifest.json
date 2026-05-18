@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_page_resize_to_a4_portrait",
+  "files": [
+    {
+      "filename": "a4doc.svg",
+      "sandbox_path": "/home/user/Documents/a4doc.svg",
+      "type": "svg"
+    }
+  ]
+}

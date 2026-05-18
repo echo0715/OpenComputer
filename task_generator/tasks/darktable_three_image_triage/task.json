@@ -1,0 +1,83 @@
+{
+  "id": "darktable_three_image_triage",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/triage/shoot_1.png, /home/user/Pictures/triage/shoot_2.png, and /home/user/Pictures/triage/shoot_3.png into the darktable library.\n\nAssign star ratings as follows:\n- shoot_1.png — 5 stars\n- shoot_2.png — 3 stars\n- shoot_3.png — 1 star\n\nApply the tag 'keep' ONLY to shoot_1.png and shoot_2.png (do not tag shoot_3.png). Export ONLY shoot_1.png as a JPEG to /home/user/Pictures/triage/shoot_1_final.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "shoot_1.png",
+        "sandbox_path": "/home/user/Pictures/triage/shoot_1.png"
+      },
+      {
+        "filename": "shoot_2.png",
+        "sandbox_path": "/home/user/Pictures/triage/shoot_2.png"
+      },
+      {
+        "filename": "shoot_3.png",
+        "sandbox_path": "/home/user/Pictures/triage/shoot_3.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported shoot_1.png",
+      "key": "imported",
+      "expected": true,
+      "description": "shoot_1.png imported"
+    },
+    {
+      "command": "check-image-imported shoot_2.png",
+      "key": "imported",
+      "expected": true,
+      "description": "shoot_2.png imported"
+    },
+    {
+      "command": "check-image-imported shoot_3.png",
+      "key": "imported",
+      "expected": true,
+      "description": "shoot_3.png imported"
+    },
+    {
+      "command": "check-image-rating-by-filename shoot_1.png 5",
+      "key": "matches",
+      "expected": true,
+      "description": "shoot_1.png rating is 5 stars"
+    },
+    {
+      "command": "check-image-rating-by-filename shoot_2.png 3",
+      "key": "matches",
+      "expected": true,
+      "description": "shoot_2.png rating is 3 stars"
+    },
+    {
+      "command": "check-image-rating-by-filename shoot_3.png 1",
+      "key": "matches",
+      "expected": true,
+      "description": "shoot_3.png rating is 1 star"
+    },
+    {
+      "command": "check-image-tagged-by-filename shoot_1.png keep",
+      "key": "tagged",
+      "expected": true,
+      "description": "shoot_1.png is tagged with 'keep'"
+    },
+    {
+      "command": "check-image-tagged-by-filename shoot_2.png keep",
+      "key": "tagged",
+      "expected": true,
+      "description": "shoot_2.png is tagged with 'keep'"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/triage/shoot_1_final.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "shoot_1.png exported as JPEG to triage folder"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

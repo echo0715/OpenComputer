@@ -1,0 +1,92 @@
+{
+  "id": "draw_family_tree_layers",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/family_root.odg is open in LibreOffice Draw — page 1 already contains two rectangles labeled 'Grandpa John' and 'Grandma Mary'.\n\nBuild out a three-generation family tree on page 1, preserving the seed rectangles:\n- Add three parents-generation rectangles labelled exactly 'Uncle Bob', 'Dad Tom', 'Aunt Sue'.\n- Add three children-generation rectangles labelled exactly 'Cousin Lisa', 'Me', 'Sister Amy'.\n- Connectors: 'Grandpa John' to each of 'Uncle Bob', 'Dad Tom', 'Aunt Sue'; 'Dad Tom' to 'Me' and to 'Sister Amy'; 'Uncle Bob' to 'Cousin Lisa'.\n- Page 1 must end up with at least 8 shapes (2 seed + 6 new rectangles).\n\nAlso add a custom layer named exactly 'Captions'. Save the file in-place to /home/user/Documents/family_root.odg.",
+  "env": {
+    "files": [
+      {
+        "filename": "family_root.odg",
+        "sandbox_path": "/home/user/Documents/family_root.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 \"Grandpa John\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Grandpa John'"
+    },
+    {
+      "command": "check-page-contains 0 \"Grandma Mary\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains 'Grandma Mary'"
+    },
+    {
+      "command": "check-page-contains 0 \"Uncle Bob\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Uncle Bob'"
+    },
+    {
+      "command": "check-page-contains 0 \"Dad Tom\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Dad Tom'"
+    },
+    {
+      "command": "check-page-contains 0 \"Aunt Sue\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Aunt Sue'"
+    },
+    {
+      "command": "check-page-contains 0 \"Cousin Lisa\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Cousin Lisa'"
+    },
+    {
+      "command": "check-page-contains 0 Me",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Me'"
+    },
+    {
+      "command": "check-page-contains 0 \"Sister Amy\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Sister Amy'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 8",
+      "description": "Page 1 has at least 8 shapes (2 seed + 6 new rectangles)"
+    },
+    {
+      "command": "check-layer-exists Captions",
+      "key": "exists",
+      "expected": true,
+      "description": "A layer named 'Captions' exists"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

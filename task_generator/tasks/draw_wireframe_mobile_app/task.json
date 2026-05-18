@@ -1,0 +1,136 @@
+{
+  "id": "draw_wireframe_mobile_app",
+  "app": "libreoffice_draw",
+  "task": "Create a new three-page LibreOffice Draw mobile app wireframe and save it to /home/user/Documents/wireframe.odg.\n\nPage 1 (Login screen): rectangles with these exact texts — 'Logo', 'Username Field', 'Password Field', 'Login Button', 'Sign Up Link'.\n\nPage 2 (Home screen): rectangles with these exact texts — 'Top Bar', 'Search', 'Feed Item 1', 'Feed Item 2', 'Feed Item 3', 'Bottom Nav'.\n\nPage 3 (Profile screen): one ellipse with the exact text 'Avatar', and four rectangles with these exact texts — 'Full Name', 'Email Address', 'Edit Profile', 'Log Out'.\n\nThe document must end up with exactly 3 pages.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/wireframe.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File wireframe.odg exists"
+    },
+    {
+      "command": "check-page-count 3",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 3 pages"
+    },
+    {
+      "command": "check-page-contains 0 Logo",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Logo'"
+    },
+    {
+      "command": "check-page-contains 0 \"Username Field\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Username Field'"
+    },
+    {
+      "command": "check-page-contains 0 \"Password Field\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Password Field'"
+    },
+    {
+      "command": "check-page-contains 0 \"Login Button\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Login Button'"
+    },
+    {
+      "command": "check-page-contains 0 \"Sign Up Link\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Sign Up Link'"
+    },
+    {
+      "command": "check-page-contains 1 \"Top Bar\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Top Bar'"
+    },
+    {
+      "command": "check-page-contains 1 Search",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Search'"
+    },
+    {
+      "command": "check-page-contains 1 \"Feed Item 1\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Feed Item 1'"
+    },
+    {
+      "command": "check-page-contains 1 \"Feed Item 2\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Feed Item 2'"
+    },
+    {
+      "command": "check-page-contains 1 \"Feed Item 3\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Feed Item 3'"
+    },
+    {
+      "command": "check-page-contains 1 \"Bottom Nav\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 2 contains 'Bottom Nav'"
+    },
+    {
+      "command": "check-page-contains 2 Avatar",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Avatar'"
+    },
+    {
+      "command": "check-page-contains 2 \"Full Name\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Full Name'"
+    },
+    {
+      "command": "check-page-contains 2 \"Email Address\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Email Address'"
+    },
+    {
+      "command": "check-page-contains 2 \"Edit Profile\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Edit Profile'"
+    },
+    {
+      "command": "check-page-contains 2 \"Log Out\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 3 contains 'Log Out'"
+    },
+    {
+      "command": "check-shape-exists 2 EllipseShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 3 has an ellipse shape (the Avatar)"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

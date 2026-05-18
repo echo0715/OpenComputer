@@ -1,0 +1,30 @@
+{
+  "id": "godot4_player_character_scene",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/player_scene_game/player.tscn. The scene currently contains only a root CharacterBody2D node named Player. Add three child nodes directly under Player (parent=\".\"):\n\n1. [node name=\"Sprite\" type=\"Sprite2D\" parent=\".\"]\n2. [node name=\"Collision\" type=\"CollisionShape2D\" parent=\".\"]\n3. [node name=\"Cam\" type=\"Camera2D\" parent=\".\"]\n   zoom = Vector2(2, 2)\n\nAfter the edits the scene must contain exactly 4 nodes total (Player + Sprite + Collision + Cam). Save the file.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/player_scene_game/project.godot"},
+      {"filename": "player.tscn", "sandbox_path": "/home/user/godot_projects/player_scene_game/player.tscn"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/player_scene_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-node-exists /home/user/godot_projects/player_scene_game/player.tscn Player", "key": "exists", "expected": true, "description": "Player root still exists"},
+    {"command": "check-node-type /home/user/godot_projects/player_scene_game/player.tscn Player CharacterBody2D", "key": "match", "expected": true, "description": "Player is CharacterBody2D"},
+    {"command": "check-node-exists /home/user/godot_projects/player_scene_game/player.tscn Sprite", "key": "exists", "expected": true, "description": "Sprite node added"},
+    {"command": "check-node-type /home/user/godot_projects/player_scene_game/player.tscn Sprite Sprite2D", "key": "match", "expected": true, "description": "Sprite type is Sprite2D"},
+    {"command": "check-node-exists /home/user/godot_projects/player_scene_game/player.tscn Collision", "key": "exists", "expected": true, "description": "Collision node added"},
+    {"command": "check-node-type /home/user/godot_projects/player_scene_game/player.tscn Collision CollisionShape2D", "key": "match", "expected": true, "description": "Collision type is CollisionShape2D"},
+    {"command": "check-node-exists /home/user/godot_projects/player_scene_game/player.tscn Cam", "key": "exists", "expected": true, "description": "Cam node added"},
+    {"command": "check-node-type /home/user/godot_projects/player_scene_game/player.tscn Cam Camera2D", "key": "match", "expected": true, "description": "Cam type is Camera2D"},
+    {"command": "check-node-property /home/user/godot_projects/player_scene_game/player.tscn Cam zoom 'Vector2(2, 2)'", "key": "match", "expected": true, "description": "Cam zoom is Vector2(2, 2)"},
+    {"command": "check-node-count /home/user/godot_projects/player_scene_game/player.tscn 4", "key": "match", "expected": true, "description": "Scene has exactly 4 nodes"}
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

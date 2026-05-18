@@ -1,0 +1,52 @@
+{
+  "id": "vscode_custom_keybindings",
+  "app": "vscode",
+  "task": "Add the following custom keybindings to `keybindings.json` (persisted under `~/.config/Code/User/keybindings.json`):\n\n- `ctrl+shift+d` → `editor.action.duplicateSelection`\n- `ctrl+shift+b` → `workbench.action.toggleSidebarVisibility`\n- `ctrl+alt+t` → `workbench.action.terminal.new`\n- `ctrl+alt+f` → `editor.action.formatDocument`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-keybinding-exists ctrl+shift+d",
+      "key": "exists",
+      "expected": true,
+      "description": "Ctrl+Shift+D keybinding exists"
+    },
+    {
+      "command": "check-keybinding-command editor.action.duplicateSelection",
+      "key": "exists",
+      "expected": true,
+      "description": "duplicateSelection command has keybinding"
+    },
+    {
+      "command": "check-keybinding-exists ctrl+shift+b",
+      "key": "exists",
+      "expected": true,
+      "description": "Ctrl+Shift+B keybinding exists"
+    },
+    {
+      "command": "check-keybinding-exists ctrl+alt+t",
+      "key": "exists",
+      "expected": true,
+      "description": "Ctrl+Alt+T keybinding exists"
+    },
+    {
+      "command": "check-keybinding-command workbench.action.terminal.new",
+      "key": "exists",
+      "expected": true,
+      "description": "terminal.new command has keybinding"
+    },
+    {
+      "command": "check-keybinding-exists ctrl+alt+f",
+      "key": "exists",
+      "expected": true,
+      "description": "Ctrl+Alt+F keybinding exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

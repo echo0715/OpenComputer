@@ -1,0 +1,39 @@
+{
+  "id": "freecad_sphere_stl_export_high_res",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/ball.FCStd, which contains a single Part::Sphere named 'Sphere' (Radius=30).\n\nExport the 'Sphere' object as an 'STL Mesh (*.stl)' file to exactly /home/user/exports/ball.stl (creating /home/user/exports/ if it does not exist). The exported STL must contain at least 200 triangles — FreeCAD's default mesh deviation easily produces well over that for a 30 mm sphere, so default mesh settings are fine. After exporting, save the FCStd document.",
+  "env": {
+    "files": [
+      {
+        "filename": "ball.FCStd",
+        "sandbox_path": "/home/user/Documents/ball.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/ball.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "FCStd source still exists"
+    },
+    {
+      "command": "check-file-exists /home/user/exports/ball.stl",
+      "key": "exists",
+      "expected": true,
+      "description": "STL export exists"
+    },
+    {
+      "command": "check-stl-min-triangles /home/user/exports/ball.stl 200",
+      "key": "match",
+      "expected": true,
+      "description": "STL has >= 200 triangles"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

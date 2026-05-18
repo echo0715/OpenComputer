@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_bar_chart_svg",
+  "files": [
+    {
+      "filename": "barchart.svg",
+      "sandbox_path": "/home/user/Documents/barchart.svg",
+      "type": "svg"
+    }
+  ]
+}

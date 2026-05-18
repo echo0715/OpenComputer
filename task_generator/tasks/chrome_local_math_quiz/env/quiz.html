@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arithmetic Quiz</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 520px; margin: 40px auto; padding: 20px; }
+  h1 { text-align: center; }
+  .question { margin: 14px 0; font-size: 18px; }
+  input[type=number] { width: 90px; padding: 4px 6px; font-size: 16px; }
+  button { padding: 8px 16px; font-size: 16px; margin-top: 12px; }
+  #score { font-size: 18px; margin-top: 16px; }
+  #message { font-size: 20px; font-weight: bold; color: #080; }
+</style>
+</head>
+<body>
+<h1>Arithmetic Quiz</h1>
+<form id="quiz">
+  <div class="question"><label>Q1: 12 + 8 = <input type="number" id="q1"></label></div>
+  <div class="question"><label>Q2: 15 &times; 4 = <input type="number" id="q2"></label></div>
+  <div class="question"><label>Q3: 100 &minus; 37 = <input type="number" id="q3"></label></div>
+  <div class="question"><label>Q4: 144 &divide; 12 = <input type="number" id="q4"></label></div>
+  <div class="question"><label>Q5: 7 &times; 9 = <input type="number" id="q5"></label></div>
+  <button type="button" id="submit">Submit Answers</button>
+</form>
+<div id="score"></div>
+<div id="message"></div>
+<script>
+  const answers = { q1: 20, q2: 60, q3: 63, q4: 12, q5: 63 };
+  document.getElementById("submit").onclick = () => {
+    let correct = 0;
+    for (const k of Object.keys(answers)) {
+      const v = parseInt(document.getElementById(k).value, 10);
+      if (v === answers[k]) correct++;
+    }
+    document.getElementById("score").textContent = "Score: " + correct + "/5";
+    const msg = document.getElementById("message");
+    if (correct === 5) msg.textContent = "Perfect Score!";
+    else if (correct >= 3) msg.textContent = "Good effort";
+    else msg.textContent = "Try again";
+  };
+</script>
+</body>
+</html>

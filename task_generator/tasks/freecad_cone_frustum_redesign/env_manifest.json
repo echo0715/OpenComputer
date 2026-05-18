@@ -1,0 +1,10 @@
+{
+  "task_id": "freecad_cone_frustum_redesign",
+  "files": [
+    {
+      "filename": "cone.FCStd",
+      "sandbox_path": "/home/user/Documents/cone.FCStd",
+      "type": "fcstd"
+    }
+  ]
+}

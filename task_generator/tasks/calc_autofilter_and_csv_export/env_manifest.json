@@ -1,0 +1,6 @@
+{
+  "task_id": "calc_autofilter_and_csv_export",
+  "files": [
+    {"filename": "employees.xlsx", "sandbox_path": "/home/user/Documents/employees.xlsx", "type": "xlsx"}
+  ]
+}

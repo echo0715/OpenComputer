@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_gap_filter_blur_dropshadow",
+  "files": [
+    {
+      "filename": "filters.svg",
+      "sandbox_path": "/home/user/Documents/filters.svg",
+      "type": "svg"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "gedit_delete_comment_lines",
+  "app": "gedit",
+  "task": "/home/user/Documents/settings.conf currently has 15 lines — a mix of configuration settings and 5 comment lines that start with `#`:\n\n```\n# Server Configuration\nmax_connections=100\ntimeout=30\n# Database Settings\ndb_host=localhost\ndb_port=5432\ndb_name=production\n# Logging\nlog_level=info\nlog_file=/var/log/app.log\n# Cache Settings\ncache_enabled=true\ncache_ttl=3600\n# Security\nssl_enabled=true\n```\n\nDelete all 5 comment lines so only the 10 setting lines remain. Do not modify any of the setting lines. The final file must have exactly 10 lines, and the first line must be `max_connections=100`.",
+  "env": {
+    "files": [
+      {
+        "filename": "settings.conf",
+        "sandbox_path": "/home/user/Documents/settings.conf"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/settings.conf",
+      "key": "exists",
+      "expected": true,
+      "description": "settings.conf file exists"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/settings.conf 10",
+      "key": "matches",
+      "expected": true,
+      "description": "File has exactly 10 lines after removing comments"
+    },
+    {
+      "command": "file-content /home/user/Documents/settings.conf",
+      "eval": "all(not line.startswith('#') for line in result.get('content', '').strip().split('\\n'))",
+      "description": "No lines start with # (all comments removed)"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/settings.conf max_connections=100",
+      "key": "contains",
+      "expected": true,
+      "description": "max_connections setting preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/settings.conf timeout=30",
+      "key": "contains",
+      "expected": true,
+      "description": "timeout setting preserved"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/settings.conf ssl_enabled=true",
+      "key": "contains",
+      "expected": true,
+      "description": "ssl_enabled setting preserved"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/settings.conf 1 max_connections=100",
+      "key": "matches",
+      "expected": true,
+      "description": "First line is now max_connections=100 (comment removed)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

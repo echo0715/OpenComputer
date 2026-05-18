@@ -1,0 +1,57 @@
+{
+  "id": "darktable_hierarchical_tags",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/mountain.png into the darktable library.\n\nApply the hierarchical tag 'location|europe|alps' and the hierarchical tag 'season|winter' to the image, and set its star rating to 4 stars.",
+  "env": {
+    "files": [
+      {
+        "filename": "mountain.png",
+        "sandbox_path": "/home/user/Pictures/mountain.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported mountain.png",
+      "key": "imported",
+      "expected": true,
+      "description": "mountain.png is imported into darktable library"
+    },
+    {
+      "command": "check-tag-exists location|europe|alps",
+      "key": "exists",
+      "expected": true,
+      "description": "Hierarchical tag 'location|europe|alps' exists"
+    },
+    {
+      "command": "check-tag-exists season|winter",
+      "key": "exists",
+      "expected": true,
+      "description": "Hierarchical tag 'season|winter' exists"
+    },
+    {
+      "command": "check-image-tagged 1 location|europe|alps",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'location|europe|alps'"
+    },
+    {
+      "command": "check-image-tagged 1 season|winter",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'season|winter'"
+    },
+    {
+      "command": "check-image-rating 1 4",
+      "key": "matches",
+      "expected": true,
+      "description": "Image rating is 4 stars"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

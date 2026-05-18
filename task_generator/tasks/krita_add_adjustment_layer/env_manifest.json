@@ -1,0 +1,10 @@
+{
+  "task_id": "krita_add_adjustment_layer",
+  "files": [
+    {
+      "filename": "portrait.kra",
+      "sandbox_path": "/home/user/Documents/portrait.kra",
+      "type": "kra"
+    }
+  ]
+}

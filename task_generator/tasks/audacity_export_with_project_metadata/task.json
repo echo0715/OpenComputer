@@ -1,0 +1,77 @@
+{
+  "id": "audacity_export_with_project_metadata",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/song.aup loaded — a single stereo wavetrack (~3 seconds) with no metadata tags.\n\nSet the project metadata tags to exactly:\n- Title: Starlight\n- Artist: Nova Sound\n- Year: 2025\n\nSave the project so the tags are persisted inside /home/user/Music/song.aup, and export the audio as 'WAV (Microsoft) signed 16-bit PCM' to /home/user/Music/starlight.wav. Both /home/user/Music/song.aup and /home/user/Music/starlight.wav must exist; do not rename the project file or export to a different location.",
+  "env": {
+    "files": [
+      {
+        "filename": "song.aup",
+        "sandbox_path": "/home/user/Music/song.aup"
+      },
+      {
+        "filename": "song_data/e00/d00/e000001.au",
+        "sandbox_path": "/home/user/Music/song_data/e00/d00/e000001.au"
+      },
+      {
+        "filename": "song_data/e00/d00/e000002.au",
+        "sandbox_path": "/home/user/Music/song_data/e00/d00/e000002.au"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-valid-aup /home/user/Music/song.aup",
+      "key": "valid",
+      "expected": true,
+      "description": "song.aup is still valid"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/song.aup TITLE Starlight",
+      "key": "match",
+      "expected": true,
+      "description": "TITLE tag is 'Starlight' in .aup"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/song.aup ARTIST 'Nova Sound'",
+      "key": "match",
+      "expected": true,
+      "description": "ARTIST tag is 'Nova Sound' in .aup"
+    },
+    {
+      "command": "check-tag-value /home/user/Music/song.aup YEAR 2025",
+      "key": "match",
+      "expected": true,
+      "description": "YEAR tag is '2025' in .aup"
+    },
+    {
+      "command": "check-file-exists /home/user/Music/starlight.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported WAV exists at /home/user/Music/starlight.wav"
+    },
+    {
+      "command": "check-export-codec /home/user/Music/starlight.wav pcm_s16le",
+      "key": "match",
+      "expected": true,
+      "description": "Exported WAV codec is pcm_s16le"
+    },
+    {
+      "command": "check-export-channels /home/user/Music/starlight.wav 2",
+      "key": "match",
+      "expected": true,
+      "description": "Exported WAV is stereo (2 channels)"
+    },
+    {
+      "command": "check-export-format /home/user/Music/starlight.wav wav",
+      "key": "match",
+      "expected": true,
+      "description": "Exported container format is WAV"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "id": "renderdoc_project_save_dir_and_presets",
+  "app": "renderdoc",
+  "task": "Set up a project-specific RenderDoc workspace.\n\n1. Create the directory /home/user/projects/titan_captures on disk.\n2. Create two .cap capture-settings files inside that directory:\n   (a) /home/user/projects/titan_captures/titan_client.cap with settings.executable = \"/usr/local/bin/titan_client\", workingDir = \"/home/user/projects/titan_captures\", commandLine = \"--client\", options = {\"APIValidation\": true, \"CaptureCallstacks\": false, \"HookIntoChildren\": false}, autoStart = false.\n   (b) /home/user/projects/titan_captures/titan_server.cap with settings.executable = \"/usr/local/bin/titan_server\", workingDir = \"/home/user/projects/titan_captures\", commandLine = \"--server\", options = {\"APIValidation\": true, \"CaptureCallstacks\": true, \"HookIntoChildren\": false}, autoStart = true.\n   Each file must be valid JSON with a top-level \"rdocConfigData\": 1 marker and a nested \"settings\" object.\n\n3. Edit /home/user/.local/share/qrenderdoc/UI.config so that:\n   - \"DefaultCaptureSaveDirectory\" is the string \"/home/user/projects/titan_captures\".\n   - \"RecentCaptureSettings\" is the JSON array [\"/home/user/projects/titan_captures/titan_client.cap\", \"/home/user/projects/titan_captures/titan_server.cap\"]\n   - \"rdocConfigData\": 1 marker is still present.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/titan_captures",
+      "key": "is_dir",
+      "expected": true,
+      "description": "titan_captures directory exists"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/titan_captures/titan_client.cap",
+      "key": "exists",
+      "expected": true,
+      "description": "titan_client.cap exists"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/titan_captures/titan_server.cap",
+      "key": "exists",
+      "expected": true,
+      "description": "titan_server.cap exists"
+    },
+    {
+      "command": "check-cap-executable /home/user/projects/titan_captures/titan_client.cap /usr/local/bin/titan_client",
+      "key": "match",
+      "expected": true,
+      "description": "titan_client executable"
+    },
+    {
+      "command": "check-cap-executable /home/user/projects/titan_captures/titan_server.cap /usr/local/bin/titan_server",
+      "key": "match",
+      "expected": true,
+      "description": "titan_server executable"
+    },
+    {
+      "command": "check-cap-command-line /home/user/projects/titan_captures/titan_client.cap --client",
+      "key": "match",
+      "expected": true,
+      "description": "--client flag"
+    },
+    {
+      "command": "check-cap-command-line /home/user/projects/titan_captures/titan_server.cap --server",
+      "key": "match",
+      "expected": true,
+      "description": "--server flag"
+    },
+    {
+      "command": "check-cap-option /home/user/projects/titan_captures/titan_server.cap CaptureCallstacks true",
+      "key": "match",
+      "expected": true,
+      "description": "server CaptureCallstacks true"
+    },
+    {
+      "command": "cap-parse /home/user/projects/titan_captures/titan_server.cap",
+      "eval": "result.get('autoStart') is True",
+      "description": "server autoStart true"
+    },
+    {
+      "command": "check-setting DefaultCaptureSaveDirectory \"/home/user/projects/titan_captures\"",
+      "key": "match",
+      "expected": true,
+      "description": "DefaultCaptureSaveDirectory set"
+    },
+    {
+      "command": "recent-settings",
+      "eval": "result.get('settings') == ['/home/user/projects/titan_captures/titan_client.cap', '/home/user/projects/titan_captures/titan_server.cap']",
+      "description": "RecentCaptureSettings ordered"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

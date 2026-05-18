@@ -1,0 +1,9 @@
+{
+  "task_id": "obsidian_meeting_actions_extract",
+  "files": [
+    {"filename": "app.json", "sandbox_path": "/home/user/Documents/MeetingVault/.obsidian/app.json", "type": "json"},
+    {"filename": "Meeting-Kickoff.md", "sandbox_path": "/home/user/Documents/MeetingVault/Meeting-Kickoff.md", "type": "markdown"},
+    {"filename": "Meeting-Standup.md", "sandbox_path": "/home/user/Documents/MeetingVault/Meeting-Standup.md", "type": "markdown"},
+    {"filename": "Meeting-Retro.md", "sandbox_path": "/home/user/Documents/MeetingVault/Meeting-Retro.md", "type": "markdown"}
+  ]
+}

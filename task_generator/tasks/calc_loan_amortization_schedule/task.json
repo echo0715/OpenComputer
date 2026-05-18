@@ -1,0 +1,106 @@
+{
+  "id": "calc_loan_amortization_schedule",
+  "app": "libreoffice_calc",
+  "task": "Open /home/user/Documents/loan.xlsx in LibreOffice Calc. The 'Loan' sheet has loan inputs in B1:B3 (Principal=24000, Annual Rate=0.06, Term Months=12) and schedule headers already in row 6 (Month, Payment, Interest, Principal, Balance).\n\nBuild the schedule:\n- C1 = `=PMT(B2/12,B3,-B1)` (bold) — single monthly payment.\n- A7:A18 = month numbers 1..12.\n- B7:B18 = `=-PMT(B$2/12,B$3,-B$1)` (positive monthly payment, ~2065.52, identical on every row).\n- C7:C18 = `=-IPMT(B$2/12,A7,B$3,-B$1)`-style formula referencing the month in column A.\n- D7:D18 = `=-PPMT(B$2/12,A7,B$3,-B$1)`-style formula referencing the month in column A.\n- E7 = `=B1-D7`; E8:E18 = `=E[prev_row]-D[current_row]` so E18 ends at 0 (running remaining balance).\n- A19 = 'Totals' (bold).\n- B19 = `=SUM(B7:B18)`, C19 = `=SUM(C7:C18)`, D19 = `=SUM(D7:D18)`.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "loan.xlsx",
+        "sandbox_path": "/home/user/Documents/loan.xlsx"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "cell-value C1 Loan",
+      "eval": "result.get('formula') is not None and 'PMT' in result.get('formula','').upper()",
+      "description": "C1 contains a PMT formula"
+    },
+    {
+      "command": "cell-value C1 Loan",
+      "eval": "abs((result.get('value') or 0) + 2065.52) < 0.5 or abs((result.get('value') or 0) - 2065.52) < 0.5",
+      "description": "C1 computes approximately 2065.52 monthly payment"
+    },
+    {
+      "command": "check-cell-value A7 1 Loan",
+      "key": "match",
+      "expected": true,
+      "description": "A7 = 1 (month 1)"
+    },
+    {
+      "command": "check-cell-value A18 12 Loan",
+      "key": "match",
+      "expected": true,
+      "description": "A18 = 12 (month 12)"
+    },
+    {
+      "command": "cell-value B7 Loan",
+      "eval": "abs((result.get('value') or 0) - 2065.52) < 0.5",
+      "description": "B7 payment approx 2065.52"
+    },
+    {
+      "command": "cell-value B18 Loan",
+      "eval": "abs((result.get('value') or 0) - 2065.52) < 0.5",
+      "description": "B18 payment approx 2065.52"
+    },
+    {
+      "command": "cell-value C7 Loan",
+      "eval": "result.get('formula') is not None and 'IPMT' in result.get('formula','').upper()",
+      "description": "C7 has an IPMT formula"
+    },
+    {
+      "command": "cell-value C7 Loan",
+      "eval": "abs((result.get('value') or 0) - 120) < 1.0",
+      "description": "C7 first-month interest approx 120"
+    },
+    {
+      "command": "cell-value D7 Loan",
+      "eval": "result.get('formula') is not None and 'PPMT' in result.get('formula','').upper()",
+      "description": "D7 has a PPMT formula"
+    },
+    {
+      "command": "cell-value D7 Loan",
+      "eval": "abs((result.get('value') or 0) - 1945.52) < 1.0",
+      "description": "D7 first-month principal approx 1945.52"
+    },
+    {
+      "command": "cell-value E18 Loan",
+      "eval": "abs((result.get('value') or 0)) < 0.5",
+      "description": "E18 ending balance approximately 0"
+    },
+    {
+      "command": "check-cell-value A19 Totals Loan",
+      "key": "match",
+      "expected": true,
+      "description": "A19 = 'Totals'"
+    },
+    {
+      "command": "check-cell-formatted A19 true Loan",
+      "key": "match",
+      "expected": true,
+      "description": "A19 is bold"
+    },
+    {
+      "command": "cell-value B19 Loan",
+      "eval": "abs((result.get('value') or 0) - 24786.28) < 2.0",
+      "description": "B19 total payments approx 24786.28"
+    },
+    {
+      "command": "cell-value D19 Loan",
+      "eval": "abs((result.get('value') or 0) - 24000) < 1.0",
+      "description": "D19 total principal approx 24000"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

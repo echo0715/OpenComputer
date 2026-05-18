@@ -1,0 +1,46 @@
+{
+  "id": "vscode_appearance_settings",
+  "app": "vscode",
+  "task": "Configure the following user settings (persisted to `~/.config/Code/User/settings.json`):\n\n- `editor.fontSize`: 16\n- `editor.lineHeight`: 28\n- `editor.letterSpacing`: 0.5\n- `editor.fontFamily`: Fira Code\n- `workbench.colorTheme`: Monokai",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting editor.fontSize 16",
+      "key": "match",
+      "expected": true,
+      "description": "editor.fontSize is 16"
+    },
+    {
+      "command": "check-setting editor.lineHeight 28",
+      "key": "match",
+      "expected": true,
+      "description": "editor.lineHeight is 28"
+    },
+    {
+      "command": "check-setting editor.letterSpacing 0.5",
+      "key": "match",
+      "expected": true,
+      "description": "editor.letterSpacing is 0.5"
+    },
+    {
+      "command": "check-setting editor.fontFamily Fira Code",
+      "key": "match",
+      "expected": true,
+      "description": "editor.fontFamily is Fira Code"
+    },
+    {
+      "command": "check-setting workbench.colorTheme Monokai",
+      "key": "match",
+      "expected": true,
+      "description": "workbench.colorTheme is Monokai"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

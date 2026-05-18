@@ -1,0 +1,6 @@
+{
+  "task_id": "chrome_local_json_viewer",
+  "files": [
+    {"filename": "products.json", "sandbox_path": "/home/user/Documents/products.json", "type": "json"}
+  ]
+}

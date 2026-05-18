@@ -1,0 +1,69 @@
+{
+  "id": "darktable_multi_tag_single_image",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/cityscape.png into the darktable library.\n\nApply all three tags 'urban', 'architecture', and 'night' to the image, and set its star rating to 3 stars.",
+  "env": {
+    "files": [
+      {
+        "filename": "cityscape.png",
+        "sandbox_path": "/home/user/Pictures/cityscape.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported cityscape.png",
+      "key": "imported",
+      "expected": true,
+      "description": "cityscape.png is imported into darktable library"
+    },
+    {
+      "command": "check-tag-exists urban",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'urban' exists in the library"
+    },
+    {
+      "command": "check-tag-exists architecture",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'architecture' exists in the library"
+    },
+    {
+      "command": "check-tag-exists night",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'night' exists in the library"
+    },
+    {
+      "command": "check-image-tagged-by-filename cityscape.png urban",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'urban'"
+    },
+    {
+      "command": "check-image-tagged-by-filename cityscape.png architecture",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'architecture'"
+    },
+    {
+      "command": "check-image-tagged-by-filename cityscape.png night",
+      "key": "tagged",
+      "expected": true,
+      "description": "Image is tagged with 'night'"
+    },
+    {
+      "command": "check-image-rating-by-filename cityscape.png 3",
+      "key": "matches",
+      "expected": true,
+      "description": "Image rating is 3 stars"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "task_id": "eclipse_gap_line_breakpoint",
+  "files": [
+    {
+      "filename": "DemoApp/.project",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_line_breakpoint/env/DemoApp/.project",
+      "sandbox_path": "/home/user/workspace/DemoApp/.project"
+    },
+    {
+      "filename": "DemoApp/.classpath",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_line_breakpoint/env/DemoApp/.classpath",
+      "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+    },
+    {
+      "filename": "DemoApp/src/com/example/App.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_line_breakpoint/env/DemoApp/src/com/example/App.java",
+      "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+    },
+    {
+      "filename": "DemoApp/src/com/example/Service.java",
+      "local": "/Users/Mike/Desktop/syn_env/task_generator/tasks/eclipse_gap_line_breakpoint/env/DemoApp/src/com/example/Service.java",
+      "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+    }
+  ]
+}

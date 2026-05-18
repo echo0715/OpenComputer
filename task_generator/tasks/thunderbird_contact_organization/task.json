@@ -1,0 +1,80 @@
+{
+  "id": "thunderbird_contact_organization",
+  "app": "thunderbird",
+  "task": "Add the following four contacts to Thunderbird's Address Book, all with company `Meridian Corp`:\n1. Lisa Park — email: lisa@meridian.com, job title: CEO\n2. Ryan Foster — email: ryan@meridian.com, job title: CTO\n3. Amy Chen — email: amy@meridian.com, job title: VP Engineering\n4. Derek Moss — email: derek@meridian.com, job title: Lead Developer\n\nCreate a mailing list named exactly `Meridian Leadership` containing all four contacts as members.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Lisa Park",
+      "key": "found",
+      "expected": true,
+      "description": "Lisa Park exists"
+    },
+    {
+      "command": "check-contact-field Lisa Park company Meridian Corp",
+      "key": "match",
+      "expected": true,
+      "description": "Lisa company is Meridian Corp"
+    },
+    {
+      "command": "check-contact-field Lisa Park job_title CEO",
+      "key": "match",
+      "expected": true,
+      "description": "Lisa is CEO"
+    },
+    {
+      "command": "check-contact-exists Ryan Foster",
+      "key": "found",
+      "expected": true,
+      "description": "Ryan Foster exists"
+    },
+    {
+      "command": "check-contact-field Ryan Foster job_title CTO",
+      "key": "match",
+      "expected": true,
+      "description": "Ryan is CTO"
+    },
+    {
+      "command": "check-contact-exists Amy Chen",
+      "key": "found",
+      "expected": true,
+      "description": "Amy Chen exists"
+    },
+    {
+      "command": "check-contact-field Amy Chen company Meridian Corp",
+      "key": "match",
+      "expected": true,
+      "description": "Amy company is Meridian Corp"
+    },
+    {
+      "command": "check-contact-exists Derek Moss",
+      "key": "found",
+      "expected": true,
+      "description": "Derek Moss exists"
+    },
+    {
+      "command": "check-mailing-list Meridian Leadership",
+      "key": "found",
+      "expected": true,
+      "description": "Mailing list Meridian Leadership exists"
+    },
+    {
+      "command": "contact-count",
+      "eval": "result.get('count', 0) >= 4",
+      "description": "At least 4 contacts in address book"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "task_id": "freecad_gap_partdesign_fillet_chamfer",
+  "files": [
+    {
+      "filename": "cube_start.FCStd",
+      "sandbox_path": "/home/user/Documents/cube_start.FCStd",
+      "type": "fcstd"
+    }
+  ]
+}

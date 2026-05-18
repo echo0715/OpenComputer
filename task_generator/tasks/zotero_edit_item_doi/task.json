@@ -1,0 +1,33 @@
+{
+  "id": "zotero_edit_item_doi",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. The item titled 'A Survey of RL Methods' currently has no DOI value.\n\nSet the DOI field of that item to exactly `10.1234/rl-survey-2020` (no quotes, nothing else). Leave Zotero running so the edit persists.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Zotero/zotero.sqlite",
+      "key": "exists",
+      "expected": true,
+      "description": "zotero.sqlite exists"
+    },
+    {
+      "command": "check-item-field 'Survey of RL Methods' DOI 10.1234/rl-survey-2020",
+      "key": "match",
+      "expected": true,
+      "description": "Survey item DOI matches expected"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

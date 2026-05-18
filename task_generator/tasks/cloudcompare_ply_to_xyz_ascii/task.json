@@ -1,0 +1,39 @@
+{
+  "id": "cloudcompare_ply_to_xyz_ascii",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/lidar.ply is an ASCII PLY with 800 points and only X Y Z columns.\n\nExport the cloud as an ASCII XYZ file at /home/user/Documents/lidar.xyz (ASCII cloud format). Do not change or drop any points.",
+  "env": {
+    "files": [
+      {
+        "filename": "lidar.ply",
+        "sandbox_path": "/home/user/Documents/lidar.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/lidar.xyz",
+      "key": "exists",
+      "expected": true,
+      "description": "XYZ output exists"
+    },
+    {
+      "command": "check-format /home/user/Documents/lidar.xyz ascii",
+      "key": "match",
+      "expected": true,
+      "description": "Output detected as ASCII cloud"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/lidar.xyz 800",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 800 points"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

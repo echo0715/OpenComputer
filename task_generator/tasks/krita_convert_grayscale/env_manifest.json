@@ -1,0 +1,10 @@
+{
+  "task_id": "krita_convert_grayscale",
+  "files": [
+    {
+      "filename": "color_artwork.kra",
+      "sandbox_path": "/home/user/Documents/color_artwork.kra",
+      "type": "kra"
+    }
+  ]
+}

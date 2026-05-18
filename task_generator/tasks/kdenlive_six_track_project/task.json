@@ -1,0 +1,74 @@
+{
+  "id": "kdenlive_six_track_project",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/six_tracks.kdenlive (1920x1080, 30fps).\n\nExpand the project's track layout so it contains at least 6 tracks total (video and audio combined). Import a.mp4, b.mp4, and c.mp4 from /home/user/Videos/ into the project, and place them on three separate video tracks: a.mp4 on Video Track 1, b.mp4 on Video Track 2, c.mp4 on Video Track 3. Save the project so the changes are persisted to /home/user/Documents/six_tracks.kdenlive. The project must remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "six_tracks.kdenlive",
+        "sandbox_path": "/home/user/Documents/six_tracks.kdenlive"
+      },
+      {
+        "filename": "a.mp4",
+        "sandbox_path": "/home/user/Videos/a.mp4"
+      },
+      {
+        "filename": "b.mp4",
+        "sandbox_path": "/home/user/Videos/b.mp4"
+      },
+      {
+        "filename": "c.mp4",
+        "sandbox_path": "/home/user/Videos/c.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/six_tracks.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/six_tracks.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/six_tracks.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/six_tracks.kdenlive a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "a.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/six_tracks.kdenlive b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "b.mp4 in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/six_tracks.kdenlive c.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "c.mp4 in project"
+    },
+    {
+      "command": "tracks /home/user/Documents/six_tracks.kdenlive",
+      "eval": "len(result) >= 6",
+      "description": "At least 6 tracks in project"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

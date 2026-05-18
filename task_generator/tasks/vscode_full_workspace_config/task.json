@@ -1,0 +1,70 @@
+{
+  "id": "vscode_full_workspace_config",
+  "app": "vscode",
+  "task": "Create a project workspace at `/home/user/projects/flask-api` with the following files:\n\n- `app.py`:\n  ```python\n  from flask import Flask, jsonify\n  app = Flask(__name__)\n\n  @app.route('/health')\n  def health():\n      return jsonify(status='ok')\n\n  if __name__ == '__main__':\n      app.run(debug=True)\n  ```\n- `.vscode/settings.json` — `python.defaultInterpreterPath: /usr/bin/python3`, `editor.formatOnSave: true`.\n- `.vscode/launch.json` — a configuration named `Flask App`, type `debugpy`, request `launch`, running `app.py`.\n- `.vscode/tasks.json` — two shell tasks:\n  - `Run Server` — runs `python3 app.py`\n  - `Run Tests` — runs `python3 -m pytest`\n- `.vscode/extensions.json` — recommends `ms-python.python`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/flask-api/app.py",
+      "key": "exists",
+      "expected": true,
+      "description": "app.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/flask-api/app.py Flask",
+      "key": "contains",
+      "expected": true,
+      "description": "app.py contains Flask"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/flask-api python.defaultInterpreterPath /usr/bin/python3",
+      "key": "match",
+      "expected": true,
+      "description": "python interpreter path set"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/flask-api editor.formatOnSave true",
+      "key": "match",
+      "expected": true,
+      "description": "formatOnSave is true"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/flask-api Flask App",
+      "key": "exists",
+      "expected": true,
+      "description": "Flask App launch config exists"
+    },
+    {
+      "command": "check-tasks-defined /home/user/projects/flask-api",
+      "key": "defined",
+      "expected": true,
+      "description": "tasks.json has tasks"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/flask-api Run Server",
+      "key": "exists",
+      "expected": true,
+      "description": "Run Server task exists"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/flask-api Run Tests",
+      "key": "exists",
+      "expected": true,
+      "description": "Run Tests task exists"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/flask-api ms-python.python",
+      "key": "recommended",
+      "expected": true,
+      "description": "python extension recommended"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "darktable_gap_multi_instance_exposure",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/multi_inst_source.jpg into the darktable library.\n\nEnable the 'exposure' module at +0.5 EV, then create a second instance of the 'exposure' module with different settings (e.g., -0.3 EV) so the history contains two distinct exposure operations. Apply the tag 'multi_instance' to the image and export it as a JPEG to /home/user/Pictures/multi_inst_result.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "multi_inst_source.jpg",
+        "sandbox_path": "/home/user/Pictures/multi_inst_source.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported multi_inst_source.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation multi_inst_source.jpg exposure",
+      "eval": "result.get('has_operation') is True and result.get('count', 0) >= 2",
+      "description": "exposure module applied at least twice (multiple instances)"
+    },
+    {
+      "command": "check-image-tagged-by-filename multi_inst_source.jpg multi_instance",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged multi_instance"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/multi_inst_result.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

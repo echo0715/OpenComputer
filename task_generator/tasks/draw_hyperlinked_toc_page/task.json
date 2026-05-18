@@ -1,0 +1,111 @@
+{
+  "id": "draw_hyperlinked_toc_page",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/report_toc.odg is open in LibreOffice Draw. It has 4 pages with rectangles labeled 'Intro Section', 'Methods Section', 'Results Section', 'Appendix Section' (pages 1–4).\n\nBuild a clickable table-of-contents page at the start of the document:\n- Rename the four existing content pages, in order, to 'Intro', 'Methods', 'Results', 'Appendix'.\n- Insert a new page at the very beginning (so it becomes page 1) named 'Contents'.\n- On the 'Contents' page, add four text boxes with these exact contents (one per text box): 'Go to Intro', 'Go to Methods', 'Go to Results', 'Go to Appendix'.\n- Each of those four text boxes must carry an internal-document hyperlink targeting the corresponding renamed page, so the saved ODG records `xlink:href` values of `#Intro`, `#Methods`, `#Results`, `#Appendix` respectively.\n\nThe document must end up with exactly 5 pages. Save the file in-place.",
+  "env": {
+    "files": [
+      {
+        "filename": "report_toc.odg",
+        "sandbox_path": "/home/user/Documents/report_toc.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/report_toc.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-page-count 5",
+      "key": "match",
+      "expected": true,
+      "description": "Document has 5 pages"
+    },
+    {
+      "command": "check-page-property 0 name Contents /home/user/Documents/report_toc.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page 1 is named 'Contents'"
+    },
+    {
+      "command": "check-page-property 1 name Intro /home/user/Documents/report_toc.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page 2 is named 'Intro'"
+    },
+    {
+      "command": "check-page-property 2 name Methods /home/user/Documents/report_toc.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page 3 is named 'Methods'"
+    },
+    {
+      "command": "check-page-property 3 name Results /home/user/Documents/report_toc.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page 4 is named 'Results'"
+    },
+    {
+      "command": "check-page-property 4 name Appendix /home/user/Documents/report_toc.odg",
+      "key": "match",
+      "expected": true,
+      "description": "Page 5 is named 'Appendix'"
+    },
+    {
+      "command": "check-page-contains 0 \"Go to Intro\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Contents page mentions 'Go to Intro'"
+    },
+    {
+      "command": "check-page-contains 0 \"Go to Methods\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Contents page mentions 'Go to Methods'"
+    },
+    {
+      "command": "check-page-contains 0 \"Go to Results\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Contents page mentions 'Go to Results'"
+    },
+    {
+      "command": "check-page-contains 0 \"Go to Appendix\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Contents page mentions 'Go to Appendix'"
+    },
+    {
+      "command": "check-shape-hyperlink 0 Intro \"Go to Intro\" /home/user/Documents/report_toc.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Hyperlink to Intro present on Contents page"
+    },
+    {
+      "command": "check-shape-hyperlink 0 Methods \"Go to Methods\" /home/user/Documents/report_toc.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Hyperlink to Methods present"
+    },
+    {
+      "command": "check-shape-hyperlink 0 Results \"Go to Results\" /home/user/Documents/report_toc.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Hyperlink to Results present"
+    },
+    {
+      "command": "check-shape-hyperlink 0 Appendix \"Go to Appendix\" /home/user/Documents/report_toc.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "Hyperlink to Appendix present"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

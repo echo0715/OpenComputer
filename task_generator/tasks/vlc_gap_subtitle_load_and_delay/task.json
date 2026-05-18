@@ -1,0 +1,18 @@
+{
+  "id": "vlc_gap_subtitle_load_and_delay",
+  "app": "vlc",
+  "task": "Open /home/user/Videos/sample.mp4 in VLC and load the external subtitle file /home/user/Videos/sample.srt as a subtitle track. Configure VLC so the subtitle delay is +500 milliseconds (sub-delay in VLC's preferences), and begin playback. Save the preferences so the setting persists in ~/.config/vlc/vlcrc.",
+  "env": {
+    "files": [
+      {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4"},
+      {"filename": "sample.srt", "sandbox_path": "/home/user/Videos/sample.srt"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/Videos/sample.mp4", "key": "exists", "expected": true, "description": "sample.mp4 is present"},
+    {"command": "check-file-exists /home/user/Videos/sample.srt", "key": "exists", "expected": true, "description": "sample.srt subtitle file is present"},
+    {"command": "check-media-loaded sample.mp4", "key": "loaded", "expected": true, "description": "sample.mp4 is loaded in VLC"},
+    {"command": "check-config sub-delay 500", "key": "match", "expected": true, "description": "Subtitle delay is set to 500 ms in vlcrc"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "estimated_difficulty": 4}
+}

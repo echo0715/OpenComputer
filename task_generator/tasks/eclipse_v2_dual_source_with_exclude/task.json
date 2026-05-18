@@ -1,0 +1,64 @@
+{
+  "id": "eclipse_v2_dual_source_with_exclude",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nCreate a new Java project 'ServerApp' (root: /home/user/workspace/ServerApp, Java nature) with the following configuration:\n\n- TWO source folders registered on the build path: 'src' (main Java source) and 'resources' (for non-Java resource files).\n- Default output folder: 'bin'.\n- Project-specific Java compiler settings with compliance, source, and target all set to 17.\n\nAdd the following files:\n\n1. src/server/core/ServerCore.java:\n\n```\npackage server.core;\n\npublic class ServerCore {\n    public static void start() {\n        System.out.println(\"Server started\");\n    }\n\n    public static void main(String[] args) {\n        start();\n    }\n}\n```\n\n2. resources/app.properties with exactly:\n\n```\napp.name=ServerApp\napp.version=1.0\napp.port=8080\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace ServerApp",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'ServerApp' exists"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/ServerApp org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/ServerApp src src",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has src entry 'src'"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/ServerApp src resources",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has src entry 'resources'"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/ServerApp output bin",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath output entry is 'bin'"
+    },
+    {
+      "command": "check-setting /home/user/workspace/ServerApp org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler compliance = 17"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/ServerApp src/server/core/ServerCore.java",
+      "key": "exists",
+      "expected": true,
+      "description": "ServerCore.java exists"
+    },
+    {
+      "command": "check-file-exists /home/user/workspace/ServerApp/resources/app.properties",
+      "key": "exists",
+      "expected": true,
+      "description": "resources/app.properties exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "shotcut_multi_track_audio_video",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/multi_track.mlt (1920x1080, 30 fps). Three source files exist: /home/user/Videos/video1.mp4, /home/user/Videos/video2.mp4, and /home/user/Music/audio1.mp3.\n\nBuild a multi-track timeline as follows: place video1.mp4 on the default V1 video track, add a second video track (V2) and place video2.mp4 on it, and add a new audio track and place audio1.mp3 on it. Save the project so /home/user/Documents/multi_track.mlt keeps its 1920x1080 profile and references all three media files.",
+  "env": {
+    "files": [
+      {
+        "filename": "multi_track.mlt",
+        "sandbox_path": "/home/user/Documents/multi_track.mlt"
+      },
+      {
+        "filename": "video1.mp4",
+        "sandbox_path": "/home/user/Videos/video1.mp4"
+      },
+      {
+        "filename": "video2.mp4",
+        "sandbox_path": "/home/user/Videos/video2.mp4"
+      },
+      {
+        "filename": "audio1.mp3",
+        "sandbox_path": "/home/user/Music/audio1.mp3"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multi_track.mlt",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/multi_track.mlt 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1920x1080"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multi_track.mlt video1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "video1.mp4 is referenced in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multi_track.mlt video2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "video2.mp4 is referenced in the project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multi_track.mlt audio1.mp3",
+      "key": "exists",
+      "expected": true,
+      "description": "audio1.mp3 is referenced in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

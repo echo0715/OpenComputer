@@ -1,0 +1,11 @@
+{
+  "task_id": "blender_hard_lookdev_scatter_physics_compositor",
+  "files": [
+    {
+      "filename": "lookdev_scene.blend",
+      "sandbox_path": "/home/user/Documents/lookdev_scene.blend",
+      "type": "blend",
+      "generation": "create_env.py creates an empty default Blender scene at the target path"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "task_id": "darktable_style_create_from_edits",
+  "files": [
+    {
+      "filename": "scene.png",
+      "sandbox_path": "/home/user/Pictures/scene.png",
+      "type": "png"
+    }
+  ]
+}

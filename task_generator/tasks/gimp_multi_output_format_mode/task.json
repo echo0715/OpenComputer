@@ -1,0 +1,81 @@
+{
+  "id": "gimp_multi_output_format_mode",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/source_multi.png in GIMP — a 500x500 RGB image with four colored quadrants (red, green, blue, yellow).\n\nProduce three outputs from this single source:\n- /home/user/Documents/out_gray.jpg — grayscale JPEG at the original 500x500 dimensions (mode 'L').\n- /home/user/Documents/out_small.png — RGB PNG scaled down to 250x250.\n- /home/user/Documents/out_copy.bmp — BMP copy of the original at 500x500 with the colors unchanged.",
+  "env": {
+    "files": [
+      {
+        "filename": "source_multi.png",
+        "sandbox_path": "/home/user/Documents/source_multi.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/out_gray.jpg",
+      "key": "exists",
+      "expected": true,
+      "description": "Grayscale JPEG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/out_gray.jpg JPEG",
+      "key": "match",
+      "expected": true,
+      "description": "out_gray.jpg is JPEG format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/out_gray.jpg 500 500",
+      "key": "match",
+      "expected": true,
+      "description": "out_gray.jpg is 500x500"
+    },
+    {
+      "command": "check-file-mode /home/user/Documents/out_gray.jpg L",
+      "key": "match",
+      "expected": true,
+      "description": "out_gray.jpg is grayscale (mode L)"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/out_small.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Small PNG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/out_small.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "out_small.png is PNG format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/out_small.png 250 250",
+      "key": "match",
+      "expected": true,
+      "description": "out_small.png is 250x250"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/out_copy.bmp",
+      "key": "exists",
+      "expected": true,
+      "description": "BMP copy exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/out_copy.bmp BMP",
+      "key": "match",
+      "expected": true,
+      "description": "out_copy.bmp is BMP format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/out_copy.bmp 500 500",
+      "key": "match",
+      "expected": true,
+      "description": "out_copy.bmp is 500x500"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

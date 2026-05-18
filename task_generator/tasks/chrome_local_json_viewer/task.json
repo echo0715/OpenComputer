@@ -1,0 +1,45 @@
+{
+  "id": "chrome_local_json_viewer",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/products.json in the first tab and https://httpbin.org/json in a second tab, and bookmark the https://httpbin.org/json page. Both tabs must remain open.",
+  "env": {
+    "files": [
+      {
+        "filename": "products.json",
+        "sandbox_path": "/home/user/Documents/products.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open products.json",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with local products.json file is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/json",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/json is open"
+    },
+    {
+      "command": "check-url-visited httpbin.org/json",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/json appears in browsing history"
+    },
+    {
+      "command": "check-bookmark httpbin.org/json",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/json exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

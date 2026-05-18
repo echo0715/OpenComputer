@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_find_replace_config",
+  "files": [
+    {"filename": "config.ini", "sandbox_path": "/home/user/Documents/config.ini", "type": "ini"}
+  ]
+}

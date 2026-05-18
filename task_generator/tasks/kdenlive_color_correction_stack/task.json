@@ -1,0 +1,67 @@
+{
+  "id": "kdenlive_color_correction_stack",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/color_grade.kdenlive (1920x1080, 30fps).\n\nImport /home/user/Videos/raw_footage.mp4 onto a video track in the timeline, then apply a three-effect color-correction stack to that timeline clip in this exact order:\n1. Brightness (`frei0r.brightness`)\n2. Contrast (`frei0r.contrast0r`)\n3. Saturation (`frei0r.saturat0r`)\n\nSave the project so the changes are persisted to /home/user/Documents/color_grade.kdenlive. The project must remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "color_grade.kdenlive",
+        "sandbox_path": "/home/user/Documents/color_grade.kdenlive"
+      },
+      {
+        "filename": "raw_footage.mp4",
+        "sandbox_path": "/home/user/Videos/raw_footage.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/color_grade.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/color_grade.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/color_grade.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/color_grade.kdenlive raw_footage.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "raw_footage.mp4 in project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/color_grade.kdenlive frei0r.brightness",
+      "key": "exists",
+      "expected": true,
+      "description": "Brightness effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/color_grade.kdenlive frei0r.contrast0r",
+      "key": "exists",
+      "expected": true,
+      "description": "Contrast effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/color_grade.kdenlive frei0r.saturat0r",
+      "key": "exists",
+      "expected": true,
+      "description": "Saturation effect applied"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

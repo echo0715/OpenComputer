@@ -1,0 +1,106 @@
+{
+  "id": "vscode_monorepo_multiroot_workspace",
+  "app": "vscode",
+  "task": "Build a multi-root monorepo at `/home/user/projects/monorepo` with the following files:\n\n- `frontend/src/App.jsx`:\n  ```jsx\n  import React from 'react';\n  export default function App() {\n    return <div>Monorepo Frontend</div>;\n  }\n  ```\n- `frontend/package.json` — `name`: `monorepo-frontend`, `version`: `1.0.0`.\n- `backend/app.py`:\n  ```python\n  from flask import Flask\n  app = Flask(__name__)\n\n  @app.route('/')\n  def index():\n      return 'monorepo backend'\n  ```\n- `shared/utils.py`:\n  ```python\n  def format_name(first, last):\n      return f\"{first} {last}\"\n  ```\n- `monorepo.code-workspace` — multi-root workspace file whose `folders` array lists all three folders: `frontend`, `backend`, `shared`.\n- `.vscode/settings.json`:\n  - `editor.tabSize`: 2\n  - `python.analysis.extraPaths`: `[\"./shared\"]`\n  - `files.exclude`: includes `**/node_modules: true`\n- `.vscode/extensions.json` — recommends `ms-python.python`, `dbaeumer.vscode-eslint`, `esbenp.prettier-vscode`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/monorepo/frontend/src/App.jsx",
+      "key": "exists",
+      "expected": true,
+      "description": "frontend App.jsx exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/monorepo/frontend/src/App.jsx Monorepo Frontend",
+      "key": "contains",
+      "expected": true,
+      "description": "App.jsx has expected text"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/monorepo/frontend/package.json",
+      "key": "exists",
+      "expected": true,
+      "description": "frontend package.json exists"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/monorepo/backend/app.py",
+      "key": "exists",
+      "expected": true,
+      "description": "backend app.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/monorepo/backend/app.py Flask",
+      "key": "contains",
+      "expected": true,
+      "description": "backend app.py imports Flask"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/monorepo/shared/utils.py",
+      "key": "exists",
+      "expected": true,
+      "description": "shared utils.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/monorepo/shared/utils.py format_name",
+      "key": "contains",
+      "expected": true,
+      "description": "utils.py has format_name function"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/monorepo/monorepo.code-workspace",
+      "key": "exists",
+      "expected": true,
+      "description": "monorepo.code-workspace file exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/monorepo/monorepo.code-workspace frontend",
+      "key": "contains",
+      "expected": true,
+      "description": "workspace lists frontend folder"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/monorepo/monorepo.code-workspace backend",
+      "key": "contains",
+      "expected": true,
+      "description": "workspace lists backend folder"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/monorepo/monorepo.code-workspace shared",
+      "key": "contains",
+      "expected": true,
+      "description": "workspace lists shared folder"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/monorepo editor.tabSize 2",
+      "key": "match",
+      "expected": true,
+      "description": "editor.tabSize is 2"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/monorepo ms-python.python",
+      "key": "recommended",
+      "expected": true,
+      "description": "Python extension recommended"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/monorepo dbaeumer.vscode-eslint",
+      "key": "recommended",
+      "expected": true,
+      "description": "ESLint extension recommended"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/monorepo esbenp.prettier-vscode",
+      "key": "recommended",
+      "expected": true,
+      "description": "Prettier extension recommended"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

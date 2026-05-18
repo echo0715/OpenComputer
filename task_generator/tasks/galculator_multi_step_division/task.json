@@ -1,0 +1,28 @@
+{
+  "id": "galculator_multi_step_division",
+  "app": "galculator",
+  "task": "In galculator, perform the following chain of calculations, using the result of each step as input to the next:\n\n1. `144 / 12` = 12\n2. `* 7` = 84\n3. `+ 16` = 100\n4. `sqrt(...)` = 10\n\nThe final step requires applying the square root function to the running result. The final display must show exactly `10`.\n\nLeave galculator open with the result showing on the display.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-running",
+      "key": "running",
+      "expected": true,
+      "description": "galculator is running"
+    },
+    {
+      "command": "check-display-value 10",
+      "key": "match",
+      "expected": true,
+      "description": "Display shows 10"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "zoom_change_recording_path",
+  "app": "zoom",
+  "task": "A baseline Zoom config file exists at /home/user/.config/zoomus.conf with `[General]localRecordingPath=/home/user/Documents/Zoom`.\n\nDo both of the following:\n1. Set `[General]localRecordingPath` to exactly `/home/user/ZoomRecordings` in /home/user/.config/zoomus.conf.\n2. Ensure the directory `/home/user/ZoomRecordings` exists on disk.\n\nSave the config file in-place. Do not change any other config keys.",
+  "env": {
+    "files": [
+      {
+        "filename": "zoomus.conf",
+        "sandbox_path": "/home/user/.config/zoomus.conf"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-config-exists",
+      "key": "exists",
+      "expected": true,
+      "description": "zoomus.conf exists"
+    },
+    {
+      "command": "check-recording-path /home/user/ZoomRecordings",
+      "key": "match",
+      "expected": true,
+      "description": "Recording path is /home/user/ZoomRecordings"
+    },
+    {
+      "command": "check-config General localRecordingPath /home/user/ZoomRecordings",
+      "key": "match",
+      "expected": true,
+      "description": "[General]localRecordingPath matches"
+    },
+    {
+      "command": "check-directory-exists /home/user/ZoomRecordings",
+      "key": "exists",
+      "expected": true,
+      "description": "Recording directory exists on disk"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

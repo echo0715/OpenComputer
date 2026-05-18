@@ -1,0 +1,63 @@
+{
+  "id": "drawio_flowchart_create",
+  "app": "drawio",
+  "task": "Build a flowchart in /home/user/Documents/flowchart.drawio with exactly 4 shapes:\n1. 'Start' — rectangle\n2. 'Check Input' — diamond/decision shape\n3. 'Process Data' — rectangle\n4. 'End' — rectangle\n\nConnect them with arrows: Start -> Check Input -> Process Data -> End, plus a loop-back arrow from 'Check Input' back to 'Start' (the 'No' path) — 5 edges total. Persist to /home/user/Documents/flowchart.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "flowchart.drawio",
+        "sandbox_path": "/home/user/Documents/flowchart.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/flowchart.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists at expected path"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/flowchart.drawio Start",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape labeled 'Start' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/flowchart.drawio \"Check Input\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape labeled 'Check Input' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/flowchart.drawio \"Process Data\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape labeled 'Process Data' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/flowchart.drawio End",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape labeled 'End' exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/flowchart.drawio 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 vertex shapes in the diagram"
+    },
+    {
+      "command": "check-edge-count /home/user/Documents/flowchart.drawio 5",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 5 edges (4 forward connections + 1 loop-back)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

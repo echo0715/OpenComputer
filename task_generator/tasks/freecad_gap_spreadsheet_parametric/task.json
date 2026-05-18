@@ -1,0 +1,68 @@
+{
+  "id": "freecad_gap_spreadsheet_parametric",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/spreadsheet_start.FCStd (empty document).\n\nCreate a Spreadsheet named exactly 'Params' with these cell values and aliases:\n- B1 = 100, alias `length`\n- B2 = 50, alias `width`\n- B3 = 20, alias `height`\n\n(Column A may optionally hold the label text `length`, `width`, `height` for readability but is not required.)\n\nThen create a Part::Box named exactly 'DrivenBox' with its Length, Width, and Height bound by expressions to `Params.length`, `Params.width`, and `Params.height` respectively, so the box evaluates to 100 x 50 x 20 mm. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "spreadsheet_start.FCStd",
+        "sandbox_path": "/home/user/Documents/spreadsheet_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/spreadsheet_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/spreadsheet_start.FCStd Params",
+      "key": "exists",
+      "expected": true,
+      "description": "Params sheet exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/spreadsheet_start.FCStd Params Spreadsheet::Sheet",
+      "key": "match",
+      "expected": true,
+      "description": "Params is Spreadsheet::Sheet"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/spreadsheet_start.FCStd DrivenBox",
+      "key": "exists",
+      "expected": true,
+      "description": "DrivenBox exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/spreadsheet_start.FCStd DrivenBox Part::Box",
+      "key": "match",
+      "expected": true,
+      "description": "DrivenBox is Part::Box"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/spreadsheet_start.FCStd DrivenBox Length 100",
+      "key": "match",
+      "expected": true,
+      "description": "Length evaluates to 100"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/spreadsheet_start.FCStd DrivenBox Width 50",
+      "key": "match",
+      "expected": true,
+      "description": "Width evaluates to 50"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/spreadsheet_start.FCStd DrivenBox Height 20",
+      "key": "match",
+      "expected": true,
+      "description": "Height evaluates to 20"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

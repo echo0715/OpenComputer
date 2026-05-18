@@ -1,0 +1,79 @@
+{
+  "id": "eclipse_v2_rename_package_refactor",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the Java project 'Shopping' sits at /home/user/workspace/Shopping (import it if necessary) and currently has package `com.shop.old` under 'src' containing CartItem.java and Product.java.\n\nRefactor 'Shopping' as follows:\n\n1. Rename the package `com.shop.old` to `com.shop.modern` (with reference updates enabled), so BOTH CartItem.java and Product.java move to src/com/shop/modern/ and their `package com.shop.old;` declarations become `package com.shop.modern;`.\n2. In the new package `com.shop.modern`, create src/com/shop/modern/CartService.java containing exactly:\n\n```\npackage com.shop.modern;\n\npublic class CartService {\n    public double total(CartItem item) {\n        return item.price * item.quantity;\n    }\n}\n```\n\nAfter the rename, the old files at src/com/shop/old/CartItem.java and src/com/shop/old/Product.java must NOT exist anymore.",
+  "env": {
+    "files": [
+      {
+        "filename": "Shopping/.project",
+        "sandbox_path": "/home/user/workspace/Shopping/.project"
+      },
+      {
+        "filename": "Shopping/.classpath",
+        "sandbox_path": "/home/user/workspace/Shopping/.classpath"
+      },
+      {
+        "filename": "Shopping/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/Shopping/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "Shopping/src/com/shop/old/CartItem.java",
+        "sandbox_path": "/home/user/workspace/Shopping/src/com/shop/old/CartItem.java"
+      },
+      {
+        "filename": "Shopping/src/com/shop/old/Product.java",
+        "sandbox_path": "/home/user/workspace/Shopping/src/com/shop/old/Product.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace Shopping",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'Shopping' exists"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/Shopping org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Shopping src/com/shop/modern/CartItem.java",
+      "key": "exists",
+      "expected": true,
+      "description": "CartItem.java moved to com.shop.modern"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Shopping src/com/shop/modern/Product.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Product.java moved to com.shop.modern"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Shopping src/com/shop/modern/CartService.java",
+      "key": "exists",
+      "expected": true,
+      "description": "New CartService.java created"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Shopping src/com/shop/old/CartItem.java",
+      "key": "exists",
+      "expected": false,
+      "description": "Old CartItem.java removed"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Shopping src/com/shop/old/Product.java",
+      "key": "exists",
+      "expected": false,
+      "description": "Old Product.java removed"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

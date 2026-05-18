@@ -1,0 +1,45 @@
+{
+  "id": "inkscape_resize_and_add_paths",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/landscape.svg — a 640x480 document containing a green rectangle background.\n\nEdit /home/user/Documents/landscape.svg so that:\n- The page size is exactly 800 wide x 600 tall.\n- The document contains at least two separate `<path>` elements (any freeform shape).\n- A text element exists with the exact text: Resized Canvas.\n\nSave the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "landscape.svg",
+        "sandbox_path": "/home/user/Documents/landscape.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/landscape.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File landscape.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/landscape.svg 800 600",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 800x600 pixels"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/landscape.svg path",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains path elements"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/landscape.svg 'Resized Canvas'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Resized Canvas' exists in the document"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

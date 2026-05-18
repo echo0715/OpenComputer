@@ -1,0 +1,21 @@
+{
+  "id": "vlc_gap_hotkey_customize_pause",
+  "app": "vlc",
+  "task": "Customize VLC's hotkey settings so the lowercase letter 'p' is bound to the Play/Pause action (`key-play-pause = p`), and persist the change to `~/.config/vlc/vlcrc`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-config key-play-pause p",
+      "key": "match",
+      "expected": true,
+      "description": "key-play-pause is bound to 'p'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

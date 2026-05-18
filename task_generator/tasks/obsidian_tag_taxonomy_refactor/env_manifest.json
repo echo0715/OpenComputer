@@ -1,0 +1,13 @@
+{
+  "task_id": "obsidian_tag_taxonomy_refactor",
+  "files": [
+    {"filename": "app.json", "sandbox_path": "/home/user/Documents/TaxonomyVault/.obsidian/app.json", "type": "json"},
+    {"filename": "A.md", "sandbox_path": "/home/user/Documents/TaxonomyVault/A.md", "type": "markdown"},
+    {"filename": "B.md", "sandbox_path": "/home/user/Documents/TaxonomyVault/B.md", "type": "markdown"},
+    {"filename": "C.md", "sandbox_path": "/home/user/Documents/TaxonomyVault/C.md", "type": "markdown"},
+    {"filename": "D.md", "sandbox_path": "/home/user/Documents/TaxonomyVault/D.md", "type": "markdown"},
+    {"filename": "E.md", "sandbox_path": "/home/user/Documents/TaxonomyVault/E.md", "type": "markdown"},
+    {"filename": "F.md", "sandbox_path": "/home/user/Documents/TaxonomyVault/F.md", "type": "markdown"},
+    {"filename": "G.md", "sandbox_path": "/home/user/Documents/TaxonomyVault/G.md", "type": "markdown"}
+  ]
+}

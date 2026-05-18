@@ -1,0 +1,47 @@
+{
+  "id": "blender_gap2_shape_keys_morph",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/shapekeys_scene.blend, on the default Cube add shape keys in this order: 'Basis', then 'Squash', then 'Stretch' (names must match exactly).\n\nSet both 'Squash' and 'Stretch' to slider Min = -1 and Max = 2. Set the current value of 'Squash' to 0.7 and 'Stretch' to 0.3. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "shapekeys_scene.blend",
+        "sandbox_path": "/home/user/Documents/shapekeys_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/shapekeys_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "shape-keys /home/user/Documents/shapekeys_scene.blend Cube",
+      "key": "has_shape_keys",
+      "expected": true,
+      "description": "Cube has shape keys"
+    },
+    {
+      "command": "shape-keys /home/user/Documents/shapekeys_scene.blend Cube",
+      "eval": "{k['name'] for k in result.get('keys',[])} >= {'Basis','Squash','Stretch'}",
+      "description": "Keys Basis, Squash, Stretch exist"
+    },
+    {
+      "command": "shape-keys /home/user/Documents/shapekeys_scene.blend Cube",
+      "eval": "any(k['name']=='Squash' and abs(k['value']-0.7)<0.02 and abs(k['slider_min']-(-1.0))<0.02 and abs(k['slider_max']-2.0)<0.02 for k in result.get('keys',[]))",
+      "description": "Squash value 0.7, range (-1,2)"
+    },
+    {
+      "command": "shape-keys /home/user/Documents/shapekeys_scene.blend Cube",
+      "eval": "any(k['name']=='Stretch' and abs(k['value']-0.3)<0.02 and abs(k['slider_min']-(-1.0))<0.02 and abs(k['slider_max']-2.0)<0.02 for k in result.get('keys',[]))",
+      "description": "Stretch value 0.3, range (-1,2)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

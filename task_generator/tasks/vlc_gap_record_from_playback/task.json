@@ -1,0 +1,17 @@
+{
+  "id": "vlc_gap_record_from_playback",
+  "app": "vlc",
+  "task": "Configure VLC's record directory (input-record-path) to /home/user/Videos/recordings. Create the directory if it does not exist. Save preferences so the setting persists in ~/.config/vlc/vlcrc, then open /home/user/Videos/sample.mp4.",
+  "env": {
+    "files": [
+      {"filename": "sample.mp4", "sandbox_path": "/home/user/Videos/sample.mp4"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/Videos/sample.mp4", "key": "exists", "expected": true, "description": "sample.mp4 is present"},
+    {"command": "check-config input-record-path /home/user/Videos/recordings", "key": "match", "expected": true, "description": "Input record path is /home/user/Videos/recordings"},
+    {"command": "check-file-exists /home/user/Videos/recordings", "key": "exists", "expected": true, "description": "Recordings directory exists"},
+    {"command": "check-media-loaded sample.mp4", "key": "loaded", "expected": true, "description": "sample.mp4 is loaded in VLC"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "estimated_difficulty": 5}
+}

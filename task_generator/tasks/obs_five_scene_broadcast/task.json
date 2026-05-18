@@ -1,0 +1,93 @@
+{
+  "id": "obs_five_scene_broadcast",
+  "app": "obs",
+  "task": "Build a broadcast-ready OBS Studio scene collection. The final collection must contain exactly 5 scenes (no default 'Scene' left over) with these exact names: 'Pre-Show', 'Interview', 'Screen Share', 'BRB', 'End Card'.\n\nSources required per scene, with these exact names and types:\n- 'Pre-Show': Color Source named 'Countdown BG'\n- 'Interview': Video Capture Device named 'Camera'\n- 'Screen Share': Display Capture named 'Monitor'\n- 'BRB': Image named 'BRB Image' (file /home/user/Pictures/brb.png)\n- 'End Card': Color Source named 'EndBG'; Text (FreeType 2) named 'Thanks'\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "brb.png",
+        "sandbox_path": "/home/user/Pictures/brb.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists 'Pre-Show'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Pre-Show' exists"
+    },
+    {
+      "command": "check-scene-exists Interview",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Interview' exists"
+    },
+    {
+      "command": "check-scene-exists 'Screen Share'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Screen Share' exists"
+    },
+    {
+      "command": "check-scene-exists BRB",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'BRB' exists"
+    },
+    {
+      "command": "check-scene-exists 'End Card'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'End Card' exists"
+    },
+    {
+      "command": "check-scene-count 5",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 5 scenes in the collection"
+    },
+    {
+      "command": "check-source-in-scene 'Countdown BG' 'Pre-Show'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Countdown BG' exists in 'Pre-Show' scene"
+    },
+    {
+      "command": "check-source-in-scene Camera Interview",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Camera' exists in 'Interview' scene"
+    },
+    {
+      "command": "check-source-in-scene Monitor 'Screen Share'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Monitor' exists in 'Screen Share' scene"
+    },
+    {
+      "command": "check-source-in-scene 'BRB Image' BRB",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'BRB Image' exists in 'BRB' scene"
+    },
+    {
+      "command": "check-source-in-scene EndBG 'End Card'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'EndBG' exists in 'End Card' scene"
+    },
+    {
+      "command": "check-source-in-scene Thanks 'End Card'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Thanks' exists in 'End Card' scene"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

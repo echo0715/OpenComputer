@@ -1,0 +1,56 @@
+{
+  "id": "obs_gap_streaming_output_settings",
+  "app": "obs",
+  "task": "Configure OBS Studio streaming output for Twitch as follows:\n- Stream Service: Twitch (stream key may be empty or any placeholder)\n- Output mode: Advanced\n- Streaming Encoder: x264 (software)\n- Rate Control: CBR\n- Bitrate: 6000 kbps\n- Keyframe Interval: 2 seconds\n- x264 Preset (CPU Usage Preset): veryfast\n- Profile: high\n\nPersist the changes so basic.ini and service.json are written.",
+  "env": {
+    "files": [
+      {
+        "filename": ".keep",
+        "sandbox_path": "/home/user/Documents/.obs_stream_task"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "streaming-settings",
+      "eval": "str(result.get('service', '')).lower() == 'twitch'",
+      "expected": true,
+      "description": "Streaming service = Twitch"
+    },
+    {
+      "command": "streaming-settings",
+      "eval": "int(str(result.get('ini_AdvOut', {}).get('trackindex', '1')) or '1') >= 1",
+      "expected": true,
+      "description": "Advanced output track index is set"
+    },
+    {
+      "command": "streaming-settings",
+      "eval": "any(int(str(v).split()[0]) == 6000 for v in (result.get('ini_AdvOut', {}) or {}).values() if str(v).strip().split() and str(v).split()[0].isdigit())",
+      "expected": true,
+      "description": "Streaming bitrate = 6000 kbps present in AdvOut"
+    },
+    {
+      "command": "streaming-settings",
+      "eval": "any('veryfast' in str(v).lower() for v in (result.get('ini_AdvOut', {}) or {}).values())",
+      "expected": true,
+      "description": "x264 preset = veryfast in AdvOut"
+    },
+    {
+      "command": "streaming-settings",
+      "eval": "any(str(v).lower() == 'cbr' for v in (result.get('ini_AdvOut', {}) or {}).values())",
+      "expected": true,
+      "description": "Rate control = CBR in AdvOut"
+    },
+    {
+      "command": "recording-settings",
+      "eval": "str(result.get('output_mode', result.get('mode', ''))).lower().startswith('advanced') or str(result.get('output_mode', '')).lower() == 'advanced'",
+      "expected": true,
+      "description": "Output mode = Advanced"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

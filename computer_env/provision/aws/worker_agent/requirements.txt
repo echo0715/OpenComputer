@@ -1,0 +1,1 @@
+# stdlib-only worker agent; reserved for future optional dependencies

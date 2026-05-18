@@ -1,0 +1,102 @@
+{
+  "id": "gedit_env_file_sanitize",
+  "app": "gedit",
+  "task": "/home/user/Documents/app.env currently has 12 lines (settings, secrets, and one blank line):\n\n```\nAPP_NAME=myapp\nAPP_ENV=production\nDB_PASSWORD=s3cret_p4ss\nHOST=127.0.0.1\nPORT=8080\nAPI_SECRET=abc123xyz\nDEBUG=false\nJWT_TOKEN=ey.fake.jwt\nTIMEOUT=30\nAUTH_TOKEN=t0k3n\nLOG_LEVEL=info\n(blank line)\n```\n\nSanitize the file so that:\n- Every line whose KEY contains `PASSWORD`, `SECRET`, or `TOKEN` is removed (i.e. `DB_PASSWORD`, `API_SECRET`, `JWT_TOKEN`, `AUTH_TOKEN` are all gone).\n- The blank line is removed.\n- Every remaining value is wrapped in double quotes (e.g. `APP_NAME=\"myapp\"`, `PORT=\"8080\"`).\n- The last line (line 8) is exactly the comment `# Sanitized for production`.\n\nThe final file must have exactly 8 lines (7 sanitized settings + 1 trailing comment).",
+  "env": {
+    "files": [
+      {
+        "filename": "app.env",
+        "sandbox_path": "/home/user/Documents/app.env"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/app.env",
+      "key": "exists",
+      "expected": true,
+      "description": "app.env still exists"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/app.env 8",
+      "key": "matches",
+      "expected": true,
+      "description": "File has exactly 8 lines"
+    },
+    {
+      "command": "file-content /home/user/Documents/app.env",
+      "eval": "'PASSWORD' not in result.get('content', '')",
+      "description": "No PASSWORD lines remain"
+    },
+    {
+      "command": "file-content /home/user/Documents/app.env",
+      "eval": "'SECRET' not in result.get('content', '')",
+      "description": "No SECRET lines remain"
+    },
+    {
+      "command": "file-content /home/user/Documents/app.env",
+      "eval": "'TOKEN' not in result.get('content', '')",
+      "description": "No TOKEN lines remain"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"APP_NAME=\\\"myapp\\\"\"",
+      "key": "contains",
+      "expected": true,
+      "description": "APP_NAME value is quoted"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"APP_ENV=\\\"production\\\"\"",
+      "key": "contains",
+      "expected": true,
+      "description": "APP_ENV value is quoted"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"HOST=\\\"127.0.0.1\\\"\"",
+      "key": "contains",
+      "expected": true,
+      "description": "HOST value is quoted"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"PORT=\\\"8080\\\"\"",
+      "key": "contains",
+      "expected": true,
+      "description": "PORT value is quoted"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"DEBUG=\\\"false\\\"\"",
+      "key": "contains",
+      "expected": true,
+      "description": "DEBUG value is quoted"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"TIMEOUT=\\\"30\\\"\"",
+      "key": "contains",
+      "expected": true,
+      "description": "TIMEOUT value is quoted"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"LOG_LEVEL=\\\"info\\\"\"",
+      "key": "contains",
+      "expected": true,
+      "description": "LOG_LEVEL value is quoted"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/app.env \"# Sanitized for production\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Trailing comment present"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/app.env 8 \"# Sanitized for production\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Comment is on line 8 (last line)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

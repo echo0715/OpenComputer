@@ -1,0 +1,58 @@
+{
+  "id": "eclipse_create_multi_package_project",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nCreate a new Java project 'ShoppingCart' in this workspace (Java nature, default 'src' source folder) containing three packages with one class each, all under the 'src' source folder:\n\n1. src/com/shop/model/Item.java:\n\n```\npackage com.shop.model;\n\npublic class Item {\n    private String name;\n    private double price;\n\n    public Item(String name, double price) {\n        this.name = name;\n        this.price = price;\n    }\n\n    public String getName() { return name; }\n    public double getPrice() { return price; }\n}\n```\n\n2. src/com/shop/service/CartService.java:\n\n```\npackage com.shop.service;\n\nimport java.util.ArrayList;\nimport java.util.List;\nimport com.shop.model.Item;\n\npublic class CartService {\n    private List<Item> items = new ArrayList<>();\n\n    public void addItem(Item item) {\n        items.add(item);\n    }\n\n    public int getItemCount() {\n        return items.size();\n    }\n}\n```\n\n3. src/com/shop/util/PriceCalculator.java:\n\n```\npackage com.shop.util;\n\npublic class PriceCalculator {\n    public static double applyDiscount(double price, double percent) {\n        return price * (1.0 - percent / 100.0);\n    }\n}\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace ShoppingCart",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'ShoppingCart' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/ShoppingCart org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/ShoppingCart src src",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has 'src' source entry"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/ShoppingCart src/com/shop/model/Item.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Source file Item.java exists in com.shop.model package"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/ShoppingCart src/com/shop/service/CartService.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Source file CartService.java exists in com.shop.service package"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/ShoppingCart src/com/shop/util/PriceCalculator.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Source file PriceCalculator.java exists in com.shop.util package"
+    },
+    {
+      "command": "check-file-exists /home/user/workspace/ShoppingCart/.project",
+      "key": "exists",
+      "expected": true,
+      "description": "Eclipse .project file exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

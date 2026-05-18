@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_render_output_png",
+  "files": [
+    {"filename": "output_setup.blend", "sandbox_path": "/home/user/Documents/output_setup.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "chrome_local_styled_table",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/inventory.html (the local warehouse inventory page) in the first tab and https://example.com in a second tab, and bookmark the https://example.com page. Both tabs must remain open.",
+  "env": {
+    "files": [
+      {
+        "filename": "inventory.html",
+        "sandbox_path": "/home/user/Documents/inventory.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open inventory.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with local inventory.html is open"
+    },
+    {
+      "command": "check-tab-open example.com",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with example.com is open"
+    },
+    {
+      "command": "check-bookmark example.com",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for example.com exists"
+    },
+    {
+      "command": "check-url-visited example.com",
+      "key": "visited",
+      "expected": true,
+      "description": "example.com appears in browsing history"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

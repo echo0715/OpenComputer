@@ -1,0 +1,69 @@
+{
+  "id": "gimp_split_image_two_halves",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/two_tone.png in GIMP — an 800x400 image whose left 400 columns are solid red and right 400 columns are solid blue.\n\nSplit the source into two separate 400x400 PNG outputs:\n- /home/user/Documents/half_left.png — the left half of the source (solid red).\n- /home/user/Documents/half_right.png — the right half of the source (solid blue).\n\nEach output must be exactly 400x400 pixels.",
+  "env": {
+    "files": [
+      {
+        "filename": "two_tone.png",
+        "sandbox_path": "/home/user/Documents/two_tone.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/half_left.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Left half file exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/half_left.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Left half is PNG format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/half_left.png 400 400",
+      "key": "match",
+      "expected": true,
+      "description": "Left half dimensions are 400x400"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/half_left.png 200 200 255 0 0 10",
+      "key": "match",
+      "expected": true,
+      "description": "Left half center pixel is red"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/half_right.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Right half file exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/half_right.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Right half is PNG format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/half_right.png 400 400",
+      "key": "match",
+      "expected": true,
+      "description": "Right half dimensions are 400x400"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/half_right.png 200 200 0 0 255 10",
+      "key": "match",
+      "expected": true,
+      "description": "Right half center pixel is blue"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

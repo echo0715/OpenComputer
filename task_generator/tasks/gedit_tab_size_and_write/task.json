@@ -1,0 +1,52 @@
+{
+  "id": "gedit_tab_size_and_write",
+  "app": "gedit",
+  "task": "Set the gedit tab width preference to 8 (so `tab-size` is `8`).\n\nThen create /home/user/Documents/indented.txt containing exactly these 5 lines, with indentation produced by tab characters:\n\n- Line 1: `Level 0` (no indentation)\n- Line 2: one tab followed by `Level 1`\n- Line 3: two tabs followed by `Level 2`\n- Line 4: three tabs followed by `Level 3`\n- Line 5: four tabs followed by `Level 4`\n\nThe file must have exactly 5 lines.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/indented.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "indented.txt file was created"
+    },
+    {
+      "command": "check-tab-size 8",
+      "key": "matches",
+      "expected": true,
+      "description": "Tab size setting is 8"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/indented.txt \"Level 0\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains Level 0"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/indented.txt \"Level 4\"",
+      "key": "contains",
+      "expected": true,
+      "description": "File contains Level 4"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/indented.txt 1 \"Level 0\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 1 is 'Level 0' with no indentation"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/indented.txt 5",
+      "key": "matches",
+      "expected": true,
+      "description": "File has exactly 5 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

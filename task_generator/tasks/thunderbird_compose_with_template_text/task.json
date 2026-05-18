@@ -1,0 +1,45 @@
+{
+  "id": "thunderbird_compose_with_template_text",
+  "app": "thunderbird",
+  "task": "Create a Thunderbird draft (do NOT send) with these exact fields:\n- To: hr@megacorp.com\n- Subject: Vacation Request - July 2026\n- Body:\nDear HR Team,\n\nI am writing to formally request vacation leave from July 14 2026 to July 25 2026 for a total of 10 business days. My responsibilities will be covered by my colleague Sarah Johnson during my absence.\n\nPlease let me know if you need any additional information.\n\nThank you.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists Vacation Request",
+      "key": "found",
+      "expected": true,
+      "description": "Draft Vacation Request exists"
+    },
+    {
+      "command": "check-message-to Drafts Vacation Request hr@megacorp.com",
+      "key": "match",
+      "expected": true,
+      "description": "Draft is to hr@megacorp.com"
+    },
+    {
+      "command": "check-draft-content Vacation Request July 14 2026",
+      "key": "found",
+      "expected": true,
+      "description": "Draft mentions start date"
+    },
+    {
+      "command": "check-draft-content Vacation Request Sarah Johnson",
+      "key": "found",
+      "expected": true,
+      "description": "Draft mentions coverage person"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "blender_boolean_cutout",
+  "files": [
+    {"filename": "boolean_scene.blend", "sandbox_path": "/home/user/Documents/boolean_scene.blend", "type": "blend", "generated_by": "create_env.py"}
+  ]
+}

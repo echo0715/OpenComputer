@@ -1,0 +1,48 @@
+{
+  "id": "vlc_gap_subtitle_encoding_utf8",
+  "app": "vlc",
+  "task": "Set VLC's default subtitle text encoding to UTF-8 (`subsdec-encoding = UTF-8`) and the subtitle relative font size to 16 (`freetype-rel-fontsize = 16`) so subtitles render larger than default, and persist the change to `~/.config/vlc/vlcrc`. Then open /home/user/Videos/sample.mp4 with /home/user/Videos/sample.srt loaded as the subtitle track.",
+  "env": {
+    "files": [
+      {
+        "filename": "sample.mp4",
+        "sandbox_path": "/home/user/Videos/sample.mp4"
+      },
+      {
+        "filename": "sample.srt",
+        "sandbox_path": "/home/user/Videos/sample.srt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/sample.srt",
+      "key": "exists",
+      "expected": true,
+      "description": "sample.srt is present"
+    },
+    {
+      "command": "check-config subsdec-encoding UTF-8",
+      "key": "match",
+      "expected": true,
+      "description": "Subtitle decoding encoding is UTF-8"
+    },
+    {
+      "command": "check-config freetype-rel-fontsize 16",
+      "key": "match",
+      "expected": true,
+      "description": "Subtitle font size set to 16"
+    },
+    {
+      "command": "check-media-loaded sample.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "sample.mp4 is loaded in VLC"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

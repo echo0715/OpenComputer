@@ -1,0 +1,63 @@
+{
+  "id": "thunderbird_contacts_and_draft_workflow",
+  "app": "thunderbird",
+  "task": "In Thunderbird:\n\n1. Add an Address Book contact: Maria Santos, email `maria.santos@vendor.com`, company `Vendor Solutions`.\n2. Add an Address Book contact: Jake Taylor, email `jake.taylor@vendor.com`, company `Vendor Solutions`.\n3. Create a single draft (do NOT send) addressed to both `maria.santos@vendor.com` and `jake.taylor@vendor.com` with:\n   - Subject: Partnership Renewal Discussion\n   - Body: I would like to schedule a meeting to discuss the renewal terms for our annual partnership agreement. Please let me know your availability next week.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Maria Santos",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Maria Santos exists"
+    },
+    {
+      "command": "check-contact-field Maria Santos primary_email maria.santos@vendor.com",
+      "key": "match",
+      "expected": true,
+      "description": "Maria email correct"
+    },
+    {
+      "command": "check-contact-field Maria Santos company Vendor Solutions",
+      "key": "match",
+      "expected": true,
+      "description": "Maria company correct"
+    },
+    {
+      "command": "check-contact-exists Jake Taylor",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Jake Taylor exists"
+    },
+    {
+      "command": "check-contact-field Jake Taylor primary_email jake.taylor@vendor.com",
+      "key": "match",
+      "expected": true,
+      "description": "Jake email correct"
+    },
+    {
+      "command": "check-draft-exists Partnership Renewal",
+      "key": "found",
+      "expected": true,
+      "description": "Draft Partnership Renewal exists"
+    },
+    {
+      "command": "check-draft-content Partnership Renewal renewal terms",
+      "key": "found",
+      "expected": true,
+      "description": "Draft body contains renewal terms"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

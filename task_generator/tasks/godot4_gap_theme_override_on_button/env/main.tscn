@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://themeov"]
+
+[node name="Root" type="Control"]
+
+[node name="BigButton" type="Button" parent="."]
+text = "Big"

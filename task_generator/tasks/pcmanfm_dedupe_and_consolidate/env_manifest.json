@@ -1,0 +1,15 @@
+{
+  "task_id": "pcmanfm_dedupe_and_consolidate",
+  "files": [
+    {"filename": "report.txt", "sandbox_path": "/home/user/Documents/downloads/report.txt", "type": "text"},
+    {"filename": "report (1).txt", "sandbox_path": "/home/user/Documents/downloads/report (1).txt", "type": "text"},
+    {"filename": "report (2).txt", "sandbox_path": "/home/user/Documents/downloads/report (2).txt", "type": "text"},
+    {"filename": "notes.txt", "sandbox_path": "/home/user/Documents/downloads/notes.txt", "type": "text"},
+    {"filename": "notes (copy).txt", "sandbox_path": "/home/user/Documents/downloads/notes (copy).txt", "type": "text"},
+    {"filename": "summary.txt", "sandbox_path": "/home/user/Documents/downloads/summary.txt", "type": "text"},
+    {"filename": "summary (1).txt", "sandbox_path": "/home/user/Documents/downloads/summary (1).txt", "type": "text"},
+    {"filename": "invoice.pdf", "sandbox_path": "/home/user/Documents/downloads/invoice.pdf", "type": "pdf"},
+    {"filename": "invoice (1).pdf", "sandbox_path": "/home/user/Documents/downloads/invoice (1).pdf", "type": "pdf"},
+    {"filename": "invoice (copy).pdf", "sandbox_path": "/home/user/Documents/downloads/invoice (copy).pdf", "type": "pdf"}
+  ]
+}

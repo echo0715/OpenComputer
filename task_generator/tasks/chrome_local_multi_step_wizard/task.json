@@ -1,0 +1,62 @@
+{
+  "id": "chrome_local_multi_step_wizard",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/wizard.html (a three-step signup wizard) and complete it with these exact values:\n- Step 1 (Account info): Username `devuser42`, Email `devuser42@mail.test`, Password `SuperSecret1`\n- Step 2 (Preferences): `Subscribe to newsletter` checked, theme radio set to `Dark`\n- Step 3 (Review): submit the form\n\nThe final confirmation block must have heading `Registration complete` and include the username `devuser42`, email `devuser42@mail.test`, theme `Dark`, and `Subscribed: Yes`.",
+  "env": {
+    "files": [
+      {
+        "filename": "wizard.html",
+        "sandbox_path": "/home/user/Documents/wizard.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open wizard.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for wizard.html is open"
+    },
+    {
+      "command": "check-page-contains \"Registration complete\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation heading 'Registration complete' is shown"
+    },
+    {
+      "command": "check-page-contains \"devuser42\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation shows username 'devuser42'"
+    },
+    {
+      "command": "check-page-contains \"devuser42@mail.test\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation shows email address"
+    },
+    {
+      "command": "check-page-contains \"Dark\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation shows the chosen theme 'Dark'"
+    },
+    {
+      "command": "check-page-contains \"Subscribed: Yes\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Confirmation shows newsletter subscription 'Subscribed: Yes'"
+    },
+    {
+      "command": "eval \"document.getElementById('confirmation').style.display\"",
+      "eval": "result.get('value') == 'block'",
+      "description": "#confirmation block is visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

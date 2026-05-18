@@ -1,0 +1,60 @@
+{
+  "id": "chrome_local_log_filter_search",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/logs.html ('Production Log Viewer', 40 log rows mixed INFO/WARN/ERROR, with a severity radio filter and a search text input).\n\nApply the severity filter `ERROR` and the search term `database` so the table shows only ERROR-severity rows whose text contains `database`. In a second tab, load https://httpbin.org/uuid and bookmark that page. The logs.html tab must remain in the filtered state (ERROR + `database`) and the https://httpbin.org/uuid tab must be open and bookmarked.",
+  "env": {
+    "files": [
+      {
+        "filename": "logs.html",
+        "sandbox_path": "/home/user/Documents/logs.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open logs.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for logs.html is open"
+    },
+    {
+      "command": "eval \"document.querySelector('input[name=sev][value=ERROR]').checked\"",
+      "eval": "result.get('value') is True",
+      "description": "The ERROR severity radio is selected"
+    },
+    {
+      "command": "input #search",
+      "eval": "(result.get('value') or '').strip().lower() == 'database'",
+      "description": "Search input contains the term 'database'"
+    },
+    {
+      "command": "eval \"document.getElementById('visible-rows').textContent\"",
+      "eval": "str(result.get('value')).strip() == '4'",
+      "description": "Four log rows are visible after ERROR + database filter"
+    },
+    {
+      "command": "check-tab-open httpbin.org/uuid",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for httpbin.org/uuid is open"
+    },
+    {
+      "command": "check-url-visited httpbin.org/uuid",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/uuid appears in history"
+    },
+    {
+      "command": "check-bookmark httpbin.org/uuid",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/uuid exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

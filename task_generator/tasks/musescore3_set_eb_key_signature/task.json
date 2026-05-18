@@ -1,0 +1,45 @@
+{
+  "id": "musescore3_set_eb_key_signature",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/study_eb.mscz — 8 measures of quarter notes in C major (no sharps or flats), 4/4 time.\n\nChange the key signature at the start of the score to E-flat major (three flats), so the first KeySig accidental count equals -3. Do not change the time signature or measure count. Save in place at /home/user/Documents/study_eb.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "study_eb.mscz",
+        "sandbox_path": "/home/user/Documents/study_eb.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/study_eb.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "study_eb.mscz still exists"
+    },
+    {
+      "command": "check-key-signature /home/user/Documents/study_eb.mscz -3",
+      "key": "match",
+      "expected": true,
+      "description": "First KeySig has -3 accidentals (E-flat major)"
+    },
+    {
+      "command": "check-time-signature /home/user/Documents/study_eb.mscz 4 4",
+      "key": "match",
+      "expected": true,
+      "description": "Time signature is still 4/4"
+    },
+    {
+      "command": "check-measure-count /home/user/Documents/study_eb.mscz 8",
+      "key": "match",
+      "expected": true,
+      "description": "Still 8 measures"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

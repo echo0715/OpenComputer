@@ -1,0 +1,81 @@
+{
+  "id": "gedit_sort_lines_manually",
+  "app": "gedit",
+  "task": "/home/user/Documents/fruits.txt currently contains 8 fruit names in this order: `Mango`, `Apple`, `Cherry`, `Banana`, `Elderberry`, `Date`, `Fig`, `Grape`.\n\nRearrange the lines so the file contains exactly these 8 lines, in alphabetical order:\n\n```\nApple\nBanana\nCherry\nDate\nElderberry\nFig\nGrape\nMango\n```",
+  "env": {
+    "files": [
+      {
+        "filename": "fruits.txt",
+        "sandbox_path": "/home/user/Documents/fruits.txt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/fruits.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "fruits.txt file exists"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 1 Apple",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 1 is Apple"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 2 Banana",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 2 is Banana"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 3 Cherry",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 3 is Cherry"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 4 Date",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 4 is Date"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 5 Elderberry",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 5 is Elderberry"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 6 Fig",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 6 is Fig"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 7 Grape",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 7 is Grape"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/fruits.txt 8 Mango",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 8 is Mango"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/fruits.txt 8",
+      "key": "matches",
+      "expected": true,
+      "description": "File still has exactly 8 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "gimp_flip_vertical_jpeg_export",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/red_top_green_bottom.png in GIMP — a 400x400 image with a red top half and a green bottom half.\n\nFlip the image vertically so the green half is now on top and the red half is on the bottom, then export the result as a JPEG file to /home/user/Documents/flipped_vert.jpg. The output must remain 400x400 pixels.",
+  "env": {
+    "files": [
+      {
+        "filename": "red_top_green_bottom.png",
+        "sandbox_path": "/home/user/Documents/red_top_green_bottom.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/flipped_vert.jpg",
+      "key": "exists",
+      "expected": true,
+      "description": "Flipped JPEG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/flipped_vert.jpg JPEG",
+      "key": "match",
+      "expected": true,
+      "description": "Output is JPEG format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/flipped_vert.jpg 400 400",
+      "key": "match",
+      "expected": true,
+      "description": "Dimensions are 400x400"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/flipped_vert.jpg 200 50 0 255 0 15",
+      "key": "match",
+      "expected": true,
+      "description": "Top half (y=50) is now green (flipped from bottom)"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/flipped_vert.jpg 200 350 255 0 0 15",
+      "key": "match",
+      "expected": true,
+      "description": "Bottom half (y=350) is now red (flipped from top)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

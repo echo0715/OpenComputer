@@ -1,0 +1,64 @@
+{
+  "id": "gedit_disable_autosave_font_change",
+  "app": "gedit",
+  "task": "Set the gedit editor preferences under `org.gnome.gedit.preferences.editor` so that:\n- `auto-save` is `false`\n- `tab-size` is `2`\n- `display-line-numbers` is `true`\n\nThen create /home/user/Documents/prefs_notes.txt containing exactly these 3 lines, in this order:\n\n```\nauto-save disabled\ntab-size 2\nline numbers enabled\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting-value \"org.gnome.gedit.preferences.editor auto-save\" false",
+      "key": "matches",
+      "expected": true,
+      "description": "Auto-save is disabled"
+    },
+    {
+      "command": "check-tab-size 2",
+      "key": "matches",
+      "expected": true,
+      "description": "Tab size is 2"
+    },
+    {
+      "command": "check-setting-value \"org.gnome.gedit.preferences.editor display-line-numbers\" true",
+      "key": "matches",
+      "expected": true,
+      "description": "Line numbers are displayed"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/prefs_notes.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "prefs_notes.txt was created"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/prefs_notes.txt 1 \"auto-save disabled\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 1 records auto-save change"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/prefs_notes.txt 2 \"tab-size 2\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 2 records tab-size change"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/prefs_notes.txt 3 \"line numbers enabled\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Line 3 records line numbers change"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/prefs_notes.txt 3",
+      "key": "matches",
+      "expected": true,
+      "description": "Notes file has exactly 3 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

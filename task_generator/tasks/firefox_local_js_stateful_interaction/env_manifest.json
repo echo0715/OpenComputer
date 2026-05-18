@@ -1,0 +1,6 @@
+{
+  "task_id": "firefox_local_js_stateful_interaction",
+  "files": [
+    {"filename": "dashboard.html", "sandbox_path": "/home/user/Documents/dashboard.html", "type": "html"}
+  ]
+}

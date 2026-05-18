@@ -1,0 +1,36 @@
+{
+  "id": "zotero_gap_import_ris_file",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite, and a single-record RIS file is at /home/user/Documents/new_papers.ris.\n\nImport /home/user/Documents/new_papers.ris into the library (it may live directly in 'My Library' or inside an auto-created import collection — either is acceptable). After import, an item titled 'GPT-4 Technical Report' of type `journalArticle` must exist in the library, and the total item count must be at least 5. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      },
+      {
+        "filename": "new_papers.ris",
+        "sandbox_path": "/home/user/Documents/new_papers.ris"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-item-exists 'GPT-4 Technical Report'",
+      "key": "exists",
+      "expected": true,
+      "description": "Imported GPT-4 item exists"
+    },
+    {
+      "command": "check-item-type 'GPT-4 Technical Report' journalArticle",
+      "key": "match",
+      "expected": true,
+      "description": "Type is journalArticle"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

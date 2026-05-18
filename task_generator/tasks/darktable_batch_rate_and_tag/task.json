@@ -1,0 +1,89 @@
+{
+  "id": "darktable_batch_rate_and_tag",
+  "app": "darktable",
+  "task": "Import the three images /home/user/Pictures/batch/img_001.png, /home/user/Pictures/batch/img_002.png, and /home/user/Pictures/batch/img_003.png into the darktable library.\n\nApply the tag 'batch_processed' to all three images, and set star ratings as follows:\n- img_001.png — 1 star\n- img_002.png — 3 stars\n- img_003.png — 5 stars",
+  "env": {
+    "files": [
+      {
+        "filename": "img_001.png",
+        "sandbox_path": "/home/user/Pictures/batch/img_001.png"
+      },
+      {
+        "filename": "img_002.png",
+        "sandbox_path": "/home/user/Pictures/batch/img_002.png"
+      },
+      {
+        "filename": "img_003.png",
+        "sandbox_path": "/home/user/Pictures/batch/img_003.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported img_001.png",
+      "key": "imported",
+      "expected": true,
+      "description": "img_001.png is imported into darktable library"
+    },
+    {
+      "command": "check-image-imported img_002.png",
+      "key": "imported",
+      "expected": true,
+      "description": "img_002.png is imported into darktable library"
+    },
+    {
+      "command": "check-image-imported img_003.png",
+      "key": "imported",
+      "expected": true,
+      "description": "img_003.png is imported into darktable library"
+    },
+    {
+      "command": "check-tag-exists batch_processed",
+      "key": "exists",
+      "expected": true,
+      "description": "Tag 'batch_processed' exists in the library"
+    },
+    {
+      "command": "check-image-tagged 1 batch_processed",
+      "key": "tagged",
+      "expected": true,
+      "description": "img_001 is tagged with 'batch_processed'"
+    },
+    {
+      "command": "check-image-tagged 2 batch_processed",
+      "key": "tagged",
+      "expected": true,
+      "description": "img_002 is tagged with 'batch_processed'"
+    },
+    {
+      "command": "check-image-tagged 3 batch_processed",
+      "key": "tagged",
+      "expected": true,
+      "description": "img_003 is tagged with 'batch_processed'"
+    },
+    {
+      "command": "check-image-rating 1 1",
+      "key": "matches",
+      "expected": true,
+      "description": "img_001 rating is 1 star"
+    },
+    {
+      "command": "check-image-rating 2 3",
+      "key": "matches",
+      "expected": true,
+      "description": "img_002 rating is 3 stars"
+    },
+    {
+      "command": "check-image-rating 3 5",
+      "key": "matches",
+      "expected": true,
+      "description": "img_003 rating is 5 stars"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

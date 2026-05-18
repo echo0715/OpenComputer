@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_convert_mp4_to_mkv",
+  "files": [
+    {"filename": "source.mp4", "sandbox_path": "/home/user/Videos/source.mp4", "type": "mp4"}
+  ]
+}

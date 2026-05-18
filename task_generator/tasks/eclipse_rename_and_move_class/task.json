@@ -1,0 +1,57 @@
+{
+  "id": "eclipse_rename_and_move_class",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the Java project 'Refactor' is imported at /home/user/workspace/Refactor and contains the class file src/com/old/Helper.java.\n\nRename the class 'Helper' to 'Utility' (so the file is renamed to `Utility.java` and the declaration becomes `public class Utility`) and move it from package `com.old` into a new package `com.newpkg` under the existing 'src' source folder (so the package declaration becomes `package com.newpkg;`). The final source file must be at /home/user/workspace/Refactor/src/com/newpkg/Utility.java, and the old file at src/com/old/Helper.java must no longer exist.",
+  "env": {
+    "files": [
+      {
+        "filename": "Refactor/.project",
+        "sandbox_path": "/home/user/workspace/Refactor/.project"
+      },
+      {
+        "filename": "Refactor/.classpath",
+        "sandbox_path": "/home/user/workspace/Refactor/.classpath"
+      },
+      {
+        "filename": "Refactor/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/Refactor/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "Refactor/src/com/old/Helper.java",
+        "sandbox_path": "/home/user/workspace/Refactor/src/com/old/Helper.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace Refactor",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'Refactor' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/Refactor org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Refactor src/com/newpkg/Utility.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Utility.java exists in the new package com.newpkg"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Refactor src/com/old/Helper.java",
+      "key": "exists",
+      "expected": false,
+      "description": "Old file Helper.java no longer exists in com.old"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

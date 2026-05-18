@@ -1,0 +1,99 @@
+{
+  "id": "obsidian_recipe_vault",
+  "app": "obsidian",
+  "task": "Build a recipe collection in the Obsidian vault at /home/user/Documents/RecipeVault.\n\n1. Create folders: 'Italian', 'Asian', 'Desserts'.\n2. Create 'Italian/Carbonara.md' with frontmatter `cuisine: italian`, `servings: 4`, `time: 30`, body with heading 'Carbonara', an ingredient list, instructions, a link to [[Cacio e Pepe]], and tags #recipe #italian #pasta.\n3. Create 'Italian/Cacio e Pepe.md' with frontmatter `cuisine: italian`, `servings: 2`, `time: 20`, body with a heading, ingredients, instructions, a link to [[Carbonara]], and tags #recipe #italian #pasta.\n4. Create 'Asian/PadThai.md' with frontmatter `cuisine: thai`, `servings: 2`, `time: 25`, body with a heading, ingredients, instructions, and tags #recipe #thai #noodles.\n5. Create 'Desserts/Tiramisu.md' with frontmatter `cuisine: italian`, `servings: 6`, `time: 45`, body with a heading, ingredients, instructions, a link to [[Carbonara]], and tags #recipe #italian #dessert.\n6. Create 'Index.md' in the vault root with a heading 'Recipe Index', links to [[Carbonara]], [[Cacio e Pepe]], [[PadThai]], [[Tiramisu]], and tags #index #recipes.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/RecipeVault Italian",
+      "key": "exists",
+      "expected": true,
+      "description": "Italian folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/RecipeVault Asian",
+      "key": "exists",
+      "expected": true,
+      "description": "Asian folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/RecipeVault Desserts",
+      "key": "exists",
+      "expected": true,
+      "description": "Desserts folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/RecipeVault Carbonara cuisine italian",
+      "key": "match",
+      "expected": true,
+      "description": "Carbonara has cuisine=italian"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/RecipeVault Carbonara 'Cacio e Pepe'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Carbonara links to Cacio e Pepe"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/RecipeVault 'Cacio e Pepe' Carbonara",
+      "key": "links_to",
+      "expected": true,
+      "description": "Cacio e Pepe links to Carbonara"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/RecipeVault PadThai cuisine thai",
+      "key": "match",
+      "expected": true,
+      "description": "PadThai has cuisine=thai"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/RecipeVault PadThai noodles",
+      "key": "has_tag",
+      "expected": true,
+      "description": "PadThai has #noodles tag"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/RecipeVault Tiramisu servings 6",
+      "key": "match",
+      "expected": true,
+      "description": "Tiramisu has servings=6"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/RecipeVault Tiramisu Carbonara",
+      "key": "links_to",
+      "expected": true,
+      "description": "Tiramisu links to Carbonara"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/RecipeVault Index Carbonara",
+      "key": "links_to",
+      "expected": true,
+      "description": "Index links to Carbonara"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/RecipeVault Index PadThai",
+      "key": "links_to",
+      "expected": true,
+      "description": "Index links to PadThai"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/RecipeVault Index index",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Index has #index tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/RecipeVault",
+      "eval": "result.get('count') == 5",
+      "description": "Vault has exactly 5 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

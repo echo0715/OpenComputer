@@ -1,0 +1,93 @@
+{
+  "id": "drawio_multipage_architecture",
+  "app": "drawio",
+  "task": "Create a software architecture diagram in /home/user/Documents/architecture.drawio with exactly 3 pages.\n\n- Page 1 named 'Frontend' — 2 shapes: 'React App', 'API Gateway', connected by 1 edge.\n- Page 2 named 'Backend' — 3 shapes: 'Auth Service', 'Data Service', 'Message Queue'. Edges: 'Auth Service' -> 'Message Queue' and 'Data Service' -> 'Message Queue' (2 edges).\n- Page 3 named 'Database' — 2 shapes: 'PostgreSQL', 'Redis' (no edges).\n\nPersist to /home/user/Documents/architecture.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "architecture.drawio",
+        "sandbox_path": "/home/user/Documents/architecture.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/architecture.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists at expected path"
+    },
+    {
+      "command": "check-page-count /home/user/Documents/architecture.drawio 3",
+      "key": "match",
+      "expected": true,
+      "description": "Diagram has exactly 3 pages"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/architecture.drawio \"React App\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape 'React App' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/architecture.drawio \"API Gateway\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape 'API Gateway' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/architecture.drawio \"Auth Service\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape 'Auth Service' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/architecture.drawio \"Data Service\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape 'Data Service' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/architecture.drawio \"Message Queue\"",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape 'Message Queue' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/architecture.drawio PostgreSQL",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape 'PostgreSQL' exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/architecture.drawio Redis",
+      "key": "exists",
+      "expected": true,
+      "description": "Shape 'Redis' exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/architecture.drawio 2 0",
+      "key": "match",
+      "expected": true,
+      "description": "Page 1 (Frontend) has exactly 2 vertices"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/architecture.drawio 3 1",
+      "key": "match",
+      "expected": true,
+      "description": "Page 2 (Backend) has exactly 3 vertices"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/architecture.drawio 2 2",
+      "key": "match",
+      "expected": true,
+      "description": "Page 3 (Database) has exactly 2 vertices"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

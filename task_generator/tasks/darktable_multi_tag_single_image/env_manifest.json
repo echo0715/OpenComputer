@@ -1,0 +1,6 @@
+{
+  "task_id": "darktable_multi_tag_single_image",
+  "files": [
+    {"filename": "cityscape.png", "sandbox_path": "/home/user/Pictures/cityscape.png", "type": "png"}
+  ]
+}

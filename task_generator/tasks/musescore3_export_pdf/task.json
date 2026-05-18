@@ -1,0 +1,33 @@
+{
+  "id": "musescore3_export_pdf",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/sonatina.mscz — a 4-measure piano piece in 4/4 time.\n\nExport the score as a PDF File (all pages) to exactly /home/user/Documents/sonatina.pdf. The original /home/user/Documents/sonatina.mscz must still exist, and the exported PDF must begin with a valid %PDF- header.",
+  "env": {
+    "files": [
+      {
+        "filename": "sonatina.mscz",
+        "sandbox_path": "/home/user/Documents/sonatina.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/sonatina.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "Original sonatina.mscz still exists"
+    },
+    {
+      "command": "check-pdf-exists /home/user/Documents/sonatina.pdf",
+      "key": "match",
+      "expected": true,
+      "description": "Exported sonatina.pdf exists and has a valid %PDF- header"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "cloudcompare_xyz_to_binary_ply",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/survey.xyz is an ASCII point cloud with 600 points in X Y Z format.\n\nExport the cloud as a binary little-endian PLY at /home/user/Documents/survey.ply (encoding `binary_little_endian`). Do not drop any points.",
+  "env": {
+    "files": [
+      {
+        "filename": "survey.xyz",
+        "sandbox_path": "/home/user/Documents/survey.xyz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/survey.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Binary PLY output exists"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/survey.ply binary_little_endian",
+      "key": "match",
+      "expected": true,
+      "description": "Output PLY is binary little-endian"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/survey.ply 600",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 600 vertices"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

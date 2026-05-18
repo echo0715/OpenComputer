@@ -1,0 +1,51 @@
+{
+  "id": "audacity_export_flac_mono",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/input.wav already loaded (a 2.5-second mono 44.1 kHz WAV file).\n\nExport this audio as a FLAC file to /home/user/Music/output.flac using the default compression level.",
+  "env": {
+    "files": [
+      {
+        "filename": "input.wav",
+        "sandbox_path": "/home/user/Music/input.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Music/output.flac",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported FLAC exists"
+    },
+    {
+      "command": "check-export-codec /home/user/Music/output.flac flac",
+      "key": "match",
+      "expected": true,
+      "description": "Codec is flac"
+    },
+    {
+      "command": "check-export-sample-rate /home/user/Music/output.flac 44100",
+      "key": "match",
+      "expected": true,
+      "description": "Sample rate is 44100 Hz"
+    },
+    {
+      "command": "check-export-channels /home/user/Music/output.flac 1",
+      "key": "match",
+      "expected": true,
+      "description": "FLAC has 1 channel (mono)"
+    },
+    {
+      "command": "check-export-format /home/user/Music/output.flac flac",
+      "key": "match",
+      "expected": true,
+      "description": "Container format is flac"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

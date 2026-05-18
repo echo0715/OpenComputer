@@ -1,0 +1,98 @@
+{
+  "id": "renderdoc_cap_triple_api_comparison",
+  "app": "renderdoc",
+  "task": "Set up three capture-settings presets that target the SAME program under different graphics APIs, for a cross-API comparison run. Each file must be valid JSON with a top-level \"rdocConfigData\": 1 marker and a nested \"settings\" object.\n\n1. /home/user/captures/app_vulkan.cap:\n   - executable = \"/usr/local/games/cross_app\"\n   - workingDir = \"/home/user/cross\"\n   - commandLine = \"--api vulkan\"\n   - options = {\"APIValidation\": true, \"CaptureCallstacks\": false, \"HookIntoChildren\": false}\n   - autoStart = false\n\n2. /home/user/captures/app_d3d12.cap:\n   - executable = \"/usr/local/games/cross_app\"\n   - workingDir = \"/home/user/cross\"\n   - commandLine = \"--api d3d12\"\n   - options = {\"APIValidation\": true, \"CaptureCallstacks\": false, \"HookIntoChildren\": false}\n   - autoStart = false\n\n3. /home/user/captures/app_opengl.cap:\n   - executable = \"/usr/local/games/cross_app\"\n   - workingDir = \"/home/user/cross\"\n   - commandLine = \"--api opengl\"\n   - options = {\"APIValidation\": false, \"CaptureCallstacks\": false, \"HookIntoChildren\": false}\n   - autoStart = false\n\nThen register ALL THREE absolute paths in the UI configuration's \"RecentCaptureSettings\" JSON array at /home/user/.local/share/qrenderdoc/UI.config, in the exact order vulkan, d3d12, opengl. The top-level \"rdocConfigData\": 1 marker must still be present.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/captures/app_vulkan.cap",
+      "key": "exists",
+      "expected": true,
+      "description": "vulkan preset exists"
+    },
+    {
+      "command": "check-file-exists /home/user/captures/app_d3d12.cap",
+      "key": "exists",
+      "expected": true,
+      "description": "d3d12 preset exists"
+    },
+    {
+      "command": "check-file-exists /home/user/captures/app_opengl.cap",
+      "key": "exists",
+      "expected": true,
+      "description": "opengl preset exists"
+    },
+    {
+      "command": "check-cap-executable /home/user/captures/app_vulkan.cap /usr/local/games/cross_app",
+      "key": "match",
+      "expected": true,
+      "description": "vulkan exec"
+    },
+    {
+      "command": "check-cap-executable /home/user/captures/app_d3d12.cap /usr/local/games/cross_app",
+      "key": "match",
+      "expected": true,
+      "description": "d3d12 exec"
+    },
+    {
+      "command": "check-cap-executable /home/user/captures/app_opengl.cap /usr/local/games/cross_app",
+      "key": "match",
+      "expected": true,
+      "description": "opengl exec"
+    },
+    {
+      "command": "check-cap-command-line /home/user/captures/app_vulkan.cap vulkan",
+      "key": "match",
+      "expected": true,
+      "description": "vulkan cmdline"
+    },
+    {
+      "command": "check-cap-command-line /home/user/captures/app_d3d12.cap d3d12",
+      "key": "match",
+      "expected": true,
+      "description": "d3d12 cmdline"
+    },
+    {
+      "command": "check-cap-command-line /home/user/captures/app_opengl.cap opengl",
+      "key": "match",
+      "expected": true,
+      "description": "opengl cmdline"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/app_vulkan.cap APIValidation true",
+      "key": "match",
+      "expected": true,
+      "description": "vulkan APIValidation true"
+    },
+    {
+      "command": "check-cap-option /home/user/captures/app_opengl.cap APIValidation false",
+      "key": "match",
+      "expected": true,
+      "description": "opengl APIValidation false"
+    },
+    {
+      "command": "recent-settings",
+      "eval": "result.get('settings') == ['/home/user/captures/app_vulkan.cap', '/home/user/captures/app_d3d12.cap', '/home/user/captures/app_opengl.cap']",
+      "description": "RecentCaptureSettings ordered [vulkan, d3d12, opengl]"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

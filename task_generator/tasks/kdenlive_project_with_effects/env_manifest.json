@@ -1,0 +1,6 @@
+{
+  "task_id": "kdenlive_project_with_effects",
+  "files": [
+    {"filename": "setup_sample.sh", "sandbox_path": "/home/user/setup_sample.sh", "type": "sh", "note": "Run this script before the task to generate sample video clip using ffmpeg"}
+  ]
+}

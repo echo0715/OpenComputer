@@ -1,0 +1,57 @@
+{
+  "id": "inkscape_page_resize_to_a4_portrait",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/a4doc.svg — a blank 500x500 canvas.\n\nRebuild /home/user/Documents/a4doc.svg as an A4-portrait template with these exact contents:\n\n- Page size exactly 595 wide x 842 tall (the SVG width and height attributes must be exactly '595' and '842' — no units, no decimals).\n- Layer named 'Content' containing a header-bar rectangle near the top of the page with id `header_bar` and fill #003366.\n- One text element anywhere with the exact text: A4 Document.\n\nSave the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "a4doc.svg",
+        "sandbox_path": "/home/user/Documents/a4doc.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/a4doc.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "a4doc.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/a4doc.svg 595 842",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 595x842"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/a4doc.svg Content",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'Content' exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/a4doc.svg header_bar",
+      "key": "exists",
+      "expected": true,
+      "description": "header_bar exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/a4doc.svg header_bar fill #003366",
+      "key": "match",
+      "expected": true,
+      "description": "header_bar fill is #003366"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/a4doc.svg 'A4 Document'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'A4 Document' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

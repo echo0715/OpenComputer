@@ -1,0 +1,33 @@
+{
+  "id": "musescore3_transpose_to_g_major",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/etude_c.mscz — currently in C major (0 sharps / 0 flats) with 4 measures of quarter notes.\n\nTranspose the entire score from C major up to G major (transposing key signatures along with the notes), so the first key signature has exactly 1 sharp. Save in place at /home/user/Documents/etude_c.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "etude_c.mscz",
+        "sandbox_path": "/home/user/Documents/etude_c.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/etude_c.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "etude_c.mscz still exists"
+    },
+    {
+      "command": "check-key-signature /home/user/Documents/etude_c.mscz 1",
+      "key": "match",
+      "expected": true,
+      "description": "First key signature has 1 sharp (G major)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

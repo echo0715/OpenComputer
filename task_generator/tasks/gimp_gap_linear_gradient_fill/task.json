@@ -1,0 +1,53 @@
+{
+  "id": "gimp_gap_linear_gradient_fill",
+  "app": "gimp",
+  "task": "Create a new 500x500 RGB image in GIMP.\n\nFill it with a linear top-to-bottom gradient that starts at pure red (#FF0000) on the top edge and ends at pure blue (#0000FF) on the bottom edge, with a smooth blend through the middle. Flatten and export as PNG to /home/user/Documents/gradient.png. The output must be 500x500 with a predominantly red top row, predominantly blue bottom row, and a red/blue mix in the middle row.",
+  "env": {
+    "files": [
+      {
+        "filename": "placeholder.png",
+        "sandbox_path": "/home/user/Documents/placeholder.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/gradient.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Output PNG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/gradient.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Output is PNG"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/gradient.png 500 500",
+      "key": "match",
+      "expected": true,
+      "description": "Output is 500x500"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/gradient.png 250 5",
+      "eval": "result.get('r',0) > 200 and result.get('b',255) < 60",
+      "description": "Top row is predominantly red"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/gradient.png 250 495",
+      "eval": "result.get('b',0) > 200 and result.get('r',255) < 60",
+      "description": "Bottom row is predominantly blue"
+    },
+    {
+      "command": "pixel-color-file /home/user/Documents/gradient.png 250 250",
+      "eval": "50 < result.get('r',0) < 220 and 50 < result.get('b',0) < 220",
+      "description": "Middle row is a mix of red and blue (blended)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

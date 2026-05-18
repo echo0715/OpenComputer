@@ -1,0 +1,40 @@
+{
+  "id": "vscode_javascript_snippets",
+  "app": "vscode",
+  "task": "Add the following user snippets for JavaScript (persisted to `~/.config/Code/User/snippets/javascript.json`):\n\n- prefix `clog` — body `console.log($1);` — description `Console log`\n- prefix `afn` — body `const $1 = async ($2) => {\\n  $3\\n};` — description `Async arrow function`\n- prefix `imp` — body `import $1 from '$2';` — description `Import module`\n- prefix `forin` — body `for (const $1 in $2) {\\n  $3\\n}` — description `For in loop`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-snippet-exists javascript clog",
+      "key": "exists",
+      "expected": true,
+      "description": "clog snippet exists for JavaScript"
+    },
+    {
+      "command": "check-snippet-exists javascript afn",
+      "key": "exists",
+      "expected": true,
+      "description": "afn snippet exists for JavaScript"
+    },
+    {
+      "command": "check-snippet-exists javascript imp",
+      "key": "exists",
+      "expected": true,
+      "description": "imp snippet exists for JavaScript"
+    },
+    {
+      "command": "check-snippet-exists javascript forin",
+      "key": "exists",
+      "expected": true,
+      "description": "forin snippet exists for JavaScript"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

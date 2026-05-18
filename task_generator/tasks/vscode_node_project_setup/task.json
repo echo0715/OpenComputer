@@ -1,0 +1,52 @@
+{
+  "id": "vscode_node_project_setup",
+  "app": "vscode",
+  "task": "Create a Node.js project at `/home/user/projects/api-server` with the following files:\n\n- `src/index.js`:\n  ```javascript\n  const express = require('express');\n  const app = express();\n  app.get('/', (req, res) => res.send('Hello API'));\n  app.listen(3000);\n  ```\n- `src/utils.js`:\n  ```javascript\n  function formatDate(date) {\n    return date.toISOString().split('T')[0];\n  }\n  module.exports = { formatDate };\n  ```\n- `.vscode/settings.json`:\n  - `editor.tabSize`: 2\n  - `editor.formatOnSave`: `true`\n  - `files.exclude`: includes `node_modules: true`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/api-server/src/index.js",
+      "key": "exists",
+      "expected": true,
+      "description": "index.js exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/api-server/src/index.js express",
+      "key": "contains",
+      "expected": true,
+      "description": "index.js contains express"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/api-server/src/utils.js",
+      "key": "exists",
+      "expected": true,
+      "description": "utils.js exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/api-server/src/utils.js formatDate",
+      "key": "contains",
+      "expected": true,
+      "description": "utils.js contains formatDate"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/api-server editor.tabSize 2",
+      "key": "match",
+      "expected": true,
+      "description": "workspace tabSize is 2"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/api-server editor.formatOnSave true",
+      "key": "match",
+      "expected": true,
+      "description": "workspace formatOnSave is true"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

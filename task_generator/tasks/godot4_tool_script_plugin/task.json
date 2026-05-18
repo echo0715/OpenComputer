@@ -1,0 +1,81 @@
+{
+  "id": "godot4_tool_script_plugin",
+  "app": "godot4",
+  "task": "Replace the contents of /home/user/godot_projects/tool_game/scripts/grid_drawer.gd with a valid `@tool` GDScript that satisfies all of the following:\n\n1. The very first non-empty line must be `@tool`.\n2. `class_name GridDrawer`\n3. `extends Node2D`\n4. Declares a signal named `grid_changed`\n5. Declares two `@export` variables:\n   - `@export var grid_size: int = 32`\n   - `@export var cell_color: Color = Color(1, 1, 1, 1)`\n6. Defines two functions:\n   - `func update_grid() -> void`\n   - `func clear_grid() -> void`",
+  "env": {
+    "files": [
+      {
+        "filename": "project.godot",
+        "sandbox_path": "/home/user/godot_projects/tool_game/project.godot"
+      },
+      {
+        "filename": "main.tscn",
+        "sandbox_path": "/home/user/godot_projects/tool_game/main.tscn"
+      },
+      {
+        "filename": "scripts/grid_drawer.gd",
+        "sandbox_path": "/home/user/godot_projects/tool_game/scripts/grid_drawer.gd"
+      },
+      {
+        "filename": "icon.svg",
+        "sandbox_path": "/home/user/godot_projects/tool_game/icon.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-contains /home/user/godot_projects/tool_game/scripts/grid_drawer.gd @tool",
+      "key": "contains",
+      "expected": true,
+      "description": "Script is marked as @tool"
+    },
+    {
+      "command": "check-script-class-name /home/user/godot_projects/tool_game/scripts/grid_drawer.gd GridDrawer",
+      "key": "match",
+      "expected": true,
+      "description": "class_name is GridDrawer"
+    },
+    {
+      "command": "check-script-extends /home/user/godot_projects/tool_game/scripts/grid_drawer.gd Node2D",
+      "key": "match",
+      "expected": true,
+      "description": "extends Node2D"
+    },
+    {
+      "command": "check-script-signal /home/user/godot_projects/tool_game/scripts/grid_drawer.gd grid_changed",
+      "key": "exists",
+      "expected": true,
+      "description": "grid_changed signal declared"
+    },
+    {
+      "command": "check-script-export /home/user/godot_projects/tool_game/scripts/grid_drawer.gd grid_size",
+      "key": "exists",
+      "expected": true,
+      "description": "@export grid_size declared"
+    },
+    {
+      "command": "check-script-export /home/user/godot_projects/tool_game/scripts/grid_drawer.gd cell_color",
+      "key": "exists",
+      "expected": true,
+      "description": "@export cell_color declared"
+    },
+    {
+      "command": "check-script-func /home/user/godot_projects/tool_game/scripts/grid_drawer.gd update_grid",
+      "key": "exists",
+      "expected": true,
+      "description": "update_grid function exists"
+    },
+    {
+      "command": "check-script-func /home/user/godot_projects/tool_game/scripts/grid_drawer.gd clear_grid",
+      "key": "exists",
+      "expected": true,
+      "description": "clear_grid function exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "task_id": "thunderbird_gap_calendar_ics_import",
+  "files": [
+    {
+      "filename": "conference_schedule.ics",
+      "sandbox_path": "/home/user/Documents/conference_schedule.ics",
+      "type": "ics"
+    }
+  ]
+}

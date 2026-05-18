@@ -1,0 +1,140 @@
+{
+  "id": "obsidian_meeting_actions_extract",
+  "app": "obsidian",
+  "task": "The Obsidian vault at /home/user/Documents/MeetingVault has 3 pre-existing meeting notes (Meeting-Kickoff.md, Meeting-Standup.md, Meeting-Retro.md), each with an `## Action Items` section containing ACT-XXX entries. Extract every action item into its own note and add backlinks in Meeting-Retro.\n\n1. Create a folder 'Actions' in the vault root.\n2. For each action item, create a note at 'Actions/ACT-00X.md' with:\n   - YAML frontmatter `owner: <name>`, `status: open`, `source: <meeting>`\n   - Level-1 heading `ACT-00X`\n   - Level-2 `Description` heading followed by a one-sentence summary of the action\n   - A wikilink back to the source meeting (e.g. [[Meeting-Kickoff]])\n   - The inline tag #action\n\n   Exact action notes to create:\n   - Actions/ACT-001.md: owner=alice, source=Meeting-Kickoff, links to [[Meeting-Kickoff]]\n   - Actions/ACT-002.md: owner=bob, source=Meeting-Kickoff, links to [[Meeting-Kickoff]]\n   - Actions/ACT-003.md: owner=carol, source=Meeting-Standup, links to [[Meeting-Standup]]\n   - Actions/ACT-004.md: owner=dave, source=Meeting-Retro, links to [[Meeting-Retro]]\n   - Actions/ACT-005.md: owner=eve, source=Meeting-Retro, links to [[Meeting-Retro]]\n\n3. Append a new `## Linked Actions` section to the end of Meeting-Retro.md containing wikilinks [[ACT-004]] and [[ACT-005]]. Do not modify Meeting-Kickoff.md or Meeting-Standup.md.\n\nThe vault must end up with exactly 8 notes total.",
+  "env": {
+    "files": [
+      {
+        "filename": "app.json",
+        "sandbox_path": "/home/user/Documents/MeetingVault/.obsidian/app.json"
+      },
+      {
+        "filename": "Meeting-Kickoff.md",
+        "sandbox_path": "/home/user/Documents/MeetingVault/Meeting-Kickoff.md"
+      },
+      {
+        "filename": "Meeting-Standup.md",
+        "sandbox_path": "/home/user/Documents/MeetingVault/Meeting-Standup.md"
+      },
+      {
+        "filename": "Meeting-Retro.md",
+        "sandbox_path": "/home/user/Documents/MeetingVault/Meeting-Retro.md"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/MeetingVault Actions",
+      "key": "exists",
+      "expected": true,
+      "description": "Actions folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MeetingVault 'Actions/ACT-001' owner alice",
+      "key": "match",
+      "expected": true,
+      "description": "ACT-001 owner=alice"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MeetingVault 'Actions/ACT-001' status open",
+      "key": "match",
+      "expected": true,
+      "description": "ACT-001 status=open"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MeetingVault 'Actions/ACT-001' source Meeting-Kickoff",
+      "key": "match",
+      "expected": true,
+      "description": "ACT-001 source=Meeting-Kickoff"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MeetingVault 'Actions/ACT-001' Meeting-Kickoff",
+      "key": "links_to",
+      "expected": true,
+      "description": "ACT-001 links Meeting-Kickoff"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/MeetingVault 'Actions/ACT-001' action",
+      "key": "has_tag",
+      "expected": true,
+      "description": "ACT-001 has #action"
+    },
+    {
+      "command": "check-note-has-heading /home/user/Documents/MeetingVault 'Actions/ACT-001' Description 2",
+      "key": "has_heading",
+      "expected": true,
+      "description": "ACT-001 has Description heading"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MeetingVault 'Actions/ACT-002' owner bob",
+      "key": "match",
+      "expected": true,
+      "description": "ACT-002 owner=bob"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MeetingVault 'Actions/ACT-002' Meeting-Kickoff",
+      "key": "links_to",
+      "expected": true,
+      "description": "ACT-002 links Meeting-Kickoff"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MeetingVault 'Actions/ACT-003' owner carol",
+      "key": "match",
+      "expected": true,
+      "description": "ACT-003 owner=carol"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MeetingVault 'Actions/ACT-003' Meeting-Standup",
+      "key": "links_to",
+      "expected": true,
+      "description": "ACT-003 links Meeting-Standup"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MeetingVault 'Actions/ACT-004' owner dave",
+      "key": "match",
+      "expected": true,
+      "description": "ACT-004 owner=dave"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MeetingVault 'Actions/ACT-004' Meeting-Retro",
+      "key": "links_to",
+      "expected": true,
+      "description": "ACT-004 links Meeting-Retro"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MeetingVault 'Actions/ACT-005' owner eve",
+      "key": "match",
+      "expected": true,
+      "description": "ACT-005 owner=eve"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/MeetingVault 'Actions/ACT-005' action",
+      "key": "has_tag",
+      "expected": true,
+      "description": "ACT-005 has #action"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MeetingVault Meeting-Retro ACT-004",
+      "key": "links_to",
+      "expected": true,
+      "description": "Meeting-Retro links ACT-004"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MeetingVault Meeting-Retro ACT-005",
+      "key": "links_to",
+      "expected": true,
+      "description": "Meeting-Retro links ACT-005"
+    },
+    {
+      "command": "list-notes /home/user/Documents/MeetingVault",
+      "eval": "result.get('count') == 8",
+      "description": "Vault has exactly 8 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

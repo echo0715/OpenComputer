@@ -1,0 +1,51 @@
+{
+  "id": "renderdoc_disable_telemetry",
+  "app": "renderdoc",
+  "task": "Fully disable analytics and update checks in the RenderDoc UI configuration at /home/user/.local/share/qrenderdoc/UI.config (a JSON document) by setting exactly these three keys:\n\n1. `\"Analytics_TotalOptOut\"` to `true`.\n2. `\"Analytics_ManualCheck\"` to `false`.\n3. `\"CheckUpdate_AllowChecks\"` to `false`.\n\nAll other keys, including the top-level `\"rdocConfigData\": 1` marker, must remain intact.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting Analytics_TotalOptOut true",
+      "key": "match",
+      "expected": true,
+      "description": "Analytics_TotalOptOut is true"
+    },
+    {
+      "command": "check-setting Analytics_ManualCheck false",
+      "key": "match",
+      "expected": true,
+      "description": "Analytics_ManualCheck is false"
+    },
+    {
+      "command": "check-setting CheckUpdate_AllowChecks false",
+      "key": "match",
+      "expected": true,
+      "description": "CheckUpdate_AllowChecks is false"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

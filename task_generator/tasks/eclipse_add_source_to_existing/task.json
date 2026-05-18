@@ -1,0 +1,63 @@
+{
+  "id": "eclipse_add_source_to_existing",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the existing Java project 'TaskManager' at /home/user/workspace/TaskManager (already imported, with one source file at src/com/tasks/Task.java).\n\nAdd two new Java source files to the project, both in the existing 'src' source folder:\n\n1. src/com/tasks/TaskRunner.java (in the existing package 'com.tasks'):\n\n```\npackage com.tasks;\n\npublic class TaskRunner {\n    public static void main(String[] args) {\n        Task task = new Task(\"Sample Task\");\n        System.out.println(\"Running: \" + task.getName());\n        task.complete();\n        System.out.println(\"Completed: \" + task.isCompleted());\n    }\n}\n```\n\n2. src/com/tasks/util/Logger.java (in a new package 'com.tasks.util'):\n\n```\npackage com.tasks.util;\n\nimport java.time.LocalDateTime;\n\npublic class Logger {\n    public static void log(String message) {\n        System.out.println(\"[\" + LocalDateTime.now() + \"] \" + message);\n    }\n}\n```\n\nDo NOT modify or delete the existing src/com/tasks/Task.java file.",
+  "env": {
+    "files": [
+      {
+        "filename": "TaskManager/.project",
+        "sandbox_path": "/home/user/workspace/TaskManager/.project"
+      },
+      {
+        "filename": "TaskManager/.classpath",
+        "sandbox_path": "/home/user/workspace/TaskManager/.classpath"
+      },
+      {
+        "filename": "TaskManager/.settings/org.eclipse.jdt.core.prefs",
+        "sandbox_path": "/home/user/workspace/TaskManager/.settings/org.eclipse.jdt.core.prefs"
+      },
+      {
+        "filename": "TaskManager/src/com/tasks/Task.java",
+        "sandbox_path": "/home/user/workspace/TaskManager/src/com/tasks/Task.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace TaskManager",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'TaskManager' exists in the workspace"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/TaskManager org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/TaskManager src/com/tasks/Task.java",
+      "key": "exists",
+      "expected": true,
+      "description": "Original source file Task.java still exists"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/TaskManager src/com/tasks/TaskRunner.java",
+      "key": "exists",
+      "expected": true,
+      "description": "New source file TaskRunner.java exists in com.tasks package"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/TaskManager src/com/tasks/util/Logger.java",
+      "key": "exists",
+      "expected": true,
+      "description": "New source file Logger.java exists in com.tasks.util package"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

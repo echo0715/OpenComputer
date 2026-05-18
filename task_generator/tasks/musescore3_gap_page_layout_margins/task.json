@@ -1,0 +1,38 @@
+{
+  "id": "musescore3_gap_page_layout_margins",
+  "app": "musescore3",
+  "task": "MuseScore 3 is open with /home/user/Documents/score_layout.mscz — currently US Letter (8.5 × 11 inches).\n\nChange the page dimensions to A4 expressed in inches: page width 8.27 in and page height 11.69 in. Save in place at /home/user/Documents/score_layout.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "score_layout.mscz",
+        "sandbox_path": "/home/user/Documents/score_layout.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/score_layout.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-style-value /home/user/Documents/score_layout.mscz pageWidth 8.27",
+      "key": "match",
+      "expected": true,
+      "description": "Page width ~ 8.27 inches"
+    },
+    {
+      "command": "check-style-value /home/user/Documents/score_layout.mscz pageHeight 11.69",
+      "key": "match",
+      "expected": true,
+      "description": "Page height ~ 11.69 inches"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

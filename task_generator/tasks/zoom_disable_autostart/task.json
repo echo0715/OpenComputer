@@ -1,0 +1,39 @@
+{
+  "id": "zoom_disable_autostart",
+  "app": "zoom",
+  "task": "A baseline Zoom config file exists at /home/user/.config/zoomus.conf with `[General]autoStart=true`.\n\nSet `[General]autoStart` to `false` so Zoom no longer starts automatically with the system. Save the file in-place at /home/user/.config/zoomus.conf. Do not modify any other keys (in particular, leave `[General]language=en-US` untouched).",
+  "env": {
+    "files": [
+      {
+        "filename": "zoomus.conf",
+        "sandbox_path": "/home/user/.config/zoomus.conf"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-config-exists",
+      "key": "exists",
+      "expected": true,
+      "description": "zoomus.conf exists"
+    },
+    {
+      "command": "check-config General autoStart false",
+      "key": "match",
+      "expected": true,
+      "description": "[General]autoStart == false"
+    },
+    {
+      "command": "check-config General language en-US",
+      "key": "match",
+      "expected": true,
+      "description": "language left untouched"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

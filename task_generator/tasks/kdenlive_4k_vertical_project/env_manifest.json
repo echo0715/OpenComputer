@@ -1,0 +1,15 @@
+{
+  "task_id": "kdenlive_4k_vertical_project",
+  "files": [
+    {
+      "filename": "vertical_4k.kdenlive",
+      "sandbox_path": "/home/user/Documents/vertical_4k.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "vertical.mp4",
+      "sandbox_path": "/home/user/Videos/vertical.mp4",
+      "type": "mp4"
+    }
+  ]
+}

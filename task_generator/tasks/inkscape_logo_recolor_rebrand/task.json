@@ -1,0 +1,93 @@
+{
+  "id": "inkscape_logo_recolor_rebrand",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/oldlogo.svg — a 400x400 file containing four grey-palette elements `logo_bg`, `logo_ring`, `logo_mark`, `logo_text_bg` inside a single layer labelled 'OldBrand'.\n\nRebrand /home/user/Documents/oldlogo.svg so that:\n\n- The four existing elements keep their ids (do not rename, move, or delete any) and have these exact fills:\n  - logo_bg fill #111827\n  - logo_ring fill #facc15\n  - logo_mark fill #ffffff\n  - logo_text_bg fill #111827\n- The existing layer is renamed from 'OldBrand' to exactly 'NewBrand'.\n- A text element exists anywhere with the exact text: NewBrand.\n\nThe page must remain 400x400. Save the file in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "oldlogo.svg",
+        "sandbox_path": "/home/user/Documents/oldlogo.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/oldlogo.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "oldlogo.svg exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/oldlogo.svg 400 400",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 400x400"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/oldlogo.svg logo_bg",
+      "key": "exists",
+      "expected": true,
+      "description": "logo_bg still exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/oldlogo.svg logo_bg fill #111827",
+      "key": "match",
+      "expected": true,
+      "description": "logo_bg fill is #111827"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/oldlogo.svg logo_ring",
+      "key": "exists",
+      "expected": true,
+      "description": "logo_ring still exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/oldlogo.svg logo_ring fill #facc15",
+      "key": "match",
+      "expected": true,
+      "description": "logo_ring fill is #facc15"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/oldlogo.svg logo_mark",
+      "key": "exists",
+      "expected": true,
+      "description": "logo_mark still exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/oldlogo.svg logo_mark fill #ffffff",
+      "key": "match",
+      "expected": true,
+      "description": "logo_mark fill is #ffffff"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/oldlogo.svg logo_text_bg",
+      "key": "exists",
+      "expected": true,
+      "description": "logo_text_bg still exists"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/oldlogo.svg logo_text_bg fill #111827",
+      "key": "match",
+      "expected": true,
+      "description": "logo_text_bg fill is #111827"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/oldlogo.svg NewBrand",
+      "key": "exists",
+      "expected": true,
+      "description": "Layer 'NewBrand' exists"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/oldlogo.svg NewBrand",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'NewBrand' exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

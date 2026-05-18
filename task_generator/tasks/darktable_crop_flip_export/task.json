@@ -1,0 +1,57 @@
+{
+  "id": "darktable_crop_flip_export",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/portrait_raw.png into the darktable library.\n\nEnable the 'crop' module and apply a crop, then enable the 'orientation' module (flip/rotate) and apply a horizontal flip or rotation. Apply the tag 'cropped' to the image, set its star rating to 4 stars, and export it as a JPEG to /home/user/Pictures/portrait_final.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "portrait_raw.png",
+        "sandbox_path": "/home/user/Pictures/portrait_raw.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported portrait_raw.png",
+      "key": "imported",
+      "expected": true,
+      "description": "portrait_raw.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation portrait_raw.png crop",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'crop' operation"
+    },
+    {
+      "command": "check-db-has-operation portrait_raw.png flip",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'flip' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename portrait_raw.png cropped",
+      "key": "tagged",
+      "expected": true,
+      "description": "portrait_raw.png is tagged with 'cropped'"
+    },
+    {
+      "command": "check-image-rating-by-filename portrait_raw.png 4",
+      "key": "matches",
+      "expected": true,
+      "description": "portrait_raw.png rating is 4 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/portrait_final.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported JPEG exists at /home/user/Pictures/portrait_final.jpg"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

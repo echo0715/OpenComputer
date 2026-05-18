@@ -1,0 +1,45 @@
+{
+  "id": "gimp_threshold_black_white",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/gradient.png in GIMP — a 400x200 image with a horizontal gradient from black on the left to white on the right.\n\nApply a threshold of 128 to convert the image to pure black and white (every pixel below 128 becomes pure black (0,0,0); every pixel at or above 128 becomes pure white (255,255,255)). Export the result as PNG to /home/user/Documents/threshold_result.png. The output must remain 400x200 pixels.",
+  "env": {
+    "files": [
+      {
+        "filename": "gradient.png",
+        "sandbox_path": "/home/user/Documents/gradient.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/threshold_result.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported threshold result PNG file exists"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/threshold_result.png 400 200",
+      "key": "match",
+      "expected": true,
+      "description": "Image dimensions are 400x200 pixels"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/threshold_result.png 50 100 0 0 0",
+      "key": "match",
+      "expected": true,
+      "description": "Left side pixel is pure black (below threshold)"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/threshold_result.png 350 100 255 255 255",
+      "key": "match",
+      "expected": true,
+      "description": "Right side pixel is pure white (above threshold)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

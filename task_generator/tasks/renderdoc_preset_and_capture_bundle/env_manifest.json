@@ -1,0 +1,15 @@
+{
+  "task_id": "renderdoc_preset_and_capture_bundle",
+  "files": [
+    {
+      "filename": "UI.config",
+      "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config",
+      "type": "json"
+    },
+    {
+      "filename": "demo_frame.rdc",
+      "sandbox_path": "/home/user/captures/demo_frame.rdc",
+      "type": "rdc"
+    }
+  ]
+}

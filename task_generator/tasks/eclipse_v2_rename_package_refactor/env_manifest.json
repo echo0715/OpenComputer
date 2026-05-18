@@ -1,0 +1,30 @@
+{
+  "task_id": "eclipse_v2_rename_package_refactor",
+  "files": [
+    {
+      "filename": "Shopping/.project",
+      "sandbox_path": "/home/user/workspace/Shopping/.project",
+      "type": "project"
+    },
+    {
+      "filename": "Shopping/.classpath",
+      "sandbox_path": "/home/user/workspace/Shopping/.classpath",
+      "type": "classpath"
+    },
+    {
+      "filename": "Shopping/.settings/org.eclipse.jdt.core.prefs",
+      "sandbox_path": "/home/user/workspace/Shopping/.settings/org.eclipse.jdt.core.prefs",
+      "type": "prefs"
+    },
+    {
+      "filename": "Shopping/src/com/shop/old/CartItem.java",
+      "sandbox_path": "/home/user/workspace/Shopping/src/com/shop/old/CartItem.java",
+      "type": "java"
+    },
+    {
+      "filename": "Shopping/src/com/shop/old/Product.java",
+      "sandbox_path": "/home/user/workspace/Shopping/src/com/shop/old/Product.java",
+      "type": "java"
+    }
+  ]
+}

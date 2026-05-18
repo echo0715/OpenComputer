@@ -1,0 +1,58 @@
+{
+  "id": "firefox_bookmark_multiple_pages",
+  "app": "firefox",
+  "task": "Add bookmarks for these three Wikipedia pages:\n- https://en.wikipedia.org/wiki/Python_(programming_language)\n- https://en.wikipedia.org/wiki/Java_(programming_language)\n- https://en.wikipedia.org/wiki/Rust_(programming_language)\n\nWhen finished, exactly three new bookmarks must exist for those URLs and the active tab must be showing the Rust programming language Wikipedia page.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Python",
+      "key": "visited",
+      "expected": true,
+      "description": "Python Wikipedia page was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Java",
+      "key": "visited",
+      "expected": true,
+      "description": "Java Wikipedia page was visited"
+    },
+    {
+      "command": "check-url-visited wikipedia.org/wiki/Rust",
+      "key": "visited",
+      "expected": true,
+      "description": "Rust Wikipedia page was visited"
+    },
+    {
+      "command": "check-bookmark Python",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Python Wikipedia page exists"
+    },
+    {
+      "command": "check-bookmark Java",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Java Wikipedia page exists"
+    },
+    {
+      "command": "check-bookmark Rust",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Rust Wikipedia page exists"
+    },
+    {
+      "command": "check-tab-open wikipedia.org/wiki/Rust",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab shows Rust Wikipedia page"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

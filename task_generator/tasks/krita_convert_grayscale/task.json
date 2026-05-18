@@ -1,0 +1,56 @@
+{
+  "id": "krita_convert_grayscale",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/color_artwork.kra loaded — currently RGBA color space with 3 paint layers named 'LayerA', 'LayerB', and 'LayerC'.\n\nConvert the image color space to Grayscale/Alpha 8-bit (Krita reports this as GRAYA). All 3 paint layers must remain intact with their original names.\n\nSave the file in place at /home/user/Documents/color_artwork.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "color_artwork.kra",
+        "sandbox_path": "/home/user/Documents/color_artwork.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/color_artwork.kra",
+      "key": "exists",
+      "expected": true,
+      "description": ".kra saved"
+    },
+    {
+      "command": "check-color-space /home/user/Documents/color_artwork.kra GRAYA",
+      "key": "match",
+      "expected": true,
+      "description": "Document color space is GRAYA"
+    },
+    {
+      "command": "check-layer-count /home/user/Documents/color_artwork.kra 3",
+      "key": "match",
+      "expected": true,
+      "description": "3 layers preserved"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/color_artwork.kra LayerA",
+      "key": "exists",
+      "expected": true,
+      "description": "Original LayerA preserved"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/color_artwork.kra LayerB",
+      "key": "exists",
+      "expected": true,
+      "description": "Original LayerB preserved"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/color_artwork.kra LayerC",
+      "key": "exists",
+      "expected": true,
+      "description": "Original LayerC preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

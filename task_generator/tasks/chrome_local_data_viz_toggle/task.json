@@ -1,0 +1,70 @@
+{
+  "id": "chrome_local_data_viz_toggle",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/dashboard.html ('Analytics Dashboard' with four chart checkboxes Bar/Line/Pie/Area, a Series dropdown Q1 2024 / Q2 2024 / Q3 2024, four chart cards, and a legend area).\n\nConfigure the dashboard so:\n- Series = `Q3 2024`\n- Bar and Line checkboxes are checked; Pie and Area are unchecked\n- The Bar chart card heading reads `Q3 2024 Revenue`\n- The Line chart card heading reads `Q3 2024 Trend`\n- The legend shows `Region A` and `Region D`\n\nLeave the page in this final configuration.",
+  "env": {
+    "files": [
+      {
+        "filename": "dashboard.html",
+        "sandbox_path": "/home/user/Documents/dashboard.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open dashboard.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for dashboard.html is open"
+    },
+    {
+      "command": "eval \"document.getElementById('series').value\"",
+      "eval": "result.get('value') == 'Q3 2024'",
+      "description": "Series dropdown is set to 'Q3 2024'"
+    },
+    {
+      "command": "eval \"document.getElementById('chart-bar').checked\"",
+      "eval": "result.get('value') is True",
+      "description": "Bar chart checkbox is checked"
+    },
+    {
+      "command": "eval \"document.getElementById('chart-line').checked\"",
+      "eval": "result.get('value') is True",
+      "description": "Line chart checkbox is checked"
+    },
+    {
+      "command": "eval \"document.getElementById('chart-pie').checked\"",
+      "eval": "result.get('value') is False",
+      "description": "Pie chart checkbox is NOT checked"
+    },
+    {
+      "command": "eval \"document.getElementById('chart-area').checked\"",
+      "eval": "result.get('value') is False",
+      "description": "Area chart checkbox is NOT checked"
+    },
+    {
+      "command": "check-page-contains \"Q3 2024 Revenue\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Bar chart title shows 'Q3 2024 Revenue'"
+    },
+    {
+      "command": "check-page-contains \"Q3 2024 Trend\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Line chart title shows 'Q3 2024 Trend'"
+    },
+    {
+      "command": "check-page-contains \"Region D\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Legend shows 'Region D' entry for Q3"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

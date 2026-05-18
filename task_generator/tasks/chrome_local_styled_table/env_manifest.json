@@ -1,0 +1,6 @@
+{
+  "task_id": "chrome_local_styled_table",
+  "files": [
+    {"filename": "inventory.html", "sandbox_path": "/home/user/Documents/inventory.html", "type": "html"}
+  ]
+}

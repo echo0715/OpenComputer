@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_csv_column_delete_and_add",
+  "files": [
+    {"filename": "products.csv", "sandbox_path": "/home/user/Documents/products.csv", "type": "csv"}
+  ]
+}

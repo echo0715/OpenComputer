@@ -1,0 +1,27 @@
+{
+  "id": "freecad_change_unit_schema",
+  "app": "freecad",
+  "task": "FreeCAD is open. Set the General > Units 'User system' preference to 'Imperial decimal (in, in/s^2)' (schema index 3) so that `/home/user/.config/FreeCAD/user.cfg` is updated with `BaseApp/Preferences/Units/UserSchema=3`.",
+  "env": {
+    "files": [
+      {
+        "filename": "empty.FCStd",
+        "sandbox_path": "/home/user/Documents/empty.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-preference BaseApp/Preferences/Units/UserSchema 3",
+      "key": "match",
+      "expected": true,
+      "description": "User unit schema set to 3 (Imperial decimal)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_yaml_k8s_deployment",
+  "files": [
+    {"filename": "deployment.yaml", "sandbox_path": "/home/user/Documents/deployment.yaml", "type": "yaml"}
+  ]
+}

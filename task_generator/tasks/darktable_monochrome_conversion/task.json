@@ -1,0 +1,51 @@
+{
+  "id": "darktable_monochrome_conversion",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/street.png into the darktable library.\n\nEnable the 'monochrome' module to convert the image to black and white. Apply the tag 'bw' to the image, set its star rating to 5 stars, and export it as a PNG to /home/user/Pictures/street_bw.png.",
+  "env": {
+    "files": [
+      {
+        "filename": "street.png",
+        "sandbox_path": "/home/user/Pictures/street.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported street.png",
+      "key": "imported",
+      "expected": true,
+      "description": "street.png imported into darktable library"
+    },
+    {
+      "command": "check-db-has-operation street.png monochrome",
+      "key": "has_operation",
+      "expected": true,
+      "description": "library.db history contains 'monochrome' operation"
+    },
+    {
+      "command": "check-image-tagged-by-filename street.png bw",
+      "key": "tagged",
+      "expected": true,
+      "description": "street.png is tagged with 'bw'"
+    },
+    {
+      "command": "check-image-rating-by-filename street.png 5",
+      "key": "matches",
+      "expected": true,
+      "description": "street.png rating is 5 stars"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/street_bw.png",
+      "key": "exported",
+      "expected": true,
+      "description": "Exported PNG exists at /home/user/Pictures/street_bw.png"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

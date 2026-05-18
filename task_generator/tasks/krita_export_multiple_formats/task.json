@@ -1,0 +1,62 @@
+{
+  "id": "krita_export_multiple_formats",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/logo.kra loaded.\n\nExport the image to three separate files:\n- /home/user/Pictures/logo.png (PNG)\n- /home/user/Pictures/logo.jpg (JPEG)\n- /home/user/Pictures/logo.webp (WebP)\n\nDo not modify the canvas size or layer contents of the source — /home/user/Documents/logo.kra must be left unchanged (export only).",
+  "env": {
+    "files": [
+      {
+        "filename": "logo.kra",
+        "sandbox_path": "/home/user/Documents/logo.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Pictures/logo.png",
+      "key": "exists",
+      "expected": true,
+      "description": "PNG export exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/logo.jpg",
+      "key": "exists",
+      "expected": true,
+      "description": "JPEG export exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/logo.webp",
+      "key": "exists",
+      "expected": true,
+      "description": "WebP export exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/logo.png",
+      "eval": "result.get('size_bytes',0) > 100",
+      "expected": true,
+      "description": "PNG non-trivial"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/logo.jpg",
+      "eval": "result.get('size_bytes',0) > 100",
+      "expected": true,
+      "description": "JPEG non-trivial"
+    },
+    {
+      "command": "check-file-exists /home/user/Pictures/logo.webp",
+      "eval": "result.get('size_bytes',0) > 100",
+      "expected": true,
+      "description": "WebP non-trivial"
+    },
+    {
+      "command": "check-image-size /home/user/Documents/logo.kra 512 512",
+      "key": "match",
+      "expected": true,
+      "description": "Source canvas size unchanged"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

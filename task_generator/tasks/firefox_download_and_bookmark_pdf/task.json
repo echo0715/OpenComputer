@@ -1,0 +1,40 @@
+{
+  "id": "firefox_download_and_bookmark_pdf",
+  "app": "firefox",
+  "task": "Download the PDF at https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf to /home/user/Downloads/dummy.pdf and add a bookmark for that PDF URL. Then navigate to https://example.com in the same tab.\n\nWhen finished: /home/user/Downloads/dummy.pdf must exist, a bookmark for the PDF URL must exist, and the active tab must be showing example.com.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-download dummy.pdf",
+      "key": "downloaded",
+      "expected": true,
+      "description": "dummy.pdf was downloaded to /home/user/Downloads/"
+    },
+    {
+      "command": "check-bookmark dummy.pdf",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for the PDF URL exists"
+    },
+    {
+      "command": "check-tab-open example.com",
+      "key": "found",
+      "expected": true,
+      "description": "Active tab shows example.com"
+    },
+    {
+      "command": "check-url-visited w3.org/WAI/ER/tests",
+      "key": "visited",
+      "expected": true,
+      "description": "The w3.org PDF URL was visited"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

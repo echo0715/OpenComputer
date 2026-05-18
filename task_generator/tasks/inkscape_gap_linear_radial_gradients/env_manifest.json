@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_gap_linear_radial_gradients",
+  "files": [
+    {
+      "filename": "gradients.svg",
+      "sandbox_path": "/home/user/Documents/gradients.svg",
+      "type": "svg"
+    }
+  ]
+}

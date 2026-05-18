@@ -1,0 +1,50 @@
+{
+  "id": "krita_add_gradient_fill_layer",
+  "app": "krita",
+  "task": "Krita is open with /home/user/Documents/sunset.kra loaded — a single paint layer named 'Ground'.\n\nAdd a new gradient fill/generator layer named exactly 'SkyGradient' positioned above the 'Ground' layer.\n\nSave the file in place at /home/user/Documents/sunset.kra.",
+  "env": {
+    "files": [
+      {
+        "filename": "sunset.kra",
+        "sandbox_path": "/home/user/Documents/sunset.kra"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/sunset.kra",
+      "key": "exists",
+      "expected": true,
+      "description": "sunset.kra still exists"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/sunset.kra Ground",
+      "key": "exists",
+      "expected": true,
+      "description": "Ground layer preserved"
+    },
+    {
+      "command": "check-layer-exists /home/user/Documents/sunset.kra SkyGradient",
+      "key": "exists",
+      "expected": true,
+      "description": "SkyGradient layer added"
+    },
+    {
+      "command": "layer-info /home/user/Documents/sunset.kra SkyGradient",
+      "eval": "result.get('node_type') in ('generatedlayer','filllayer','generatorlayer')",
+      "expected": true,
+      "description": "SkyGradient is a generated/fill layer"
+    },
+    {
+      "command": "layer-info /home/user/Documents/sunset.kra SkyGradient",
+      "eval": "'gradient' in (result.get('generator_name','') or '').lower() or result.get('node_type','') in ('generatedlayer','filllayer','generatorlayer')",
+      "expected": true,
+      "description": "Generator is gradient (or generic fill layer acceptable)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "vscode_cpp_cmake_workspace",
+  "app": "vscode",
+  "task": "Create a C++ CMake project at `/home/user/projects/cpp-calc` with the following files:\n\n- `main.cpp`:\n  ```cpp\n  #include <iostream>\n  #include \"calc.h\"\n  int main() {\n      std::cout << add(2, 3) << std::endl;\n      return 0;\n  }\n  ```\n- `calc.h`:\n  ```cpp\n  #pragma once\n  int add(int a, int b);\n  int subtract(int a, int b);\n  ```\n- `calc.cpp`:\n  ```cpp\n  #include \"calc.h\"\n  int add(int a, int b) { return a + b; }\n  int subtract(int a, int b) { return a - b; }\n  ```\n- `CMakeLists.txt`:\n  ```\n  cmake_minimum_required(VERSION 3.10)\n  project(cpp-calc)\n  set(CMAKE_CXX_STANDARD 17)\n  add_executable(cpp-calc main.cpp calc.cpp)\n  ```\n- `.vscode/tasks.json` — a shell task labeled `CMake Build` running `cmake -B build && cmake --build build`.\n- `.vscode/launch.json` — a `cppdbg` configuration named `Debug Calc` that runs the built binary from the `build` directory.\n- `.vscode/extensions.json` — recommends `ms-vscode.cpptools` and `twxs.cmake`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/cpp-calc/main.cpp",
+      "key": "exists",
+      "expected": true,
+      "description": "main.cpp exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/cpp-calc/main.cpp int main",
+      "key": "contains",
+      "expected": true,
+      "description": "main.cpp has main function"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/cpp-calc/calc.h",
+      "key": "exists",
+      "expected": true,
+      "description": "calc.h exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/cpp-calc/calc.h subtract",
+      "key": "contains",
+      "expected": true,
+      "description": "calc.h declares subtract"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/cpp-calc/calc.cpp",
+      "key": "exists",
+      "expected": true,
+      "description": "calc.cpp exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/cpp-calc/calc.cpp add",
+      "key": "contains",
+      "expected": true,
+      "description": "calc.cpp implements add"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/cpp-calc/CMakeLists.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "CMakeLists.txt exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/cpp-calc/CMakeLists.txt cpp-calc",
+      "key": "contains",
+      "expected": true,
+      "description": "CMakeLists.txt declares project cpp-calc"
+    },
+    {
+      "command": "check-task-exists /home/user/projects/cpp-calc CMake Build",
+      "key": "exists",
+      "expected": true,
+      "description": "CMake Build task exists"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/cpp-calc Debug Calc",
+      "key": "exists",
+      "expected": true,
+      "description": "Debug Calc launch config exists"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/cpp-calc ms-vscode.cpptools",
+      "key": "recommended",
+      "expected": true,
+      "description": "cpptools extension recommended"
+    },
+    {
+      "command": "check-workspace-extension-recommended /home/user/projects/cpp-calc twxs.cmake",
+      "key": "recommended",
+      "expected": true,
+      "description": "cmake extension recommended"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

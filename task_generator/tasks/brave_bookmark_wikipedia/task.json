@@ -1,0 +1,40 @@
+{
+  "id": "brave_bookmark_wikipedia",
+  "app": "brave",
+  "task": "In Brave, open two tabs and bookmark each:\n- Tab: https://en.wikipedia.org/wiki/Artificial_intelligence — bookmarked\n- Tab: https://en.wikipedia.org/wiki/Machine_learning — bookmarked\n\nBoth tabs must remain open when done.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-url-visited Artificial_intelligence",
+      "key": "visited",
+      "expected": true,
+      "description": "Artificial_intelligence Wikipedia page was visited"
+    },
+    {
+      "command": "check-url-visited Machine_learning",
+      "key": "visited",
+      "expected": true,
+      "description": "Machine_learning Wikipedia page was visited"
+    },
+    {
+      "command": "check-bookmark Artificial_intelligence",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Artificial_intelligence page exists"
+    },
+    {
+      "command": "check-bookmark Machine_learning",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Machine_learning page exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

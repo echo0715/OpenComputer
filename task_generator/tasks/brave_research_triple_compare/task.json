@@ -1,0 +1,88 @@
+{
+  "id": "brave_research_triple_compare",
+  "app": "brave",
+  "task": "In Brave, do a comparative research pass with each of these Wikipedia articles fully loaded in its own tab:\n1. https://en.wikipedia.org/wiki/Johann_Sebastian_Bach\n2. https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart\n3. https://en.wikipedia.org/wiki/Ludwig_van_Beethoven\n\nBookmark all three articles. When done, all three tabs must be open, all three URLs must appear in browsing history, all three bookmarks must exist, and each of tabs 0/1/2 must contain a `table.infobox` element.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open Johann_Sebastian_Bach",
+      "key": "found",
+      "expected": true,
+      "description": "Bach tab is open"
+    },
+    {
+      "command": "check-tab-open Wolfgang_Amadeus_Mozart",
+      "key": "found",
+      "expected": true,
+      "description": "Mozart tab is open"
+    },
+    {
+      "command": "check-tab-open Ludwig_van_Beethoven",
+      "key": "found",
+      "expected": true,
+      "description": "Beethoven tab is open"
+    },
+    {
+      "command": "check-url-visited Johann_Sebastian_Bach",
+      "key": "visited",
+      "expected": true,
+      "description": "Bach Wikipedia URL appears in history"
+    },
+    {
+      "command": "check-url-visited Wolfgang_Amadeus_Mozart",
+      "key": "visited",
+      "expected": true,
+      "description": "Mozart Wikipedia URL appears in history"
+    },
+    {
+      "command": "check-url-visited Ludwig_van_Beethoven",
+      "key": "visited",
+      "expected": true,
+      "description": "Beethoven Wikipedia URL appears in history"
+    },
+    {
+      "command": "check-bookmark Johann_Sebastian_Bach",
+      "key": "exists",
+      "expected": true,
+      "description": "Bach bookmark exists"
+    },
+    {
+      "command": "check-bookmark Wolfgang_Amadeus_Mozart",
+      "key": "exists",
+      "expected": true,
+      "description": "Mozart bookmark exists"
+    },
+    {
+      "command": "check-bookmark Ludwig_van_Beethoven",
+      "key": "exists",
+      "expected": true,
+      "description": "Beethoven bookmark exists"
+    },
+    {
+      "command": "check-element-exists table.infobox 0",
+      "key": "exists",
+      "expected": true,
+      "description": "Tab 0 has a Wikipedia infobox table"
+    },
+    {
+      "command": "check-element-exists table.infobox 1",
+      "key": "exists",
+      "expected": true,
+      "description": "Tab 1 has a Wikipedia infobox table"
+    },
+    {
+      "command": "check-element-exists table.infobox 2",
+      "key": "exists",
+      "expected": true,
+      "description": "Tab 2 has a Wikipedia infobox table"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

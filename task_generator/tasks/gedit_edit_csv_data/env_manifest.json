@@ -1,0 +1,6 @@
+{
+  "task_id": "gedit_edit_csv_data",
+  "files": [
+    {"filename": "employees.csv", "sandbox_path": "/home/user/Documents/employees.csv", "type": "csv"}
+  ]
+}

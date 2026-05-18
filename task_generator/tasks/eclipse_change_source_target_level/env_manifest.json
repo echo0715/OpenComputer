@@ -1,0 +1,9 @@
+{
+  "task_id": "eclipse_change_source_target_level",
+  "files": [
+    {"filename": "MigrationApp/.project", "sandbox_path": "/home/user/workspace/MigrationApp/.project", "type": "xml"},
+    {"filename": "MigrationApp/.classpath", "sandbox_path": "/home/user/workspace/MigrationApp/.classpath", "type": "xml"},
+    {"filename": "MigrationApp/.settings/org.eclipse.jdt.core.prefs", "sandbox_path": "/home/user/workspace/MigrationApp/.settings/org.eclipse.jdt.core.prefs", "type": "properties"},
+    {"filename": "MigrationApp/src/com/migration/App.java", "sandbox_path": "/home/user/workspace/MigrationApp/src/com/migration/App.java", "type": "java"}
+  ]
+}

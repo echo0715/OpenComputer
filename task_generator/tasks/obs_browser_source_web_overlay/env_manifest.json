@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_browser_source_web_overlay",
+  "files": [
+    {
+      "filename": "offline.png",
+      "sandbox_path": "/home/user/Pictures/offline.png",
+      "type": "png"
+    }
+  ]
+}

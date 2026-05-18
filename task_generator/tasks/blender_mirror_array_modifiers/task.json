@@ -1,0 +1,93 @@
+{
+  "id": "blender_mirror_array_modifiers",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/mirror_array.blend:\n- Rename the default Cube to 'Block' and add modifiers in this order: Mirror, then Array. Assign a new material 'BlockMat' to 'Block'.\n- Add a UV Sphere named 'Bead' with an Array modifier. Assign a new material 'BeadMat' to 'Bead'.\n\nSet the render engine to Cycles, the render resolution to 1920x1080, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "mirror_array.blend",
+        "sandbox_path": "/home/user/Documents/mirror_array.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/mirror_array.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/mirror_array.blend Block",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Block' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/mirror_array.blend Block MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Block is a MESH object"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/mirror_array.blend Block MIRROR",
+      "key": "exists",
+      "expected": true,
+      "description": "Block has Mirror modifier"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/mirror_array.blend Block ARRAY",
+      "key": "exists",
+      "expected": true,
+      "description": "Block has Array modifier"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/mirror_array.blend Bead",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Bead' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/mirror_array.blend Bead MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Bead is a MESH object"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/mirror_array.blend Bead ARRAY",
+      "key": "exists",
+      "expected": true,
+      "description": "Bead has Array modifier"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/mirror_array.blend BlockMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'BlockMat' exists"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/mirror_array.blend BeadMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'BeadMat' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/mirror_array.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine set to CYCLES"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/mirror_array.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 1920x1080"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

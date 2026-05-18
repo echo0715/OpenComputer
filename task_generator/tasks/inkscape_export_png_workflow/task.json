@@ -1,0 +1,57 @@
+{
+  "id": "inkscape_export_png_workflow",
+  "app": "inkscape",
+  "task": "Inkscape is open with /home/user/Documents/export_test.svg — a blank 400x300 document.\n\nEdit /home/user/Documents/export_test.svg so it contains:\n- A circle with fill #ff0000.\n- A rectangle with fill #0000ff.\n- A text element with the exact text: Export Test.\n\nSave the SVG, then export the page area as a PNG to /home/user/Documents/export_test.png. Both /home/user/Documents/export_test.svg and /home/user/Documents/export_test.png must exist when done. The page must remain 400x300.",
+  "env": {
+    "files": [
+      {
+        "filename": "export_test.svg",
+        "sandbox_path": "/home/user/Documents/export_test.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/export_test.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "SVG file export_test.svg exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/export_test.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported PNG file export_test.png exists"
+    },
+    {
+      "command": "check-page-size /home/user/Documents/export_test.svg 400 300",
+      "key": "match",
+      "expected": true,
+      "description": "Page size is 400x300 pixels"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/export_test.svg circle",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains a circle element"
+    },
+    {
+      "command": "check-has-element-type /home/user/Documents/export_test.svg rect",
+      "key": "exists",
+      "expected": true,
+      "description": "Document contains a rectangle element"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/export_test.svg 'Export Test'",
+      "key": "contains",
+      "expected": true,
+      "description": "Text 'Export Test' exists in the SVG"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

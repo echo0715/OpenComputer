@@ -1,0 +1,10 @@
+{
+  "task_id": "freecad_gap_assembly4_two_parts",
+  "files": [
+    {
+      "filename": "asm_start.FCStd",
+      "sandbox_path": "/home/user/Documents/asm_start.FCStd",
+      "type": "fcstd"
+    }
+  ]
+}

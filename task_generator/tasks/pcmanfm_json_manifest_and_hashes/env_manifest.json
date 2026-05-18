@@ -1,0 +1,9 @@
+{
+  "task_id": "pcmanfm_json_manifest_and_hashes",
+  "files": [
+    {"filename": "v1.dat", "sandbox_path": "/home/user/Documents/release/v1.dat", "type": "data"},
+    {"filename": "v2.dat", "sandbox_path": "/home/user/Documents/release/v2.dat", "type": "data"},
+    {"filename": "v3.dat", "sandbox_path": "/home/user/Documents/release/v3.dat", "type": "data"},
+    {"filename": "v4.dat", "sandbox_path": "/home/user/Documents/release/v4.dat", "type": "data"}
+  ]
+}

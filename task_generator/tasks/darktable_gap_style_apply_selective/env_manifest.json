@@ -1,0 +1,20 @@
+{
+  "task_id": "darktable_gap_style_apply_selective",
+  "files": [
+    {
+      "filename": "img_a.jpg",
+      "sandbox_path": "/home/user/Pictures/img_a.jpg",
+      "type": "jpg"
+    },
+    {
+      "filename": "img_b.jpg",
+      "sandbox_path": "/home/user/Pictures/img_b.jpg",
+      "type": "jpg"
+    },
+    {
+      "filename": "img_c.jpg",
+      "sandbox_path": "/home/user/Pictures/img_c.jpg",
+      "type": "jpg"
+    }
+  ]
+}

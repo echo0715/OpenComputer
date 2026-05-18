@@ -1,0 +1,44 @@
+{
+  "id": "darktable_gap_color_zones",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/color_zones_source.jpg into the darktable library.\n\nEnable the 'color zones' module and, on the saturation channel, lower the saturation of the green hue range so green regions become noticeably desaturated while red and blue regions remain unaffected. Apply the tag 'color_zones_edit' to the image and export it as a JPEG to /home/user/Pictures/color_zones_result.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "color_zones_source.jpg",
+        "sandbox_path": "/home/user/Pictures/color_zones_source.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported color_zones_source.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation color_zones_source.jpg colorzones",
+      "key": "has_operation",
+      "expected": true,
+      "description": "color zones operation applied"
+    },
+    {
+      "command": "check-image-tagged-by-filename color_zones_source.jpg color_zones_edit",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged color_zones_edit"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/color_zones_result.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "gimp_gap_two_layer_screen_blend",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/dark_base.png in GIMP as the base layer — a 500x500 solid RGB (40,40,80) fill — and add /home/user/Documents/light_top.png (solid RGB (120,120,120)) as a layer above it.\n\nConfigure the top layer with blend mode = Screen and opacity = 100%, then flatten and export as PNG to /home/user/Documents/screen_result.png. The output must be 500x500 with every pixel matching the Screen blend of the two flat layers (~RGB (141,141,162)).",
+  "env": {
+    "files": [
+      {
+        "filename": "dark_base.png",
+        "sandbox_path": "/home/user/Documents/dark_base.png"
+      },
+      {
+        "filename": "light_top.png",
+        "sandbox_path": "/home/user/Documents/light_top.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/screen_result.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Output PNG exists"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/screen_result.png 500 500",
+      "key": "match",
+      "expected": true,
+      "description": "Output is 500x500"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/screen_result.png 250 250 141 141 162 8",
+      "key": "match",
+      "expected": true,
+      "description": "Center pixel matches Screen blend of (40,40,80) and (120,120,120): expected ~(141,141,162)"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/screen_result.png 10 10 141 141 162 8",
+      "key": "match",
+      "expected": true,
+      "description": "Top-left pixel also shows correct Screen blend (flat images, uniform result)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

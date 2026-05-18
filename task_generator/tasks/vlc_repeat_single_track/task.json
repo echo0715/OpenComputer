@@ -1,0 +1,45 @@
+{
+  "id": "vlc_repeat_single_track",
+  "app": "vlc",
+  "task": "VLC is already running. Open /home/user/Videos/loopme.mp4 and start playback, then enable 'Repeat One' (single-track repeat) mode so the current clip repeats indefinitely. The state must be repeat-one, NOT plain 'Loop all'. Leave VLC playing loopme.mp4 with repeat-one enabled.",
+  "env": {
+    "files": [
+      {
+        "filename": "loopme.mp4",
+        "sandbox_path": "/home/user/Videos/loopme.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/loopme.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source loopme.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded loopme.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "loopme.mp4 is loaded in VLC"
+    },
+    {
+      "command": "check-playing",
+      "key": "playing",
+      "expected": true,
+      "description": "VLC is currently playing"
+    },
+    {
+      "command": "check-repeat true",
+      "key": "match",
+      "expected": true,
+      "description": "Repeat (single-track) mode is enabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

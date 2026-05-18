@@ -1,0 +1,18 @@
+{
+  "id": "renderdoc_gap_python_shell_history",
+  "app": "renderdoc",
+  "task": "Do two things:\n\n(A) Create a Python shell history file at /home/user/.local/share/qrenderdoc/python_history.txt. The file must exist and contain at least 40 bytes of text (for example, a few lines of Python like 'import renderdoc as rd', 'ctx = pyrenderdoc', 'print(len(ctx.CurDrawcalls()))').\n\n(B) Edit the RenderDoc UI configuration at /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document) and set the key \"PythonShell_AutoLoad\" to true so that the next qrenderdoc session automatically loads saved Python shell state.\n\nThe top-level \"rdocConfigData\": 1 marker must still be present after saving UI.config. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {"filename": "UI.config", "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-exists /home/user/.local/share/qrenderdoc/python_history.txt", "key": "exists", "expected": true, "description": "Python history file exists"},
+    {"command": "file-info /home/user/.local/share/qrenderdoc/python_history.txt", "eval": "result.get('size', 0) >= 40", "description": "History file is at least 40 bytes"},
+    {"command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config", "key": "exists", "expected": true, "description": "UI.config still exists"},
+    {"command": "check-setting rdocConfigData 1", "key": "match", "expected": true, "description": "rdocConfigData marker preserved"},
+    {"command": "check-setting PythonShell_AutoLoad true", "key": "match", "expected": true, "description": "PythonShell_AutoLoad is true"}
+  ],
+  "metadata": {"complexity": 4, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 4}
+}

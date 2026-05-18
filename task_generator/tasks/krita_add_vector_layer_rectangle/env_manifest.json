@@ -1,0 +1,10 @@
+{
+  "task_id": "krita_add_vector_layer_rectangle",
+  "files": [
+    {
+      "filename": "frame.kra",
+      "sandbox_path": "/home/user/Documents/frame.kra",
+      "type": "kra"
+    }
+  ]
+}

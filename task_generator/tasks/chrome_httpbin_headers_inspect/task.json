@@ -1,0 +1,52 @@
+{
+  "id": "chrome_httpbin_headers_inspect",
+  "app": "chrome",
+  "task": "In Google Chrome, open the following three URLs each in its own tab so all three remain open simultaneously:\n1. https://httpbin.org/headers (request headers as JSON)\n2. https://httpbin.org/user-agent (User-Agent string)\n3. https://httpbin.org/ip (IP address)",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open httpbin.org/headers",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/headers is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/user-agent",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/user-agent is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/ip",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/ip is open"
+    },
+    {
+      "command": "check-url-visited httpbin.org/headers",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/headers appears in browsing history"
+    },
+    {
+      "command": "check-url-visited httpbin.org/user-agent",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/user-agent appears in browsing history"
+    },
+    {
+      "command": "check-url-visited httpbin.org/ip",
+      "key": "visited",
+      "expected": true,
+      "description": "httpbin.org/ip appears in browsing history"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

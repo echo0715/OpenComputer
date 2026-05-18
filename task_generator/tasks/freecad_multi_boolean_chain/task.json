@@ -1,0 +1,63 @@
+{
+  "id": "freecad_multi_boolean_chain",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/chain.FCStd, which already contains three primitives: a Part::Box named 'Box' (20x20x20), a Part::Cylinder named 'Cylinder' (Radius 5, Height 40), and a Part::Sphere named 'Sphere' (Radius 12).\n\nBuild the following boolean chain in this exact order:\n1. A Part::Fuse (named 'Fusion') that unions 'Box' with 'Sphere'.\n2. A Part::Cut (named 'Cut') that subtracts 'Cylinder' from the Fusion.\n\nThe final document must contain exactly 5 objects total: the original Box, Cylinder, and Sphere (still present as children of the booleans), plus the 1 Part::Fuse and 1 Part::Cut. Save the file so the changes are written back to /home/user/Documents/chain.FCStd.",
+  "env": {
+    "files": [
+      {
+        "filename": "chain.FCStd",
+        "sandbox_path": "/home/user/Documents/chain.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/chain.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/chain.FCStd Box",
+      "key": "exists",
+      "expected": true,
+      "description": "Original Box still exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/chain.FCStd Cylinder",
+      "key": "exists",
+      "expected": true,
+      "description": "Original Cylinder still exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/chain.FCStd Sphere",
+      "key": "exists",
+      "expected": true,
+      "description": "Original Sphere still exists"
+    },
+    {
+      "command": "check-object-count /home/user/Documents/chain.FCStd 5",
+      "key": "match",
+      "expected": true,
+      "description": "Document has exactly 5 objects"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/chain.FCStd Part::Fuse 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one Part::Fuse"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/chain.FCStd Part::Cut 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one Part::Cut"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

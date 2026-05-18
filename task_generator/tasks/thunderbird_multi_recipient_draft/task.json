@@ -1,0 +1,57 @@
+{
+  "id": "thunderbird_multi_recipient_draft",
+  "app": "thunderbird",
+  "task": "Create a single Thunderbird draft (do NOT send) with these exact fields:\n\n- To (three recipients): qa@launchco.example, devops@launchco.example, marketing@launchco.example\n- CC: program-manager@launchco.example\n- Subject: Launch Readiness Review - Cross Team Sign Off\n- Body:\n  Hi all,\n\n  Please review the launch readiness checklist attached to the shared drive. Each of your teams owns one section:\n\n  - QA: regression suite, crash reporting, rollback plan\n  - DevOps: production capacity, on-call schedule, feature flags\n  - Marketing: press embargo timing, social media drafts, partner emails\n\n  We will hold the go/no-go decision Friday at 10:00 AM in the main war room. Please flag any blockers by Thursday end of day.\n\n  Thanks.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists 'Launch Readiness Review'",
+      "key": "found",
+      "expected": true,
+      "description": "Launch Readiness Review draft exists"
+    },
+    {
+      "command": "check-message-to Drafts 'Launch Readiness Review' qa@launchco.example",
+      "key": "match",
+      "expected": true,
+      "description": "Draft addressed to QA"
+    },
+    {
+      "command": "check-message-to Drafts 'Launch Readiness Review' devops@launchco.example",
+      "key": "match",
+      "expected": true,
+      "description": "Draft addressed to DevOps"
+    },
+    {
+      "command": "check-message-to Drafts 'Launch Readiness Review' marketing@launchco.example",
+      "key": "match",
+      "expected": true,
+      "description": "Draft addressed to Marketing"
+    },
+    {
+      "command": "check-draft-content 'Launch Readiness Review' 'go/no-go decision Friday'",
+      "key": "found",
+      "expected": true,
+      "description": "Body mentions go/no-go Friday"
+    },
+    {
+      "command": "check-draft-content 'Launch Readiness Review' 'regression suite'",
+      "key": "found",
+      "expected": true,
+      "description": "Body mentions regression suite"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

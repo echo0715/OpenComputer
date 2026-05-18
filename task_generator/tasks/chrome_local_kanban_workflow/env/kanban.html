@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kanban Board</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #f4f5f7; margin: 0; padding: 24px; }
+  h1 { margin-top: 0; }
+  .board { display: flex; gap: 16px; }
+  .col { flex: 1; background: #ebecf0; border-radius: 8px; padding: 12px; min-height: 400px; }
+  .col h2 { font-size: 16px; margin: 0 0 12px; }
+  .card { background: white; padding: 10px 12px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+  .card button { margin-right: 4px; font-size: 11px; }
+  .counter { font-size: 13px; color: #555; margin-top: 8px; }
+  .add-form { margin-top: 12px; display: flex; gap: 4px; }
+  .add-form input { flex: 1; padding: 4px 6px; }
+</style>
+</head>
+<body>
+<h1>Team Kanban Board</h1>
+<div class="board">
+  <div class="col" id="todo">
+    <h2>To Do</h2>
+    <div class="cards"></div>
+    <div class="counter">To Do: <span class="count">0</span></div>
+  </div>
+  <div class="col" id="inprogress">
+    <h2>In Progress</h2>
+    <div class="cards"></div>
+    <div class="counter">In Progress: <span class="count">0</span></div>
+  </div>
+  <div class="col" id="done">
+    <h2>Done</h2>
+    <div class="cards"></div>
+    <div class="counter">Done: <span class="count">0</span></div>
+    <div class="add-form">
+      <input id="new-task" type="text" placeholder="New done task...">
+      <button id="add-done">Add to Done</button>
+    </div>
+  </div>
+</div>
+<script>
+  const order = ["todo", "inprogress", "done"];
+  const initial = [
+    { title: "Draft report", col: "todo" },
+    { title: "Review PR", col: "todo" },
+    { title: "Deploy staging", col: "inprogress" },
+    { title: "Write tests", col: "inprogress" }
+  ];
+  const state = initial.map(t => ({ ...t }));
+
+  function render() {
+    for (const c of order) {
+      const box = document.querySelector("#" + c + " .cards");
+      box.innerHTML = "";
+    }
+    state.forEach((t, i) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.setAttribute("data-title", t.title);
+      card.setAttribute("aria-label", "task-" + t.title.replace(/\s+/g, "-"));
+      const label = document.createElement("span");
+      label.textContent = t.title + " ";
+      card.appendChild(label);
+      const idx = order.indexOf(t.col);
+      if (idx > 0) {
+        const back = document.createElement("button");
+        back.textContent = "<";
+        back.onclick = () => { t.col = order[idx - 1]; render(); };
+        card.appendChild(back);
+      }
+      if (idx < order.length - 1) {
+        const fwd = document.createElement("button");
+        fwd.textContent = ">";
+        fwd.onclick = () => { t.col = order[idx + 1]; render(); };
+        card.appendChild(fwd);
+      }
+      document.querySelector("#" + t.col + " .cards").appendChild(card);
+    });
+    for (const c of order) {
+      const n = state.filter(t => t.col === c).length;
+      document.querySelector("#" + c + " .count").textContent = n;
+    }
+  }
+
+  document.getElementById("add-done").onclick = () => {
+    const v = document.getElementById("new-task").value.trim();
+    if (v) {
+      state.push({ title: v, col: "done" });
+      document.getElementById("new-task").value = "";
+      render();
+    }
+  };
+
+  render();
+</script>
+</body>
+</html>

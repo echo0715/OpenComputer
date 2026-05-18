@@ -1,0 +1,74 @@
+{
+  "id": "inkscape_gap_boolean_union_difference",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/booleans.svg in Inkscape. Perform two path boolean operations:\n1. UNION of the two circles (circA red and circB blue). Replace both with a single path whose id is 'circUnion' and fill is '#884488'.\n2. DIFFERENCE of sqA (green) minus sqB (orange). Replace both squares with a single path whose id is 'sqDiff' and fill is '#228866'.\n\nSave the file in place at /home/user/Documents/booleans.svg. The original circA/circB/sqA/sqB elements should no longer exist.",
+  "env": {
+    "files": [
+      {
+        "filename": "booleans.svg",
+        "sandbox_path": "/home/user/Documents/booleans.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/booleans.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/booleans.svg circUnion",
+      "key": "exists",
+      "expected": true,
+      "description": "circUnion path exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/booleans.svg sqDiff",
+      "key": "exists",
+      "expected": true,
+      "description": "sqDiff path exists"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/booleans.svg circA",
+      "key": "exists",
+      "expected": false,
+      "description": "Original circA removed"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/booleans.svg circB",
+      "key": "exists",
+      "expected": false,
+      "description": "Original circB removed"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/booleans.svg sqA",
+      "key": "exists",
+      "expected": false,
+      "description": "Original sqA removed"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/booleans.svg sqB",
+      "key": "exists",
+      "expected": false,
+      "description": "Original sqB removed"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/booleans.svg circUnion fill #884488",
+      "key": "match",
+      "expected": true,
+      "description": "circUnion fill"
+    },
+    {
+      "command": "check-style-property /home/user/Documents/booleans.svg sqDiff fill #228866",
+      "key": "match",
+      "expected": true,
+      "description": "sqDiff fill"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

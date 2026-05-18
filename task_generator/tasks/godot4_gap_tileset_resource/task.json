@@ -1,0 +1,28 @@
+{
+  "id": "godot4_gap_tileset_resource",
+  "app": "godot4",
+  "task": "Edit /home/user/godot_projects/tileset_game/tileset.tres. It is an empty TileSet resource. Turn it into a TileSet that:\n\n1. Sets tile_size = Vector2i(16, 16) in the [resource] section.\n2. Declares an embedded [sub_resource type=\"TileSetAtlasSource\" id=\"atlas_0\"] with texture = ExtResource pointing to res://atlas.png and texture_region_size = Vector2i(16, 16).\n3. Assigns sources/0 = SubResource(\"atlas_0\") in the [resource] section.\n4. Adds an [ext_resource type=\"Texture2D\" path=\"res://atlas.png\" id=\"atlas_png\"] at the top.\n\nThe final file must keep 'gd_resource type=\"TileSet\"' in its header. Save the file. Also edit /home/user/godot_projects/tileset_game/main.tscn: add a TileMap node named 'Tiles' under the root Node2D 'Root', set tile_set = ExtResource pointing to res://tileset.tres, and set layer_0/name = \"Ground\".",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/tileset_game/project.godot"},
+      {"filename": "main.tscn", "sandbox_path": "/home/user/godot_projects/tileset_game/main.tscn"},
+      {"filename": "tileset.tres", "sandbox_path": "/home/user/godot_projects/tileset_game/tileset.tres"},
+      {"filename": "atlas.png", "sandbox_path": "/home/user/godot_projects/tileset_game/atlas.png"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/tileset_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-resource-type /home/user/godot_projects/tileset_game/tileset.tres TileSet", "key": "match", "expected": true, "description": "tileset.tres is a TileSet"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/tileset.tres tile_size", "key": "contains", "expected": true, "description": "tile_size property present"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/tileset.tres Vector2i", "key": "contains", "expected": true, "description": "Vector2i value used"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/tileset.tres TileSetAtlasSource", "key": "contains", "expected": true, "description": "TileSetAtlasSource sub_resource present"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/tileset.tres res://atlas.png", "key": "contains", "expected": true, "description": "atlas.png referenced"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/tileset.tres sources/0", "key": "contains", "expected": true, "description": "sources/0 assigned"},
+    {"command": "check-node-exists /home/user/godot_projects/tileset_game/main.tscn Tiles", "key": "exists", "expected": true, "description": "Tiles node exists"},
+    {"command": "check-node-type /home/user/godot_projects/tileset_game/main.tscn Tiles TileMap", "key": "match", "expected": true, "description": "Tiles is TileMap"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/main.tscn res://tileset.tres", "key": "contains", "expected": true, "description": "tileset ext_resource referenced in scene"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/main.tscn layer_0/name", "key": "contains", "expected": true, "description": "layer_0 name property present"},
+    {"command": "check-file-contains /home/user/godot_projects/tileset_game/main.tscn \"Ground\"", "key": "contains", "expected": true, "description": "layer name Ground present"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 5}
+}

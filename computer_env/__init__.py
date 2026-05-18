@@ -1,0 +1,58 @@
+"""Environment backends for GUI task execution."""
+
+from .backends.base import (
+    BackgroundCommandHandle,
+    BaseComputerEnvironment,
+    CommandExitException,
+    CommandResult,
+    CommandsClient,
+    FilesClient,
+    StreamClient,
+)
+from .config import (
+    DEFAULT_DOCKER_CPUS,
+    DEFAULT_DOCKER_IMAGE,
+    DEFAULT_DOCKER_MEMORY,
+    DEFAULT_DOCKER_PLATFORM,
+    DEFAULT_DOCKER_SHM_SIZE,
+    DEFAULT_DOCKER_READY_TIMEOUT,
+    DEFAULT_ENV_BACKEND,
+    DEFAULT_E2B_TEMPLATE,
+    DEFAULT_REMOTE_DOCKER_API_TOKEN,
+    DEFAULT_REMOTE_DOCKER_COMMAND_TIMEOUT_GRACE_SECONDS,
+    DEFAULT_REMOTE_DOCKER_POOL_FILE,
+    DEFAULT_REMOTE_DOCKER_REQUEST_TIMEOUT,
+    DEFAULT_REMOTE_DOCKER_SESSION_ACQUIRE_TIMEOUT,
+    DEFAULT_REMOTE_DOCKER_SESSION_CREATE_TIMEOUT,
+    DEFAULT_REMOTE_DOCKER_WORKER_COOLDOWN_SECONDS,
+    DEFAULT_REMOTE_DOCKER_WORKER_URLS,
+)
+from .factory import create_env, ensure_backend_support
+
+__all__ = [
+    "BaseComputerEnvironment",
+    "CommandsClient",
+    "BackgroundCommandHandle",
+    "CommandExitException",
+    "CommandResult",
+    "DEFAULT_DOCKER_CPUS",
+    "DEFAULT_DOCKER_IMAGE",
+    "DEFAULT_DOCKER_MEMORY",
+    "DEFAULT_DOCKER_PLATFORM",
+    "DEFAULT_DOCKER_READY_TIMEOUT",
+    "DEFAULT_DOCKER_SHM_SIZE",
+    "DEFAULT_ENV_BACKEND",
+    "DEFAULT_E2B_TEMPLATE",
+    "DEFAULT_REMOTE_DOCKER_API_TOKEN",
+    "DEFAULT_REMOTE_DOCKER_COMMAND_TIMEOUT_GRACE_SECONDS",
+    "DEFAULT_REMOTE_DOCKER_POOL_FILE",
+    "DEFAULT_REMOTE_DOCKER_REQUEST_TIMEOUT",
+    "DEFAULT_REMOTE_DOCKER_SESSION_ACQUIRE_TIMEOUT",
+    "DEFAULT_REMOTE_DOCKER_SESSION_CREATE_TIMEOUT",
+    "DEFAULT_REMOTE_DOCKER_WORKER_COOLDOWN_SECONDS",
+    "DEFAULT_REMOTE_DOCKER_WORKER_URLS",
+    "FilesClient",
+    "StreamClient",
+    "create_env",
+    "ensure_backend_support",
+]

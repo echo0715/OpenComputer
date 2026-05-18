@@ -1,0 +1,45 @@
+{
+  "id": "musescore3_add_flute_instrument",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/piano_only.mscz — currently a single Piano part.\n\nAdd a Flute instrument so the saved score has exactly 2 parts: the original Piano and the newly added Flute. Save the file in place at /home/user/Documents/piano_only.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "piano_only.mscz",
+        "sandbox_path": "/home/user/Documents/piano_only.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/piano_only.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "piano_only.mscz still exists"
+    },
+    {
+      "command": "check-part-count /home/user/Documents/piano_only.mscz 2",
+      "key": "match",
+      "expected": true,
+      "description": "Score has exactly 2 parts"
+    },
+    {
+      "command": "check-instrument /home/user/Documents/piano_only.mscz Flute",
+      "key": "exists",
+      "expected": true,
+      "description": "Flute instrument exists in the score"
+    },
+    {
+      "command": "check-instrument /home/user/Documents/piano_only.mscz Piano",
+      "key": "exists",
+      "expected": true,
+      "description": "Piano instrument still exists in the score"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

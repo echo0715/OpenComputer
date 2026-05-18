@@ -1,0 +1,38 @@
+{
+  "id": "musescore3_gap_staccato_articulation",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/staccato_etude.mscz — a single piano staff with 4 measures of four quarter notes each in C major, 4/4.\n\nAdd a staccato articulation to every note in measure 1 (all 4 quarter notes). Do not add articulations to notes in measures 2, 3, or 4. Save in place at /home/user/Documents/staccato_etude.mscz.",
+  "env": {
+    "files": [
+      {
+        "filename": "staccato_etude.mscz",
+        "sandbox_path": "/home/user/Documents/staccato_etude.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/staccato_etude.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved at original path"
+    },
+    {
+      "command": "check-articulation-in-measure /home/user/Documents/staccato_etude.mscz 1 staccato",
+      "key": "match",
+      "expected": true,
+      "description": "Staccato present in measure 1"
+    },
+    {
+      "command": "check-articulation-count /home/user/Documents/staccato_etude.mscz staccato 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 4 staccato articulations in score"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

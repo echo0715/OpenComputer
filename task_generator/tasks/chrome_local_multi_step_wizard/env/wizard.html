@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Signup Wizard</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 520px; margin: 30px auto; padding: 20px; }
+  h1 { margin-top: 0; }
+  .step { display: none; background: #fafafa; border: 1px solid #ccc; padding: 16px; border-radius: 6px; }
+  .step.active { display: block; }
+  input[type=text], input[type=email], input[type=password] { display: block; width: 100%; margin: 6px 0 12px; padding: 8px; }
+  button { padding: 8px 14px; margin-top: 8px; margin-right: 6px; }
+  #indicator { font-weight: bold; margin-bottom: 10px; }
+  #confirmation { background: #e8f5e9; border: 1px solid #2e7d32; padding: 16px; border-radius: 6px; display: none; margin-top: 16px; }
+  #confirmation h2 { color: #2e7d32; margin-top: 0; }
+</style>
+</head>
+<body>
+<h1>Create your account</h1>
+<div id="indicator">Step 1 of 3</div>
+
+<div class="step active" data-step="1">
+  <h2>Account info</h2>
+  <label>Username</label>
+  <input type="text" id="w-username">
+  <label>Email</label>
+  <input type="email" id="w-email">
+  <label>Password</label>
+  <input type="password" id="w-password">
+  <button class="next">Next</button>
+</div>
+
+<div class="step" data-step="2">
+  <h2>Preferences</h2>
+  <label><input type="checkbox" id="w-newsletter"> Subscribe to newsletter</label><br>
+  <p>Theme:</p>
+  <label><input type="radio" name="w-theme" value="Light"> Light</label><br>
+  <label><input type="radio" name="w-theme" value="Dark"> Dark</label><br>
+  <button class="prev">Back</button>
+  <button class="next">Next</button>
+</div>
+
+<div class="step" data-step="3">
+  <h2>Review</h2>
+  <div id="review"></div>
+  <button class="prev">Back</button>
+  <button id="submit-wizard">Submit</button>
+</div>
+
+<div id="confirmation"></div>
+
+<script>
+  let step = 1;
+  function show() {
+    for (const s of document.querySelectorAll(".step")) {
+      s.classList.toggle("active", parseInt(s.dataset.step, 10) === step);
+    }
+    document.getElementById("indicator").textContent = "Step " + step + " of 3";
+    if (step === 3) {
+      const username = document.getElementById("w-username").value;
+      const email = document.getElementById("w-email").value;
+      const news = document.getElementById("w-newsletter").checked;
+      const themeEl = document.querySelector("input[name=w-theme]:checked");
+      const theme = themeEl ? themeEl.value : "(none)";
+      document.getElementById("review").innerHTML =
+        "<ul>" +
+        "<li>Username: " + username + "</li>" +
+        "<li>Email: " + email + "</li>" +
+        "<li>Theme: " + theme + "</li>" +
+        "<li>Subscribed: " + (news ? "Yes" : "No") + "</li>" +
+        "</ul>";
+    }
+  }
+  for (const b of document.querySelectorAll(".next")) b.onclick = () => { step = Math.min(3, step + 1); show(); };
+  for (const b of document.querySelectorAll(".prev")) b.onclick = () => { step = Math.max(1, step - 1); show(); };
+
+  document.getElementById("submit-wizard").onclick = () => {
+    const username = document.getElementById("w-username").value;
+    const email = document.getElementById("w-email").value;
+    const news = document.getElementById("w-newsletter").checked;
+    const themeEl = document.querySelector("input[name=w-theme]:checked");
+    const theme = themeEl ? themeEl.value : "(none)";
+    const conf = document.getElementById("confirmation");
+    conf.innerHTML = `<h2>Registration complete</h2>
+      <p>Welcome, ${username}!</p>
+      <p>Email: ${email}</p>
+      <p>Theme: ${theme}</p>
+      <p>Subscribed: ${news ? "Yes" : "No"}</p>`;
+    conf.style.display = "block";
+    for (const s of document.querySelectorAll(".step")) s.classList.remove("active");
+    document.getElementById("indicator").textContent = "Completed";
+  };
+</script>
+</body>
+</html>

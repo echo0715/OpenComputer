@@ -1,0 +1,15 @@
+{
+  "task_id": "thunderbird_bulk_contacts_from_csv",
+  "files": [
+    {
+      "filename": "team_contacts.csv",
+      "sandbox_path": "/home/user/Documents/team_contacts.csv",
+      "type": "csv"
+    },
+    {
+      "filename": "thunderbird-profile.tar.gz",
+      "sandbox_path": "/tmp/thunderbird-profile.tar.gz",
+      "type": "archive"
+    }
+  ]
+}

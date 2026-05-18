@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_tutorial_overlay_scene",
+  "files": [
+    {
+      "filename": "watermark.png",
+      "sandbox_path": "/home/user/Pictures/watermark.png",
+      "type": "png"
+    }
+  ]
+}

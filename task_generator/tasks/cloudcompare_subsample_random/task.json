@@ -1,0 +1,39 @@
+{
+  "id": "cloudcompare_subsample_random",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/dense.ply is an ASCII PLY with 500 points.\n\nRandomly subsample the cloud down to exactly 100 points and export only the subsampled cloud as a PLY at /home/user/Documents/dense_sub.ply. Do not export the original 500-point cloud.",
+  "env": {
+    "files": [
+      {
+        "filename": "dense.ply",
+        "sandbox_path": "/home/user/Documents/dense.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/dense_sub.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Subsampled PLY output exists"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/dense_sub.ply 100",
+      "key": "match",
+      "expected": true,
+      "description": "Output has exactly 100 points"
+    },
+    {
+      "command": "check-format /home/user/Documents/dense_sub.ply ply",
+      "key": "match",
+      "expected": true,
+      "description": "Output file is a .ply"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "obs_gap_recording_output_settings",
+  "app": "obs",
+  "task": "Configure OBS Studio recording output settings as follows:\n- Output mode: Simple\n- Recording Format: MKV\n- Recording Encoder: Software (x264) / obs_x264\n- Recording Quality: 'Same as stream', OR a custom bitrate of 8000 kbps using CBR rate control (using 'Custom Output (FFmpeg)' if required so the bitrate/rate-control is saved into the profile)\n- Recording Path: /home/user/Videos/Recordings (create the directory if it does not exist)\n\nPersist the changes so the profile's basic.ini is written.",
+  "env": {
+    "files": [
+      {
+        "filename": ".keep",
+        "sandbox_path": "/home/user/Videos/Recordings/.keep"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/Recordings",
+      "key": "is_dir",
+      "expected": true,
+      "description": "Recording directory exists"
+    },
+    {
+      "command": "recording-settings",
+      "eval": "str(result.get('recformat', result.get('recformat2', ''))).lower() == 'mkv' or str(result.get('recformat2', '')).lower() == 'mkv'",
+      "expected": true,
+      "description": "Recording format = mkv"
+    },
+    {
+      "command": "recording-settings",
+      "eval": "'x264' in str(result.get('recencoder', '')).lower() or 'x264' in str(result.get('adv_recencoder', '')).lower()",
+      "expected": true,
+      "description": "Recording encoder is x264"
+    },
+    {
+      "command": "recording-settings",
+      "eval": "'/home/user/Videos/Recordings' in str(result.get('filepath', result.get('adv_recfilepath', '')))",
+      "expected": true,
+      "description": "Recording path contains /home/user/Videos/Recordings"
+    },
+    {
+      "command": "recording-settings",
+      "eval": "int(str(result.get('vbitrate', result.get('adv_recbitrate', '0'))).split()[0] or 0) == 8000 or any(int(str(v).split()[0]) == 8000 for v in result.values() if str(v).strip().split() and str(v).split()[0].isdigit())",
+      "expected": true,
+      "description": "Recording bitrate = 8000 kbps"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "id": "gedit_csv_column_delete_and_add",
+  "app": "gedit",
+  "task": "/home/user/Documents/products.csv currently has the header `ProductID,Name,InternalCode,Price,Quantity` followed by 8 data rows:\n\n```\nProductID,Name,InternalCode,Price,Quantity\nP001,Widget,IC-A1,10,5\nP002,Gadget,IC-B2,25,4\nP003,Gizmo,IC-C3,15,10\nP004,Thingamajig,IC-D4,100,2\nP005,Doohickey,IC-E5,8,20\nP006,Contraption,IC-F6,50,3\nP007,Whatsit,IC-G7,12,8\nP008,Apparatus,IC-H8,200,1\n```\n\nRemove the `InternalCode` column entirely (header and every data row), and append a new final column `TotalValue` computed as `Price * Quantity` per row, so the file has exactly 9 lines and matches:\n\n```\nProductID,Name,Price,Quantity,TotalValue\nP001,Widget,10,5,50\nP002,Gadget,25,4,100\nP003,Gizmo,15,10,150\nP004,Thingamajig,100,2,200\nP005,Doohickey,8,20,160\nP006,Contraption,50,3,150\nP007,Whatsit,12,8,96\nP008,Apparatus,200,1,200\n```",
+  "env": {
+    "files": [
+      {
+        "filename": "products.csv",
+        "sandbox_path": "/home/user/Documents/products.csv"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/products.csv",
+      "key": "exists",
+      "expected": true,
+      "description": "products.csv exists"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 1 \"ProductID,Name,Price,Quantity,TotalValue\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Header row has InternalCode removed and TotalValue appended"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 2 \"P001,Widget,10,5,50\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 2 (Widget) correct"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 3 \"P002,Gadget,25,4,100\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 3 (Gadget) correct"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 4 \"P003,Gizmo,15,10,150\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 4 (Gizmo) correct"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 5 \"P004,Thingamajig,100,2,200\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 5 (Thingamajig) correct"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 6 \"P005,Doohickey,8,20,160\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 6 (Doohickey) correct"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 7 \"P006,Contraption,50,3,150\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 7 (Contraption) correct"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 8 \"P007,Whatsit,12,8,96\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 8 (Whatsit) correct"
+    },
+    {
+      "command": "check-file-line /home/user/Documents/products.csv 9 \"P008,Apparatus,200,1,200\"",
+      "key": "matches",
+      "expected": true,
+      "description": "Row 9 (Apparatus) correct"
+    },
+    {
+      "command": "check-file-line-count /home/user/Documents/products.csv 9",
+      "key": "matches",
+      "expected": true,
+      "description": "File has exactly 9 lines"
+    },
+    {
+      "command": "file-content /home/user/Documents/products.csv",
+      "eval": "'InternalCode' not in result.get('content', '')",
+      "description": "InternalCode column header removed"
+    },
+    {
+      "command": "file-content /home/user/Documents/products.csv",
+      "eval": "'IC-' not in result.get('content', '')",
+      "description": "All InternalCode values removed from data rows"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

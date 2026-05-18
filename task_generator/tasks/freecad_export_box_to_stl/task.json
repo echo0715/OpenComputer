@@ -1,0 +1,39 @@
+{
+  "id": "freecad_export_box_to_stl",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/box_to_export.FCStd, which contains a single Part::Box named 'Box' (Length 30, Width 20, Height 10).\n\nExport the 'Box' object as an 'STL Mesh (*.stl)' file to exactly /home/user/exports/box.stl (creating /home/user/exports/ if it does not exist), then save the FCStd document.",
+  "env": {
+    "files": [
+      {
+        "filename": "box_to_export.FCStd",
+        "sandbox_path": "/home/user/Documents/box_to_export.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/exports/box.stl",
+      "key": "exists",
+      "expected": true,
+      "description": "STL file was written"
+    },
+    {
+      "command": "check-stl-min-triangles /home/user/exports/box.stl 12",
+      "key": "match",
+      "expected": true,
+      "description": "STL has at least 12 triangles (a closed box has >=12)"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/box_to_export.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "FCStd source still exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

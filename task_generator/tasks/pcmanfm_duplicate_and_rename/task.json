@@ -1,0 +1,125 @@
+{
+  "id": "pcmanfm_duplicate_and_rename",
+  "app": "pcmanfm",
+  "task": "In /home/user/Documents/reports/, for each of the three sales report files (sales_q1.txt, sales_q2.txt, sales_q3.txt): create a backup copy with the prefix 'backup_' (e.g., backup_sales_q1.txt) AND rename the original to have a '_final' suffix before the extension (e.g., sales_q1_final.txt). The backup copies and the renamed originals must preserve their content. After completion, /home/user/Documents/reports/ must contain exactly these 6 files: backup_sales_q1.txt, backup_sales_q2.txt, backup_sales_q3.txt, sales_q1_final.txt, sales_q2_final.txt, sales_q3_final.txt.",
+  "env": {
+    "files": [
+      {
+        "filename": "sales_q1.txt",
+        "sandbox_path": "/home/user/Documents/reports/sales_q1.txt"
+      },
+      {
+        "filename": "sales_q2.txt",
+        "sandbox_path": "/home/user/Documents/reports/sales_q2.txt"
+      },
+      {
+        "filename": "sales_q3.txt",
+        "sandbox_path": "/home/user/Documents/reports/sales_q3.txt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-count /home/user/Documents/reports 6",
+      "key": "count",
+      "expected": 6,
+      "description": "Exactly 6 files in reports directory"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/backup_sales_q1.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "backup_sales_q1.txt exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/backup_sales_q2.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "backup_sales_q2.txt exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/backup_sales_q3.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "backup_sales_q3.txt exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/sales_q1_final.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "sales_q1_final.txt exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/sales_q2_final.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "sales_q2_final.txt exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/sales_q3_final.txt",
+      "key": "exists",
+      "expected": true,
+      "description": "sales_q3_final.txt exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/sales_q1.txt",
+      "key": "exists",
+      "expected": false,
+      "description": "Original sales_q1.txt is removed"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/sales_q2.txt",
+      "key": "exists",
+      "expected": false,
+      "description": "Original sales_q2.txt is removed"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/reports/sales_q3.txt",
+      "key": "exists",
+      "expected": false,
+      "description": "Original sales_q3.txt is removed"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/reports/backup_sales_q1.txt Q1 Sales: 250000",
+      "key": "contains",
+      "expected": true,
+      "description": "backup_sales_q1.txt has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/reports/backup_sales_q2.txt Q2 Sales: 310000",
+      "key": "contains",
+      "expected": true,
+      "description": "backup_sales_q2.txt has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/reports/backup_sales_q3.txt Q3 Sales: 290000",
+      "key": "contains",
+      "expected": true,
+      "description": "backup_sales_q3.txt has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/reports/sales_q1_final.txt Q1 Sales: 250000",
+      "key": "contains",
+      "expected": true,
+      "description": "sales_q1_final.txt has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/reports/sales_q2_final.txt Q2 Sales: 310000",
+      "key": "contains",
+      "expected": true,
+      "description": "sales_q2_final.txt has correct content"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/reports/sales_q3_final.txt Q3 Sales: 290000",
+      "key": "contains",
+      "expected": true,
+      "description": "sales_q3_final.txt has correct content"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

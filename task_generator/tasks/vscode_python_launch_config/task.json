@@ -1,0 +1,40 @@
+{
+  "id": "vscode_python_launch_config",
+  "app": "vscode",
+  "task": "Create a project at `/home/user/projects/pyapp` with the following files:\n\n- `main.py`:\n  ```python\n  def greet(name):\n      return f\"Hello, {name}!\"\n\n  if __name__ == \"__main__\":\n      print(greet(\"World\"))\n  ```\n- `.vscode/launch.json` containing two configurations, both type `debugpy`, request `launch`:\n  - `Python: Current File` — runs the currently open Python file\n  - `Python: Main` — specifically runs `main.py`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/pyapp/main.py",
+      "key": "exists",
+      "expected": true,
+      "description": "main.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/pyapp/main.py greet",
+      "key": "contains",
+      "expected": true,
+      "description": "main.py contains greet function"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/pyapp Python: Current File",
+      "key": "exists",
+      "expected": true,
+      "description": "Python: Current File launch config exists"
+    },
+    {
+      "command": "check-launch-config-exists /home/user/projects/pyapp Python: Main",
+      "key": "exists",
+      "expected": true,
+      "description": "Python: Main launch config exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

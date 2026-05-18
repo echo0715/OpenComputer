@@ -1,0 +1,56 @@
+{
+  "id": "inkscape_gap_text_on_path",
+  "app": "inkscape",
+  "task": "Open /home/user/Documents/textpath.svg. It contains a wavy path 'wavePath' and a text element 'labelText' reading 'INKSCAPE CURVE RIDE'. Put the text onto the path so it renders along the wave (SVG <textPath> with xlink:href='#wavePath'). Keep the text content exactly 'INKSCAPE CURVE RIDE'. Save /home/user/Documents/textpath.svg in place.",
+  "env": {
+    "files": [
+      {
+        "filename": "textpath.svg",
+        "sandbox_path": "/home/user/Documents/textpath.svg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/textpath.svg",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/textpath.svg wavePath",
+      "key": "exists",
+      "expected": true,
+      "description": "wavePath preserved"
+    },
+    {
+      "command": "check-element-exists /home/user/Documents/textpath.svg labelText",
+      "key": "exists",
+      "expected": true,
+      "description": "labelText preserved"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/textpath.svg textPath",
+      "key": "contains",
+      "expected": true,
+      "description": "textPath element present"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/textpath.svg wavePath",
+      "key": "contains",
+      "expected": true,
+      "description": "wavePath referenced"
+    },
+    {
+      "command": "check-text-contains /home/user/Documents/textpath.svg INKSCAPE",
+      "key": "contains",
+      "expected": true,
+      "description": "Label text present"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

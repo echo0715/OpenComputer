@@ -1,0 +1,39 @@
+{
+  "id": "gimp_resize_export_jpeg",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/landscape.png in GIMP.\n\nScale the image to 640x480 pixels and export the result as a JPEG file to /home/user/Documents/landscape_small.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "landscape.png",
+        "sandbox_path": "/home/user/Documents/landscape.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/landscape_small.jpg",
+      "key": "exists",
+      "expected": true,
+      "description": "Output JPEG file exists at /home/user/Documents/landscape_small.jpg"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/landscape_small.jpg 640 480",
+      "key": "match",
+      "expected": true,
+      "description": "Output image has dimensions 640x480"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/landscape_small.jpg JPEG",
+      "key": "match",
+      "expected": true,
+      "description": "Output file is in JPEG format"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

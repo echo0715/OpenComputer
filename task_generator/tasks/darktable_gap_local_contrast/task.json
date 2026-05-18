@@ -1,0 +1,50 @@
+{
+  "id": "darktable_gap_local_contrast",
+  "app": "darktable",
+  "task": "Import /home/user/Pictures/local_contrast_source.jpg into the darktable library.\n\nEnable the 'local contrast' module and raise its detail/strength so local contrast is increased. Apply the tag 'local_contrast_boost' to the image, set its star rating to 4 stars, and export it as a JPEG to /home/user/Pictures/local_contrast_result.jpg.",
+  "env": {
+    "files": [
+      {
+        "filename": "local_contrast_source.jpg",
+        "sandbox_path": "/home/user/Pictures/local_contrast_source.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported local_contrast_source.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "image imported"
+    },
+    {
+      "command": "check-db-has-operation local_contrast_source.jpg bilat",
+      "key": "has_operation",
+      "expected": true,
+      "description": "local contrast (bilat) operation applied"
+    },
+    {
+      "command": "check-image-rating-by-filename local_contrast_source.jpg 4",
+      "key": "matches",
+      "expected": true,
+      "description": "rating is 4"
+    },
+    {
+      "command": "check-image-tagged-by-filename local_contrast_source.jpg local_contrast_boost",
+      "key": "tagged",
+      "expected": true,
+      "description": "tagged local_contrast_boost"
+    },
+    {
+      "command": "check-image-exported /home/user/Pictures/local_contrast_result.jpg",
+      "key": "exported",
+      "expected": true,
+      "description": "JPEG exported"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "estimated_difficulty": 4
+  }
+}

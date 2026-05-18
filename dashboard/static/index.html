@@ -1,0 +1,3120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synthetic Pipeline — Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="/static/opencomputer.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --paper: #ffffff;
+      --paper-2: #faf8f3;
+      --ink: #1a1a1a;
+      --ink-soft: #3a3a3a;
+      --muted: #6b6b6b;
+      --muted-2: #8a8a8a;
+      --rule: #e5e2db;
+      --rule-soft: #efece6;
+      --accent: #b04a2f;
+      --accent-soft: #f3e1d8;
+      --accent-glow: rgba(176,74,47,0.18);
+      --link: #2a5db0;
+      --code-bg: #f4f1ea;
+      --ok: #2f7a4f;
+      --ok-soft: #e3f0e7;
+      --warn: #b07a1a;
+      --warn-soft: #f5ecd6;
+      --fail: #b03a3a;
+      --fail-soft: #f3dada;
+      --idle: #8a8a8a;
+      --idle-soft: #ebe8e1;
+      --max-w: 1320px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg); color: var(--ink);
+      line-height: 1.55; font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, .mono { font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+    button, input, select, textarea { font-family: inherit; font-size: inherit; }
+    input, select, textarea {
+      border: 1px solid var(--rule); border-radius: 8px;
+      padding: 0.45rem 0.65rem; background: var(--paper); color: var(--ink);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none; border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(176,74,47,0.12);
+    }
+    textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+    label { font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); display: block; margin-bottom: 0.3rem; }
+    .form-row input, .form-row select, .form-row textarea { width: 100%; display: block; }
+
+    .topbar {
+      border-bottom: 1px solid var(--rule);
+      background: rgba(251,250,247,0.92);
+      backdrop-filter: blur(10px);
+      position: sticky; top: 0; z-index: 60;
+    }
+    .topbar-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: "Source Serif 4", serif;
+      font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em;
+    }
+    .brand .logo {
+      width: 26px; height: 26px; border-radius: 7px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .brand .logo img { width: 100%; height: 100%; display: block; }
+    .brand-sub {
+      font-family: "Inter", sans-serif; font-weight: 400; color: var(--muted);
+      font-size: 0.83rem;
+      padding-left: 0.6rem; margin-left: 0.2rem;
+      border-left: 1px solid var(--rule);
+    }
+    .topbar-spacer { flex: 1; }
+    .topbar-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+    .section-tabs {
+      display: flex;
+      background: var(--rule-soft);
+      border-radius: 999px;
+      padding: 0.18rem;
+      gap: 0.15rem;
+      margin-left: 1rem;
+    }
+    .section-tab {
+      border: none; background: transparent;
+      padding: 0.42rem 1.05rem;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--muted); cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .section-tab:hover { color: var(--ink); }
+    .section-tab.active { background: var(--ink); color: #fff; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      color: var(--ink-soft);
+      font-size: 0.84rem; font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .15s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:hover { border-color: var(--ink); color: var(--ink); text-decoration: none; }
+    .btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn.accent:hover { filter: brightness(0.92); border-color: var(--accent); color: #fff; }
+    .btn.ok { background: var(--ok); color: #fff; border-color: var(--ok); }
+    .btn.ok:hover { filter: brightness(0.92); color: #fff; }
+    .btn.danger { background: var(--fail); color: #fff; border-color: var(--fail); }
+    .btn.danger:hover { filter: brightness(0.92); color: #fff; }
+    .btn.ghost { background: transparent; }
+    .btn.sm { padding: 0.3rem 0.65rem; font-size: 0.78rem; }
+    .btn.xs { padding: 0.22rem 0.5rem; font-size: 0.74rem; border-radius: 6px; }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .shell {
+      max-width: var(--max-w); margin: 0 auto;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+    @media (max-width: 980px) { .shell { grid-template-columns: 1fr; } }
+
+    .sidebar {
+      position: sticky; top: 70px;
+      align-self: start;
+      max-height: calc(100vh - 90px);
+      overflow-y: auto;
+    }
+    .sidebar-section { margin-bottom: 1.4rem; }
+    .sidebar-section h3 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted-2);
+      margin-bottom: 0.5rem; padding: 0 0.5rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .sidebar-section h3 .count {
+      background: var(--rule-soft); color: var(--ink-soft);
+      padding: 0.05rem 0.4rem; border-radius: 999px;
+      font-size: 0.65rem; letter-spacing: 0.05em;
+    }
+    .sidebar-search {
+      display: block; width: 100%;
+      margin: 0 0 0.5rem;
+      font-size: 0.84rem;
+      padding: 0.35rem 0.55rem;
+    }
+    .app-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .app-item {
+      display: flex; align-items: center; gap: 0.55rem;
+      padding: 0.55rem 0.6rem;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background .12s, border-color .12s;
+    }
+    .app-item:hover { background: var(--rule-soft); }
+    .app-item.active {
+      background: var(--paper);
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(176,74,47,0.06);
+    }
+    .app-item .ai-icon {
+      width: 26px; height: 26px;
+      border-radius: 7px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700; font-size: 0.74rem;
+      color: var(--ink-soft);
+      flex-shrink: 0;
+    }
+    .app-item .ai-name {
+      font-weight: 600; font-size: 0.9rem;
+      flex: 1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .app-item .ai-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .ai-dot.idle  { background: var(--idle); }
+    .ai-dot.run   { background: var(--accent); animation: ai-pulse 1.4s infinite; }
+    .ai-dot.pass  { background: var(--ok); }
+    .ai-dot.warn  { background: var(--warn); }
+    .ai-dot.fail  { background: var(--fail); }
+    @keyframes ai-pulse {
+      0%,100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+      50%     { box-shadow: 0 0 0 5px rgba(176,74,47,0); }
+    }
+    .add-app {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.5rem 0.6rem;
+      border: 1px dashed var(--rule); border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.84rem; font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      width: 100%;
+      transition: all .12s;
+      margin-bottom: 0.5rem;
+    }
+    .add-app:hover { color: var(--accent); border-color: var(--accent); background: var(--paper); }
+    .sidebar-empty {
+      padding: 0.7rem 0.6rem;
+      font-size: 0.84rem; color: var(--muted);
+      font-style: italic;
+    }
+
+    .main { min-width: 0; }
+    .app-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .app-header .ah-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700; font-size: 1.05rem;
+    }
+    .app-header h1 {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.7rem; font-weight: 700;
+      letter-spacing: -0.012em;
+    }
+    .app-header .ah-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem; color: var(--muted);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .app-header-actions { margin-left: auto; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    .stepper {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 1rem 1rem 1.1rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 10px rgba(26,26,26,0.03);
+    }
+    .stepper-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    @media (max-width: 720px) { .stepper-row { grid-template-columns: 1fr 1fr; } }
+
+    .step {
+      position: relative;
+      padding: 0.7rem 0.8rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .15s;
+      display: flex; gap: 0.65rem; align-items: flex-start;
+    }
+    .step:hover { background: var(--rule-soft); }
+    .step.selected { background: var(--rule-soft); }
+    .step.selected::after {
+      content: "";
+      position: absolute;
+      bottom: -8px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 7px solid var(--rule-soft);
+    }
+    .step::before {
+      content: ""; position: absolute;
+      top: 22px; right: -2px;
+      width: 4px; height: 2px;
+      background: var(--rule);
+    }
+    .step:last-child::before { display: none; }
+    .step-bullet {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--rule-soft);
+      color: var(--muted);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700; font-size: 0.78rem;
+      flex-shrink: 0;
+      transition: background .15s, color .15s;
+      border: 2px solid var(--rule-soft);
+    }
+    .step-body { min-width: 0; flex: 1; }
+    .step-name {
+      font-weight: 600; font-size: 0.92rem;
+      letter-spacing: -0.005em;
+    }
+    .step-status {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem; color: var(--muted);
+      margin-top: 0.1rem;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .step.s-pass .step-bullet  { background: var(--ok-soft); color: var(--ok); border-color: var(--ok-soft); }
+    .step.s-pass .step-status  { color: var(--ok); }
+    .step.s-warn .step-bullet  { background: var(--warn-soft); color: var(--warn); border-color: var(--warn-soft); }
+    .step.s-warn .step-status  { color: var(--warn); }
+    .step.s-fail .step-bullet  { background: var(--fail-soft); color: var(--fail); border-color: var(--fail-soft); }
+    .step.s-fail .step-status  { color: var(--fail); }
+    .step.s-run  .step-bullet  {
+      background: var(--accent-soft); color: var(--accent); border-color: var(--accent);
+      animation: bullet-pulse 1.6s infinite;
+    }
+    .step.s-run  .step-status  { color: var(--accent); }
+    @keyframes bullet-pulse {
+      0%,100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+      50%     { box-shadow: 0 0 0 5px rgba(176,74,47,0); }
+    }
+    .step.optional .step-name { color: var(--muted); font-style: italic; }
+    .step.optional .step-bullet { border: 2px dashed var(--rule); background: transparent; }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(26,26,26,0.03);
+      overflow: hidden;
+    }
+    .panel-head {
+      padding: 1.05rem 1.3rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .panel-eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .panel-title {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.22rem; font-weight: 700;
+      letter-spacing: -0.012em;
+      margin-top: 0.15rem;
+    }
+    .panel-sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.1rem; }
+    .panel-actions { margin-left: auto; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .panel-body { padding: 1.2rem 1.3rem; }
+
+    .artifact-list {
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .artifact-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 0.8rem;
+      padding: 0.7rem 0.95rem;
+      border-bottom: 1px solid var(--rule-soft);
+      align-items: center;
+      font-size: 0.88rem;
+    }
+    .artifact-row:last-child { border-bottom: none; }
+    .artifact-row:hover { background: var(--rule-soft); }
+    .artifact-row .a-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 0.16rem 0.5rem;
+      border-radius: 6px;
+      background: var(--rule-soft); color: var(--ink-soft);
+      white-space: nowrap;
+    }
+    .artifact-row .a-tag.get  { background: #e0eaf1; color: #1a4a7a; }
+    .artifact-row .a-tag.post { background: var(--ok-soft); color: var(--ok); }
+    .artifact-row .a-tag.put  { background: var(--warn-soft); color: var(--warn); }
+    .artifact-row .a-tag.delete { background: var(--fail-soft); color: var(--fail); }
+    .artifact-row .a-name { font-weight: 600; word-break: break-all; }
+    .artifact-row .a-desc { color: var(--muted); font-weight: 400; font-size: 0.84rem; }
+    .artifact-row .a-action {
+      font-size: 0.78rem; color: var(--accent); font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      background: none; border: none; padding: 0;
+    }
+    .artifact-row .a-action:hover { text-decoration: underline; }
+    .artifact-row .a-actions { display: flex; gap: 0.5rem; align-items: center; }
+
+    .card {
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.6rem;
+      background: var(--paper);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(176,74,47,0.06);
+    }
+    .card-head {
+      display: flex; align-items: center; gap: 0.6rem;
+      flex-wrap: wrap; margin-bottom: 0.3rem;
+    }
+    .card-id {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem; color: var(--muted);
+      cursor: pointer;
+    }
+    .card-id:hover { color: var(--accent); }
+    .card-title {
+      font-weight: 600; font-size: 0.96rem;
+      flex: 1; min-width: 0;
+    }
+    .card-desc {
+      font-size: 0.86rem; color: var(--muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    .card-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.5rem; }
+    .card-actions { display: flex; gap: 0.3rem; flex-wrap: wrap; padding-top: 0.4rem; border-top: 1px dashed var(--rule); }
+
+    .chip {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      background: var(--rule-soft); color: var(--ink-soft);
+      white-space: nowrap;
+    }
+    .chip.ok    { background: var(--ok-soft); color: var(--ok); }
+    .chip.warn  { background: var(--warn-soft); color: var(--warn); }
+    .chip.fail  { background: var(--fail-soft); color: var(--fail); }
+    .chip.accent{ background: var(--accent-soft); color: var(--accent); }
+    .chip.diff  { background: #e0eaf1; color: #1a4a7a; }
+    .chip.idle  { background: var(--idle-soft); color: var(--idle); }
+    .chip.running { background: var(--accent-soft); color: var(--accent); animation: chip-pulse 1.4s infinite; }
+    @keyframes chip-pulse {
+      0%,100% { opacity: 1; }
+      50%     { opacity: 0.65; }
+    }
+
+    .empty {
+      padding: 2.2rem 1rem;
+      text-align: center; color: var(--muted);
+      border: 1px dashed var(--rule); border-radius: 10px;
+      background: var(--paper-2);
+    }
+    .empty .empty-icon {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1.6rem; color: var(--muted-2);
+      margin-bottom: 0.4rem;
+    }
+    .empty p { margin-bottom: 0.6rem; }
+    .empty .empty-cmd {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      background: var(--code-bg);
+      padding: 0.4rem 0.7rem;
+      border-radius: 6px;
+      color: var(--ink-soft);
+    }
+
+    .modal-back {
+      position: fixed; inset: 0;
+      background: rgba(26,26,26,0.55);
+      display: none;
+      align-items: center; justify-content: center;
+      z-index: 100; padding: 1.5rem;
+    }
+    .modal-back.show { display: flex; animation: fade-in .15s ease-out; }
+    .modal {
+      background: var(--paper);
+      border-radius: 14px;
+      max-width: 880px; width: 100%;
+      max-height: 86vh;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.25);
+    }
+    .modal.lg { max-width: 1140px; }
+    .modal.sm { max-width: 540px; }
+    .modal-head {
+      padding: 1.05rem 1.2rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .modal-title {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.1rem; font-weight: 700;
+      word-break: break-word;
+    }
+    .modal-sub {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem; color: var(--muted);
+      word-break: break-all;
+    }
+    .modal-body { padding: 1.1rem 1.2rem; overflow-y: auto; flex: 1; }
+    .modal-foot {
+      padding: 0.85rem 1.2rem;
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: flex-end; gap: 0.5rem;
+      background: var(--paper-2);
+    }
+    .modal-close {
+      margin-left: auto;
+      border: none; background: transparent;
+      cursor: pointer; color: var(--muted);
+      font-size: 1.2rem; padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+    }
+    .modal-close:hover { background: var(--rule-soft); color: var(--ink); }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+    .code, .term {
+      background: #1a1a1a; color: #e8e6e0;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem; line-height: 1.6;
+      overflow: auto;
+      max-height: 60vh;
+    }
+    .code { white-space: pre; }
+    .term { white-space: pre-wrap; word-break: break-word; }
+
+    .markdown {
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.92rem; line-height: 1.65;
+      max-height: 60vh; overflow-y: auto;
+    }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
+      font-family: "Source Serif 4", serif; font-weight: 700;
+      letter-spacing: -0.005em; margin: 0.7em 0 0.35em;
+    }
+    .markdown h1 { font-size: 1.3rem; }
+    .markdown h2 { font-size: 1.15rem; }
+    .markdown h3 { font-size: 1.02rem; }
+    .markdown h4 { font-size: 0.95rem; }
+    .markdown p  { margin-bottom: 0.5em; color: var(--ink-soft); }
+    .markdown ul, .markdown ol { padding-left: 1.4em; margin-bottom: 0.5em; }
+    .markdown li { margin-bottom: 0.18em; color: var(--ink-soft); }
+    .markdown code {
+      background: var(--code-bg); padding: 0.05em 0.32em;
+      border-radius: 4px; font-size: 0.86em; color: var(--ink-soft);
+    }
+    .markdown pre {
+      background: #1a1a1a; color: #e8e6e0;
+      padding: 0.7rem 0.9rem; border-radius: 8px;
+      overflow-x: auto; font-size: 0.82em; margin: 0.5em 0;
+    }
+    .markdown pre code { background: transparent; color: inherit; padding: 0; }
+    .markdown a { color: var(--link); }
+    .markdown blockquote {
+      border-left: 3px solid var(--accent); padding-left: 0.8rem;
+      margin: 0.6em 0; color: var(--muted); font-style: italic;
+    }
+    .markdown hr { border: none; border-top: 1px solid var(--rule); margin: 0.8em 0; }
+    .markdown strong { font-weight: 700; color: var(--ink); }
+    .markdown em { font-style: italic; }
+    .markdown table { border-collapse: collapse; width: 100%; margin: 0.5em 0; font-size: 0.88em; }
+    .markdown th, .markdown td { padding: 0.35em 0.6em; border: 1px solid var(--rule); text-align: left; }
+    .markdown th { background: var(--rule-soft); font-weight: 600; }
+
+    .skel {
+      background: linear-gradient(90deg, var(--rule-soft) 0%, var(--paper-2) 50%, var(--rule-soft) 100%);
+      background-size: 200% 100%;
+      animation: skel-shimmer 1.4s ease-in-out infinite;
+      border-radius: 6px; height: 14px;
+    }
+    @keyframes skel-shimmer {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    .progress {
+      height: 6px; border-radius: 99px;
+      background: var(--rule-soft); overflow: hidden;
+      margin: 0.4rem 0 0.6rem; position: relative;
+    }
+    .progress > span {
+      display: block; height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width .4s ease;
+    }
+    .progress.indet > span {
+      width: 35% !important; position: absolute;
+      animation: indet-slide 1.6s ease-in-out infinite;
+    }
+    @keyframes indet-slide {
+      0%   { left: -35%; }
+      100% { left: 105%; }
+    }
+
+    .tree {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem; line-height: 1.7;
+      background: var(--paper-2);
+      border: 1px solid var(--rule); border-radius: 10px;
+      padding: 0.85rem 1rem;
+      color: var(--ink-soft);
+    }
+    .tree .file { color: var(--ink); cursor: pointer; }
+    .tree .file:hover { color: var(--accent); text-decoration: underline; }
+    .tree .dir  { color: var(--accent); font-weight: 600; }
+    .tree .size { color: var(--muted-2); font-size: 0.78rem; margin-left: 0.5em; }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--ink); color: #fff;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      z-index: 200;
+      transform: translateY(60px); opacity: 0;
+      transition: transform .25s, opacity .25s;
+      max-width: 480px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.ok    { background: var(--ok); }
+    .toast.fail  { background: var(--fail); }
+    .toast.accent { background: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.1rem 1.5rem;
+      text-align: center;
+      color: var(--muted); font-size: 0.8rem;
+    }
+    .v-tag {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.18rem 0.55rem; border-radius: 999px;
+      margin-right: 0.55rem;
+    }
+
+    .row { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    .grow { flex: 1; min-width: 0; }
+    .stack { display: flex; flex-direction: column; gap: 0.7rem; }
+    .stack-tight { display: flex; flex-direction: column; gap: 0.3rem; }
+    .muted { color: var(--muted); }
+    .label-mono {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+    }
+
+    .kpi-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem; margin-bottom: 1rem;
+    }
+    @media (max-width: 720px) { .kpi-row { grid-template-columns: 1fr 1fr; } }
+    .kpi {
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+    }
+    .kpi-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kpi-value {
+      font-family: "Source Serif 4", serif;
+      font-size: 1.4rem; font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--ink); margin-top: 0.1rem;
+    }
+
+    .filter-row {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 0.9rem; align-items: center;
+    }
+    .filter-row input, .filter-row select { font-size: 0.85rem; padding: 0.35rem 0.55rem; }
+    .filter-row .grow { min-width: 200px; }
+
+    /* trajectory list — focus-on-active style (matches classic dashboard) */
+    .trajectory-list {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .trajectory-step {
+      display: grid;
+      grid-template-columns: minmax(160px, 0.52fr) minmax(0, 0.7fr);
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--rule);
+      background: transparent;
+      opacity: 0.72;
+      transition: background .2s ease, grid-template-columns .28s ease, gap .28s ease, padding .28s ease, opacity .28s ease;
+    }
+    .trajectory-step.active {
+      grid-template-columns: minmax(260px, 0.95fr) minmax(0, 1.7fr);
+      gap: 18px;
+      padding: 14px 0;
+      background: linear-gradient(90deg, rgba(176, 74, 47, 0.05), transparent 45%);
+      opacity: 1;
+    }
+    .trajectory-step-text { min-width: 0; display: flex; flex-direction: column; }
+    .trajectory-step-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 4px; }
+    .step-num {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700; color: var(--accent);
+      flex-shrink: 0; font-size: 10px;
+      letter-spacing: 0.02em;
+      transition: font-size .28s ease;
+    }
+    .trajectory-step.active .step-num { font-size: 12px; }
+    .trajectory-step-reasoning {
+      padding: 0; font-size: 10px;
+      line-height: 1.32; margin-bottom: 5px;
+      white-space: pre-wrap; word-break: break-word;
+      color: var(--ink);
+      transition: font-size .28s ease, line-height .28s ease, margin-bottom .28s ease;
+    }
+    .trajectory-step.active .trajectory-step-reasoning {
+      font-size: 12px; line-height: 1.45; margin-bottom: 8px;
+    }
+    .trajectory-step-reasoning-label, .step-actions-label {
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--muted);
+      margin-bottom: 2px; font-weight: 600;
+      transition: font-size .28s ease, margin-bottom .28s ease;
+    }
+    .trajectory-step.active .trajectory-step-reasoning-label,
+    .trajectory-step.active .step-actions-label {
+      font-size: 11px; margin-bottom: 3px;
+    }
+    .trajectory-step-media {
+      display: flex; align-items: center; justify-content: center;
+      min-width: 0;
+    }
+    .trajectory-step-media-frame {
+      width: 100%;
+      max-width: 320px;
+      height: clamp(72px, 10vw, 118px);
+      padding: 2px;
+      border-radius: 10px;
+      background: transparent;
+      opacity: 0.42;
+      transition: box-shadow .25s ease, opacity .25s ease, background .25s ease, max-width .28s ease, height .28s ease, padding .28s ease;
+    }
+    .trajectory-step.active .trajectory-step-media-frame {
+      max-width: 840px;
+      height: clamp(240px, 38vw, 460px);
+      padding: 6px;
+      box-shadow: 0 14px 34px rgba(176, 74, 47, 0.20);
+      opacity: 1;
+      background: rgba(176, 74, 47, 0.04);
+    }
+    .trajectory-step-media-frame.placeholder {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 13px;
+      border: 1px dashed var(--rule);
+    }
+    .trajectory-step-image {
+      display: block;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid rgba(31, 35, 40, 0.08);
+      background: var(--paper);
+      cursor: pointer;
+      transform: scale(0.46);
+      filter: saturate(0.72);
+      transition: transform .3s ease, border-color .2s ease, filter .3s ease;
+    }
+    .trajectory-step.active .trajectory-step-image {
+      border-color: var(--accent);
+      transform: scale(1);
+      filter: saturate(1);
+    }
+    .trajectory-step-image:hover { border-color: var(--accent); }
+
+    .step-action-code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      background: transparent;
+      padding: 2px 0;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      border: none;
+      color: var(--muted);
+      transition: font-size .28s ease;
+      word-break: break-word;
+    }
+    .step-action-result {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      transition: font-size .28s ease;
+      word-break: break-word;
+    }
+    .step-action-result.fail { color: var(--fail); }
+    .trajectory-step.active .step-action-code,
+    .trajectory-step.active .step-action-result { font-size: 12px; }
+
+    @media (max-width: 900px) {
+      .trajectory-step { grid-template-columns: 1fr; gap: 6px; padding: 6px 0; opacity: 0.82; }
+      .trajectory-step.active { gap: 10px; padding: 10px 0; }
+      .trajectory-step-head { flex-direction: column; }
+      .trajectory-step-media-frame { max-width: 100%; height: clamp(88px, 22vw, 140px); opacity: 1; }
+      .trajectory-step.active .trajectory-step-media-frame { height: clamp(220px, 72vw, 360px); }
+    }
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: none; align-items: center; justify-content: center;
+      z-index: 250; cursor: zoom-out;
+      padding: 1rem;
+    }
+    .lightbox.show { display: flex; }
+    .lightbox img { max-width: 100%; max-height: 100%; }
+
+    /* judge result */
+    .judge-row {
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 0.6rem; align-items: start;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    .judge-row:last-child { border-bottom: none; }
+    .judge-row .jr-name { font-weight: 600; font-size: 0.88rem; }
+    .judge-row .jr-reason { color: var(--muted); font-size: 0.84rem; }
+
+    /* form layout */
+    .form-row { margin-bottom: 0.8rem; }
+    .form-row.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .form-row .help { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+    .form-check {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      cursor: pointer;
+      font-size: 0.86rem;
+    }
+    .form-check input { width: auto; margin: 0; }
+
+    /* trace events */
+    .trace-events { max-height: 320px; overflow-y: auto; padding-right: 0.4rem; }
+    .trace-event {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      padding: 0.32rem 0.6rem;
+      border-bottom: 1px dashed var(--rule-soft);
+      display: flex; gap: 0.55rem;
+      color: var(--ink-soft);
+    }
+    .trace-event .te-tag {
+      flex-shrink: 0;
+      font-weight: 700; font-size: 0.68rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.05rem 0.4rem; border-radius: 4px;
+      background: var(--rule-soft); color: var(--ink-soft);
+      align-self: flex-start;
+    }
+    .trace-event.tool .te-tag    { background: #e0eaf1; color: #1a4a7a; }
+    .trace-event.text .te-tag    { background: var(--idle-soft); color: var(--idle); }
+    .trace-event.thinking .te-tag{ background: #e7dee9; color: #5a2a7a; }
+    .trace-event.result .te-tag  { background: var(--ok-soft); color: var(--ok); }
+    .trace-event.error .te-tag, .trace-event.fail .te-tag { background: var(--fail-soft); color: var(--fail); }
+    .trace-event .te-msg { flex: 1; min-width: 0; word-break: break-word; }
+
+    .diff-box { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    @media (max-width: 720px) { .diff-box { grid-template-columns: 1fr; } }
+    .diff-side {
+      border: 1px solid var(--rule); border-radius: 8px; overflow: hidden;
+    }
+    .diff-side h5 {
+      background: var(--rule-soft); padding: 0.4rem 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .diff-side .code {
+      max-height: 280px; border-radius: 0;
+      font-size: 0.74rem;
+    }
+
+    /* small "running" badge inline */
+    .run-badge {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem; font-weight: 600;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .run-badge::before {
+      content: ""; display: inline-block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: ai-pulse 1.4s infinite;
+    }
+
+    /* benchmark summary table */
+    .summary-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.86rem;
+      border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+    }
+    .summary-table thead th {
+      text-align: left;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted-2);
+      padding: 0.65rem 0.85rem;
+      background: var(--paper-2);
+      border-bottom: 1px solid var(--rule);
+    }
+    .summary-table thead th.right { text-align: right; }
+    .summary-table tbody td {
+      padding: 0.6rem 0.85rem;
+      border-bottom: 1px solid var(--rule-soft);
+      vertical-align: middle;
+    }
+    .summary-table tbody tr:last-child td { border-bottom: none; }
+    .summary-table tbody tr { cursor: pointer; transition: background .12s; }
+    .summary-table tbody tr:hover { background: var(--rule-soft); }
+    .summary-table .right { text-align: right; font-family: "JetBrains Mono", monospace; }
+    .summary-table .pct-bar {
+      display: inline-block; vertical-align: middle;
+      width: 60px; height: 5px; border-radius: 99px;
+      background: var(--rule-soft); margin-right: 0.4rem;
+      overflow: hidden;
+    }
+    .summary-table .pct-bar > span {
+      display: block; height: 100%;
+      background: var(--accent); border-radius: 99px;
+    }
+    .summary-table .pct-bar.ok > span { background: var(--ok); }
+    .summary-table .pct-bar.warn > span { background: var(--warn); }
+    .summary-table .pct-bar.fail > span { background: var(--fail); }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="logo"><img src="/static/opencomputer.svg" alt="OpenComputer" /></span>
+        OpenComputer
+        <span class="brand-sub">Dashboard</span>
+      </div>
+      <nav class="section-tabs">
+        <button class="section-tab" id="tab-synthetic" onclick="switchSection('synthetic')">Synthetic</button>
+        <button class="section-tab" id="tab-benchmark" onclick="switchSection('benchmark')">Benchmark</button>
+      </nav>
+      <div class="topbar-spacer"></div>
+      <div class="topbar-actions">
+        <a class="btn ghost sm" href="/">
+          <svg viewBox="0 0 24 24"><path d="M9 18l-6-6 6-6"/></svg>
+          Classic
+        </a>
+        <button class="btn sm" id="refresh-btn" title="Refresh data">
+          <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+          Refresh
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell">
+
+    <aside class="sidebar">
+      <div class="sidebar-section" id="benchmark-side" style="display:none;">
+        <h3>Overview</h3>
+        <ul class="app-list">
+          <li class="app-item" id="overview-item" onclick="state.currentApp=null;renderSidebar();renderMain();">
+            <span class="ai-icon" style="background:#1a1a1a;color:#fff;">≡</span>
+            <span class="ai-name">Cross-app summary</span>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h3>Apps <span class="count" id="app-count">—</span></h3>
+        <button class="add-app" id="add-app-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          New app
+        </button>
+        <div class="add-app-inline" id="add-app-inline" style="display:none;margin-bottom:0.5rem">
+          <input type="text" id="add-app-inline-name" placeholder="app_name" autocomplete="off"
+                 style="display:block;width:100%;padding:0.4rem 0.55rem;font-size:0.84rem;border:1px solid var(--accent);border-radius:8px;background:var(--paper);color:var(--ink);font-family:inherit" />
+          <div id="add-app-inline-err" style="color:var(--fail);font-size:0.75rem;margin-top:3px;display:none"></div>
+        </div>
+        <input type="search" class="sidebar-search" id="app-search" placeholder="Filter apps…" />
+        <ul class="app-list" id="app-list">
+          <li class="sidebar-empty">loading…</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main" id="main">
+      <div class="empty"><div class="empty-icon">∅</div><p>Loading apps…</p></div>
+    </main>
+  </div>
+
+  <div class="modal-back" id="modal-back">
+    <div class="modal" id="modal">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title" id="modal-title">Title</div>
+          <div class="modal-sub" id="modal-sub"></div>
+        </div>
+        <button class="modal-close" id="modal-close">×</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-foot" id="modal-foot" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox"><img id="lightbox-img" src="" /></div>
+
+  <div class="toast" id="toast"><span id="toast-msg">message</span></div>
+
+  <footer>
+    <span class="v-tag">v2</span>
+    Same pipeline, redesigned. Switch to <a href="/">classic</a> for legacy views.
+  </footer>
+
+  <script>
+  // ============================================================
+  // STATE
+  // ============================================================
+  const state = {
+    verifiers: [], smokeApps: [], smokeRuns: [], apps: {},
+    appNames: [], filteredAppNames: [], appsTasks: {},
+    runs: [], models: [],
+    section: 'synthetic',           // 'synthetic' | 'benchmark'
+    currentApp: null, currentStage: 'verifier',
+    appSearch: '', taskSearch: '', taskDifficulty: '',
+    benchmarkRunFilter: '',         // run_id or '' for latest-per-task
+    benchmarkAppFilter: '',
+    benchmarkSearch: '', benchmarkDifficulty: '',
+    benchmarkSummary: null, benchmarkTasks: [],
+    pollers: {},
+    runningTasks: {},
+    pendingProposal: null,
+    pendingGen: null,
+  };
+  const STAGES = ['verifier', 'smoke', 'tasks', 'repair'];
+  const STAGE_META = {
+    verifier: { num: '01', label: 'Verifier', sub: 'Endpoints + tests' },
+    smoke:    { num: '02', label: 'Smoke',    sub: 'Live sandbox runs' },
+    tasks:    { num: '03', label: 'Tasks',    sub: 'Generate · run · judge' },
+    repair:   { num: '04', label: 'Repair',   sub: 'Optional repair runs', optional: true },
+  };
+  const APP_PALETTE = [
+    ['#eadfd1', '#7a4a1a'], ['#d8e4ea', '#1a4f7a'], ['#e7dee9', '#5a2a7a'],
+    ['#dde6dd', '#2a5a2a'], ['#ead8d8', '#7a1a1a'], ['#e1e1de', '#3a3a3a'],
+    ['#e6e0d2', '#6a5a1a'], ['#d8e4e4', '#1a5a5a'], ['#ead7e0', '#7a2a4a'],
+  ];
+
+  // ============================================================
+  // FETCH
+  // ============================================================
+  async function fetchJSON(url, opts) {
+    const r = await fetch(url, opts);
+    const ct = r.headers.get('content-type') || '';
+    if (!r.ok) {
+      let msg = `${url} → ${r.status}`;
+      try {
+        if (ct.includes('json')) { const j = await r.json(); if (j.error) msg = j.error; }
+        else { const t = await r.text(); if (t) msg = t; }
+      } catch {}
+      throw new Error(msg);
+    }
+    return r.json();
+  }
+  async function fetchText(url) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`${url} → ${r.status}`);
+    return r.text();
+  }
+  async function postJSON(url, body) {
+    return fetchJSON(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body || {}),
+    });
+  }
+  async function deleteJSON(url) {
+    return fetchJSON(url, { method: 'DELETE' });
+  }
+
+  // ============================================================
+  // POLLING
+  // ============================================================
+  function startPoll(key, fn, interval = 1500) {
+    stopPoll(key);
+    const tick = async () => { try { await fn(); } catch (e) { console.warn(key, e); } };
+    state.pollers[key] = setInterval(tick, interval);
+    tick();
+  }
+  function stopPoll(key) {
+    if (state.pollers[key]) { clearInterval(state.pollers[key]); delete state.pollers[key]; }
+  }
+  function stopAllPolls() { for (const k of Object.keys(state.pollers)) stopPoll(k); }
+
+  // ============================================================
+  // BOOT
+  // ============================================================
+  async function loadAll() {
+    try {
+      const [verifiers, smokeApps, smokeRuns, models, runs] = await Promise.all([
+        fetchJSON('/api/synthesis/verifiers').catch(() => []),
+        fetchJSON('/api/synthesis/smoke/apps').catch(() => []),
+        fetchJSON('/api/synthesis/smoke/runs').catch(() => []),
+        fetchJSON('/api/models').catch(() => ['kimi-k2.5','claude-sonnet-4-6','claude-opus-4-6']),
+        fetchJSON('/api/runs').catch(() => []),
+      ]);
+      state.verifiers = verifiers; state.smokeApps = smokeApps;
+      state.smokeRuns = smokeRuns; state.models = models;
+      state.runs = runs;
+      const tasks = await fetchJSON('/api/tasks').catch(() => []);
+      const byApp = {};
+      for (const t of tasks) (byApp[t.app] = byApp[t.app] || []).push(t);
+      state.appsTasks = byApp;
+      buildAppIndex(); computeAppStatuses(); applyAppSearch();
+      if (!state.currentApp && state.filteredAppNames.length) {
+        state.currentApp = state.filteredAppNames[0];
+      }
+      renderSidebar(); renderMain();
+    } catch (e) {
+      console.error(e);
+      $('main').innerHTML = `<div class="empty"><div class="empty-icon">!</div><p>Failed to load: ${escapeHtml(e.message)}</p><button class="btn" onclick="location.reload()">Reload</button></div>`;
+    }
+  }
+  function buildAppIndex() {
+    const names = new Set();
+    state.verifiers.forEach(v => names.add(v.app));
+    state.smokeApps.forEach(s => names.add(s.app));
+    Object.keys(state.appsTasks).forEach(a => names.add(a));
+    const sorted = Array.from(names).filter(Boolean).sort();
+    state.appNames = sorted;
+    sorted.forEach((name, i) => {
+      const [bg, fg] = APP_PALETTE[i % APP_PALETTE.length];
+      state.apps[name] = state.apps[name] || {};
+      state.apps[name].name = name;
+      state.apps[name].label = (name[0]?.toUpperCase() || '') + (name[1] || '');
+      state.apps[name].color = bg;
+      state.apps[name].text = fg;
+    });
+  }
+  function computeAppStatuses() {
+    for (const name of state.appNames) {
+      const a = state.apps[name];
+      const v = state.verifiers.find(x => x.app === name);
+      const s = state.smokeApps.find(x => x.app === name);
+      const tasks = state.appsTasks[name] || [];
+      if (v) {
+        if (v.has_verifier && v.has_test_py && v.has_readme) a.verifier = { status: 'pass', meta: v };
+        else if (v.has_verifier) a.verifier = { status: 'warn', meta: v };
+        else a.verifier = { status: 'idle', meta: v };
+      } else a.verifier = { status: 'idle', meta: null };
+      if (s && s.total > 0) {
+        if (s.errored > 0) a.smoke = { status: 'fail', meta: s };
+        else if (s.solved === s.total) a.smoke = { status: 'pass', meta: s };
+        else if (s.solved > 0) a.smoke = { status: 'warn', meta: s };
+        else a.smoke = { status: 'idle', meta: s };
+      } else a.smoke = { status: 'idle', meta: s || null };
+      const finalized = tasks.filter(t => t.has_env || (t.num_checks || 0) > 0);
+      if (tasks.length === 0) a.tasks = { status: 'idle', meta: { count: 0, finalized: 0 } };
+      else if (finalized.length >= 3) a.tasks = { status: 'pass', meta: { count: tasks.length, finalized: finalized.length } };
+      else a.tasks = { status: 'warn', meta: { count: tasks.length, finalized: finalized.length } };
+      let repairTotal = 0, repairSolved = 0;
+      for (const t of tasks) {
+        const rbm = t.runs_by_model || {};
+        for (const k of Object.keys(rbm)) {
+          if (k.startsWith('repair:')) { repairTotal++; if (rbm[k].reward === 1) repairSolved++; }
+        }
+      }
+      if (!repairTotal) a.repair = { status: 'idle', meta: { runs: 0 } };
+      else if (repairSolved === repairTotal) a.repair = { status: 'pass', meta: { runs: repairTotal, solved: repairSolved } };
+      else a.repair = { status: 'warn', meta: { runs: repairTotal, solved: repairSolved } };
+    }
+  }
+  function appOverall(a) {
+    if (a.smoke?.status === 'fail') return 'fail';
+    if (a.verifier?.status === 'pass' && a.smoke?.status === 'pass' && a.tasks?.status === 'pass') return 'pass';
+    if (a.verifier?.status === 'warn' || a.tasks?.status === 'warn' || a.smoke?.status === 'warn') return 'warn';
+    if (a.verifier?.status === 'pass') return 'idle';
+    return 'idle';
+  }
+  function applyAppSearch() {
+    const q = state.appSearch.toLowerCase();
+    state.filteredAppNames = q ? state.appNames.filter(n => n.toLowerCase().includes(q)) : state.appNames;
+  }
+
+  // ============================================================
+  // RENDER: sidebar + main shell
+  // ============================================================
+  const $ = (id) => document.getElementById(id);
+
+  function renderSidebar() {
+    // Section tabs (top of page)
+    $('tab-synthetic').classList.toggle('active', state.section === 'synthetic');
+    $('tab-benchmark').classList.toggle('active', state.section === 'benchmark');
+
+    // Show "Cross-app summary" only in benchmark mode
+    const benchSide = $('benchmark-side');
+    if (benchSide) benchSide.style.display = state.section === 'benchmark' ? '' : 'none';
+    const overviewItem = $('overview-item');
+    if (overviewItem) overviewItem.classList.toggle('active', state.section === 'benchmark' && !state.currentApp);
+
+    // Apps section
+    $('app-count').textContent = state.filteredAppNames.length;
+    const ul = $('app-list'); ul.innerHTML = '';
+    if (state.filteredAppNames.length === 0) {
+      ul.innerHTML = `<li class="sidebar-empty">${state.appSearch ? 'No matches' : 'No apps yet — click <strong>+ New app</strong> below.'}</li>`;
+      return;
+    }
+    state.filteredAppNames.forEach(name => {
+      const a = state.apps[name];
+      const overall = appOverall(a);
+      const li = document.createElement('li');
+      li.className = 'app-item' + (name === state.currentApp ? ' active' : '');
+      li.innerHTML = `
+        <span class="ai-icon" style="background:${a.color};color:${a.text};">${a.label}</span>
+        <span class="ai-name">${name}</span>
+        <span class="ai-dot ${overall}"></span>
+      `;
+      li.onclick = () => { state.currentApp = name; state.currentStage = 'verifier'; renderSidebar(); renderMain(); };
+      ul.appendChild(li);
+    });
+  }
+
+  function switchSection(s) {
+    state.section = s;
+    if (s === 'benchmark') {
+      // load benchmark data lazily
+      if (!state.benchmarkSummary) loadBenchmark().then(() => { renderSidebar(); renderMain(); });
+    }
+    renderSidebar();
+    renderMain();
+  }
+
+  function renderMain() {
+    if (state.section === 'benchmark') {
+      if (state.currentApp) return renderBenchmarkAppView();
+      return renderBenchmarkOverview();
+    }
+    if (!state.currentApp) {
+      $('main').innerHTML = `<div class="empty"><div class="empty-icon">∅</div><p>Pick an app from the sidebar.</p></div>`;
+      return;
+    }
+    const name = state.currentApp;
+    const a = state.apps[name];
+    const overall = appOverall(a);
+    const overallText = ({pass:'all stages green', warn:'attention required', fail:'failure', idle:'not started'})[overall];
+    $('main').innerHTML = `
+      <div class="app-header">
+        <div class="ah-icon" style="background:${a.color};color:${a.text};">${a.label}</div>
+        <div>
+          <h1>${name}</h1>
+          <div class="ah-meta">
+            <span class="ai-dot ${overall}" style="display:inline-block;"></span>
+            ${overallText}
+            <span style="color:var(--rule);">·</span>
+            verifiers/${name}
+          </div>
+        </div>
+        <div class="app-header-actions" id="app-header-actions"></div>
+      </div>
+      <div class="stepper"><div class="stepper-row" id="stepper">${renderStepper(a)}</div></div>
+      <div class="panel">
+        <div class="panel-head" id="panel-head"></div>
+        <div class="panel-body" id="panel-body"></div>
+      </div>
+    `;
+    renderHeaderActions();
+    renderDetail();
+  }
+
+  function renderHeaderActions() {
+    const a = state.apps[state.currentApp];
+    const v = a.verifier?.meta;
+    const acts = [];
+    if (v?.has_readme)   acts.push(`<button class="btn ghost sm" onclick="openReadme('${state.currentApp}')">README.md</button>`);
+    if (v?.has_test_md)  acts.push(`<button class="btn ghost sm" onclick="openTestMd('${state.currentApp}')">Test.md</button>`);
+    if (v?.has_verifier) acts.push(`<button class="btn ghost sm" onclick="openVerifierSource('${state.currentApp}')">${state.currentApp}.py</button>`);
+    $('app-header-actions').innerHTML = acts.join('');
+  }
+
+  function renderStepper(a) {
+    return STAGES.map(s => {
+      const m = STAGE_META[s];
+      const stage = a[s] || { status: 'idle' };
+      const cls = ['step', 's-' + stage.status];
+      if (s === state.currentStage) cls.push('selected');
+      if (m.optional) cls.push('optional');
+      const bullet = ({pass:'✓', warn:'!', fail:'×', run:'…', idle:m.num})[stage.status];
+      return `
+        <div class="${cls.join(' ')}" onclick="selectStage('${s}')">
+          <div class="step-bullet">${bullet}</div>
+          <div class="step-body">
+            <div class="step-name">${m.label}${m.optional?' <span class="muted" style="font-size:0.74rem;">(opt)</span>':''}</div>
+            <div class="step-status">${stepStatusLabel(s, stage)}</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+  function stepStatusLabel(s, stage) {
+    if (s === 'verifier') {
+      const v = stage.meta;
+      if (!v) return 'no verifier';
+      return `${v.endpoint_count || 0} endpoints`;
+    }
+    if (s === 'smoke') {
+      const sm = stage.meta;
+      if (!sm) return 'not run';
+      return `${sm.solved || 0} / ${sm.total || 0} solved`;
+    }
+    if (s === 'tasks') {
+      const t = stage.meta || {};
+      return `${t.finalized || 0} / ${t.count || 0} finalized`;
+    }
+    if (s === 'repair') {
+      const r = stage.meta || {};
+      if (!r.runs) return 'no runs';
+      return `${r.solved || 0} / ${r.runs} solved`;
+    }
+    return STAGE_META[s].sub;
+  }
+
+  function selectStage(s) { state.currentStage = s; renderMain(); }
+
+  function renderDetail() {
+    if (state.currentStage === 'verifier') return renderVerifierStage();
+    if (state.currentStage === 'smoke')    return renderSmokeStage();
+    if (state.currentStage === 'tasks')    return renderTasksStage();
+    if (state.currentStage === 'repair')   return renderRepairStage();
+  }
+
+  // ============================================================
+  // STAGE 1 — VERIFIER
+  // ============================================================
+  async function renderVerifierStage() {
+    const name = state.currentApp;
+    const a = state.apps[name];
+    const v = a.verifier?.meta;
+    const isRunning = state.pollers[`vt:${name}`] || state.pollers[`vg:${name}`];
+    $('panel-head').innerHTML = `
+      <div>
+        <div class="panel-eyebrow">Stage 01 · Verifier</div>
+        <div class="panel-title">Endpoints + module files</div>
+        <div class="panel-sub">verifiers/${name}/${name}.py</div>
+      </div>
+      <div class="panel-actions">
+        ${v?.has_test_py ? `<button class="btn sm" onclick="runVerifierTest('${name}')" ${isRunning?'disabled':''}>
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run tests
+        </button>` : ''}
+        <button class="btn sm primary" onclick="generateVerifier('${name}')" ${isRunning?'disabled':''}>
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> ${v?.has_verifier?'Extend':'Generate'}
+        </button>
+      </div>
+    `;
+    if (!v || !v.has_verifier) {
+      $('panel-body').innerHTML = `
+        <div id="vg-status-banner"></div>
+        <div class="empty">
+          <div class="empty-icon">∅</div>
+          <p>No verifier module for <code>${name}</code> yet.</p>
+          <button class="btn accent" onclick="generateVerifier('${name}')">Generate verifier</button>
+        </div>
+      `;
+      if (state.pollers[`vg:${name}`]) refreshVerifierGenBanner(name);
+      else if (state.lastVgTrace && state.lastVgTrace[name]) paintLastVerifierGenTrace(name);
+      return;
+    }
+    $('panel-body').innerHTML = '<div class="stack"><div class="skel" style="width:60%;"></div><div class="skel" style="width:80%;"></div><div class="skel" style="width:50%;"></div></div>';
+    let detail;
+    try { detail = await fetchJSON(`/api/synthesis/verifiers/${encodeURIComponent(name)}`); }
+    catch (e) { $('panel-body').innerHTML = `<div class="empty"><p>Failed to load: ${escapeHtml(e.message)}</p></div>`; return; }
+    const eps = detail.endpoints || [];
+    const files = detail.files || [];
+    $('panel-body').innerHTML = `
+      <div id="vt-status-banner"></div>
+      <div id="vg-status-banner"></div>
+      <div class="row" style="margin-bottom:0.9rem;">
+        <span class="label-mono">${detail.endpoint_count} endpoints</span>
+        ${v.has_test_py ? `<span class="chip ok">test_${name}.py</span>` : `<span class="chip warn">no tests</span>`}
+        ${v.has_test_md ? `<span class="chip ok">Test.md</span>` : ''}
+        ${v.has_readme  ? `<span class="chip ok">README.md</span>` : ''}
+      </div>
+      ${eps.length ? `
+        <div class="artifact-list">
+          ${eps.map(e => {
+            const obj = (typeof e === 'string') ? { name: e } : e;
+            const epName = obj.name || obj.path || '';
+            const epDesc = obj.description || obj.desc || '';
+            return `
+              <div class="artifact-row">
+                <span class="a-tag get">${obj.method ? obj.method.toUpperCase() : 'CHECK'}</span>
+                <div>
+                  <div class="a-name">${escapeHtml(epName)}</div>
+                  ${epDesc ? `<div class="a-desc">${escapeHtml(epDesc)}</div>` : ''}
+                </div>
+                <button class="a-action" onclick="openEndpointSource('${name}', ${JSON.stringify(epName).replace(/"/g,'&quot;')})">view source</button>
+              </div>`;
+          }).join('')}
+        </div>` : `<div class="empty"><p>No endpoints parsed.</p></div>`}
+      ${files.length ? `
+        <div class="row" style="margin-top:1rem;margin-bottom:0.4rem;">
+          <span class="label-mono">${files.length} module file${files.length===1?'':'s'}</span>
+        </div>
+        <div class="tree">verifiers/${name}/
+${files.map(f => `├── <span class="file" onclick="openVerifierFile('${name}','${f.name}')">${f.name}</span><span class="size">${formatBytes(f.size)}</span>`).join('\n')}</div>` : ''}
+    `;
+    if (state.pollers[`vt:${name}`]) refreshVerifierTestBanner(name);
+    if (state.pollers[`vg:${name}`]) refreshVerifierGenBanner(name);
+    else if (state.lastVgTrace && state.lastVgTrace[name]) paintLastVerifierGenTrace(name);
+  }
+  function paintLastVerifierGenTrace(name) {
+    const last = state.lastVgTrace && state.lastVgTrace[name];
+    const banner = $('vg-status-banner');
+    if (!last || !banner) return;
+    banner.innerHTML = `
+      <div class="card" style="margin-bottom:0.7rem;background:var(--paper-2);">
+        <div class="row">
+          <span class="label-mono">verifier gen</span>
+          <span class="chip ${last.status==='completed'?'ok':last.status==='error'?'fail':'idle'}">${last.status}${last.event_count?` · ${last.event_count} events`:''}</span>
+          <span class="grow"></span>
+          <button class="btn xs ghost" onclick="delete state.lastVgTrace['${name}'];renderVerifierStage();">dismiss</button>
+        </div>
+        <div class="trace-events" style="margin-top:0.6rem;">${renderTraceEvents(last.events || [])}</div>
+      </div>`;
+  }
+
+  // ----- Stage 1 actions -----
+  async function runVerifierTest(name) {
+    try {
+      const r = await postJSON(`/api/synthesis/verifiers/${encodeURIComponent(name)}/test`, {});
+      if (r.error) { toast(r.error, 'fail'); return; }
+      toast(`Running test_${name}.py …`);
+      startPoll(`vt:${name}`, () => refreshVerifierTestBanner(name), 1500);
+      renderVerifierStage();
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  async function refreshVerifierTestBanner(name) {
+    try {
+      const s = await fetchJSON(`/api/synthesis/verifiers/${encodeURIComponent(name)}/test/status`);
+      const banner = $('vt-status-banner');
+      if (!banner) return;
+      const finished = s.status === 'completed' || s.status === 'error' || s.status === 'idle';
+      banner.innerHTML = `
+        <div class="card" style="margin-bottom:0.7rem;background:var(--paper-2);">
+          <div class="row">
+            <span class="label-mono">verifier test</span>
+            <span class="chip ${s.status==='completed' && (s.exit_code===0)?'ok':s.status==='error'||(s.exit_code&&s.exit_code!==0)?'fail':'running'}">${s.status}${s.exit_code!=null?` · exit ${s.exit_code}`:''}</span>
+            <span class="grow"></span>
+            <button class="btn xs ghost" onclick="openProcessOutput('Verifier test · ${name}', ${JSON.stringify(s.output||'').replace(/"/g,'&quot;')})">view output</button>
+          </div>
+        </div>`;
+      if (finished) {
+        stopPoll(`vt:${name}`);
+        if (s.status === 'completed' && s.exit_code === 0) toast(`Tests passed: ${name}`, 'ok');
+        else if (s.status === 'error' || (s.exit_code && s.exit_code !== 0)) toast(`Tests failed: ${name}`, 'fail');
+      }
+    } catch {}
+  }
+  function generateVerifier(name) {
+    const isNew = !state.apps[name]?.verifier?.meta?.has_verifier;
+    openModal(
+      `${isNew ? 'Generate' : 'Extend'} verifier · ${name}`,
+      isNew ? 'Claude will create the verifier module' : 'Claude will add endpoints to the existing module',
+      `
+        <div class="form-row">
+          <label>Instructions <span class="muted">(optional)</span></label>
+          <textarea id="gen-verifier-instr" placeholder="${isNew
+            ? 'Describe the app, key surfaces to inspect, important verifier endpoints…'
+            : 'What should Claude add or change? Leave empty to let Claude pick gaps to fill.'}" rows="6" style="width:100%;"></textarea>
+          <div class="help">Leave empty for defaults. Claude follows <code>verifiers/CLAUDE.md</code>.</div>
+        </div>
+      `,
+      [
+        { label: 'Cancel', cls: 'ghost', onclick: 'closeModal()' },
+        { label: isNew ? 'Generate' : 'Extend', cls: 'accent primary', onclick: `submitGenerateVerifier('${name}')` },
+      ]
+    );
+    setTimeout(() => {
+      const t = $('gen-verifier-instr');
+      if (t) t.focus();
+    }, 50);
+  }
+  async function submitGenerateVerifier(name) {
+    const t = $('gen-verifier-instr');
+    const instructions = t ? (t.value || '').trim() : '';
+    closeModal();
+    try {
+      const r = await postJSON(`/api/synthesis/verifiers/${encodeURIComponent(name)}/generate`, { instructions });
+      if (r.error) { toast(r.error, 'fail'); return; }
+      toast(`Generating verifier · ${name}`);
+      startPoll(`vg:${name}`, () => refreshVerifierGenBanner(name), 1500);
+      renderVerifierStage();
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  async function refreshVerifierGenBanner(name) {
+    try {
+      const s = await fetchJSON(`/api/synthesis/verifiers/${encodeURIComponent(name)}/generate/status`);
+      const banner = $('vg-status-banner');
+      if (!banner) return;
+      const finished = s.status === 'completed' || s.status === 'error' || s.status === 'idle';
+      const traceId = `vg-trace-${name}`;
+      const wasAtBottom = (() => {
+        const el = $(traceId);
+        if (!el) return true;
+        return el.scrollHeight - el.scrollTop - el.clientHeight < 20;
+      })();
+      banner.innerHTML = `
+        <div class="card" style="margin-bottom:0.7rem;background:var(--paper-2);">
+          <div class="row">
+            <span class="label-mono">verifier gen</span>
+            <span class="chip ${s.status==='completed'?'ok':s.status==='error'?'fail':'running'}">${s.status}${s.event_count?` · ${s.event_count} events`:''}</span>
+            <span class="grow"></span>
+            <button class="btn xs ghost" onclick="openTrace('Verifier gen · ${name}', ${JSON.stringify({events:s.events||[],output:s.output||''}).replace(/"/g,'&quot;')})">expand</button>
+          </div>
+          <div class="trace-events" id="${traceId}" style="margin-top:0.6rem;">${renderTraceEvents(s.events || [])}</div>
+        </div>`;
+      const traceEl = $(traceId);
+      if (traceEl && wasAtBottom) traceEl.scrollTop = traceEl.scrollHeight;
+      if (finished) {
+        stopPoll(`vg:${name}`);
+        toast(`Verifier ${s.status === 'completed' ? 'generated' : 'gen ' + s.status}: ${name}`, s.status === 'completed' ? 'ok' : 'fail');
+        // Stash the final trace so it can be re-rendered after the stage refresh
+        if (!state.lastVgTrace) state.lastVgTrace = {};
+        state.lastVgTrace[name] = {
+          events: s.events || [],
+          status: s.status,
+          exit_code: s.exit_code,
+          event_count: s.event_count,
+        };
+        try {
+          state.verifiers = await fetchJSON('/api/synthesis/verifiers');
+          buildAppIndex(); computeAppStatuses(); renderSidebar();
+          if (state.currentApp === name && state.currentStage === 'verifier') renderVerifierStage();
+        } catch {}
+      }
+    } catch {}
+  }
+
+  // ============================================================
+  // STAGE 2 — SMOKE
+  // ============================================================
+  function renderSmokeStage() {
+    const name = state.currentApp;
+    const a = state.apps[name];
+    const sm = a.smoke?.meta;
+    const runsForApp = state.smokeRuns.filter(r => r.app === name);
+    const isRunning = state.pollers[`sm:${name}`];
+    $('panel-head').innerHTML = `
+      <div>
+        <div class="panel-eyebrow">Stage 02 · Smoke</div>
+        <div class="panel-title">Sandbox trajectories per endpoint group</div>
+        <div class="panel-sub">smoke/runs/${name}_&lt;ts&gt;/REPORT.md</div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn sm primary" onclick="openSmokeRunForm('${name}')" ${isRunning?'disabled':''}>
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> Run smoke
+        </button>
+      </div>
+    `;
+    let body = `<div id="sm-status-banner"></div>`;
+    if (!sm || sm.total === 0) {
+      body += `
+        <div class="empty">
+          <div class="empty-icon">∅</div>
+          <p>No smoke runs for <code>${name}</code> yet.</p>
+          <div class="empty-cmd">python smoke/smoke_loop.py --app ${name}</div>
+        </div>`;
+    } else {
+      const tasks = sm.tasks || [];
+      body += `
+        <div class="row" style="margin-bottom:0.5rem;">
+          <span class="label-mono">${tasks.length} smoke tasks</span>
+          <span class="chip ok">${sm.solved} solved</span>
+          ${sm.errored ? `<span class="chip fail">${sm.errored} errored</span>` : ''}
+          ${sm.not_run ? `<span class="chip idle">${sm.not_run} not run</span>` : ''}
+        </div>
+        <div class="artifact-list">
+          ${tasks.map(t => `
+            <div class="artifact-row">
+              <span class="a-tag ${t.status==='solved'?'post':t.status==='errored'?'put':'get'}">${(t.status||'').toUpperCase()}</span>
+              <div>
+                <div class="a-name">${t.task_id || t.id}</div>
+                <div class="a-desc">${t.latest_ts ? 'last run ' + relTime(t.latest_ts) : 'never run'}${t.latest_run_id ? ' · ' + t.latest_run_id : ''}</div>
+              </div>
+              <button class="a-action" onclick="openSmokeTask('${name}', ${JSON.stringify(t.task_id||t.id).replace(/"/g,'&quot;')})">SOLVED.md</button>
+            </div>
+          `).join('')}
+        </div>`;
+      if (runsForApp.length) {
+        body += `
+          <div class="row" style="margin-top:1.2rem;margin-bottom:0.4rem;">
+            <span class="label-mono">${runsForApp.length} run${runsForApp.length===1?'':'s'}</span>
+          </div>
+          <div class="artifact-list">
+            ${runsForApp.map(r => `
+              <div class="artifact-row">
+                <span class="a-tag get">${r.task_count || 0} TASKS</span>
+                <div>
+                  <div class="a-name">${r.run_id}</div>
+                  <div class="a-desc">${r.timestamp ? relTime(r.timestamp) : ''} · ${r.solved_count || 0} solved${r.has_report ? ' · REPORT.md' : ''}</div>
+                </div>
+                <button class="a-action" onclick="openSmokeRun('${r.run_id}')">view run</button>
+              </div>
+            `).join('')}
+          </div>`;
+      }
+    }
+    $('panel-body').innerHTML = body;
+    if (state.pollers[`sm:${name}`]) refreshSmokeBanner(name);
+  }
+  function openSmokeRunForm(name) {
+    openModal(`Run smoke · ${name}`, '', `
+      <form id="smoke-form" onsubmit="event.preventDefault();submitSmokeRun('${name}');">
+        <div class="form-row">
+          <label>Max tasks <span class="muted">(optional, 1–50)</span></label>
+          <input type="number" name="max_tasks" min="1" max="50" placeholder="—" />
+        </div>
+        <div class="form-row">
+          <label class="form-check"><input type="checkbox" name="generate_only" /> Generate-only (don't run)</label>
+        </div>
+        <div class="form-row">
+          <label class="form-check"><input type="checkbox" name="run_only" /> Run-only (skip generation)</label>
+        </div>
+      </form>
+    `, [
+      { label: 'Cancel', cls: 'ghost', onclick: 'closeModal()' },
+      { label: 'Run', cls: 'primary', onclick: `submitSmokeRun('${name}')` },
+    ]);
+  }
+  async function submitSmokeRun(name) {
+    const f = $('smoke-form');
+    const body = { app: name };
+    const m = f.elements.max_tasks.value; if (m) body.max_tasks = parseInt(m, 10);
+    if (f.elements.generate_only.checked) body.generate_only = true;
+    if (f.elements.run_only.checked) body.run_only = true;
+    closeModal();
+    try {
+      const r = await postJSON('/api/synthesis/smoke/run', body);
+      if (r.error) { toast(r.error, 'fail'); return; }
+      toast(`Started smoke for ${name}`);
+      startPoll(`sm:${name}`, () => refreshSmokeBanner(name), 1500);
+      renderSmokeStage();
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  async function refreshSmokeBanner(name) {
+    try {
+      const s = await fetchJSON(`/api/synthesis/smoke/status/${encodeURIComponent(name)}`);
+      const banner = $('sm-status-banner');
+      if (!banner) return;
+      const finished = s.status === 'completed' || s.status === 'error' || s.status === 'idle';
+      banner.innerHTML = `
+        <div class="card" style="margin-bottom:0.7rem;background:var(--paper-2);">
+          <div class="row">
+            <span class="label-mono">smoke run</span>
+            <span class="chip ${s.status==='completed' && s.exit_code===0?'ok':s.status==='error'||(s.exit_code&&s.exit_code!==0)?'fail':'running'}">${s.status}${s.exit_code!=null?` · exit ${s.exit_code}`:''}</span>
+            <span class="grow"></span>
+            <button class="btn xs ghost" onclick="openProcessOutput('Smoke · ${name}', ${JSON.stringify(s.output||'').replace(/"/g,'&quot;')})">view output</button>
+          </div>
+        </div>`;
+      if (finished) {
+        stopPoll(`sm:${name}`);
+        toast(`Smoke ${s.status}: ${name}`, s.status === 'completed' ? 'ok' : 'fail');
+        // Refresh smoke data
+        try {
+          state.smokeApps = await fetchJSON('/api/synthesis/smoke/apps');
+          state.smokeRuns = await fetchJSON('/api/synthesis/smoke/runs');
+          computeAppStatuses(); renderSidebar(); renderSmokeStage();
+        } catch {}
+      }
+    } catch {}
+  }
+
+  // ============================================================
+  // STAGE 3 — TASKS
+  // ============================================================
+  function renderTasksStage() {
+    const name = state.currentApp;
+    const tasks = state.appsTasks[name] || [];
+    $('panel-head').innerHTML = `
+      <div>
+        <div class="panel-eyebrow">Stage 03 · Tasks</div>
+        <div class="panel-title">Generate · run · judge</div>
+        <div class="panel-sub">task_generator/tasks/&lt;task_id&gt;/task.json</div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn sm" onclick="openEnvList('${name}')">env files</button>
+        <button class="btn sm primary" onclick="openGenerateTasksForm('${name}')">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> Generate tasks
+        </button>
+      </div>
+    `;
+    if (tasks.length === 0) {
+      $('panel-body').innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">∅</div>
+          <p>No tasks for <code>${name}</code>. Generate some to start.</p>
+          <button class="btn accent" onclick="openGenerateTasksForm('${name}')">Generate tasks</button>
+        </div>`;
+      return;
+    }
+    const finalized = tasks.filter(t => t.has_env || (t.num_checks || 0) > 0);
+    const draft = tasks.filter(t => !(t.has_env || (t.num_checks || 0) > 0));
+    const filtered = applyTaskFilters(tasks);
+    $('panel-body').innerHTML = `
+      <div class="kpi-row">
+        <div class="kpi"><div class="kpi-label">Total</div><div class="kpi-value">${tasks.length}</div></div>
+        <div class="kpi"><div class="kpi-label">Finalized</div><div class="kpi-value">${finalized.length}</div></div>
+        <div class="kpi"><div class="kpi-label">With env</div><div class="kpi-value">${tasks.filter(t=>t.has_env).length}</div></div>
+        <div class="kpi"><div class="kpi-label">Avg checks</div><div class="kpi-value">${(tasks.reduce((s,t)=>s+(t.num_checks||0),0)/tasks.length).toFixed(1)}</div></div>
+      </div>
+      <div class="filter-row">
+        <input type="search" id="task-search" class="grow" placeholder="Search id / description…" value="${escapeHtml(state.taskSearch)}" />
+        <select id="task-difficulty">
+          <option value="">All difficulties</option>
+          ${[1,2,3,4,5].map(d => `<option value="${d}" ${state.taskDifficulty==String(d)?'selected':''}>difficulty ${d}</option>`).join('')}
+        </select>
+        <span class="label-mono">${filtered.length} of ${tasks.length}</span>
+      </div>
+      <div class="stack" id="task-list">
+        ${filtered.map(taskCardHtml).join('')}
+      </div>
+    `;
+    $('task-search').oninput = (e) => { state.taskSearch = e.target.value; debouncedRenderTasks(); };
+    $('task-difficulty').onchange = (e) => { state.taskDifficulty = e.target.value; renderTasksStage(); };
+  }
+  let taskDebounceTimer;
+  function debouncedRenderTasks() {
+    clearTimeout(taskDebounceTimer);
+    taskDebounceTimer = setTimeout(() => renderTasksStage(), 250);
+  }
+  function applyTaskFilters(tasks) {
+    const q = state.taskSearch.toLowerCase();
+    const diff = state.taskDifficulty;
+    return tasks.filter(t => {
+      if (diff && String(t.metadata?.difficulty || '') !== diff) return false;
+      if (q) {
+        const hay = `${t.id} ${t.task || ''} ${t.metadata?.description || ''}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }
+  function taskCardHtml(t) {
+    const running = state.runningTasks[t.id];
+    const inBenchmark = state.section === 'benchmark';
+    const filterActive = inBenchmark && state.benchmarkRunFilter && state.benchmarkRunFilter !== 'none';
+    // When a specific run is filtered, use the server-scoped last_run; otherwise pick best from runs_by_model.
+    const primaryRun = filterActive ? t.last_run : bestLastRun(t);
+    // Show "View" if any trajectory exists OR if a primary run is known.
+    const hasAnyRun = primaryRun || Object.keys(t.runs_by_model || {}).length > 0;
+    const idJ = JSON.stringify(t.id).replace(/"/g,'&quot;');
+    const runIdJ = primaryRun ? JSON.stringify(primaryRun.run_id||'').replace(/"/g,'&quot;') : '""';
+    const subJ = primaryRun ? JSON.stringify(primaryRun.traj_subdir||'').replace(/"/g,'&quot;') : '""';
+    const rewardChipCls = primaryRun ? (primaryRun.reward===1?'ok':primaryRun.reward>0?'warn':'fail') : '';
+    return `
+      <div class="card" id="card-${cssId(t.id)}">
+        <div class="card-head">
+          <span class="card-id" onclick="openTaskJson(${idJ})">${t.id}</span>
+          <span class="card-title">${escapeHtml(t.task || t.metadata?.description || t.id)}</span>
+          ${t.metadata?.difficulty ? `<span class="chip">difficulty ${t.metadata.difficulty}</span>` : ''}
+          ${inBenchmark && running ? `<span class="run-badge">running · ${running.model}</span>` : ''}
+        </div>
+        ${t.metadata?.description && t.metadata.description !== t.task ? `<div class="card-desc">${escapeHtml(String(t.metadata.description).slice(0,260))}</div>` : ''}
+        <div class="card-meta">
+          <span class="chip">${t.num_checks || 0} check${(t.num_checks||0)===1?'':'s'}</span>
+          ${t.has_env ? `<span class="chip ok">env</span>` : `<span class="chip warn">no env</span>`}
+          ${inBenchmark ? (primaryRun ? `<span class="chip ${rewardChipCls}">${primaryRun.model||'?'}: ${primaryRun.checks_passed||0}/${primaryRun.checks_total||0}${typeof primaryRun.reward==='number'?' · r='+primaryRun.reward.toFixed(2):''}</span>`
+            : (filterActive ? `<span class="chip idle">not in this run</span>` : '')) : ''}
+          ${inBenchmark && !filterActive ? runsBadge(t) : ''}
+        </div>
+        <div class="card-actions">
+          ${inBenchmark && hasAnyRun ? `<button class="btn xs" onclick="openTrajectory(${idJ}, ${runIdJ}, ${subJ})">View</button>` : ''}
+          ${inBenchmark && primaryRun ? `<button class="btn xs" onclick="judgeTask(${idJ}, ${runIdJ}, ${subJ})">Judge</button>` : ''}
+          ${inBenchmark ? `<button class="btn xs primary" onclick="openRunTaskForm(${idJ})" ${running?'disabled':''}>Run</button>` : ''}
+          <button class="btn xs" onclick="openTaskJson(${idJ})">task.json</button>
+          <button class="btn xs ghost" onclick="confirmDeleteTask(${idJ})" style="color:var(--fail);">Delete</button>
+        </div>
+      </div>`;
+  }
+  function bestLastRun(t) {
+    const rbm = t.runs_by_model || {};
+    const entries = Object.values(rbm);
+    if (!entries.length) return null;
+    const passing = entries.find(e => e.reward === 1);
+    return passing || entries.sort((a,b)=> (b.timestamp||'').localeCompare(a.timestamp||''))[0];
+  }
+  function runsBadge(t) {
+    const rbm = t.runs_by_model || {};
+    const keys = Object.keys(rbm);
+    if (!keys.length) return '';
+    const ev = keys.filter(k => k.startsWith('eval:')).length;
+    const rp = keys.filter(k => k.startsWith('repair:')).length;
+    return [
+      ev ? `<span class="chip diff">eval ×${ev}</span>` : '',
+      rp ? `<span class="chip accent">repair ×${rp}</span>` : '',
+    ].join(' ');
+  }
+  function cssId(id) { return id.replace(/[^a-zA-Z0-9_-]/g, '_'); }
+
+  // ----- Run a task -----
+  function openRunTaskForm(taskId) {
+    openModal(`Run task`, taskId, `
+      <form id="run-task-form" onsubmit="event.preventDefault();submitRunTask(${JSON.stringify(taskId).replace(/"/g,'&quot;')});">
+        <div class="form-row">
+          <label>Model</label>
+          <select name="model">
+            ${state.models.map(m => `<option value="${m}">${m}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Run id <span class="muted">(optional, save into specific eval run)</span></label>
+          <select name="run_id">
+            <option value="">(new auto run)</option>
+            ${state.runs.filter(r => r.source==='eval').map(r => `<option value="${r.run_id}">${r.run_id}</option>`).join('')}
+          </select>
+        </div>
+      </form>
+    `, [
+      { label: 'Cancel', cls: 'ghost', onclick: 'closeModal()' },
+      { label: 'Run task', cls: 'accent', onclick: `submitRunTask(${JSON.stringify(taskId).replace(/"/g,'&quot;')})` },
+    ]);
+  }
+  async function submitRunTask(taskId) {
+    const f = $('run-task-form');
+    const body = { model: f.elements.model.value };
+    const rid = f.elements.run_id.value;
+    if (rid) body.run_id = rid;
+    closeModal();
+    try {
+      const r = await postJSON(`/api/tasks/${encodeURIComponent(taskId)}/run`, body);
+      if (r.status === 'already_running') { toast('Task already running', 'fail'); return; }
+      state.runningTasks[taskId] = { model: body.model, status: 'starting' };
+      toast(`Running ${taskId} · ${body.model}`);
+      if (r.stream_url) window.open(r.stream_url, '_blank');
+      startPoll(`task:${taskId}`, () => pollTaskStatus(taskId), 2000);
+      renderTasksStage();
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  async function pollTaskStatus(taskId) {
+    try {
+      const s = await fetchJSON(`/api/tasks/${encodeURIComponent(taskId)}/status`);
+      if (s.status === 'completed' || s.status === 'error' || s.status === 'idle') {
+        delete state.runningTasks[taskId];
+        stopPoll(`task:${taskId}`);
+        const ok = s.status === 'completed' && s.reward !== undefined;
+        toast(`${taskId}: ${s.status}${s.reward!==undefined?` · reward ${s.reward}`:''}${s.error?' · ' + s.error.slice(0,80):''}`, ok ? 'ok' : 'fail');
+        // Refresh tasks
+        try {
+          const tasks = await fetchJSON('/api/tasks');
+          const byApp = {}; for (const t of tasks) (byApp[t.app] = byApp[t.app] || []).push(t);
+          state.appsTasks = byApp;
+          computeAppStatuses(); renderSidebar(); renderTasksStage();
+        } catch {}
+      } else {
+        state.runningTasks[taskId] = { ...state.runningTasks[taskId], status: s.status };
+      }
+    } catch {}
+  }
+
+  // ----- Judge -----
+  async function judgeTask(taskId, runId, trajSubdir) {
+    if (!runId) { toast('No run to judge', 'fail'); return; }
+    toast('Running LLM judge…');
+    try {
+      const r = await postJSON(`/api/tasks/${encodeURIComponent(taskId)}/judge`, { run_id: runId, traj_subdir: trajSubdir || '' });
+      const judge = r.result || r;
+      if (!judge || judge.status === 'error') { toast(judge?.error || 'Judge failed', 'fail'); return; }
+      toast(`Judge: ${(judge.accuracy*100).toFixed(0)}% agree`, 'ok');
+      openJudgeModal(taskId, judge);
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  function openJudgeModal(taskId, judge) {
+    const checks = judge.checks || [];
+    openModal(`LLM Judge · ${taskId}`, '', `
+      <div class="row" style="margin-bottom:0.7rem;">
+        <span class="kpi" style="margin:0;flex:0 0 auto;"><div class="kpi-label">Accuracy</div><div class="kpi-value">${((judge.accuracy||0)*100).toFixed(0)}%</div></span>
+        <span class="kpi" style="margin:0;flex:0 0 auto;"><div class="kpi-label">Compared</div><div class="kpi-value">${judge.total_compared||checks.length||0}</div></span>
+        <span class="kpi" style="margin:0;flex:0 0 auto;"><div class="kpi-label">Matches</div><div class="kpi-value">${judge.matches||0}</div></span>
+      </div>
+      ${judge.summary ? `<div class="markdown" style="margin-bottom:0.6rem;">${renderMarkdown(judge.summary)}</div>` : ''}
+      <div class="row" style="margin-bottom:0.4rem;"><span class="label-mono">checks</span></div>
+      ${checks.map(c => `
+        <div class="judge-row">
+          <span class="chip ${c.passed?'ok':'fail'}">${c.passed?'pass':'fail'}</span>
+          <div>
+            <div class="jr-name">${escapeHtml(c.name || c.key || '')}</div>
+            <div class="jr-reason">${escapeHtml(c.reasoning || c.reason || '')}</div>
+          </div>
+          <span class="chip ${c.matches_checker?'ok':'warn'}">${c.matches_checker?'agrees':'disagrees'}</span>
+        </div>
+      `).join('') || '<div class="empty"><p>No per-check breakdown.</p></div>'}
+    `, [{ label: 'Close', cls: 'ghost', onclick: 'closeModal()' }]);
+  }
+
+  // ----- Trajectory viewer -----
+  async function openTrajectory(taskId, preferredRunId, preferredTrajSubdir) {
+    openModalLg(`Trajectory · ${taskId}`, '', '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const list = await fetchJSON(`/api/tasks/${encodeURIComponent(taskId)}/trajectories`);
+      const trajs = list.trajectories || list || [];
+      if (!trajs.length) { $('modal-body').innerHTML = '<div class="empty"><p>No trajectories.</p></div>'; return; }
+      let initial = trajs[0];
+      if (preferredRunId) {
+        const match = trajs.find(t =>
+          t.run_id === preferredRunId &&
+          (!preferredTrajSubdir || t.traj_subdir === preferredTrajSubdir));
+        if (match) initial = match;
+      }
+      await loadTrajectoryInto(taskId, initial.run_id, initial.traj_subdir, initial.source || 'eval', trajs);
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>Failed: ${escapeHtml(e.message)}</p></div>`; }
+  }
+  async function loadTrajectoryInto(taskId, runId, trajSubdir, source, allTrajs) {
+    $('modal-body').innerHTML = '<div class="empty"><p>Loading…</p></div>';
+    try {
+      const t = await fetchJSON(`/api/trajectory/${encodeURIComponent(runId)}/${encodeURIComponent(trajSubdir)}?source=${encodeURIComponent(source||'eval')}`);
+      // Server returns trajectory steps under `trajectory` (eval) or `trajectory` (repair) keys.
+      const steps = t.trajectory || t.steps || [];
+      const checks = t.verification_details || [];
+      const trajTabsHtml = (allTrajs||[]).length > 1 ? `
+        <div class="row" style="margin-bottom:0.6rem;flex-wrap:wrap;gap:0.3rem;">
+          ${allTrajs.map(tr => `
+            <button class="btn xs ${tr.run_id===runId && tr.traj_subdir===trajSubdir?'primary':''}" onclick="loadTrajectoryInto(${JSON.stringify(taskId).replace(/"/g,'&quot;')}, ${JSON.stringify(tr.run_id).replace(/"/g,'&quot;')}, ${JSON.stringify(tr.traj_subdir).replace(/"/g,'&quot;')}, ${JSON.stringify(tr.source||'eval').replace(/"/g,'&quot;')}, ${JSON.stringify(allTrajs).replace(/"/g,'&quot;')})">
+              ${tr.model||'?'} · ${tr.reward!==undefined?(tr.reward*100).toFixed(0)+'%':'—'}${tr.source==='repair'?' · repair':''}
+            </button>`).join('')}
+        </div>` : '';
+      $('modal-sub').textContent = `${t.model || ''} · ${steps.length} steps · ${t.reward!==undefined?'reward '+t.reward:''} · ${runId}`;
+      $('modal-body').innerHTML = `
+        ${trajTabsHtml}
+        ${t.task ? `<div class="markdown" style="margin-bottom:0.7rem;"><strong>Task:</strong> ${escapeHtml(t.task)}</div>` : ''}
+        <div class="row" style="margin-bottom:0.6rem;">
+          <span class="chip ${t.reward===1?'ok':t.reward>0?'warn':'fail'}">reward ${t.reward!==undefined?t.reward:'—'}</span>
+          <span class="chip">${t.checks_passed||0} / ${t.checks_total||0} checks</span>
+          <span class="chip diff">${t.agent_steps||steps.length} steps</span>
+          <span class="grow"></span>
+          <button class="btn sm ghost" onclick="judgeTask(${JSON.stringify(taskId).replace(/"/g,'&quot;')}, ${JSON.stringify(runId).replace(/"/g,'&quot;')}, ${JSON.stringify(trajSubdir).replace(/"/g,'&quot;')})">Run LLM judge</button>
+        </div>
+        ${checks.length ? `
+          <div class="row" style="margin-bottom:0.4rem;"><span class="label-mono">verification (${checks.length})</span></div>
+          ${checks.map(c => verificationRowHtml(c)).join('')}
+        ` : ''}
+        <div class="row" style="margin:0.9rem 0 0.4rem;"><span class="label-mono">steps (${steps.length})</span></div>
+        ${steps.length ? `<div class="trajectory-list">${steps.map((s, i) => stepRowHtml(s, i, runId, trajSubdir, source, trajSubdir)).join('')}</div>` : '<div class="empty"><p>No steps recorded.</p></div>'}
+      `;
+      // Activate first step + start scroll/hover-driven focus.
+      initTrajectoryScrollState();
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>Failed: ${escapeHtml(e.message)}</p></div>`; }
+  }
+
+  function verificationRowHtml(c) {
+    const fmt = (v) => v === undefined ? '' : typeof v === 'string' ? v : JSON.stringify(v);
+    const expected = c.expected;
+    const actual = c.actual;
+    const showExp = expected !== undefined;
+    const showAct = actual !== undefined;
+    return `
+      <div class="judge-row">
+        <span class="chip ${c.passed?'ok':'fail'}">${c.passed?'pass':'fail'}</span>
+        <div>
+          <div class="jr-name">${escapeHtml(c.key || c.name || '')}</div>
+          ${c.command ? `<div class="jr-reason"><code>${escapeHtml(c.command)}</code></div>` : ''}
+          ${(showExp || showAct) ? `<div class="jr-reason">${showExp ? `expected <code>${escapeHtml(fmt(expected))}</code>` : ''}${showExp && showAct ? ' · ' : ''}${showAct ? `actual <code>${escapeHtml(fmt(actual))}</code>` : ''}</div>` : ''}
+          ${c.reason ? `<div class="jr-reason">${escapeHtml(c.reason)}</div>` : ''}
+        </div>
+        <span></span>
+      </div>`;
+  }
+
+  function stepRowHtml(s, i, runId, trajSubdir, source) {
+    // Eval steps use {step, reasoning, actions[], action_results[], screenshot_file}.
+    // Repair steps may use {thought/thinking, action, observation_type, screenshot}.
+    const stepNum = s.step != null ? s.step : (i + 1);
+    const reasoning = s.reasoning || s.thought || s.thinking || '';
+    const rawActions = Array.isArray(s.actions) ? s.actions
+                     : (s.action ? [s.action] : []);
+    const rawResults = Array.isArray(s.action_results) ? s.action_results : [];
+
+    // Dedupe consecutive identical (action, description, success) entries — same as classic.
+    const compact = [];
+    rawActions.forEach((act, idx) => {
+      const r = rawResults[idx] || {};
+      const prev = compact[compact.length - 1];
+      const sameAsPrev = prev
+        && prev.action === act
+        && (prev.result.description || '') === (r.description || '')
+        && prev.result.success === r.success;
+      if (sameAsPrev) return;
+      compact.push({ action: act, result: r });
+    });
+
+    // Screenshot — server expects the bare filename (it joins with screenshots/<filename>).
+    const ssFile = s.screenshot_file || s.screenshot || s.image || '';
+    const shotName = ssFile ? ssFile.split('/').pop() : '';
+    const shotUrl = shotName
+      ? `/api/trajectory/${encodeURIComponent(runId)}/${encodeURIComponent(trajSubdir)}/screenshot/${encodeURIComponent(shotName)}?source=${encodeURIComponent(source||'eval')}`
+      : '';
+
+    const actionsHtml = compact.map(({action, result}) => {
+      const cls = result.success === false ? 'fail' : '';
+      const desc = result.description || '';
+      return `
+        <div class="step-action-code">${escapeHtml(typeof action === 'string' ? action : JSON.stringify(action))}</div>
+        ${desc ? `<div class="step-action-result ${cls}">${escapeHtml(desc)}</div>` : ''}`;
+    }).join('');
+
+    const stepKey = `${trajSubdir}-${stepNum}`;
+    return `
+      <div class="trajectory-step ${i === 0 ? 'active' : ''}" id="step-${stepKey}">
+        <div class="trajectory-step-text">
+          <div class="trajectory-step-head">
+            <span class="step-num">Step ${stepNum}</span>
+          </div>
+          ${reasoning ? `
+            <div class="trajectory-step-reasoning-label">Reasoning</div>
+            <div class="trajectory-step-reasoning">${escapeHtml(reasoning)}</div>
+          ` : ''}
+          ${actionsHtml ? `
+            <div class="step-actions-label">Actions</div>
+            ${actionsHtml}
+          ` : ''}
+        </div>
+        <div class="trajectory-step-media">
+          ${shotUrl ? `
+            <div class="trajectory-step-media-frame">
+              <img class="trajectory-step-image" src="${shotUrl}" loading="lazy" onclick="openLightbox('${shotUrl}')" alt="Step ${stepNum}">
+            </div>
+          ` : `<div class="trajectory-step-media-frame placeholder">no screenshot</div>`}
+        </div>
+      </div>`;
+  }
+
+  // ----- Trajectory scroll/hover focus (matches classic dashboard) -----
+  let _trajObserver = null;
+  let _trajPointerHandler = null;
+  let _trajLeaveHandler = null;
+  function setActiveTrajectoryStep(stepEl) {
+    if (!stepEl) return;
+    document.querySelectorAll('#modal-body .trajectory-step.active').forEach(el => {
+      if (el !== stepEl) el.classList.remove('active');
+    });
+    stepEl.classList.add('active');
+  }
+  function findFocusedTrajectoryStep(root, steps) {
+    if (!root || !steps.length) return null;
+    const rootRect = root.getBoundingClientRect();
+    const focusLine = root.clientHeight * 0.28;
+    let best = null, bestDist = Infinity;
+    for (const step of steps) {
+      const rect = step.getBoundingClientRect();
+      const visTop = Math.max(rect.top, rootRect.top);
+      const visBot = Math.min(rect.bottom, rootRect.bottom);
+      if (visBot <= visTop) continue;
+      const dist = Math.abs(rect.top - rootRect.top - focusLine);
+      if (dist < bestDist) { bestDist = dist; best = step; }
+    }
+    return best;
+  }
+  function initTrajectoryScrollState() {
+    cleanupTrajectoryScrollState();
+    const root = $('modal-body');
+    const steps = Array.from(document.querySelectorAll('#modal-body .trajectory-step'));
+    if (!root || !steps.length) return;
+    _trajObserver = new IntersectionObserver(() => {
+      const focused = findFocusedTrajectoryStep(root, steps);
+      if (focused) setActiveTrajectoryStep(focused);
+    }, { root, threshold: [0.2, 0.45, 0.7], rootMargin: '-8% 0px -38% 0px' });
+    steps.forEach(s => _trajObserver.observe(s));
+    _trajPointerHandler = (e) => {
+      const step = e.target.closest('#modal-body .trajectory-step');
+      if (step) setActiveTrajectoryStep(step);
+    };
+    _trajLeaveHandler = () => {
+      const focused = findFocusedTrajectoryStep(root, steps);
+      if (focused) setActiveTrajectoryStep(focused);
+    };
+    root.addEventListener('pointermove', _trajPointerHandler);
+    root.addEventListener('mouseleave', _trajLeaveHandler);
+  }
+  function cleanupTrajectoryScrollState() {
+    if (_trajObserver) { _trajObserver.disconnect(); _trajObserver = null; }
+    const root = $('modal-body');
+    if (root && _trajPointerHandler) { root.removeEventListener('pointermove', _trajPointerHandler); _trajPointerHandler = null; }
+    if (root && _trajLeaveHandler)   { root.removeEventListener('mouseleave', _trajLeaveHandler); _trajLeaveHandler = null; }
+  }
+  function openLightbox(src) {
+    $('lightbox-img').src = src;
+    $('lightbox').classList.add('show');
+  }
+  $('lightbox').onclick = () => { $('lightbox').classList.remove('show'); $('lightbox-img').src = ''; };
+
+  // ----- Task JSON / detail -----
+  async function openTaskJson(taskId) {
+    openModalLg(`task · ${taskId}`, 'loading', '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const [task, env] = await Promise.all([
+        fetchJSON(`/api/tasks/${encodeURIComponent(taskId)}`),
+        fetchJSON(`/api/synthesis/env/${encodeURIComponent(taskId)}`).catch(() => null),
+      ]);
+      $('modal-sub').textContent = task.app || '';
+      const taskJson = JSON.stringify(task, (k, v) => k === 'runs' ? `[${(v||[]).length} runs]` : v, 2);
+      const verifyHtml = (task.verification || []).length ? `
+        <div class="row" style="margin:1rem 0 0.4rem;"><span class="label-mono">verification (${task.verification.length})</span></div>
+        <div class="artifact-list">
+          ${task.verification.map((c,i) => {
+            const name = c.key || c.endpoint || c.path || c.kind || c.type || `check ${i+1}`;
+            const cmd = c.command || c.cmd || '';
+            const desc = c.description || c.desc || '';
+            const expected = (c.expected !== undefined ? c.expected : c.expect !== undefined ? c.expect : c.value);
+            const expStr = expected === undefined ? '' : (typeof expected === 'string' ? expected : JSON.stringify(expected));
+            const judgeMode = c.llm_judge || c.use_llm_judge ? 'JUDGE' : 'CHECK';
+            return `
+              <div class="artifact-row">
+                <span class="a-tag get">${judgeMode}</span>
+                <div>
+                  <div class="a-name">${escapeHtml(name)}${expStr ? ` <span class="muted" style="font-weight:400;">→ ${escapeHtml(expStr).slice(0,80)}</span>` : ''}</div>
+                  ${desc ? `<div class="a-desc">${escapeHtml(desc)}</div>` : ''}
+                  ${cmd ? `<div class="a-desc"><code>${escapeHtml(cmd).slice(0,200)}</code></div>` : ''}
+                </div>
+                <span class="a-actions">
+                  ${!judgeMode.includes('JUDGE') ? `<button class="a-action" onclick="convertCriterion(${JSON.stringify(taskId).replace(/"/g,'&quot;')}, ${i})">→ judge</button>` : ''}
+                  <button class="a-action" style="color:var(--fail);" onclick="deleteCriterion(${JSON.stringify(taskId).replace(/"/g,'&quot;')}, ${i})">delete</button>
+                </span>
+              </div>`;
+          }).join('')}
+        </div>` : '';
+      const envHtml = env && env.exists && (env.files||[]).length ? `
+        <div class="row" style="margin:1rem 0 0.4rem;"><span class="label-mono">env files</span><span class="chip">${env.files.length}</span></div>
+        <div class="tree">tasks/${taskId}/env/
+${env.files.map(f => `├── <span class="file" onclick="openEnvFile('${taskId}','${f.name}')">${f.name}</span><span class="size">${formatBytes(f.size)}</span>`).join('\n')}</div>` : '';
+      const runsHtml = (task.runs || []).length ? `
+        <div class="row" style="margin:1rem 0 0.4rem;"><span class="label-mono">runs (${task.runs.length})</span></div>
+        <div class="artifact-list">
+          ${task.runs.slice(0,10).map(r => `
+            <div class="artifact-row">
+              <span class="a-tag ${r.reward===1?'post':'put'}">${(r.source||'eval').toUpperCase()}</span>
+              <div><div class="a-name">${r.model || 'unknown'} · ${r.checks_passed||0}/${r.checks_total||0}</div>
+                <div class="a-desc">${r.run_id || ''}${r.timestamp ? ' · ' + relTime(r.timestamp) : ''}</div>
+              </div>
+              <span></span>
+            </div>`).join('')}
+        </div>` : '';
+      $('modal-body').innerHTML = `
+        <div class="row" style="margin-bottom:0.5rem;"><span class="label-mono">task.json</span></div>
+        <div class="code">${escapeHtml(taskJson)}</div>
+        ${verifyHtml}
+        ${envHtml}
+        ${runsHtml}
+      `;
+      setModalFoot([
+        { label: 'Run', cls: 'accent', onclick: `closeModal();openRunTaskForm(${JSON.stringify(taskId).replace(/"/g,'&quot;')})` },
+        { label: 'Delete', cls: 'ghost', onclick: `closeModal();confirmDeleteTask(${JSON.stringify(taskId).replace(/"/g,'&quot;')})` },
+        { label: 'Close', cls: 'ghost', onclick: 'closeModal()' },
+      ]);
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>Failed: ${escapeHtml(e.message)}</p></div>`; }
+  }
+  async function openEnvFile(taskId, filename) {
+    openModal(`env/${filename}`, taskId, '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const url = `/api/synthesis/env/${encodeURIComponent(taskId)}/file/${encodeURIComponent(filename)}`;
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`${r.status}`);
+      const ct = r.headers.get('content-type') || '';
+      if (ct.startsWith('image/')) {
+        const blob = await r.blob();
+        const obj = URL.createObjectURL(blob);
+        $('modal-body').innerHTML = `<div style="text-align:center;"><img src="${obj}" style="max-width:100%;max-height:60vh;border:1px solid var(--rule);border-radius:8px;cursor:zoom-in;" onclick="openLightbox('${obj}')"/></div>`;
+      } else {
+        const txt = await r.text();
+        const isMd = filename.toLowerCase().endsWith('.md');
+        $('modal-body').innerHTML = isMd ? `<div class="markdown">${renderMarkdown(txt)}</div>` : `<div class="code">${escapeHtml(txt)}</div>`;
+      }
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>Failed: ${escapeHtml(e.message)}</p></div>`; }
+  }
+
+  // ----- Convert / Delete criterion -----
+  async function convertCriterion(taskId, index) {
+    toast('Converting criterion…');
+    try {
+      const r = await postJSON(`/api/tasks/${encodeURIComponent(taskId)}/convert_criterion`, { index });
+      if (r.status === 'error') { toast(r.error || 'Convert failed', 'fail'); return; }
+      state.pendingProposal = { task_id: taskId, ...r };
+      openProposalModal(taskId, r);
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  function openProposalModal(taskId, prop) {
+    const orig = JSON.stringify(prop.original, null, 2);
+    const newer = JSON.stringify(prop.proposed, null, 2);
+    openModal(`Proposal · ${taskId}`, prop.suggestion || 'review changes', `
+      <div class="diff-box">
+        <div class="diff-side"><h5>original</h5><div class="code">${escapeHtml(orig)}</div></div>
+        <div class="diff-side"><h5>proposed</h5><div class="code">${escapeHtml(newer)}</div></div>
+      </div>
+    `, [
+      { label: 'Reject', cls: 'ghost', onclick: `rejectProposal(${JSON.stringify(taskId).replace(/"/g,'&quot;')})` },
+      { label: 'Approve', cls: 'ok', onclick: `approveProposal(${JSON.stringify(taskId).replace(/"/g,'&quot;')})` },
+    ]);
+  }
+  async function approveProposal(taskId) {
+    try {
+      await postJSON(`/api/tasks/${encodeURIComponent(taskId)}/approve`, {});
+      state.pendingProposal = null;
+      closeModal();
+      toast('Approved · check converted', 'ok');
+      // refresh tasks
+      const tasks = await fetchJSON('/api/tasks');
+      const byApp = {}; for (const t of tasks) (byApp[t.app] = byApp[t.app] || []).push(t);
+      state.appsTasks = byApp; computeAppStatuses(); renderTasksStage();
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  async function rejectProposal(taskId) {
+    try { await postJSON(`/api/tasks/${encodeURIComponent(taskId)}/reject`, {}); } catch {}
+    state.pendingProposal = null;
+    closeModal();
+    toast('Proposal discarded');
+  }
+  async function deleteCriterion(taskId, index) {
+    if (!confirm('Delete this verification check?')) return;
+    try {
+      await postJSON(`/api/tasks/${encodeURIComponent(taskId)}/delete_criterion`, { index });
+      toast('Check deleted', 'ok');
+      // re-open task json with fresh data
+      closeModal(); await openTaskJson(taskId);
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+
+  // ----- Delete task -----
+  function confirmDeleteTask(taskId) {
+    openModal('Delete task?', taskId, `
+      <p>This permanently removes:</p>
+      <ul style="margin:0.4rem 0 0.6rem 1.4rem;">
+        <li>tasks/${taskId}/ folder</li>
+        <li>combined ${(state.apps[state.currentApp]?.name||'')}_tasks.json entry</li>
+        <li>any trajectories + judge cache for this task</li>
+      </ul>
+      <p style="color:var(--fail);font-weight:600;">This action cannot be undone.</p>
+    `, [
+      { label: 'Cancel', cls: 'ghost', onclick: 'closeModal()' },
+      { label: 'Delete permanently', cls: 'danger', onclick: `doDeleteTask(${JSON.stringify(taskId).replace(/"/g,'&quot;')})` },
+    ]);
+  }
+  async function doDeleteTask(taskId) {
+    try {
+      await deleteJSON(`/api/tasks/${encodeURIComponent(taskId)}`);
+      closeModal(); toast(`Deleted ${taskId}`, 'ok');
+      // remove from local state and re-render
+      const app = state.currentApp;
+      state.appsTasks[app] = (state.appsTasks[app] || []).filter(t => t.id !== taskId);
+      computeAppStatuses(); renderSidebar(); renderTasksStage();
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+
+  // ----- Generate tasks -----
+  function openGenerateTasksForm(name) {
+    openModal(`Generate tasks · ${name}`, '', `
+      <form id="gen-form" onsubmit="event.preventDefault();submitGenerate('${name}');">
+        <div class="form-row row2">
+          <div>
+            <label>Count <span class="muted">(1–20)</span></label>
+            <input type="number" name="count" min="1" max="20" value="5" />
+          </div>
+          <div>
+            <label>App</label>
+            <input type="text" name="app" value="${name}" readonly style="background:var(--rule-soft);" />
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Guidance <span class="muted">(optional)</span></label>
+          <textarea name="guidance" placeholder="e.g. focus on multi-step rendering tasks…"></textarea>
+        </div>
+      </form>
+    `, [
+      { label: 'Cancel', cls: 'ghost', onclick: 'closeModal()' },
+      { label: 'Generate', cls: 'accent', onclick: `submitGenerate('${name}')` },
+    ]);
+  }
+  async function submitGenerate(name) {
+    const f = $('gen-form');
+    const body = { app: name, count: parseInt(f.elements.count.value, 10), guidance: f.elements.guidance.value };
+    try {
+      const r = await postJSON('/api/generate', body);
+      if (r.error) { toast(r.error, 'fail'); return; }
+      state.pendingGen = { gen_key: r.gen_key, app: name, count: body.count };
+      // Replace modal with progress view
+      $('modal-title').textContent = `Generating tasks · ${name}`;
+      $('modal-sub').textContent = `count=${body.count}`;
+      $('modal-body').innerHTML = `
+        <div class="row" style="margin-bottom:0.6rem;">
+          <span class="run-badge">starting</span>
+          <span class="grow"></span>
+          <span class="label-mono" id="gen-events-count">0 events</span>
+        </div>
+        <div class="progress indet"><span></span></div>
+        <div id="gen-trace" class="trace-events"></div>
+        <div id="gen-result"></div>
+      `;
+      setModalFoot([{ label: 'Cancel', cls: 'ghost', onclick: `cancelGenerate()` }]);
+      startPoll(`gen:${r.gen_key}`, () => pollGenerate(r.gen_key, name), 1500);
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  async function pollGenerate(key, appName) {
+    try {
+      const s = await fetchJSON(`/api/generate/status/${encodeURIComponent(key)}`);
+      const trace = $('gen-trace'); if (!trace) { stopPoll(`gen:${key}`); return; }
+      $('gen-events-count').textContent = `${s.event_count||0} events`;
+      trace.innerHTML = renderTraceEvents(s.events);
+      trace.scrollTop = trace.scrollHeight;
+      if (s.status === 'completed' || s.status === 'error') {
+        stopPoll(`gen:${key}`);
+        const result = $('gen-result');
+        if (s.status === 'completed' && (s.tasks || []).length) {
+          result.innerHTML = `
+            <div class="row" style="margin:1rem 0 0.4rem;">
+              <span class="label-mono">${s.tasks.length} proposed task${s.tasks.length===1?'':'s'}</span>
+            </div>
+            ${s.tasks.map((t,i) => `
+              <div class="card">
+                <div class="card-head">
+                  <span class="card-id">proposal ${i+1}</span>
+                  <span class="card-title">${escapeHtml(t.task || t.metadata?.description || t.id || ('task '+(i+1)))}</span>
+                  ${t.metadata?.difficulty ? `<span class="chip">difficulty ${t.metadata.difficulty}</span>` : ''}
+                </div>
+                ${t.metadata?.description && t.metadata.description !== t.task ? `<div class="card-desc">${escapeHtml(t.metadata.description.slice(0,260))}</div>` : ''}
+                <div class="card-meta">
+                  <span class="chip">${(t.verification||[]).length} check${(t.verification||[]).length===1?'':'s'}</span>
+                </div>
+              </div>
+            `).join('')}
+            ${s.lesson ? `<div class="markdown" style="margin-top:0.6rem;"><h4>lesson</h4><p>${escapeHtml(s.lesson)}</p></div>` : ''}
+          `;
+          setModalFoot([
+            { label: 'Reject all', cls: 'ghost', onclick: `rejectGenerate('${key}')` },
+            { label: 'Approve all', cls: 'ok', onclick: `approveGenerate('${key}')` },
+          ]);
+        } else {
+          result.innerHTML = `<div class="empty"><p>${s.status === 'error' ? 'Generation errored.' : 'No tasks produced.'}</p>${s.parse_error ? `<div class="code" style="margin-top:0.4rem;">${escapeHtml(s.parse_error)}</div>` : ''}</div>`;
+          setModalFoot([{ label: 'Close', cls: 'ghost', onclick: 'closeModal()' }]);
+        }
+      }
+    } catch {}
+  }
+  function renderTraceEvents(events) {
+    if (!events || !events.length) return '<div class="muted" style="font-size:0.82rem;padding:0.4rem 0;">awaiting events…</div>';
+    const trunc = (s, n) => {
+      if (s == null) return '';
+      const flat = String(s).replace(/\s+/g, ' ').trim();
+      return flat.length > n ? flat.slice(0, n) + '…' : flat;
+    };
+    const toolSummary = (name, input) => {
+      if (!input || typeof input !== 'object') return name || '';
+      if (name === 'Bash') {
+        const cmd = trunc(input.command, 120);
+        return input.description ? `${input.description} · ${cmd}` : cmd;
+      }
+      if (name === 'Read') return input.file_path || '';
+      if (name === 'Edit' || name === 'MultiEdit') {
+        return `${input.file_path || ''} · ${trunc(input.old_string, 50)} → ${trunc(input.new_string, 50)}`;
+      }
+      if (name === 'Write') return `${input.file_path || ''} (${(input.content || '').length} chars)`;
+      if (name === 'Glob') return (input.pattern || '') + (input.path ? ` in ${input.path}` : '');
+      if (name === 'Grep') return (input.pattern || '') + (input.path ? ` in ${input.path}` : '');
+      if (name === 'TodoWrite') {
+        const t = input.todos || [];
+        return `${t.length} todo${t.length===1?'':'s'}` + (t[0] ? ` — ${trunc(t[0].content, 70)}` : '');
+      }
+      if (name === 'Task' || name === 'Agent') return trunc(input.description || input.prompt, 140);
+      return trunc(JSON.stringify(input), 120);
+    };
+    const rows = [];
+    const push = (kind, tag, msg) => {
+      rows.push(`<div class="trace-event ${kind}"><span class="te-tag">${escapeHtml(tag)}</span><span class="te-msg">${escapeHtml(msg)}</span></div>`);
+    };
+    for (const ev of events) {
+      const t = ev.type;
+      if (t === 'system_init') {
+        const sid = ev.session_id ? ` · ${ev.session_id.slice(0, 8)}` : '';
+        push('text', 'init', `model=${ev.model || '?'}${sid}`);
+      } else if (t === 'assistant') {
+        for (const b of (ev.blocks || [])) {
+          if (b.type === 'text') {
+            const txt = trunc(b.text, 240);
+            if (txt) push('text', 'text', txt);
+          } else if (b.type === 'thinking') {
+            const txt = trunc(b.text, 200);
+            if (txt) push('thinking', 'think', txt);
+          } else if (b.type === 'tool_use') {
+            push('tool', b.name || 'tool', toolSummary(b.name, b.input));
+          }
+        }
+      } else if (t === 'tool_result_batch') {
+        for (const r of (ev.results || [])) {
+          const cls = r.is_error ? 'error' : 'tool';
+          const tag = r.is_error ? 'error' : 'result';
+          const text = r.text || '';
+          const lines = text.split('\n').filter(l => l.trim());
+          const first = lines[0] || '(empty)';
+          const more = lines.length > 1 ? `  (+${lines.length - 1} more line${lines.length === 2 ? '' : 's'})` : '';
+          push(cls, tag, trunc(first, 140) + more);
+        }
+      } else if (t === 'result') {
+        const cls = ev.is_error ? 'error' : 'result';
+        const tag = ev.is_error ? 'failed' : 'done';
+        const dur = ev.duration_ms != null ? ` ${(ev.duration_ms/1000).toFixed(1)}s` : '';
+        const turns = ev.num_turns ? ` · ${ev.num_turns} turns` : '';
+        push(cls, tag, `${ev.subtype || ''}${dur}${turns}`.trim() || 'finished');
+      }
+    }
+    if (!rows.length) return '<div class="muted" style="font-size:0.82rem;padding:0.4rem 0;">awaiting events…</div>';
+    return rows.join('');
+  }
+  async function approveGenerate(key) {
+    try {
+      const r = await postJSON('/api/generate/approve', { gen_key: key });
+      closeModal(); toast(`Added ${r.added||0} tasks · ${r.total||0} total`, 'ok');
+      const tasks = await fetchJSON('/api/tasks');
+      const byApp = {}; for (const t of tasks) (byApp[t.app] = byApp[t.app] || []).push(t);
+      state.appsTasks = byApp; computeAppStatuses(); renderSidebar(); renderTasksStage();
+    } catch (e) { toast(e.message, 'fail'); }
+  }
+  async function rejectGenerate(key) {
+    try { await postJSON('/api/generate/reject', { gen_key: key }); } catch {}
+    closeModal(); toast('Proposals rejected');
+  }
+  function cancelGenerate() {
+    if (state.pendingGen) stopPoll(`gen:${state.pendingGen.gen_key}`);
+    state.pendingGen = null;
+    closeModal();
+  }
+
+  // ----- env list per app -----
+  async function openEnvList(name) {
+    openModalLg(`env files · ${name}`, '', '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const all = await fetchJSON('/api/synthesis/env');
+      const list = all.filter(e => e.app === name);
+      $('modal-sub').textContent = `${list.length} task${list.length===1?'':'s'} with env`;
+      $('modal-body').innerHTML = list.length ? `
+        <div class="artifact-list">
+          ${list.map(e => `
+            <div class="artifact-row">
+              <span class="a-tag get">${e.file_count} F</span>
+              <div>
+                <div class="a-name">${e.task_id}</div>
+                <div class="a-desc">${formatBytes(e.total_size)}${e.has_manifest?' · manifest':''} · ${e.verification_count||0} checks</div>
+              </div>
+              <button class="a-action" onclick="closeModal();openTaskJson(${JSON.stringify(e.task_id).replace(/"/g,'&quot;')})">view</button>
+            </div>
+          `).join('')}
+        </div>
+      ` : `<div class="empty"><p>No tasks with env files.</p></div>`;
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>${escapeHtml(e.message)}</p></div>`; }
+  }
+
+  // ============================================================
+  // BENCHMARK — cross-app overview
+  // ============================================================
+  async function renderBenchmarkOverview() {
+    const summary = state.benchmarkSummary;
+    const tasks = state.benchmarkTasks;
+    const filtered = applyBenchmarkFilters(tasks);
+
+    $('main').innerHTML = `
+      <div class="app-header">
+        <div class="ah-icon" style="background:#1a1a1a;color:#fff;font-size:1.2rem;">≡</div>
+        <div>
+          <h1>Cross-app summary</h1>
+          <div class="ah-meta">
+            <span class="ai-dot pass" style="display:inline-block;"></span>
+            reward · pass-rate · judge accuracy across all apps
+          </div>
+        </div>
+        <div class="app-header-actions">
+          <button class="btn ghost sm" onclick="reloadBenchmark()">
+            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+            Reload
+          </button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-eyebrow">Summary</div>
+            <div class="panel-title">${summary?.scope?.label || 'Latest result per task across all runs'}</div>
+            <div class="panel-sub">/api/summary${state.benchmarkRunFilter ? '?run=' + state.benchmarkRunFilter : ''}</div>
+          </div>
+          <div class="panel-actions">
+            <select id="bm-run-filter" style="font-size:0.85rem;padding:0.35rem 0.55rem;">
+              <option value="">Latest per task (all runs)</option>
+              <option value="none" ${state.benchmarkRunFilter==='none'?'selected':''}>No run (raw tasks)</option>
+              ${state.runs.map(r => `<option value="${r.run_id}" ${r.run_id===state.benchmarkRunFilter?'selected':''}>${r.source==='repair'?'[repair] ':''}${r.model} · ${r.task_count} tasks</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="panel-body" id="bm-panel-body">
+          ${summary ? renderBenchmarkSummary(summary) : '<div class="empty"><p>Loading…</p></div>'}
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:1.2rem;">
+        <div class="panel-head">
+          <div>
+            <div class="panel-eyebrow">Tasks</div>
+            <div class="panel-title">All tasks</div>
+            <div class="panel-sub">${filtered.length} of ${tasks.length}</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="filter-row">
+            <input type="search" id="bm-search" class="grow" placeholder="Search id / description…" value="${escapeHtml(state.benchmarkSearch)}" />
+            <select id="bm-app-filter">
+              <option value="">All apps</option>
+              ${state.appNames.map(n => `<option value="${n}" ${n===state.benchmarkAppFilter?'selected':''}>${n}</option>`).join('')}
+            </select>
+            <select id="bm-difficulty">
+              <option value="">All difficulties</option>
+              ${[1,2,3,4,5].map(d => `<option value="${d}" ${state.benchmarkDifficulty==String(d)?'selected':''}>difficulty ${d}</option>`).join('')}
+            </select>
+          </div>
+          <div class="stack" id="bm-task-list">
+            ${filtered.length ? filtered.slice(0, 200).map(taskCardHtml).join('') : '<div class="empty"><p>No tasks match.</p></div>'}
+          </div>
+          ${filtered.length > 200 ? `<p class="muted" style="margin-top:0.6rem;text-align:center;font-size:0.84rem;">Showing first 200 of ${filtered.length}.</p>` : ''}
+        </div>
+      </div>
+    `;
+
+    $('bm-run-filter').onchange = (e) => { state.benchmarkRunFilter = e.target.value; loadBenchmark().then(renderBenchmarkOverview); };
+    $('bm-search').oninput      = (e) => { state.benchmarkSearch = e.target.value; debouncedRenderBenchmark(); };
+    $('bm-app-filter').onchange = (e) => { state.benchmarkAppFilter = e.target.value; renderBenchmarkOverview(); };
+    $('bm-difficulty').onchange = (e) => { state.benchmarkDifficulty = e.target.value; renderBenchmarkOverview(); };
+
+    if (!summary) loadBenchmark().then(renderBenchmarkOverview);
+  }
+  let bmDebounceTimer;
+  function debouncedRenderBenchmark() {
+    clearTimeout(bmDebounceTimer);
+    bmDebounceTimer = setTimeout(() => state.section === 'benchmark' && (state.currentApp ? renderBenchmarkAppView() : renderBenchmarkOverview()), 250);
+  }
+
+  // ============================================================
+  // BENCHMARK — per-app
+  // ============================================================
+  async function renderBenchmarkAppView() {
+    const name = state.currentApp;
+    const a = state.apps[name];
+    if (!state.benchmarkSummary) await loadBenchmark();
+
+    // Filter to this app
+    const appTasks = (state.benchmarkTasks || []).filter(t => t.app === name);
+    const appSummary = (state.benchmarkSummary?.by_app || []).find(r => r.app === name) || {};
+
+    // Per-model aggregate from runs_by_model — scope to filter when active
+    const filterActive = state.benchmarkRunFilter && state.benchmarkRunFilter !== 'none';
+    const byModel = {};
+    for (const t of appTasks) {
+      const rbm = t.runs_by_model || {};
+      for (const k of Object.keys(rbm)) {
+        const r = rbm[k];
+        // When a specific run is filtered, only count that run's entries
+        if (filterActive && r.run_id !== state.benchmarkRunFilter) continue;
+        const parts = k.split(':');
+        const source = parts.length > 1 ? parts[0] : 'eval';
+        const model = parts.length > 1 ? parts.slice(1).join(':') : k;
+        const m = byModel[k] = byModel[k] || { key: k, source, model, runs: 0, passes: 0, rewards: [], checks_p: 0, checks_t: 0 };
+        m.runs++;
+        if (r.reward === 1) m.passes++;
+        if (typeof r.reward === 'number') m.rewards.push(r.reward);
+        if (typeof r.checks_passed === 'number') m.checks_p += r.checks_passed;
+        if (typeof r.checks_total === 'number')  m.checks_t += r.checks_total;
+      }
+    }
+    const modelRows = Object.values(byModel).sort((a,b) => b.runs - a.runs);
+
+    const filteredTasks = appTasks.filter(t => {
+      // Hide tasks that didn't run in the selected run
+      if (filterActive && !t.last_run) return false;
+      const q = state.benchmarkSearch.toLowerCase();
+      const diff = state.benchmarkDifficulty;
+      if (diff && String(t.metadata?.difficulty || '') !== diff) return false;
+      if (q && !`${t.id} ${t.task||''}`.toLowerCase().includes(q)) return false;
+      return true;
+    });
+
+    $('main').innerHTML = `
+      <div class="app-header">
+        <div class="ah-icon" style="background:${a.color};color:${a.text};">${a.label}</div>
+        <div>
+          <h1>${name}</h1>
+          <div class="ah-meta">
+            <span class="ai-dot ${appOverall(a)}" style="display:inline-block;"></span>
+            benchmark · ${appSummary.task_count || appTasks.length} tasks · ${appSummary.result_count || 0} results
+          </div>
+        </div>
+        <div class="app-header-actions">
+          <button class="btn ghost sm" onclick="state.section='synthetic';renderSidebar();renderMain();">→ Synthetic</button>
+          <button class="btn ghost sm" onclick="reloadBenchmark()">
+            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+            Reload
+          </button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-eyebrow">App benchmark</div>
+            <div class="panel-title">${name} · summary</div>
+            <div class="panel-sub">${state.benchmarkSummary?.scope?.label || 'Latest per task across all runs'}</div>
+          </div>
+          <div class="panel-actions">
+            <select id="bm-run-filter" style="font-size:0.85rem;padding:0.35rem 0.55rem;">
+              <option value="">Latest per task (all runs)</option>
+              <option value="none" ${state.benchmarkRunFilter==='none'?'selected':''}>No run (raw tasks)</option>
+              ${state.runs.map(r => `<option value="${r.run_id}" ${r.run_id===state.benchmarkRunFilter?'selected':''}>${r.source==='repair'?'[repair] ':''}${r.model} · ${r.task_count} tasks</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="kpi-row" style="grid-template-columns:repeat(6,1fr);">
+            <div class="kpi"><div class="kpi-label">Tasks</div><div class="kpi-value">${appSummary.task_count||appTasks.length}</div></div>
+            <div class="kpi"><div class="kpi-label">Results</div><div class="kpi-value">${appSummary.result_count||0}</div></div>
+            <div class="kpi"><div class="kpi-label">Avg reward</div><div class="kpi-value">${fmtRew(appSummary.avg_reward)}</div></div>
+            <div class="kpi"><div class="kpi-label">Pass rate</div><div class="kpi-value">${fmtPct(appSummary.pass_rate)}</div></div>
+            <div class="kpi"><div class="kpi-label">Avg accuracy</div><div class="kpi-value">${fmtPct(appSummary.avg_accuracy)}</div></div>
+            <div class="kpi"><div class="kpi-label">Judged</div><div class="kpi-value">${appSummary.judged_count||0}</div></div>
+          </div>
+          ${modelRows.length ? `
+            <div class="row" style="margin:1rem 0 0.4rem;">
+              <span class="label-mono">By model · ${modelRows.length}</span>
+            </div>
+            <table class="summary-table">
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Source</th>
+                  <th class="right">Runs</th>
+                  <th class="right">Pass rate</th>
+                  <th class="right">Avg reward</th>
+                  <th class="right">Checks</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${modelRows.map(m => {
+                  const passRate = m.runs ? m.passes / m.runs : null;
+                  const avgRew = m.rewards.length ? m.rewards.reduce((a,b)=>a+b,0) / m.rewards.length : null;
+                  return `<tr style="cursor:default;">
+                    <td><strong>${m.model}</strong></td>
+                    <td><span class="chip ${m.source==='repair'?'accent':'diff'}">${m.source}</span></td>
+                    <td class="right">${m.runs}</td>
+                    <td class="right">${pctBar(passRate)}</td>
+                    <td class="right">${fmtRew(avgRew)}</td>
+                    <td class="right">${m.checks_p}/${m.checks_t}</td>
+                  </tr>`;
+                }).join('')}
+              </tbody>
+            </table>` : '<div class="empty"><p>No model results yet for this app.</p></div>'}
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:1.2rem;">
+        <div class="panel-head">
+          <div>
+            <div class="panel-eyebrow">Tasks</div>
+            <div class="panel-title">${name} tasks</div>
+            <div class="panel-sub">${filteredTasks.length} of ${appTasks.length}</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="filter-row">
+            <input type="search" id="bm-search" class="grow" placeholder="Search id / description…" value="${escapeHtml(state.benchmarkSearch)}" />
+            <select id="bm-difficulty">
+              <option value="">All difficulties</option>
+              ${[1,2,3,4,5].map(d => `<option value="${d}" ${state.benchmarkDifficulty==String(d)?'selected':''}>difficulty ${d}</option>`).join('')}
+            </select>
+          </div>
+          <div class="stack">
+            ${filteredTasks.length ? filteredTasks.map(taskCardHtml).join('') : '<div class="empty"><p>No tasks match.</p></div>'}
+          </div>
+        </div>
+      </div>
+    `;
+
+    $('bm-run-filter').onchange = (e) => { state.benchmarkRunFilter = e.target.value; loadBenchmark().then(renderBenchmarkAppView); };
+    $('bm-search').oninput      = (e) => { state.benchmarkSearch = e.target.value; debouncedRenderBenchmark(); };
+    $('bm-difficulty').onchange = (e) => { state.benchmarkDifficulty = e.target.value; renderBenchmarkAppView(); };
+  }
+
+  function fmtPct(v) { return v == null ? '—' : `${(v * 100).toFixed(1)}%`; }
+  function fmtRew(v) { return v == null ? '—' : v.toFixed(2); }
+  function applyBenchmarkFilters(tasks) {
+    const q = state.benchmarkSearch.toLowerCase();
+    const diff = state.benchmarkDifficulty;
+    const app = state.benchmarkAppFilter;
+    const filterActive = state.benchmarkRunFilter && state.benchmarkRunFilter !== 'none';
+    return tasks.filter(t => {
+      if (filterActive && !t.last_run) return false;
+      if (app && t.app !== app) return false;
+      if (diff && String(t.metadata?.difficulty || '') !== diff) return false;
+      if (q) {
+        const hay = `${t.id} ${t.task || ''} ${t.metadata?.description || ''}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }
+  function renderBenchmarkSummary(summary) {
+    const o = summary.overall || {};
+    const fmtPct = (v) => v == null ? '—' : `${(v * 100).toFixed(1)}%`;
+    const fmtRew = (v) => v == null ? '—' : v.toFixed(2);
+    const kpis = `
+      <div class="kpi-row" style="grid-template-columns:repeat(6,1fr);">
+        <div class="kpi"><div class="kpi-label">Tasks</div><div class="kpi-value">${o.task_count||0}</div></div>
+        <div class="kpi"><div class="kpi-label">Results</div><div class="kpi-value">${o.result_count||0}</div></div>
+        <div class="kpi"><div class="kpi-label">Avg reward</div><div class="kpi-value">${fmtRew(o.avg_reward)}</div></div>
+        <div class="kpi"><div class="kpi-label">Pass rate</div><div class="kpi-value">${fmtPct(o.pass_rate)}</div></div>
+        <div class="kpi"><div class="kpi-label">Avg accuracy</div><div class="kpi-value">${fmtPct(o.avg_accuracy)}</div></div>
+        <div class="kpi"><div class="kpi-label">Judged</div><div class="kpi-value">${o.judged_count||0}</div></div>
+      </div>
+    `;
+    const byApp = (summary.by_app || []).filter(r => r.task_count > 0);
+    const tableHtml = byApp.length ? `
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>App</th>
+            <th class="right">Tasks</th>
+            <th class="right">Results</th>
+            <th class="right">Avg reward</th>
+            <th class="right">Pass rate</th>
+            <th class="right">Avg accuracy</th>
+            <th class="right">Judged</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${byApp.map(r => `
+            <tr onclick="state.currentApp='${r.app}'; renderSidebar(); renderMain();">
+              <td>${r.app}</td>
+              <td class="right">${r.task_count}</td>
+              <td class="right">${r.result_count}</td>
+              <td class="right">${fmtRew(r.avg_reward)}</td>
+              <td class="right">${pctBar(r.pass_rate)}</td>
+              <td class="right">${pctBar(r.avg_accuracy)}</td>
+              <td class="right">${r.judged_count}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    ` : '<div class="empty"><p>No results to summarize for this scope.</p></div>';
+    return kpis + tableHtml;
+  }
+  function pctBar(v) {
+    if (v == null) return '—';
+    const pct = Math.round(v * 100);
+    const cls = pct >= 75 ? 'ok' : pct >= 40 ? 'warn' : 'fail';
+    return `<span class="pct-bar ${cls}"><span style="width:${pct}%"></span></span>${pct}%`;
+  }
+  async function loadBenchmark() {
+    const rf = state.benchmarkRunFilter;
+    const qs = rf ? `?run=${encodeURIComponent(rf)}` : '';
+    try {
+      const [summary, tasks] = await Promise.all([
+        fetchJSON(`/api/summary${qs}`).catch(() => null),
+        fetchJSON(`/api/tasks${qs}`).catch(() => []),
+      ]);
+      state.benchmarkSummary = summary;
+      state.benchmarkTasks = tasks || [];
+    } catch (e) {
+      toast('Benchmark load failed: ' + e.message, 'fail');
+    }
+  }
+  async function reloadBenchmark() {
+    toast('Reloading benchmark…');
+    state.benchmarkSummary = null;
+    await loadBenchmark();
+    if (state.section === 'benchmark') {
+      state.currentApp ? renderBenchmarkAppView() : renderBenchmarkOverview();
+    }
+    toast('Benchmark reloaded', 'ok');
+  }
+
+  // ============================================================
+  // STAGE 4 — REPAIR
+  // ============================================================
+  function renderRepairStage() {
+    const name = state.currentApp;
+    const tasks = state.appsTasks[name] || [];
+    const withRepair = [];
+    for (const t of tasks) {
+      const rbm = t.runs_by_model || {};
+      const repairKeys = Object.keys(rbm).filter(k => k.startsWith('repair:'));
+      if (repairKeys.length) {
+        const runs = repairKeys.map(k => ({ key: k, model: k.slice(7), ...rbm[k] }));
+        const solved = runs.some(r => r.reward === 1);
+        withRepair.push({ task: t, runs, solved });
+      }
+    }
+    $('panel-head').innerHTML = `
+      <div>
+        <div class="panel-eyebrow">Stage 04 · Repair (optional)</div>
+        <div class="panel-title">Tasks with repair runs</div>
+        <div class="panel-sub">evaluation/repair/runs/&lt;task_id&gt;_&lt;ts&gt;/SOLVED.md</div>
+      </div>
+      <div class="panel-actions">
+        <span class="label-mono">${withRepair.length} task${withRepair.length===1?'':'s'}</span>
+      </div>
+    `;
+    if (!withRepair.length) {
+      $('panel-body').innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">⟳</div>
+          <p>No repair runs for <code>${name}</code>.</p>
+          <div class="empty-cmd">python evaluation/repair/repair_loop.py --app ${name} --task &lt;task_id&gt; --max-rounds 3</div>
+        </div>`;
+      return;
+    }
+    const totalRuns = withRepair.reduce((s,r) => s + r.runs.length, 0);
+    const solvedCount = withRepair.filter(r => r.solved).length;
+    $('panel-body').innerHTML = `
+      <div class="kpi-row">
+        <div class="kpi"><div class="kpi-label">Tasks</div><div class="kpi-value">${withRepair.length}</div></div>
+        <div class="kpi"><div class="kpi-label">Solved</div><div class="kpi-value">${solvedCount}</div></div>
+        <div class="kpi"><div class="kpi-label">Runs</div><div class="kpi-value">${totalRuns}</div></div>
+        <div class="kpi"><div class="kpi-label">Models</div><div class="kpi-value">${new Set(withRepair.flatMap(r => r.runs.map(x=>x.model))).size}</div></div>
+      </div>
+      <div class="stack">
+        ${withRepair.map(({task, runs, solved}) => `
+          <div class="card" onclick="openTaskJson(${JSON.stringify(task.id).replace(/"/g,'&quot;')})">
+            <div class="card-head">
+              <span class="card-id">${task.id}</span>
+              <span class="card-title">${escapeHtml(task.task || task.id)}</span>
+              <span class="chip ${solved?'ok':'warn'}">${solved?'solved':'unsolved'}</span>
+            </div>
+            <div class="card-meta">
+              ${runs.map(r => `<span class="chip ${r.reward===1?'ok':'warn'}">${r.model}: ${r.checks_passed||0}/${r.checks_total||0}</span>`).join('')}
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+  }
+
+  // ============================================================
+  // SMOKE TASK / RUN modals (read-only viewers)
+  // ============================================================
+  async function openSmokeTask(app, taskId) {
+    openModal(`smoke task · ${taskId}`, app, '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const d = await fetchJSON(`/api/synthesis/smoke/task/${encodeURIComponent(app)}/${encodeURIComponent(taskId)}`);
+      $('modal-sub').textContent = `${d.status}${d.latest_ts ? ' · ' + relTime(d.latest_ts) : ''}`;
+      let body = '';
+      if (d.solved_md) body += `<div class="markdown">${renderMarkdown(d.solved_md)}</div>`;
+      if (d.error_text) body += `<div class="row" style="margin:0.6rem 0;"><span class="label-mono">error.txt</span></div><div class="code">${escapeHtml(d.error_text)}</div>`;
+      if (!d.solved_md && !d.error_text) body = `<div class="empty"><p>No SOLVED.md or error.txt for this task.</p></div>`;
+      $('modal-body').innerHTML = body;
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>${escapeHtml(e.message)}</p></div>`; }
+  }
+  async function openSmokeRun(runId) {
+    openModalLg(`smoke run · ${runId}`, '', '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const d = await fetchJSON(`/api/synthesis/smoke/runs/${encodeURIComponent(runId)}`);
+      const tasksHtml = (d.tasks || []).map(t => `
+        <div class="artifact-row">
+          <span class="a-tag ${t.has_solved?'post':'get'}">${t.has_solved?'SOLVED':'OTHER'}</span>
+          <div><div class="a-name">${t.id}</div></div>
+          ${t.has_solved ? `<button class="a-action" onclick="showSolvedMd(${JSON.stringify(t.id).replace(/"/g,'&quot;')}, ${JSON.stringify(t.solved_md||'').replace(/"/g,'&quot;')})">SOLVED.md</button>` : ''}
+        </div>`).join('');
+      $('modal-sub').textContent = `${(d.tasks||[]).length} tasks`;
+      $('modal-body').innerHTML = `
+        ${d.report ? `<div class="row" style="margin-bottom:0.5rem;"><span class="label-mono">REPORT.md</span></div><div class="markdown" style="margin-bottom:1rem;">${renderMarkdown(d.report)}</div>` : ''}
+        ${tasksHtml ? `<div class="row" style="margin-bottom:0.5rem;"><span class="label-mono">tasks</span></div><div class="artifact-list">${tasksHtml}</div>` : ''}
+        ${d.log_tail ? `<div class="row" style="margin-top:1rem;margin-bottom:0.5rem;"><span class="label-mono">log tail</span></div><div class="term">${escapeHtml(d.log_tail)}</div>` : ''}
+      `;
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>${escapeHtml(e.message)}</p></div>`; }
+  }
+  function showSolvedMd(taskId, md) {
+    if (!md) { toast('No content', 'fail'); return; }
+    openModal(`SOLVED.md · ${taskId}`, '', `<div class="markdown">${renderMarkdown(md)}</div>`, [{ label: 'Close', cls: 'ghost', onclick: 'closeModal()' }]);
+  }
+
+  // ============================================================
+  // VERIFIER FILE / ENDPOINT viewer
+  // ============================================================
+  async function openVerifierFile(app, filename) {
+    openModal(`verifiers/${app}/${filename}`, '', '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const txt = await fetchText(`/api/synthesis/verifiers/${encodeURIComponent(app)}/file/${encodeURIComponent(filename)}`);
+      $('modal-sub').textContent = `${formatBytes(new Blob([txt]).size)}`;
+      const isMd = filename.toLowerCase().endsWith('.md');
+      $('modal-body').innerHTML = isMd ? `<div class="markdown">${renderMarkdown(txt)}</div>` : `<div class="code">${escapeHtml(txt)}</div>`;
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>${escapeHtml(e.message)}</p></div>`; }
+  }
+  async function openReadme(app)         { return openVerifierFile(app, 'README.md'); }
+  async function openTestMd(app)         { return openVerifierFile(app, 'Test.md'); }
+  async function openVerifierSource(app) { return openVerifierFile(app, `${app}.py`); }
+  async function openEndpointSource(app, name) {
+    openModal(`${app}.py · ${name}`, 'endpoint source', '<div class="empty"><p>Loading…</p></div>');
+    try {
+      const src = await fetchText(`/api/synthesis/verifiers/${encodeURIComponent(app)}/file/${encodeURIComponent(app)}.py`);
+      const idx = src.indexOf(`"${name}"`) >= 0 ? src.indexOf(`"${name}"`) : src.indexOf(`'${name}'`);
+      let snippet = src;
+      if (idx >= 0) {
+        const start = Math.max(0, src.lastIndexOf('\n', idx - 80));
+        const end = src.indexOf('\n\n\n', idx);
+        snippet = src.slice(start, end > 0 ? end : Math.min(src.length, idx + 1400));
+      }
+      $('modal-body').innerHTML = `<div class="code">${escapeHtml(snippet)}</div>`;
+    } catch (e) { $('modal-body').innerHTML = `<div class="empty"><p>${escapeHtml(e.message)}</p></div>`; }
+  }
+  function openProcessOutput(title, text) {
+    openModal(title, '', `<div class="term">${escapeHtml(text || '(no output)')}</div>`, [{ label: 'Close', cls: 'ghost', onclick: 'closeModal()' }]);
+  }
+  function openTrace(title, payload) {
+    const events = (payload && payload.events) || [];
+    openModal(title, `${events.length} events`, `<div class="trace-events">${renderTraceEvents(events)}</div>${payload?.output ? `<div class="row" style="margin-top:0.6rem;"><span class="label-mono">output</span></div><div class="term">${escapeHtml(payload.output)}</div>` : ''}`, [{ label: 'Close', cls: 'ghost', onclick: 'closeModal()' }]);
+  }
+
+  // ============================================================
+  // ADD NEW APP
+  // ============================================================
+  function startAddAppInline() {
+    $('add-app-btn').style.display = 'none';
+    const wrap = $('add-app-inline');
+    wrap.style.display = '';
+    const err = $('add-app-inline-err');
+    err.style.display = 'none';
+    const el = $('add-app-inline-name');
+    el.value = '';
+    el.focus();
+    el.onkeydown = (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); confirmAddAppInline(); }
+      else if (e.key === 'Escape') { e.preventDefault(); cancelAddAppInline(); }
+    };
+    el.onblur = () => {
+      // Cancel on blur if the field is empty (matches "new file" UX)
+      setTimeout(() => {
+        if (wrap.style.display !== 'none' && !el.value.trim()) cancelAddAppInline();
+      }, 120);
+    };
+  }
+  function cancelAddAppInline() {
+    $('add-app-inline').style.display = 'none';
+    $('add-app-inline-err').style.display = 'none';
+    $('add-app-btn').style.display = '';
+  }
+  async function confirmAddAppInline() {
+    const el = $('add-app-inline-name');
+    const err = $('add-app-inline-err');
+    const showErr = (msg) => { err.textContent = msg; err.style.display = ''; };
+    err.style.display = 'none';
+
+    const name = (el.value || '').trim();
+    if (!name) { showErr('Name required'); return; }
+    if (!/^[a-zA-Z0-9_-]+$/.test(name)) { showErr('Use letters, numbers, _, - only'); return; }
+    if (state.apps[name]) { showErr(`"${name}" already exists`); return; }
+
+    try {
+      const r = await postJSON(`/api/synthesis/verifiers/${encodeURIComponent(name)}/create`, {});
+      if (r.error) { showErr(r.error); return; }
+    } catch (e) {
+      showErr(e.message || 'Failed');
+      return;
+    }
+
+    cancelAddAppInline();
+    toast(`Created ${name}`);
+    try { state.verifiers = await fetchJSON('/api/synthesis/verifiers'); } catch {}
+    buildAppIndex(); computeAppStatuses(); applyAppSearch();
+    state.currentApp = name; state.currentStage = 'verifier';
+    renderSidebar(); renderMain();
+  }
+
+  // ============================================================
+  // MODAL HELPERS
+  // ============================================================
+  function openModal(title, sub, bodyHtml, footActions) {
+    $('modal').classList.remove('lg', 'sm');
+    $('modal-title').textContent = title;
+    $('modal-sub').textContent = sub || '';
+    $('modal-body').innerHTML = bodyHtml;
+    setModalFoot(footActions);
+    $('modal-back').classList.add('show');
+  }
+  function openModalLg(title, sub, bodyHtml, footActions) {
+    openModal(title, sub, bodyHtml, footActions);
+    $('modal').classList.add('lg');
+  }
+  function setModalFoot(actions) {
+    const foot = $('modal-foot');
+    if (!actions || !actions.length) { foot.style.display = 'none'; foot.innerHTML = ''; return; }
+    foot.style.display = 'flex';
+    foot.innerHTML = actions.map(a => `<button class="btn ${a.cls||''}" onclick="${a.onclick}">${a.label}</button>`).join('');
+  }
+  function closeModal() {
+    cleanupTrajectoryScrollState();
+    $('modal-back').classList.remove('show');
+    $('modal').classList.remove('lg', 'sm');
+    setModalFoot(null);
+  }
+  $('modal-close').onclick = closeModal;
+  $('modal-back').addEventListener('click', e => { if (e.target.id === 'modal-back') closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if ($('lightbox').classList.contains('show')) { $('lightbox').classList.remove('show'); $('lightbox-img').src=''; }
+      else closeModal();
+    }
+  });
+
+  // ============================================================
+  // UTILITIES
+  // ============================================================
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function formatBytes(n) {
+    if (n == null) return '';
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n/1024).toFixed(1)} KB`;
+    return `${(n/1024/1024).toFixed(2)} MB`;
+  }
+  function relTime(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    const s = (Date.now() - d.getTime()) / 1000;
+    if (s < 60) return 'just now';
+    if (s < 3600) return `${Math.floor(s/60)}m ago`;
+    if (s < 86400) return `${Math.floor(s/3600)}h ago`;
+    if (s < 86400*30) return `${Math.floor(s/86400)}d ago`;
+    return d.toLocaleDateString();
+  }
+  function renderMarkdown(src) {
+    if (!src) return '';
+    const lines = src.split('\n');
+    let html = '', inCode = false, codeBuf = [];
+    let inList = false, listKind = null;
+    const flushList = () => { if (inList) { html += `</${listKind}>`; inList = false; listKind = null; } };
+    const inline = (t) => {
+      let s = escapeHtml(t);
+      s = s.replace(/`([^`]+)`/g, (_, c) => `<code>${c}</code>`);
+      s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      s = s.replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+      s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+      return s;
+    };
+    for (let i = 0; i < lines.length; i++) {
+      const ln = lines[i];
+      if (/^```/.test(ln)) {
+        if (!inCode) { inCode = true; codeBuf = []; }
+        else { inCode = false; flushList(); html += `<pre><code>${escapeHtml(codeBuf.join('\n'))}</code></pre>`; }
+        continue;
+      }
+      if (inCode) { codeBuf.push(ln); continue; }
+      const h = ln.match(/^(#{1,6})\s+(.*)$/);
+      if (h) { flushList(); html += `<h${h[1].length}>${inline(h[2])}</h${h[1].length}>`; continue; }
+      const ul = ln.match(/^[-*]\s+(.*)$/);
+      const ol = ln.match(/^\d+\.\s+(.*)$/);
+      if (ul) {
+        if (!inList || listKind !== 'ul') { flushList(); html += '<ul>'; inList = true; listKind = 'ul'; }
+        html += `<li>${inline(ul[1])}</li>`; continue;
+      }
+      if (ol) {
+        if (!inList || listKind !== 'ol') { flushList(); html += '<ol>'; inList = true; listKind = 'ol'; }
+        html += `<li>${inline(ol[1])}</li>`; continue;
+      }
+      if (/^---+$/.test(ln.trim())) { flushList(); html += '<hr/>'; continue; }
+      if (ln.trim() === '') { flushList(); continue; }
+      flushList(); html += `<p>${inline(ln)}</p>`;
+    }
+    flushList();
+    if (inCode) html += `<pre><code>${escapeHtml(codeBuf.join('\n'))}</code></pre>`;
+    return html;
+  }
+
+  let toastTimer;
+  function toast(msg, cls = '') {
+    $('toast-msg').textContent = msg;
+    $('toast').className = 'toast show ' + cls;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => $('toast').classList.remove('show'), cls === 'fail' ? 5000 : 2800);
+  }
+
+  // ============================================================
+  // BOOT
+  // ============================================================
+  $('refresh-btn').onclick = async () => { toast('Refreshing…'); await loadAll(); toast('Refreshed', 'ok'); };
+  $('add-app-btn').onclick = startAddAppInline;
+  $('app-search').oninput = (e) => { state.appSearch = e.target.value; applyAppSearch(); renderSidebar(); };
+  loadAll();
+  </script>
+</body>
+</html>

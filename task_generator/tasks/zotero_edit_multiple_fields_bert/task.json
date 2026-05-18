@@ -1,0 +1,39 @@
+{
+  "id": "zotero_edit_multiple_fields_bert",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite. The item titled 'BERT: Pre-training of Deep Bidirectional Transformers' currently has a publicationTitle of 'NAACL' and a DOI, but its Pages, Volume, and Publisher fields are empty.\n\nSet the following fields on that item to exactly:\n- Pages: `4171-4186`\n- Volume: `1`\n- Publisher: `Association for Computational Linguistics`\n\nLeave Zotero running so the edits persist.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-item-field 'BERT: Pre-training' pages 4171-4186",
+      "key": "match",
+      "expected": true,
+      "description": "BERT pages = 4171-4186"
+    },
+    {
+      "command": "check-item-field 'BERT: Pre-training' volume 1",
+      "key": "match",
+      "expected": true,
+      "description": "BERT volume = 1"
+    },
+    {
+      "command": "check-item-field 'BERT: Pre-training' publisher 'Association for Computational Linguistics'",
+      "key": "match",
+      "expected": true,
+      "description": "BERT publisher set"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

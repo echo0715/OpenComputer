@@ -1,0 +1,20 @@
+{
+  "task_id": "kdenlive_audio_video_mix",
+  "files": [
+    {
+      "filename": "av_mix.kdenlive",
+      "sandbox_path": "/home/user/Documents/av_mix.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "footage.mp4",
+      "sandbox_path": "/home/user/Videos/footage.mp4",
+      "type": "mp4"
+    },
+    {
+      "filename": "music.wav",
+      "sandbox_path": "/home/user/Music/music.wav",
+      "type": "wav"
+    }
+  ]
+}

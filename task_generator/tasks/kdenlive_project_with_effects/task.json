@@ -1,0 +1,55 @@
+{
+  "id": "kdenlive_project_with_effects",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/effects_project.kdenlive (1280x720, 25fps).\n\nImport /home/user/Videos/sample.mp4 onto a video track in the timeline and apply the Glow effect (`frei0r.glow`) to that timeline clip. Save the project so the change is persisted to /home/user/Documents/effects_project.kdenlive. The project must remain at 1280x720, 25fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "effects_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/effects_project.kdenlive"
+      },
+      {
+        "filename": "sample.mp4",
+        "sandbox_path": "/home/user/Videos/sample.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/effects_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/effects_project.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/effects_project.kdenlive 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1280x720"
+    },
+    {
+      "command": "check-fps /home/user/Documents/effects_project.kdenlive 25",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 25 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/effects_project.kdenlive sample.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip sample.mp4 is in the project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/effects_project.kdenlive frei0r.glow",
+      "key": "exists",
+      "expected": true,
+      "description": "Glow effect (frei0r.glow) is applied in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

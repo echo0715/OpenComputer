@@ -1,0 +1,61 @@
+{
+  "id": "kdenlive_multiple_effects_stack",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/multi_effects.kdenlive (1280x720, 30fps).\n\nImport /home/user/Videos/footage.mp4 onto a video track in the timeline, then apply both the Glow effect (`frei0r.glow`) and the Cartoon effect (`frei0r.cartoon`) to that timeline clip. Save the project so both effects are persisted to /home/user/Documents/multi_effects.kdenlive. The project must remain at 1280x720, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "multi_effects.kdenlive",
+        "sandbox_path": "/home/user/Documents/multi_effects.kdenlive"
+      },
+      {
+        "filename": "footage.mp4",
+        "sandbox_path": "/home/user/Videos/footage.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multi_effects.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists at /home/user/Documents/multi_effects.kdenlive"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/multi_effects.kdenlive 1280 720",
+      "key": "match",
+      "expected": true,
+      "description": "Project resolution is 1280x720"
+    },
+    {
+      "command": "check-fps /home/user/Documents/multi_effects.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Project frame rate is 30 fps"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multi_effects.kdenlive footage.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Clip footage.mp4 is in the project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multi_effects.kdenlive frei0r.glow",
+      "key": "exists",
+      "expected": true,
+      "description": "Glow effect (frei0r.glow) is applied in the project"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multi_effects.kdenlive frei0r.cartoon",
+      "key": "exists",
+      "expected": true,
+      "description": "Cartoon effect (frei0r.cartoon) is applied in the project"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

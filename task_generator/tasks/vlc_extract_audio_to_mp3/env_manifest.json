@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_extract_audio_to_mp3",
+  "files": [
+    {"filename": "source_audio.mp4", "sandbox_path": "/home/user/Videos/source_audio.mp4", "type": "mp4"}
+  ]
+}

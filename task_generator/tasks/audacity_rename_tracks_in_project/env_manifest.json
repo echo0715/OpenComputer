@@ -1,0 +1,20 @@
+{
+  "task_id": "audacity_rename_tracks_in_project",
+  "files": [
+    {
+      "filename": "session.aup",
+      "sandbox_path": "/home/user/Music/session.aup",
+      "type": "aup"
+    },
+    {
+      "filename": "session_data/e00/d00/e000001.au",
+      "sandbox_path": "/home/user/Music/session_data/e00/d00/e000001.au",
+      "type": "au"
+    },
+    {
+      "filename": "session_data/e00/d00/e000002.au",
+      "sandbox_path": "/home/user/Music/session_data/e00/d00/e000002.au",
+      "type": "au"
+    }
+  ]
+}

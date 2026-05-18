@@ -1,0 +1,39 @@
+{
+  "id": "musescore3_export_midi",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/dance.mscz — 4 measures of quarter notes in 3/4 time (16 notes total).\n\nExport the score as a Standard MIDI File to exactly /home/user/Documents/dance.mid (export all parts). The original /home/user/Documents/dance.mscz must still exist, and the exported MIDI must contain at least 4 notes.",
+  "env": {
+    "files": [
+      {
+        "filename": "dance.mscz",
+        "sandbox_path": "/home/user/Documents/dance.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/dance.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "Original dance.mscz still exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/dance.mid",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported MIDI file exists at /home/user/Documents/dance.mid"
+    },
+    {
+      "command": "check-midi-has-notes /home/user/Documents/dance.mid 4",
+      "key": "match",
+      "expected": true,
+      "description": "Exported MIDI contains at least 4 note-on events"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "vscode_react_project_scaffold",
+  "app": "vscode",
+  "task": "Create a React project scaffold at `/home/user/projects/my-react-app` with the following files:\n\n- `src/App.js`:\n  ```javascript\n  import React from 'react';\n  function App() {\n    return <div className=\"App\">Hello React</div>;\n  }\n  export default App;\n  ```\n- `src/index.js`:\n  ```javascript\n  import React from 'react';\n  import ReactDOM from 'react-dom';\n  import App from './App';\n  ReactDOM.render(<App />, document.getElementById('root'));\n  ```\n- `public/index.html` — a basic HTML5 document containing a `<div id=\"root\">`.\n- `package.json` — `name`: `my-react-app`, `version`: `1.0.0`.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/my-react-app/src/App.js",
+      "key": "exists",
+      "expected": true,
+      "description": "App.js exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/my-react-app/src/App.js Hello React",
+      "key": "contains",
+      "expected": true,
+      "description": "App.js contains Hello React"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/my-react-app/src/index.js",
+      "key": "exists",
+      "expected": true,
+      "description": "index.js exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/my-react-app/src/index.js ReactDOM",
+      "key": "contains",
+      "expected": true,
+      "description": "index.js contains ReactDOM"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/my-react-app/public/index.html",
+      "key": "exists",
+      "expected": true,
+      "description": "public/index.html exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/my-react-app/public/index.html root",
+      "key": "contains",
+      "expected": true,
+      "description": "index.html contains root div"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/my-react-app/package.json",
+      "key": "exists",
+      "expected": true,
+      "description": "package.json exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/my-react-app/package.json my-react-app",
+      "key": "contains",
+      "expected": true,
+      "description": "package.json contains project name"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

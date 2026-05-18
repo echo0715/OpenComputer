@@ -1,0 +1,6 @@
+{
+  "task_id": "chrome_local_html_inspect",
+  "files": [
+    {"filename": "test_page.html", "sandbox_path": "/home/user/Documents/test_page.html", "type": "html"}
+  ]
+}

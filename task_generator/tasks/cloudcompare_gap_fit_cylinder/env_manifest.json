@@ -1,0 +1,6 @@
+{
+  "task_id": "cloudcompare_gap_fit_cylinder",
+  "files": [
+    {"filename": "cylinder_points.ply", "sandbox_path": "/home/user/Documents/cylinder_points.ply", "type": "ply"}
+  ]
+}

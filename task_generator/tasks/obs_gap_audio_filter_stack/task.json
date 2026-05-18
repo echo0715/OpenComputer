@@ -1,0 +1,68 @@
+{
+  "id": "obs_gap_audio_filter_stack",
+  "app": "obs",
+  "task": "Build a podcast-style audio filter chain in OBS Studio. The final collection must contain exactly one scene named 'Podcast' (no default 'Scene' left over).\n\nThe 'Podcast' scene must contain a Media Source named exactly 'Mic' that plays the local file /home/user/Music/voice.wav with looping disabled.\n\nApply these audio filters to 'Mic' in this exact order, with these exact filter names, types, and settings:\n1. 'Denoise' — Noise Suppression (RNNoise method)\n2. 'Gate' — Noise Gate with Close Threshold = -36 dB, Open Threshold = -26 dB\n3. 'Comp' — Compressor with Ratio = 4.0, Threshold = -18 dB\n4. 'Boost' — Gain with Gain = 3.0 dB\n5. 'Safety' — Limiter with Threshold = -1.5 dB\n\nPersist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "voice.wav",
+        "sandbox_path": "/home/user/Music/voice.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Podcast",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Podcast' exists"
+    },
+    {
+      "command": "check-source-in-scene Mic Podcast",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Mic' is in 'Podcast'"
+    },
+    {
+      "command": "source-filter-info Mic Denoise",
+      "eval": "'noise_suppress' in (result.get('type') or '').lower() and str(result.get('settings', {}).get('method', 'rnnoise')).lower() == 'rnnoise'",
+      "expected": true,
+      "description": "'Denoise' is a Noise Suppression (RNNoise) filter"
+    },
+    {
+      "command": "source-filter-info Mic Gate",
+      "eval": "'noise_gate' in (result.get('type') or '').lower() and int(result.get('settings', {}).get('close_threshold', 0)) == -36 and int(result.get('settings', {}).get('open_threshold', 0)) == -26",
+      "expected": true,
+      "description": "'Gate' Noise Gate with close=-36, open=-26"
+    },
+    {
+      "command": "source-filter-info Mic Comp",
+      "eval": "'compressor' in (result.get('type') or '').lower() and abs(float(result.get('settings', {}).get('ratio', 0)) - 4.0) < 0.1 and int(result.get('settings', {}).get('threshold', 0)) == -18",
+      "expected": true,
+      "description": "'Comp' Compressor ratio=4.0 threshold=-18"
+    },
+    {
+      "command": "source-filter-info Mic Boost",
+      "eval": "'gain' in (result.get('type') or '').lower() and abs(float(result.get('settings', {}).get('db', 0)) - 3.0) < 0.1",
+      "expected": true,
+      "description": "'Boost' Gain +3.0 dB"
+    },
+    {
+      "command": "source-filter-info Mic Safety",
+      "eval": "'limiter' in (result.get('type') or '').lower() and abs(float(result.get('settings', {}).get('threshold', 0)) - (-1.5)) < 0.1",
+      "expected": true,
+      "description": "'Safety' Limiter threshold=-1.5 dB"
+    },
+    {
+      "command": "source-filters Mic",
+      "eval": "[f.get('name') for f in result if f.get('name') in ('Denoise','Gate','Comp','Boost','Safety')] == ['Denoise','Gate','Comp','Boost','Safety']",
+      "expected": true,
+      "description": "Audio filters ordered Denoise, Gate, Comp, Boost, Safety"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

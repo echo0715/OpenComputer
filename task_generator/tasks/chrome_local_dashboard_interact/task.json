@@ -1,0 +1,57 @@
+{
+  "id": "chrome_local_dashboard_interact",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/dashboard.html (the local 'Q4 Sales Dashboard'). Set the Region dropdown to `West` and generate the report so the page displays the `West Region Report` with total revenue, total orders, and year-over-year growth. In a second tab, load https://httpbin.org/get and bookmark that page. Both tabs must remain open.",
+  "env": {
+    "files": [
+      {
+        "filename": "dashboard.html",
+        "sandbox_path": "/home/user/Documents/dashboard.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open dashboard.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with local dashboard.html is open"
+    },
+    {
+      "command": "check-page-contains \"Q4 Sales Dashboard\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page contains 'Q4 Sales Dashboard' heading"
+    },
+    {
+      "command": "check-page-contains \"West Region Report\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page shows 'West Region Report' after generating report for West region"
+    },
+    {
+      "command": "check-page-contains \"$278,750\"",
+      "key": "contains",
+      "expected": true,
+      "description": "West region total revenue '$278,750' is displayed"
+    },
+    {
+      "command": "check-tab-open httpbin.org/get",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/get is open"
+    },
+    {
+      "command": "check-bookmark httpbin.org/get",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for httpbin.org/get exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

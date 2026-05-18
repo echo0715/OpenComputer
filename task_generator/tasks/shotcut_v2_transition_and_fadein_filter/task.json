@@ -1,0 +1,59 @@
+{
+  "id": "shotcut_v2_transition_and_fadein_filter",
+  "app": "shotcut",
+  "task": "Shotcut is already open with /home/user/Documents/combo.mlt (1920x1080 30 fps, empty timeline). Two source videos exist: /home/user/Videos/intro.mp4 and /home/user/Videos/outro.mp4.\n\nPlace intro.mp4 and outro.mp4 on the V1 timeline track so that outro.mp4's start overlaps the end of intro.mp4 by about half a second, producing a default dissolve (luma) transition in the overlap region. Apply a 'Fade In Video' filter (default parameters) to the intro.mp4 clip. Save the project so /home/user/Documents/combo.mlt references both clips, contains a luma (dissolve) transition, and contains a fade filter on the intro clip.",
+  "env": {
+    "files": [
+      {
+        "filename": "combo.mlt",
+        "sandbox_path": "/home/user/Documents/combo.mlt"
+      },
+      {
+        "filename": "intro.mp4",
+        "sandbox_path": "/home/user/Videos/intro.mp4"
+      },
+      {
+        "filename": "outro.mp4",
+        "sandbox_path": "/home/user/Videos/outro.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/combo.mlt",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/combo.mlt intro.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "intro.mp4 is referenced"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/combo.mlt outro.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "outro.mp4 is referenced"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/combo.mlt luma",
+      "key": "exists",
+      "expected": true,
+      "description": "A luma (dissolve) transition is present"
+    },
+    {
+      "command": "check-filter-exists /home/user/Documents/combo.mlt fade",
+      "key": "exists",
+      "expected": true,
+      "description": "A fade filter is present (Fade In Video)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 5
+  }
+}

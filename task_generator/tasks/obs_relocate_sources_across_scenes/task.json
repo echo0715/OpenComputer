@@ -1,0 +1,111 @@
+{
+  "id": "obs_relocate_sources_across_scenes",
+  "app": "obs",
+  "task": "OBS Studio is open with a scene collection that already contains two scenes:\n- 'Raw' with 5 sources: 'Cam1', 'Cam2', 'Screen', 'Overlay', 'Bumper'\n- 'Target' which is empty\n\nRelocate three sources so that:\n- 'Raw' contains only 'Cam1' and 'Screen' (and 'Cam2', 'Overlay', 'Bumper' no longer appear in 'Raw')\n- 'Target' contains exactly 'Cam2', 'Overlay', 'Bumper' (and neither 'Cam1' nor 'Screen' appears in 'Target')\n\nDo NOT create or delete any scene — the collection must still have exactly 2 scenes named 'Raw' and 'Target'. The relocation may be done by re-creating sources of the same name (any source type) in 'Target'; only the names in each scene matter. All sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "scene_collection.json",
+        "sandbox_path": "/home/user/.config/obs-studio/basic/scenes/Untitled.json"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Raw",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Raw' still exists"
+    },
+    {
+      "command": "check-scene-exists Target",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Target' still exists"
+    },
+    {
+      "command": "check-scene-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 2 scenes"
+    },
+    {
+      "command": "check-source-in-scene Cam1 Raw",
+      "key": "exists",
+      "expected": true,
+      "description": "'Cam1' kept in 'Raw'"
+    },
+    {
+      "command": "check-source-in-scene Screen Raw",
+      "key": "exists",
+      "expected": true,
+      "description": "'Screen' kept in 'Raw'"
+    },
+    {
+      "command": "check-source-in-scene Cam2 Raw",
+      "key": "exists",
+      "expected": false,
+      "description": "'Cam2' no longer in 'Raw'"
+    },
+    {
+      "command": "check-source-in-scene Overlay Raw",
+      "key": "exists",
+      "expected": false,
+      "description": "'Overlay' no longer in 'Raw'"
+    },
+    {
+      "command": "check-source-in-scene Bumper Raw",
+      "key": "exists",
+      "expected": false,
+      "description": "'Bumper' no longer in 'Raw'"
+    },
+    {
+      "command": "check-source-in-scene Cam2 Target",
+      "key": "exists",
+      "expected": true,
+      "description": "'Cam2' moved to 'Target'"
+    },
+    {
+      "command": "check-source-in-scene Overlay Target",
+      "key": "exists",
+      "expected": true,
+      "description": "'Overlay' moved to 'Target'"
+    },
+    {
+      "command": "check-source-in-scene Bumper Target",
+      "key": "exists",
+      "expected": true,
+      "description": "'Bumper' moved to 'Target'"
+    },
+    {
+      "command": "check-source-in-scene Cam1 Target",
+      "key": "exists",
+      "expected": false,
+      "description": "'Cam1' not in 'Target'"
+    },
+    {
+      "command": "check-source-in-scene Screen Target",
+      "key": "exists",
+      "expected": false,
+      "description": "'Screen' not in 'Target'"
+    },
+    {
+      "command": "check-source-visible Cam1",
+      "key": "visible",
+      "expected": true,
+      "description": "'Cam1' visible"
+    },
+    {
+      "command": "check-source-visible Cam2",
+      "key": "visible",
+      "expected": true,
+      "description": "'Cam2' visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

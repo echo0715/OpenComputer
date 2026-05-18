@@ -1,0 +1,10 @@
+{
+  "task_id": "obs_gap_audio_filter_stack",
+  "files": [
+    {
+      "filename": "voice.wav",
+      "sandbox_path": "/home/user/Music/voice.wav",
+      "type": "wav"
+    }
+  ]
+}

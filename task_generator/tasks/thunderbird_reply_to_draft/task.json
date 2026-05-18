@@ -1,0 +1,43 @@
+{
+  "id": "thunderbird_reply_to_draft",
+  "app": "thunderbird",
+  "task": "Thunderbird's Inbox already contains a message from `supplier@parts.com` with subject `Quote for Components`. Create a reply draft of that message (do NOT send) addressed to `supplier@parts.com`, with the body containing: `Thank you for the quote. We would like to proceed with ordering 500 units of part number BX-2200 at the quoted price.`",
+  "env": {
+    "files": [
+      {
+        "filename": "setup_inbox.py",
+        "sandbox_path": "/home/user/setup_inbox.py"
+      },
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists Quote for Components",
+      "key": "found",
+      "expected": true,
+      "description": "Reply draft exists with subject containing Quote for Components"
+    },
+    {
+      "command": "check-message-to Drafts Quote for Components supplier@parts.com",
+      "key": "match",
+      "expected": true,
+      "description": "Reply is addressed to supplier@parts.com"
+    },
+    {
+      "command": "check-draft-content Quote for Components BX-2200",
+      "key": "found",
+      "expected": true,
+      "description": "Reply mentions part number BX-2200"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "musescore3_export_musicxml",
+  "app": "musescore3",
+  "task": "MuseScore 3 is already open with /home/user/Documents/duet.mscz — a two-part duet (Flute and Cello) in 4/4 time with 4 measures per part.\n\nExport the score as Uncompressed MusicXML (not compressed `.mxl`) to exactly /home/user/Documents/duet.musicxml. The original /home/user/Documents/duet.mscz must still exist, and the exported file must parse as valid MusicXML containing exactly 2 parts.",
+  "env": {
+    "files": [
+      {
+        "filename": "duet.mscz",
+        "sandbox_path": "/home/user/Documents/duet.mscz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/duet.mscz",
+      "key": "exists",
+      "expected": true,
+      "description": "Original duet.mscz still exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/duet.musicxml",
+      "key": "exists",
+      "expected": true,
+      "description": "Exported MusicXML file exists"
+    },
+    {
+      "command": "check-musicxml-parts /home/user/Documents/duet.musicxml 2",
+      "key": "match",
+      "expected": true,
+      "description": "Exported MusicXML has exactly 2 parts"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

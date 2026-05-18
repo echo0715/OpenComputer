@@ -1,0 +1,52 @@
+{
+  "id": "vscode_terminal_editor_settings",
+  "app": "vscode",
+  "task": "Configure the following user settings (persisted to `~/.config/Code/User/settings.json`):\n\n- `terminal.integrated.fontSize`: 15\n- `terminal.integrated.cursorStyle`: `line`\n- `editor.autoSave`: `afterDelay`\n- `editor.autoSaveDelay`: 5000\n- `editor.formatOnPaste`: `true`\n- `editor.wordWrap`: `on`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-setting terminal.integrated.fontSize 15",
+      "key": "match",
+      "expected": true,
+      "description": "terminal fontSize is 15"
+    },
+    {
+      "command": "check-setting terminal.integrated.cursorStyle line",
+      "key": "match",
+      "expected": true,
+      "description": "terminal cursorStyle is line"
+    },
+    {
+      "command": "check-setting editor.autoSave afterDelay",
+      "key": "match",
+      "expected": true,
+      "description": "autoSave is afterDelay"
+    },
+    {
+      "command": "check-setting editor.autoSaveDelay 5000",
+      "key": "match",
+      "expected": true,
+      "description": "autoSaveDelay is 5000"
+    },
+    {
+      "command": "check-setting editor.formatOnPaste true",
+      "key": "match",
+      "expected": true,
+      "description": "formatOnPaste is true"
+    },
+    {
+      "command": "check-setting editor.wordWrap on",
+      "key": "match",
+      "expected": true,
+      "description": "wordWrap is on"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

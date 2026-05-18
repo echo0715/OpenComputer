@@ -1,0 +1,52 @@
+{
+  "id": "chrome_local_markdown_editor",
+  "app": "chrome",
+  "task": "In Google Chrome, load file:///home/user/Documents/md_editor.html ('Markdown Playground' with a `#source` textarea and a live `#preview` div).\n\nPlace exactly this Markdown into `#source`, preserving line breaks:\n\n```\n# Project Status\n\n- Finish docs\n- Review pull requests\n- Deploy to staging\n\n```\nnpm run build\n```\n```\n\nThe live `#preview` must render an `<h1>` with text `Project Status`, a `<ul>` with three `<li>` bullets (`Finish docs`, `Review pull requests`, `Deploy to staging`), and a `<pre><code>` block containing `npm run build`. Leave the page in this state.",
+  "env": {
+    "files": [
+      {
+        "filename": "md_editor.html",
+        "sandbox_path": "/home/user/Documents/md_editor.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open md_editor.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for md_editor.html is open"
+    },
+    {
+      "command": "input #source",
+      "eval": "'Project Status' in (result.get('value') or '') and 'Finish docs' in (result.get('value') or '')",
+      "description": "Source textarea contains the required markdown content"
+    },
+    {
+      "command": "eval \"document.querySelector('#preview h1') && document.querySelector('#preview h1').textContent\"",
+      "eval": "(result.get('value') or '').strip() == 'Project Status'",
+      "description": "Preview contains an h1 with text 'Project Status'"
+    },
+    {
+      "command": "eval \"document.querySelectorAll('#preview ul li').length\"",
+      "eval": "int(result.get('value') or 0) >= 3",
+      "description": "Preview contains a <ul> with at least 3 <li> children"
+    },
+    {
+      "command": "eval \"!!document.querySelector('#preview pre code')\"",
+      "eval": "result.get('value') is True",
+      "description": "Preview contains a <pre><code> code block"
+    },
+    {
+      "command": "eval \"document.querySelector('#preview pre code') && document.querySelector('#preview pre code').textContent\"",
+      "eval": "'npm run build' in (result.get('value') or '')",
+      "description": "Preview code block contains 'npm run build'"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

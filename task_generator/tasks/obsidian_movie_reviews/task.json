@@ -1,0 +1,105 @@
+{
+  "id": "obsidian_movie_reviews",
+  "app": "obsidian",
+  "task": "Build a movie review database in the Obsidian vault at /home/user/Documents/MovieVault.\n\n1. Create folders: 'Reviews', 'Directors', 'Genres'.\n2. Create 'Reviews/Inception.md' with frontmatter `rating: 9`, `year: 2010`, `genre: sci-fi`, body with heading 'Inception', review text, links to [[Christopher Nolan]] and [[Thriller]], and tags #review #sci-fi.\n3. Create 'Reviews/Parasite.md' with frontmatter `rating: 10`, `year: 2019`, `genre: thriller`, body with heading 'Parasite', review text, links to [[Bong Joon-ho]] and [[Thriller]], and tags #review #thriller.\n4. Create 'Directors/Christopher Nolan.md' with frontmatter `nationality: British-American`, `born: 1970`, body with a heading, bio, a link to [[Inception]], and tags #director.\n5. Create 'Directors/Bong Joon-ho.md' with frontmatter `nationality: South Korean`, `born: 1969`, body with a heading, bio, a link to [[Parasite]], and tags #director.\n6. Create 'Genres/Thriller.md' with frontmatter `description: suspenseful films`, body with a heading, description, links to [[Inception]] and [[Parasite]], and tags #genre #thriller.\n7. Create 'Watchlist.md' in the vault root with a heading 'Watchlist', links to [[Inception]], [[Parasite]], [[Christopher Nolan]], [[Bong Joon-ho]], and tags #watchlist #todo.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-folder-exists /home/user/Documents/MovieVault Reviews",
+      "key": "exists",
+      "expected": true,
+      "description": "Reviews folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/MovieVault Directors",
+      "key": "exists",
+      "expected": true,
+      "description": "Directors folder exists"
+    },
+    {
+      "command": "check-folder-exists /home/user/Documents/MovieVault Genres",
+      "key": "exists",
+      "expected": true,
+      "description": "Genres folder exists"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MovieVault Inception rating 9",
+      "key": "match",
+      "expected": true,
+      "description": "Inception has rating=9"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault Inception 'Christopher Nolan'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Inception links to Christopher Nolan"
+    },
+    {
+      "command": "check-note-has-frontmatter /home/user/Documents/MovieVault Parasite rating 10",
+      "key": "match",
+      "expected": true,
+      "description": "Parasite has rating=10"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault Parasite 'Bong Joon-ho'",
+      "key": "links_to",
+      "expected": true,
+      "description": "Parasite links to Bong Joon-ho"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault 'Christopher Nolan' Inception",
+      "key": "links_to",
+      "expected": true,
+      "description": "Christopher Nolan links to Inception"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault 'Bong Joon-ho' Parasite",
+      "key": "links_to",
+      "expected": true,
+      "description": "Bong Joon-ho links to Parasite"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault Thriller Inception",
+      "key": "links_to",
+      "expected": true,
+      "description": "Thriller links to Inception"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault Thriller Parasite",
+      "key": "links_to",
+      "expected": true,
+      "description": "Thriller links to Parasite"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault Watchlist Inception",
+      "key": "links_to",
+      "expected": true,
+      "description": "Watchlist links to Inception"
+    },
+    {
+      "command": "check-note-links-to /home/user/Documents/MovieVault Watchlist Parasite",
+      "key": "links_to",
+      "expected": true,
+      "description": "Watchlist links to Parasite"
+    },
+    {
+      "command": "check-note-has-tag /home/user/Documents/MovieVault Watchlist watchlist",
+      "key": "has_tag",
+      "expected": true,
+      "description": "Watchlist has #watchlist tag"
+    },
+    {
+      "command": "list-notes /home/user/Documents/MovieVault",
+      "eval": "result.get('count') == 7",
+      "description": "Vault has exactly 7 notes"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

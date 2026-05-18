@@ -1,0 +1,57 @@
+{
+  "id": "freecad_create_parametric_box",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/part.FCStd, currently an empty document.\n\nAdd a Part::Box object with Length = 40 mm, Width = 30 mm, Height = 20 mm, and Label exactly 'MainBlock'. Save the file so it is written back to /home/user/Documents/part.FCStd.",
+  "env": {
+    "files": [
+      {
+        "filename": "part.FCStd",
+        "sandbox_path": "/home/user/Documents/part.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/part.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File saved at expected path"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/part.FCStd Part::Box 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one Part::Box object exists"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/part.FCStd Box Length 40",
+      "key": "match",
+      "expected": true,
+      "description": "Box Length == 40"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/part.FCStd Box Width 30",
+      "key": "match",
+      "expected": true,
+      "description": "Box Width == 30"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/part.FCStd Box Height 20",
+      "key": "match",
+      "expected": true,
+      "description": "Box Height == 20"
+    },
+    {
+      "command": "check-label /home/user/Documents/part.FCStd Box MainBlock",
+      "key": "match",
+      "expected": true,
+      "description": "Box Label == 'MainBlock'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

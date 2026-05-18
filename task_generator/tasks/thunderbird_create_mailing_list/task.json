@@ -1,0 +1,39 @@
+{
+  "id": "thunderbird_create_mailing_list",
+  "app": "thunderbird",
+  "task": "In Thunderbird's Address Book:\n1. Add two contacts: `Sarah Kim` (sarah@example.com) and `Tom Harris` (tom@example.com).\n2. Create a mailing list named exactly `Marketing Team` containing both Sarah Kim and Tom Harris as members.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-contact-exists Sarah Kim",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Sarah Kim exists"
+    },
+    {
+      "command": "check-contact-exists Tom Harris",
+      "key": "found",
+      "expected": true,
+      "description": "Contact Tom Harris exists"
+    },
+    {
+      "command": "check-mailing-list Marketing Team",
+      "key": "found",
+      "expected": true,
+      "description": "Mailing list Marketing Team exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

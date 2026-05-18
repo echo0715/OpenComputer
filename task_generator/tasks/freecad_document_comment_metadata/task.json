@@ -1,0 +1,33 @@
+{
+  "id": "freecad_document_comment_metadata",
+  "app": "freecad",
+  "task": "FreeCAD is open with the empty document /home/user/Documents/metadata.FCStd.\n\nSet the document-level 'Comment' property to exactly `Prototype v1` (capital P, single space before v1) and save the file so the Comment is written back to /home/user/Documents/metadata.FCStd.",
+  "env": {
+    "files": [
+      {
+        "filename": "metadata.FCStd",
+        "sandbox_path": "/home/user/Documents/metadata.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/metadata.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-document-property /home/user/Documents/metadata.FCStd Comment 'Prototype v1'",
+      "key": "match",
+      "expected": true,
+      "description": "Document Comment == 'Prototype v1'"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

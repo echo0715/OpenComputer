@@ -1,0 +1,6 @@
+{
+  "task_id": "vlc_convert_avi_to_webm",
+  "files": [
+    {"filename": "clip.avi", "sandbox_path": "/home/user/Videos/clip.avi", "type": "avi"}
+  ]
+}

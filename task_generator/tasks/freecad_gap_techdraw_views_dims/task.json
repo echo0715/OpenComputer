@@ -1,0 +1,74 @@
+{
+  "id": "freecad_gap_techdraw_views_dims",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/techdraw_start.FCStd, which already contains a Part::Box named 'Block' (60 x 40 x 20 mm).\n\nCreate a TechDraw drawing Page named exactly 'DrawingPage' using the A4 landscape template, and add to it:\n- An orthographic front view of Block named exactly 'FrontView' projecting along +Y (60x20 face visible), at scale 1:1.\n- An orthographic top view of Block named exactly 'TopView' projecting along +Z (60x40 face visible), at scale 1:1.\n- A linear length dimension attached to FrontView measuring the 60 mm horizontal width of Block.\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "techdraw_start.FCStd",
+        "sandbox_path": "/home/user/Documents/techdraw_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/techdraw_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/techdraw_start.FCStd Block",
+      "key": "exists",
+      "expected": true,
+      "description": "Block preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/techdraw_start.FCStd DrawingPage",
+      "key": "exists",
+      "expected": true,
+      "description": "DrawingPage exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/techdraw_start.FCStd DrawingPage TechDraw::DrawPage",
+      "key": "match",
+      "expected": true,
+      "description": "DrawingPage is TechDraw::DrawPage"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/techdraw_start.FCStd FrontView",
+      "key": "exists",
+      "expected": true,
+      "description": "FrontView exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/techdraw_start.FCStd FrontView TechDraw::DrawViewPart",
+      "key": "match",
+      "expected": true,
+      "description": "FrontView is DrawViewPart"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/techdraw_start.FCStd TopView",
+      "key": "exists",
+      "expected": true,
+      "description": "TopView exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/techdraw_start.FCStd TopView TechDraw::DrawViewPart",
+      "key": "match",
+      "expected": true,
+      "description": "TopView is DrawViewPart"
+    },
+    {
+      "command": "check-object-type-count /home/user/Documents/techdraw_start.FCStd TechDraw::DrawViewDimension 1",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly one DrawViewDimension"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

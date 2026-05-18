@@ -1,0 +1,58 @@
+{
+  "id": "eclipse_v2_project_with_custom_output",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace.\n\nCreate a new Java project 'Graphing' (root: /home/user/workspace/Graphing, Java nature) with the following configuration:\n\n- A single source folder named 'src'.\n- A custom default output folder `out/classes` (NOT the default 'bin').\n- Project-specific Java compiler settings with compliance, source, and target all set to 17.\n\nAdd the following two files in 'src':\n\n1. src/graphing/algo/DijkstraSolver.java:\n\n```\npackage graphing.algo;\n\npublic class DijkstraSolver {\n    public int shortestPath(int[][] graph, int start, int end) {\n        return 0;\n    }\n}\n```\n\n2. src/graphing/util/GraphUtils.java:\n\n```\npackage graphing.util;\n\npublic class GraphUtils {\n    public static int countNodes(int[][] graph) {\n        return graph == null ? 0 : graph.length;\n    }\n}\n```",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-project-exists /home/user/workspace Graphing",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'Graphing' exists"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/Graphing org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "Project has Java nature"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/Graphing src src",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath has src entry 'src'"
+    },
+    {
+      "command": "check-classpath-entry /home/user/workspace/Graphing output out/classes",
+      "key": "exists",
+      "expected": true,
+      "description": "Classpath output is 'out/classes'"
+    },
+    {
+      "command": "check-setting /home/user/workspace/Graphing org.eclipse.jdt.core.prefs org.eclipse.jdt.core.compiler.compliance 17",
+      "key": "matches",
+      "expected": true,
+      "description": "Compiler compliance = 17"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Graphing src/graphing/algo/DijkstraSolver.java",
+      "key": "exists",
+      "expected": true,
+      "description": "DijkstraSolver.java exists"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/Graphing src/graphing/util/GraphUtils.java",
+      "key": "exists",
+      "expected": true,
+      "description": "GraphUtils.java exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

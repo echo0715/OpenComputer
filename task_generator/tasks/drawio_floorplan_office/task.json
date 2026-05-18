@@ -1,0 +1,81 @@
+{
+  "id": "drawio_floorplan_office",
+  "app": "drawio",
+  "task": "Create an office floor plan in /home/user/Documents/floorplan.drawio with exactly 6 labeled rectangle rooms: 'Lobby', 'MeetingRoom', 'Office1', 'Office2', 'Kitchen', 'Restroom'.\n\nApply fill colors:\n- 'Lobby' — fillColor #f5f5f5\n- 'MeetingRoom' — fillColor #dae8fc\n- 'Kitchen' — fillColor #fff2cc\n- The other three rooms may keep any fill color.\n\nDraw at least 5 doorway connections between adjacent rooms: Lobby<->MeetingRoom, Lobby<->Office1, Lobby<->Office2, Lobby<->Kitchen, Kitchen<->Restroom. Persist to /home/user/Documents/floorplan.drawio.",
+  "env": {
+    "files": [
+      {
+        "filename": "floorplan.drawio",
+        "sandbox_path": "/home/user/Documents/floorplan.drawio"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/floorplan.drawio",
+      "key": "exists",
+      "expected": true,
+      "description": "Diagram file exists"
+    },
+    {
+      "command": "check-vertex-count /home/user/Documents/floorplan.drawio 6 0",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 6 vertices"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/floorplan.drawio Lobby",
+      "key": "exists",
+      "expected": true,
+      "description": "Lobby label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/floorplan.drawio MeetingRoom",
+      "key": "exists",
+      "expected": true,
+      "description": "MeetingRoom label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/floorplan.drawio Office1",
+      "key": "exists",
+      "expected": true,
+      "description": "Office1 label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/floorplan.drawio Office2",
+      "key": "exists",
+      "expected": true,
+      "description": "Office2 label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/floorplan.drawio Kitchen",
+      "key": "exists",
+      "expected": true,
+      "description": "Kitchen label exists"
+    },
+    {
+      "command": "check-label-exists /home/user/Documents/floorplan.drawio Restroom",
+      "key": "exists",
+      "expected": true,
+      "description": "Restroom label exists"
+    },
+    {
+      "command": "edges /home/user/Documents/floorplan.drawio 0",
+      "eval": "len(result) >= 5",
+      "description": "At least 5 doorway edges on page 0"
+    },
+    {
+      "judge": "llm",
+      "prompt": "Inspect the vertices list. Does the vertex labeled 'Lobby' have fillColor=#f5f5f5 in its style, the vertex labeled 'MeetingRoom' have fillColor=#dae8fc, and the vertex labeled 'Kitchen' have fillColor=#fff2cc? All three must match.",
+      "command": "vertices /home/user/Documents/floorplan.drawio 0",
+      "context": "command_output",
+      "description": "Lobby/MeetingRoom/Kitchen have correct fill colors"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

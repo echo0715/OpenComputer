@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenComputer — Live Pipeline Demo</title>
+<link rel="icon" type="image/svg+xml" href="opencomputer.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fbfaf7;
+  --bg-grad: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(176, 74, 47, 0.06) 0%, transparent 65%),
+             radial-gradient(900px 500px at 100% 0%, rgba(176, 74, 47, 0.03) 0%, transparent 60%),
+             var(--bg);
+  --surface: #ffffff;
+  --surface2: #f4f1ea;
+  --surface3: #efece6;
+  --border: #e5e2db;
+  --border-strong: #d4d0c5;
+  --text: #1a1a1a;
+  --text2: #6b6b6b;
+  --text3: #8a8a8a;
+  --accent: #b04a2f;
+  --accent-2: #8b3520;
+  --accent-soft: #f3e1d8;
+  --green: #4f7a3a;
+  --green-soft: #e6efde;
+  --red: #9c2a1a;
+  --orange: #b8860b;
+  --orange-soft: #fff6dc;
+  --purple: #6b4e8a;
+  --purple-soft: #ece4f3;
+  --term-bg: #1a1a1f;
+  --term-bg2: #232328;
+  --term-text: #e2e0d8;
+  --term-dim: #8a877d;
+  --term-accent: #e89c7c;
+  --term-green: #9bc47e;
+  --term-orange: #e0b95a;
+  --term-blue: #82a8d6;
+  --term-purple: #b89dd6;
+  --shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.04), 0 1px 3px rgba(26, 26, 26, 0.04);
+  --shadow-md: 0 4px 12px -2px rgba(26, 26, 26, 0.08), 0 2px 4px -2px rgba(26, 26, 26, 0.04);
+  --shadow-lg: 0 16px 40px -8px rgba(26, 26, 26, 0.14), 0 6px 14px -6px rgba(26, 26, 26, 0.07);
+  --shadow-glow: 0 6px 24px -6px rgba(176, 74, 47, 0.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --serif: 'Source Serif 4', 'Times New Roman', serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  background-image: var(--bg-grad);
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.header {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid rgba(230, 233, 240, 0.8);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.header h1 .logo {
+  width: 22px; height: 22px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 12px;
+}
+.header .live {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.header .live::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); animation: pulse 1.6s ease-in-out infinite;
+}
+.header .grow { flex: 1; }
+.header button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.header button:hover { border-color: var(--border-strong); background: var(--surface2); }
+.header button.primary {
+  background: var(--accent); color: white; border-color: var(--accent);
+}
+.header button.primary:hover { background: var(--accent-2); border-color: var(--accent-2); }
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 36px 28px 12px;
+  display: flex;
+  align-items: end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.hero-text { flex: 1; min-width: 280px; }
+.hero .eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.hero h2 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.hero h2 em { font-style: italic; color: var(--accent); }
+.hero p {
+  font-size: 16px;
+  color: var(--text2);
+  max-width: 640px;
+  line-height: 1.55;
+}
+.hero-meta {
+  display: flex; gap: 18px; flex-wrap: wrap;
+  margin-top: 18px;
+}
+.hero-meta .chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px;
+  color: var(--text2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-family: var(--mono);
+}
+.hero-meta .chip strong { color: var(--text); font-weight: 600; }
+.hero-meta .chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* ── Stage track ───────────────────────────────────────────── */
+.stages {
+  max-width: 1320px;
+  margin: 32px auto 0;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  position: relative;
+}
+.stages::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 56px; right: 56px;
+  height: 2px;
+  background: linear-gradient(to right, var(--border) 0%, var(--border) 100%);
+  z-index: 0;
+}
+.stage {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 18px 16px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.stage[data-state="running"] {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+  background: linear-gradient(180deg, #ffffff 0%, #fdf6f1 100%);
+}
+.stage[data-state="done"] {
+  border-color: var(--green);
+  background: linear-gradient(180deg, #ffffff 0%, #f5faf0 100%);
+}
+.stage-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+}
+.stage-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--surface2);
+  color: var(--text2);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.stage[data-state="running"] .stage-num {
+  background: var(--accent); color: white;
+  box-shadow: 0 0 0 4px rgba(176, 74, 47, 0.15);
+}
+.stage[data-state="done"] .stage-num {
+  background: var(--green); color: white;
+}
+.stage[data-state="done"] .stage-num::before { content: '✓'; }
+.stage[data-state="done"] .stage-num span { display: none; }
+.stage-meta { flex: 1; min-width: 0; }
+.stage-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 2px;
+}
+.stage-sub {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--mono);
+}
+.stage-bar {
+  height: 4px;
+  background: var(--surface3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.stage-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+  border-radius: 2px;
+  transition: width 0.18s linear;
+}
+.stage[data-state="done"] .stage-bar-fill {
+  background: linear-gradient(90deg, var(--green) 0%, #3d6029 100%);
+  width: 100% !important;
+}
+.stage-stats {
+  margin-top: 10px;
+  display: flex; gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+.stage-stats span strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ── Main work area ────────────────────────────────────────── */
+.work {
+  max-width: 1320px;
+  margin: 24px auto 0;
+  padding: 0 28px 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 18px;
+}
+@media (max-width: 1080px) {
+  .work { grid-template-columns: 1fr; }
+  .stages { grid-template-columns: repeat(2, 1fr); }
+  .stages::before { display: none; }
+  .hero h2 { font-size: 32px; }
+}
+
+/* Terminal */
+.terminal {
+  background: var(--term-bg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column;
+  height: 540px;
+}
+.terminal-head {
+  background: var(--term-bg2);
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.terminal-dots { display: flex; gap: 6px; }
+.terminal-dots span {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #4a4a52;
+}
+.terminal-dots span:nth-child(1) { background: #e36059; }
+.terminal-dots span:nth-child(2) { background: #e0a849; }
+.terminal-dots span:nth-child(3) { background: #6bb750; }
+.terminal-title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--term-dim);
+}
+.terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 18px 18px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--term-text);
+  scroll-behavior: smooth;
+}
+.terminal-body::-webkit-scrollbar { width: 8px; }
+.terminal-body::-webkit-scrollbar-track { background: transparent; }
+.terminal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.term-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+  opacity: 0;
+  animation: fadeUp 0.18s ease-out forwards;
+}
+.term-line.cmd { color: var(--term-text); }
+.term-line.cmd::before { content: '$ '; color: var(--term-accent); }
+.term-line.info { color: var(--term-dim); }
+.term-line.info::before { content: '→ '; color: var(--term-blue); }
+.term-line.ok { color: var(--term-green); }
+.term-line.ok::before { content: '✓ '; }
+.term-line.warn { color: var(--term-orange); }
+.term-line.warn::before { content: '! '; }
+.term-line.err { color: #e8806b; }
+.term-line.err::before { content: '✗ '; }
+.term-line.head { color: var(--term-purple); font-weight: 600; margin-top: 8px; }
+.term-line.head::before { content: '── '; color: var(--term-purple); opacity: 0.6; }
+.term-line.dim { color: var(--term-dim); padding-left: 18px; }
+.term-line.io { color: var(--term-text); padding-left: 18px; }
+.term-line.io span.k { color: var(--term-blue); }
+.term-line.io span.v { color: var(--term-green); }
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--term-accent);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: blink 1s step-start infinite;
+}
+
+/* Artifacts panel */
+.artifacts {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+  height: 540px;
+  overflow: hidden;
+}
+.artifacts-head {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.artifacts-title {
+  font-size: 13px;
+  font-weight: 600;
+  flex: 1;
+}
+.artifacts-stage-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent-2);
+  background: var(--accent-soft);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.artifacts-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 18px;
+}
+.artifacts-body::-webkit-scrollbar { width: 8px; }
+.artifacts-body::-webkit-scrollbar-track { background: transparent; }
+.artifacts-body::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+.art-empty {
+  padding: 44px 12px;
+  text-align: center;
+  color: var(--text3);
+  font-size: 13px;
+}
+
+/* Endpoint cards (Stage 1) */
+.endpoint-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.endpoint {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 11px;
+  background: var(--surface);
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  opacity: 0;
+  transform: translateY(4px);
+  animation: fadeUp 0.32s ease-out forwards;
+}
+.endpoint .tick {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  flex-shrink: 0;
+}
+.endpoint .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+.endpoint .kind {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text3);
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--surface2);
+}
+.endpoint .kind.q { color: var(--purple); background: var(--purple-soft); }
+.endpoint .kind.c { color: var(--accent-2); background: var(--accent-soft); }
+
+/* Smoke result rows (Stage 2) */
+.smoke-list { display: flex; flex-direction: column; gap: 6px; }
+.smoke-row {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--surface);
+  opacity: 0;
+  animation: fadeUp 0.28s ease-out forwards;
+}
+.smoke-row .icon {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0;
+}
+.smoke-row.fail .icon { background: #f3d8d3; color: var(--red); }
+.smoke-row .name {
+  font-family: var(--mono);
+  font-size: 12px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.smoke-row .crit {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+.smoke-row .crit strong { color: var(--green); font-weight: 600; }
+.smoke-row.fail .crit strong { color: var(--red); }
+
+/* Task cards (Stage 3) */
+.task-list { display: flex; flex-direction: column; gap: 10px; }
+.task-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  background: var(--surface);
+  opacity: 0;
+  animation: fadeUp 0.32s ease-out forwards;
+}
+.task-card .row1 {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+}
+.task-card .id {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+.task-card .diff {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: var(--orange-soft);
+  color: var(--orange);
+}
+.task-card .diff.d4 { background: var(--accent-soft); color: var(--accent-2); }
+.task-card .diff.d5 { background: #f3d8d3; color: var(--red); }
+.task-card .desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.task-card .checks {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.task-card .check {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* Repair rounds (Stage 4) */
+.repair-list { display: flex; flex-direction: column; gap: 12px; }
+.repair-task {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  background: var(--surface);
+  opacity: 0;
+  animation: fadeUp 0.32s ease-out forwards;
+}
+.repair-task .id {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.repair-rounds { display: flex; gap: 6px; align-items: center; }
+.repair-round {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--surface2);
+  color: var(--text3);
+  border: 1px solid var(--border);
+}
+.repair-round.pass { background: var(--green-soft); color: var(--green); border-color: transparent; }
+.repair-round.partial { background: var(--orange-soft); color: var(--orange); border-color: transparent; }
+.repair-arrow { color: var(--text3); font-size: 10px; }
+.repair-summary {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text2);
+  font-family: var(--mono);
+}
+.repair-summary strong { color: var(--green); }
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.7; }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  display: inline-block;
+  width: 11px; height: 11px;
+  border: 2px solid var(--term-dim);
+  border-top-color: var(--term-accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+
+/* ── Intro popup (simulated "Add new app" in v2.html) ───────── */
+.intro-back {
+  position: fixed; inset: 0;
+  background: rgba(26, 26, 26, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease-out;
+}
+.intro-back.show { opacity: 1; pointer-events: auto; }
+.intro-modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(12px) scale(0.985);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1), opacity 0.35s ease-out;
+}
+.intro-back.show .intro-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+.intro-modal-head {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.intro-modal-title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.intro-modal-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 20px;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.intro-modal-body { padding: 18px 18px 4px; }
+.intro-form-row { margin-bottom: 14px; }
+.intro-form-row label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.intro-form-row label .mute { font-weight: 400; color: var(--text3); text-transform: none; letter-spacing: 0; }
+.intro-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  min-height: 38px;
+}
+.intro-form-row.focused .intro-input {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.intro-input .placeholder {
+  color: var(--text3);
+}
+.intro-input .typed { color: var(--text); }
+.intro-input .icaret {
+  display: inline-block;
+  width: 1.5px;
+  height: 16px;
+  background: var(--text);
+  margin-left: 1px;
+  animation: blink 1s step-start infinite;
+  vertical-align: middle;
+  opacity: 0;
+}
+.intro-form-row.focused .intro-input .icaret { opacity: 1; }
+.intro-form-help {
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--text3);
+}
+.intro-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  background: var(--surface);
+  color: var(--text3);
+  outline: none;
+  resize: none;
+  min-height: 52px;
+}
+.intro-modal-foot {
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  background: var(--surface2);
+}
+.intro-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.08s ease-out, box-shadow 0.15s, background 0.15s, filter 0.15s;
+  position: relative;
+}
+.intro-btn.ghost {
+  background: transparent;
+  color: var(--text2);
+  border-color: var(--border-strong);
+}
+.intro-btn.accent {
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(176, 74, 47, 0.22);
+}
+.intro-btn.accent.hover {
+  filter: brightness(1.05);
+  box-shadow: 0 4px 18px rgba(176, 74, 47, 0.35);
+}
+.intro-btn.accent.pressed {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.94);
+}
+.intro-btn.accent.pressed::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 12px;
+  border: 2px solid var(--accent);
+  opacity: 0.5;
+  animation: intro-click-ring 0.5s ease-out;
+}
+@keyframes intro-click-ring {
+  from { transform: scale(0.85); opacity: 0.6; }
+  to   { transform: scale(1.15); opacity: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Intro popup: simulated "Add new app" interaction in v2.html -->
+<div class="intro-back" id="introBack">
+  <div class="intro-modal" id="introModal">
+    <div class="intro-modal-head">
+      <div class="intro-modal-title">Choose an app &rarr; Training/Evaluation environment</div>
+      <button class="intro-modal-close" tabindex="-1" aria-hidden="true">×</button>
+    </div>
+    <div class="intro-modal-body">
+      <div class="intro-form-row" id="introFormRow">
+        <label>App name</label>
+        <div class="intro-input" id="introInput">
+          <span class="placeholder" id="introPlaceholder">e.g. krita</span>
+          <span class="typed" id="introTyped"></span>
+          <span class="icaret"></span>
+        </div>
+        <div class="intro-form-help">Letters, digits, underscores, dashes only.</div>
+      </div>
+      <div class="intro-form-row">
+        <label>Instructions <span class="mute">(optional)</span></label>
+        <textarea class="intro-textarea" placeholder="What should the verifier inspect?" tabindex="-1" readonly></textarea>
+      </div>
+    </div>
+    <div class="intro-modal-foot">
+      <button class="intro-btn ghost" tabindex="-1">Cancel</button>
+      <button class="intro-btn accent" id="introCreateBtn" tabindex="-1">Create &amp; Generate</button>
+    </div>
+  </div>
+</div>
+
+<section class="stages" id="stages">
+  <!-- Stages injected by JS -->
+</section>
+
+<section class="work">
+  <div class="terminal">
+    <div class="terminal-head">
+      <div class="terminal-dots"><span></span><span></span><span></span></div>
+      <div class="terminal-title" id="termTitle">opencomputer ~ pipeline</div>
+    </div>
+    <div class="terminal-body" id="terminal"></div>
+  </div>
+  <div class="artifacts">
+    <div class="artifacts-head">
+      <div class="artifacts-title" id="artTitle">Stage output</div>
+      <div class="artifacts-stage-tag" id="artTag">idle</div>
+    </div>
+    <div class="artifacts-body" id="artifacts">
+      <div class="art-empty">Pipeline starting…</div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── Pipeline mock data ────────────────────────────────────────
+
+const ENDPOINTS = [
+  { name: 'objects',          kind: 'q', label: 'Query' },
+  { name: 'object-info',      kind: 'q', label: 'Query' },
+  { name: 'materials',        kind: 'q', label: 'Query' },
+  { name: 'scene-info',       kind: 'q', label: 'Query' },
+  { name: 'collections',      kind: 'q', label: 'Query' },
+  { name: 'animations',       kind: 'q', label: 'Query' },
+  { name: 'modifiers',        kind: 'q', label: 'Query' },
+  { name: 'constraints',      kind: 'q', label: 'Query' },
+  { name: 'shape-keys',       kind: 'q', label: 'Query' },
+  { name: 'compositor-nodes', kind: 'q', label: 'Query' },
+  { name: 'check-object-exists',    kind: 'c', label: 'Check' },
+  { name: 'check-object-type',      kind: 'c', label: 'Check' },
+  { name: 'check-material',         kind: 'c', label: 'Check' },
+  { name: 'check-render-engine',    kind: 'c', label: 'Check' },
+  { name: 'check-resolution',       kind: 'c', label: 'Check' },
+  { name: 'check-frame-range',      kind: 'c', label: 'Check' },
+  { name: 'check-keyframe',         kind: 'c', label: 'Check' },
+  { name: 'check-modifier-stack',   kind: 'c', label: 'Check' },
+  { name: 'check-collection',       kind: 'c', label: 'Check' },
+  { name: 'check-animation-exists', kind: 'c', label: 'Check' },
+  { name: 'check-driver',           kind: 'c', label: 'Check' },
+  { name: 'check-shape-key',        kind: 'c', label: 'Check' },
+  { name: 'check-compositor-node',  kind: 'c', label: 'Check' },
+  { name: 'check-physics-cache',    kind: 'c', label: 'Check' },
+  { name: 'check-armature-bones',   kind: 'c', label: 'Check' },
+  { name: 'check-geometry-nodes',   kind: 'c', label: 'Check' },
+  { name: 'force-save-via-gui',     kind: 'c', label: 'Check' },
+];
+
+const SMOKE_TASKS = [
+  { id: 'smoke_blender_add_keyframe',         pass: true,  crit: '3/3' },
+  { id: 'smoke_blender_add_material',         pass: true,  crit: '3/3' },
+  { id: 'smoke_blender_add_subsurf_modifier', pass: true,  crit: '3/3' },
+  { id: 'smoke_blender_armature_pose',        pass: true,  crit: '4/4' },
+  { id: 'smoke_blender_compositor_nodes',     pass: true,  crit: '3/3' },
+  { id: 'smoke_blender_create_collection',    pass: true,  crit: '2/2' },
+  { id: 'smoke_blender_drivers_custom_props', pass: true,  crit: '3/3' },
+  { id: 'smoke_blender_geometry_nodes',       pass: true,  crit: '3/3' },
+  { id: 'smoke_blender_object_constraint',    pass: true,  crit: '2/2' },
+  { id: 'smoke_blender_physics_anim_scene',   pass: true,  crit: '4/4' },
+  { id: 'smoke_blender_save_file',            pass: true,  crit: '2/2' },
+  { id: 'smoke_blender_set_render_engine',    pass: true,  crit: '2/2' },
+  { id: 'smoke_blender_set_resolution',       pass: true,  crit: '3/3' },
+  { id: 'smoke_blender_shape_keys',           pass: true,  crit: '3/3' },
+];
+
+const TASKS = [
+  {
+    id: 'blender_animated_object',
+    diff: 4,
+    desc: 'Rename Cube to "Mover", animate its location with two keyframes (frame 1 and 50), set frame range 1–50, add a Plane named "Ground" with material "GroundMat", set render to 1280×720, and save.',
+    checks: ['check-object-exists', 'check-animation-exists', 'check-material', 'check-resolution', 'check-frame-range'],
+  },
+  {
+    id: 'blender_camera_light_setup',
+    diff: 4,
+    desc: 'Add a Camera named "MainCam" at (7, -7, 5) pointing at the origin, add a Sun light "KeyLight" with energy 4.0, and mark MainCam as the scene\'s active camera.',
+    checks: ['check-object-exists', 'check-object-type', 'scene-info'],
+  },
+  {
+    id: 'blender_collection_hierarchy',
+    diff: 4,
+    desc: 'Create three collections "Hero", "Set", "Lights"; nest "Lights" inside "Set"; move existing Cube into "Hero" and Camera into "Set/Lights".',
+    checks: ['check-collection', 'collections'],
+  },
+  {
+    id: 'blender_boolean_cutout',
+    diff: 5,
+    desc: 'Add a Cylinder positioned to intersect the default Cube and use a Boolean (Difference) modifier to cut a circular hole through it; apply the modifier and save as cutout.blend.',
+    checks: ['check-modifier-stack', 'check-object-exists'],
+  },
+  {
+    id: 'blender_frame_range_fps',
+    diff: 4,
+    desc: 'Set the active scene to 24 fps with frame start 1 and end 240, and rename the scene to "Shot01".',
+    checks: ['check-frame-range', 'scene-info'],
+  },
+  {
+    id: 'blender_compositor_blur_glare',
+    diff: 5,
+    desc: 'Enable compositor nodes, build Render Layers → Blur → Glare → Composite, set Blur size to 12 px and Glare type to Streaks; save the file.',
+    checks: ['check-compositor-node'],
+  },
+  {
+    id: 'blender_geometry_nodes_scatter',
+    diff: 5,
+    desc: 'On the Plane, add a Geometry Nodes modifier named "Scatter" using Distribute Points on Faces with density 8; instance the Cube on those points.',
+    checks: ['check-geometry-nodes', 'check-modifier-stack'],
+  },
+  {
+    id: 'blender_armature_bone_chain',
+    diff: 5,
+    desc: 'Add an Armature with a 3-bone chain "spine.001 → spine.002 → spine.003" rooted at the origin and parent the Cube to the tip bone with vertex groups.',
+    checks: ['check-armature-bones', 'check-object-exists'],
+  },
+  {
+    id: 'blender_complex_product_shot',
+    diff: 5,
+    desc: 'Build a product-shot scene: Suzanne with a glossy red Principled BSDF material, three-point lighting, Cycles render engine at 1920×1080 with 128 samples, and a camera angled 30°.',
+    checks: ['check-render-engine', 'check-material', 'check-resolution', 'check-object-exists'],
+  },
+];
+
+const REPAIR_RUNS = [
+  {
+    id: 'blender_animated_object',
+    rounds: ['5/8', '7/8', '8/8'],
+    summary: 'verifier reconciled with LLM judge after 2 rounds',
+    final: 'pass',
+  },
+  {
+    id: 'blender_camera_light_setup',
+    rounds: ['4/6', '6/6'],
+    summary: 'Round 1 added missing check-active-camera endpoint',
+    final: 'pass',
+  },
+  {
+    id: 'blender_collection_hierarchy',
+    rounds: ['3/5', '4/5', '5/5'],
+    summary: 'Final round patched check-collection-parent recursion',
+    final: 'pass',
+  },
+];
+
+// ── Stage configuration ───────────────────────────────────────
+
+const STAGES = [
+  {
+    id: 'verifier',
+    title: 'Verifier Generation',
+    sub: 'verifiers/blender/blender.py',
+    cmd: 'verifier-build --app blender',
+    duration: 4000,
+    plan: [
+      { t: 0,    type: 'cmd',  text: 'cat verifiers/CLAUDE.md  verifiers/blender/README.md' },
+      { t: 100, type: 'info', text: 'Inferring inspectable surfaces · designing endpoints (bpy, .blend)' },
+      { t: 300, type: 'cmd',  text: 'write blender.py · Test.md · test_blender.py  (1842 lines, 27 cases)' },
+      { t: 1300, type: 'cmd',  text: 'python verifiers/blender/test_blender.py' },
+      { t: 1500, type: 'dim',  text: '  27 tests · OK in 0.92s' },
+      { t: 3500, type: 'ok',   text: 'Verifier ready: 27 endpoints (10 query + 17 check)' },
+    ],
+    artifactStream: () => streamEndpoints(),
+  },
+  {
+    id: 'smoke',
+    title: 'Smoke Testing',
+    sub: 'smoke/runs/blender_*',
+    cmd: 'smoke_loop --app blender',
+    duration: 5000,
+    plan: [
+      { t: 0,    type: 'cmd',  text: 'python smoke/smoke_loop.py --app blender' },
+      { t: 120,  type: 'info', text: 'Stages 1-4 — map · evaluate · finalize · synth env (14 tasks, avg D 1.7)' },
+      { t: 350,  type: 'cmd',  text: 'sandbox.start template=desktop-all-apps  parallelism=4' },
+      { t: 550,  type: 'ok',   text: 'sandbox 7f3a1b… online (xfce4 + blender 4.2)' },
+      { t: 700,  type: 'head', text: 'Running smoke trajectories' },
+      // smoke task results streamed below via artifactStream
+    ],
+    artifactStream: () => streamSmoke(),
+    tail: [
+      { t: 4800, type: 'ok',  text: '14/14 endpoint groups passed — verifier validated end-to-end' },
+    ],
+  },
+  {
+    id: 'tasks',
+    title: 'Task Generation',
+    sub: 'task_generator/tasks/',
+    cmd: 'task-gen --app blender',
+    duration: 3500,
+    plan: [
+      { t: 0,    type: 'cmd',  text: 'cat task_generator/CLAUDE.md  task_generator/LESSONS.md' },
+      { t: 150,  type: 'head', text: 'Stages 1-4 — propose · evaluate · match · synth env' },
+      { t: 350,  type: 'dim',  text: '  13 proposals · accepted 11 / rejected 2' },
+      { t: 600,  type: 'dim',  text: '  direct match 7 · adapt 1 · extend verifier 2 · discard 1' },
+      { t: 850,  type: 'cmd',  text: 'extend verifiers/blender/blender.py +check-active-camera +check-vertex-group' },
+      { t: 1000, type: 'ok',   text: 'verifier patched, 27 → 29 endpoints' },
+      { t: 1100, type: 'cmd',  text: 'generate animation_demo · product_shot · cutout  (.blend × 3, bpy-verified)' },
+      // task cards streamed below
+    ],
+    artifactStream: () => streamTasks(),
+    tail: [
+      { t: 3300, type: 'ok', text: '9 finalized tasks written to task_generator/tasks/blender_*' },
+    ],
+  },
+  {
+    id: 'repair',
+    title: 'Repair Loop',
+    sub: 'evaluation/repair/runs/',
+    cmd: 'repair_loop --max-rounds 3',
+    duration: 3250,
+    plan: [
+      { t: 0,    type: 'cmd',  text: 'python evaluation/repair/repair_loop.py --app blender --max-rounds 3' },
+      { t: 100,  type: 'info', text: 'Selecting 3 finalized tasks for reconciliation' },
+      { t: 250,  type: 'head', text: 'Task 1/3 · blender_animated_object' },
+      { t: 400,  type: 'info', text: 'Rounds 0-2 — verifier 5/8 → 8/8 (patched 2 endpoints) ✓' },
+      { t: 750,  type: 'ok',   text: 'reconciled in 2 rounds' },
+      { t: 900,  type: 'head', text: 'Task 2/3 · blender_camera_light_setup' },
+      { t: 1050, type: 'info', text: 'Rounds 0-1 — verifier 4/6 → 6/6 (added check-active-camera) ✓' },
+      { t: 1450, type: 'ok',   text: 'reconciled in 1 round' },
+      { t: 1600, type: 'head', text: 'Task 3/3 · blender_collection_hierarchy' },
+      { t: 1750, type: 'info', text: 'Rounds 0-2 — verifier 3/5 → 5/5 (fixed parent recursion) ✓' },
+      { t: 2200, type: 'ok',   text: 'reconciled in 2 rounds' },
+      { t: 2700, type: 'ok',   text: '3/3 tasks reconciled · verifier delta committed: +3 endpoints, +6 fixes' },
+    ],
+    artifactStream: () => streamRepair(),
+  },
+];
+
+// ── Render stage cards ────────────────────────────────────────
+
+const stagesEl = document.getElementById('stages');
+STAGES.forEach((stage, idx) => {
+  const el = document.createElement('div');
+  el.className = 'stage';
+  el.dataset.state = 'queued';
+  el.dataset.stage = stage.id;
+  el.innerHTML = `
+    <div class="stage-head">
+      <div class="stage-num"><span>${idx + 1}</span></div>
+      <div class="stage-meta">
+        <div class="stage-title">${stage.title}</div>
+        <div class="stage-sub">${stage.sub}</div>
+      </div>
+    </div>
+    <div class="stage-bar"><div class="stage-bar-fill" data-fill="${stage.id}"></div></div>
+    <div class="stage-stats">
+      <span id="stat-${stage.id}">queued</span>
+    </div>
+  `;
+  stagesEl.appendChild(el);
+});
+
+// ── Terminal helpers ─────────────────────────────────────────
+
+const termEl = document.getElementById('terminal');
+const termTitleEl = document.getElementById('termTitle');
+const artEl = document.getElementById('artifacts');
+const artTitleEl = document.getElementById('artTitle');
+const artTagEl = document.getElementById('artTag');
+
+function termLine(type, text) {
+  const div = document.createElement('div');
+  div.className = `term-line ${type}`;
+  div.textContent = text;
+  termEl.appendChild(div);
+  termEl.scrollTop = termEl.scrollHeight;
+}
+
+function typeCommand(text, charDelay = 38) {
+  return new Promise((resolve) => {
+    const div = document.createElement('div');
+    div.className = 'term-line cmd';
+    div.style.opacity = '1';
+    div.style.animation = 'none';
+    const textSpan = document.createElement('span');
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    div.appendChild(textSpan);
+    div.appendChild(cursor);
+    termEl.appendChild(div);
+    termEl.scrollTop = termEl.scrollHeight;
+
+    let i = 0;
+    function step() {
+      if (i < text.length) {
+        textSpan.textContent += text[i++];
+        termEl.scrollTop = termEl.scrollHeight;
+        setTimeout(step, charDelay + Math.random() * 35);
+      } else {
+        setTimeout(() => { cursor.remove(); resolve(); }, 380);
+      }
+    }
+    setTimeout(step, 220);
+  });
+}
+
+function clearTerm() {
+  termEl.innerHTML = '';
+}
+
+function clearArt() {
+  artEl.innerHTML = '';
+}
+
+function setArtHeader(title, tag) {
+  artTitleEl.textContent = title;
+  artTagEl.textContent = tag;
+}
+
+function setStat(id, html) {
+  const el = document.getElementById(`stat-${id}`);
+  if (el) el.innerHTML = html;
+}
+
+function setStageState(id, state) {
+  const el = document.querySelector(`.stage[data-stage="${id}"]`);
+  if (el) el.dataset.state = state;
+}
+
+function setStageFill(id, pct) {
+  const el = document.querySelector(`.stage-bar-fill[data-fill="${id}"]`);
+  if (el) el.style.width = pct + '%';
+}
+
+// Active-stage progress tracking: lets the progress bar follow the
+// real artifact stream count instead of drifting on pure time.
+let activeStage = null;
+function setItemTotal(n) { if (activeStage) activeStage._total = n; }
+function bumpItem()      { if (activeStage) activeStage._done = (activeStage._done || 0) + 1; }
+
+
+// ── Artifact streamers ───────────────────────────────────────
+
+function streamEndpoints() {
+  const wrap = document.createElement('div');
+  wrap.className = 'endpoint-list';
+  artEl.appendChild(wrap);
+  const total = ENDPOINTS.length;
+  setItemTotal(total);
+  let i = 0;
+  function emit() {
+    if (i >= total) return;
+    const e = ENDPOINTS[i++];
+    const div = document.createElement('div');
+    div.className = 'endpoint';
+    div.innerHTML = `
+      <span class="tick">✓</span>
+      <span class="name">${e.name}</span>
+      <span class="kind ${e.kind}">${e.label}</span>
+    `;
+    wrap.appendChild(div);
+    bumpItem();
+    setStat('verifier', `<strong>${i}</strong>/${total} endpoints`);
+    if (i < total) setTimeout(emit, 110 + Math.random() * 30);
+  }
+  setTimeout(emit, 500);
+}
+
+function streamSmoke() {
+  const wrap = document.createElement('div');
+  wrap.className = 'smoke-list';
+  artEl.appendChild(wrap);
+  const total = SMOKE_TASKS.length;
+  setItemTotal(total);
+  let i = 0;
+  function emit() {
+    if (i >= total) return;
+    const s = SMOKE_TASKS[i++];
+    const div = document.createElement('div');
+    div.className = `smoke-row${s.pass ? '' : ' fail'}`;
+    div.innerHTML = `
+      <span class="icon">${s.pass ? '✓' : '✗'}</span>
+      <span class="name">${s.id}</span>
+      <span class="crit"><strong>${s.crit}</strong> criteria</span>
+    `;
+    wrap.appendChild(div);
+    // Also stream a log line per task
+    termLine('dim', `  [${String(i).padStart(2, '0')}/${total}] ${s.id.padEnd(38, ' ')}  ${s.pass ? '✓' : '✗'} ${s.crit}`);
+    bumpItem();
+    setStat('smoke', `<strong>${i}</strong>/${total} groups passing`);
+    if (i < total) setTimeout(emit, 270 + Math.random() * 50);
+  }
+  setTimeout(emit, 700);
+}
+
+function streamTasks() {
+  const wrap = document.createElement('div');
+  wrap.className = 'task-list';
+  artEl.appendChild(wrap);
+  const total = TASKS.length;
+  setItemTotal(total);
+  let i = 0;
+  function emit() {
+    if (i >= total) return;
+    const t = TASKS[i++];
+    const div = document.createElement('div');
+    div.className = 'task-card';
+    div.innerHTML = `
+      <div class="row1">
+        <span class="id">${t.id}</span>
+        <span class="diff d${t.diff}">D${t.diff}</span>
+      </div>
+      <div class="desc">${t.desc}</div>
+      <div class="checks">${t.checks.map(c => `<span class="check">${c}</span>`).join('')}</div>
+    `;
+    wrap.appendChild(div);
+    termLine('dim', `  ✓ finalized  task_generator/tasks/${t.id}/task.json  (D${t.diff})`);
+    bumpItem();
+    setStat('tasks', `<strong>${i}</strong>/${total} finalized`);
+    if (i < total) setTimeout(emit, 220 + Math.random() * 60);
+  }
+  setTimeout(emit, 1200);
+}
+
+function streamRepair() {
+  const wrap = document.createElement('div');
+  wrap.className = 'repair-list';
+  artEl.appendChild(wrap);
+  const total = REPAIR_RUNS.length;
+  setItemTotal(total);
+  // Schedule each repair task to render in step with the matching
+  // "reconciled in N rounds" log line.
+  const offsets = [750, 1450, 2200];
+  REPAIR_RUNS.forEach((r, idx) => {
+    setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = 'repair-task';
+      const roundsHtml = r.rounds.map((round, k) => {
+        const isLast = k === r.rounds.length - 1;
+        const cls = isLast ? 'pass' : 'partial';
+        const arrow = k < r.rounds.length - 1 ? '<span class="repair-arrow">→</span>' : '';
+        return `<span class="repair-round ${cls}">R${k} ${round}</span>${arrow}`;
+      }).join('');
+      div.innerHTML = `
+        <div class="id">${r.id}</div>
+        <div class="repair-rounds">${roundsHtml}</div>
+        <div class="repair-summary"><strong>✓</strong> ${r.summary}</div>
+      `;
+      wrap.appendChild(div);
+      bumpItem();
+      setStat('repair', `<strong>${idx + 1}</strong>/${total} reconciled`);
+    }, offsets[idx]);
+  });
+}
+
+// ── Stage runner ─────────────────────────────────────────────
+
+function runStage(stage) {
+  return new Promise((resolve) => {
+    setStageState(stage.id, 'running');
+    setStat(stage.id, ({
+      verifier: '<strong>0</strong>/27 endpoints',
+      smoke:    '<strong>0</strong>/14 groups passing',
+      tasks:    '<strong>0</strong>/9 finalized',
+      repair:   '<strong>0</strong>/3 reconciled',
+    })[stage.id] || '');
+    termTitleEl.textContent = `opencomputer ~ ${stage.cmd}`;
+
+    // Reset artifact-stream tracking for this stage. The bar will follow
+    // the real item count once items start streaming.
+    stage._done = 0;
+    stage._total = 0;
+    activeStage = stage;
+
+    // Header banner in terminal
+    termLine('head', `Stage · ${stage.title}`);
+
+    // Artifact panel
+    clearArt();
+    const titles = {
+      verifier: ['Generated endpoints', 'verifier'],
+      smoke: ['Smoke run results', 'sandbox'],
+      tasks: ['Finalized training tasks', 'task-gen'],
+      repair: ['Repair-loop reconciliation', 'judge'],
+    };
+    setArtHeader(titles[stage.id][0], titles[stage.id][1]);
+
+    // Schedule plan lines
+    stage.plan.forEach(line => {
+      setTimeout(() => termLine(line.type, line.text), line.t);
+    });
+    if (stage.tail) {
+      stage.tail.forEach(line => {
+        setTimeout(() => termLine(line.type, line.text), line.t);
+      });
+    }
+    if (stage.artifactStream) stage.artifactStream();
+
+    // Drive progress bar: max(time, data) so the bar never drifts ahead of
+    // or behind the X/Y count shown directly below it.
+    const t0 = performance.now();
+    function tick() {
+      const tProg = Math.min(1, (performance.now() - t0) / stage.duration);
+      const dProg = stage._total > 0 ? stage._done / stage._total : 0;
+      const k = Math.max(tProg, dProg);
+      setStageFill(stage.id, k * 100);
+      if (tProg < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    setTimeout(() => {
+      setStageState(stage.id, 'done');
+      setStageFill(stage.id, 100);
+      const finalStats = {
+        verifier: `<strong>27</strong>/27 endpoints · OK`,
+        smoke:    `<strong>14</strong>/14 groups · OK`,
+        tasks:    `<strong>9</strong> tasks finalized`,
+        repair:   `<strong>3</strong>/3 reconciled`,
+      };
+      setStat(stage.id, finalStats[stage.id]);
+      termLine('ok', `${stage.title} complete`);
+      termLine('dim', '');
+      activeStage = null;
+      resolve();
+    }, stage.duration);
+  });
+}
+
+async function playIntroPopup() {
+  const back = document.getElementById('introBack');
+  const formRow = document.getElementById('introFormRow');
+  const placeholder = document.getElementById('introPlaceholder');
+  const typed = document.getElementById('introTyped');
+  const btn = document.getElementById('introCreateBtn');
+
+  // Reset
+  typed.textContent = '';
+  placeholder.style.display = '';
+  formRow.classList.remove('focused');
+  btn.classList.remove('hover', 'pressed');
+
+  // Show overlay
+  back.classList.add('show');
+  await sleep(550);
+
+  // Focus the app-name input
+  formRow.classList.add('focused');
+  placeholder.style.display = 'none';
+  await sleep(380);
+
+  // Type the app name
+  const name = 'blender';
+  for (let i = 0; i < name.length; i++) {
+    typed.textContent += name[i];
+    await sleep(95 + Math.random() * 50);
+  }
+
+  await sleep(540);
+
+  // Hover and press the Create & Generate button
+  btn.classList.add('hover');
+  await sleep(280);
+  btn.classList.add('pressed');
+  await sleep(260);
+  btn.classList.remove('pressed');
+  await sleep(160);
+
+  // Fade out
+  back.classList.remove('show');
+  await sleep(420);
+}
+
+async function playPipeline() {
+  // Reset
+  clearTerm();
+  clearArt();
+  STAGES.forEach(s => {
+    setStageState(s.id, 'queued');
+    setStageFill(s.id, 0);
+    setStat(s.id, 'queued');
+  });
+  setArtHeader('Pipeline starting…', 'idle');
+  artEl.innerHTML = '<div class="art-empty">Waiting for command…</div>';
+  termTitleEl.textContent = 'opencomputer ~ ready';
+
+  // Opening scene: user creates the app from the v2.html dashboard
+  await playIntroPopup();
+
+  await sleep(280);
+  termLine('info', 'Booting pipeline · 4 stages · target: blender');
+  termLine('dim', '');
+  await sleep(700);
+
+  for (const stage of STAGES) {
+    await runStage(stage);
+  }
+
+  termLine('head', 'Pipeline complete');
+  termLine('ok', 'blender · ready for training · 27 endpoints · 14 smoke · 9 tasks · 3 reconciled');
+  termTitleEl.textContent = 'opencomputer ~ done';
+
+  // Auto-replay after a pause
+  setTimeout(() => {
+    if (autoReplay) playPipeline();
+  }, 6000);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── Boot ──────────────────────────────────────────────────────
+
+let autoReplay = true;
+const replayBtn = document.getElementById('replayBtn');
+if (replayBtn) {
+  replayBtn.addEventListener('click', () => { playPipeline(); });
+}
+
+playPipeline();
+</script>
+
+</body>
+</html>

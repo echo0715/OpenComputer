@@ -1,0 +1,57 @@
+{
+  "id": "firefox_local_form_submit_dom",
+  "app": "firefox",
+  "task": "Open the local feedback survey at file:///home/user/Documents/survey.html and fill the form with these exact values:\n- Full name: Jordan Miller\n- Age: 29\n- Country: Canada\n- Subscribe to newsletter: checked\n- Comments: Looks great overall\n\nSubmit the form. The page's JavaScript handler will, on a valid submit, populate the #result element with a confirmation message containing 'Submitted Jordan Miller'. Leave the tab on file:///home/user/Documents/survey.html with the result visible.",
+  "env": {
+    "files": [
+      {
+        "filename": "survey.html",
+        "sandbox_path": "/home/user/Documents/survey.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open survey.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for survey.html is open"
+    },
+    {
+      "command": "input \"#fullname\"",
+      "eval": "result.get('value') == 'Jordan Miller'",
+      "description": "Full name field equals 'Jordan Miller'"
+    },
+    {
+      "command": "input \"#age\"",
+      "eval": "str(result.get('value')) == '29'",
+      "description": "Age field equals 29"
+    },
+    {
+      "command": "input \"#country\"",
+      "eval": "result.get('value') == 'Canada'",
+      "description": "Country dropdown is Canada"
+    },
+    {
+      "command": "eval \"document.getElementById('newsletter').checked\"",
+      "eval": "result.get('value') in (True, 'true')",
+      "description": "Newsletter checkbox is checked"
+    },
+    {
+      "command": "input \"#comments\"",
+      "eval": "result.get('value') == 'Looks great overall'",
+      "description": "Comments textarea equals 'Looks great overall'"
+    },
+    {
+      "command": "eval \"document.getElementById('result').textContent\"",
+      "eval": "'Submitted Jordan Miller' in (result.get('value') or '')",
+      "description": "#result element contains 'Submitted Jordan Miller'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

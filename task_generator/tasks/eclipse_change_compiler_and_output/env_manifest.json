@@ -1,0 +1,9 @@
+{
+  "task_id": "eclipse_change_compiler_and_output",
+  "files": [
+    {"filename": "ReportEngine/.project", "sandbox_path": "/home/user/workspace/ReportEngine/.project", "type": "xml"},
+    {"filename": "ReportEngine/.classpath", "sandbox_path": "/home/user/workspace/ReportEngine/.classpath", "type": "xml"},
+    {"filename": "ReportEngine/.settings/org.eclipse.jdt.core.prefs", "sandbox_path": "/home/user/workspace/ReportEngine/.settings/org.eclipse.jdt.core.prefs", "type": "properties"},
+    {"filename": "ReportEngine/src/com/report/ReportGenerator.java", "sandbox_path": "/home/user/workspace/ReportEngine/src/com/report/ReportGenerator.java", "type": "java"}
+  ]
+}

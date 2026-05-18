@@ -1,0 +1,81 @@
+{
+  "id": "gedit_sql_schema_create",
+  "app": "gedit",
+  "task": "Create a SQL schema file at /home/user/Documents/schema.sql that defines three tables via `CREATE TABLE` statements (each ending with a semicolon):\n\n1. `users`:\n   - `user_id INTEGER PRIMARY KEY`\n   - `username VARCHAR(50)`\n   - `email VARCHAR(100)`\n   - `created_at VARCHAR(30)`\n\n2. `products`:\n   - `product_id INTEGER PRIMARY KEY`\n   - `name VARCHAR(100)`\n   - `price INTEGER`\n   - `stock INTEGER`\n\n3. `orders`:\n   - `order_id INTEGER PRIMARY KEY`\n   - `user_id INTEGER`\n   - `product_id INTEGER`\n   - `quantity INTEGER`\n   - a `FOREIGN KEY` clause referencing `users(user_id)` AND a `FOREIGN KEY` clause referencing `products(product_id)`\n\nBlank lines or SQL comments between the table definitions are allowed. The file must have at least 25 lines.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/schema.sql",
+      "key": "exists",
+      "expected": true,
+      "description": "schema.sql exists"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"CREATE TABLE users\"",
+      "key": "contains",
+      "expected": true,
+      "description": "users table created"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"CREATE TABLE products\"",
+      "key": "contains",
+      "expected": true,
+      "description": "products table created"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"CREATE TABLE orders\"",
+      "key": "contains",
+      "expected": true,
+      "description": "orders table created"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"PRIMARY KEY\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Primary keys defined"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"FOREIGN KEY\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Foreign keys defined"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"VARCHAR\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Uses VARCHAR columns"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"INTEGER\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Uses INTEGER columns"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"user_id\"",
+      "key": "contains",
+      "expected": true,
+      "description": "user_id column present"
+    },
+    {
+      "command": "check-file-contains /home/user/Documents/schema.sql \"product_id\"",
+      "key": "contains",
+      "expected": true,
+      "description": "product_id column present"
+    },
+    {
+      "command": "file-line-count /home/user/Documents/schema.sql",
+      "eval": "result.get('line_count', 0) >= 25",
+      "description": "File has at least 25 lines"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

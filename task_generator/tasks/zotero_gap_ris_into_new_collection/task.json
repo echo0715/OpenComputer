@@ -1,0 +1,48 @@
+{
+  "id": "zotero_gap_ris_into_new_collection",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite, and an RIS file with 2 entries (ELECTRA and RoBERTa) is at /home/user/Documents/nlp_papers.ris.\n\nCreate a new top-level collection named exactly 'NLP Imports' and import /home/user/Documents/nlp_papers.ris so that both imported items end up inside that collection. After completion, the 'NLP Imports' collection must exist and contain at least 2 items, and items titled 'ELECTRA' and 'RoBERTa' must exist in the library. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      },
+      {
+        "filename": "nlp_papers.ris",
+        "sandbox_path": "/home/user/Documents/nlp_papers.ris"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-collection-exists 'NLP Imports'",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection exists"
+    },
+    {
+      "command": "check-collection-count 'NLP Imports' 2",
+      "key": "match",
+      "expected": true,
+      "description": "Collection has at least 2 items"
+    },
+    {
+      "command": "check-item-exists ELECTRA",
+      "key": "exists",
+      "expected": true,
+      "description": "ELECTRA imported"
+    },
+    {
+      "command": "check-item-exists RoBERTa",
+      "key": "exists",
+      "expected": true,
+      "description": "RoBERTa imported"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

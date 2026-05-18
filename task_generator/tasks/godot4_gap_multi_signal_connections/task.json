@@ -1,0 +1,25 @@
+{
+  "id": "godot4_gap_multi_signal_connections",
+  "app": "godot4",
+  "task": "Edit the Godot project at /home/user/godot_projects/multi_signal_game/.\n\n1. In /home/user/godot_projects/multi_signal_game/menu.tscn, add three [connection] blocks wiring each button's 'pressed' signal to the MenuController root node:\n\n[connection signal=\"pressed\" from=\"Menu/PlayButton\" to=\".\" method=\"_on_play_pressed\"]\n[connection signal=\"pressed\" from=\"Menu/OptionsButton\" to=\".\" method=\"_on_options_pressed\"]\n[connection signal=\"pressed\" from=\"Menu/QuitButton\" to=\".\" method=\"_on_quit_pressed\"]\n\n2. In /home/user/godot_projects/multi_signal_game/scripts/menu_controller.gd (which has 'extends Control'), define all three handler functions:\n\nfunc _on_play_pressed() -> void:\n\tpass\nfunc _on_options_pressed() -> void:\n\tpass\nfunc _on_quit_pressed() -> void:\n\tget_tree().quit()\n\nSave both files.",
+  "env": {
+    "files": [
+      {"filename": "project.godot", "sandbox_path": "/home/user/godot_projects/multi_signal_game/project.godot"},
+      {"filename": "menu.tscn", "sandbox_path": "/home/user/godot_projects/multi_signal_game/menu.tscn"},
+      {"filename": "scripts/menu_controller.gd", "sandbox_path": "/home/user/godot_projects/multi_signal_game/scripts/menu_controller.gd"},
+      {"filename": "icon.svg", "sandbox_path": "/home/user/godot_projects/multi_signal_game/icon.svg"}
+    ]
+  },
+  "verification": [
+    {"command": "check-file-contains /home/user/godot_projects/multi_signal_game/menu.tscn _on_play_pressed", "key": "contains", "expected": true, "description": "play handler referenced in scene"},
+    {"command": "check-file-contains /home/user/godot_projects/multi_signal_game/menu.tscn _on_options_pressed", "key": "contains", "expected": true, "description": "options handler referenced in scene"},
+    {"command": "check-file-contains /home/user/godot_projects/multi_signal_game/menu.tscn _on_quit_pressed", "key": "contains", "expected": true, "description": "quit handler referenced in scene"},
+    {"command": "check-file-contains /home/user/godot_projects/multi_signal_game/menu.tscn connection", "key": "contains", "expected": true, "description": "at least one [connection] block exists"},
+    {"command": "check-file-contains /home/user/godot_projects/multi_signal_game/menu.tscn pressed", "key": "contains", "expected": true, "description": "pressed signal wired"},
+    {"command": "check-script-func /home/user/godot_projects/multi_signal_game/scripts/menu_controller.gd _on_play_pressed", "key": "exists", "expected": true, "description": "_on_play_pressed defined"},
+    {"command": "check-script-func /home/user/godot_projects/multi_signal_game/scripts/menu_controller.gd _on_options_pressed", "key": "exists", "expected": true, "description": "_on_options_pressed defined"},
+    {"command": "check-script-func /home/user/godot_projects/multi_signal_game/scripts/menu_controller.gd _on_quit_pressed", "key": "exists", "expected": true, "description": "_on_quit_pressed defined"},
+    {"command": "check-script-extends /home/user/godot_projects/multi_signal_game/scripts/menu_controller.gd Control", "key": "match", "expected": true, "description": "controller extends Control"}
+  ],
+  "metadata": {"complexity": 5, "data_generatability": 5, "verification_determinism": 5, "estimated_difficulty": 5}
+}

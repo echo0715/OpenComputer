@@ -1,0 +1,81 @@
+{
+  "id": "writer_find_replace_cleanup",
+  "app": "libreoffice_writer",
+  "task": "The file /home/user/Documents/draft_article.odt is open in LibreOffice Writer — a draft AI article using British English spellings and with no heading structure.\n\nConvert the document to American English spellings and add a heading structure, then save the file:\n- Replace every occurrence of 'colour' with 'color' (5 occurrences, including 'colour-coded' which becomes 'color-coded').\n- Replace every occurrence of 'analyse' with 'analyze' (3 occurrences).\n- Replace every occurrence of 'organisation' with 'organization' (4 occurrences).\n- Set the first paragraph 'The Future of Artificial Intelligence' to Heading 1 style.\n- Set 'Machine Learning Trends', 'Natural Language Processing', and 'Ethical Considerations' to Heading 2 style.",
+  "env": {
+    "files": [
+      {
+        "filename": "draft_article.odt",
+        "sandbox_path": "/home/user/Documents/draft_article.odt"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "search colour",
+      "eval": "result.get('count', 1) == 0",
+      "description": "No occurrences of 'colour' remain"
+    },
+    {
+      "command": "search color",
+      "eval": "result.get('count', 0) == 5",
+      "description": "5 occurrences of 'color' in document"
+    },
+    {
+      "command": "search analyse",
+      "eval": "result.get('count', 1) == 0",
+      "description": "No occurrences of 'analyse' remain"
+    },
+    {
+      "command": "search analyze",
+      "eval": "result.get('count', 0) == 3",
+      "description": "3 occurrences of 'analyze' in document"
+    },
+    {
+      "command": "search organisation",
+      "eval": "result.get('count', 1) == 0",
+      "description": "No occurrences of 'organisation' remain"
+    },
+    {
+      "command": "search organization",
+      "eval": "result.get('count', 0) == 4",
+      "description": "4 occurrences of 'organization' in document"
+    },
+    {
+      "command": "check-heading-exists \"The Future of Artificial Intelligence\" 1",
+      "key": "exists",
+      "expected": true,
+      "description": "Title is Heading 1"
+    },
+    {
+      "command": "check-heading-exists \"Machine Learning Trends\" 2",
+      "key": "exists",
+      "expected": true,
+      "description": "'Machine Learning Trends' is Heading 2"
+    },
+    {
+      "command": "check-heading-exists \"Natural Language Processing\" 2",
+      "key": "exists",
+      "expected": true,
+      "description": "'Natural Language Processing' is Heading 2"
+    },
+    {
+      "command": "check-heading-exists \"Ethical Considerations\" 2",
+      "key": "exists",
+      "expected": true,
+      "description": "'Ethical Considerations' is Heading 2"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

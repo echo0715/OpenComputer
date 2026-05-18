@@ -1,0 +1,11 @@
+{
+  "task_id": "blender_hard_rigged_character_driven_expression",
+  "files": [
+    {
+      "filename": "rigged_char.blend",
+      "sandbox_path": "/home/user/Documents/rigged_char.blend",
+      "type": "blend",
+      "generation": "create_env.py creates an empty default Blender scene at the target path"
+    }
+  ]
+}

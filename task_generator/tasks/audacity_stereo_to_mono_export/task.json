@@ -1,0 +1,45 @@
+{
+  "id": "audacity_stereo_to_mono_export",
+  "app": "audacity",
+  "task": "Audacity is open with /home/user/Music/stereo.wav already loaded (a 2-second stereo 44.1 kHz WAV); the project has one stereo track.\n\nMix the stereo track down to a single mono track (so the project has exactly one mono track), then export the audio to /home/user/Music/mono_out.wav as 'WAV (Microsoft) signed 16-bit PCM'.",
+  "env": {
+    "files": [
+      {
+        "filename": "stereo.wav",
+        "sandbox_path": "/home/user/Music/stereo.wav"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Music/mono_out.wav",
+      "key": "exists",
+      "expected": true,
+      "description": "Mono WAV exists"
+    },
+    {
+      "command": "check-export-codec /home/user/Music/mono_out.wav pcm_s16le",
+      "key": "match",
+      "expected": true,
+      "description": "Codec is pcm_s16le"
+    },
+    {
+      "command": "check-export-channels /home/user/Music/mono_out.wav 1",
+      "key": "match",
+      "expected": true,
+      "description": "Channel count is 1 (mono)"
+    },
+    {
+      "command": "check-export-sample-rate /home/user/Music/mono_out.wav 44100",
+      "key": "match",
+      "expected": true,
+      "description": "Sample rate is 44100 Hz"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

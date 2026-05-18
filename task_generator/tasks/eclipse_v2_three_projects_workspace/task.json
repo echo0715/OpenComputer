@@ -1,0 +1,76 @@
+{
+  "id": "eclipse_v2_three_projects_workspace",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace; the workspace starts empty (no existing projects).\n\nCreate exactly THREE separate Java projects in this workspace, each with default settings (Java nature, 'src' source folder, 'bin' output folder):\n\n1. Java project 'CoreLib' with src/core/CoreLibrary.java:\n\n```\npackage core;\n\npublic class CoreLibrary {\n    public String version() { return \"1.0\"; }\n}\n```\n\n2. Java project 'WebApi' with src/webapi/ApiServer.java:\n\n```\npackage webapi;\n\npublic class ApiServer {\n    public static void main(String[] args) {\n        System.out.println(\"ApiServer started\");\n    }\n}\n```\n\n3. Java project 'CliTool' with src/cli/CliMain.java:\n\n```\npackage cli;\n\npublic class CliMain {\n    public static void main(String[] args) {\n        System.out.println(\"cli\");\n    }\n}\n```\n\nWhen finished, the workspace must contain exactly these three Eclipse Java projects (CoreLib, WebApi, CliTool) and no others.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-project-count /home/user/workspace 3",
+      "key": "matches",
+      "expected": true,
+      "description": "Workspace has exactly 3 projects"
+    },
+    {
+      "command": "check-project-exists /home/user/workspace CoreLib",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'CoreLib' exists"
+    },
+    {
+      "command": "check-project-exists /home/user/workspace WebApi",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'WebApi' exists"
+    },
+    {
+      "command": "check-project-exists /home/user/workspace CliTool",
+      "key": "exists",
+      "expected": true,
+      "description": "Project 'CliTool' exists"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/CoreLib org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "CoreLib has Java nature"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/WebApi org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "WebApi has Java nature"
+    },
+    {
+      "command": "check-project-nature /home/user/workspace/CliTool org.eclipse.jdt.core.javanature",
+      "key": "has_nature",
+      "expected": true,
+      "description": "CliTool has Java nature"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/CoreLib src/core/CoreLibrary.java",
+      "key": "exists",
+      "expected": true,
+      "description": "CoreLibrary.java exists"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/WebApi src/webapi/ApiServer.java",
+      "key": "exists",
+      "expected": true,
+      "description": "ApiServer.java exists"
+    },
+    {
+      "command": "check-source-file-exists /home/user/workspace/CliTool src/cli/CliMain.java",
+      "key": "exists",
+      "expected": true,
+      "description": "CliMain.java exists"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

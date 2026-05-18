@@ -1,0 +1,45 @@
+{
+  "id": "freecad_preferences_multi_tune",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/empty_prefs.FCStd. Do not edit the config file by hand — change the settings through FreeCAD's preferences so they are flushed to `~/.config/FreeCAD/user.cfg`.\n\nApply all four of the following preference values:\n1. General > Theme = `Dark` (writes `BaseApp/Preferences/General/ThemeName=Dark`).\n2. General > Enable document save (auto save) enabled (writes `BaseApp/Preferences/General/AutoSaveEnabled=true`).\n3. General > Auto save interval = 180 seconds (writes `BaseApp/Preferences/General/AutoSaveInterval=180`).\n4. General > Units > User system = `Imperial from SI (in, in/s^2)`, schema index 2 (writes `BaseApp/Preferences/Units/UserSchema=2`).",
+  "env": {
+    "files": [
+      {
+        "filename": "empty_prefs.FCStd",
+        "sandbox_path": "/home/user/Documents/empty_prefs.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-preference BaseApp/Preferences/General/ThemeName Dark",
+      "key": "match",
+      "expected": true,
+      "description": "Theme set to Dark"
+    },
+    {
+      "command": "check-preference BaseApp/Preferences/General/AutoSaveEnabled true",
+      "key": "match",
+      "expected": true,
+      "description": "Auto-save enabled"
+    },
+    {
+      "command": "check-preference BaseApp/Preferences/General/AutoSaveInterval 180",
+      "key": "match",
+      "expected": true,
+      "description": "Auto-save interval == 180"
+    },
+    {
+      "command": "check-preference BaseApp/Preferences/Units/UserSchema 2",
+      "key": "match",
+      "expected": true,
+      "description": "Units schema set to 2 (Imperial from SI)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

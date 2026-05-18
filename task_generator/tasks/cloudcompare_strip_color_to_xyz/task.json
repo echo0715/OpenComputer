@@ -1,0 +1,39 @@
+{
+  "id": "cloudcompare_strip_color_to_xyz",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/tinted.ply is an ASCII PLY with 250 colored points.\n\nExport the cloud as an ASCII XYZ file at /home/user/Documents/tinted_plain.xyz with the RGB color stripped (either clear the colors first, or export with only the X, Y, Z columns enabled). The result must be a 3-column ASCII cloud with 250 points and no color columns.",
+  "env": {
+    "files": [
+      {
+        "filename": "tinted.ply",
+        "sandbox_path": "/home/user/Documents/tinted.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/tinted_plain.xyz",
+      "key": "exists",
+      "expected": true,
+      "description": "Plain XYZ output exists"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/tinted_plain.xyz 250",
+      "key": "match",
+      "expected": true,
+      "description": "Output has 250 points"
+    },
+    {
+      "command": "check-has-color /home/user/Documents/tinted_plain.xyz",
+      "key": "has_color",
+      "expected": false,
+      "description": "Output has no color columns (only X Y Z)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

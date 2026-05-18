@@ -1,0 +1,10 @@
+{
+  "task_id": "cloudcompare_strip_color_to_xyz",
+  "files": [
+    {
+      "filename": "tinted.ply",
+      "sandbox_path": "/home/user/Documents/tinted.ply",
+      "type": "ply"
+    }
+  ]
+}

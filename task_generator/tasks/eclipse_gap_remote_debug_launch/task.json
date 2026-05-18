@@ -1,0 +1,62 @@
+{
+  "id": "eclipse_gap_remote_debug_launch",
+  "app": "eclipse",
+  "task": "Eclipse is open with the workspace at /home/user/workspace, which contains the project 'DemoApp'.\n\nCreate a Remote Java Application debug launch configuration named 'DebugLocal8000' (type `org.eclipse.jdt.launching.remoteJavaApplication`) with:\n\n- Project: DemoApp\n- VM connector: Standard Socket Attach (`org.eclipse.jdt.launching.socketAttachConnector`)\n- Connect map: host `localhost`, port `8000`",
+  "env": {
+    "files": [
+      {
+        "filename": "DemoApp/.project",
+        "sandbox_path": "/home/user/workspace/DemoApp/.project"
+      },
+      {
+        "filename": "DemoApp/.classpath",
+        "sandbox_path": "/home/user/workspace/DemoApp/.classpath"
+      },
+      {
+        "filename": "DemoApp/src/com/example/App.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/App.java"
+      },
+      {
+        "filename": "DemoApp/src/com/example/Service.java",
+        "sandbox_path": "/home/user/workspace/DemoApp/src/com/example/Service.java"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-launch-config /home/user/workspace DebugLocal8000 org.eclipse.jdt.launching.remoteJavaApplication",
+      "key": "type_matches",
+      "expected": true,
+      "description": "Remote Java Application launch config exists"
+    },
+    {
+      "command": "check-launch-attribute /home/user/workspace DebugLocal8000 org.eclipse.jdt.launching.PROJECT_ATTR DemoApp",
+      "key": "matches",
+      "expected": true,
+      "description": "Project = DemoApp"
+    },
+    {
+      "command": "check-launch-attribute /home/user/workspace DebugLocal8000 org.eclipse.jdt.launching.VM_CONNECTOR_ID org.eclipse.jdt.launching.socketAttachConnector",
+      "key": "matches",
+      "expected": true,
+      "description": "Socket attach connector"
+    },
+    {
+      "command": "check-launch-attribute-contains /home/user/workspace DebugLocal8000 org.eclipse.jdt.launching.CONNECT_MAP localhost",
+      "key": "contains",
+      "expected": true,
+      "description": "Connect map includes localhost"
+    },
+    {
+      "command": "check-launch-attribute-contains /home/user/workspace DebugLocal8000 org.eclipse.jdt.launching.CONNECT_MAP 8000",
+      "key": "contains",
+      "expected": true,
+      "description": "Connect map includes port 8000"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "draw_layer_annotations",
+  "app": "libreoffice_draw",
+  "task": "Create a new LibreOffice Draw technical diagram with a custom layer, and save it to /home/user/Documents/layered_diagram.odg.\n\nPage 1 must contain five rectangles with these exact labels: 'Module A', 'Module B', 'Module C', 'Draft Version', 'Needs Review'. Add connectors linking 'Module A' → 'Module B' and 'Module B' → 'Module C'.\n\nAlso add a custom layer named exactly 'Notes' to the document.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/layered_diagram.odg",
+      "key": "exists",
+      "expected": true,
+      "description": "File layered_diagram.odg exists"
+    },
+    {
+      "command": "check-page-contains 0 \"Module A\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Module A'"
+    },
+    {
+      "command": "check-page-contains 0 \"Module B\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Module B'"
+    },
+    {
+      "command": "check-page-contains 0 \"Module C\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Module C'"
+    },
+    {
+      "command": "check-page-contains 0 \"Draft Version\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Draft Version'"
+    },
+    {
+      "command": "check-page-contains 0 \"Needs Review\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains text 'Needs Review'"
+    },
+    {
+      "command": "check-layer-exists Notes",
+      "key": "exists",
+      "expected": true,
+      "description": "A layer named 'Notes' exists"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 contains rectangle shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

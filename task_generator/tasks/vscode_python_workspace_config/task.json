@@ -1,0 +1,52 @@
+{
+  "id": "vscode_python_workspace_config",
+  "app": "vscode",
+  "task": "Create a Python project at `/home/user/projects/data-pipeline` with the following files:\n\n- `pipeline.py`:\n  ```python\n  import csv\n  import json\n\n  def load_csv(filepath):\n      with open(filepath) as f:\n          return list(csv.DictReader(f))\n\n  def save_json(data, filepath):\n      with open(filepath, 'w') as f:\n          json.dump(data, f, indent=2)\n  ```\n- `tests/test_pipeline.py`:\n  ```python\n  import unittest\n  from pipeline import load_csv, save_json\n\n  class TestPipeline(unittest.TestCase):\n      pass\n  ```\n- `.vscode/settings.json`:\n  - `python.defaultInterpreterPath`: `/usr/bin/python3`\n  - `python.testing.pytestEnabled`: `true`\n  - `editor.rulers`: `[79]`",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/projects/data-pipeline/pipeline.py",
+      "key": "exists",
+      "expected": true,
+      "description": "pipeline.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/data-pipeline/pipeline.py load_csv",
+      "key": "contains",
+      "expected": true,
+      "description": "pipeline.py contains load_csv"
+    },
+    {
+      "command": "check-file-exists /home/user/projects/data-pipeline/tests/test_pipeline.py",
+      "key": "exists",
+      "expected": true,
+      "description": "test_pipeline.py exists"
+    },
+    {
+      "command": "check-file-contains /home/user/projects/data-pipeline/tests/test_pipeline.py TestPipeline",
+      "key": "contains",
+      "expected": true,
+      "description": "test file contains TestPipeline"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/data-pipeline python.defaultInterpreterPath /usr/bin/python3",
+      "key": "match",
+      "expected": true,
+      "description": "python interpreter path is set"
+    },
+    {
+      "command": "check-workspace-setting /home/user/projects/data-pipeline python.testing.pytestEnabled true",
+      "key": "match",
+      "expected": true,
+      "description": "pytest is enabled"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

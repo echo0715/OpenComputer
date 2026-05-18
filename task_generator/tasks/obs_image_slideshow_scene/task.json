@@ -1,0 +1,95 @@
+{
+  "id": "obs_image_slideshow_scene",
+  "app": "obs",
+  "task": "Build an OBS Studio scene collection for an image slideshow presentation. The final collection must contain exactly 2 scenes (no default 'Scene' left over) with these exact names: 'Slides' and 'Title Card'.\n\nSources required per scene, with these exact names and types:\n- 'Slides': Image named 'Slide 1' (file /home/user/Pictures/slide1.png); Image named 'Slide 2' (file /home/user/Pictures/slide2.png); Image named 'Slide 3' (file /home/user/Pictures/slide3.png)\n- 'Title Card': Color Source named 'Title BG'; Text (FreeType 2) named 'Presentation Title' (any text)\n\nAll sources must be visible. Persist the changes to the scene collection JSON.",
+  "env": {
+    "files": [
+      {
+        "filename": "slide1.png",
+        "sandbox_path": "/home/user/Pictures/slide1.png"
+      },
+      {
+        "filename": "slide2.png",
+        "sandbox_path": "/home/user/Pictures/slide2.png"
+      },
+      {
+        "filename": "slide3.png",
+        "sandbox_path": "/home/user/Pictures/slide3.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists Slides",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Slides' exists"
+    },
+    {
+      "command": "check-scene-exists 'Title Card'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Title Card' exists"
+    },
+    {
+      "command": "check-scene-count 2",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 2 scenes in the collection"
+    },
+    {
+      "command": "check-source-in-scene 'Slide 1' Slides",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Slide 1' exists in 'Slides' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Slide 2' Slides",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Slide 2' exists in 'Slides' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Slide 3' Slides",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Slide 3' exists in 'Slides' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Title BG' 'Title Card'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Title BG' exists in 'Title Card' scene"
+    },
+    {
+      "command": "check-source-in-scene 'Presentation Title' 'Title Card'",
+      "key": "exists",
+      "expected": true,
+      "description": "Source 'Presentation Title' exists in 'Title Card' scene"
+    },
+    {
+      "command": "check-source-visible 'Slide 1'",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Slide 1' is visible"
+    },
+    {
+      "command": "check-source-visible 'Slide 2'",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Slide 2' is visible"
+    },
+    {
+      "command": "check-source-visible 'Slide 3'",
+      "key": "visible",
+      "expected": true,
+      "description": "Source 'Slide 3' is visible"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

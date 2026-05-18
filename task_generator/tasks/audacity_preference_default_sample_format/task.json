@@ -1,0 +1,22 @@
+{
+  "id": "audacity_preference_default_sample_format",
+  "app": "audacity",
+  "task": "Audacity is already running. Set the Quality preference 'Default Sample Format' to '32-bit float' so the change is persisted to `~/.audacity-data/audacity.cfg`. Audacity stores this setting as the enum code 524293 for 32-bit float.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-preference Quality DefaultSampleFormat 524293",
+      "key": "match",
+      "expected": true,
+      "description": "Default sample format is 524293 (32-bit float)"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "vlc_playlist_advance_to_second",
+  "app": "vlc",
+  "task": "VLC is already running. Build a VLC playlist containing exactly these two video files, added in this order:\n  1. /home/user/Videos/track_a.mp4\n  2. /home/user/Videos/track_b.mp4\n\nThen advance to the second playlist item so that track_b.mp4 becomes the currently playing media. Leave VLC actively playing track_b.mp4; do not pause, stop, or close VLC.",
+  "env": {
+    "files": [
+      {
+        "filename": "track_a.mp4",
+        "sandbox_path": "/home/user/Videos/track_a.mp4"
+      },
+      {
+        "filename": "track_b.mp4",
+        "sandbox_path": "/home/user/Videos/track_b.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/track_a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source track_a.mp4 exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Videos/track_b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Source track_b.mp4 exists"
+    },
+    {
+      "command": "check-media-loaded track_b.mp4",
+      "key": "loaded",
+      "expected": true,
+      "description": "track_b.mp4 is the currently loaded media"
+    },
+    {
+      "command": "check-playing",
+      "key": "playing",
+      "expected": true,
+      "description": "VLC is currently playing"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}

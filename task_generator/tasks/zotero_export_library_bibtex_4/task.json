@@ -1,0 +1,57 @@
+{
+  "id": "zotero_export_library_bibtex_4",
+  "app": "zotero",
+  "task": "A pre-seeded Zotero library is at /home/user/Zotero/zotero.sqlite containing 4 items in 'My Library'.\n\nExport the entire 'My Library' to BibTeX format at exactly /home/user/Documents/library_export.bib. The output file must contain exactly 4 BibTeX entries, including entries whose titles contain 'Attention Is All You Need', 'Deep Learning', 'BERT', and 'Survey of RL Methods'. Leave Zotero running.",
+  "env": {
+    "files": [
+      {
+        "filename": "zotero.sqlite",
+        "sandbox_path": "/home/user/Zotero/zotero.sqlite"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/library_export.bib",
+      "key": "exists",
+      "expected": true,
+      "description": "library_export.bib exists"
+    },
+    {
+      "command": "check-bibtex-count /home/user/Documents/library_export.bib 4",
+      "key": "match",
+      "expected": true,
+      "description": "BibTeX file has exactly 4 entries"
+    },
+    {
+      "command": "check-bibtex-title /home/user/Documents/library_export.bib 'Attention Is All You Need'",
+      "key": "contains",
+      "expected": true,
+      "description": "BibTeX contains Attention paper"
+    },
+    {
+      "command": "check-bibtex-title /home/user/Documents/library_export.bib 'Deep Learning'",
+      "key": "contains",
+      "expected": true,
+      "description": "BibTeX contains Deep Learning"
+    },
+    {
+      "command": "check-bibtex-title /home/user/Documents/library_export.bib BERT",
+      "key": "contains",
+      "expected": true,
+      "description": "BibTeX contains BERT paper"
+    },
+    {
+      "command": "check-bibtex-title /home/user/Documents/library_export.bib 'Survey of RL Methods'",
+      "key": "contains",
+      "expected": true,
+      "description": "BibTeX contains RL survey"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

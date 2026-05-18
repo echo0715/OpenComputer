@@ -1,0 +1,45 @@
+{
+  "id": "vlc_convert_avi_to_webm",
+  "app": "vlc",
+  "task": "VLC is already running. Convert /home/user/Videos/clip.avi into a WebM file at /home/user/Videos/clip_out.webm using the 'Video - VP80 + Vorbis (Webm)' profile (VP8 video, Vorbis audio, WebM container).\n\nThe resulting /home/user/Videos/clip_out.webm must be a valid WebM container containing a video stream.",
+  "env": {
+    "files": [
+      {
+        "filename": "clip.avi",
+        "sandbox_path": "/home/user/Videos/clip.avi"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Videos/clip.avi",
+      "key": "exists",
+      "expected": true,
+      "description": "Source clip.avi exists"
+    },
+    {
+      "command": "check-file-exists /home/user/Videos/clip_out.webm",
+      "key": "exists",
+      "expected": true,
+      "description": "Converted clip_out.webm exists"
+    },
+    {
+      "command": "check-media-format /home/user/Videos/clip_out.webm webm",
+      "key": "match",
+      "expected": true,
+      "description": "clip_out.webm is a WebM container"
+    },
+    {
+      "command": "check-media-has-video /home/user/Videos/clip_out.webm",
+      "key": "has_video",
+      "expected": true,
+      "description": "clip_out.webm contains a video stream"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

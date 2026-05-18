@@ -1,0 +1,92 @@
+{
+  "id": "blender_lattice_deform",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/lattice_demo.blend (which starts empty), set up a lattice deformation:\n- Add a UV Sphere named 'Blob' and a Lattice object named 'Cage'.\n- On 'Blob', add a Lattice modifier with Object = 'Cage', plus a Smooth modifier.\n- Parent 'Blob' to 'Cage' (Object parenting).\n- Create a material named 'BlobMat' and assign it to 'Blob'.\n\nSet the render engine to Cycles, resolution to 1920x1080, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "lattice_demo.blend",
+        "sandbox_path": "/home/user/Documents/lattice_demo.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/lattice_demo.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/lattice_demo.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lattice_demo.blend Blob",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Blob' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/lattice_demo.blend Blob MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Blob' is MESH"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lattice_demo.blend Cage",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Cage' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/lattice_demo.blend Cage LATTICE",
+      "key": "match",
+      "expected": true,
+      "description": "'Cage' is LATTICE"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/lattice_demo.blend Blob LATTICE",
+      "key": "exists",
+      "expected": true,
+      "description": "'Blob' has LATTICE modifier"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/lattice_demo.blend Blob SMOOTH",
+      "key": "exists",
+      "expected": true,
+      "description": "'Blob' has SMOOTH modifier"
+    },
+    {
+      "command": "object-info /home/user/Documents/lattice_demo.blend Blob",
+      "eval": "result.get('parent') == 'Cage'",
+      "description": "'Blob' is parented to 'Cage'"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/lattice_demo.blend BlobMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'BlobMat' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/lattice_demo.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine is Cycles"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/lattice_demo.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 1920x1080"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

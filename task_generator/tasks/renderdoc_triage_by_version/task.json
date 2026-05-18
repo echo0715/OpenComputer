@@ -1,0 +1,145 @@
+{
+  "id": "renderdoc_triage_by_version",
+  "app": "renderdoc",
+  "task": "Triage a directory of RenderDoc captures by serialise version. The directory /home/user/captures currently contains seven files:\n\n  alpha.rdc     (valid, serialise_version 0x102)\n  beta.rdc      (valid, serialise_version 0x102)\n  gamma.rdc     (valid, serialise_version 0x102)\n  delta.rdc     (valid, serialise_version 0x101)\n  epsilon.rdc   (valid, serialise_version 0x101)\n  zeta.rdc      (valid, serialise_version 0x101)\n  bogus.rdc     (NOT a real capture - bad magic bytes)\n\nDo the following:\n1. Create subdirectory /home/user/captures/current and move alpha.rdc, beta.rdc, gamma.rdc into it (keep filenames).\n2. Create subdirectory /home/user/captures/legacy and move delta.rdc, epsilon.rdc, zeta.rdc into it (keep filenames).\n3. Delete bogus.rdc entirely.\n4. Edit /home/user/.local/share/qrenderdoc/UI.config so that \"RecentCaptureFiles\" contains exactly these three paths, in any order: /home/user/captures/current/alpha.rdc, /home/user/captures/current/beta.rdc, /home/user/captures/current/gamma.rdc. Keep the \"rdocConfigData\": 1 marker intact.\n\nDo not modify the contents of any .rdc file.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      },
+      {
+        "filename": "alpha.rdc",
+        "sandbox_path": "/home/user/captures/alpha.rdc"
+      },
+      {
+        "filename": "beta.rdc",
+        "sandbox_path": "/home/user/captures/beta.rdc"
+      },
+      {
+        "filename": "gamma.rdc",
+        "sandbox_path": "/home/user/captures/gamma.rdc"
+      },
+      {
+        "filename": "delta.rdc",
+        "sandbox_path": "/home/user/captures/delta.rdc"
+      },
+      {
+        "filename": "epsilon.rdc",
+        "sandbox_path": "/home/user/captures/epsilon.rdc"
+      },
+      {
+        "filename": "zeta.rdc",
+        "sandbox_path": "/home/user/captures/zeta.rdc"
+      },
+      {
+        "filename": "bogus.rdc",
+        "sandbox_path": "/home/user/captures/bogus.rdc"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/captures/current",
+      "key": "is_dir",
+      "expected": true,
+      "description": "current/ subdir exists"
+    },
+    {
+      "command": "check-file-exists /home/user/captures/legacy",
+      "key": "is_dir",
+      "expected": true,
+      "description": "legacy/ subdir exists"
+    },
+    {
+      "command": "check-capture-count /home/user/captures/current 3",
+      "key": "match",
+      "expected": true,
+      "description": "exactly 3 .rdc in current/"
+    },
+    {
+      "command": "check-capture-count /home/user/captures/legacy 3",
+      "key": "match",
+      "expected": true,
+      "description": "exactly 3 .rdc in legacy/"
+    },
+    {
+      "command": "check-rdc-valid /home/user/captures/current/alpha.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "alpha.rdc valid"
+    },
+    {
+      "command": "check-rdc-valid /home/user/captures/current/beta.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "beta.rdc valid"
+    },
+    {
+      "command": "check-rdc-valid /home/user/captures/current/gamma.rdc",
+      "key": "valid",
+      "expected": true,
+      "description": "gamma.rdc valid"
+    },
+    {
+      "command": "check-rdc-version /home/user/captures/current/alpha.rdc 0x102",
+      "key": "match",
+      "expected": true,
+      "description": "alpha version 0x102"
+    },
+    {
+      "command": "check-rdc-version /home/user/captures/legacy/delta.rdc 0x101",
+      "key": "match",
+      "expected": true,
+      "description": "delta version 0x101"
+    },
+    {
+      "command": "check-rdc-version /home/user/captures/legacy/epsilon.rdc 0x101",
+      "key": "match",
+      "expected": true,
+      "description": "epsilon version 0x101"
+    },
+    {
+      "command": "check-rdc-version /home/user/captures/legacy/zeta.rdc 0x101",
+      "key": "match",
+      "expected": true,
+      "description": "zeta version 0x101"
+    },
+    {
+      "command": "check-file-exists /home/user/captures/bogus.rdc",
+      "key": "exists",
+      "expected": false,
+      "description": "bogus.rdc deleted"
+    },
+    {
+      "command": "check-recent-capture /home/user/captures/current/alpha.rdc",
+      "key": "found",
+      "expected": true,
+      "description": "alpha in recents"
+    },
+    {
+      "command": "check-recent-capture /home/user/captures/current/beta.rdc",
+      "key": "found",
+      "expected": true,
+      "description": "beta in recents"
+    },
+    {
+      "command": "check-recent-capture /home/user/captures/current/gamma.rdc",
+      "key": "found",
+      "expected": true,
+      "description": "gamma in recents"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData preserved"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

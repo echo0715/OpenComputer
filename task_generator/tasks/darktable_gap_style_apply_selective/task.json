@@ -1,0 +1,88 @@
+{
+  "id": "darktable_gap_style_apply_selective",
+  "app": "darktable",
+  "task": "Import the three images /home/user/Pictures/img_a.jpg, /home/user/Pictures/img_b.jpg, and /home/user/Pictures/img_c.jpg into the darktable library.\n\nOn img_a.jpg, enable the 'exposure' module with raised exposure and enable the 'filmic rgb' module. From img_a.jpg's history, create a new darktable style named 'gap_punch' that captures its current edits. Apply the style 'gap_punch' to img_b.jpg only, and tag img_b.jpg with 'styled_b'. Leave img_c.jpg untouched (do not edit or apply the style to it).",
+  "env": {
+    "files": [
+      {
+        "filename": "img_a.jpg",
+        "sandbox_path": "/home/user/Pictures/img_a.jpg"
+      },
+      {
+        "filename": "img_b.jpg",
+        "sandbox_path": "/home/user/Pictures/img_b.jpg"
+      },
+      {
+        "filename": "img_c.jpg",
+        "sandbox_path": "/home/user/Pictures/img_c.jpg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-image-imported img_a.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "img_a imported"
+    },
+    {
+      "command": "check-image-imported img_b.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "img_b imported"
+    },
+    {
+      "command": "check-image-imported img_c.jpg",
+      "key": "imported",
+      "expected": true,
+      "description": "img_c imported"
+    },
+    {
+      "command": "check-db-has-operation img_a.jpg exposure",
+      "key": "has_operation",
+      "expected": true,
+      "description": "img_a has exposure"
+    },
+    {
+      "command": "check-db-has-operation img_a.jpg filmicrgb",
+      "key": "has_operation",
+      "expected": true,
+      "description": "img_a has filmicrgb"
+    },
+    {
+      "command": "check-style-exists gap_punch",
+      "key": "exists",
+      "expected": true,
+      "description": "style 'gap_punch' exists"
+    },
+    {
+      "command": "check-db-has-operation img_b.jpg exposure",
+      "key": "has_operation",
+      "expected": true,
+      "description": "img_b received exposure from style"
+    },
+    {
+      "command": "check-db-has-operation img_b.jpg filmicrgb",
+      "key": "has_operation",
+      "expected": true,
+      "description": "img_b received filmicrgb from style"
+    },
+    {
+      "command": "check-image-tagged-by-filename img_b.jpg styled_b",
+      "key": "tagged",
+      "expected": true,
+      "description": "img_b tagged styled_b"
+    },
+    {
+      "command": "check-db-has-operation img_c.jpg filmicrgb",
+      "key": "has_operation",
+      "expected": false,
+      "description": "img_c was NOT edited (no filmicrgb)"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "task_id": "firefox_local_table_dom_inspect",
+  "files": [
+    {"filename": "sales_report.html", "sandbox_path": "/home/user/Documents/sales_report.html", "type": "html"}
+  ]
+}

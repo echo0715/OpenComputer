@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_business_card_layout",
+  "files": [
+    {
+      "filename": "card.svg",
+      "sandbox_path": "/home/user/Documents/card.svg",
+      "type": "svg"
+    }
+  ]
+}

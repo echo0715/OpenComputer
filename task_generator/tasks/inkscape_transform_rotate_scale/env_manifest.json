@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_transform_rotate_scale",
+  "files": [
+    {
+      "filename": "transforms.svg",
+      "sandbox_path": "/home/user/Documents/transforms.svg",
+      "type": "svg"
+    }
+  ]
+}

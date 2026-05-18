@@ -1,0 +1,59 @@
+{
+  "id": "blender_gap2_geometry_nodes_scatter",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/geo_nodes_scene.blend, delete the default Cube. Add a Plane named 'Ground' and an Ico Sphere named 'Pebble' with viewport visibility disabled.\n\nAdd a Geometry Nodes modifier named 'Scatter' on 'Ground' whose node group contains a 'Distribute Points on Faces' node (Density = 50) and an 'Instance on Points' node whose Instance input references the 'Pebble' object (via an Object Info or Object input node), wired:\n- Group Input Geometry -> Distribute Points on Faces (Mesh)\n- Distribute Points on Faces (Points) -> Instance on Points (Points)\n- Instance on Points (Instances) -> Group Output Geometry\n\nSave the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "geo_nodes_scene.blend",
+        "sandbox_path": "/home/user/Documents/geo_nodes_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/geo_nodes_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/geo_nodes_scene.blend Ground",
+      "key": "exists",
+      "expected": true,
+      "description": "Ground exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/geo_nodes_scene.blend Pebble",
+      "key": "exists",
+      "expected": true,
+      "description": "Pebble exists"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/geo_nodes_scene.blend Ground NODES",
+      "key": "exists",
+      "expected": true,
+      "description": "Ground has a NODES modifier"
+    },
+    {
+      "command": "geometry-nodes /home/user/Documents/geo_nodes_scene.blend Ground",
+      "eval": "any(m.get('modifier_name')=='Scatter' for m in result.get('geometry_modifiers',[]))",
+      "description": "Modifier named 'Scatter' exists on Ground"
+    },
+    {
+      "command": "geometry-nodes /home/user/Documents/geo_nodes_scene.blend Ground",
+      "eval": "any({n.get('type') for n in m.get('nodes',[])} >= {'DISTRIBUTE_POINTS_ON_FACES','INSTANCE_ON_POINTS'} for m in result.get('geometry_modifiers',[]))",
+      "description": "Graph contains Distribute Points on Faces and Instance on Points nodes"
+    },
+    {
+      "command": "geometry-nodes /home/user/Documents/geo_nodes_scene.blend Ground",
+      "eval": "any(any(n.get('type')=='DISTRIBUTE_POINTS_ON_FACES' and abs(n['inputs'].get('Density',0)-50)<0.5 for n in m.get('nodes',[])) for m in result.get('geometry_modifiers',[]))",
+      "description": "Distribute Points density = 50"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

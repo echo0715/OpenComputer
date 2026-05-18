@@ -1,0 +1,75 @@
+{
+  "id": "thunderbird_compose_multiple_drafts",
+  "app": "thunderbird",
+  "task": "Create three separate Thunderbird drafts (do NOT send any of them):\n\n1. To: alice@example.com\n   Subject: Budget Approval Request\n   Body: Requesting approval for the Q3 marketing budget of 50000 dollars.\n\n2. To: bob@example.com\n   Subject: Design Review Feedback\n   Body: The new dashboard mockups look great. Please proceed with implementation.\n\n3. To: carol@example.com\n   Subject: Team Offsite Planning\n   Body: Lets schedule the annual team offsite for the second week of August.",
+  "env": {
+    "files": [
+      {
+        "filename": "thunderbird-profile.tar.gz",
+        "sandbox_path": "/tmp/thunderbird-profile.tar.gz"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-draft-exists Budget Approval Request",
+      "key": "found",
+      "expected": true,
+      "description": "Budget draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Budget Approval alice@example.com",
+      "key": "match",
+      "expected": true,
+      "description": "Budget draft to alice"
+    },
+    {
+      "command": "check-draft-content Budget Approval 50000",
+      "key": "found",
+      "expected": true,
+      "description": "Budget draft mentions 50000"
+    },
+    {
+      "command": "check-draft-exists Design Review Feedback",
+      "key": "found",
+      "expected": true,
+      "description": "Design draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Design Review bob@example.com",
+      "key": "match",
+      "expected": true,
+      "description": "Design draft to bob"
+    },
+    {
+      "command": "check-draft-content Design Review dashboard mockups",
+      "key": "found",
+      "expected": true,
+      "description": "Design draft mentions mockups"
+    },
+    {
+      "command": "check-draft-exists Team Offsite Planning",
+      "key": "found",
+      "expected": true,
+      "description": "Offsite draft exists"
+    },
+    {
+      "command": "check-message-to Drafts Team Offsite carol@example.com",
+      "key": "match",
+      "expected": true,
+      "description": "Offsite draft to carol"
+    },
+    {
+      "command": "check-draft-content Team Offsite second week of August",
+      "key": "found",
+      "expected": true,
+      "description": "Offsite draft mentions August"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

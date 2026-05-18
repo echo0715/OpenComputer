@@ -1,0 +1,10 @@
+{
+  "task_id": "chrome_local_log_filter_search",
+  "files": [
+    {
+      "filename": "logs.html",
+      "sandbox_path": "/home/user/Documents/logs.html",
+      "type": "html"
+    }
+  ]
+}

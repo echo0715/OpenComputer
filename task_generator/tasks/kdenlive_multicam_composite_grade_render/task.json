@@ -1,0 +1,147 @@
+{
+  "id": "kdenlive_multicam_composite_grade_render",
+  "app": "kdenlive",
+  "task": "Kdenlive is already open with the project file at /home/user/Documents/multicam_project.kdenlive (1920x1080, 30fps).\n\nImport five video clips from /home/user/Videos/: cam_a.mp4, cam_b.mp4, cam_c.mp4, broll_1.mp4, and broll_2.mp4. Arrange cam_a.mp4 and cam_b.mp4 sequentially on Video Track 1 with a slight overlap, and add a Dissolve (`luma`) transition bridging that overlap. Place cam_c.mp4 on Video Track 2 so it overlaps in time with the cam_a/cam_b sequence, and add a Composite and Transform (`qtblend`) transition between Video Track 1 and Video Track 2 across the overlap. Place broll_1.mp4 and broll_2.mp4 on Video Track 3 as additional overlay elements. Apply the Saturation effect (`frei0r.saturat0r`) to the cam_c.mp4 clip on Video Track 2, the Edge Glow effect (`frei0r.edgeglow`) to the broll_1.mp4 clip on Video Track 3, and the Cartoon effect (`frei0r.cartoon`) to the broll_2.mp4 clip on Video Track 3. Also apply a Volume effect (`volume`) to any audio track in the project. Ensure the project has at least 6 tracks in total (video and audio combined). Save the project so the changes are persisted to /home/user/Documents/multicam_project.kdenlive, then render the project to /home/user/Documents/multicam_out.mp4 using the MP4 / H.264 preset. The project must remain at 1920x1080, 30fps.",
+  "env": {
+    "files": [
+      {
+        "filename": "multicam_project.kdenlive",
+        "sandbox_path": "/home/user/Documents/multicam_project.kdenlive"
+      },
+      {
+        "filename": "cam_a.mp4",
+        "sandbox_path": "/home/user/Videos/cam_a.mp4"
+      },
+      {
+        "filename": "cam_b.mp4",
+        "sandbox_path": "/home/user/Videos/cam_b.mp4"
+      },
+      {
+        "filename": "cam_c.mp4",
+        "sandbox_path": "/home/user/Videos/cam_c.mp4"
+      },
+      {
+        "filename": "broll_1.mp4",
+        "sandbox_path": "/home/user/Videos/broll_1.mp4"
+      },
+      {
+        "filename": "broll_2.mp4",
+        "sandbox_path": "/home/user/Videos/broll_2.mp4"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multicam_project.kdenlive",
+      "key": "exists",
+      "expected": true,
+      "description": "Project file exists"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/multicam_project.kdenlive 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Resolution is 1920x1080"
+    },
+    {
+      "command": "check-fps /home/user/Documents/multicam_project.kdenlive 30",
+      "key": "match",
+      "expected": true,
+      "description": "Frame rate is 30fps"
+    },
+    {
+      "command": "check-clip-count /home/user/Documents/multicam_project.kdenlive 5",
+      "key": "match",
+      "expected": true,
+      "description": "Exactly 5 clips in project"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multicam_project.kdenlive cam_a.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "cam_a.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multicam_project.kdenlive cam_b.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "cam_b.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multicam_project.kdenlive cam_c.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "cam_c.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multicam_project.kdenlive broll_1.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "broll_1.mp4 imported"
+    },
+    {
+      "command": "check-clip-exists /home/user/Documents/multicam_project.kdenlive broll_2.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "broll_2.mp4 imported"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/multicam_project.kdenlive luma",
+      "key": "exists",
+      "expected": true,
+      "description": "Dissolve (luma) transition exists"
+    },
+    {
+      "command": "check-transition-exists /home/user/Documents/multicam_project.kdenlive qtblend",
+      "key": "exists",
+      "expected": true,
+      "description": "Composite (qtblend) transition exists"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multicam_project.kdenlive frei0r.saturat0r",
+      "key": "exists",
+      "expected": true,
+      "description": "Saturation effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multicam_project.kdenlive frei0r.edgeglow",
+      "key": "exists",
+      "expected": true,
+      "description": "Edge Glow effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multicam_project.kdenlive frei0r.cartoon",
+      "key": "exists",
+      "expected": true,
+      "description": "Cartoon effect applied"
+    },
+    {
+      "command": "check-effect-exists /home/user/Documents/multicam_project.kdenlive volume",
+      "key": "exists",
+      "expected": true,
+      "description": "Volume effect applied to audio"
+    },
+    {
+      "command": "tracks /home/user/Documents/multicam_project.kdenlive",
+      "eval": "len(result) >= 6",
+      "description": "At least 6 tracks in project"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/multicam_out.mp4",
+      "key": "exists",
+      "expected": true,
+      "description": "Rendered output file exists"
+    },
+    {
+      "command": "check-render-output /home/user/Documents/multicam_out.mp4",
+      "key": "valid",
+      "expected": true,
+      "description": "Rendered output is valid media"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 4,
+    "estimated_difficulty": 5
+  }
+}

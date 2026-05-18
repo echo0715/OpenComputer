@@ -1,0 +1,50 @@
+{
+  "id": "obs_gap_studio_mode_preview",
+  "app": "obs",
+  "task": "Enable Studio Mode in OBS Studio with a specific preview/program setup. The final collection must contain exactly two scenes (no default 'Scene' left over) named exactly 'Preview Scene' and 'Program Scene'.\n\nStudio Mode must be enabled with the Program scene set to 'Program Scene' and the Preview scene set to 'Preview Scene'. Persist the changes so the scene collection JSON and user.ini are written.",
+  "env": {
+    "files": [
+      {
+        "filename": ".keep",
+        "sandbox_path": "/home/user/Documents/.obs_studio_mode_task"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-scene-exists 'Preview Scene'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Preview Scene' exists"
+    },
+    {
+      "command": "check-scene-exists 'Program Scene'",
+      "key": "exists",
+      "expected": true,
+      "description": "Scene 'Program Scene' exists"
+    },
+    {
+      "command": "collection-meta",
+      "eval": "result.get('current_program_scene', '') == 'Program Scene' or result.get('current_scene', '') == 'Program Scene'",
+      "expected": true,
+      "description": "Program scene is 'Program Scene'"
+    },
+    {
+      "command": "collection-meta",
+      "eval": "result.get('preview_scene', '') == 'Preview Scene'",
+      "expected": true,
+      "description": "Preview scene is 'Preview Scene'"
+    },
+    {
+      "command": "global-config BasicWindow",
+      "eval": "str((result.get('values') or {}).get('previewprogrammode', (result.get('values') or {}).get('studiomode', 'false'))).lower() == 'true'",
+      "expected": true,
+      "description": "Studio Mode enabled in global config"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "estimated_difficulty": 4
+  }
+}

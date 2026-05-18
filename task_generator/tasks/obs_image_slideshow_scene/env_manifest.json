@@ -1,0 +1,20 @@
+{
+  "task_id": "obs_image_slideshow_scene",
+  "files": [
+    {
+      "filename": "slide1.png",
+      "sandbox_path": "/home/user/Pictures/slide1.png",
+      "type": "png"
+    },
+    {
+      "filename": "slide2.png",
+      "sandbox_path": "/home/user/Pictures/slide2.png",
+      "type": "png"
+    },
+    {
+      "filename": "slide3.png",
+      "sandbox_path": "/home/user/Pictures/slide3.png",
+      "type": "png"
+    }
+  ]
+}

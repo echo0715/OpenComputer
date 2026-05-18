@@ -1,0 +1,15 @@
+{
+  "task_id": "kdenlive_color_correction_stack",
+  "files": [
+    {
+      "filename": "color_grade.kdenlive",
+      "sandbox_path": "/home/user/Documents/color_grade.kdenlive",
+      "type": "kdenlive"
+    },
+    {
+      "filename": "raw_footage.mp4",
+      "sandbox_path": "/home/user/Videos/raw_footage.mp4",
+      "type": "mp4"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "cloudcompare_scale_cloud_2x",
+  "app": "cloudcompare",
+  "task": "/home/user/Documents/small.ply is an ASCII PLY with 250 points whose bounding box is (0, 0, 0)..(22, 22, 22).\n\nApply a uniform 2x scale to the cloud so the resulting X extent is at least 40 units, and export the scaled cloud as an ASCII PLY at /home/user/Documents/small_scaled.ply. Do not drop any points and keep ASCII PLY encoding.",
+  "env": {
+    "files": [
+      {
+        "filename": "small.ply",
+        "sandbox_path": "/home/user/Documents/small.ply"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/small_scaled.ply",
+      "key": "exists",
+      "expected": true,
+      "description": "Scaled PLY exists"
+    },
+    {
+      "command": "check-ply-format /home/user/Documents/small_scaled.ply ascii",
+      "key": "match",
+      "expected": true,
+      "description": "Output is ASCII PLY"
+    },
+    {
+      "command": "check-point-count /home/user/Documents/small_scaled.ply 250",
+      "key": "match",
+      "expected": true,
+      "description": "All 250 points preserved"
+    },
+    {
+      "command": "check-bbox-min-extent /home/user/Documents/small_scaled.ply x 40",
+      "key": "match",
+      "expected": true,
+      "description": "X extent is at least 40 after 2x scale"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "id": "renderdoc_gap_event_browser_deepdive",
+  "app": "renderdoc",
+  "task": "Configure the Event Browser for a deep-dive workflow in /home/user/.local/share/qrenderdoc/UI.config (a flat JSON document). Apply all of the following edits in a single save:\n\n1. Set `\"EventBrowser_ApplyColors\"` to `true`.\n2. Set `\"EventBrowser_CollapseMarkers\"` to `true`.\n3. Set `\"EventBrowser_ShowParameterNames\"` to `true`.\n4. Set `\"EventBrowser_HideEmpty\"` to `true`.\n5. Set `\"EventBrowser_Bookmarks\"` to a JSON array with exactly three integer EIDs in this order, with NO whitespace between elements: `[42,128,377]`.\n\nThe top-level `\"rdocConfigData\": 1` marker must still be present after saving. Do not remove or rename any other key.",
+  "env": {
+    "files": [
+      {
+        "filename": "UI.config",
+        "sandbox_path": "/home/user/.local/share/qrenderdoc/UI.config"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/.local/share/qrenderdoc/UI.config",
+      "key": "exists",
+      "expected": true,
+      "description": "UI.config still exists"
+    },
+    {
+      "command": "check-setting rdocConfigData 1",
+      "key": "match",
+      "expected": true,
+      "description": "rdocConfigData marker preserved"
+    },
+    {
+      "command": "check-setting EventBrowser_ApplyColors true",
+      "key": "match",
+      "expected": true,
+      "description": "ApplyColors true"
+    },
+    {
+      "command": "check-setting EventBrowser_CollapseMarkers true",
+      "key": "match",
+      "expected": true,
+      "description": "CollapseMarkers true"
+    },
+    {
+      "command": "check-setting EventBrowser_ShowParameterNames true",
+      "key": "match",
+      "expected": true,
+      "description": "ShowParameterNames true"
+    },
+    {
+      "command": "check-setting EventBrowser_HideEmpty true",
+      "key": "match",
+      "expected": true,
+      "description": "HideEmpty true"
+    },
+    {
+      "command": "check-setting EventBrowser_Bookmarks [42,128,377]",
+      "key": "match",
+      "expected": true,
+      "description": "Bookmarks array equals [42,128,377]"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 5
+  }
+}

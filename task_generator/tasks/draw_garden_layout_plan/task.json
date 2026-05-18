@@ -1,0 +1,116 @@
+{
+  "id": "draw_garden_layout_plan",
+  "app": "libreoffice_draw",
+  "task": "/home/user/Documents/garden_base.odg is open in LibreOffice Draw — page 1 already contains a rectangle at the top labelled 'Backyard Garden Plan'.\n\nBuild out a backyard garden layout on the same page, preserving the title rectangle:\n- Six rectangles with these exact labels (one per rectangle): 'Vegetable Bed', 'Herb Spiral', 'Fruit Orchard', 'Compost Area', 'Greenhouse', 'Tool Shed'.\n- One ellipse labelled 'Pond'.\n- A 'Legend' shape/label plus three additional labels below it with the exact strings 'Beds', 'Structures', 'Water'.\n- At least one connector or curve linking the 'Tool Shed' rectangle to the 'Vegetable Bed' rectangle (representing a garden path).\n\nPage 1 must end up with at least 12 shapes. Save the file in-place to /home/user/Documents/garden_base.odg.",
+  "env": {
+    "files": [
+      {
+        "filename": "garden_base.odg",
+        "sandbox_path": "/home/user/Documents/garden_base.odg"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-page-contains 0 \"Backyard Garden Plan\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 still contains original title"
+    },
+    {
+      "command": "check-page-contains 0 \"Vegetable Bed\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Vegetable Bed'"
+    },
+    {
+      "command": "check-page-contains 0 \"Herb Spiral\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Herb Spiral'"
+    },
+    {
+      "command": "check-page-contains 0 \"Fruit Orchard\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Fruit Orchard'"
+    },
+    {
+      "command": "check-page-contains 0 \"Compost Area\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Compost Area'"
+    },
+    {
+      "command": "check-page-contains 0 Greenhouse",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Greenhouse'"
+    },
+    {
+      "command": "check-page-contains 0 \"Tool Shed\"",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Tool Shed'"
+    },
+    {
+      "command": "check-page-contains 0 Pond",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Pond'"
+    },
+    {
+      "command": "check-page-contains 0 Legend",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Legend'"
+    },
+    {
+      "command": "check-page-contains 0 Beds",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Beds'"
+    },
+    {
+      "command": "check-page-contains 0 Structures",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Structures'"
+    },
+    {
+      "command": "check-page-contains 0 Water",
+      "key": "contains",
+      "expected": true,
+      "description": "Page 1 contains 'Water'"
+    },
+    {
+      "command": "check-shape-exists 0 RectangleShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has rectangle shapes"
+    },
+    {
+      "command": "check-shape-exists 0 EllipseShape",
+      "key": "exists",
+      "expected": true,
+      "description": "Page 1 has an ellipse (Pond)"
+    },
+    {
+      "command": "pages",
+      "eval": "result['pages'][0]['shape_count'] >= 12",
+      "description": "Page 1 has at least 12 shapes"
+    },
+    {
+      "command": "check-file-saved",
+      "key": "saved",
+      "expected": true,
+      "description": "File has been saved"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

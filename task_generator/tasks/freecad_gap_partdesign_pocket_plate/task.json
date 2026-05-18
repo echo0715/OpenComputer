@@ -1,0 +1,56 @@
+{
+  "id": "freecad_gap_partdesign_pocket_plate",
+  "app": "freecad",
+  "task": "FreeCAD is open with /home/user/Documents/plate_start.FCStd, which already contains a PartDesign Body 'PlateBody' with a Pad 'BasePlate' (100 x 60 x 10 mm).\n\nInside PlateBody, add a Pocket feature named exactly 'CenterPocket' with Length = 5 mm (downward into the plate), built from a Sketch on the top face of BasePlate consisting of a rectangle centered at the origin that is 40 mm (X) by 20 mm (Y). Keep 'PlateBody' and 'BasePlate' otherwise untouched. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "plate_start.FCStd",
+        "sandbox_path": "/home/user/Documents/plate_start.FCStd"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/plate_start.FCStd",
+      "key": "exists",
+      "expected": true,
+      "description": "File exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/plate_start.FCStd PlateBody",
+      "key": "exists",
+      "expected": true,
+      "description": "PlateBody preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/plate_start.FCStd BasePlate",
+      "key": "exists",
+      "expected": true,
+      "description": "BasePlate preserved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/plate_start.FCStd CenterPocket",
+      "key": "exists",
+      "expected": true,
+      "description": "CenterPocket exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/plate_start.FCStd CenterPocket PartDesign::Pocket",
+      "key": "match",
+      "expected": true,
+      "description": "CenterPocket is a PartDesign::Pocket"
+    },
+    {
+      "command": "check-parameter-value /home/user/Documents/plate_start.FCStd CenterPocket Length 5",
+      "key": "match",
+      "expected": true,
+      "description": "Pocket Length = 5"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

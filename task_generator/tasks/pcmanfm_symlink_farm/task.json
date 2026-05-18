@@ -1,0 +1,59 @@
+{
+  "id": "pcmanfm_symlink_farm",
+  "app": "pcmanfm",
+  "task": "Create the directory /home/user/Desktop/shortcuts/ containing exactly three symbolic links (each using an absolute path as its target):\n- /home/user/Desktop/shortcuts/report_link → /home/user/Documents/report.txt\n- /home/user/Desktop/shortcuts/data_link → /home/user/Documents/data.csv\n- /home/user/Desktop/shortcuts/image_link → /home/user/Documents/image.png",
+  "env": {
+    "files": [
+      {
+        "filename": "report.txt",
+        "sandbox_path": "/home/user/Documents/report.txt"
+      },
+      {
+        "filename": "data.csv",
+        "sandbox_path": "/home/user/Documents/data.csv"
+      },
+      {
+        "filename": "image.png",
+        "sandbox_path": "/home/user/Documents/image.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-dir-exists /home/user/Desktop/shortcuts",
+      "key": "exists",
+      "expected": true,
+      "description": "shortcuts directory exists"
+    },
+    {
+      "command": "check-symlink /home/user/Desktop/shortcuts/report_link /home/user/Documents/report.txt",
+      "key": "target_matches",
+      "expected": true,
+      "description": "report_link points to report.txt"
+    },
+    {
+      "command": "check-symlink /home/user/Desktop/shortcuts/data_link /home/user/Documents/data.csv",
+      "key": "target_matches",
+      "expected": true,
+      "description": "data_link points to data.csv"
+    },
+    {
+      "command": "check-symlink /home/user/Desktop/shortcuts/image_link /home/user/Documents/image.png",
+      "key": "target_matches",
+      "expected": true,
+      "description": "image_link points to image.png"
+    },
+    {
+      "command": "check-file-count /home/user/Desktop/shortcuts 3",
+      "key": "match",
+      "expected": true,
+      "description": "shortcuts directory contains exactly 3 entries"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

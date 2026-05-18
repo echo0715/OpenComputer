@@ -1,0 +1,10 @@
+{
+  "task_id": "inkscape_gap_text_on_path",
+  "files": [
+    {
+      "filename": "textpath.svg",
+      "sandbox_path": "/home/user/Documents/textpath.svg",
+      "type": "svg"
+    }
+  ]
+}

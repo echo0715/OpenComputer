@@ -1,0 +1,78 @@
+{
+  "id": "blender_nested_collections",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/nested_cols.blend (which starts empty), build this nested collection hierarchy:\n- 'Environment' at the scene root, containing a Plane named 'Floor' and a child collection 'Props'.\n- 'Props' contains two Cubes named 'Chair' and 'Table'.\n\n'Floor' must be directly in 'Environment' and not in 'Props'. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "nested_cols.blend",
+        "sandbox_path": "/home/user/Documents/nested_cols.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/nested_cols.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/nested_cols.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/nested_cols.blend Environment",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Environment' exists"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/nested_cols.blend Props",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Props' exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/nested_cols.blend Chair",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Chair' exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/nested_cols.blend Table",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Table' exists"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/nested_cols.blend Floor",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Floor' exists"
+    },
+    {
+      "command": "collections /home/user/Documents/nested_cols.blend",
+      "eval": "any(c.get('name') == 'Environment' and 'Props' in c.get('children', []) for c in result.get('collections', []))",
+      "description": "'Environment' contains 'Props' as a child collection"
+    },
+    {
+      "command": "collections /home/user/Documents/nested_cols.blend",
+      "eval": "any(c.get('name') == 'Props' and 'Chair' in c.get('objects', []) and 'Table' in c.get('objects', []) for c in result.get('collections', []))",
+      "description": "'Props' contains 'Chair' and 'Table'"
+    },
+    {
+      "command": "collections /home/user/Documents/nested_cols.blend",
+      "eval": "any(c.get('name') == 'Environment' and 'Floor' in c.get('objects', []) for c in result.get('collections', []))",
+      "description": "'Environment' directly contains 'Floor'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

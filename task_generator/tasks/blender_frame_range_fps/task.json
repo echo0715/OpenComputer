@@ -1,0 +1,71 @@
+{
+  "id": "blender_frame_range_fps",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/timeline_scene.blend, rename the default Cube to 'Spinner'. Set the scene timeline to frame_start = 1, frame_end = 120, and fps = 30.\n\nAnimate 'Spinner' with two Location keyframes: one at frame 1 at its starting position and another at frame 120 at a distinctly different position (e.g., Z = 5). Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "timeline_scene.blend",
+        "sandbox_path": "/home/user/Documents/timeline_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "force-save-via-gui /home/user/Documents/timeline_scene.blend",
+      "key": "saved",
+      "expected": true,
+      "description": "Force-save running Blender session to disk before verification checks"
+    },
+    {
+      "command": "check-file-exists /home/user/Documents/timeline_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file exists on disk"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/timeline_scene.blend Spinner",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Spinner' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/timeline_scene.blend Spinner MESH",
+      "key": "match",
+      "expected": true,
+      "description": "'Spinner' is a MESH"
+    },
+    {
+      "command": "check-animation-exists /home/user/Documents/timeline_scene.blend Spinner",
+      "key": "animated",
+      "expected": true,
+      "description": "'Spinner' has animation data"
+    },
+    {
+      "command": "scene-info /home/user/Documents/timeline_scene.blend",
+      "eval": "result.get('frame_start') == 1",
+      "description": "frame_start == 1"
+    },
+    {
+      "command": "scene-info /home/user/Documents/timeline_scene.blend",
+      "eval": "result.get('frame_end') == 120",
+      "description": "frame_end == 120"
+    },
+    {
+      "command": "scene-info /home/user/Documents/timeline_scene.blend",
+      "eval": "result.get('fps') == 30",
+      "description": "fps == 30"
+    },
+    {
+      "command": "animations /home/user/Documents/timeline_scene.blend Spinner",
+      "eval": "result.get('keyframe_count', 0) >= 2",
+      "description": "At least 2 Location keyframes on Spinner"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

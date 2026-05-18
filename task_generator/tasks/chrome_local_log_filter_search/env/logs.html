@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Production Log Viewer</title>
+<style>
+  body { font-family: ui-monospace, monospace; margin: 0; padding: 20px; background: #1e1e1e; color: #ddd; }
+  h1 { color: #eee; }
+  .controls { margin-bottom: 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-family: system-ui; font-size: 13px; }
+  #search { padding: 4px 8px; font-family: ui-monospace, monospace; width: 260px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 4px 8px; font-size: 12px; border-bottom: 1px solid #333; }
+  tr.INFO td.sev { color: #6cf; }
+  tr.WARN td.sev { color: #fc6; }
+  tr.ERROR td.sev { color: #f66; }
+  tr.hidden { display: none; }
+  #counter { font-family: system-ui; font-size: 13px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<h1>Production Log Viewer</h1>
+<div class="controls">
+  <label><input type="radio" name="sev" value="ALL" checked> All</label>
+  <label><input type="radio" name="sev" value="INFO"> INFO</label>
+  <label><input type="radio" name="sev" value="WARN"> WARN</label>
+  <label><input type="radio" name="sev" value="ERROR"> ERROR</label>
+  <label>Search: <input id="search" type="text" placeholder="filter text"></label>
+</div>
+<table>
+  <thead><tr><th>Time</th><th>Severity</th><th>Source</th><th>Message</th></tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+<div id="counter">Visible rows: <span id="visible-rows">0</span></div>
+<script>
+  const logs = [
+    ["09:01:02", "INFO",  "api",      "Server started on port 8080"],
+    ["09:01:03", "INFO",  "api",      "Loaded config from /etc/app.conf"],
+    ["09:01:10", "INFO",  "database", "Connected to database primary"],
+    ["09:02:11", "WARN",  "cache",    "Cache miss ratio above 40%"],
+    ["09:03:04", "INFO",  "api",      "User login user=alice"],
+    ["09:03:15", "ERROR", "database", "Failed to acquire database connection"],
+    ["09:04:01", "INFO",  "worker",   "Worker pool initialized size=8"],
+    ["09:04:22", "WARN",  "api",      "Slow request 1200ms on /reports"],
+    ["09:05:00", "ERROR", "api",      "Unhandled exception in /reports handler"],
+    ["09:05:30", "INFO",  "scheduler","Scheduled job nightly-sync queued"],
+    ["09:06:02", "ERROR", "database", "database deadlock detected on txn 3321"],
+    ["09:06:45", "INFO",  "api",      "User logout user=alice"],
+    ["09:07:10", "WARN",  "cache",    "Cache eviction rate high"],
+    ["09:07:40", "INFO",  "worker",   "Worker completed job id=55"],
+    ["09:08:05", "ERROR", "payments", "Payment gateway timeout transaction=tx881"],
+    ["09:08:50", "INFO",  "api",      "User login user=bob"],
+    ["09:09:21", "WARN",  "auth",     "Failed login attempt user=unknown"],
+    ["09:09:45", "INFO",  "scheduler","Job nightly-sync started"],
+    ["09:10:11", "INFO",  "api",      "GET /dashboard 200 ok"],
+    ["09:10:55", "ERROR", "database", "database replica lag exceeded 10s"],
+    ["09:11:30", "INFO",  "api",      "GET /profile 200 ok"],
+    ["09:12:03", "WARN",  "api",      "Rate limit approaching on /search"],
+    ["09:12:40", "ERROR", "api",      "Internal server error on /checkout"],
+    ["09:13:10", "INFO",  "worker",   "Worker completed job id=56"],
+    ["09:13:50", "INFO",  "api",      "User login user=carol"],
+    ["09:14:20", "WARN",  "cache",    "Cache restart recommended"],
+    ["09:14:55", "INFO",  "scheduler","Job nightly-sync completed"],
+    ["09:15:22", "INFO",  "api",      "POST /orders 201 created"],
+    ["09:15:40", "ERROR", "database", "database primary failover triggered"],
+    ["09:16:05", "INFO",  "api",      "GET /health 200 ok"],
+    ["09:16:40", "WARN",  "auth",     "Token about to expire user=bob"],
+    ["09:17:15", "INFO",  "worker",   "Worker completed job id=57"],
+    ["09:17:55", "INFO",  "api",      "GET /metrics 200 ok"],
+    ["09:18:22", "WARN",  "cache",    "Connection pool nearly exhausted"],
+    ["09:18:50", "INFO",  "api",      "User logout user=carol"],
+    ["09:19:05", "INFO",  "scheduler","Next nightly-sync queued"],
+    ["09:19:30", "WARN",  "api",      "Slow request 900ms on /feed"],
+    ["09:20:00", "INFO",  "api",      "Graceful shutdown requested"],
+    ["09:20:15", "INFO",  "worker",   "Worker pool drained"],
+    ["09:20:30", "INFO",  "api",      "Server stopped"]
+  ];
+
+  const tbody = document.getElementById("rows");
+  logs.forEach(([time, sev, src, msg]) => {
+    const tr = document.createElement("tr");
+    tr.className = sev;
+    tr.innerHTML = `<td>${time}</td><td class="sev">${sev}</td><td>${src}</td><td>${msg}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  function applyFilter() {
+    const sev = document.querySelector("input[name=sev]:checked").value;
+    const q = document.getElementById("search").value.trim().toLowerCase();
+    let visible = 0;
+    for (const tr of tbody.querySelectorAll("tr")) {
+      const sevMatch = sev === "ALL" || tr.classList.contains(sev);
+      const text = tr.textContent.toLowerCase();
+      const qMatch = q === "" || text.includes(q);
+      const show = sevMatch && qMatch;
+      tr.classList.toggle("hidden", !show);
+      if (show) visible++;
+    }
+    document.getElementById("visible-rows").textContent = visible;
+  }
+
+  for (const r of document.querySelectorAll("input[name=sev]")) r.onchange = applyFilter;
+  document.getElementById("search").oninput = applyFilter;
+  applyFilter();
+</script>
+</body>
+</html>

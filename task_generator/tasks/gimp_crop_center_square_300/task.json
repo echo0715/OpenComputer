@@ -1,0 +1,51 @@
+{
+  "id": "gimp_crop_center_square_300",
+  "app": "gimp",
+  "task": "Open /home/user/Documents/wide_photo.png in GIMP — a 600x400 light gray image with a 100x100 magenta square at its center.\n\nCrop the image to a 300x300 square whose top-left corner is at (150, 50) on the original (so the result is centered on the source image), and export the cropped image as PNG to /home/user/Documents/center_crop.png. The magenta square must remain centered in the output.",
+  "env": {
+    "files": [
+      {
+        "filename": "wide_photo.png",
+        "sandbox_path": "/home/user/Documents/wide_photo.png"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/center_crop.png",
+      "key": "exists",
+      "expected": true,
+      "description": "Cropped PNG exists"
+    },
+    {
+      "command": "check-file-format /home/user/Documents/center_crop.png PNG",
+      "key": "match",
+      "expected": true,
+      "description": "Output is PNG format"
+    },
+    {
+      "command": "check-file-dimensions /home/user/Documents/center_crop.png 300 300",
+      "key": "match",
+      "expected": true,
+      "description": "Cropped dimensions are 300x300"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/center_crop.png 150 150 255 0 255 15",
+      "key": "match",
+      "expected": true,
+      "description": "Center pixel is magenta (the center square)"
+    },
+    {
+      "command": "check-pixel-color-file /home/user/Documents/center_crop.png 10 10 220 220 220 15",
+      "key": "match",
+      "expected": true,
+      "description": "Corner pixel is light gray (outside the magenta square)"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

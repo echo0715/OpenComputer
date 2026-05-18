@@ -1,0 +1,42 @@
+{
+  "id": "firefox_local_js_stateful_interaction",
+  "app": "firefox",
+  "task": "Open the local interactive dashboard at file:///home/user/Documents/dashboard.html. The page has Increment / Decrement / Toggle Dark Mode buttons and a status text input that initially reads 'idle'.\n\nDrive the page into this exact final state, without navigating away from the dashboard tab:\n- The #counter element shows 7.\n- The `<body>` element has class 'dark-mode'.\n- The status text input value is exactly 'ready'.",
+  "env": {
+    "files": [
+      {
+        "filename": "dashboard.html",
+        "sandbox_path": "/home/user/Documents/dashboard.html"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-tab-open dashboard.html",
+      "key": "found",
+      "expected": true,
+      "description": "Tab for dashboard.html is open"
+    },
+    {
+      "command": "eval \"document.getElementById('counter').textContent.trim()\"",
+      "eval": "result.get('value') == '7'",
+      "description": "#counter element text equals '7'"
+    },
+    {
+      "command": "eval \"document.body.classList.contains('dark-mode')\"",
+      "eval": "result.get('value') in (True, 'true')",
+      "description": "body has class 'dark-mode'"
+    },
+    {
+      "command": "input \"#status\"",
+      "eval": "result.get('value') == 'ready'",
+      "description": "status input value equals 'ready'"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

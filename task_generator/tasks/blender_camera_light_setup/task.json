@@ -1,0 +1,93 @@
+{
+  "id": "blender_camera_light_setup",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/lighting_setup.blend, keep the default Cube and add: a Point light named 'KeyLight', a second Point light named 'FillLight', and a Camera named 'RenderCam'. Create a material named 'CubeMat' and assign it to the default Cube.\n\nSet the render engine to Cycles, the render resolution to 1920x1080, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "lighting_setup.blend",
+        "sandbox_path": "/home/user/Documents/lighting_setup.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/lighting_setup.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lighting_setup.blend Cube",
+      "key": "exists",
+      "expected": true,
+      "description": "Default Cube still exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/lighting_setup.blend Cube MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Cube is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lighting_setup.blend KeyLight",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'KeyLight' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/lighting_setup.blend KeyLight LIGHT",
+      "key": "match",
+      "expected": true,
+      "description": "KeyLight is a LIGHT object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lighting_setup.blend FillLight",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'FillLight' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/lighting_setup.blend FillLight LIGHT",
+      "key": "match",
+      "expected": true,
+      "description": "FillLight is a LIGHT object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/lighting_setup.blend RenderCam",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'RenderCam' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/lighting_setup.blend RenderCam CAMERA",
+      "key": "match",
+      "expected": true,
+      "description": "RenderCam is a CAMERA object"
+    },
+    {
+      "command": "check-material-exists /home/user/Documents/lighting_setup.blend CubeMat",
+      "key": "exists",
+      "expected": true,
+      "description": "Material 'CubeMat' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/lighting_setup.blend CYCLES",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine set to CYCLES"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/lighting_setup.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 1920x1080"
+    }
+  ],
+  "metadata": {
+    "complexity": 3,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 3
+  }
+}

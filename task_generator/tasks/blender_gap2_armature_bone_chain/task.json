@@ -1,0 +1,60 @@
+{
+  "id": "blender_gap2_armature_bone_chain",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/rig_scene.blend, delete the default Cube and add an Armature object named 'Rig' at the origin containing a three-bone chain along the +Z axis, each bone 1 unit long:\n- 'Bone.Root' from (0,0,0) to (0,0,1)\n- 'Bone.Mid' from (0,0,1) to (0,0,2), parented to 'Bone.Root' and connected\n- 'Bone.Tip' from (0,0,2) to (0,0,3), parented to 'Bone.Mid' and connected\n\nAdd a Cube named 'CharMesh' with an Armature modifier whose Object is set to 'Rig'. Save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "rig_scene.blend",
+        "sandbox_path": "/home/user/Documents/rig_scene.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/rig_scene.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend saved"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rig_scene.blend Rig",
+      "key": "exists",
+      "expected": true,
+      "description": "Rig exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/rig_scene.blend Rig ARMATURE",
+      "key": "match",
+      "expected": true,
+      "description": "Rig is ARMATURE"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/rig_scene.blend CharMesh",
+      "key": "exists",
+      "expected": true,
+      "description": "CharMesh exists"
+    },
+    {
+      "command": "check-modifier-exists /home/user/Documents/rig_scene.blend CharMesh ARMATURE",
+      "key": "exists",
+      "expected": true,
+      "description": "CharMesh has ARMATURE modifier"
+    },
+    {
+      "command": "armature-bones /home/user/Documents/rig_scene.blend Rig",
+      "eval": "{b['name'] for b in result.get('bones',[])} >= {'Bone.Root','Bone.Mid','Bone.Tip'}",
+      "description": "All three bones present"
+    },
+    {
+      "command": "armature-bones /home/user/Documents/rig_scene.blend Rig",
+      "eval": "any(b['name']=='Bone.Mid' and b.get('parent')=='Bone.Root' for b in result.get('bones',[])) and any(b['name']=='Bone.Tip' and b.get('parent')=='Bone.Mid' for b in result.get('bones',[]))",
+      "description": "Bone parent chain Root->Mid->Tip"
+    }
+  ],
+  "metadata": {
+    "complexity": 5,
+    "data_generatability": 5,
+    "estimated_difficulty": 5
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "brave_bookmark_and_revisit",
+  "app": "brave",
+  "task": "In Brave, visit and bookmark each of these three Wikipedia pages in order, bookmarking each one before moving on:\n1. https://en.wikipedia.org/wiki/Computer_science\n2. https://en.wikipedia.org/wiki/Mathematics\n3. https://en.wikipedia.org/wiki/Physics\n\nThen end up with exactly two tabs open: one showing https://httpbin.org/get and one showing https://en.wikipedia.org/wiki/Computer_science. All three Wikipedia bookmarks must exist and all three Wikipedia URLs must appear in browsing history.",
+  "env": {
+    "files": []
+  },
+  "verification": [
+    {
+      "command": "check-tab-open Computer_science",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with Computer_science Wikipedia page is open"
+    },
+    {
+      "command": "check-tab-open httpbin.org/get",
+      "key": "found",
+      "expected": true,
+      "description": "Tab with httpbin.org/get is open"
+    },
+    {
+      "command": "check-bookmark Computer_science",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Computer_science exists"
+    },
+    {
+      "command": "check-bookmark Mathematics",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Mathematics exists"
+    },
+    {
+      "command": "check-bookmark Physics",
+      "key": "exists",
+      "expected": true,
+      "description": "Bookmark for Physics exists"
+    },
+    {
+      "command": "check-url-visited Mathematics",
+      "key": "visited",
+      "expected": true,
+      "description": "Mathematics Wikipedia page was visited in history"
+    },
+    {
+      "command": "check-url-visited Physics",
+      "key": "visited",
+      "expected": true,
+      "description": "Physics Wikipedia page was visited in history"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 5,
+    "estimated_difficulty": 4
+  }
+}

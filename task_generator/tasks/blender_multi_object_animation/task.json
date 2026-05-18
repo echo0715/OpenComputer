@@ -1,0 +1,93 @@
+{
+  "id": "blender_multi_object_animation",
+  "app": "blender",
+  "task": "In the Blender file open at /home/user/Documents/multi_anim.blend:\n- Rename the default Cube to 'BoxA' and add a second Cube named 'BoxB'. Each must have two Location keyframes: one at frame 1 (starting position) and one at frame 30 at a clearly different position.\n- Add a Plane named 'Platform'.\n- Create a collection named 'Animated' containing 'BoxA' and 'BoxB' (but not 'Platform').\n\nSet the render engine to EEVEE, the render resolution to 1920x1080, and save the file.",
+  "env": {
+    "files": [
+      {
+        "filename": "multi_anim.blend",
+        "sandbox_path": "/home/user/Documents/multi_anim.blend"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "check-file-exists /home/user/Documents/multi_anim.blend",
+      "key": "exists",
+      "expected": true,
+      "description": "Blend file saved at expected path"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/multi_anim.blend BoxA",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'BoxA' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/multi_anim.blend BoxA MESH",
+      "key": "match",
+      "expected": true,
+      "description": "BoxA is a MESH object"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/multi_anim.blend BoxB",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'BoxB' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/multi_anim.blend BoxB MESH",
+      "key": "match",
+      "expected": true,
+      "description": "BoxB is a MESH object"
+    },
+    {
+      "command": "check-animation-exists /home/user/Documents/multi_anim.blend BoxA",
+      "key": "animated",
+      "expected": true,
+      "description": "BoxA has animation keyframes"
+    },
+    {
+      "command": "check-animation-exists /home/user/Documents/multi_anim.blend BoxB",
+      "key": "animated",
+      "expected": true,
+      "description": "BoxB has animation keyframes"
+    },
+    {
+      "command": "check-object-exists /home/user/Documents/multi_anim.blend Platform",
+      "key": "exists",
+      "expected": true,
+      "description": "Object 'Platform' exists"
+    },
+    {
+      "command": "check-object-type /home/user/Documents/multi_anim.blend Platform MESH",
+      "key": "match",
+      "expected": true,
+      "description": "Platform is a MESH object"
+    },
+    {
+      "command": "check-collection-exists /home/user/Documents/multi_anim.blend Animated",
+      "key": "exists",
+      "expected": true,
+      "description": "Collection 'Animated' exists"
+    },
+    {
+      "command": "check-render-engine /home/user/Documents/multi_anim.blend BLENDER_EEVEE_NEXT",
+      "key": "match",
+      "expected": true,
+      "description": "Render engine set to EEVEE"
+    },
+    {
+      "command": "check-resolution /home/user/Documents/multi_anim.blend 1920 1080",
+      "key": "match",
+      "expected": true,
+      "description": "Render resolution is 1920x1080"
+    }
+  ],
+  "metadata": {
+    "complexity": 4,
+    "data_generatability": 5,
+    "verification_determinism": 4,
+    "estimated_difficulty": 4
+  }
+}
