@@ -10,6 +10,8 @@
 <p align="center">
   <a href="https://echo0715.github.io/OpenComputer" target="_blank" rel="noopener"><strong>🌐 Website</strong></a>
   &nbsp;·&nbsp;
+  <a href="https://arxiv.org/pdf/2605.19769" target="_blank" rel="noopener">📄 Paper</a>
+  &nbsp;·&nbsp;
   <a href="#synthesis-quick-start">Synthesis Quick Start</a>
   &nbsp;·&nbsp;
   <a href="#evaluation-quick-start">Evaluation Quick Start</a>
@@ -194,6 +196,24 @@ Backend-specific and operator-facing settings are documented in:
 - **New app** or **more tasks for an existing app** → see [Synthesizing your own environment](#synthesizing-your-own-environment) above.
 - **New agent** → subclass `agents/base.py:BaseAgent`, parse the model's output into pyautogui code strings (or the special `DONE` / `FAIL` / `WAIT` tokens), and register the alias in `agents/registry.py`. Unknown model IDs are routed by family heuristics, so any name containing `claude`, `kimi`, `qwen`, `gemini`, `gpt-`, etc. will pick up the right agent class even without an explicit registry entry.
 - **New backend** → drop a runtime adapter under `computer_env/backends/<name>/` implementing `BaseComputerEnvironment`, register it in `computer_env/factory.py`, and add a `--env-backend <name>` branch in `evaluation/run_eval.py`.
+
+---
+
+## Citation
+
+If you use OpenComputer in your research or find it helpful, please cite:
+
+```bibtex
+@misc{wei2026opencomputerverifiablesoftwareworlds,
+      title={OpenComputer: Verifiable Software Worlds for Computer-Use Agents}, 
+      author={Jinbiao Wei and Qianran Ma and Yilun Zhao and Xiao Zhou and Kangqi Ni and Guo Gan and Arman Cohan},
+      year={2026},
+      eprint={2605.19769},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2605.19769}, 
+}
+```
 
 ---
 
