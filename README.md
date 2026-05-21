@@ -8,19 +8,21 @@
 </h1>
 
 <p align="center">
-  <a href="https://echo0715.github.io/OpenComputer" target="_blank" rel="noopener"><strong>🌐 Website</strong></a>
-  &nbsp;·&nbsp;
-  <a href="https://arxiv.org/pdf/2605.19769" target="_blank" rel="noopener">📄 Paper</a>
-  &nbsp;·&nbsp;
-  <a href="#synthesis-quick-start">Synthesis Quick Start</a>
-  &nbsp;·&nbsp;
-  <a href="#evaluation-quick-start">Evaluation Quick Start</a>
-  &nbsp;·&nbsp;
-  <a href="./LICENSE">License</a>
-</p>
-
-<p align="center">
-  <a href="./LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" /></a>
+  <a href="https://echo0715.github.io/OpenComputer" target="_blank" rel="noopener">
+    <img alt="Website" src="https://img.shields.io/badge/Website-OpenComputer-111827?style=for-the-badge&logo=githubpages&logoColor=white" />
+  </a>
+  <a href="https://arxiv.org/pdf/2605.19769" target="_blank" rel="noopener">
+    <img alt="Paper" src="https://img.shields.io/badge/Paper-arXiv-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" />
+  </a>
+  <a href="#synthesis-quick-start">
+    <img alt="Synthesis Quick Start" src="https://img.shields.io/badge/Synthesis-Quick_Start-2563eb?style=for-the-badge" />
+  </a>
+  <a href="#evaluation-quick-start">
+    <img alt="Evaluation Quick Start" src="https://img.shields.io/badge/Evaluation-Quick_Start-7c3aed?style=for-the-badge" />
+  </a>
+  <a href="./LICENSE">
+    <img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache_2.0-475569?style=for-the-badge" />
+  </a>
 </p>
 
 We present **OpenComputer**, a verifier-grounded framework for constructing verifiable software worlds for computer-use agents. OpenComputer integrates four components: (1) app-specific state verifiers that expose structured inspection endpoints over real applications, (2) a self-evolving verification layer that improves verifier reliability using execution-grounded feedback, (3) a task-generation pipeline that synthesizes realistic and machine-checkable desktop tasks, and (4) an evaluation harness that records full trajectories and computes auditable partial-credit rewards. In its current form, OpenComputer covers 33 desktop applications and 1,000 finalized tasks spanning browsers, office tools, creative software, development environments, file managers, and communication applications. Experiments show that OpenComputer's hard-coded verifiers align more closely with human adjudication than LLM-as-judge evaluation, especially when success depends on fine-grained application state. Frontier agents struggle with end-to-end completion despite partial progress, and open-source models exhibit sharp drops from their OSWorld-Verified scores, exposing a persistent gap in robust computer automation.
