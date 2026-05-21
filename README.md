@@ -8,6 +8,10 @@
 </h1>
 
 <p align="center">
+  <strong>Infinite Synthetic Environments for Computer-Use Agent Training and Evaluation</strong>
+</p>
+
+<p align="center">
   <a href="https://echo0715.github.io/OpenComputer" target="_blank" rel="noopener">
     <img alt="Website" src="https://img.shields.io/badge/Website-OpenComputer-111827?style=for-the-badge&logo=githubpages&logoColor=white" />
   </a>
