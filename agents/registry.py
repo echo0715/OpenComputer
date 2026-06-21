@@ -206,6 +206,25 @@ _REGISTRY: Dict[str, dict] = {
         "cls": "agents.dart_agent.DartAgent",
         "defaults": {"model": "dart", "temperature": 0.0},
     },
+    # ── Holo-3.1 (Hcompany) ─────────────────────────────────────────────
+    "holo-3.1": {
+        "cls": "agents.holo3_agent.Holo3Agent",
+        "defaults": {
+            "model": "holo-3.1",
+            "temperature": 0.8,
+            "max_tokens": 4096,
+            "history_n": 2,
+        },
+    },
+    "Hcompany/Holo-3.1-35B-A3B": {
+        "cls": "agents.holo3_agent.Holo3Agent",
+        "defaults": {
+            "model": "holo-3.1",
+            "temperature": 0.8,
+            "max_tokens": 4096,
+            "history_n": 2,
+        },
+    },
     # ── GUI-Owl 1.5 ─────────────────────────────────────────────────────
     "owl1.5": {
         "cls": "agents.owl15_agent.Owl15Agent",
@@ -360,6 +379,9 @@ def create_agent(model: str, **kwargs) -> BaseAgent:
         return cls(model=model, **kwargs)
     elif "dart" in model_lower:
         cls = _import_class("agents.dart_agent.DartAgent")
+        return cls(model=model, **kwargs)
+    elif "holo" in model_lower:
+        cls = _import_class("agents.holo3_agent.Holo3Agent")
         return cls(model=model, **kwargs)
     elif "owl" in model_lower:
         cls = _import_class("agents.owl15_agent.Owl15Agent")
